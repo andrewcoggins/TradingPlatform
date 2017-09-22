@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.markets.Market;
-import brown.tradeables.Tradeable;
+import brown.tradeables.Asset;
 
 /**
  * A ledger tracks all trades within a market. 
@@ -17,7 +17,7 @@ import brown.tradeables.Tradeable;
  */
 public class Ledger {
 	protected final List<Transaction> transactions;
-	protected final Map<Tradeable, Transaction> latest;
+	protected final Map<Asset, Transaction> latest;
 	protected final List<Transaction> unshared;
 	protected final Market market;
 	
@@ -39,7 +39,7 @@ public class Ledger {
 		this.market = market;
 		this.unshared = new LinkedList<Transaction>();
 		this.transactions = new LinkedList<Transaction>();
-		this.latest = new HashMap<Tradeable, Transaction>();
+		this.latest = new HashMap<Asset, Transaction>();
 	}
 	
 	/**

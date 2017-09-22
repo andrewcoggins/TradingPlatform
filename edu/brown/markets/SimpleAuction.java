@@ -7,7 +7,7 @@ import java.util.Set;
 
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
-import brown.assets.value.BasicType;
+import brown.assets.value.Tradeable;
 import brown.auctions.arules.MechanismType;
 import brown.bundles.MarketState;
 import brown.bundles.SimpleBidBundle;
@@ -96,7 +96,7 @@ public class SimpleAuction implements IMarket {
 	 * Returns the high bid
 	 * @return double
 	 */
-	public MarketState getMarketState(BasicType type) {
+	public MarketState getMarketState(Tradeable type) {
 		return this.HIGHBID.getBid(type);
 	}
 	
@@ -108,9 +108,9 @@ public class SimpleAuction implements IMarket {
 		return this.ELIGIBILITY;
 	}
 
-	public void bid(Agent agent, Map<BasicType, Double> bids) {
-		Map<BasicType, MarketState> fixedBids = new HashMap<BasicType,MarketState>();
-		for (Entry<BasicType, Double> bid : bids.entrySet()) {
+	public void bid(Agent agent, Map<Tradeable, Double> bids) {
+		Map<Tradeable, MarketState> fixedBids = new HashMap<Tradeable,MarketState>();
+		for (Entry<Tradeable, Double> bid : bids.entrySet()) {
 			fixedBids.put(bid.getKey(), new MarketState(agent.ID, bid.getValue()));
 			//works here
 			System.out.println("fixed bids " + fixedBids);
@@ -124,9 +124,9 @@ public class SimpleAuction implements IMarket {
 		}
 	}
 
-	public void demandSet(Agent agent, Set<BasicType> toBid) {
-		Map<BasicType, MarketState> fixedBids = new HashMap<BasicType,MarketState>();
-		for (BasicType bid : toBid) {
+	public void demandSet(Agent agent, Set<Tradeable> toBid) {
+		Map<Tradeable, MarketState> fixedBids = new HashMap<Tradeable,MarketState>();
+		for (Tradeable bid : toBid) {
 			fixedBids.put(bid, new MarketState(agent.ID, 0));
 			if (fixedBids.size() > 10) {
 				agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
@@ -138,17 +138,17 @@ public class SimpleAuction implements IMarket {
 		}
 	}
 	
-	public void xorBid(Agent agent, Map<Set<BasicType>, Double> toBid) {
+	public void xorBid(Agent agent, Map<Set<Tradeable>, Double> toBid) {
 		if (3 < toBid.size()) {
 			throw new IllegalArgumentException("Attempt to submit too many atomic bids");
 		}
 		
-		Map<BasicType, MarketState> fixedBids = new HashMap<BasicType,MarketState>();
-		for (Entry<Set<BasicType>, Double> bid : toBid.entrySet()) {
+		Map<Tradeable, MarketState> fixedBids = new HashMap<Tradeable,MarketState>();
+		for (Entry<Set<Tradeable>, Double> bid : toBid.entrySet()) {
 			if (this.ELIGIBILITY < bid.getKey().size()) {
 				throw new IllegalArgumentException("Attempt to submit ineligible bid " + bid.getKey());
 			}
-			for (BasicType t : bid.getKey()) {
+			for (Tradeable t : bid.getKey()) {
 				fixedBids.put(t, new MarketState(agent.ID, bid.getValue()));
 				if (fixedBids.size() > 10) {
 					agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
@@ -162,7 +162,7 @@ public class SimpleAuction implements IMarket {
 		}
 	}
 	
-	public Set<BasicType> getTradeables() {
+	public Set<Tradeable> getTradeables() {
 		return this.HIGHBID.getTradeables();
 	}
 

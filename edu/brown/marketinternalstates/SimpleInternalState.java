@@ -7,18 +7,18 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.assets.accounting.Order;
-import brown.assets.value.BasicType;
+import brown.assets.value.Tradeable;
 import brown.bundles.BidBundle;
 import brown.bundles.MarketState;
 import brown.bundles.SimpleBidBundle;
 import brown.messages.auctions.Bid;
-import brown.tradeables.Tradeable;
+import brown.tradeables.Asset;
 
 public class SimpleInternalState implements MarketInternalState {
 	private final double INCREMENT = 20.0;
 	private final Integer ID;
 	private final List<Bid> BIDS;
-	private final Set<Tradeable> TRADEABLES;
+	private final Set<Asset> TRADEABLES;
 	
 	private BidBundle lastAlloc;
 	private List<Order> lastPayments;
@@ -26,22 +26,22 @@ public class SimpleInternalState implements MarketInternalState {
 	private BidBundle reserve;
 	private boolean maximizing;
 	
-	public SimpleInternalState(Integer ID, Set<Tradeable> tradeables) {
+	public SimpleInternalState(Integer ID, Set<Asset> tradeables) {
 		this.BIDS = new LinkedList<Bid>();
 		this.lastAlloc = null;
 		this.lastPayments = null;
 		this.TRADEABLES = tradeables;
 		this.ID = ID;
 		this.ticks = 0;
-		Map<BasicType, MarketState> reserve = new HashMap<BasicType, MarketState>();
-		for (Tradeable t : this.TRADEABLES) {
+		Map<Tradeable, MarketState> reserve = new HashMap<Tradeable, MarketState>();
+		for (Asset t : this.TRADEABLES) {
 			reserve.put(t.getType(), new MarketState(null,0));
 		}
 		this.reserve = new SimpleBidBundle(reserve);
 		this.maximizing = false;
 	}
 	
-	public SimpleInternalState(Integer ID, Set<Tradeable> tradeables, Map<BasicType, MarketState> reserve) {
+	public SimpleInternalState(Integer ID, Set<Asset> tradeables, Map<Tradeable, MarketState> reserve) {
 		this.BIDS = new LinkedList<Bid>();
 		this.lastAlloc = null;
 		this.lastPayments = null;
@@ -69,7 +69,7 @@ public class SimpleInternalState implements MarketInternalState {
 	}
 
 	@Override
-	public Set<Tradeable> getTradeables() {
+	public Set<Asset> getTradeables() {
 		return this.TRADEABLES;
 	}
 
@@ -140,7 +140,7 @@ public class SimpleInternalState implements MarketInternalState {
 			return 0;
 		}
 		SimpleBidBundle bundle = (SimpleBidBundle) this.reserve;
-		for (BasicType type : bundle.getDemandSet()) {
+		for (Tradeable type : bundle.getDemandSet()) {
 			MarketState state = bundle.getBid(type);
 			if (state != null && state.AGENTID != null) {
 				elig+=1;

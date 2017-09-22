@@ -13,14 +13,14 @@ import java.util.function.Function;
 
 import brown.assets.accounting.Order;
 import brown.rules.clearingrules.ClearingRule;
-import brown.tradeables.Tradeable;
+import brown.tradeables.Asset;
 
 public class ClosestMatchClearing implements ClearingRule {
 	private final SortedMap<Double, Set<Order>> buyOrderBook;
 	private final SortedMap<Double, Set<Order>> sellOrderBook;
 
 	private final boolean SHORT;
-	private final Function<Tradeable, Tradeable> SHORTER;
+	private final Function<Asset, Asset> SHORTER;
 
 	public ClosestMatchClearing() {
 		this.buyOrderBook = new TreeMap<Double, Set<Order>>(Collections.reverseOrder());
@@ -29,7 +29,7 @@ public class ClosestMatchClearing implements ClearingRule {
 		this.SHORTER = null;
 	}
 
-	public ClosestMatchClearing(Function<Tradeable, Tradeable> shorter) {
+	public ClosestMatchClearing(Function<Asset, Asset> shorter) {
 		this.buyOrderBook = new TreeMap<Double, Set<Order>>(Collections.reverseOrder());
 		this.sellOrderBook = new TreeMap<Double, Set<Order>>(Collections.reverseOrder());
 		this.SHORT = true;
@@ -91,12 +91,12 @@ public class ClosestMatchClearing implements ClearingRule {
 	}
 
 	@Override
-	public List<Order> sell(Integer agentID, Tradeable opp, double sharePrice) {
+	public List<Order> sell(Integer agentID, Asset opp, double sharePrice) {
 		List<Order> completed = new LinkedList<Order>();
 		Set<Double> bigRemove = new HashSet<Double>();
 		double shareNum = opp.getCount();
 		if (this.SHORT && opp.getAgentID() == null) {
-			opp = this.SHORTER.apply(new Tradeable(null, opp.getCount(), agentID));
+			opp = this.SHORTER.apply(new Asset(null, opp.getCount(), agentID));
 		} else if (opp.getAgentID() == null) {
 			return completed;
 		}
@@ -117,7 +117,7 @@ public class ClosestMatchClearing implements ClearingRule {
 					}
 
 					double quantity = Math.min(opp.getCount(), buy.QUANTITY);
-					Tradeable toGive = quantity == opp.getCount() ? opp : opp.split(quantity);
+					Asset toGive = quantity == opp.getCount() ? opp : opp.split(quantity);
 					completed.add(new Order(buy.FROM, agentID, sharePrice * quantity, quantity, toGive));
 					if (quantity == buy.QUANTITY) {
 						toRemove.add(buy);

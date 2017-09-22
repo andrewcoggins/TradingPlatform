@@ -7,15 +7,13 @@ package brown.assets.value;
  * @author acoggins
  *
  */
-public class BasicType {
-	public final TradeableType TYPE;
+public class Tradeable {
 	public final Integer ID;
 	
 	/**
 	 * for Kryo.
 	 */
-	public BasicType() {
-		this.TYPE = null;
+	public Tradeable() {
 		this.ID = null;
 	}
 	
@@ -27,22 +25,20 @@ public class BasicType {
 	 * @param ID
 	 * the private id of the agent that owns the BasicType.
 	 */
-	public BasicType(TradeableType type, Integer ID) {
-		this.TYPE = type;
+	public Tradeable(Integer ID) {
 		this.ID = ID;
 	}
-	
-	@Override
-	public String toString() {
-		return "(" + TYPE + " " + ID + ")";
-	}
-	
-	@Override
+
+  @Override
+  public String toString() {
+    return "Tradeable [ID=" + ID + "]";
+  }
+
+  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((ID == null) ? 0 : ID.hashCode());
-    result = prime * result + ((TYPE == null) ? 0 : TYPE.hashCode());
     return result;
   }
 
@@ -54,16 +50,18 @@ public class BasicType {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    BasicType other = (BasicType) obj;
+    Tradeable other = (Tradeable) obj;
     if (ID == null) {
       if (other.ID != null)
         return false;
     } else if (!ID.equals(other.ID))
       return false;
-    if (TYPE != other.TYPE)
-      return false;
     return true;
   }
+  
+  
+	
+
 	
 	
 }

@@ -1,10 +1,10 @@
 package brown.assets.accounting;
 
-import brown.tradeables.Tradeable;
+import brown.tradeables.Asset;
 
 public class Transaction {
 	public final Integer TO;
-	public final Tradeable TRADEABLE;
+	public final Asset TRADEABLE;
 	public final Integer FROM;
 	public final double PRICE;
 	public final double QUANTITY;
@@ -31,7 +31,7 @@ public class Transaction {
 	 * @param quantity
 	 * @param TRADEABLE
 	 */
-	public Transaction(Integer to, Integer from, double price, double quantity, Tradeable TRADEABLE) {
+	public Transaction(Integer to, Integer from, double price, double quantity, Asset TRADEABLE) {
 		this.TO = to;
 		this.FROM = from;
 		this.PRICE = price;

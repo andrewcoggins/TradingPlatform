@@ -3,7 +3,7 @@ package brown.bundles;
 import java.util.Map;
 import java.util.Set;
 
-import brown.assets.value.BasicType;
+import brown.assets.value.Tradeable;
 
 /**
  * A Complex Bid Bundle is a bid bundle that submits bids for vectors 
@@ -12,7 +12,7 @@ import brown.assets.value.BasicType;
  *
  */
 public class ComplexBidBundle implements BidBundle {
-	private final Map<Set<BasicType>, MarketState> BIDS;
+	private final Map<Set<Tradeable>, MarketState> BIDS;
 	private final BundleType BT;
 	
 	/**
@@ -29,7 +29,7 @@ public class ComplexBidBundle implements BidBundle {
 	 * @param bid : agent's bid
 	 * @param agent : agent ID
 	 */
-	public ComplexBidBundle(Map<Set<BasicType>, MarketState> bid, Integer agent) {
+	public ComplexBidBundle(Map<Set<Tradeable>, MarketState> bid, Integer agent) {
 		this.BIDS = bid;
 		this.BT = BundleType.Complex;
 	}
@@ -53,7 +53,7 @@ public class ComplexBidBundle implements BidBundle {
 		return this.BT;
 	}
 	
-	public MarketState getBid(Set<BasicType> types) {
+	public MarketState getBid(Set<Tradeable> types) {
 		return this.BIDS.get(types);
 	}
 

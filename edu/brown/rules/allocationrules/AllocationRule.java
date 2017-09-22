@@ -10,7 +10,7 @@ import brown.marketinternalstates.MarketInternalState;
 import brown.messages.auctions.Bid;
 import brown.messages.auctions.BidRequest;
 import brown.messages.markets.GameReport;
-import brown.tradeables.Tradeable;
+import brown.tradeables.Asset;
 
 public interface AllocationRule {
 
@@ -18,7 +18,7 @@ public interface AllocationRule {
 	
 	public BidBundle getAllocation(MarketInternalState state);
 
-	Map<Integer, Set<Tradeable>> getAllocations(Set<Bid> bids, Set<Tradeable> items);
+	Map<Integer, Set<Asset>> getAllocations(Set<Bid> bids, Set<Asset> items);
 
 	BidRequest getBidRequest(Set<Bid> bids, Integer iD);
 

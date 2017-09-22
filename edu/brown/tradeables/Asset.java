@@ -5,25 +5,25 @@ import java.util.function.Function;
 
 import brown.assets.accounting.Account;
 import brown.assets.value.EndState;
-import brown.assets.value.BasicType;
+import brown.assets.value.Tradeable;
 import brown.states.StateOfTheWorld;
 
 /**
  * All non-cash assets will extend this class
  * Primarily for implementing stock or prediction markets
  */
-public class Tradeable {
+public class Asset {
 	protected double count;
 	protected Integer agentID;
 	protected Function<EndState, List<Account>> CONVERTER;
 	
 	protected final long TIMESTAMP;
-	protected final BasicType TYPE;
+	protected final Tradeable TYPE;
 	
 	/**
 	 * For KyroNet
 	 */
-	public Tradeable() {
+	public Asset() {
 		this.count = 0;
 		this.agentID = null;
 		this.CONVERTER = null;
@@ -40,7 +40,7 @@ public class Tradeable {
 	 * @param owner
 	 * Owner of the Tradeable.
 	 */
-	public Tradeable(BasicType type, double count, Integer owner) {
+	public Asset(Tradeable type, double count, Integer owner) {
 		this.count = count;
 		this.TYPE = type;
 		this.agentID = owner;
@@ -56,7 +56,7 @@ public class Tradeable {
 	 * @param count
 	 * number of Basictypes in the tradeable.
 	 */
-	public Tradeable(BasicType type, double count) {
+	public Asset(Tradeable type, double count) {
 		this.count = count;
 		this.TYPE = type;
 		this.agentID = null;
@@ -76,7 +76,7 @@ public class Tradeable {
 	 * @param closure
 	 * function describing the closure of the tradeable (ask about this?)
 	 */
-	public Tradeable(BasicType type, double count, Integer owner,
+	public Asset(Tradeable type, double count, Integer owner,
 			Function<EndState, List<Account>> closure) {
 		this.count = count;
 		this.TYPE = type;
@@ -92,7 +92,7 @@ public class Tradeable {
 	 * @param count
 	 * @param closure
 	 */
-	public Tradeable(BasicType type, double count,
+	public Asset(Tradeable type, double count,
 			Function<EndState, List<Account>> closure) {
 		this.count = count;
 		this.TYPE = type;
@@ -140,7 +140,7 @@ public class Tradeable {
 	 * get the enum type of the tradeable.
 	 * @return
 	 */
-	public BasicType getType() {
+	public Tradeable getType() {
 		return this.TYPE;
 	}
 	
@@ -148,9 +148,9 @@ public class Tradeable {
 		return this.CONVERTER.apply(new EndState(this.count, closingState));
 	}
 	
-	public Tradeable split(double newCount) {
+	public Asset split(double newCount) {
 		this.count -= newCount;
-		return new Tradeable(this.TYPE, newCount, this.agentID, this.CONVERTER);
+		return new Asset(this.TYPE, newCount, this.agentID, this.CONVERTER);
 	}
 	
 	/**
@@ -161,12 +161,12 @@ public class Tradeable {
 	 * returns a new tradeable that belongs to the 
 	 * agent specified by the id. 
 	 */
-	public Tradeable toAgent(Integer id) {
+	public Asset toAgent(Integer id) {
 		Integer toInclude = null;
 		if (id.equals(this.agentID)) {
 			toInclude = this.agentID;
 		}
 		
-		return new Tradeable(this.TYPE, this.count, toInclude);
+		return new Asset(this.TYPE, this.count, toInclude);
 	}
 }

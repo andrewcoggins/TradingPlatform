@@ -11,7 +11,7 @@ import brown.markets.library.TwoSidedAuction;
 import brown.server.AgentServer;
 import brown.setup.Logging;
 import brown.states.StateOfTheWorld;
-import brown.tradeables.Tradeable;
+import brown.tradeables.Asset;
 
 /**
  * Market manager stores and handles multiple markets 
@@ -78,7 +78,7 @@ public class MarketManager {
 				}
 
 				Account newAccount = oldAccount.add(
-						toReplace.monies, new HashSet<Tradeable>(
+						toReplace.monies, new HashSet<Asset>(
 								toReplace.tradeables));
 				server.setAccount(toReplaceID, newAccount);
 				server.sendBankUpdate(toReplaceID, oldAccount,
@@ -147,7 +147,7 @@ public class MarketManager {
 	 * @param t
 	 * @return
 	 */
-	public boolean register(Integer ID, Tradeable t) {
+	public boolean register(Integer ID, Asset t) {
 		Market tsa = tsauctions.get(ID);
 		if (tsa == null) {
 			return false;

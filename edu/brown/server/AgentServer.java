@@ -31,7 +31,7 @@ import brown.setup.Logging;
 import brown.setup.Setup;
 import brown.setup.Startup;
 import brown.tradeables.ShortShare;
-import brown.tradeables.Tradeable;
+import brown.tradeables.Asset;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
@@ -164,7 +164,7 @@ public abstract class AgentServer {
 					List<Order> trans = market.buy(privateID,
 							limitorder.buyShares, limitorder.price);
 					for (Order t : trans) {
-						Tradeable split = null;
+						Asset split = null;
 						if (t.GOOD.getCount() > t.QUANTITY) {
 							split = t.GOOD.split(t.QUANTITY);
 							ledger.add(t.toTransaction());
@@ -179,7 +179,7 @@ public abstract class AgentServer {
 									// TODO: Deal with this case
 								}
 								Account finalUpdatedFrom = fromBank.add(t.COST,
-										new HashSet<Tradeable>());
+										new HashSet<Asset>());
 								if (split == null) {
 									finalUpdatedFrom = finalUpdatedFrom.remove(
 											0, t.GOOD);
@@ -222,11 +222,11 @@ public abstract class AgentServer {
 							.getAccount(privateID);
 					double qToSell = limitorder.sellShares;
 					synchronized (sellerAccount.tradeables) {
-						List<Tradeable> justAList = new LinkedList<Tradeable>(
+						List<Asset> justAList = new LinkedList<Asset>(
 								sellerAccount.tradeables);
 						if (market.permitShort()) {
 							double toShort = limitorder.sellShares;
-							for (Tradeable t : justAList) {
+							for (Asset t : justAList) {
 								if (t.getType().equals(
 										market.getTradeableType())) {
 									toShort -= t.getCount();
@@ -238,14 +238,14 @@ public abstract class AgentServer {
 							}
 						}
 
-						for (Tradeable tradeable : justAList) {
+						for (Asset tradeable : justAList) {
 							if (qToSell <= 0) {
 								break;
 							}
 
 							if (tradeable.getType().equals(
 									market.getTradeableType())) {
-								Tradeable toSell = tradeable;
+								Asset toSell = tradeable;
 								if (tradeable.getCount() > qToSell) {
 									toSell = tradeable.split(qToSell);
 								}
@@ -265,7 +265,7 @@ public abstract class AgentServer {
 														.remove(0, t.GOOD);
 												Account finalUpdatedFrom = taken
 														.add(t.COST,
-																new HashSet<Tradeable>());
+																new HashSet<Asset>());
 												this.acctManager.setAccount(t.FROM,
 														finalUpdatedFrom);
 												this.sendBankUpdate(t.FROM,

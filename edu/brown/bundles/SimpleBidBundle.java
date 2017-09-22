@@ -5,11 +5,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import brown.assets.value.BasicType;
+import brown.assets.value.Tradeable;
 
 
 public class SimpleBidBundle implements BidBundle {
-	private final Map<BasicType,MarketState> BIDS;
+	private final Map<Tradeable,MarketState> BIDS;
 	private final BundleType BT;
 	
 	/**
@@ -26,7 +26,7 @@ public class SimpleBidBundle implements BidBundle {
 	 * @param bid : agent's bid
 	 * @param agent : agent ID
 	 */
-	public SimpleBidBundle(Map<BasicType, MarketState> bids) {
+	public SimpleBidBundle(Map<Tradeable, MarketState> bids) {
 		if (bids == null) {
 			throw new IllegalArgumentException("Null bids");
 		}
@@ -50,8 +50,8 @@ public class SimpleBidBundle implements BidBundle {
 
 	@Override
 	public BidBundle wipeAgent(Integer ID) {
-		Map<BasicType, MarketState> newBids = new HashMap<BasicType, MarketState>();
-		for (Entry<BasicType, MarketState> entry : this.BIDS.entrySet()) {
+		Map<Tradeable, MarketState> newBids = new HashMap<Tradeable, MarketState>();
+		for (Entry<Tradeable, MarketState> entry : this.BIDS.entrySet()) {
 			if (ID.equals(entry.getValue().AGENTID)) {
 				newBids.put(entry.getKey(), entry.getValue());
 			} else {
@@ -62,8 +62,8 @@ public class SimpleBidBundle implements BidBundle {
 		return new SimpleBidBundle(newBids);
 	}
 	
-	public MarketState getBid(BasicType type) {
-		for (BasicType ot : this.BIDS.keySet()) {
+	public MarketState getBid(Tradeable type) {
+		for (Tradeable ot : this.BIDS.keySet()) {
 			if(ot.equals(type)) {
 				return BIDS.get(type);
 			}
@@ -76,15 +76,15 @@ public class SimpleBidBundle implements BidBundle {
 		return "[" + this.BT + ": " + this.BIDS + "]";
 	}
 
-	public boolean isDemanded(BasicType type) {
+	public boolean isDemanded(Tradeable type) {
 		return this.getBid(type) != null;
 	}
 	
-	public Set<BasicType> getDemandSet() {
+	public Set<Tradeable> getDemandSet() {
 		return this.BIDS.keySet();
 	}
 
-	public Set<BasicType> getTradeables() {
+	public Set<Tradeable> getTradeables() {
 		return this.BIDS.keySet();
 	}
 }

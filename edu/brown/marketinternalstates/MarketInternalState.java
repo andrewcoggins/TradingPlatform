@@ -6,7 +6,7 @@ import java.util.Set;
 import brown.assets.accounting.Order;
 import brown.bundles.BidBundle;
 import brown.messages.auctions.Bid;
-import brown.tradeables.Tradeable;
+import brown.tradeables.Asset;
 
 /**
  * this interface stores the internal state of a market as 
@@ -62,7 +62,7 @@ public interface MarketInternalState {
 	 * gets and returns tradeables from internal state.
 	 * @return
 	 */
-	public Set<Tradeable> getTradeables();
+	public Set<Asset> getTradeables();
 
 	/**
 	 * gets and returns allocation bundle from internal state.

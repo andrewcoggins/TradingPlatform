@@ -3,18 +3,18 @@ package brown.tradeables;
 import java.util.List;
 
 import brown.assets.accounting.Account;
-import brown.assets.value.BasicType;
+import brown.assets.value.Tradeable;
 import brown.states.StateOfTheWorld;
-import brown.tradeables.Tradeable;
+import brown.tradeables.Asset;
 
 /**
  * a share intended to be used for shortselling. 
  * @author acoggins
  *
  */
-public class ShortShare extends Tradeable {
+public class ShortShare extends Asset {
 	private final double COUNT;
-	private final BasicType TYPE;
+	private final Tradeable TYPE;
 	
 	/**
 	 * a shortshare has a count and a type.
@@ -23,7 +23,7 @@ public class ShortShare extends Tradeable {
 	 * @param type
 	 * the Basic type of the good.
 	 */
-	public ShortShare(double count, BasicType type) {
+	public ShortShare(double count, Tradeable type) {
 		this.COUNT = count;
 		this.TYPE = type;
 	}
@@ -49,7 +49,7 @@ public class ShortShare extends Tradeable {
 	}
 
 	@Override
-	public BasicType getType() {
+	public Tradeable getType() {
 		return this.TYPE;
 	}
 
@@ -59,12 +59,12 @@ public class ShortShare extends Tradeable {
 	}
 
 	@Override
-	public Tradeable split(double newCount) {
+	public Asset split(double newCount) {
 		return null;
 	}
 
 	@Override
-	public Tradeable toAgent(Integer ID) {
+	public Asset toAgent(Integer ID) {
 		return this;
 	}
 

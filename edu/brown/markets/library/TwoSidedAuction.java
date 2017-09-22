@@ -5,15 +5,15 @@ import java.util.Set;
 import java.util.SortedMap;
 
 import brown.assets.accounting.Order;
-import brown.assets.value.BasicType;
+import brown.assets.value.Tradeable;
 import brown.markets.IMarketServer;
-import brown.tradeables.Tradeable;
+import brown.tradeables.Asset;
 
 public interface TwoSidedAuction extends IMarketServer {
-	public BasicType getTradeableType();
+	public Tradeable getTradeableType();
 	
 	public List<Order> buy(Integer agentID, double shareNum, double sharePrice);
-	public List<Order> sell(Integer agentID, Tradeable opp, double sharePrice);
+	public List<Order> sell(Integer agentID, Asset opp, double sharePrice);
 	public void cancel(Integer agentID, boolean buy, double shareNum, double sharePrice);
 	
 	public double quoteBid(double shareNum, double sharePrice);

@@ -8,13 +8,13 @@ import brown.assets.accounting.Order;
 import brown.bundles.BidBundle;
 import brown.marketinternalstates.MarketInternalState;
 import brown.messages.auctions.Bid;
-import brown.tradeables.Tradeable;
+import brown.tradeables.Asset;
 
 public interface PaymentRule {
 
 	public List<Order> getPayments(MarketInternalState state);
 	
-	public Map<BidBundle, Set<Tradeable>> getPayments(Map<Integer, Set<Tradeable>> allocations, Set<Bid> bids);
+	public Map<BidBundle, Set<Asset>> getPayments(Map<Integer, Set<Asset>> allocations, Set<Bid> bids);
 
 	public PaymentType getPaymentType();
 

@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import brown.exceptions.AgentCreationException;
 import brown.markets.ContinuousDoubleAuction;
-import brown.markets.LMSR;
 import brown.markets.SimpleAuction;
 import brown.messages.Ack;
 import brown.messages.BankUpdate;
@@ -92,12 +91,6 @@ public abstract class Agent {
 	 * @param OpenOutcry wrapper
 	 */
 	public abstract void onSimpleOpenOutcry(SimpleAuction simpleWrapper);
-
-	/**
-	 * Provides agent response to LMSR
-	 * @param LMSR wrapper
-	 */
-	public abstract void onLMSR(LMSR market);
 
 	/**
 	 * Provides agent response to CDAs
