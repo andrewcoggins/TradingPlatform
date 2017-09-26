@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="edu"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/TradingPlatform/lib/kryonet-2.21-all.jar"/>
+	<classpathentry kind="lib" path="/Users/andrew/Documents/workspace/jars/valuegenerator.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

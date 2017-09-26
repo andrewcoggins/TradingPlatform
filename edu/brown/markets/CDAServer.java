@@ -6,12 +6,12 @@ import java.util.SortedMap;
 
 import brown.assets.accounting.Ledger;
 import brown.assets.accounting.Order;
-import brown.assets.value.Tradeable;
 import brown.auctions.arules.MechanismType;
 import brown.markets.ITwoSidedAuction;
 import brown.markets.library.TwoSidedAuction;
 import brown.rules.clearingrules.ClearingRule;
 import brown.tradeables.Asset;
+import brown.valuable.library.Tradeable;
 
 public class CDAServer implements TwoSidedAuction {
 	private final Integer ID;

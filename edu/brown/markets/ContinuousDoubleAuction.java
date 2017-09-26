@@ -8,9 +8,9 @@ import java.util.TreeMap;
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 import brown.assets.accounting.Order;
-import brown.assets.value.Tradeable;
 import brown.markets.ITwoSidedPriceSetter;
 import brown.messages.markets.MarketOrder;
+import brown.valuable.library.Tradeable;
 
 public class ContinuousDoubleAuction implements ITwoSidedPriceSetter {
 	private final Integer MARKETID;

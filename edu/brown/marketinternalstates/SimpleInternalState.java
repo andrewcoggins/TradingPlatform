@@ -7,12 +7,12 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.assets.accounting.Order;
-import brown.assets.value.Tradeable;
 import brown.bundles.BidBundle;
 import brown.bundles.MarketState;
 import brown.bundles.SimpleBidBundle;
 import brown.messages.auctions.Bid;
 import brown.tradeables.Asset;
+import brown.valuable.library.Tradeable;
 
 public class SimpleInternalState implements MarketInternalState {
 	private final double INCREMENT = 20.0;

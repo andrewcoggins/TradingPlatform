@@ -14,7 +14,6 @@ import brown.assets.accounting.Account;
 import brown.assets.accounting.Ledger;
 import brown.assets.accounting.Order;
 import brown.assets.accounting.Transaction;
-import brown.assets.value.Tradeable;
 import brown.auctions.arules.MechanismType;
 import brown.bundles.BidBundle;
 import brown.bundles.BundleType;
@@ -40,6 +39,7 @@ import brown.messages.trades.Trade;
 import brown.rules.paymentrules.PaymentType;
 import brown.rules.clearingrules.ClearingRule;
 import brown.tradeables.Asset;
+import brown.valuable.library.Tradeable;
 
 import com.esotericsoftware.kryo.Kryo;
 

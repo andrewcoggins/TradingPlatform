@@ -3,7 +3,8 @@ package brown.bundles;
 import java.util.Map;
 import java.util.Set;
 
-import brown.assets.value.Tradeable;
+import brown.valuable.library.Tradeable;
+
 
 /**
  * A Complex Bid Bundle is a bid bundle that submits bids for vectors 

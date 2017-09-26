@@ -5,8 +5,8 @@ import java.util.function.Function;
 
 import brown.assets.accounting.Account;
 import brown.assets.value.EndState;
-import brown.assets.value.Tradeable;
 import brown.states.StateOfTheWorld;
+import brown.valuable.library.Tradeable;
 
 /**
  * All non-cash assets will extend this class

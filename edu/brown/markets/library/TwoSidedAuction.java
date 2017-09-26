@@ -5,9 +5,9 @@ import java.util.Set;
 import java.util.SortedMap;
 
 import brown.assets.accounting.Order;
-import brown.assets.value.Tradeable;
 import brown.markets.IMarketServer;
 import brown.tradeables.Asset;
+import brown.valuable.library.Tradeable;
 
 public interface TwoSidedAuction extends IMarketServer {
 	public Tradeable getTradeableType();

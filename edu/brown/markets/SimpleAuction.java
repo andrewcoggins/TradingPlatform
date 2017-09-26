@@ -7,7 +7,6 @@ import java.util.Set;
 
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
-import brown.assets.value.Tradeable;
 import brown.auctions.arules.MechanismType;
 import brown.bundles.MarketState;
 import brown.bundles.SimpleBidBundle;
@@ -15,6 +14,7 @@ import brown.markets.IMarket;
 import brown.messages.auctions.Bid;
 import brown.rules.paymentrules.PaymentType;
 import brown.setup.Logging;
+import brown.valuable.library.Tradeable;
 
 public class SimpleAuction implements IMarket {
 	private final Integer ID;

@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import brown.assets.value.Tradeable;
+import brown.valuable.library.Tradeable;
+
 
 
 public class SimpleBidBundle implements BidBundle {

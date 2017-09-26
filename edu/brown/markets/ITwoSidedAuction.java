@@ -1,6 +1,6 @@
 package brown.markets;
 
-import brown.assets.value.Tradeable;
+import brown.valuable.library.Tradeable;
 
 public interface ITwoSidedAuction extends IMarket {	
 	/**

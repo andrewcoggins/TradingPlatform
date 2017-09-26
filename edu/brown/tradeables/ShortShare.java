@@ -3,9 +3,9 @@ package brown.tradeables;
 import java.util.List;
 
 import brown.assets.accounting.Account;
-import brown.assets.value.Tradeable;
 import brown.states.StateOfTheWorld;
 import brown.tradeables.Asset;
+import brown.valuable.library.Tradeable;
 
 /**
  * a share intended to be used for shortselling. 
