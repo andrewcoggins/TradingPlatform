@@ -45,7 +45,7 @@ import com.esotericsoftware.kryonet.Server;
  * specifics
  * 
  */
-public abstract class AgentServer {
+public abstract class TradingServer {
 	protected Map<Connection, Integer> connections;
 	protected Map<Integer, Integer> privateToPublic;
 	// Consider time limiting these
@@ -58,7 +58,7 @@ public abstract class AgentServer {
 	protected Server theServer;
 	protected boolean SHORT;
 
-	public AgentServer(int port, Setup gameSetup) {
+	public TradingServer(int port, Setup gameSetup) {
 		this.PORT = port;
 		this.agentCount = 0;
 		this.connections = new ConcurrentHashMap<Connection, Integer>();
@@ -84,7 +84,7 @@ public abstract class AgentServer {
 			return;
 		}
 
-		final AgentServer aServer = this;
+		final TradingServer aServer = this;
 		theServer.addListener(new Listener() {
 			public void received(Connection connection, Object message) {
 				Integer id = null;

@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import brown.markets.Market;
 import brown.markets.library.TwoSidedAuction;
-import brown.server.AgentServer;
+import brown.server.TradingServer;
 import brown.setup.Logging;
 import brown.states.StateOfTheWorld;
 import brown.tradeables.Asset;
@@ -42,7 +42,7 @@ public class MarketManager {
 	 * @param t: transaction to be processed in the markets.
 	 * @param toReplace: account to replace. 
 	 */
-	private void process(AgentServer server, Market market, Ledger ledger, 
+	private void process(TradingServer server, Market market, Ledger ledger, 
 			Transaction t, Account toReplace) {
 		synchronized (t.TRADEABLE.getAgentID()) {
 			Account oldAccount = server.privateToAccount(t
@@ -94,7 +94,7 @@ public class MarketManager {
 	 * @param market
 	 * @param closingState
 	 */
-	public void convert(AgentServer server, Market market,
+	public void convert(TradingServer server, Market market,
 			StateOfTheWorld closingState) {
 		synchronized (market) {
 			Ledger ledger = this.ledgers.get(market);
@@ -120,7 +120,7 @@ public class MarketManager {
 	 * @param ID
 	 * @param closingState
 	 */
-	public void close(AgentServer server, Integer ID, StateOfTheWorld closingState) {
+	public void close(TradingServer server, Integer ID, StateOfTheWorld closingState) {
 		Market market = tsauctions.get(ID);
 		//TODO: market.close();
 		convert(server, market, closingState);
