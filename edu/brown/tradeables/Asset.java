@@ -10,7 +10,6 @@ import brown.valuable.library.Tradeable;
 
 /**
  * All non-cash assets will extend this class
- * Primarily for implementing stock or prediction markets
  */
 public class Asset {
 	protected double count;

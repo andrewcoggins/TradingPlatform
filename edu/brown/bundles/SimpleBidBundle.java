@@ -35,7 +35,8 @@ public class SimpleBidBundle implements BidBundle {
 		this.BT = BundleType.Simple;
 	}
 
-	@Override
+
+  @Override
 	public double getCost() {
 		double total = 0;
 		for (MarketState b : this.BIDS.values()) {
@@ -88,4 +89,34 @@ public class SimpleBidBundle implements BidBundle {
 	public Set<Tradeable> getTradeables() {
 		return this.BIDS.keySet();
 	}
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((BIDS == null) ? 0 : BIDS.hashCode());
+    result = prime * result + ((BT == null) ? 0 : BT.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    SimpleBidBundle other = (SimpleBidBundle) obj;
+    if (BIDS == null) {
+      if (other.BIDS != null)
+        return false;
+    } else if (!BIDS.equals(other.BIDS))
+      return false;
+    if (BT != other.BT)
+      return false;
+    return true;
+  }
+	
+	
 }

@@ -12,6 +12,11 @@ import brown.messages.auctions.BidRequest;
 import brown.messages.markets.GameReport;
 import brown.tradeables.Asset;
 
+/**
+ * an allocation rule decides two things: 
+ * @author andrew
+ *
+ */
 public interface AllocationRule {
 
 	void tick(long time);

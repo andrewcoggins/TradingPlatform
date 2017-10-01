@@ -7,22 +7,12 @@ import brown.states.StateOfTheWorld;
 import brown.tradeables.Asset;
 import brown.valuable.library.Tradeable;
 
-/**
- * a share intended to be used for shortselling. 
- * @author acoggins
- *
- */
+
 public class ShortShare extends Asset {
 	private final double COUNT;
 	private final Tradeable TYPE;
 	
-	/**
-	 * a shortshare has a count and a type.
-	 * @param count
-	 * the number of goods in the shortshare.
-	 * @param type
-	 * the Basic type of the good.
-	 */
+
 	public ShortShare(double count, Tradeable type) {
 		this.COUNT = count;
 		this.TYPE = type;
