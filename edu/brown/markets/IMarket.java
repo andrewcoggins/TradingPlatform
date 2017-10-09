@@ -3,6 +3,14 @@ package brown.markets;
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 
+
+/*
+ * Agents are exposed to client-side versions of markets through IMarket:
+ * e.g., a OneSidedMarket, a TwoSidedMarket, or a NegotiationMarket. These
+ * wrappers expose the current state of a market, as well as bid, buy, and sell
+ * functionality. Agents can then simply call bid, buy, or sell on a Wrapper,
+ * and the Wrapper will handle all communication with the server
+ */
 public interface IMarket {
 	/**
 	 * Gets the ID of the auction

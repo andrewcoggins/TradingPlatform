@@ -1,8 +1,9 @@
 package brown.setup;
 
 /**
- * wraps printed messages. logging.log(X) prints X to console.
- * @author acoggins
+ * wraps printed messages, so messages can be enabled or disabled.
+ * logging.log(X) prints X to console.
+ * @author lcamery
  *
  */
 public class Logging {

@@ -9,7 +9,8 @@ import brown.messages.Message;
 import brown.tradeables.Asset;
 
 /**
- * Message to bid on auctions.
+ * An Agent sends a bidRequest as
+ * a Message to bid on auctions.
  * 
  * @author lcamery
  */

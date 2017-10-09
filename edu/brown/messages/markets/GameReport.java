@@ -4,6 +4,14 @@ import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 import brown.messages.Message;
 
+/**
+ * The markets can also send agents GameReports (e.g., summary statistics) at
+ * other times. For example, in a simulation of two sequential second-price
+ * auctions, a GameReports might be sent between the two.
+
+ * @author andrew
+ *
+ */
 public class GameReport extends Message {
 	public final Ledger LEDGER;
 	

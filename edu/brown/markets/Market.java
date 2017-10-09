@@ -16,6 +16,11 @@ import brown.rules.irpolicies.InformationRevelationPolicy;
 import brown.rules.queryrules.QueryRule;
 import brown.rules.terminationconditions.TerminationCondition;
 
+/*
+ * A trading environment consists of a set of markets
+ * together with a set of agents. This class dictates a market
+ * in which agents will bid.
+ */
 public class Market {
 	private final PaymentRule PRULE;
 	private final AllocationRule ARULE;

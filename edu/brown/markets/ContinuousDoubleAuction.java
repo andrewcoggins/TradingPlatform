@@ -12,6 +12,9 @@ import brown.markets.ITwoSidedPriceSetter;
 import brown.messages.markets.MarketOrder;
 import brown.valuable.library.Tradeable;
 
+/*
+ * Implements IMarket for Continuous Double auctions
+ */
 public class ContinuousDoubleAuction implements ITwoSidedPriceSetter {
 	private final Integer MARKETID;
 	private final Tradeable TYPE;

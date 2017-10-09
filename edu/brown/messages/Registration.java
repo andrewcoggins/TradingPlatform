@@ -2,10 +2,15 @@ package brown.messages;
 
 import brown.agent.Agent;
 
+/**
+ * a request for an agent to join the server 
+ * is a sent as a registration.
+ * @author lcamery
+ */
 public class Registration extends Message {
 	
 	/**
-	 * Kronet requires an empty constructor
+	 * Kryonet requires an empty constructor
 	 * DO NOT USE
 	 */
 	public Registration() {

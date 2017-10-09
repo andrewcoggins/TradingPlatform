@@ -2,6 +2,10 @@ package brown.messages;
 
 import brown.agent.Agent;
 
+/**
+ * a message communicates between the agent and the server.
+ * @author lcamery
+ */
 public abstract class Message {
 	protected final Integer ID;
 	

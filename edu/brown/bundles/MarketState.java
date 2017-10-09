@@ -1,5 +1,10 @@
 package brown.bundles;
 
+/**
+ * confused about what this does.
+ * @author andrew
+ *
+ */
 public class MarketState {
 	public final Integer AGENTID;
 	public final double PRICE;
@@ -13,7 +18,6 @@ public class MarketState {
 	}
 	
 	/**
-	 * a marketstate is an agentID and a price. This may be a misnomer.
 	 * @param agentID
 	 * @param price
 	 */

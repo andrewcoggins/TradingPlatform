@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import brown.auctions.arules.MechanismType;
 import brown.bundles.BidBundle;
 import brown.bundles.BundleType;
 import brown.bundles.MarketState;
 import brown.bundles.SimpleBidBundle;
 import brown.marketinternalstates.MarketInternalState;
+import brown.markets.MechanismType;
 import brown.messages.auctions.Bid;
 import brown.messages.auctions.BidRequest;
 import brown.messages.markets.GameReport;

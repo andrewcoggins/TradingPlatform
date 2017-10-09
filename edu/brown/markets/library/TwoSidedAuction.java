@@ -9,6 +9,14 @@ import brown.markets.IMarketServer;
 import brown.tradeables.Asset;
 import brown.valuable.library.Tradeable;
 
+/**
+ * the server sends a Wrapper exposing a market’s functionality,
+ * and containing information about a market that utilizes the [Mechanism]
+ * rule. a TwoSidedAuction is passed into either: onCDA, onCallMarket, 
+ * onMarketScoring, or onLMSR
+ * @author andrew
+ *
+ */
 public interface TwoSidedAuction extends IMarketServer {
 	public Tradeable getTradeableType();
 	

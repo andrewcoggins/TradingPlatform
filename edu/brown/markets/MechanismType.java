@@ -1,7 +1,8 @@
-package brown.auctions.arules;
+package brown.markets;
 
 /**
- * enum used to determine the Mechanism type of an auction.
+ * an auction is either OpenOutcry, SealedBid, LMSR, 
+ * CDA or Lemonade
  * @author acoggins
  *
  */

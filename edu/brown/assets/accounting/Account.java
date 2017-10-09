@@ -10,7 +10,7 @@ import brown.tradeables.Asset;
 /**
  * an account belongs to an agent and stores tradeables
  * and money for that agent.
- * @author acoggins
+ * @author lcamery
  *
  */
 public class Account {

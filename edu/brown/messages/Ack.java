@@ -5,6 +5,12 @@ import brown.messages.auctions.Bid;
 import brown.messages.markets.MarketOrder;
 import brown.messages.trades.NegotiateRequest;
 
+/**
+ * message provided to agent when there is an 
+ * error on the server relating to a message the agent sent.
+ * @author andrew
+ *
+ */
 public class Ack extends Message {
 	public final MarketOrder failedLO;
 	public final Bid failedBR;

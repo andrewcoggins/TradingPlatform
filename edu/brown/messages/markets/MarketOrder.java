@@ -4,6 +4,12 @@ import brown.agent.Agent;
 import brown.markets.library.TwoSidedAuction;
 import brown.messages.Message;
 
+/**
+ * Orders that do not fully clear during a given round may
+ *  carry over to the next round, or they may be cancelled. 
+ * @author andrew
+ *
+ */
 public class MarketOrder extends Message {
 	public final Integer marketID;
 	public final double buyShares;

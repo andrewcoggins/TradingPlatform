@@ -1,7 +1,6 @@
 package brown.markets;
 
 import brown.assets.accounting.Ledger;
-import brown.auctions.arules.MechanismType;
 
 public interface IMarketServer {
 	/**

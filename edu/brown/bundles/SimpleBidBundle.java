@@ -7,8 +7,10 @@ import java.util.Set;
 
 import brown.valuable.library.Tradeable;
 
-
-
+/*
+ * The built-in BidBundle is called SimpleBidBundle,
+ * and holds one double. 
+ */
 public class SimpleBidBundle implements BidBundle {
 	private final Map<Tradeable,MarketState> BIDS;
 	private final BundleType BT;

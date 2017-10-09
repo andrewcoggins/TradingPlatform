@@ -2,6 +2,9 @@ package brown.assets.accounting;
 
 import brown.tradeables.Asset;
 
+/*
+ * a Transaction is recorded in the ledger.
+ */
 public class Transaction {
 	public final Integer TO;
 	public final Asset TRADEABLE;

@@ -8,7 +8,9 @@ import brown.messages.Message;
 import brown.tradeables.Asset;
 
 /**
- * A message sent to the server by an agent when it wants to initiate a trade note: -1 indicates offer to all agents
+ * Direct Negotiation
+ * A message sent to the server by an agent when it wants
+ * to initiate a trade note: -1 indicates offer to all agents
  * 
  * @author lcamery
  */
