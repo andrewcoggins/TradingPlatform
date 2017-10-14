@@ -1,11 +1,10 @@
-package brown.markets.library;
+package brown.channels;
 
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 
 import brown.assets.accounting.Order;
-import brown.markets.IServerChannel;
 import brown.tradeables.Asset;
 import brown.valuable.library.Tradeable;
 

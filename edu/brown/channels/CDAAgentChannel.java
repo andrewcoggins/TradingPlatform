@@ -1,4 +1,4 @@
-package brown.markets;
+package brown.channels;
 
 import java.util.Map;
 import java.util.Set;
@@ -8,21 +8,20 @@ import java.util.TreeMap;
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 import brown.assets.accounting.Order;
-import brown.markets.ITwoSidedPriceSetter;
 import brown.messages.markets.MarketOrder;
 import brown.valuable.library.Tradeable;
 
 /*
  * Implements IMarket for Continuous Double auctions
  */
-public class ContinuousDoubleAuction implements ITwoSidedPriceSetter {
+public class CDAAgentChannel implements ITwoSidedPriceSetter {
 	private final Integer MARKETID;
 	private final Tradeable TYPE;
 	private final SortedMap<Double, Double> BUYBOOK;
 	private final SortedMap<Double, Double> SELLBOOK;
 	private final Ledger LEDGER;
 	
-	public ContinuousDoubleAuction() {
+	public CDAAgentChannel() {
 		this.TYPE = null;
 		this.MARKETID = null;
 		this.BUYBOOK = null;
@@ -30,7 +29,7 @@ public class ContinuousDoubleAuction implements ITwoSidedPriceSetter {
 		this.LEDGER = null;
 	}
 	
-	public ContinuousDoubleAuction(CDAServer CDA, Ledger ledger) {
+	public CDAAgentChannel(CDAServerChannel CDA, Ledger ledger) {
 		this.BUYBOOK = new TreeMap<Double, Double>();
 		this.SELLBOOK = new TreeMap<Double, Double>();
 		this.LEDGER = ledger;

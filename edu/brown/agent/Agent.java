@@ -2,9 +2,9 @@ package brown.agent;
 
 import java.io.IOException;
 
+import brown.channels.CDAAgentChannel;
+import brown.channels.SimpleAuctionChannel;
 import brown.exceptions.AgentCreationException;
-import brown.markets.ContinuousDoubleAuction;
-import brown.markets.SimpleAuction;
 import brown.messages.Ack;
 import brown.messages.BankUpdate;
 import brown.messages.Message;
@@ -84,19 +84,19 @@ public abstract class Agent {
 	 * Provides response to sealed bid auction
 	 * @param SealedBid wrapper
 	 */
-	public abstract void onSimpleSealed(SimpleAuction simpleWrapper);
+	public abstract void onSimpleSealed(SimpleAuctionChannel simpleWrapper);
 
 	/**
 	 * Provides agent response to OpenOutcry auction
 	 * @param OpenOutcry wrapper
 	 */
-	public abstract void onSimpleOpenOutcry(SimpleAuction simpleWrapper);
+	public abstract void onSimpleOpenOutcry(SimpleAuctionChannel simpleWrapper);
 
 	/**
 	 * Provides agent response to CDAs
 	 * @param market : CDA wrapper
 	 */
-	public abstract void onContinuousDoubleAuction(ContinuousDoubleAuction market);
+	public abstract void onContinuousDoubleAuction(CDAAgentChannel market);
 
 	/**
 	 * Agents must accept their IDs from the server

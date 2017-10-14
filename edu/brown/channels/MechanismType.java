@@ -1,4 +1,4 @@
-package brown.markets;
+package brown.channels;
 
 /**
  * an auction is either OpenOutcry, SealedBid, LMSR, 

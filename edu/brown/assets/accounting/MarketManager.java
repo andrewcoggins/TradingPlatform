@@ -6,8 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import brown.channels.TwoSidedAuction;
 import brown.markets.Market;
-import brown.markets.library.TwoSidedAuction;
 import brown.server.TradingServer;
 import brown.setup.Logging;
 import brown.states.StateOfTheWorld;

@@ -18,13 +18,13 @@ import brown.bundles.BidBundle;
 import brown.bundles.BundleType;
 import brown.bundles.MarketState;
 import brown.bundles.SimpleBidBundle;
-import brown.markets.CDAServer;
-import brown.markets.ContinuousDoubleAuction;
-import brown.markets.ITwoSidedAuction;
+import brown.channels.CDAServerChannel;
+import brown.channels.CDAAgentChannel;
+import brown.channels.ITwoSidedAuction;
+import brown.channels.MechanismType;
+import brown.channels.SimpleAuctionChannel;
+import brown.channels.TwoSidedAuction;
 import brown.markets.LMSRBackend;
-import brown.markets.MechanismType;
-import brown.markets.SimpleAuction;
-import brown.markets.library.TwoSidedAuction;
 import brown.messages.Ack;
 import brown.messages.BankUpdate;
 import brown.messages.Message;
@@ -89,14 +89,14 @@ public final class Startup {
 		kryo.register(ITwoSidedAuction.class);
 		kryo.register(MechanismType.class);
 		kryo.register(PaymentType.class);
-		kryo.register(ContinuousDoubleAuction.class);
+		kryo.register(CDAAgentChannel.class);
 		kryo.register(ClearingRule.class);
 		kryo.register(Tradeable.class);
-		kryo.register(CDAServer.class);
+		kryo.register(CDAServerChannel.class);
 		kryo.register(Order.class);
 		kryo.register(Ledger.class);
 		kryo.register(HashMap.class);
-		kryo.register(SimpleAuction.class);
+		kryo.register(SimpleAuctionChannel.class);
 		
 		return true;
 	}
