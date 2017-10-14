@@ -1,4 +1,4 @@
-package brown.markets;
+package brown.channels;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,6 @@ import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 import brown.bundles.MarketState;
 import brown.bundles.SimpleBidBundle;
-import brown.markets.IAgentChannel;
 import brown.messages.auctions.Bid;
 import brown.rules.paymentrules.PaymentType;
 import brown.setup.Logging;
@@ -18,7 +17,7 @@ import brown.valuable.library.Tradeable;
 /*
  * Implements IMarket for Simple auctions
  */
-public class SimpleAuction implements IAgentChannel {
+public class SimpleAuctionChannel implements IAgentChannel {
 	private final Integer ID;
 	private final Ledger LEDGER;
 	private final SimpleBidBundle HIGHBID;
@@ -27,7 +26,7 @@ public class SimpleAuction implements IAgentChannel {
 	private final PaymentType PTYPE;
 	private final MechanismType MTYPE;
 	
-	public SimpleAuction() {
+	public SimpleAuctionChannel() {
 		this.ID = null;
 		this.LEDGER = null;
 		this.HIGHBID = null;
@@ -42,7 +41,7 @@ public class SimpleAuction implements IAgentChannel {
 	 * @param ledger
 	 * @param highBid
 	 */
-	public SimpleAuction(Integer ID, Ledger ledger, PaymentType ptype, MechanismType mtype,
+	public SimpleAuctionChannel(Integer ID, Ledger ledger, PaymentType ptype, MechanismType mtype,
 			SimpleBidBundle highBid, int elig) {
 		if (highBid == null || ledger == null) {
 			throw new IllegalArgumentException("Null structures");

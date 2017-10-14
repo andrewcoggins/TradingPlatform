@@ -5,8 +5,8 @@ import java.util.Set;
 
 import brown.bundles.BidBundle;
 import brown.bundles.BundleType;
+import brown.channels.MechanismType;
 import brown.marketinternalstates.MarketInternalState;
-import brown.markets.MechanismType;
 import brown.messages.auctions.Bid;
 import brown.messages.auctions.BidRequest;
 import brown.messages.markets.GameReport;

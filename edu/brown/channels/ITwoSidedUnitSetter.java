@@ -1,10 +1,10 @@
-package brown.markets;
+package brown.channels;
 
 import java.util.SortedMap;
 
 import brown.agent.Agent;
 
-public interface ITwoSidedUnitSetter extends ITwoSidedAuction {
+public interface ITwoSidedUnitSetter extends IAbstractTwoSided {
 	public void buy(Agent agent, int sharePrice);
 	public void sell(Agent agent, int sharePrice);
 	public void cancel(Agent agent, boolean buy, int sharePrice);

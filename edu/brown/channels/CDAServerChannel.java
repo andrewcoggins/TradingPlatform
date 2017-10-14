@@ -1,4 +1,4 @@
-package brown.markets;
+package brown.channels;
 
 import java.util.List;
 import java.util.Set;
@@ -6,13 +6,11 @@ import java.util.SortedMap;
 
 import brown.assets.accounting.Ledger;
 import brown.assets.accounting.Order;
-import brown.markets.ITwoSidedAuction;
-import brown.markets.library.TwoSidedAuction;
 import brown.rules.clearingrules.ClearingRule;
 import brown.tradeables.Asset;
 import brown.valuable.library.Tradeable;
 
-public class CDAServer implements TwoSidedAuction {
+public class CDAServerChannel implements TwoSidedAuction {
 	private final Integer ID;
 	private final Tradeable TYPE;
 	private final ClearingRule RULE;
@@ -21,7 +19,7 @@ public class CDAServer implements TwoSidedAuction {
 	 * For kryonet
 	 * DO NOT USE
 	 */
-	public CDAServer() {
+	public CDAServerChannel() {
 		this.ID = null;
 		this.TYPE = null;
 		this.RULE = null;
@@ -33,7 +31,7 @@ public class CDAServer implements TwoSidedAuction {
 	 * @param type : SecurityType
 	 * @param rule : ClearingRule
 	 */
-	public CDAServer(Integer ID, Tradeable type, ClearingRule rule) {
+	public CDAServerChannel(Integer ID, Tradeable type, ClearingRule rule) {
 		this.ID = ID;
 		this.TYPE = type;
 		this.RULE = rule;
@@ -91,7 +89,7 @@ public class CDAServer implements TwoSidedAuction {
 
 	@Override
 	public ITwoSidedAuction wrap(Ledger ledger) {
-		return new ContinuousDoubleAuction(this, ledger);
+		return new CDAAgentChannel(this, ledger);
 	}
 
 	@Override

@@ -1,9 +1,8 @@
 package brown.messages.markets;
 
 import brown.agent.Agent;
-
-import brown.markets.IAgentChannel;
-import brown.markets.MechanismType;
+import brown.channels.IAgentChannel;
+import brown.channels.MechanismType;
 import brown.messages.Message;
 
 /**

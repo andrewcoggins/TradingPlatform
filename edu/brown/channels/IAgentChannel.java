@@ -1,4 +1,4 @@
-package brown.markets;
+package brown.channels;
 
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;

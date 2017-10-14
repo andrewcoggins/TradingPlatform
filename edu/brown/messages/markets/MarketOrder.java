@@ -1,7 +1,7 @@
 package brown.messages.markets;
 
 import brown.agent.Agent;
-import brown.markets.library.TwoSidedAuction;
+import brown.channels.TwoSidedAuction;
 import brown.messages.Message;
 
 /**
