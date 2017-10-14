@@ -16,7 +16,7 @@ import brown.assets.accounting.AccountManager;
 import brown.assets.accounting.Ledger;
 import brown.assets.accounting.MarketManager;
 import brown.assets.accounting.Order;
-import brown.markets.IMarketServer;
+import brown.markets.IServerChannel;
 import brown.markets.Market;
 import brown.markets.library.TwoSidedAuction;
 import brown.messages.Ack;
@@ -540,7 +540,7 @@ public abstract class TradingServer {
 	 * 
 	 * @param Security : the market to update on
 	 */
-	public void sendMarketUpdate(IMarketServer market) {
+	public void sendMarketUpdate(IServerChannel market) {
 		synchronized(market) {
 			for (Entry<Connection, Integer> ID : this.connections.entrySet()) {
 				TradeRequest mupdate = new TradeRequest(0, market.wrap(this.manager

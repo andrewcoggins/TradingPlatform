@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.SortedMap;
 
 import brown.assets.accounting.Order;
-import brown.markets.IMarketServer;
+import brown.markets.IServerChannel;
 import brown.tradeables.Asset;
 import brown.valuable.library.Tradeable;
 
@@ -17,7 +17,7 @@ import brown.valuable.library.Tradeable;
  * @author andrew
  *
  */
-public interface TwoSidedAuction extends IMarketServer {
+public interface TwoSidedAuction extends IServerChannel {
 	public Tradeable getTradeableType();
 	
 	public List<Order> buy(Integer agentID, double shareNum, double sharePrice);

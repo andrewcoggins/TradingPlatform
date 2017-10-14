@@ -2,7 +2,7 @@ package brown.messages.markets;
 
 import brown.agent.Agent;
 
-import brown.markets.IMarket;
+import brown.markets.IAgentChannel;
 import brown.markets.MechanismType;
 import brown.messages.Message;
 
@@ -16,7 +16,7 @@ import brown.messages.Message;
  *
  */
 public class TradeRequest extends Message {
-	public final IMarket MARKET;
+	public final IAgentChannel MARKET;
 	public final MechanismType MECHANISM;
 	
 	public TradeRequest() {
@@ -25,7 +25,7 @@ public class TradeRequest extends Message {
 		MECHANISM = null;
 	}
 
-	public TradeRequest(Integer ID, IMarket market, MechanismType mechanism) {
+	public TradeRequest(Integer ID, IAgentChannel market, MechanismType mechanism) {
 		super(ID);
 		this.MARKET = market;
 		this.MECHANISM = mechanism;

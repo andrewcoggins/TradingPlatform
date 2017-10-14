@@ -9,7 +9,7 @@ import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 import brown.bundles.MarketState;
 import brown.bundles.SimpleBidBundle;
-import brown.markets.IMarket;
+import brown.markets.IAgentChannel;
 import brown.messages.auctions.Bid;
 import brown.rules.paymentrules.PaymentType;
 import brown.setup.Logging;
@@ -18,7 +18,7 @@ import brown.valuable.library.Tradeable;
 /*
  * Implements IMarket for Simple auctions
  */
-public class SimpleAuction implements IMarket {
+public class SimpleAuction implements IAgentChannel {
 	private final Integer ID;
 	private final Ledger LEDGER;
 	private final SimpleBidBundle HIGHBID;

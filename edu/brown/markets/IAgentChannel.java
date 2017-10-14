@@ -11,7 +11,7 @@ import brown.assets.accounting.Ledger;
  * functionality. Agents can then simply call bid, buy, or sell on a Wrapper,
  * and the Wrapper will handle all communication with the server
  */
-public interface IMarket {
+public interface IAgentChannel {
 	/**
 	 * Gets the ID of the auction
 	 * @return id

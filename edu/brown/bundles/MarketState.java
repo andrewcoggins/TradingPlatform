@@ -1,7 +1,9 @@
 package brown.bundles;
 
 /**
- * confused about what this does.
+ * the 'state' of the market. In one sided auctions
+ * this is a quote of the highest bid. In a two sided auction
+ * this is an order book. with bargaining, this is an offer. 
  * @author andrew
  *
  */

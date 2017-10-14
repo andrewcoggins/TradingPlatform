@@ -2,7 +2,7 @@ package brown.markets;
 
 import brown.assets.accounting.Ledger;
 
-public interface IMarketServer {
+public interface IServerChannel {
 	/**
 	 * Gets the ID of the auction
 	 * @return id
@@ -31,6 +31,6 @@ public interface IMarketServer {
 	 * Get wrapper
 	 * @return
 	 */
-	public IMarket wrap(Ledger ledger);
+	public IAgentChannel wrap(Ledger ledger);
 
 }

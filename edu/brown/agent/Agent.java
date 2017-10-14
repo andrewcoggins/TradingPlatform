@@ -151,4 +151,5 @@ public abstract class Agent {
 	 *            fields describe what it will give up
 	 */
 	public abstract void onNegotiateRequest(NegotiateRequest tradeRequest);
+
 }
