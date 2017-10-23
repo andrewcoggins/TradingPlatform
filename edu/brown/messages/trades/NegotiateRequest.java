@@ -2,6 +2,7 @@ package brown.messages.trades;
 
 import java.util.List;
 
+import brown.agent.AClient;
 import brown.agent.Agent;
 import brown.assets.accounting.Account;
 import brown.messages.Message;
@@ -76,7 +77,7 @@ public class NegotiateRequest extends Message {
   }
 
 @Override
-public void dispatch(Agent agent) {
+public void dispatch(AClient agent) {
 	agent.onNegotiateRequest(this);
 }
 

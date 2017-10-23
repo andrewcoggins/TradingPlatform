@@ -1,5 +1,6 @@
 package brown.messages;
 
+import brown.agent.AClient;
 import brown.agent.Agent;
 import brown.messages.auctions.Bid;
 import brown.messages.markets.MarketOrder;
@@ -84,7 +85,7 @@ public class Ack extends Message {
 	}
 	
 	@Override
-	public void dispatch(Agent agent) {
+	public void dispatch(AClient agent) {
 		agent.onAck(this);
 	}
 

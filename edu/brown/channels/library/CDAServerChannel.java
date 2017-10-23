@@ -1,4 +1,4 @@
-package brown.channels;
+package brown.channels.library;
 
 import java.util.List;
 import java.util.Set;
@@ -6,6 +6,9 @@ import java.util.SortedMap;
 
 import brown.assets.accounting.Ledger;
 import brown.assets.accounting.Order;
+import brown.channels.ITwoSidedAuction;
+import brown.channels.MechanismType;
+import brown.channels.TwoSidedAuction;
 import brown.rules.clearingrules.ClearingRule;
 import brown.tradeables.Asset;
 import brown.valuable.library.Tradeable;

@@ -1,14 +1,17 @@
-package brown.channels;
+package brown.channels.library;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import brown.agent.AClient;
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 import brown.bundles.MarketState;
 import brown.bundles.SimpleBidBundle;
+import brown.channels.IAgentChannel;
+import brown.channels.MechanismType;
 import brown.messages.auctions.Bid;
 import brown.rules.paymentrules.PaymentType;
 import brown.setup.Logging;
@@ -60,7 +63,7 @@ public class SimpleAuctionChannel implements IAgentChannel {
 	}
 
 	@Override
-	public void dispatchMessage(Agent agent) {
+	public void dispatchMessage(AClient agent) {
 		switch(this.MTYPE) {
 		case ContinuousDoubleAuction:
 			break;

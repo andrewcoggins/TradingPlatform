@@ -1,13 +1,16 @@
-package brown.channels;
+package brown.channels.library;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import brown.agent.CDAAgent;
+import brown.agent.AClient;
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 import brown.assets.accounting.Order;
+import brown.channels.ITwoSidedPriceSetter;
 import brown.messages.markets.MarketOrder;
 import brown.valuable.library.Tradeable;
 
@@ -104,8 +107,13 @@ public class CDAAgentChannel implements ITwoSidedPriceSetter {
 		}
 	}
 
+	//what to do... maybe make dispatch message a higher level method. 
+	//no. this must be generic. 
+	//two options: 
+	//either I implement every one of these methods for a TPClient, or I 
+	//make the on... generic. 
 	@Override
-	public void dispatchMessage(Agent agent) {
+	public void dispatchMessage(AClient agent) {
 		agent.onContinuousDoubleAuction(this);
 	}
 
