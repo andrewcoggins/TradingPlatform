@@ -14,6 +14,7 @@ import brown.valuation.IValuation;
  * 
  * @author lcamery
  */
+@SuppressWarnings("unused")
 public abstract class TestAgent {
   
   public TestAgent() throws AgentCreationException {
