@@ -1,6 +1,5 @@
 package brown.messages.markets;
 
-import brown.agent.AClient;
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 import brown.messages.Message;
@@ -27,7 +26,7 @@ public class GameReport extends Message {
 	}
 
 	@Override
-	public void dispatch(AClient agent) {
+	public void dispatch(Agent agent) {
 		agent.onMarketUpdate(this);
 	}
 

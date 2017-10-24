@@ -8,6 +8,7 @@ import brown.assets.accounting.Ledger;
 import brown.assets.accounting.Order;
 import brown.bundles.BidBundle;
 import brown.marketinternalstates.MarketInternalState;
+import brown.markets.presets.MarketPreset;
 import brown.messages.auctions.Bid;
 import brown.messages.markets.TradeRequest;
 import brown.rules.paymentrules.PaymentRule;
@@ -47,6 +48,18 @@ public class Market implements IMarket {
 		this.STATE = startingState;
 		
 		this.STATE.setReserve(this.PRULE.getReserve());
+	}
+	
+	public Market(MarketPreset rules) {
+	   this.PRULE = rules.pRule;
+	    this.ARULE = rules.aRule;
+	    this.QRULE = rules.qRule;
+	    this.ACTRULE = rules.actRule;
+	    this.INFOPOLICY = rules.infoPolicy;
+	    this.TCONDITION = rules.tCondition;
+	    this.STATE = rules.startingState;
+	    
+	    this.STATE.setReserve(this.PRULE.getReserve());
 	}
 	
 	/**

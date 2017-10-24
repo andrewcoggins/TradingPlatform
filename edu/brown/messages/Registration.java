@@ -1,6 +1,5 @@
 package brown.messages;
 
-import brown.agent.AClient;
 import brown.agent.Agent;
 
 /**
@@ -28,7 +27,7 @@ public class Registration extends Message {
 	}
 
 	@Override
-	public void dispatch(AClient agent) {
+	public void dispatch(Agent agent) {
 		agent.onRegistration(this);
 	}
 }

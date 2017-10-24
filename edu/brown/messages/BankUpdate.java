@@ -1,6 +1,6 @@
 package brown.messages;
 
-import brown.agent.AClient;
+import brown.agent.Agent;
 import brown.assets.accounting.Account;
 
 /**
@@ -33,7 +33,7 @@ public class BankUpdate extends Message {
 	}
 
 	@Override
-	public void dispatch(AClient agent) {
+	public void dispatch(Agent agent) {
 		agent.onBankUpdate(this);
 	}
 

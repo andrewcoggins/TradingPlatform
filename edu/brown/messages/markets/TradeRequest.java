@@ -1,6 +1,5 @@
 package brown.messages.markets;
 
-import brown.agent.AClient;
 import brown.agent.Agent;
 import brown.channels.IAgentChannel;
 import brown.channels.MechanismType;
@@ -32,7 +31,7 @@ public class TradeRequest extends Message {
 	}
 
 	@Override
-	public void dispatch(AClient agent) {
+	public void dispatch(Agent agent) {
 		this.MARKET.dispatchMessage(agent);
 	}
 

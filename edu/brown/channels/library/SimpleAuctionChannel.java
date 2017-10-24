@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import brown.agent.AClient;
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 import brown.bundles.MarketState;
@@ -63,7 +62,7 @@ public class SimpleAuctionChannel implements IAgentChannel {
 	}
 
 	@Override
-	public void dispatchMessage(AClient agent) {
+	public void dispatchMessage(Agent agent) {
 		switch(this.MTYPE) {
 		case ContinuousDoubleAuction:
 			break;

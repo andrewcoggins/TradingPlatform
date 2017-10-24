@@ -1,6 +1,5 @@
 package brown.channels;
 
-import brown.agent.AClient;
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 
@@ -30,5 +29,5 @@ public interface IAgentChannel {
 	 * trade request types
 	 * @param agent
 	 */
-	public void dispatchMessage(AClient agent);
+	public void dispatchMessage(Agent agent);
 }

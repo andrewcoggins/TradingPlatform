@@ -1,6 +1,5 @@
 package brown.messages;
 
-import brown.agent.AClient;
 import brown.agent.Agent;
 
 /**
@@ -30,5 +29,5 @@ public abstract class Message {
 	 * Tells agent what type of message we are
 	 * @param agent
 	 */
-	public abstract void dispatch(AClient agent);
+	public abstract void dispatch(Agent agent);
 }

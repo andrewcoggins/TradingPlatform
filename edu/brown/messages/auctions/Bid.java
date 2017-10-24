@@ -2,7 +2,6 @@ package brown.messages.auctions;
 
 import java.util.Comparator;
 
-import brown.agent.AClient;
 import brown.agent.Agent;
 import brown.bundles.BidBundle;
 import brown.messages.Message;
@@ -102,7 +101,7 @@ public class Bid extends Message {
   }
 
 	@Override
-	public void dispatch(AClient agent) {
+	public void dispatch(Agent agent) {
 		//Noop
 	}
 	

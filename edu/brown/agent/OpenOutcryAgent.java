@@ -5,7 +5,7 @@ import brown.channels.library.SimpleAuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.setup.Setup;
 
-public abstract class OpenOutcryAgent extends AClient {
+public abstract class OpenOutcryAgent extends Agent {
 
   public OpenOutcryAgent(String host, int port, Setup gameSetup)
       throws AgentCreationException {

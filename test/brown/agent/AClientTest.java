@@ -7,8 +7,11 @@ import java.util.Map.Entry;
 import com.esotericsoftware.kryonet.Connection;
 
 import brown.assets.accounting.Account;
+import brown.marketinternalstates.SimpleInternalState;
 import brown.markets.Market;
 import brown.registration.ValuationRegistration;
+import brown.rules.allocationrules.library.SimpleHighestBidderAllocation;
+import brown.rules.paymentrules.library.SimpleSecondPrice;
 import brown.server.TradingServer;
 import brown.setup.Logging;
 import brown.setup.library.SimpleSetup;
@@ -32,7 +35,8 @@ public class AClientTest extends TradingServer {
       testItem.put(new Tradeable(999), 1.111);
       this.theServer.sendToTCP(conn.getKey().getID(), new ValuationRegistration(conn.getValue(), testItem));
     }
-    Market market = new Market();
+    Market market = new Market(new SimpleSecondPrice(), new SimpleHighestBidderAllocation(),
+        null, null, null, null, new SimpleInternalState(2121, null));
     this.manager.open(market);
     while(!market.isOver()) {
       try {
@@ -43,7 +47,6 @@ public class AClientTest extends TradingServer {
       }
     }
     this.updateAllAuctions(true);
-    System.out.println("\n\n\n\n\nOUTCOME:");
     for (Account account : this.acctManager.getAccounts()) {
       System.out.println(account);
     }

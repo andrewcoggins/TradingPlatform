@@ -1,6 +1,5 @@
 package brown.messages.trades;
 
-import brown.agent.AClient;
 import brown.agent.Agent;
 import brown.messages.Message;
 
@@ -20,7 +19,7 @@ public class Trade extends Message {
 	}
 
 	@Override
-	public void dispatch(AClient agent) {
+	public void dispatch(Agent agent) {
 		//Noop
 	}
 

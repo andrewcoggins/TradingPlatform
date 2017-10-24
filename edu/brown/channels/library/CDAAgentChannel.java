@@ -6,7 +6,6 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import brown.agent.CDAAgent;
-import brown.agent.AClient;
 import brown.agent.Agent;
 import brown.assets.accounting.Ledger;
 import brown.assets.accounting.Order;
@@ -113,7 +112,7 @@ public class CDAAgentChannel implements ITwoSidedPriceSetter {
 	//either I implement every one of these methods for a TPClient, or I 
 	//make the on... generic. 
 	@Override
-	public void dispatchMessage(AClient agent) {
+	public void dispatchMessage(Agent agent) {
 		agent.onContinuousDoubleAuction(this);
 	}
 
