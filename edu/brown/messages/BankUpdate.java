@@ -1,7 +1,6 @@
 package brown.messages;
 
 import brown.agent.AClient;
-import brown.agent.Agent;
 import brown.assets.accounting.Account;
 
 /**

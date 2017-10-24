@@ -21,7 +21,7 @@ import brown.rules.terminationconditions.TerminationCondition;
  * together with a set of agents. This class dictates a market
  * in which agents will bid.
  */
-public class Market {
+public class Market implements IMarket {
 	private final PaymentRule PRULE;
 	private final AllocationRule ARULE;
 	
@@ -64,13 +64,9 @@ public class Market {
 	 * @return TradeRequest for ID
 	 */
 	public TradeRequest wrap(Integer ID, Ledger ledger) {
-		//System.out.println("STARTWRAP" + this.term);
 		if (this.term != this.lastTerm) {
-			//System.out.println("BIDS " + this.STATE.getBids());
 			this.STATE.setAllocation(this.ARULE.getAllocation(this.STATE));
 			this.STATE.setPayments(this.PRULE.getPayments(this.STATE));
-			//System.out.println("ALLOC" + this.STATE.getAllocation());
-			//System.out.println(this.STATE.getPayments());
 			this.lastTerm = this.term;
 		}
 
@@ -91,8 +87,6 @@ public class Market {
 	 * @param bid
 	 */
 	public boolean handleBid(Bid bid) {
-	  //activityrule is not finding acceptable the internal state, and the bid.
-	  //what is isAcceptable
 		if (this.ACTRULE.isAcceptable(this.STATE, bid)) {
 			this.STATE.addBid(bid);
 			return true;
@@ -113,11 +107,8 @@ public class Market {
 
 		BidBundle newState = this.ARULE.getAllocation(this.STATE);
 		this.STATE.setAllocation(newState);
-		//this is null, or empty
 		List<Order> newPayments = this.PRULE.getPayments(this.STATE);
-		System.out.println("new payments " + newPayments);
 		this.STATE.setPayments(newPayments);
-		System.out.println("P " + this.STATE.getPayments());
 		return this.STATE.getPayments();
 	}
 	
@@ -129,4 +120,5 @@ public class Market {
 		this.term++;
 		this.STATE.tick(time);
 	}
+
 }
