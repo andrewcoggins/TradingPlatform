@@ -22,16 +22,7 @@ import brown.setup.Logging;
 import brown.setup.Setup;
 import brown.setup.Startup;
 
-public abstract class Agent { 
-  /**
-   * Kryo's client object.
-   */
-  public final Client CLIENT;
-
-  /**
-   * Agent id.
-   */
-  public Integer ID;
+public abstract class Agent extends TPClient{ 
 
   /**
    * Implementations should always invoke super()
@@ -43,22 +34,7 @@ public abstract class Agent {
    */
   public Agent(String host, int port, Setup gameSetup)
       throws AgentCreationException {
-    this.CLIENT = new Client();
-    this.ID = null;
-
-    CLIENT.start();
-    Log.TRACE();
-    Kryo agentKryo = CLIENT.getKryo();
-    Startup.start(agentKryo);
-    if (gameSetup != null) {
-      gameSetup.setup(agentKryo);
-    }
-
-    try {
-      CLIENT.connect(5000, host, port, port);
-    } catch (IOException e) {
-      throw new AgentCreationException("Failed to connect to server");
-    }
+    super(host, port, gameSetup);
 
     final Agent agent = this;
     CLIENT.addListener(new Listener() {

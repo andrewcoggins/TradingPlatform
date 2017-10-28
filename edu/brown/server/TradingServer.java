@@ -153,7 +153,6 @@ public abstract class TradingServer {
 					if (!market.permitShort()
 							&& account.monies < market.quoteBid(
 									limitorder.buyShares, limitorder.price)) {
-				     System.out.println("ACK 3");
 						Ack rej = new Ack(privateID, limitorder, true);
 						this.theServer.sendToTCP(connection.getID(), rej);
 						return;
@@ -458,7 +457,7 @@ public abstract class TradingServer {
 
 	/**
 	 * Sends a auction update to every agent or closes out any finished
-	 * auctions. about the state of all the public auctions
+	 * auctions about the state of all the public auctions
 	 */
 	public void updateAllAuctions(boolean closeable) {
 		synchronized (this.manager) {
