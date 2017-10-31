@@ -12,7 +12,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/TradingPlatform/lib/kryonet-2.21-all.jar"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -25,6 +24,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/Users/andrew/Documents/workspace/jars/valueGenerator.jar"/>
+	<classpathentry kind="lib" path="/gpfs/main/home/acoggins/workspace/jars/valueGenerator.jar"/>
+	<classpathentry kind="lib" path="/gpfs/main/home/acoggins/workspace/jars/kryonet-2.21-all.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
