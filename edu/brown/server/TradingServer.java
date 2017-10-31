@@ -507,7 +507,7 @@ public abstract class TradingServer {
 					} else {
 						for (Map.Entry<Connection, Integer> id : this.connections
 								.entrySet()) {
-							TradeRequest tr = auction.wrap(id.getValue(), new Ledger());
+							TradeRequest tr = auction.constructTradeRequest(id.getValue(), new Ledger());
 									//this.manager.getLedger(auction.getID())
 									//		.getSanitized(id.getValue()));//TODO: Fix
 							if (tr == null) {

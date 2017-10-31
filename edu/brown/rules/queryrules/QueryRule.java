@@ -7,6 +7,6 @@ import brown.rules.paymentrules.PaymentType;
 
 public interface QueryRule {
 
-	public TradeRequest wrap(Ledger ledger, PaymentType type, MarketInternalState sTATE);
+	public TradeRequest constructChannel(Ledger ledger, PaymentType type, MarketInternalState sTATE);
 
 }
