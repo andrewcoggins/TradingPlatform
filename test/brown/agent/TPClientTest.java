@@ -172,7 +172,7 @@ public class TPClientTest extends TradingServer {
       TestServer server = new TestServer(2121, new TestSetup());
       TestClient client = new TestClient("localhost", 2121, new TestSetup());
       TestChannel channel = new TestChannel();
-      TestMessage message = new TestMessage(PORT, null);
+      TestMessage message = new TestMessage(null, null);
       
       client.communicate(channel);
       channel.dispatchMessage(client);

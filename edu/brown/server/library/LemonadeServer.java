@@ -7,9 +7,14 @@ import brown.setup.Logging;
 import brown.setup.Setup;
 import brown.setup.library.SimpleSetup;
 
-public class LemonadeMarket extends TradingServer {
+/**
+ * this needs help.
+ * @author andrew
+ *
+ */
+public class LemonadeServer extends TradingServer {
 
-  public LemonadeMarket(int port, Setup gameSetup) {
+  public LemonadeServer(int port, Setup gameSetup) {
     super(port, gameSetup);
     // TODO Auto-generated constructor stub
   }
@@ -38,7 +43,7 @@ public class LemonadeMarket extends TradingServer {
   }
   
   public static void main(String[] args) {
-    new LemonadeMarket(2121, new SimpleSetup()).runGame();
+    new LemonadeServer(2121, new SimpleSetup()).runGame();
   }
   
   
