@@ -14,7 +14,7 @@ import brown.rules.queryrules.QueryRule;
 public class SealedBidQuery implements QueryRule {
 
 	@Override
-	public TradeRequest wrap(Ledger ledger, PaymentType type, MarketInternalState state) {
+	public TradeRequest constructRequest(Ledger ledger, PaymentType type, MarketInternalState state) {
 		if (state.getAllocation().getType().equals(BundleType.Simple)) {
 			return new TradeRequest(0, 
 					new SimpleAuctionChannel(state.getID(), ledger, type, MechanismType.SealedBid, 

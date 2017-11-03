@@ -50,15 +50,14 @@ public class Market implements IMarket {
 		this.STATE.setReserve(this.PRULE.getReserve());
 	}
 	
-	public Market(MarketPreset rules) {
+	public Market(MarketPreset rules, MarketInternalState state) {
 	   this.PRULE = rules.pRule;
 	    this.ARULE = rules.aRule;
 	    this.QRULE = rules.qRule;
 	    this.ACTRULE = rules.actRule;
 	    this.INFOPOLICY = rules.infoPolicy;
 	    this.TCONDITION = rules.tCondition;
-	    this.STATE = rules.startingState;
-	    
+	    this.STATE = state;
 	    this.STATE.setReserve(this.PRULE.getReserve());
 	}
 	
@@ -76,14 +75,14 @@ public class Market implements IMarket {
 	 * @param ledger : past transactions for market
 	 * @return TradeRequest for ID
 	 */
-	public TradeRequest wrap(Integer ID, Ledger ledger) {
+	public TradeRequest constructRequest(Integer ID, Ledger ledger) {
 		if (this.term != this.lastTerm) {
 			this.STATE.setAllocation(this.ARULE.getAllocation(this.STATE));
 			this.STATE.setPayments(this.PRULE.getPayments(this.STATE));
 			this.lastTerm = this.term;
 		}
 
-		return this.QRULE.wrap(ledger, this.PRULE.getPaymentType(),
+		return this.QRULE.constructRequest(ledger, this.PRULE.getPaymentType(),
 				this.INFOPOLICY.handleInfo(ID, this.STATE));
 	}
 	

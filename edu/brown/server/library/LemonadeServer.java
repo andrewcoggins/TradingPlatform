@@ -1,5 +1,6 @@
 package brown.server.library;
 
+import brown.marketinternalstates.SimpleInternalState;
 import brown.markets.Market;
 import brown.markets.presets.LemonadeRules;
 import brown.server.TradingServer;
@@ -35,11 +36,11 @@ public class LemonadeServer extends TradingServer {
   }
   
   public void runGame() {
-    delay(10, false);
-    for (int i = 0; i < 5; i++) {
-      this.manager.open(new Market(new LemonadeRules()));
-      delay(5, true);
-    }
+  //  delay(10, false);
+  //  for (int i = 0; i < 5; i++) {
+      this.manager.open(new Market(new LemonadeRules(), new SimpleInternalState(PORT, null)));
+  //    delay(5, true);
+  //  }
   }
   
   public static void main(String[] args) {

@@ -27,12 +27,12 @@ public class BasicComTest {
       public BasicServer(int port) throws IOException {
         theServer = new Server();
         theServer.start();
-        try {
-        theServer.bind(111, 111);
-        }
-        catch (Exception e) {
-          System.err.println("ERROR: " + e);
-        }
+//        try {
+//        theServer.bind(111, 111);
+//        }
+//        catch (Exception e) {
+//          System.err.println("ERROR: " + e);
+//        }
         Kryo kryo = theServer.getKryo();
         kryo.register(String.class);
         
