@@ -49,4 +49,11 @@ public class LemonadePayment implements PaymentRule {
     return null;
   }
 
+
+  @Override
+  public List<Order> getPayments(Map<Integer, Set<Asset>> allocations) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

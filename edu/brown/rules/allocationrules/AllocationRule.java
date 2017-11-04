@@ -21,19 +21,31 @@ public interface AllocationRule {
 
 	void tick(long time);
 	
-	public BidBundle getAllocation(MarketInternalState state);
+	//uses MIS
+	public void setAllocation();
 
-	Map<Integer, Set<Asset>> getAllocations(Set<Bid> bids, Set<Asset> items);
-
-	BidRequest getBidRequest(Set<Bid> bids, Integer iD);
-
-	boolean isPrivate();
+	 //BundleType getBundleType();
+	void setBundleType();
+	 
+	void isPrivate();
 	
-	boolean isOver();
+	void isOver();
+	
+	
+	//no.
+	//Map<Integer, Set<Asset>> getAllocations(Set<Bid> bids, Set<Asset> items);
 
-	BundleType getBundleType();
+	//BidRequest getBidRequest(Set<Bid> bids, Integer iD);
+	//maybe not.
+	void setBidRequest();
 
-	Set<Bid> withReserve(Set<Bid> bids);
+//	boolean isPrivate();
+//	
+//	boolean isOver();
+
+
+	//Set<Bid> withReserve(Set<Bid> bids);
+	void withReserve();
 
 	boolean isValid(Bid bid, Set<Bid> bids);
 

@@ -12,14 +12,14 @@ import brown.rules.queryrules.QueryRule;
 public class LemonadeQuery implements QueryRule {
   
   @Override
-  public TradeRequest constructChannel(Ledger ledger, PaymentType type, MarketInternalState state) {
+  public void makeChannel(Ledger ledger, PaymentType type, MarketInternalState state) {
     if (state.getAllocation().getType().equals(BundleType.Simple)) {
       //
-      return new TradeRequest(0, 
+      TradeRequest constructedRequest = new TradeRequest(0, 
           new LemonadeChannel(state.getID(), ledger, type, MechanismType.SealedBid), 
               MechanismType.Lemonade);
+      state.setChannel(constructedRequest);
     }
-    return null;
   
 }
 }

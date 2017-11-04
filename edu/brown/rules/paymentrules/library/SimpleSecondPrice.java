@@ -92,4 +92,10 @@ public class SimpleSecondPrice implements PaymentRule {
 		return false;
 	}
 
+  @Override
+  public List<Order> getPayments(Map<Integer, Set<Asset>> allocations) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

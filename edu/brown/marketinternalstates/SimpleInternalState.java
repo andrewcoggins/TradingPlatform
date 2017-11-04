@@ -148,4 +148,11 @@ public class SimpleInternalState implements MarketInternalState {
 		}
 		return elig;
 	}
+	
+	////
+	
+	
+	public void setChannel(TradeRequest aChannel){ 
+	  
+	}
 }

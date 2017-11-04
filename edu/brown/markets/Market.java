@@ -83,7 +83,7 @@ public class Market implements IMarket {
 			this.lastTerm = this.term;
 		}
 		System.out.println(ID);
-		System.out.println(this.STATE);
+		System.out.println(this.STATE.getAllocation());
 		System.out.println(ID);
 		
 		return this.QRULE.constructChannel(ledger, this.PRULE.getPaymentType(),
@@ -128,6 +128,8 @@ public class Market implements IMarket {
 		return this.STATE.getPayments();
 	}
 	
+	
+
 	/**
 	 * Ticks the market for clock auctions
 	 * @param time
