@@ -75,14 +75,18 @@ public class Market implements IMarket {
 	 * @param ledger : past transactions for market
 	 * @return TradeRequest for ID
 	 */
-	public TradeRequest constructRequest(Integer ID, Ledger ledger) {
+
+	public TradeRequest constructTradeRequest(Integer ID, Ledger ledger) {
 		if (this.term != this.lastTerm) {
 			this.STATE.setAllocation(this.ARULE.getAllocation(this.STATE));
 			this.STATE.setPayments(this.PRULE.getPayments(this.STATE));
 			this.lastTerm = this.term;
 		}
-
-		return this.QRULE.constructRequest(ledger, this.PRULE.getPaymentType(),
+		System.out.println(ID);
+		System.out.println(this.STATE);
+		System.out.println(ID);
+		
+		return this.QRULE.constructChannel(ledger, this.PRULE.getPaymentType(),
 				this.INFOPOLICY.handleInfo(ID, this.STATE));
 	}
 	

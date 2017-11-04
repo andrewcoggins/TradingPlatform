@@ -22,7 +22,7 @@ import brown.setup.Logging;
 import brown.setup.Setup;
 import brown.setup.Startup;
 
-public abstract class Agent extends TPClient{ 
+public abstract class Agent extends TPClient { 
 
   /**
    * Implementations should always invoke super()

@@ -1,5 +1,7 @@
 package brown.server.library;
 
+import java.util.HashSet;
+
 import brown.marketinternalstates.SimpleInternalState;
 import brown.markets.Market;
 import brown.markets.presets.LemonadeRules;
@@ -7,6 +9,8 @@ import brown.server.TradingServer;
 import brown.setup.Logging;
 import brown.setup.Setup;
 import brown.setup.library.SimpleSetup;
+import brown.tradeables.Asset;
+import brown.valuable.library.Tradeable;
 
 /**
  * this needs help.
@@ -37,14 +41,15 @@ public class LemonadeServer extends TradingServer {
   
   public void runGame() {
   //  delay(10, false);
-  //  for (int i = 0; i < 5; i++) {
-      this.manager.open(new Market(new LemonadeRules(), new SimpleInternalState(PORT, null)));
-  //    delay(5, true);
-  //  }
+   // for (int i = 0; i < 5; i++) {
+    Asset a = new Asset(new Tradeable(0), 1);
+      this.manager.open(new Market(new LemonadeRules(), new SimpleInternalState(0, new HashSet<Asset>())));
+      delay(10, true);
+   // }
   }
   
   public static void main(String[] args) {
-    new LemonadeServer(2121, new SimpleSetup()).runGame();
+    new LemonadeServer(4242, new SimpleSetup()).runGame();
   }
   
   

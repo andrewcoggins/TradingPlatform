@@ -80,7 +80,7 @@ public abstract class TradingServer {
 		try {
 			theServer.bind(PORT, PORT);
 		} catch (IOException e) {
-			Logging.log("[X] Server failed to start due to port conflict");
+			Logging.log(e + " [X] Server failed to start due to port conflict");
 			return;
 		}
 
@@ -507,7 +507,7 @@ public abstract class TradingServer {
 					} else {
 						for (Map.Entry<Connection, Integer> id : this.connections
 								.entrySet()) {
-							TradeRequest tr = auction.constructRequest(id.getValue(), new Ledger());
+							TradeRequest tr = auction.constructTradeRequest(id.getValue(), new Ledger());
 									//this.manager.getLedger(auction.getID())
 									//		.getSanitized(id.getValue()));//TODO: Fix
 							if (tr == null) {

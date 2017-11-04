@@ -9,7 +9,7 @@ import brown.messages.auctions.Bid;
 import brown.tradeables.Asset;
 
 /**
- * this interface stores the internal state of a market as 
+ * stores the internal state of a market as 
  * bidding is occurring.
  * @author acoggins
  *
