@@ -2,8 +2,10 @@ package brown.server.library;
 
 import java.util.HashSet;
 
+import brown.marketinternalstates.InternalState;
 import brown.marketinternalstates.SimpleInternalState;
 import brown.markets.Market;
+import brown.markets.MarketOld;
 import brown.markets.presets.LemonadeRules;
 import brown.server.TradingServer;
 import brown.setup.Logging;
@@ -43,8 +45,9 @@ public class LemonadeServer extends TradingServer {
   //  delay(10, false);
    // for (int i = 0; i < 5; i++) {
     Asset a = new Asset(new Tradeable(0), 1);
-      this.manager.open(new Market(new LemonadeRules(), new SimpleInternalState(0, new HashSet<Asset>())));
+      this.manager.open(new Market(new LemonadeRules(), new InternalState(0, new HashSet<Asset>())));
       delay(10, true);
+      this.updateAllAuctions(true);
    // }
   }
   

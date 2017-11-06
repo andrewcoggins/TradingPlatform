@@ -1,59 +1,31 @@
-package brown.rules.paymentrules.library;
+package brown.rules.paymentrules.library; 
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import brown.assets.accounting.Order;
-import brown.bundles.BidBundle;
-import brown.bundles.BundleType;
-import brown.bundles.SimpleBidBundle;
+
 import brown.marketinternalstates.MarketInternalState;
-import brown.messages.auctions.Bid;
 import brown.rules.paymentrules.PaymentRule;
 import brown.rules.paymentrules.PaymentType;
-import brown.tradeables.Asset;
 
 public class LemonadePayment implements PaymentRule {
 
   @Override
-  public Map<BidBundle, Set<Asset>>
-  //wtf look at this.
-      getPayments(Map<Integer, Set<Asset>> allocations, Set<Bid> bids) {
-    Map<BidBundle, Set<Asset>> payments = new HashMap<BidBundle, Set<Asset>>();
-    for (Map.Entry<Integer, Set<Asset>> alloc : allocations.entrySet()) {
-      payments.put(new SimpleBidBundle(null), alloc.getValue());
-      //payments.put(new SimpleBidBundle(0, alloc.getKey(), BundleType.Simple), alloc.getValue());
-    }
-    return null;
+  public void getPayments(MarketInternalState state) {
+    //for the lemonade game, payments are handled in the allocation rule. 
   }
 
   @Override
-  public PaymentType getPaymentType() {
-    return PaymentType.Lemonade;
+  public void setPaymentType(MarketInternalState state) {
+    state.setPaymentType(PaymentType.Lemonade);
   }
 
   @Override
-  public boolean permitShort() {
-    return true;
+  public void setReserve(MarketInternalState state) {
+    // TODO Auto-generated method stub
+  }
+
+  @Override
+  public void permitShort(MarketInternalState state) {
+    state.setShort(true);
   } 
   
-  @Override
-  public BidBundle getReserve() {
-    return null;
-  }
-  
-  @Override
-  public List<Order> getPayments(MarketInternalState state) {
-    return null;
-  }
-
-
-  @Override
-  public List<Order> getPayments(Map<Integer, Set<Asset>> allocations) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
 }

@@ -19,38 +19,25 @@ import brown.tradeables.Asset;
  */
 public interface AllocationRule {
 
-	void tick(long time);
+  
+	public void tick(MarketInternalState state);
 	
-	//uses MIS
-	public void setAllocation();
+  public void setAllocation(MarketInternalState state);
+  
+  public void setBidRequest(MarketInternalState state);
 
-	 //BundleType getBundleType();
-	void setBundleType();
-	 
-	void isPrivate();
+	public void isPrivate(MarketInternalState state);
 	
-	void isOver();
+	public void isOver(MarketInternalState state);
 	
-	
-	//no.
-	//Map<Integer, Set<Asset>> getAllocations(Set<Bid> bids, Set<Asset> items);
+  public void setBundleType(MarketInternalState state);
 
-	//BidRequest getBidRequest(Set<Bid> bids, Integer iD);
-	//maybe not.
-	void setBidRequest();
+	public void withReserve(MarketInternalState state);
 
-//	boolean isPrivate();
-//	
-//	boolean isOver();
+	void isValid(MarketInternalState state);
 
+	void getAllocationType(MarketInternalState state);
 
-	//Set<Bid> withReserve(Set<Bid> bids);
-	void withReserve();
-
-	boolean isValid(Bid bid, Set<Bid> bids);
-
-	MechanismType getAllocationType();
-
-	GameReport getReport();
+  void getReport(MarketInternalState state);
 
 }

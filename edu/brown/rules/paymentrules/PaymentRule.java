@@ -1,27 +1,16 @@
 package brown.rules.paymentrules;
 
+import brown.marketinternalstates.MarketInternalState;
+
 
 public interface PaymentRule {
 
-  //thi can use the market internal state for all of its information. 
+  public void getPayments(MarketInternalState state); 
   
+  public void setPaymentType(MarketInternalState state);
   
-  public void getPayments();
+  public void setReserve(MarketInternalState state); 
   
-  public void permitShort();
+  public void permitShort(MarketInternalState state);
   
-  
-//	public List<Order> getPayments(MarketInternalState state);
-//	
-//	public Map<BidBundle, Set<Asset>> getPayments(Map<Integer, Set<Asset>> allocations, Set<Bid> bids);
-//	
-//	public List<Order> getPayments(Map<Integer, Set<Asset>> allocations);
-//
-//	public PaymentType getPaymentType();
-//
-//	public BidBundle getReserve();
-//	
-//	public boolean permitShort();
-
-
 }

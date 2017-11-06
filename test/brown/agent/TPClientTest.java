@@ -18,7 +18,7 @@ import brown.assets.accounting.Ledger;
 import brown.channels.IAgentChannel;
 import brown.exceptions.AgentCreationException;
 import brown.marketinternalstates.SimpleInternalState;
-import brown.markets.Market;
+import brown.markets.MarketOld;
 import brown.messages.Message;
 import brown.registration.ValuationRegistration;
 import brown.rules.allocationrules.library.SimpleHighestBidderAllocation;

@@ -1,64 +1,39 @@
-package brown.rules.allocationrules.library;
+package brown.rules.allocationrules.library; 
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
-import brown.assets.accounting.Account;
-import brown.assets.value.EndState;
-import brown.bundles.BidBundle;
+
+import brown.assets.accounting.Order;
 import brown.bundles.BundleType;
 import brown.channels.MechanismType;
 import brown.marketinternalstates.MarketInternalState;
 import brown.messages.auctions.Bid;
-import brown.messages.auctions.BidRequest;
-import brown.messages.markets.GameReport;
 import brown.messages.markets.LemonadeReport;
 import brown.rules.allocationrules.AllocationRule;
 import brown.tradeables.Asset;
-import brown.valuable.library.Tradeable;
 
 public class LemonadeAllocation implements AllocationRule {
 
-  private MechanismType TYPE; 
-  private Integer ticks; 
-  private Integer ID;
-  private final Integer SIZE = 12; 
+  private Integer SIZE = 12;
   private int[] slots;
   
-  /*
-   * a lemonade allocation has an array of 12 positions.
-   */
-  public LemonadeAllocation() {
-    this.ID = null;
-    this.slots = new int[SIZE];
-  }
-  
-  public LemonadeAllocation(Integer ID) {
-    this.ID = ID;
-    this.slots = new int[SIZE];
-  }
-  
   @Override
-  public void tick(long time) {
-    if (time == -1) {
-      this.ticks = 0;
-    } else {
-      this.ticks++;
-    }
+  public void tick(MarketInternalState state) {
+    long time = state.getTime(); 
+    time++; 
+    state.setTime(time); 
   }
 
-
   @Override
-  public Map<Integer, Set<Asset>> getAllocations(Set<Bid> bids,
-      Set<Asset> items) {
+  public void setAllocation(MarketInternalState state) {
     //create a list of the people in the game at each position.
+    List<Bid> bids = state.getBids();
+    Set<Asset> items = state.getTradeables();
+    List<Order> payoffs = new ArrayList<Order>();
     @SuppressWarnings("unchecked")
-    Map<Integer, Set<Asset>> securities = new HashMap<Integer, Set<Asset>>();
     List<Integer>[] positions = (List<Integer>[]) new List[SIZE];
     for(Bid bid : bids) {
       Integer place = (int) bid.Bundle.getCost() - 1;
@@ -101,78 +76,71 @@ public class LemonadeAllocation implements AllocationRule {
       //give people the payments. 
       
       for (Integer person : positions[i]) {
-        Set<Asset> goods = new HashSet<Asset>();
-        final double pay = payoff;
-        //this puts money in your account.
-        //wtf
-        Function<EndState, List<Account>> giveMoney = f -> {
-          List<Account> list = new LinkedList<Account>();
-          list.add(new Account(person).add(pay));
-          return list;
-        };
-        goods.add(new Asset(new Tradeable(), 1, giveMoney));
-        securities.put(person, goods);
+        Order earned = new Order(person, null, payoff, 1, null);
+        payoffs.add(earned); 
       }
+      state.setPayments(payoffs);
     }
-    return null;
   }
 
   @Override
-  public BidRequest getBidRequest(Set<Bid> bids, Integer ID) {
+  public void setBidRequest(MarketInternalState state) {
     // TODO Auto-generated method stub
-    return null;
+    
   }
 
   @Override
-  public boolean isPrivate() {
-    return true;
+  public void isPrivate(MarketInternalState state) {
+    state.setPrivate(true); 
+    
   }
 
   @Override
-  public boolean isOver() {
-    return this.ticks > 2;
+  public void isOver(MarketInternalState state) {
+    long ticks = state.getTime(); 
+    if(ticks > 2) { 
+      state.setOver(true);
+    }
   }
 
   @Override
-  public BundleType getBundleType() {
-    return BundleType.Simple;
+  public void setBundleType(MarketInternalState state) {
+    state.setBundleType(BundleType.Simple);
+    
   }
 
   @Override
-  public Set<Bid> withReserve(Set<Bid> bids) {
+  public void withReserve(MarketInternalState state) {
     // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public boolean isValid(Bid bid, Set<Bid> bids) {
-    if (bid.AgentID == null || bid.Bundle == null
-        || bid.Bundle.getCost() < 1 || bid.Bundle.getCost() > 12) {
-      return false;
-    }
     
-    for (Bid b : bids) {
-      if (b.AgentID.equals(bid.AgentID)) {
-        return false;
-      }
+  }
+
+  @Override
+  public void isValid(MarketInternalState state) {
+//    // TODO Auto-generated method stub
+//    if (bid.AgentID == null || bid.Bundle == null
+//        || bid.Bundle.getCost() < 1 || bid.Bundle.getCost() > 12) {
+//      state.setValid(false);
+//    }
+//    
+//    for (Bid b : bids) {
+//      if (b.AgentID.equals(bid.AgentID)) {
+//        state.setValid(false);
+//      }
+//    }
+//    
+//    return true;
     }
-    
-    return true;
+
+  @Override
+  public void getAllocationType(MarketInternalState state) {
+    state.setMType(MechanismType.Lemonade);
   }
 
   @Override
-  public MechanismType getAllocationType() {
-    return TYPE.Lemonade; 
+  public void getReport(MarketInternalState state) {
+    state.setReport(new LemonadeReport());
   }
 
-  @Override
-  public GameReport getReport() {
-    return new LemonadeReport(slots);
-  } 
-  
-  @Override
-  public BidBundle getAllocation(MarketInternalState state) {
-    return null;
-  }
   
 }

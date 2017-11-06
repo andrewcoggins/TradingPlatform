@@ -12,15 +12,24 @@ import brown.rules.queryrules.QueryRule;
 
 public class SealedBidQuery implements QueryRule {
 
-	@Override
-	public void makeChannel(Ledger ledger, PaymentType type, MarketInternalState state) {
-		if (state.getAllocation().getType().equals(BundleType.Simple)) {
-			return new TradeRequest(0, 
-					new SimpleAuctionChannel(state.getID(), ledger, type, MechanismType.SealedBid, 
-							(SimpleBidBundle) state.getReserve(), state.getEligibility()), 
-							MechanismType.OpenOutcry);
-		}
-		return null;
+  @Override
+  public void makeChannel(MarketInternalState state, Ledger ledger) {
+    // TODO Auto-generated method stub
+    
+
+//	@Override
+//	public void makeChannel(Ledger ledger, PaymentType type, MarketInternalState state) {
+//		if (state.getAllocation().getType().equals(BundleType.Simple)) {
+//			return new TradeRequest(0, 
+//					new SimpleAuctionChannel(state.getID(), ledger, type, MechanismType.SealedBid, 
+//							(SimpleBidBundle) state.getReserve(), state.getEligibility()), 
+//							MechanismType.OpenOutcry);
+//		}
+//		return null;
+		
+		
+		
+		
 //		else {
 //			return new TradeRequest(0, 
 //					new ComplexAuction(state.getID(), ledger, type, MechanismType.SealedBid, 
