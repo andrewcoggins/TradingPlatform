@@ -63,7 +63,10 @@ public class Market implements IMarket {
   @Override
   public boolean handleBid(Bid bid) {
     // TODO Auto-generated method stub
-    this.ACTRULE.isAcceptable(this.STATE, bid);
+    this.ACTRULE.isAcceptable(this.STATE, bid); 
+    if(this.STATE.getAcceptable()) {
+        STATE.addBid(bid);
+    }
     return this.STATE.getAcceptable();
   }
 
@@ -71,6 +74,9 @@ public class Market implements IMarket {
   public List<Order> getOrders() {
     this.ARULE.setAllocation(this.STATE);
     // TODO Auto-generated method stub
+//    System.out.println("B"); 
+//    System.out.println(this.STATE.getPayments().size()); 
+//    System.out.println("B"); 
     return this.STATE.getPayments();
   }
 

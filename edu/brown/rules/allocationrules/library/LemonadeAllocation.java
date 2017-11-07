@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-
 import brown.assets.accounting.Order;
 import brown.bundles.BundleType;
 import brown.channels.MechanismType;
@@ -14,11 +13,18 @@ import brown.messages.auctions.Bid;
 import brown.messages.markets.LemonadeReport;
 import brown.rules.allocationrules.AllocationRule;
 import brown.tradeables.Asset;
+import brown.valuable.library.Tradeable;
 
 public class LemonadeAllocation implements AllocationRule {
 
   private Integer SIZE = 12;
   private int[] slots;
+  
+  
+  public LemonadeAllocation() {
+  this.slots = new int[SIZE];
+  }   
+  
   
   @Override
   public void tick(MarketInternalState state) {
@@ -37,7 +43,7 @@ public class LemonadeAllocation implements AllocationRule {
     List<Integer>[] positions = (List<Integer>[]) new List[SIZE];
     for(Bid bid : bids) {
       Integer place = (int) bid.Bundle.getCost() - 1;
-      if(place >= 0 && place < 12) {
+      if(place >= 0 && place < SIZE) {
         if (positions[place] == null) {
           positions[place] = new LinkedList<Integer>();
         }
@@ -45,7 +51,7 @@ public class LemonadeAllocation implements AllocationRule {
        }  
     }
     //now run the logic of the game. 
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < SIZE; i++) { 
       //report on the status of the game.
       if (positions[i] == null) {
         continue;
@@ -58,7 +64,7 @@ public class LemonadeAllocation implements AllocationRule {
 
       int before = i;
       int after = i;
-      for (int next = (i == 11 ? 0 : i+1); next != i; next++) {
+      for (int next = (i == (SIZE - 1) ? 0 : i+1); next != i; next++) {
         if (positions[next] !=  null) {
           if (after == i) {
             after = next;
@@ -66,17 +72,18 @@ public class LemonadeAllocation implements AllocationRule {
           before = next;
         }
         
-        if (next == 11) {
+        if (next == SIZE - 1) {
           next = -1;
         }
       }
-      payoff = after > i ? after - i : 11-i + after;
+      payoff = after > i ? after - i : (SIZE - 1) - i + after;
       payoff += before < i ? i - before : before;
       payoff /= (double) positions[i].size();
       //give people the payments. 
       
       for (Integer person : positions[i]) {
-        Order earned = new Order(person, null, payoff, 1, null);
+        Asset mock = new Asset(new Tradeable(0), 0, person);
+        Order earned = new Order(person, null, -1 * payoff, 1, mock);
         payoffs.add(earned); 
       }
       state.setPayments(payoffs);

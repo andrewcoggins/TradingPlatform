@@ -7,7 +7,7 @@ public class OneShotTermination implements TerminationCondition {
 
   @Override
   public void tisOver(MarketInternalState state) {
-    // TODO Auto-generated method stub
+    // TODO Auto-generated method stubover
     boolean over = state.getBids().size() > 0; 
     state.setTOver(over);
   }

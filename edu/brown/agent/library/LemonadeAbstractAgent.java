@@ -24,15 +24,10 @@ public abstract class LemonadeAbstractAgent extends Agent {
 
   @Override
   public void onMarketUpdate(GameReport marketUpdate) {
-    // TODO Auto-generated method stub
+    // TODO Auto-generated method 
     
   }
 
-  @Override
-  public void onBankUpdate(BankUpdate bankUpdate) {
-    // TODO Auto-generated method stub
-    
-  }
 
   @Override
   public void onTradeRequest(BidRequest bidRequest) {

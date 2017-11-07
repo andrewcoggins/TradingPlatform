@@ -17,6 +17,7 @@ import brown.messages.Message;
 import brown.messages.Registration;
 import brown.messages.auctions.BidRequest;
 import brown.messages.markets.GameReport;
+import brown.messages.markets.TradeRequest;
 import brown.messages.trades.NegotiateRequest;
 import brown.setup.Logging;
 import brown.setup.Setup;

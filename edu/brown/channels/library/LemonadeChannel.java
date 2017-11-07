@@ -7,12 +7,12 @@ import java.util.Map.Entry;
 import brown.agent.Agent;
 import brown.agent.library.LemonadeAgent;
 import brown.assets.accounting.Ledger;
+import brown.bundles.BidBundle;
 import brown.bundles.MarketState;
 import brown.bundles.SimpleBidBundle;
 import brown.channels.IAgentChannel;
 import brown.channels.MechanismType;
 import brown.messages.auctions.Bid;
-import brown.messages.auctions.LemonadeBid;
 import brown.rules.paymentrules.PaymentType;
 import brown.valuable.library.Tradeable;
 
@@ -26,6 +26,11 @@ public class LemonadeChannel implements IAgentChannel {
   private final Integer ID; 
   private Ledger ledger;
   
+  
+  public LemonadeChannel() { 
+    this.ID = null; 
+    this.ledger = null;
+  }
   /**
    * Do we need other params, such as a bidbundle, an int for eligibility 
    * as for the mechanism type and payment type, do we need them? Better to send un-needed information...
@@ -52,15 +57,19 @@ public class LemonadeChannel implements IAgentChannel {
 
   @Override
   public void dispatchMessage(Agent agent) {
-    //noop
+    if(agent instanceof LemonadeAgent) {
+      LemonadeAgent lemAgent = (LemonadeAgent) agent; 
+      lemAgent.onLemonade(this);   
+    }
   }
   
-  public void dispatchLemonade(LemonadeAgent agent) {
-    agent.onLemonade(this);
-  }
+
   
   public void bid(Agent agent, Integer position) {
-      agent.CLIENT.sendTCP(new LemonadeBid(0, position, this.ID, agent.ID));
+    Map<Tradeable, MarketState> bids = new HashMap<Tradeable, MarketState>();
+    bids.put(new Tradeable(0), new MarketState(agent.ID, (double) position));
+    BidBundle toSend = new SimpleBidBundle(bids);
+    agent.CLIENT.sendTCP(new Bid(0, toSend, this.ID, agent.ID));
   }
   
 }

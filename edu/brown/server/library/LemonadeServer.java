@@ -2,6 +2,7 @@ package brown.server.library;
 
 import java.util.HashSet;
 
+import brown.assets.accounting.Account;
 import brown.marketinternalstates.InternalState;
 import brown.marketinternalstates.SimpleInternalState;
 import brown.markets.Market;
@@ -30,9 +31,9 @@ public class LemonadeServer extends TradingServer {
     int i = 0;
     while (i < amt) {
       try {
-        if (update) {
-          this.updateAllAuctions(true);
-        }
+//        if (update) {
+//          this.updateAllAuctions(true);
+//        }
         Thread.sleep(1000);
         Logging.log("[-] pause phase " + i++);
       } catch (InterruptedException e) {
@@ -41,18 +42,23 @@ public class LemonadeServer extends TradingServer {
     }
   }
   
-  public void runGame() {
+  public void runGame() throws InterruptedException {
   //  delay(10, false);
-   // for (int i = 0; i < 5; i++) {
     Asset a = new Asset(new Tradeable(0), 1);
       this.manager.open(new Market(new LemonadeRules(), new InternalState(0, new HashSet<Asset>())));
-      delay(10, true);
+      delay(3, true);
       this.updateAllAuctions(true);
-   // }
+      Thread.sleep(1000); 
+      this.updateAllAuctions(true);
+      
+      for (Account acct : this.acctManager.getAccounts()) {
+        Logging.log(acct.toString()); 
+      }
   }
   
-  public static void main(String[] args) {
-    new LemonadeServer(4242, new SimpleSetup()).runGame();
+  public static void main(String[] args) throws InterruptedException {
+    new LemonadeServer(2121, new SimpleSetup()).runGame();
+    
   }
   
   

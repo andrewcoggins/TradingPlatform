@@ -403,9 +403,8 @@ public abstract class TradingServer {
 		if (auction != null) {
 			synchronized (auction) {
 				Account account = this.acctManager.getAccount(privateID);
-				if ((!this.SHORT && account.monies < bid.Bundle.getCost())
-						|| !auction.handleBid(bid.safeCopy(privateID))) {
-		      System.out.println("G "+bid.safeCopy(privateID));
+				if (!auction.handleBid(bid.safeCopy(privateID))
+				    || (!this.SHORT && account.monies < bid.Bundle.getCost())) {
 					Ack rej = new Ack(privateID, bid, true);
 					this.theServer.sendToTCP(connection.getID(), rej);
 				}
@@ -460,7 +459,7 @@ public abstract class TradingServer {
 	 * auctions about the state of all the public auctions
 	 */
 	public void updateAllAuctions(boolean closeable) {
-		synchronized (this.manager) {
+		synchronized (this.manager) {;
 			List<Market> toRemove = new LinkedList<Market>();
 			for (Market auction : this.manager.getAuctions()) {
 				synchronized (auction) {
@@ -499,6 +498,7 @@ public abstract class TradingServer {
 											-1 * winner.COST,
 											winner.GOOD);
 									this.acctManager.setAccount(winner.FROM, newA);
+									System.out.println("reached"); 
 									this.sendBankUpdate(winner.FROM, accountFrom,
 											newA);
 								}
@@ -511,6 +511,7 @@ public abstract class TradingServer {
 									//this.manager.getLedger(auction.getID())
 									//		.getSanitized(id.getValue()));//TODO: Fix
 							if (tr == null) {
+							  
 								continue;
 							}
 							this.theServer.sendToUDP(id.getKey().getID(), tr);
@@ -623,7 +624,7 @@ public abstract class TradingServer {
 	 */
 	public void sendBankUpdate(Integer ID, Account oldA, Account newA) {
 		BankUpdate bu = new BankUpdate(ID, oldA.toAgent(), newA.toAgent());
-		theServer.sendToUDP(this.privateToConnection(ID).getID(), bu);
+		theServer.sendToTCP(this.privateToConnection(ID).getID(), bu);
 	}
 
 	/**
