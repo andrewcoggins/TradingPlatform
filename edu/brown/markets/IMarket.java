@@ -11,8 +11,8 @@ public interface IMarket {
   
   public Integer getID();
   
-  public TradeRequest wrap(Integer ID, Ledger ledger);
-  
+  public TradeRequest constructTradeRequest(Integer ID, Ledger ledger);
+
   public boolean isOver();
   
   public boolean handleBid(Bid bid);

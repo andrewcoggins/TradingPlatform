@@ -1,120 +1,149 @@
 package brown.marketinternalstates;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import brown.assets.accounting.Order;
 import brown.bundles.BidBundle;
+import brown.bundles.BundleType;
+import brown.channels.MechanismType;
 import brown.messages.auctions.Bid;
+import brown.messages.auctions.BidRequest;
+import brown.messages.markets.GameReport;
+import brown.messages.markets.TradeRequest;
+import brown.rules.paymentrules.PaymentType;
 import brown.tradeables.Asset;
 
 /**
- * this interface stores the internal state of a market as 
+ * stores the internal state of a market as 
  * bidding is occurring.
  * @author acoggins
  *
  */
 public interface MarketInternalState {
-  /**
-   * returns the auction id
-   * @return
-   */
-	public Integer getID();
 
-	/**
-	 * adds a bid 
-	 * @param bid
-	 */
-	public void addBid(Bid bid);
+    //methods not directly associated with a rule. Look for redundancies here.
+    public void addBid(Bid bid);
+    
+    //may be redundant.
+    public void setAllocation(BidBundle allocation); 
+    
+    public BidBundle getAllocation(); 
+  
+    public List<Bid> getBids(); 
+    
+    public Set<Asset> getTradeables(); 
+    
+    public Integer getID(); 
+    
+    public void setPayments_two(List<Order> payments); 
+    
+    public List<Order> getPayments_two(); 
+    
+    public void tick(long time); 
+    
+    public int getTicks();  
+    
+    public void setReserve(BidBundle o); 
+    
+    public BidBundle getbundleReserve(); 
+    
+    public void clearBids(); 
+    
+    public double getIncrement(); 
+    
+    public void setMaximizingRevenue(boolean b); 
+    
+    public boolean isMaximizingRevenue(); 
+  
+    public int getEligibility(); 
+    
+    
+    
+    //getters for all the allocation rules.
+    public long getTime(); 
+    
+    public BidBundle getAlloc(); 
+    
+    public Map<Integer, Set<Asset>> getAllocs(); 
+    
+    public BidRequest getRequest(); 
+    
+    public boolean getPrivate();
+    
+    public boolean getOver(); 
+    
+    public BundleType getBundleType(); 
+    
+    public Set<Bid> getReserve(); 
+    
+    public boolean getValid();
+    
+    public MechanismType getMType();
+    
+    public GameReport getReport(); 
+    
+    //setters for allocation rule.
+    public void setTime(long t);
+    
+    public void setAlloc(BidBundle alloc);
+   
+    public void setAllocs(Map<Integer, Set<Asset>> allocs);
+    
+    public void setRequest(BidRequest request);
+    
+    public void setPrivate(boolean p); 
+    
+    public void setOver(boolean o); 
+    
+    public void setBundleType(BundleType b); 
+    
+    public void setReserve(Set<Bid> r); 
+    
+    public void setValid(boolean v);
+    
+    public void setMType(MechanismType m);
+    
+    public void setReport(GameReport g);
+    
+    //getters for payment rules. 
+    
+    public List<Order> getPayments();
 
-	/**
-	 * sets the allocation of the auction.
-	 * @param cleanedAlloc
-	 */
-	public void setAllocation(BidBundle cleanedAlloc);
-	
-	/**
-	 * sets the payments of the auction.
-	 * @param payments
-	 */
-	public void setPayments(List<Order> payments);
-	
-	/**
-	 * sets the reserve of the auction.
-	 * @param reserveBundle
-	 */
-	public void setReserve(BidBundle reserveBundle);
-	
-	/**
-	 * gets reserve bundle from internal state.
-	 * @return
-	 * reserve bundle.
-	 */
-	public BidBundle getReserve();
-	
-	/**
-	 * gets and returns bids from internal state.
-	 * @return
-	 */
-	public List<Bid> getBids();
-
-	/**
-	 * gets and returns tradeables from internal state.
-	 * @return
-	 */
-	public Set<Asset> getTradeables();
-
-	/**
-	 * gets and returns allocation bundle from internal state.
-	 * @return
-	 */
-	public BidBundle getAllocation();
-	
-	/**
-	 * gets and returns payments from internal state.
-	 * @return
-	 */
-	public List<Order> getPayments();
-
-	/**
-	 * increments time.
-	 * @param time
-	 */
-	public void tick(long time);
-
-	/**
-	 * returns number of ticks from internal state.
-	 * @return
-	 */
-	public int getTicks();
-
-	/**
-	 * clears all bids from internal state.
-	 */
-	public void clearBids();
-
-	/**
-	 * returns increment stored in internal state.
-	 * @return
-	 */
-	public double getIncrement();
-
-	/**
-	 * sets maximizing revenue in internal state.
-	 * @param b
-	 */
-	public void setMaximizingRevenue(boolean b);
-	
-	/**
-	 * returns whether or not there is maximizing revenue.
-	 * @return
-	 */
-	public boolean isMaximizingRevenue();
-
-	/**
-	 * returns the number of bids that have been placed. 
-	 * @return
-	 */
-	public int getEligibility();
+    public Map<BidBundle, Set<Asset>> getOPayments(); 
+    
+    public PaymentType getPaymentType();
+    
+    public BidBundle getReserveBundle();
+    
+    public boolean permitShort(); 
+    
+    //setter for payment rules.
+    
+    public void setPayments(List<Order> orders); 
+    
+    public void setOPayments(Map<BidBundle, Set<Asset>> m); 
+    
+    public void setPaymentType(PaymentType p); 
+    
+    public void setReserveBundle(BidBundle b); 
+    
+    public void setShort(boolean b);
+    
+    //for Query Rules
+    
+    public TradeRequest getTRequest(); 
+    
+    public void setTRequest(TradeRequest t);
+    
+    public boolean getAcceptable();
+    
+    public void setAcceptable(boolean b);
+    
+    //tcondition things
+    public boolean getTOver();
+    
+    public void setTOver(boolean b); 
 
 }

@@ -1,92 +1,153 @@
-package brown.rules.allocationrules.library;
+package brown.rules.allocationrules.library; 
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
-import brown.bundles.BidBundle;
+import brown.assets.accounting.Order;
 import brown.bundles.BundleType;
 import brown.channels.MechanismType;
 import brown.marketinternalstates.MarketInternalState;
 import brown.messages.auctions.Bid;
-import brown.messages.auctions.BidRequest;
-import brown.messages.markets.GameReport;
+import brown.messages.markets.LemonadeReport;
 import brown.rules.allocationrules.AllocationRule;
 import brown.tradeables.Asset;
+import brown.valuable.library.Tradeable;
 
 public class LemonadeAllocation implements AllocationRule {
 
-  private MechanismType TYPE; 
-  private Integer ticks; 
-  private Integer ID;
+  private Integer SIZE = 12;
   private int[] slots;
   
+  
+  public LemonadeAllocation() {
+  this.slots = new int[SIZE];
+  }   
+  
+  
   @Override
-  public void tick(long time) {
-    if (time == -1) {
-      this.ticks = 0;
-    } else {
-      this.ticks++;
+  public void tick(MarketInternalState state) {
+    long time = state.getTime(); 
+    time++; 
+    state.setTime(time); 
+  }
+
+  @Override
+  public void setAllocation(MarketInternalState state) {
+    //create a list of the people in the game at each position.
+    List<Bid> bids = state.getBids();
+    Set<Asset> items = state.getTradeables();
+    List<Order> payoffs = new ArrayList<Order>();
+    @SuppressWarnings("unchecked")
+    List<Integer>[] positions = (List<Integer>[]) new List[SIZE];
+    for(Bid bid : bids) {
+      Integer place = (int) bid.Bundle.getCost() - 1;
+      if(place >= 0 && place < SIZE) {
+        if (positions[place] == null) {
+          positions[place] = new LinkedList<Integer>();
+        }
+        positions[place].add(bid.AgentID);
+       }  
+    }
+    //now run the logic of the game. 
+    for (int i = 0; i < SIZE; i++) { 
+      //report on the status of the game.
+      if (positions[i] == null) {
+        continue;
+      }
+      else {
+        this.slots[i] = positions[i].size();
+      }
+      //calculate payoffs based on nearest positions.
+      double payoff = 0;
+
+      int before = i;
+      int after = i;
+      for (int next = (i == (SIZE - 1) ? 0 : i+1); next != i; next++) {
+        if (positions[next] !=  null) {
+          if (after == i) {
+            after = next;
+          }
+          before = next;
+        }
+        
+        if (next == SIZE - 1) {
+          next = -1;
+        }
+      }
+      payoff = after > i ? after - i : (SIZE - 1) - i + after;
+      payoff += before < i ? i - before : before;
+      payoff /= (double) positions[i].size();
+      //give people the payments. 
+      
+      for (Integer person : positions[i]) {
+        Asset mock = new Asset(new Tradeable(0), 0, person);
+        Order earned = new Order(person, null, -1 * payoff, 1, mock);
+        payoffs.add(earned); 
+      }
+      state.setPayments(payoffs);
     }
   }
 
   @Override
-  public BidBundle getAllocation(MarketInternalState state) {
+  public void setBidRequest(MarketInternalState state) {
     // TODO Auto-generated method stub
-    return null;
+    
   }
 
   @Override
-  public Map<Integer, Set<Asset>> getAllocations(Set<Bid> bids,
-      Set<Asset> items) {
-    // TODO Auto-generated method stub
-    return null;
+  public void isPrivate(MarketInternalState state) {
+    state.setPrivate(true); 
+    
   }
 
   @Override
-  public BidRequest getBidRequest(Set<Bid> bids, Integer ID) {
-    // TODO Auto-generated method stub
-    return null;
+  public void isOver(MarketInternalState state) {
+    long ticks = state.getTime(); 
+    if(ticks > 2) { 
+      state.setOver(true);
+    }
   }
 
   @Override
-  public boolean isPrivate() {
-    // TODO Auto-generated method stub
-    return false;
+  public void setBundleType(MarketInternalState state) {
+    state.setBundleType(BundleType.Simple);
+    
   }
 
   @Override
-  public boolean isOver() {
+  public void withReserve(MarketInternalState state) {
     // TODO Auto-generated method stub
-    return false;
+    
   }
 
   @Override
-  public BundleType getBundleType() {
-    // TODO Auto-generated method stub
-    return null;
+  public void isValid(MarketInternalState state) {
+//    // TODO Auto-generated method stub
+//    if (bid.AgentID == null || bid.Bundle == null
+//        || bid.Bundle.getCost() < 1 || bid.Bundle.getCost() > 12) {
+//      state.setValid(false);
+//    }
+//    
+//    for (Bid b : bids) {
+//      if (b.AgentID.equals(bid.AgentID)) {
+//        state.setValid(false);
+//      }
+//    }
+//    
+//    return true;
+    }
+
+  @Override
+  public void getAllocationType(MarketInternalState state) {
+    state.setMType(MechanismType.Lemonade);
   }
 
   @Override
-  public Set<Bid> withReserve(Set<Bid> bids) {
-    // TODO Auto-generated method stub
-    return null;
+  public void getReport(MarketInternalState state) {
+    state.setReport(new LemonadeReport());
   }
 
-  @Override
-  public boolean isValid(Bid bid, Set<Bid> bids) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public MechanismType getAllocationType() {
-    return TYPE.Lemonade; 
-  }
-
-  @Override
-  public GameReport getReport() {
-    // TODO Auto-generated method stub
-    return null;
-  } 
   
 }

@@ -18,7 +18,7 @@ import brown.assets.accounting.Ledger;
 import brown.channels.IAgentChannel;
 import brown.exceptions.AgentCreationException;
 import brown.marketinternalstates.SimpleInternalState;
-import brown.markets.Market;
+import brown.markets.MarketOld;
 import brown.messages.Message;
 import brown.registration.ValuationRegistration;
 import brown.rules.allocationrules.library.SimpleHighestBidderAllocation;
@@ -172,7 +172,7 @@ public class TPClientTest extends TradingServer {
       TestServer server = new TestServer(2121, new TestSetup());
       TestClient client = new TestClient("localhost", 2121, new TestSetup());
       TestChannel channel = new TestChannel();
-      TestMessage message = new TestMessage(PORT, null);
+      TestMessage message = new TestMessage(null, null);
       
       client.communicate(channel);
       channel.dispatchMessage(client);

@@ -17,12 +17,13 @@ import brown.messages.Message;
 import brown.messages.Registration;
 import brown.messages.auctions.BidRequest;
 import brown.messages.markets.GameReport;
+import brown.messages.markets.TradeRequest;
 import brown.messages.trades.NegotiateRequest;
 import brown.setup.Logging;
 import brown.setup.Setup;
 import brown.setup.Startup;
 
-public abstract class Agent extends TPClient{ 
+public abstract class Agent extends TPClient { 
 
   /**
    * Implementations should always invoke super()

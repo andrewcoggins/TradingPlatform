@@ -11,7 +11,7 @@ import brown.markets.Market;
 import brown.tradeables.Asset;
 
 /**
- * A ledger tracks all trades within a market. 
+ * A ledger tracks all trades within a Market. 
  * @author lcamery
  *
  */
@@ -19,7 +19,7 @@ public class Ledger {
 	protected final List<Transaction> transactions;
 	protected final Map<Asset, Transaction> latest;
 	protected final List<Transaction> unshared;
-	protected final Market market;
+	protected final Market Market;
 	
 	/**
 	 * For Kryo do not use
@@ -27,7 +27,7 @@ public class Ledger {
 	public Ledger() {
 		this.transactions = null;
 		this.latest = null;
-		this.market = null;
+		this.Market = null;
 		this.unshared = null;
 	}
 	
@@ -35,8 +35,8 @@ public class Ledger {
 	 * Constructs a ledger for the given security
 	 * @param security : security that all Tradeables will refer to
 	 */
-	public Ledger(Market market) {
-		this.market = market;
+	public Ledger(Market Market) {
+		this.Market = Market;
 		this.unshared = new LinkedList<Transaction>();
 		this.transactions = new LinkedList<Transaction>();
 		this.latest = new HashMap<Asset, Transaction>();

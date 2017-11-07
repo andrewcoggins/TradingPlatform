@@ -14,7 +14,7 @@ import brown.valuable.library.Tradeable;
 public class Asset {
 	protected double count;
 	protected Integer agentID;
-	protected Function<EndState, List<Account>> CONVERTER;
+	//protected Function<EndState, List<Account>> CONVERTER;
 	
 	protected final long TIMESTAMP;
 	protected final Tradeable TYPE;
@@ -25,7 +25,7 @@ public class Asset {
 	public Asset() {
 		this.count = 0;
 		this.agentID = null;
-		this.CONVERTER = null;
+		//this.CONVERTER = null;
 		this.TIMESTAMP = 0;
 		this.TYPE = null;
 	}
@@ -45,7 +45,7 @@ public class Asset {
 		this.agentID = owner;
 		
 		this.TIMESTAMP = System.currentTimeMillis();
-		this.CONVERTER = (state) -> null;
+		//this.CONVERTER = (state) -> null;
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class Asset {
 		this.agentID = null;
 		
 		this.TIMESTAMP = System.currentTimeMillis();
-		this.CONVERTER = (state) -> null;
+		//this.CONVERTER = (state) -> null;
 	}
 	
 	/**
@@ -82,7 +82,7 @@ public class Asset {
 		this.agentID = owner;
 		
 		this.TIMESTAMP = System.currentTimeMillis();
-		this.CONVERTER = closure;
+		//this.CONVERTER = closure;
 	}
 	
 	/**
@@ -98,7 +98,7 @@ public class Asset {
 		this.agentID = null;
 		
 		this.TIMESTAMP = System.currentTimeMillis();
-		this.CONVERTER = closure;
+		//this.CONVERTER = closure;
 	}
 	
 	/**
@@ -144,12 +144,14 @@ public class Asset {
 	}
 	
 	public List<Account> convert(StateOfTheWorld closingState) {
-		return this.CONVERTER.apply(new EndState(this.count, closingState));
+		//return this.CONVERTER.apply(new EndState(this.count, closingState));
+	  return null;
 	}
 	
 	public Asset split(double newCount) {
 		this.count -= newCount;
-		return new Asset(this.TYPE, newCount, this.agentID, this.CONVERTER);
+		//return new Asset(this.TYPE, newCount, this.agentID, this.CONVERTER);
+		return null; 
 	}
 	
 	/**

@@ -1,6 +1,5 @@
 package brown.markets.presets;
 
-import brown.marketinternalstates.MarketInternalState;
 import brown.rules.activityrules.ActivityRule;
 import brown.rules.allocationrules.AllocationRule;
 import brown.rules.irpolicies.InformationRevelationPolicy;
@@ -19,6 +18,6 @@ public abstract class MarketPreset {
   public ActivityRule actRule; 
   public InformationRevelationPolicy infoPolicy;
   public TerminationCondition tCondition; 
-  public MarketInternalState startingState;
+  //public MarketInternalState startingState;
   
 }
