@@ -2,10 +2,6 @@ package brown.agent;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.junit.Test;
 
 import com.esotericsoftware.kryo.Kryo;
@@ -13,32 +9,23 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
-import brown.assets.accounting.Account;
-import brown.assets.accounting.Ledger;
-import brown.channels.IAgentChannel;
+import brown.accounting.Ledger;
+import brown.channels.agent.IAgentChannel;
 import brown.exceptions.AgentCreationException;
-import brown.marketinternalstates.SimpleInternalState;
-import brown.markets.MarketOld;
-import brown.messages.Message;
-import brown.registration.ValuationRegistration;
-import brown.rules.allocationrules.library.SimpleHighestBidderAllocation;
-import brown.rules.paymentrules.library.SimpleSecondPrice;
-import brown.server.TradingServer;
-import brown.setup.Logging;
-import brown.setup.Setup;
-import brown.setup.library.SimpleSetup;
-import brown.valuable.library.Tradeable;
+import brown.messages.AbsMessage;
+import brown.server.AbsServer;
+import brown.setup.ISetup;
 
 /**
  * test the ability of the system to send and receive messages.
  * @author andrew
  *
  */
-public class TPClientTest extends TradingServer {
+public class TPClientTest extends AbsServer {
   
   
 
-  public TPClientTest(int port, Setup gameSetup) {
+  public TPClientTest(int port, ISetup gameSetup) {
     super(port, gameSetup);
     // TODO Auto-generated constructor stub
   }
@@ -48,8 +35,8 @@ public class TPClientTest extends TradingServer {
    * @author andrew
    *
    */
-  private class TestClient extends TPClient {
-    public TestClient(String host, int port, Setup gameSetup)
+  private class TestClient extends AbsClient {
+    public TestClient(String host, int port, ISetup gameSetup)
         throws AgentCreationException {
       super(host, port, gameSetup);
       // TODO Auto-generated constructor stub
@@ -81,7 +68,7 @@ public class TPClientTest extends TradingServer {
 
     private String message; 
     
-    public TestServer(int port, Setup gameSetup) {
+    public TestServer(int port, ISetup gameSetup) {
       
       // TODO Auto-generated constructor stub
       theServer = new Server();
@@ -108,7 +95,7 @@ public class TPClientTest extends TradingServer {
    * @author andrew
    *
    */
-  private class TestMessage extends Message {
+  private class TestMessage extends AbsMessage {
     
    public String message; 
     
@@ -120,7 +107,7 @@ public class TPClientTest extends TradingServer {
      
    }
   @Override
-  public void dispatch(Agent agent) {
+  public void dispatch(AbsAgent agent) {
     // TODO Auto-generated method stub
     
   } 
@@ -146,7 +133,7 @@ public class TPClientTest extends TradingServer {
       }
       //noop
       @Override
-      public void dispatchMessage(Agent agent) {
+      public void dispatchMessage(AbsAgent agent) {
         // TODO Auto-generated method stub
       }
       //this call invokes the agent to invoke send below. 
@@ -159,7 +146,7 @@ public class TPClientTest extends TradingServer {
       }
     }
     
-    private class TestSetup implements Setup { 
+    private class TestSetup implements ISetup { 
       @Override
       public void setup(Kryo kryo) {
         kryo.register(TestMessage.class);

@@ -4,9 +4,8 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.exceptions.AgentCreationException;
-import brown.valuable.library.Tradeable;
-import brown.valuable.library.Value;
-import brown.valuation.IValuation;
+import brown.tradeables.library.Tradeable;
+import brown.value.valuation.IValuation;
 
 
 /**
