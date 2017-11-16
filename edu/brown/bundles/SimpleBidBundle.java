@@ -12,7 +12,7 @@ import brown.valuable.library.Tradeable;
  * and holds one double. 
  */
 public class SimpleBidBundle implements BidBundle {
-	private final Map<Tradeable,MarketState> BIDS;
+	public final Map<Tradeable,MarketState> BIDS;
 	private final BundleType BT;
 	
 	/**
@@ -119,6 +119,8 @@ public class SimpleBidBundle implements BidBundle {
       return false;
     return true;
   }
+
+
 	
 	
 }

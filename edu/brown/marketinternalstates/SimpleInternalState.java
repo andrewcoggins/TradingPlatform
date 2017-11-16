@@ -10,7 +10,6 @@ import brown.assets.accounting.Order;
 import brown.bundles.BidBundle;
 import brown.bundles.BundleType;
 import brown.bundles.MarketState;
-import brown.bundles.SimpleBidBundle;
 import brown.channels.MechanismType;
 import brown.messages.auctions.Bid;
 import brown.messages.auctions.BidRequest;
@@ -26,18 +25,6 @@ public class SimpleInternalState implements MarketInternalState {
   public void addBid(Bid bid) {
     // TODO Auto-generated method stub
     
-  }
-
-  @Override
-  public void setAllocation(BidBundle allocation) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public BidBundle getAllocation() {
-    // TODO Auto-generated method stub
-    return null;
   }
 
   @Override
@@ -131,7 +118,7 @@ public class SimpleInternalState implements MarketInternalState {
   }
 
   @Override
-  public BidBundle getAlloc() {
+  public BidBundle getAllocation() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -197,7 +184,7 @@ public class SimpleInternalState implements MarketInternalState {
   }
 
   @Override
-  public void setAlloc(BidBundle alloc) {
+  public void setAllocation(BidBundle alloc) {
     // TODO Auto-generated method stub
     
   }

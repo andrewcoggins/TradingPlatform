@@ -1,10 +1,12 @@
 package brown.rules.paymentrules.library;
 
+
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Map.Entry;
 
 import brown.assets.accounting.Order;
 import brown.bundles.BidBundle;
@@ -14,17 +16,42 @@ import brown.bundles.SimpleBidBundle;
 import brown.marketinternalstates.MarketInternalState;
 import brown.messages.auctions.Bid;
 import brown.rules.paymentrules.PaymentRule;
-import brown.rules.paymentrules.PaymentType;
 import brown.setup.Logging;
 import brown.tradeables.Asset;
 import brown.valuable.library.Tradeable;
+
 
 public class SimpleSecondPrice implements PaymentRule {
 
   @Override
   public void getPayments(MarketInternalState state) {
     // TODO Auto-generated method stub
-    
+    BidBundle highest = state.getAllocation();
+    if (!highest.getType().equals(BundleType.Simple)) {
+      Logging.log("ERROR: bundle type not simple");
+    }
+    SimpleBidBundle bundle = (SimpleBidBundle) highest;      
+    Map<Tradeable, MarketState> nextHighest = new HashMap<Tradeable, MarketState>();
+    //get the bids again.
+    for(Bid b : state.getBids()) {
+      if (!highest.getType().equals(BundleType.Simple)) {
+        Logging.log("ERROR: bundle type not simple");
+      }
+      SimpleBidBundle otherBundle = (SimpleBidBundle) highest; 
+      for(Tradeable t : otherBundle.BIDS.keySet()) {
+        if(nextHighest.get(t) == null || otherBundle.BIDS.get(t).PRICE > nextHighest.get(t).PRICE) { 
+          if (otherBundle.BIDS.get(t).PRICE < bundle.BIDS.get(t).PRICE) {
+            nextHighest.put(t, otherBundle.BIDS.get(t)); 
+          }
+        }
+      }
+    }
+    List<Order> payments = new LinkedList<Order>();
+    for(Entry<Tradeable, MarketState> a : nextHighest.entrySet()) {
+      payments.add(new Order(a.getValue().AGENTID, null,
+          a.getValue().PRICE, 1, new Asset(a.getKey(), 1)));
+    }
+    state.setPayments(payments);
   }
 
   @Override

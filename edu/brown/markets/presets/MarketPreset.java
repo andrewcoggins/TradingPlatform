@@ -18,6 +18,5 @@ public abstract class MarketPreset {
   public ActivityRule actRule; 
   public InformationRevelationPolicy infoPolicy;
   public TerminationCondition tCondition; 
-  //public MarketInternalState startingState;
   
 }

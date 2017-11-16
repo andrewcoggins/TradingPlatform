@@ -45,6 +45,7 @@ import brown.valuable.library.AValuationRepresentation;
 import brown.valuable.library.Tradeable;
 import brown.valuation.library.AdditiveValuation;
 import brown.valuation.library.BundleValuation;
+import org.apache.commons.math3.random.RandomGenerator;
 
 import com.esotericsoftware.kryo.Kryo;
 
@@ -87,7 +88,6 @@ public final class Startup {
 		kryo.register(Date.class);
 		kryo.register(BidBundle.class);
 		kryo.register(MarketState.class);
-		kryo.register(SimpleBidBundle.class);
 		kryo.register(BundleType.class);
 		kryo.register(MarketOrder.class);
 		kryo.register(TwoSidedAuction.class);
@@ -102,6 +102,7 @@ public final class Startup {
 		kryo.register(Ledger.class);
 		kryo.register(HashMap.class);
 		kryo.register(SimpleAuctionChannel.class);
+		kryo.register(SimpleBidBundle.class);
 		kryo.register(AValuationRepresentation.class);
 		kryo.register(AdditiveValuation.class);
 		kryo.register(BundleValuation.class);

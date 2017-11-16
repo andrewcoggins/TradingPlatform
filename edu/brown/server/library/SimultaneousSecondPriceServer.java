@@ -26,14 +26,14 @@ public class SimultaneousSecondPriceServer extends TradingServer {
 
   
   private AdditiveValuation masterValuation; 
-  private Integer numGoods; 
+  private Integer numGoods = 5; 
   private Set<Tradeable> allGoods;
   private Integer numPlayers;
   
   public SimultaneousSecondPriceServer(int port, Setup gameSetup) {
     super(port, gameSetup);
     //create set of goods and valuation
-    allGoods = new HashSet<Tradeable>(); 
+    this.allGoods = new HashSet<Tradeable>(); 
     for(int i = 0; i < numGoods; i++) {
       this.allGoods.add(new Tradeable(i));
     }
@@ -63,7 +63,6 @@ public class SimultaneousSecondPriceServer extends TradingServer {
     
    }
   
-  
   private void delay(int amt, boolean update) {
     int i = 0;
     while (i < amt) {
@@ -86,7 +85,7 @@ public class SimultaneousSecondPriceServer extends TradingServer {
       Logging.log("[-] setup phase " + time++);
     }
     for(int i = 0; i < 5; i++) { 
-      //TODO: Rules for this kind of game.
+      //TODO: Rules for this game.
       this.manager.open(new Market(new SimSecondPriceRules(), new InternalState(0, new HashSet<Asset>())));
       delay(3, true);
     }

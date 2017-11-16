@@ -1,19 +1,9 @@
 package brown.rules.paymentrules.library;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import brown.assets.accounting.Order;
-import brown.bundles.BidBundle;
-import brown.bundles.BundleType;
-import brown.bundles.SimpleBidBundle;
+
 import brown.marketinternalstates.MarketInternalState;
-import brown.messages.auctions.Bid;
 import brown.rules.paymentrules.PaymentRule;
-import brown.rules.paymentrules.PaymentType;
-import brown.tradeables.Asset;
 
 public class LemonadePaymentOld implements PaymentRule {
 

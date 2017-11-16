@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import brown.assets.accounting.Ledger;
 import brown.assets.accounting.Order;
 import brown.bundles.BidBundle;
 import brown.bundles.BundleType;
@@ -99,14 +98,6 @@ public class InternalState implements MarketInternalState {
     this.BIDS.add(bid);
   }
   
-  //may be redundant.
-  public void setAllocation(BidBundle allocation) {
-    this.lastAlloc = allocation;
-  }
-  //definitely reduntand with the allocation associated with allocation rule.
-  public BidBundle getAllocation() {
-    return this.lastAlloc;
-  }
 
   public List<Bid> getBids() {
     return this.BIDS;
@@ -182,7 +173,7 @@ public class InternalState implements MarketInternalState {
     return this.time; 
   }
   
-  public BidBundle getAlloc() {
+  public BidBundle getAllocation() {
     return this.alloc; 
   }
   
@@ -227,7 +218,7 @@ public class InternalState implements MarketInternalState {
     this.time = t; 
   }
   
-  public void setAlloc(BidBundle alloc) {
+  public void setAllocation(BidBundle alloc) {
     this.alloc = alloc; 
   }
  
@@ -339,5 +330,5 @@ public class InternalState implements MarketInternalState {
   public void setTOver(boolean b) {
     this.terminated = b; 
   }
-   
+
 }

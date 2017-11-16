@@ -26,10 +26,6 @@ public interface MarketInternalState {
     //methods not directly associated with a rule. Look for redundancies here.
     public void addBid(Bid bid);
     
-    //may be redundant.
-    public void setAllocation(BidBundle allocation); 
-    
-    public BidBundle getAllocation(); 
   
     public List<Bid> getBids(); 
     
@@ -64,7 +60,7 @@ public interface MarketInternalState {
     //getters for all the allocation rules.
     public long getTime(); 
     
-    public BidBundle getAlloc(); 
+    public BidBundle getAllocation(); 
     
     public Map<Integer, Set<Asset>> getAllocs(); 
     
@@ -87,7 +83,7 @@ public interface MarketInternalState {
     //setters for allocation rule.
     public void setTime(long t);
     
-    public void setAlloc(BidBundle alloc);
+    public void setAllocation(BidBundle alloc);
    
     public void setAllocs(Map<Integer, Set<Asset>> allocs);
     
