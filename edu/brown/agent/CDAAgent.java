@@ -1,6 +1,5 @@
 package brown.agent;
 
-import brown.channels.library.CDAAgentChannel;
 import brown.channels.library.SimpleAuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.setup.Setup;

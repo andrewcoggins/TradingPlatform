@@ -1,58 +1,92 @@
-package brown.registration;
-
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+package brown.registration; 
 
 import brown.messages.Registration;
-import brown.valuable.library.Tradeable;
-
+import brown.valuable.library.AValuationRepresentation;
+import brown.valuation.IValuation;
+import brown.valuation.library.AdditiveValuation;
+import brown.valuation.library.BundleValuation;
 
 /**
- * Registration with valuation from server for lab 3.
- * 
- * @author lcamery
+ * sends agents their valuations from the server.
+ * @author acoggins
+ *
  */
 public class ValuationRegistration extends Registration {
-	/**
-	 * Agent's valuation.
-	 */
-	private final Map<Tradeable, Double> valueBundle;
+  
+  private final AValuationRepresentation personalValue; 
+  private final AdditiveValuation addDistribution; 
+  private final BundleValuation bundleDistribution; 
+  
+  public ValuationRegistration() {
+    super(null);
+    this.personalValue = null; 
+    this.addDistribution = null; 
+    this.bundleDistribution = null; 
+  }
+  
+  /**
+   * valuation registration without underlying distribution.
+   * @param id
+   * @param personalValue
+   */
+  public ValuationRegistration(Integer id, AValuationRepresentation personalValue) { 
+    super(id); 
+    this.personalValue = personalValue; 
+    this.addDistribution = null; 
+    this.bundleDistribution = null; 
+  }
+      
+  /**
+   * valuation registration with underlying distribution.
+   * @param id
+   * @param personalValue
+   */
+  public ValuationRegistration(Integer id, AValuationRepresentation personalValue,
+      IValuation distribution) {
+    super(id); 
+    this.personalValue = personalValue; 
+    
+    if (distribution instanceof AdditiveValuation) {
+      AdditiveValuation val = (AdditiveValuation) distribution;
+      this.addDistribution = val; 
+      this.bundleDistribution = null; 
+    }
+    
+    else if (distribution instanceof BundleValuation) {
+      BundleValuation val = (BundleValuation) distribution;
+      this.addDistribution = null; 
+      this.bundleDistribution = val; 
+    }
+    
+    else {
+      this.addDistribution = null; 
+      this.bundleDistribution = null; 
+    }
 
-	/**
-	 * Empty Constructor for Kryo.
-	 */
-	public ValuationRegistration() {
-		super(null);
-		this.valueBundle = null;
-	}
-
-	/**
-	 * Constructor.
-	 * 
-	 * @param id
-	 * @param value
-	 */
-	public ValuationRegistration(Integer id, Map<Tradeable, Double> values) {
-		super(id);
-		this.valueBundle = values;
-	}
-
-	
-	/**
-	 * Getter.
-	 * 
-	 * @return the agents valuation.
-	 */
-	public Double getValue(Set<Tradeable> aVal) {
-		return this.valueBundle.getOrDefault(aVal, 0.0);
-	}
-	
-	public Set<Double> getAllValues() {
-	  return new HashSet<Double> (this.valueBundle.values());
-	}
-
-	public Map<Tradeable, Double> getValues() {
-		return this.valueBundle;
-	}
+  }
+  
+  /**
+   * getter.
+   * @return the agent's valuation
+   */
+  public AValuationRepresentation getValuation() {
+    return this.personalValue; 
+  }
+  
+  /**
+   * getter. 
+   * @return the distribution on which the agent is bidding, 
+   * if applicable. 
+   */
+  public IValuation getDistribution() {
+    if (addDistribution != null) {
+        return this.addDistribution; 
+    }
+    if (bundleDistribution != null) {
+      return this.bundleDistribution; 
+    }
+    return null; 
+  }
+  
+  
 }

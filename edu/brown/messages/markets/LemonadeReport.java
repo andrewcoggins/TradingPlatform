@@ -13,7 +13,7 @@ public class LemonadeReport extends GameReport {
   }
   
   public int getCount(int slot) {
-    return this.SLOTS[slot-1];
+    return this.SLOTS[slot];
   }
   
 }

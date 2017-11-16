@@ -62,7 +62,7 @@ public class LemonadeAllocationOld implements AllocationRule {
   }
 
   @Override
-  public void getReport(MarketInternalState state) {
+  public void setReport(MarketInternalState state) {
     // TODO Auto-generated method stub
     
   }

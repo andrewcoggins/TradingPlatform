@@ -38,6 +38,6 @@ public interface AllocationRule {
 
 	void getAllocationType(MarketInternalState state);
 
-  void getReport(MarketInternalState state);
+  void setReport(MarketInternalState state);
 
 }

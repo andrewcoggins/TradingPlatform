@@ -7,6 +7,7 @@ import brown.assets.accounting.Order;
 import brown.marketinternalstates.MarketInternalState;
 import brown.markets.presets.MarketPreset;
 import brown.messages.auctions.Bid;
+import brown.messages.markets.GameReport;
 import brown.messages.markets.TradeRequest;
 import brown.rules.activityrules.ActivityRule;
 import brown.rules.allocationrules.AllocationRule;
@@ -83,6 +84,12 @@ public class Market implements IMarket {
   @Override
   public void tick(long time) {
     this.STATE.setTime(time);
+  }
+
+  @Override
+  public GameReport getReport() {
+    this.ARULE.setReport(STATE);
+    return this.STATE.getReport(); 
   } 
   
 }

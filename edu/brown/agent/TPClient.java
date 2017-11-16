@@ -24,7 +24,7 @@ public abstract class TPClient {
   * @throws AgentCreationException
   */
   public TPClient(String host, int port, Setup gameSetup) throws AgentCreationException {
-    this.CLIENT = new Client();
+    this.CLIENT = new Client(8192, 4096);
     this.ID = null;
 
     CLIENT.start();

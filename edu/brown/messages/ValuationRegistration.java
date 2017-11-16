@@ -1,5 +1,6 @@
 package brown.messages; 
 
+import brown.messages.Registration;
 import brown.valuable.library.AValuationRepresentation;
 import brown.valuation.IValuation;
 import brown.valuation.library.AdditiveValuation;

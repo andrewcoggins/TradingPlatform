@@ -37,10 +37,14 @@ import brown.messages.markets.MarketOrder;
 import brown.messages.markets.TradeRequest;
 import brown.messages.trades.NegotiateRequest;
 import brown.messages.trades.Trade;
+import brown.registration.ValuationRegistration;
 import brown.rules.paymentrules.PaymentType;
 import brown.rules.clearingrules.ClearingRule;
 import brown.tradeables.Asset;
+import brown.valuable.library.AValuationRepresentation;
 import brown.valuable.library.Tradeable;
+import brown.valuation.library.AdditiveValuation;
+import brown.valuation.library.BundleValuation;
 
 import com.esotericsoftware.kryo.Kryo;
 
@@ -98,7 +102,10 @@ public final class Startup {
 		kryo.register(Ledger.class);
 		kryo.register(HashMap.class);
 		kryo.register(SimpleAuctionChannel.class);
-		
+		kryo.register(AValuationRepresentation.class);
+		kryo.register(AdditiveValuation.class);
+		kryo.register(BundleValuation.class);
+		kryo.register(ValuationRegistration.class);
 		return true;
 	}
 

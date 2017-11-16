@@ -31,9 +31,9 @@ public class LemonadeServer extends TradingServer {
     int i = 0;
     while (i < amt) {
       try {
-//        if (update) {
-//          this.updateAllAuctions(true);
-//        }
+        if (update) {
+          this.updateAllAuctions(true);
+        }
         Thread.sleep(1000);
         Logging.log("[-] pause phase " + i++);
       } catch (InterruptedException e) {
@@ -43,14 +43,11 @@ public class LemonadeServer extends TradingServer {
   }
   
   public void runGame() throws InterruptedException {
-  //  delay(10, false);
-    Asset a = new Asset(new Tradeable(0), 1);
+    delay(5, false);
+    for(int i = 0; i < 5; i++) { 
       this.manager.open(new Market(new LemonadeRules(), new InternalState(0, new HashSet<Asset>())));
       delay(3, true);
-      this.updateAllAuctions(true);
-      Thread.sleep(1000); 
-      this.updateAllAuctions(true);
-      
+    }
       for (Account acct : this.acctManager.getAccounts()) {
         Logging.log(acct.toString()); 
       }

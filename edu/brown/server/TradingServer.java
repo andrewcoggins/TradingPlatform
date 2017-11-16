@@ -23,6 +23,7 @@ import brown.messages.Ack;
 import brown.messages.BankUpdate;
 import brown.messages.Registration;
 import brown.messages.auctions.Bid;
+import brown.messages.markets.GameReport;
 import brown.messages.markets.MarketOrder;
 import brown.messages.markets.TradeRequest;
 import brown.messages.trades.NegotiateRequest;
@@ -69,7 +70,7 @@ public abstract class TradingServer {
 		this.privateToPublic.put(-1, -1);
 		this.SHORT = false;
 
-		theServer = new Server();
+		theServer = new Server(8192, 4096);
 		theServer.start();
 		Kryo serverKryo = theServer.getKryo();
 		Startup.start(serverKryo);
@@ -522,10 +523,10 @@ public abstract class TradingServer {
 			}
 
 			for (Market auction : toRemove) {
-				//GameReport report = auction.getReport();
-				//if (report != null) {
-				//	this.theServer.sendToAllTCP(report);
-				//}
+				GameReport report = auction.getReport();
+				if (report != null) {
+					this.theServer.sendToAllTCP(report);
+				}
 				this.manager.close(this, auction.getID(), null);
 			}
 		}
@@ -537,15 +538,17 @@ public abstract class TradingServer {
 	 * @param Security : the market to update on
 	 */
 	public void sendMarketUpdate(IServerChannel market) {
-		synchronized(market) {
-			for (Entry<Connection, Integer> ID : this.connections.entrySet()) {
-				TradeRequest mupdate = new TradeRequest(0, market.wrap(this.manager
-						.getLedger(market.getID()).getSanitized(ID.getValue())),
-						market.getMechanismType());
-				theServer.sendToTCP(ID.getKey().getID(), mupdate);
-			}
-			this.manager.getLedger(market.getID()).clearLatest();
-		}
+//		synchronized(market) {
+//			for (Entry<Connection, Integer> ID : this.connections.entrySet()) {
+//				TradeRequest mupdate = new TradeRequest(0, market.wrap(this.manager
+//						.getLedger(market.getID()).getSanitized(ID.getValue())),
+//						market.getMechanismType());
+//				System.out.println("SEND MARKET UPDATES IS BEING USED");
+//				theServer.sendToTCP(ID.getKey().getID(), mupdate);
+//			}
+//			this.manager.getLedger(market.getID()).clearLatest();
+//		}
+    System.out.println("SEND MARKET UPDATES IS BEING USED");
 	}
 
 	/*
