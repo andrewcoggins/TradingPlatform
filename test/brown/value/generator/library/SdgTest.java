@@ -7,7 +7,7 @@ import java.util.function.Function;
 
 import org.junit.Test;
 
-import brown.tradeables.library.Tradeable;
+import brown.tradeable.library.Tradeable;
 import brown.value.valuable.library.Value;
 
 
