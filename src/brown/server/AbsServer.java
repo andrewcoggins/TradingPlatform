@@ -2,7 +2,6 @@ package brown.server;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +19,6 @@ import brown.channels.server.IServerChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.market.IMarket;
 import brown.market.library.Market;
-import brown.market.marketstate.library.InternalState;
-import brown.market.preset.library.LemonadeRules;
 import brown.messages.library.Ack;
 import brown.messages.library.BankUpdate;
 import brown.messages.library.Bid;

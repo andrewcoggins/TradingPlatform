@@ -50,7 +50,7 @@ public class BidRequest extends AbsMessage {
 
 @Override
 public void dispatch(AbsAgent agent) {
-	//Noop
+	agent.onTradeRequest(this); 
 }
 
 }

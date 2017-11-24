@@ -128,4 +128,50 @@ public class Ledger {
 		this.unshared.clear();
 	}
 
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((latest == null) ? 0 : latest.hashCode());
+    result = prime * result + ((marketId == null) ? 0 : marketId.hashCode());
+    result =
+        prime * result + ((transactions == null) ? 0 : transactions.hashCode());
+    result = prime * result + ((unshared == null) ? 0 : unshared.hashCode());
+    return result;
+  }
+
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Ledger other = (Ledger) obj;
+    if (latest == null) {
+      if (other.latest != null)
+        return false;
+    } else if (!latest.equals(other.latest))
+      return false;
+    if (marketId == null) {
+      if (other.marketId != null)
+        return false;
+    } else if (!marketId.equals(other.marketId))
+      return false;
+    if (transactions == null) {
+      if (other.transactions != null)
+        return false;
+    } else if (!transactions.equals(other.transactions))
+      return false;
+    if (unshared == null) {
+      if (other.unshared != null)
+        return false;
+    } else if (!unshared.equals(other.unshared))
+      return false;
+    return true;
+  }
+
 }

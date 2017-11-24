@@ -24,6 +24,17 @@ public class NegotiateRequest extends AbsMessage {
   public final Integer moniesOffered;
   public final List<Tradeable> sharesOffered;
 
+  public NegotiateRequest() {
+    super(null);
+    this.toID = null; 
+    this.fromID = null;
+    this.moniesRequested = null;
+    this.moniesOffered = null;
+
+    this.sharesOffered = null;
+    this.sharesRequested = null;
+  }
+  
   /**
    * Constructor.
    * 
