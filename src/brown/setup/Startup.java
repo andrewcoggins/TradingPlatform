@@ -23,6 +23,7 @@ import brown.agent.AbsAgent;
 import brown.channels.MechanismType;
 import brown.channels.agent.ITwoSidedAuction;
 import brown.channels.agent.library.CDAAgentChannel;
+import brown.channels.agent.library.LemonadeChannel;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.channels.server.library.CDAServerChannel;
@@ -69,7 +70,7 @@ public final class Startup {
 		kryo.register(TreeMap.class);
 		kryo.register(java.util.Collections.reverseOrder().getClass());
 		kryo.register(int[].class);
-		
+		kryo.register(LemonadeChannel.class);
 		kryo.register(AbsAgent.class);
 		kryo.register(AbsMessage.class);
 		kryo.register(BankUpdate.class);

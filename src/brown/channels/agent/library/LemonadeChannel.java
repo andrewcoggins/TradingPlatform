@@ -11,6 +11,7 @@ import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.SimpleBidBundle;
 import brown.agent.AbsAgent;
+import brown.agent.AbsLemonadeAgent;
 import brown.agent.library.LemonadeAgent;
 import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;
@@ -48,19 +49,20 @@ public class LemonadeChannel implements IAgentChannel {
   @Override
   public Integer getAuctionID() {
     // TODO Auto-generated method stub
-    return null;
+    return this.ID;
   }
 
   @Override
   public Ledger getLedger() {
     // TODO Auto-generated method stub
-    return null;
+    return this.ledger;
   }
 
   @Override
   public void dispatchMessage(AbsAgent agent) {
-    if(agent instanceof LemonadeAgent) {
-      LemonadeAgent lemAgent = (LemonadeAgent) agent; 
+    if(agent instanceof AbsLemonadeAgent) {
+
+      AbsLemonadeAgent lemAgent = (AbsLemonadeAgent) agent; 
       lemAgent.onLemonade(this);   
     }
   }
