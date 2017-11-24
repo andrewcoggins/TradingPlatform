@@ -10,7 +10,7 @@ import brown.server.AbsServer;
 import brown.setup.Logging;
 import brown.setup.ISetup;
 import brown.setup.library.SimpleSetup;
-import brown.todeprecate.Asset;
+import brown.tradeable.library.Tradeable;
 
 /**
  * this needs help.
@@ -21,16 +21,12 @@ public class LemonadeServer extends AbsServer {
 
   public LemonadeServer(int port, ISetup gameSetup) {
     super(port, gameSetup);
-    // TODO Auto-generated constructor stub
   }
   
-  private void delay(int amt, boolean update) {
+  private void delay(int amt) {
     int i = 0;
     while (i < amt) {
       try {
-        if (update) {
-          this.updateAllAuctions(true);
-        }
         Thread.sleep(1000);
         Logging.log("[-] pause phase " + i++);
       } catch (InterruptedException e) {
@@ -40,11 +36,9 @@ public class LemonadeServer extends AbsServer {
   }
   
   public void runGame() throws InterruptedException {
-    delay(5, false);
-    for(int i = 0; i < 5; i++) { 
-      this.manager.open(new Market(new LemonadeRules(), new InternalState(0, new HashSet<Asset>())));
-      delay(3, true);
-    }
+    delay(5);
+      this.manager.open(new Market(new LemonadeRules(), new InternalState(0, new HashSet<Tradeable>())));
+      this.completeAuction(0);
       for (Account acct : this.acctManager.getAccounts()) {
         Logging.log(acct.toString()); 
       }
@@ -52,8 +46,5 @@ public class LemonadeServer extends AbsServer {
   
   public static void main(String[] args) throws InterruptedException {
     new LemonadeServer(2121, new SimpleSetup()).runGame();
-    
   }
-  
-  
 }

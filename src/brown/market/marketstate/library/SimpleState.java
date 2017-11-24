@@ -1,19 +1,18 @@
 package brown.market.marketstate.library;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import brown.accounting.BidBundle;
 import brown.accounting.BundleType;
 import brown.accounting.Order;
+import brown.accounting.bidbundle.AbsBidBundle;
+import brown.accounting.bidbundle.Allocation;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.Bid;
 import brown.messages.library.BidRequest;
 import brown.messages.library.GameReport;
 import brown.messages.library.TradeRequest;
-import brown.todeprecate.Asset;
 import brown.todeprecate.PaymentType;
 
 public class SimpleState implements IMarketState {
@@ -23,15 +22,14 @@ public class SimpleState implements IMarketState {
     // TODO Auto-generated method stub
     
   }
-
+  
   @Override
-  public List<Bid> getBids() {
-    // TODO Auto-generated method stub
-    return null;
+  public void clear() {
+    
   }
 
   @Override
-  public Set<Asset> getTradeables() {
+  public List<Bid> getBids() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -67,13 +65,13 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public void setReserve(BidBundle o) {
+  public void setReserve(AbsBidBundle o) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public BidBundle getbundleReserve() {
+  public AbsBidBundle getbundleReserve() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -115,13 +113,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public BidBundle getAllocation() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public Map<Integer, Set<Asset>> getAllocs() {
+  public Allocation getAllocation() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -181,13 +173,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public void setAllocation(BidBundle alloc) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void setAllocs(Map<Integer, Set<Asset>> allocs) {
+  public void setAllocation(Allocation alloc) {
     // TODO Auto-generated method stub
     
   }
@@ -247,19 +233,13 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public Map<BidBundle, Set<Asset>> getOPayments() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
   public PaymentType getPaymentType() {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public BidBundle getReserveBundle() {
+  public AbsBidBundle getReserveBundle() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -277,19 +257,13 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public void setOPayments(Map<BidBundle, Set<Asset>> m) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
   public void setPaymentType(PaymentType p) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void setReserveBundle(BidBundle b) {
+  public void setReserveBundle(AbsBidBundle b) {
     // TODO Auto-generated method stub
     
   }
@@ -324,17 +298,7 @@ public class SimpleState implements IMarketState {
     
   }
 
-  @Override
-  public boolean getTOver() {
-    // TODO Auto-generated method stub
-    return false;
-  }
 
-  @Override
-  public void setTOver(boolean b) {
-    // TODO Auto-generated method stub
-    
-  }
 //	private final double INCREMENT = 20.0;
 //	private final Integer ID;
 //	private final List<Bid> BIDS;
@@ -468,5 +432,39 @@ public class SimpleState implements IMarketState {
 //		}
 //		return elig;
 //	}
+
+  @Override
+  public boolean getInnerOver() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public void setInnerOver(boolean b) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public boolean getOuterOver() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public void setOuterOver(boolean b) {
+    // TODO Auto-generated method stub
+    
+  }
+  
+  @Override
+  public void incrementOuter() {
+    
+  }
+  
+  @Override
+  public Integer getOuterRuns() {
+    return null;
+  }
 	
 }

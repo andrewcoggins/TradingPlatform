@@ -17,7 +17,6 @@ import brown.server.AbsServer;
 import brown.setup.Logging;
 import brown.setup.ISetup;
 import brown.setup.library.SimpleSetup;
-import brown.todeprecate.Asset;
 import brown.tradeable.library.Tradeable;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuationrepresentation.library.SimpleValuation;
@@ -86,7 +85,7 @@ public class SimultaneousSecondPriceServer extends AbsServer {
     }
     for(int i = 0; i < 5; i++) { 
       //TODO: Rules for this game.
-      this.manager.open(new Market(new SimSecondPriceRules(), new InternalState(0, new HashSet<Asset>())));
+      this.manager.open(new Market(new SimSecondPriceRules(), new InternalState(0, new HashSet<Tradeable>())));
       delay(3, true);
     }
   }

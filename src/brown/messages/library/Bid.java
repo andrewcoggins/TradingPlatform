@@ -2,12 +2,12 @@ package brown.messages.library;
 
 import java.util.Comparator;
 
-import brown.accounting.BidBundle;
+import brown.accounting.bidbundle.IBidBundle;
 import brown.agent.AbsAgent;
 import brown.messages.AbsMessage;
 
 public class Bid extends AbsMessage {
-	public final BidBundle Bundle;
+	public final IBidBundle Bundle;
 	public final Integer AuctionID;
 	public final Integer AgentID;
 	
@@ -29,7 +29,7 @@ public class Bid extends AbsMessage {
 	 * @param auctionID : auction's ID
 	 * @param agentID : agent's ID; verified by server
 	 */
-	public Bid(int ID, BidBundle bundle, Integer auctionID, Integer agentID) {
+	public Bid(int ID, IBidBundle bundle, Integer auctionID, Integer agentID) {
 		super(ID);
 		this.Bundle = bundle;
 		this.AuctionID = auctionID;

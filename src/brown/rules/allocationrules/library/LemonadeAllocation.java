@@ -11,7 +11,6 @@ import brown.market.marketstate.IMarketState;
 import brown.messages.library.Bid;
 import brown.messages.library.LemonadeReport;
 import brown.rules.allocationrules.IAllocationRule;
-import brown.todeprecate.Asset;
 import brown.tradeable.library.Tradeable;
 
 public class LemonadeAllocation implements IAllocationRule {
@@ -62,22 +61,19 @@ public class LemonadeAllocation implements IAllocationRule {
       // Person to pay
       List<Integer> winners = new ArrayList<Integer>();
       if (r<l){
-        System.out.println("Index " + i + ", closest is " + Math.floorMod(i+r+1,SIZE));
         winners.addAll(slots[Math.floorMod(i+r,SIZE)]);
-      } else if (l<r){
-        System.out.println("Index " + i + ", closest is " + Math.floorMod(i-l+1,SIZE));        
+      } else if (l<r){     
         winners.addAll(slots[Math.floorMod(i-l,SIZE)]);        
-      } else {
-        System.out.println("Index " + i + ", closest is " + Math.floorMod(i-l+1,SIZE));                
-        System.out.println("Index " + i + ", closest is " + Math.floorMod(i+r+1,SIZE));        
+      } else { 
+        if (i-l != i+r){ 
+        }       
         winners.addAll(slots[Math.floorMod(i+r,SIZE)]);
         winners.addAll(slots[Math.floorMod(i-l,SIZE)]);                
       }
       
-      for (int w: winners){ 
+      for (int w : winners) { 
         double payoff = numGlasses / winners.size();
-        Asset mock = new Asset(new Tradeable(0),0,w);
-        Order earned = new Order(w,null,-1 * payoff,1,mock);
+        Order earned = new Order(w,null,-1 * payoff,1,new Tradeable(0));
         payoffs.add(earned);
       }      
     }    

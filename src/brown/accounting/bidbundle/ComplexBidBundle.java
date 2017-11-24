@@ -1,8 +1,11 @@
-package brown.accounting;
+package brown.accounting.bidbundle;
 
 import java.util.Map;
 import java.util.Set;
 
+import brown.accounting.BundleType;
+import brown.accounting.MarketState;
+import brown.accounting.bid.ComplexBid;
 import brown.tradeable.library.Tradeable;
 
 
@@ -13,8 +16,8 @@ import brown.tradeable.library.Tradeable;
  * @author acoggins
  *
  */
-public class ComplexBidBundle implements BidBundle {
-	private final Map<Set<Tradeable>, MarketState> BIDS;
+public class ComplexBidBundle extends AbsBidBundle {
+	private final ComplexBid BIDS;
 	private final BundleType BT;
 	
 	/**
@@ -31,7 +34,7 @@ public class ComplexBidBundle implements BidBundle {
 	 * @param bid : agent's bid
 	 * @param agent : agent ID
 	 */
-	public ComplexBidBundle(Map<Set<Tradeable>, MarketState> bid, Integer agent) {
+	public ComplexBidBundle(ComplexBid bid, Integer agent) {
 		this.BIDS = bid;
 		this.BT = BundleType.Complex;
 	}
@@ -39,14 +42,14 @@ public class ComplexBidBundle implements BidBundle {
 	@Override
 	public double getCost() {
 		double max = 0;
-		for (MarketState b : this.BIDS.values()) {
+		for (MarketState b : this.BIDS.bids.values()) {
 			max = Math.max(b.PRICE, max);
 		}
 		return max;
 	}
 
 	@Override
-	public BidBundle wipeAgent(Integer ID) {
+	public IBidBundle wipeAgent(Integer ID) {
 		return new ComplexBidBundle(this.BIDS, ID);
 	}
 
@@ -55,8 +58,8 @@ public class ComplexBidBundle implements BidBundle {
 		return this.BT;
 	}
 	
-	public MarketState getBid(Set<Tradeable> types) {
-		return this.BIDS.get(types);
+	public ComplexBid getBids() {
+		return this.BIDS;
 	}
 
 }

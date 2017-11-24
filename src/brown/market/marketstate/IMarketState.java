@@ -1,18 +1,17 @@
 package brown.market.marketstate;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import brown.accounting.BidBundle;
 import brown.accounting.BundleType;
 import brown.accounting.Order;
+import brown.accounting.bidbundle.AbsBidBundle;
+import brown.accounting.bidbundle.Allocation;
 import brown.channels.MechanismType;
 import brown.messages.library.Bid;
 import brown.messages.library.BidRequest;
 import brown.messages.library.GameReport;
 import brown.messages.library.TradeRequest;
-import brown.todeprecate.Asset;
 import brown.todeprecate.PaymentType;
 
 /**
@@ -26,10 +25,9 @@ public interface IMarketState {
     //methods not directly associated with a rule. Look for redundancies here.
     public void addBid(Bid bid);
     
-  
-    public List<Bid> getBids(); 
+    public void clear();
     
-    public Set<Asset> getTradeables(); 
+    public List<Bid> getBids(); 
     
     public Integer getID(); 
     
@@ -41,9 +39,9 @@ public interface IMarketState {
     
     public int getTicks();  
     
-    public void setReserve(BidBundle o); 
+    public void setReserve(AbsBidBundle o); 
     
-    public BidBundle getbundleReserve(); 
+    public AbsBidBundle getbundleReserve(); 
     
     public void clearBids(); 
     
@@ -60,9 +58,7 @@ public interface IMarketState {
     //getters for all the allocation rules.
     public long getTime(); 
     
-    public BidBundle getAllocation(); 
-    
-    public Map<Integer, Set<Asset>> getAllocs(); 
+    public Allocation getAllocation(); 
     
     public BidRequest getRequest(); 
     
@@ -83,10 +79,8 @@ public interface IMarketState {
     //setters for allocation rule.
     public void setTime(long t);
     
-    public void setAllocation(BidBundle alloc);
-   
-    public void setAllocs(Map<Integer, Set<Asset>> allocs);
-    
+    public void setAllocation(Allocation alloc);
+
     public void setRequest(BidRequest request);
     
     public void setPrivate(boolean p); 
@@ -106,12 +100,10 @@ public interface IMarketState {
     //getters for payment rules. 
     
     public List<Order> getPayments();
-
-    public Map<BidBundle, Set<Asset>> getOPayments(); 
     
     public PaymentType getPaymentType();
     
-    public BidBundle getReserveBundle();
+    public AbsBidBundle getReserveBundle();
     
     public boolean permitShort(); 
     
@@ -119,11 +111,9 @@ public interface IMarketState {
     
     public void setPayments(List<Order> orders); 
     
-    public void setOPayments(Map<BidBundle, Set<Asset>> m); 
-    
     public void setPaymentType(PaymentType p); 
     
-    public void setReserveBundle(BidBundle b); 
+    public void setReserveBundle(AbsBidBundle b); 
     
     public void setShort(boolean b);
     
@@ -138,8 +128,16 @@ public interface IMarketState {
     public void setAcceptable(boolean b);
     
     //tcondition things
-    public boolean getTOver();
+    public boolean getInnerOver();
     
-    public void setTOver(boolean b); 
+    public void setInnerOver(boolean b); 
+    
+    public boolean getOuterOver();
+    
+    public void setOuterOver(boolean b); 
+    
+    public void incrementOuter();
+    
+    public Integer getOuterRuns();
 
 }

@@ -26,28 +26,19 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     for(int i = 0; i < 12; i++) {
       positions[i] = 0; 
     }
-    // TODO Auto-generated constructor stub
   } 
   
   public void onLemonade(LemonadeChannel channel) {
     //enter a position between 0 and 11 inclusive.
-    int least = 10000;
-    for(int i = 0; i < 12; i++) { 
-      if (positions[i] < least) {
-        System.out.println(least);
-        least = positions[i];
-        this.posn = i;
-      }     
-    }
     channel.bid(this, this.posn);
   }
   
   @Override
   public void onMarketUpdate(GameReport marketUpdate) {
     // TODO Auto-generated method 
-    if(marketUpdate instanceof LemonadeReport) { 
+    if (marketUpdate instanceof LemonadeReport) { 
       LemonadeReport lemonadeUpdate = (LemonadeReport) marketUpdate;
-      for (int i =0;i<12;i++){
+      for (int i = 0; i < 12; i++) {
         this.positions[i] = this.positions[i] + lemonadeUpdate.getCount(i);
       }
       System.out.println("Game Report Received");
@@ -60,11 +51,13 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   @Override
   public void onBankUpdate(BankUpdate bankUpdate) {
     // TODO Auto-generated method stub
-    Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.monies - bankUpdate.oldAccount.monies + ", Total Money: " + bankUpdate.newAccount.monies)); 
+    //Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.monies - bankUpdate.oldAccount.monies + ", Total Money: " + bankUpdate.newAccount.monies)); 
   }
   
   public static void main(String[] args) throws AgentCreationException {
-    new LemonadeAgent("localhost", 2121, 0);
+    new LemonadeAgent("localhost", 2121, 2);
+    new LemonadeAgent("localhost", 2121, 4);
+    new LemonadeAgent("localhost", 2121, 9);
     while(true){}
   }
   

@@ -18,7 +18,10 @@ import brown.accounting.MarketManager;
 import brown.accounting.Order;
 import brown.channels.server.IServerChannel;
 import brown.channels.server.TwoSidedAuction;
+import brown.market.IMarket;
 import brown.market.library.Market;
+import brown.market.marketstate.library.InternalState;
+import brown.market.preset.library.LemonadeRules;
 import brown.messages.library.Ack;
 import brown.messages.library.BankUpdate;
 import brown.messages.library.Bid;
@@ -31,8 +34,7 @@ import brown.messages.library.TradeRequest;
 import brown.setup.Logging;
 import brown.setup.ISetup;
 import brown.setup.Startup;
-import brown.todeprecate.Asset;
-import brown.todeprecate.ShortShare;
+import brown.tradeable.library.Tradeable;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
@@ -112,197 +114,14 @@ public abstract class AbsServer {
 					aServer.onTrade(connection, (Trade) message);
 				} else if (message instanceof MarketOrder) {
 					Logging.log("[-] limitorder recieved from " + id);
-					aServer.onLimitOrder(connection, id, (MarketOrder) message);
+					Logging.log("ERROR: Limit order functionality not present");
+					//aServer.onLimitOrder(connection, id, (MarketOrder) message);
 				}
 			}
 		});
 		Logging.log("[-] server started");
 	}
 
-	/**
-	 * Deals with securities where you must post prices
-	 * 
-	 * @param connection
-	 *            - details of their connection to the server
-	 * @param privateID
-	 *            - (safe) privateID of the requesting agent
-	 * @param message
-	 *            - limit order for a security
-	 */
-	protected void onLimitOrder(Connection connection, Integer privateID,
-			MarketOrder limitorder) {
-		if (limitorder.marketID == null) {
-			Ack rej = new Ack(privateID, limitorder, true);
-			this.theServer.sendToTCP(connection.getID(), rej);
-			return;
-		}
-		TwoSidedAuction market = this.manager.getTwoSided(limitorder.marketID);
-		if (market == null) {
-			Ack rej = new Ack(privateID, limitorder, true);
-			this.theServer.sendToTCP(connection.getID(), rej);
-			return;
-		}
-		synchronized (market) {
-			Ledger ledger = new Ledger(null);//manager.getLedger(limitorder.marketID);
-			if (limitorder.cancel) {
-				double shares = limitorder.buyShares != 0 ? limitorder.buyShares : limitorder.sellShares;
-				market.cancel(privateID, limitorder.sellShares == 0, 
-						shares, limitorder.price);
-			} else if (limitorder.buyShares > 0) {
-				synchronized (privateID) {
-					Account account = this.acctManager.getAccount(privateID);
-					if (!market.permitShort()
-							&& account.monies < market.quoteBid(
-									limitorder.buyShares, limitorder.price)) {
-						Ack rej = new Ack(privateID, limitorder, true);
-						this.theServer.sendToTCP(connection.getID(), rej);
-						return;
-					}
-
-					List<Order> trans = market.buy(privateID,
-							limitorder.buyShares, limitorder.price);
-					for (Order t : trans) {
-						Asset split = null;
-						if (t.GOOD.getCount() > t.QUANTITY) {
-							split = t.GOOD.split(t.QUANTITY);
-							ledger.add(t.toTransaction());
-						}
-
-						if (t.FROM != null) {
-							synchronized (t.FROM) {
-								Account fromBank = this.acctManager.getAccount(t.FROM);
-								if (!market.permitShort()
-										&& !fromBank.tradeables
-												.contains(t.GOOD)) {
-									// TODO: Deal with this case
-								}
-								Account finalUpdatedFrom = fromBank.add(t.COST,
-										new HashSet<Asset>());
-								if (split == null) {
-									finalUpdatedFrom = finalUpdatedFrom.remove(
-											0, t.GOOD);
-								}
-								this.acctManager.
-								setAccount(t.FROM, finalUpdatedFrom);
-								this.sendBankUpdate(t.FROM, fromBank,
-										finalUpdatedFrom);
-							}
-						}
-
-						if (t.TO != null) {
-							synchronized (t.TO) {
-								Account toBank = this.acctManager.getAccount(t.TO);
-								Account oldbank = toBank;
-								if (market.permitShort()
-										|| toBank.monies >= t.COST) {
-									if (split == null) {
-										t.GOOD.setAgentID(t.TO);
-										toBank = toBank
-												.add(-1 * t.COST, t.GOOD);
-									} else {
-										split.setAgentID(t.TO);
-										toBank = toBank.add(-1 * t.COST, split);
-									}
-									this.acctManager.setAccount(t.TO, toBank);
-									this.sendBankUpdate(t.TO, oldbank, toBank);
-								} else {
-									// TODO: Could not afford
-								}
-							}
-						}
-
-						ledger.add(t.toTransaction());
-					}
-				}
-			} else if (limitorder.sellShares > 0) {
-				synchronized (privateID) {
-					Account sellerAccount = this.acctManager
-							.getAccount(privateID);
-					double qToSell = limitorder.sellShares;
-					synchronized (sellerAccount.tradeables) {
-						List<Asset> justAList = new LinkedList<Asset>(
-								sellerAccount.tradeables);
-						if (market.permitShort()) {
-							double toShort = limitorder.sellShares;
-							for (Asset t : justAList) {
-								if (t.getType().equals(
-										market.getTradeableType())) {
-									toShort -= t.getCount();
-								}
-							}
-							if (toShort > 0) {
-								justAList.add(new ShortShare(toShort, market
-										.getTradeableType()));
-							}
-						}
-
-						for (Asset tradeable : justAList) {
-							if (qToSell <= 0) {
-								break;
-							}
-
-							if (tradeable.getType().equals(
-									market.getTradeableType())) {
-								Asset toSell = tradeable;
-								if (tradeable.getCount() > qToSell) {
-									toSell = tradeable.split(qToSell);
-								}
-								qToSell -= toSell.getCount();
-
-								List<Order> trans = market.sell(privateID,
-										toSell, limitorder.price);
-								for (Order t : trans) {
-									if (t.FROM != null) {
-										synchronized (t.FROM) {
-											Account fromBank = this.acctManager
-													.getAccount(t.FROM);
-											if (market.permitShort()
-													|| fromBank.tradeables
-															.contains(t.GOOD)) {
-												Account taken = fromBank
-														.remove(0, t.GOOD);
-												Account finalUpdatedFrom = taken
-														.add(t.COST,
-																new HashSet<Asset>());
-												this.acctManager.setAccount(t.FROM,
-														finalUpdatedFrom);
-												this.sendBankUpdate(t.FROM,
-														fromBank,
-														finalUpdatedFrom);
-											} else {
-												// TODO: Deal with this case
-											}
-										}
-									}
-
-									if (t.TO != null) {
-										synchronized (t.TO) {
-											Account toBank = this.acctManager
-													.getAccount(t.TO);
-											Account oldBank = toBank;
-											if (market.permitShort()
-													|| toBank.monies >= t.COST) {
-												t.GOOD.setAgentID(t.TO);
-												toBank = toBank.add(
-														-1 * t.COST, t.GOOD);
-												this.acctManager.setAccount(t.TO, toBank);
-												this.sendBankUpdate(t.TO,
-														oldBank, toBank);
-											} else {
-												// TODO: Could not afford
-											}
-										}
-									}
-
-									ledger.add(t.toTransaction());
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
 
 	/*
 	 * This method is invoked when a new agent connects to the game
@@ -460,6 +279,7 @@ public abstract class AbsServer {
 	 * auctions about the state of all the public auctions
 	 */
 	public void updateAllAuctions(boolean closeable) {
+	  System.out.println("A");
 		synchronized (this.manager) {;
 			List<Market> toRemove = new LinkedList<Market>();
 			for (Market auction : this.manager.getAuctions()) {
@@ -468,6 +288,7 @@ public abstract class AbsServer {
 					if (auction.isOver() && closeable) {
 						toRemove.add(auction);
 						List<Order> winners = auction.getOrders();
+						System.out.println(winners.size());
 						if (winners == null) {
 							continue;
 						}
@@ -478,7 +299,7 @@ public abstract class AbsServer {
 								Account accountTo = this.acctManager.
 										getAccount(winner.TO);
 								synchronized (accountTo.ID) {
-									winner.GOOD.setAgentID(winner.TO);
+									//winner.GOOD.setAgentID(winner.TO);
 									ledger.add(winner.toTransaction());
 									
 									Account newA = accountTo.add(
@@ -489,7 +310,6 @@ public abstract class AbsServer {
 											newA);
 								}
 							}
-							
 							if (winner.FROM != null && this.acctManager
 									.containsAcct(winner.FROM)) {
 								Account accountFrom = this.acctManager
@@ -505,10 +325,14 @@ public abstract class AbsServer {
 								}
 							}
 						}
+						auction.clearState();
 					} else {
 						for (Map.Entry<Connection, Integer> id : this.connections
 								.entrySet()) {
-							TradeRequest tr = auction.constructTradeRequest(id.getValue(), new Ledger());
+						  //maybe the trade request can be a ledger that's only one trade deep.
+						  //before, this sent a blank ledger. 
+						  //trying to send a blank one if it's the first round, or if the allocation rules are null.
+							TradeRequest tr = auction.constructTradeRequest(id.getValue());
 									//this.manager.getLedger(auction.getID())
 									//		.getSanitized(id.getValue()));//TODO: Fix
 							if (tr == null) {
@@ -517,7 +341,7 @@ public abstract class AbsServer {
 							}
 							this.theServer.sendToUDP(id.getKey().getID(), tr);
 						}
-						this.manager.getLedger(auction.getID()).clearLatest();
+						//this.manager.getLedger(auction.getID()).clearLatest();
 					}
 				}
 			}
@@ -530,6 +354,69 @@ public abstract class AbsServer {
 				this.manager.close(this, auction.getID(), null);
 			}
 		}
+	}
+	
+	/*
+	 * This loops an inner cycle of an auction. For instance, If one round of an ascending auction.
+	 * TODO: synchronize.
+	 * TODO: update auction. 
+	 */
+	public void innerCycle(Integer marketID, Integer agentID) { 
+	  IMarket market = this.manager.getIMarket(marketID);
+	  market.tick((long) 1.0); 
+	  if (!market.isOver()) {
+	    //update the ledger?
+	    TradeRequest tradeReq = market.constructTradeRequest(agentID);
+	    this.theServer.sendToUDP(agentID, tradeReq);
+	  } else {
+	    //update the bank, send bank update.
+      List<Order> winners = market.getOrders();	    
+      Ledger ledger = this.manager.getLedger(market.getID());
+      for (Order winner : winners) {
+        if (winner.TO != null && this.
+            acctManager.containsAcct(winner.TO)) {
+          Account accountTo = this.acctManager.getAccount(winner.TO);
+          synchronized (accountTo.ID) {
+            //winner.GOOD.setAgentID(winner.TO);
+            ledger.add(winner.toTransaction()); 
+            Account newA = accountTo.add(-1 * winner.COST, winner.GOOD);
+            this.acctManager.setAccount(winner.TO, newA);
+            this.sendBankUpdate(winner.TO, accountTo, newA);
+          }
+        }
+        if (winner.FROM != null && this.acctManager.containsAcct(winner.FROM)) {
+          Account accountFrom = this.acctManager.getAccount(winner.FROM);
+          synchronized (accountFrom.ID) {                 
+            Account newA = accountFrom.remove(-1 * winner.COST, winner.GOOD);
+            this.acctManager.setAccount(winner.FROM, newA);
+            this.sendBankUpdate(winner.FROM, accountFrom,
+                newA);
+          }
+        }
+      }
+	  }
+	}
+	
+	public synchronized void outerCycle(Integer marketID, Integer agentID) {
+	  //run every inner cycle of the auction until it is terminated per the inner termination condition.
+	  Market market = this.manager.getIMarket(marketID); 
+	  while (!market.isOver()) { 
+	    this.innerCycle(marketID, agentID);
+	  }
+	  this.innerCycle(marketID, agentID);
+	}
+	
+	public synchronized void completeAuction(Integer marketID) throws InterruptedException { 
+	  //run every outer cycle of the auction until it is terminated per the outer termination condition.
+	  Market market = this.manager.getIMarket(marketID); 
+	 while(!market.isOverOuter()) {
+	   while(!market.isOver()) {
+	     this.updateAllAuctions(true);
+	     Thread.sleep(1000);
+	   }
+	   this.updateAllAuctions(true);
+     Thread.sleep(1000);
+	 }
 	}
 
 	/*
@@ -687,15 +574,6 @@ public abstract class AbsServer {
 	
 	public void setAccount(Integer ID, Account account) {
 		acctManager.setAccount(ID, account);
-	}
-	
-	
-	/**
-	 * Toggles short sale
-	 * @param shorting true permits negative balance
-	 */
-	public void setShort(boolean shorting) {
-		this.SHORT = shorting;
 	}
 
 }

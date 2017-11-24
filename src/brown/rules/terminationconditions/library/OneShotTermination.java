@@ -1,15 +1,16 @@
 package brown.rules.terminationconditions.library; 
 
 import brown.market.marketstate.IMarketState;
-import brown.rules.terminationconditions.ITerminationCondition;
+import brown.rules.terminationconditions.IInnerTC;
 
-public class OneShotTermination implements ITerminationCondition {
+public class OneShotTermination implements IInnerTC {
 
   @Override
-  public void tisOver(IMarketState state) {
-    // TODO Auto-generated method stubover
+  public void innerTerminated(IMarketState state) {
+    // TODO Auto-generated method stub
     boolean over = state.getBids().size() > 0; 
-    state.setTOver(over);
+    state.setInnerOver(over);
   }
+
   
 }

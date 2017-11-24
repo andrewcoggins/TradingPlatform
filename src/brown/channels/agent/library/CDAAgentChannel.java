@@ -50,7 +50,8 @@ public class CDAAgentChannel implements ITwoSidedPriceSetter {
 		for (Map.Entry<Double, Set<Order>> entry : CDA.getSellBook().entrySet()) {
 			double count = 0;
 			for (Order t : entry.getValue()) {
-				count += t.GOOD.getCount();
+			  count += 1; 
+				//count += t.GOOD.getCount();
 			}
 			this.SELLBOOK.put(entry.getKey(), count);
 		}

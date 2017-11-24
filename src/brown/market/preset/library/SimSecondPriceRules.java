@@ -7,6 +7,7 @@ import brown.rules.irpolicies.library.AnonymousPolicy;
 import brown.rules.paymentrules.library.SimpleSecondPrice;
 import brown.rules.queryrules.library.SealedBidQuery;
 import brown.rules.terminationconditions.library.OneShotTermination;
+import brown.rules.terminationconditions.library.XRoundTermination;
 
 public class SimSecondPriceRules extends AbsMarketPreset {
 
@@ -20,7 +21,8 @@ public class SimSecondPriceRules extends AbsMarketPreset {
     this.qRule = new SealedBidQuery();
     this.actRule = new OneShotActivity();
     this.infoPolicy = new AnonymousPolicy();
-    this.tCondition = new OneShotTermination();
+    this.innerTCondition = new OneShotTermination();
+    this.outerTCondition = new XRoundTermination();
   }
 
 }

@@ -2,7 +2,7 @@ package brown.rules.queryrules.library;
 
 import brown.accounting.BundleType;
 import brown.accounting.Ledger;
-import brown.accounting.SimpleBidBundle;
+import brown.accounting.bidbundle.SimpleBidBundle;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.market.marketstate.IMarketState;

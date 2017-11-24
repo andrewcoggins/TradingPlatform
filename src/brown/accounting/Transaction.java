@@ -1,13 +1,13 @@
 package brown.accounting;
 
-import brown.todeprecate.Asset;
+import brown.tradeable.library.Tradeable;
 
 /*
  * a Transaction is recorded in the ledger.
  */
 public class Transaction {
 	public final Integer TO;
-	public final Asset TRADEABLE;
+	public final Tradeable TRADEABLE;
 	public final Integer FROM;
 	public final double PRICE;
 	public final double QUANTITY;
@@ -34,7 +34,7 @@ public class Transaction {
 	 * @param quantity
 	 * @param TRADEABLE
 	 */
-	public Transaction(Integer to, Integer from, double price, double quantity, Asset TRADEABLE) {
+	public Transaction(Integer to, Integer from, double price, double quantity, Tradeable TRADEABLE) {
 		this.TO = to;
 		this.FROM = from;
 		this.PRICE = price;
@@ -46,7 +46,7 @@ public class Transaction {
 	public Transaction sanitize(Integer ID) {
 		return new Transaction(ID != null && ID.equals(TO) ? TO : null,
 				ID != null && ID.equals(FROM) ? FROM : null,
-				PRICE,QUANTITY,TRADEABLE.toAgent(ID));
+				PRICE,QUANTITY,TRADEABLE);
 	}
 
 }

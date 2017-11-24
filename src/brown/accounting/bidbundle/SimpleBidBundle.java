@@ -1,10 +1,12 @@
-package brown.accounting;
+package brown.accounting.bidbundle;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
+import brown.accounting.BundleType;
+import brown.accounting.MarketState;
+import brown.accounting.bid.SimpleBid;
 import brown.tradeable.library.Tradeable;
 
 
@@ -12,8 +14,8 @@ import brown.tradeable.library.Tradeable;
  * The built-in BidBundle is called SimpleBidBundle,
  * and holds one double. 
  */
-public class SimpleBidBundle implements BidBundle {
-	public final Map<Tradeable,MarketState> BIDS;
+public class SimpleBidBundle extends AbsBidBundle {
+	private final Map<Tradeable, MarketState> BIDS;
 	private final BundleType BT;
 	
 	/**
@@ -54,7 +56,7 @@ public class SimpleBidBundle implements BidBundle {
 	}
 
 	@Override
-	public BidBundle wipeAgent(Integer ID) {
+	public IBidBundle wipeAgent(Integer ID) {
 		Map<Tradeable, MarketState> newBids = new HashMap<Tradeable, MarketState>();
 		for (Entry<Tradeable, MarketState> entry : this.BIDS.entrySet()) {
 			if (ID.equals(entry.getValue().AGENTID)) {
@@ -67,31 +69,15 @@ public class SimpleBidBundle implements BidBundle {
 		return new SimpleBidBundle(newBids);
 	}
 	
-	public MarketState getBid(Tradeable type) {
-		for (Tradeable ot : this.BIDS.keySet()) {
-			if(ot.equals(type)) {
-				return BIDS.get(type);
-			}
-		}
-		return null;
+	public SimpleBid getBids() {
+		return new SimpleBid(this.BIDS);
 	}
 	
 	@Override
 	public String toString() {
 		return "[" + this.BT + ": " + this.BIDS + "]";
 	}
-
-	public boolean isDemanded(Tradeable type) {
-		return this.getBid(type) != null;
-	}
 	
-	public Set<Tradeable> getDemandSet() {
-		return this.BIDS.keySet();
-	}
-
-	public Set<Tradeable> getTradeables() {
-		return this.BIDS.keySet();
-	}
 
   @Override
   public int hashCode() {

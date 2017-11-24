@@ -11,7 +11,6 @@ import brown.channels.agent.ITwoSidedAuction;
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.rules.clearingrules.IClearingRule;
-import brown.todeprecate.Asset;
 import brown.tradeable.library.Tradeable;
 
 public class CDAServerChannel implements TwoSidedAuction {
@@ -57,7 +56,7 @@ public class CDAServerChannel implements TwoSidedAuction {
 	}
 
 	@Override
-	public List<Order> sell(Integer agentID, Asset opp, double sharePrice) {
+	public List<Order> sell(Integer agentID, Tradeable opp, double sharePrice) {
 		return this.RULE.sell(agentID, opp, sharePrice);
 	}
 

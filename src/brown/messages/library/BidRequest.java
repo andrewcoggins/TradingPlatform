@@ -2,11 +2,11 @@ package brown.messages.library;
 
 import java.util.Set;
 
-import brown.accounting.BidBundle;
 import brown.accounting.BundleType;
+import brown.accounting.bidbundle.IBidBundle;
 import brown.agent.AbsAgent;
 import brown.messages.AbsMessage;
-import brown.todeprecate.Asset;
+import brown.tradeable.library.Tradeable;
 
 /**
  * An Agent sends a bidRequest as
@@ -16,8 +16,8 @@ import brown.todeprecate.Asset;
  */
 public class BidRequest extends AbsMessage {
   public final Integer AuctionID;
-  public final Set<Asset> Goods;
-  public final BidBundle Current;
+  public final Set<Tradeable> Goods;
+  public final IBidBundle Current;
   public final BundleType TYPE;
 
   /**
@@ -40,7 +40,7 @@ public class BidRequest extends AbsMessage {
    * @param bundle
    * @param goods
    */
-  public BidRequest(int ID, Integer auctionID, BundleType type, BidBundle bundle, Set<Asset> goods) {
+  public BidRequest(int ID, Integer auctionID, BundleType type, IBidBundle bundle, Set<Tradeable> goods) {
     super(ID);
     this.AuctionID = auctionID;
     this.Current = bundle;

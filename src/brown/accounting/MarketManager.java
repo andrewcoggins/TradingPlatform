@@ -2,7 +2,6 @@ package brown.accounting;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -10,8 +9,8 @@ import brown.channels.server.TwoSidedAuction;
 import brown.market.library.Market;
 import brown.server.AbsServer;
 import brown.setup.Logging;
-import brown.todeprecate.Asset;
 import brown.todeprecate.StateOfTheWorld;
+import brown.tradeable.library.Tradeable;
 
 /**
  * Market manager stores and handles multiple markets 
@@ -42,22 +41,23 @@ public class MarketManager {
 	 * @param t: transaction to be processed in the markets.
 	 * @param toReplace: account to replace. 
 	 */
+	//NOTE: changed from assets to tradeables, now use TO field of transaction.
 	private void process(AbsServer server, Market market, Ledger ledger, 
 			Transaction t, Account toReplace) {
-		synchronized (t.TRADEABLE.getAgentID()) {
+		synchronized (t.TO) {
 			Account oldAccount = server.privateToAccount(t
-					.TRADEABLE.getAgentID());
+					.TO);
 			if (oldAccount == null) {
 				Logging.log("[X] agent without account "
-						+ t.TRADEABLE.getAgentID());
+						+ t.TO);
 				return;
 			}
 
 			Account newAccount = oldAccount.remove(0, t.TRADEABLE);
 			//possibly change this later
-			server.setAccount(t.TRADEABLE.getAgentID(), newAccount);
+			server.setAccount(t.TO, newAccount);
 			if (toReplace == null) {
-				server.sendBankUpdate(t.TRADEABLE.getAgentID(), oldAccount,
+				server.sendBankUpdate(t.TO, oldAccount,
 						newAccount);
 			}
 		}
@@ -65,7 +65,7 @@ public class MarketManager {
 		if (toReplace != null) {
 			Integer toReplaceID = toReplace.ID;
 			if (toReplaceID == null) {
-				toReplaceID = t.TRADEABLE.getAgentID();
+				toReplaceID = t.TO;
 			}
 
 			synchronized (toReplaceID) {
@@ -78,7 +78,7 @@ public class MarketManager {
 				}
 
 				Account newAccount = oldAccount.add(
-						toReplace.monies, new HashSet<Asset>(
+						toReplace.monies, new HashSet<Tradeable>(
 								toReplace.tradeables));
 				server.setAccount(toReplaceID, newAccount);
 				server.sendBankUpdate(toReplaceID, oldAccount,
@@ -94,25 +94,26 @@ public class MarketManager {
 	 * @param market
 	 * @param closingState
 	 */
-	public void convert(AbsServer server, Market market,
-			StateOfTheWorld closingState) {
-		synchronized (market) {
-			Ledger ledger = this.ledgers.get(market);
-			synchronized (ledger) {
-				for (Transaction t : ledger.getLatest()) {
-					List<Account> allReplacements = t.TRADEABLE.convert(closingState);
-					if (allReplacements != null) {
-						for (Account toReplace : allReplacements) {
-							this.process(server, market, ledger, t, toReplace);
-						}
-					}
-				}
-
-				ledgers.remove(market);
-				tsauctions.remove(market.getID());
-			}
-		}
-	}
+	//no.
+//	public void convert(AbsServer server, Market market,
+//			StateOfTheWorld closingState) {
+//		synchronized (market) {
+//			Ledger ledger = this.ledgers.get(market);
+//			synchronized (ledger) {
+//				for (Transaction t : ledger.getLatest()) {
+//					List<Account> allReplacements = t.TRADEABLE.convert(closingState);
+//					if (allReplacements != null) {
+//						for (Account toReplace : allReplacements) {
+//							this.process(server, market, ledger, t, toReplace);
+//						}
+//					}
+//				}
+//
+//				ledgers.remove(market);
+//				tsauctions.remove(market.getID());
+//			}
+//		}
+//	}
 
 	/**
 	 * Closes a market and tells it to convert if applicable
@@ -123,7 +124,7 @@ public class MarketManager {
 	public void close(AbsServer server, Integer ID, StateOfTheWorld closingState) {
 		Market market = tsauctions.get(ID);
 		//TODO: market.close();
-		convert(server, market, closingState);
+		//convert(server, market, closingState);
 	}
 
 	/**
@@ -135,9 +136,8 @@ public class MarketManager {
 		if (ledgers.containsKey(market)) {
 			return false;
 		}
-		this.ledgers.put(market, new Ledger(market));
+		this.ledgers.put(market, new Ledger(market.getID()));
 		this.tsauctions.put(market.getID(), market);
-
 		return true;
 	}
 	
@@ -147,7 +147,7 @@ public class MarketManager {
 	 * @param t
 	 * @return
 	 */
-	public boolean register(Integer ID, Asset t) {
+	public boolean register(Integer ID, Tradeable t) {
 		Market tsa = tsauctions.get(ID);
 		if (tsa == null) {
 			return false;
@@ -159,7 +159,7 @@ public class MarketManager {
 			
 			Ledger ledger = this.ledgers.get(tsa);
 			synchronized (ledger) {
-				ledger.add(new Transaction(t.getAgentID(), null, 0,0,t));
+				ledger.add(new Transaction(null, null, 0,0,t));
 			}
 		}
 	

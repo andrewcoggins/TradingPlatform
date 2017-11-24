@@ -4,6 +4,7 @@ import java.util.List;
 
 import brown.accounting.Ledger;
 import brown.accounting.Order;
+import brown.accounting.bidbundle.Allocation;
 import brown.market.IMarket;
 import brown.market.marketstate.IMarketState;
 import brown.market.preset.AbsMarketPreset;
@@ -15,7 +16,8 @@ import brown.rules.allocationrules.IAllocationRule;
 import brown.rules.irpolicies.IInformationRevelationPolicy;
 import brown.rules.paymentrules.IPaymentRule;
 import brown.rules.queryrules.IQueryRule;
-import brown.rules.terminationconditions.ITerminationCondition;
+import brown.rules.terminationconditions.IInnerTC;
+import brown.rules.terminationconditions.IOuterTC;
 
 public class Market implements IMarket {
 
@@ -24,7 +26,8 @@ public class Market implements IMarket {
   private final IQueryRule QRULE;
   private final IActivityRule ACTRULE;
   private final IInformationRevelationPolicy INFOPOLICY;
-  private final ITerminationCondition TCONDITION;
+  private final IInnerTC ITCONDITION;
+  private final IOuterTC OTCONDITION; 
   private final IMarketState STATE;
   
   public Market(AbsMarketPreset rules, IMarketState state) {
@@ -33,7 +36,8 @@ public class Market implements IMarket {
      this.QRULE = rules.qRule;
      this.ACTRULE = rules.actRule;
      this.INFOPOLICY = rules.infoPolicy;
-     this.TCONDITION = rules.tCondition;
+     this.ITCONDITION = rules.innerTCondition;
+     this.OTCONDITION = rules.outerTCondition;
      this.STATE = state;
      
      //set up all of the conditions and stuff needed here.
@@ -48,19 +52,33 @@ public class Market implements IMarket {
   }
 
   @Override
-  public TradeRequest constructTradeRequest(Integer ID, Ledger ledger) {
+  public TradeRequest constructTradeRequest(Integer ID) {
     //do something with the IR policy.
-    this.QRULE.makeChannel(STATE, ledger);
-    TradeRequest request = this.STATE.getTRequest();
-    return request;
+    Allocation alloc = this.STATE.getAllocation();
+    if(alloc != null) {
+      this.QRULE.makeChannel(STATE, new Ledger(this.getID(), alloc));
+      TradeRequest request = this.STATE.getTRequest();
+      return request;
+    }
+     this.QRULE.makeChannel(STATE, new Ledger(this.getID()));
+     TradeRequest request = this.STATE.getTRequest();
+     return request;
   }
 
   @Override
   public boolean isOver() {
     // TODO Auto-generated method stub
-    TCONDITION.tisOver(this.STATE);
-    return this.STATE.getTOver();
+    ITCONDITION.innerTerminated(this.STATE);
+    return this.STATE.getInnerOver();
   }
+  
+  @Override
+  public boolean isOverOuter() {
+    // TODO Auto-generated method stub
+    OTCONDITION.outerTerminated(this.STATE);
+    //clear the orders. Maybe clear other things too.
+    return this.STATE.getOuterOver();
+  } 
 
   @Override
   public boolean handleBid(Bid bid) {
@@ -74,10 +92,6 @@ public class Market implements IMarket {
   @Override
   public List<Order> getOrders() {
     this.ARULE.setAllocation(this.STATE);
-    // TODO Auto-generated method stub
-//    System.out.println("B"); 
-//    System.out.println(this.STATE.getPayments().size()); 
-//    System.out.println("B"); 
     return this.STATE.getPayments();
   }
 
@@ -87,9 +101,21 @@ public class Market implements IMarket {
   }
 
   @Override
+  public void clearState() { 
+    this.STATE.clear();
+  }
+  @Override
+  //a game report is given using a ledger...
+  //this should be sufficient, right? 
+  //like, a one-round ledger. Because this isn't the actual ledger for the market, 
+  //but just a report of what's happened in the last round. 
+  //markov property?
   public GameReport getReport() {
-    this.ARULE.setReport(STATE);
-    return this.STATE.getReport(); 
-  } 
+    this.ARULE.setAllocation(this.STATE);
+    this.ARULE.setReport(this.STATE);
+    return this.STATE.getReport();
+//    Allocation alloc = this.STATE.getAllocation(); 
+//    return new GameReport(new Ledger(this.getID(), alloc));
+  }
   
 }

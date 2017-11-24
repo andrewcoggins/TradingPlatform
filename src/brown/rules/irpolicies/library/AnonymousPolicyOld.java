@@ -3,8 +3,8 @@ package brown.rules.irpolicies.library;
 import java.util.LinkedList;
 import java.util.List;
 
-import brown.accounting.BidBundle;
 import brown.accounting.Order;
+import brown.accounting.bidbundle.IBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.SimpleState;
 import brown.messages.library.Bid;

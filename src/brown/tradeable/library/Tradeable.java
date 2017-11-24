@@ -2,9 +2,6 @@ package brown.tradeable.library;
 
 import brown.tradeable.IValuable;
 
-
-
-
 /**
  * The good to be used in the back-end bidding logic. 
  * Consists only of the private ID of the agent.

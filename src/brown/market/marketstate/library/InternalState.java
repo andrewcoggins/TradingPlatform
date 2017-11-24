@@ -6,18 +6,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import brown.accounting.BidBundle;
 import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.Order;
-import brown.accounting.SimpleBidBundle;
+import brown.accounting.bid.SimpleBid;
+import brown.accounting.bidbundle.AbsBidBundle;
+import brown.accounting.bidbundle.Allocation;
+import brown.accounting.bidbundle.SimpleBidBundle;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.Bid;
 import brown.messages.library.BidRequest;
 import brown.messages.library.GameReport;
 import brown.messages.library.TradeRequest;
-import brown.todeprecate.Asset;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.library.Tradeable;
 
@@ -29,12 +30,12 @@ public class InternalState implements IMarketState {
   private final double INCREMENT = 20.0;
   private final Integer ID;
   private final List<Bid> BIDS;
-  private final Set<Asset> TRADEABLES;
+  private final Set<Tradeable> TRADEABLES;
   
-  private BidBundle lastAlloc;
+  private AbsBidBundle lastAlloc;
   private List<Order> lastPayments;
   private int ticks;
-  private BidBundle bundleReserve;
+  private AbsBidBundle bundleReserve;
   private boolean maximizing;
   
 //  //current and temporary things that could be inputs to arguments.
@@ -46,8 +47,7 @@ public class InternalState implements IMarketState {
   
   //allocation rule things.
   private long time; 
-  private BidBundle alloc;
-  private Map<Integer, Set<Asset>> allocs;
+  private Allocation alloc;
   private BidRequest request;
   private boolean isPrivate; 
   private boolean isOver; 
@@ -59,9 +59,8 @@ public class InternalState implements IMarketState {
   
   //payment rule things
   private List<Order> payments; 
-  private Map<BidBundle, Set<Asset>> oPayments; 
   private PaymentType pType; 
-  private BidBundle reserveBundle; 
+  private AbsBidBundle reserveBundle; 
   private boolean permitShort; 
   
   //query rule things.
@@ -74,11 +73,14 @@ public class InternalState implements IMarketState {
   //come back to this.
   
   //tcondition things. 
-  private boolean terminated; 
+  private boolean innerTerminated; 
+  private boolean outerTerminated;
+  private Integer innerRuns; 
+  private Integer outerRuns; 
   
   
   
-  public InternalState(Integer ID, Set<Asset> tradeables) {
+  public InternalState(Integer ID, Set<Tradeable> tradeables) {
     this.BIDS = new LinkedList<Bid>();
     this.lastAlloc = null;
     this.lastPayments = null;
@@ -86,8 +88,8 @@ public class InternalState implements IMarketState {
     this.ID = ID;
     this.ticks = 0;
     Map<Tradeable, MarketState> reserve = new HashMap<Tradeable, MarketState>();
-    for (Asset t : this.TRADEABLES) {
-      reserve.put(t.getType(), new MarketState(null,0));
+    for (Tradeable t : this.TRADEABLES) {
+      reserve.put(t, new MarketState(null,0));
     }
     this.bundleReserve = new SimpleBidBundle(reserve);
     this.maximizing = false;
@@ -99,12 +101,21 @@ public class InternalState implements IMarketState {
     this.BIDS.add(bid);
   }
   
-
+  /**
+   * add on here as needed.
+   */
+  public void clear() {
+    if (payments != null) {
+      this.payments.clear();
+    }
+    this.BIDS.clear(); 
+  }
+  
   public List<Bid> getBids() {
     return this.BIDS;
   }
   
-  public Set<Asset> getTradeables() {
+  public Set<Tradeable> getTradeables() {
     return this.TRADEABLES;
   }
   
@@ -128,11 +139,11 @@ public class InternalState implements IMarketState {
     return this.ticks;
   } 
   
-  public void setReserve(BidBundle o) {
+  public void setReserve(AbsBidBundle o) {
     this.bundleReserve = o;
   }
   
-  public BidBundle getbundleReserve() {
+  public AbsBidBundle getbundleReserve() {
     return this.bundleReserve;
   }
   
@@ -158,12 +169,12 @@ public class InternalState implements IMarketState {
       return 0;
     }
     SimpleBidBundle bundle = (SimpleBidBundle) this.reserve;
-    for (Tradeable type : bundle.getDemandSet()) {
-      MarketState state = bundle.getBid(type);
-      if (state != null && state.AGENTID != null) {
-        elig+=1;
-      }
-    }
+//    for (Tradeable type : bundle.getDemandSet()) {
+//      MarketState state = bundle.getBid(type);
+//      if (state != null && state.AGENTID != null) {
+//        elig+=1;
+//      }
+//    }
     return elig;
   }
   
@@ -174,12 +185,8 @@ public class InternalState implements IMarketState {
     return this.time; 
   }
   
-  public BidBundle getAllocation() {
+  public Allocation getAllocation() {
     return this.alloc; 
-  }
-  
-  public Map<Integer, Set<Asset>> getAllocs() {
-    return this.allocs;
   }
   
   public BidRequest getRequest() { 
@@ -219,12 +226,8 @@ public class InternalState implements IMarketState {
     this.time = t; 
   }
   
-  public void setAllocation(BidBundle alloc) {
+  public void setAllocation(Allocation alloc) {
     this.alloc = alloc; 
-  }
- 
-  public void setAllocs(Map<Integer, Set<Asset>> allocs) {
-    this.allocs = allocs;
   }
   
   public void setRequest(BidRequest request) { 
@@ -265,15 +268,11 @@ public class InternalState implements IMarketState {
     return this.payments; 
   }
   
-  public Map<BidBundle, Set<Asset>> getOPayments() {
-    return this.oPayments;
-  }
-  
   public PaymentType getPaymentType() {
     return this.pType; 
   }
   
-  public BidBundle getReserveBundle() {
+  public AbsBidBundle getReserveBundle() {
     return this.reserveBundle;
   }
   
@@ -288,15 +287,11 @@ public class InternalState implements IMarketState {
     this.payments = orders; 
   }
   
-  public void setOPayments(Map<BidBundle, Set<Asset>> m) {
-     this.oPayments = m;
-  }
-  
   public void setPaymentType(PaymentType p) {
      this.pType = p; 
   }
   
-  public void setReserveBundle(BidBundle b) {
+  public void setReserveBundle(AbsBidBundle b) {
      this.reserveBundle = b;
   }
   
@@ -324,12 +319,34 @@ public class InternalState implements IMarketState {
   }
   
   //tcondition things
-  public boolean getTOver() {
-    return this.terminated; 
+  public boolean getInnerOver() {
+    return this.innerTerminated; 
   }
   
-  public void setTOver(boolean b) {
-    this.terminated = b; 
+  public void setInnerOver(boolean b) {
+    this.innerTerminated = b; 
   }
 
+  public boolean getOuterOver() { 
+    return this.outerTerminated;
+  }
+  
+  public void setOuterOver(boolean b) {
+    this.outerTerminated = b;
+  }
+  
+  public void incrementOuter() {
+    if(this.outerRuns == null) {
+      this.outerRuns = 0;
+    } else {
+      this.outerRuns++;
+    }
+  }
+  
+  public Integer getOuterRuns() {
+    if(this.outerRuns == null) {
+      return 0;
+    }
+    return this.outerRuns;
+  }
 }

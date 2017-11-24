@@ -8,16 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import brown.accounting.BidBundle;
 import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.Order;
-import brown.accounting.SimpleBidBundle;
+import brown.accounting.bidbundle.IBidBundle;
+import brown.accounting.bidbundle.SimpleBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.Bid;
 import brown.rules.paymentrules.IPaymentRule;
 import brown.setup.Logging;
-import brown.todeprecate.Asset;
 import brown.tradeable.library.Tradeable;
 
 
@@ -26,7 +25,7 @@ public class SimpleSecondPrice implements IPaymentRule {
   @Override
   public void getPayments(IMarketState state) {
     // TODO Auto-generated method stub
-    BidBundle highest = state.getAllocation();
+    IBidBundle highest = state.getAllocation();
     if (!highest.getType().equals(BundleType.Simple)) {
       Logging.log("ERROR: bundle type not simple");
     }
@@ -38,10 +37,10 @@ public class SimpleSecondPrice implements IPaymentRule {
         Logging.log("ERROR: bundle type not simple");
       }
       SimpleBidBundle otherBundle = (SimpleBidBundle) highest; 
-      for(Tradeable t : otherBundle.BIDS.keySet()) {
-        if(nextHighest.get(t) == null || otherBundle.BIDS.get(t).PRICE > nextHighest.get(t).PRICE) { 
-          if (otherBundle.BIDS.get(t).PRICE < bundle.BIDS.get(t).PRICE) {
-            nextHighest.put(t, otherBundle.BIDS.get(t)); 
+      for(Tradeable t : otherBundle.getBids().bids.keySet()) {
+        if(nextHighest.get(t) == null || otherBundle.getBids().bids.get(t).PRICE > nextHighest.get(t).PRICE) { 
+          if (otherBundle.getBids().bids.get(t).PRICE < bundle.getBids().bids.get(t).PRICE) {
+            nextHighest.put(t, otherBundle.getBids().bids.get(t)); 
           }
         }
       }
@@ -49,7 +48,7 @@ public class SimpleSecondPrice implements IPaymentRule {
     List<Order> payments = new LinkedList<Order>();
     for(Entry<Tradeable, MarketState> a : nextHighest.entrySet()) {
       payments.add(new Order(a.getValue().AGENTID, null,
-          a.getValue().PRICE, 1, new Asset(a.getKey(), 1)));
+          a.getValue().PRICE, 1, a.getKey()));
     }
     state.setPayments(payments);
   }

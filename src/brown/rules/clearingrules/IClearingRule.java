@@ -5,11 +5,11 @@ import java.util.Set;
 import java.util.SortedMap;
 
 import brown.accounting.Order;
-import brown.todeprecate.Asset;
+import brown.tradeable.library.Tradeable;
 
 public interface IClearingRule {
 	public List<Order> buy(Integer agentID, double shareNum, double sharePrice);
-	public List<Order> sell(Integer agentID, Asset opp, double sharePrice);
+	public List<Order> sell(Integer agentID, Tradeable opp, double sharePrice);
 	
 	public double quoteBid(double shareNum, double sharePrice);
 	public double quoteAsk(double shareNum, double sharePrice);

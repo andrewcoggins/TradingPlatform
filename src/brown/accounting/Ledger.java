@@ -5,10 +5,11 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
-import brown.market.library.Market;
-import brown.todeprecate.Asset;
+import brown.accounting.bidbundle.Allocation;
+import brown.tradeable.library.Tradeable;
 
 /**
  * A ledger tracks all trades within a Market. 
@@ -16,32 +17,42 @@ import brown.todeprecate.Asset;
  *
  */
 public class Ledger {
+  protected final Integer marketId;
 	protected final List<Transaction> transactions;
-	protected final Map<Asset, Transaction> latest;
+	protected final Map<Tradeable, Transaction> latest;
 	protected final List<Transaction> unshared;
-	protected final Market Market;
 	
 	/**
 	 * For Kryo do not use
 	 */
 	public Ledger() {
+	  this.marketId = null;
 		this.transactions = null;
 		this.latest = null;
-		this.Market = null;
 		this.unshared = null;
 	}
 	
-	/**
-	 * Constructs a ledger for the given security
-	 * @param security : security that all Tradeables will refer to
-	 */
-	public Ledger(Market Market) {
-		this.Market = Market;
-		this.unshared = new LinkedList<Transaction>();
-		this.transactions = new LinkedList<Transaction>();
-		this.latest = new HashMap<Asset, Transaction>();
-	}
-	
+
+	 public Ledger(Integer marketId) {
+	    this.marketId = marketId; 
+	    this.unshared = new LinkedList<Transaction>();
+	    this.transactions = new LinkedList<Transaction>();
+	    this.latest = new HashMap<Tradeable, Transaction>();
+	  }
+	 
+	 /**
+	  * for convenience of implementation in the market class.
+	  * @param marketId
+	  * @param initialAlloc
+	  */
+	 public Ledger(Integer marketId, Allocation initialAlloc) {
+     this.marketId = marketId; 
+     this.unshared = new LinkedList<Transaction>();
+     this.transactions = new LinkedList<Transaction>();
+     this.latest = new HashMap<Tradeable, Transaction>();
+     this.addAll(initialAlloc);
+   }
+
 	/**
 	 * Adds a transaction
 	 * @param t : transaction to add
@@ -52,6 +63,17 @@ public class Ledger {
 			this.transactions.add(t);
 			this.unshared.add(t);
 		}
+	}
+	
+	public void addAll(Allocation bids) {
+	  if (bids != null) {
+	    for (Entry<Tradeable, MarketState> t : bids.getBids().bids.entrySet()) { 
+	      Transaction tr = new Transaction(t.getValue().AGENTID, null, t.getValue().PRICE, 1, t.getKey());
+	      this.latest.put(t.getKey(), tr);
+	      this.transactions.add(tr); 
+	      this.unshared.add(tr);
+	    }
+	  }
 	}
 	
 	/**

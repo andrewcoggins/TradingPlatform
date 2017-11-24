@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import brown.accounting.BidBundle;
 import brown.accounting.Ledger;
 import brown.accounting.MarketState;
-import brown.accounting.SimpleBidBundle;
+import brown.accounting.bid.SimpleBid;
+import brown.accounting.bidbundle.AbsBidBundle;
+import brown.accounting.bidbundle.IBidBundle;
+import brown.accounting.bidbundle.SimpleBidBundle;
 import brown.agent.AbsAgent;
 import brown.agent.library.LemonadeAgent;
 import brown.channels.MechanismType;
@@ -68,7 +70,7 @@ public class LemonadeChannel implements IAgentChannel {
   public void bid(AbsAgent agent, Integer position) {
     Map<Tradeable, MarketState> bids = new HashMap<Tradeable, MarketState>();
     bids.put(new Tradeable(0), new MarketState(agent.ID, (double) position));
-    BidBundle toSend = new SimpleBidBundle(bids);
+    IBidBundle toSend = new SimpleBidBundle(bids);
     agent.CLIENT.sendTCP(new Bid(0, toSend, this.ID, agent.ID));
   }
   

@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.SortedMap;
 
 import brown.accounting.Order;
-import brown.todeprecate.Asset;
 import brown.tradeable.library.Tradeable;
 
 /**
@@ -20,7 +19,7 @@ public interface TwoSidedAuction extends IServerChannel {
 	public Tradeable getTradeableType();
 	
 	public List<Order> buy(Integer agentID, double shareNum, double sharePrice);
-	public List<Order> sell(Integer agentID, Asset opp, double sharePrice);
+	public List<Order> sell(Integer agentID, Tradeable opp, double sharePrice);
 	public void cancel(Integer agentID, boolean buy, double shareNum, double sharePrice);
 	
 	public double quoteBid(double shareNum, double sharePrice);
