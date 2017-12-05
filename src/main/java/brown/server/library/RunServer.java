@@ -1,37 +1,26 @@
 package brown.server.library; 
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import com.esotericsoftware.kryonet.Connection;
-
-import brown.accounting.Account;
 import brown.market.library.Market;
 import brown.market.marketstate.library.InternalState;
 import brown.market.preset.AbsMarketPreset;
-import brown.messages.library.Registration;
-import brown.messages.library.ValuationRegistration;
 import brown.server.AbsServer;
 import brown.setup.ISetup;
 import brown.setup.Logging;
 import brown.tradeable.library.Tradeable;
-import brown.value.valuation.IValuation;
-import brown.value.valuationrepresentation.AbsValuationRepresentation;
-import brown.value.valuationrepresentation.library.ValuationType;
+import brown.value.config.AbsValueConfig;
 
 public class RunServer extends AbsServer {
   
   private AbsMarketPreset aPreset; 
-  private Set<Tradeable> allGoods; 
   
   public RunServer(int port, ISetup gameSetup, AbsMarketPreset aPreset, 
-      ValuationType valType, Set<Tradeable> gameGoods) {
+      AbsValueConfig valueInfo) {
     super(port, gameSetup);
     this.aPreset = aPreset; 
-    this.valType = valType; 
-    this.marketGoods.put(0, gameGoods);
+    this.valueConfig = valueInfo; 
   }
   
 //  //may need to wash out some initial assumptions here.

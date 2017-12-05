@@ -14,6 +14,6 @@ public class MainServer {
   public static void main(String[] args) throws InterruptedException {
     //for now just gonna build this where you input things into this file.
     //But later on i'd like to use command line input.
-    new RunServer(2121, new SimpleSetup(), new LemonadeRules()).runGame();
+    new RunServer(2121, new SimpleSetup(), new LemonadeRules(), null).runGame();
   }
 }

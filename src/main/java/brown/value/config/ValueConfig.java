@@ -1,5 +1,5 @@
 package brown.value.config; 
 
-public class ValueConfig {
+public class ValueConfig extends AbsValueConfig {
   
 }
