@@ -51,6 +51,7 @@ public class Market implements IMarket {
     return this.STATE.getID();
   }
 
+  // constructs a trade reques
   @Override
   public TradeRequest constructTradeRequest(Integer ID) {
     //do something with the IR policy.
@@ -65,6 +66,8 @@ public class Market implements IMarket {
      return request;
   }
 
+  // asks if the game in a sequence of games is
+  // over per the termination condition
   @Override
   public boolean isOver() {
     // TODO Auto-generated method stub
@@ -72,6 +75,8 @@ public class Market implements IMarket {
     return this.STATE.getInnerOver();
   }
   
+  // asks if the entire sequence of games is 
+  // over per the outer termination condition.
   @Override
   public boolean isOverOuter() {
     // TODO Auto-generated method stub
@@ -80,6 +85,8 @@ public class Market implements IMarket {
     return this.STATE.getOuterOver();
   } 
 
+  // handles a bid from an agent. The activity rule determines if it is 
+  // to be accepted or not. 
   @Override
   public boolean handleBid(Bid bid) {
     this.ACTRULE.isAcceptable(this.STATE, bid); 
@@ -93,10 +100,12 @@ public class Market implements IMarket {
   public List<Order> getOrders() {
     this.ARULE.setAllocation(this.STATE);
     //payments are being set in allocation rule. 
-    //worth reconsidering...
+    //what we should have is: 
+    this.PRULE.setPayments(this.STATE);
     return this.STATE.getPayments();
   }
 
+  // increments time. 
   @Override
   public void tick(long time) {
     this.STATE.setTime(time);
@@ -106,12 +115,8 @@ public class Market implements IMarket {
   public void clearState() { 
     this.STATE.clear();
   }
-  @Override
-  //a game report is given using a ledger...
-  //this should be sufficient, right? 
-  //like, a one-round ledger. Because this isn't the actual ledger for the market, 
-  //but just a report of what's happened in the last round. 
-  //markov property?
+  
+  @Override 
   public GameReport getReport() {
     this.ARULE.setAllocation(this.STATE);
     this.ARULE.setReport(this.STATE);

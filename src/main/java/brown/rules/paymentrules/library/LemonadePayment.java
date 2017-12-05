@@ -9,7 +9,7 @@ import brown.todeprecate.PaymentType;
 public class LemonadePayment implements IPaymentRule {
 
   @Override
-  public void getPayments(IMarketState state) {
+  public void setPayments(IMarketState state) {
     //for the lemonade game, payments are handled in the allocation rule. 
   }
 

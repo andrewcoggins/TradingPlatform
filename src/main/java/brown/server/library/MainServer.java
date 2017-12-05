@@ -1,6 +1,7 @@
 package brown.server.library; 
 
 import brown.market.preset.library.LemonadeRules;
+import brown.market.preset.library.SimSecondPriceRules;
 import brown.setup.library.SimpleSetup;
 
 /*
@@ -14,6 +15,6 @@ public class MainServer {
   public static void main(String[] args) throws InterruptedException {
     //for now just gonna build this where you input things into this file.
     //But later on i'd like to use command line input.
-    new RunServer(2121, new SimpleSetup(), new LemonadeRules(), null).runGame();
+    new RunServer(2121, new SimpleSetup()).runGame(new SimSecondPriceRules(), null);
   }
 }

@@ -13,14 +13,9 @@ import brown.tradeable.library.Tradeable;
 import brown.value.config.AbsValueConfig;
 
 public class RunServer extends AbsServer {
-  
-  private AbsMarketPreset aPreset; 
-  
-  public RunServer(int port, ISetup gameSetup, AbsMarketPreset aPreset, 
-      AbsValueConfig valueInfo) {
+
+  public RunServer(int port, ISetup gameSetup) {
     super(port, gameSetup);
-    this.aPreset = aPreset; 
-    this.valueConfig = valueInfo; 
   }
   
 //  //may need to wash out some initial assumptions here.
@@ -55,8 +50,10 @@ public class RunServer extends AbsServer {
     }
   }
   
-  public void runGame() throws InterruptedException {
+  public void runGame( AbsMarketPreset aPreset, 
+      AbsValueConfig valueInfo) throws InterruptedException {
     delay(10);
+    this.valueConfig = valueInfo; 
     this.manager.open(new Market(aPreset, new InternalState(0, new HashSet<Tradeable>())));
     this.completeAuction(0);
   } 

@@ -23,7 +23,7 @@ import brown.tradeable.library.Tradeable;
 public class SimpleSecondPrice implements IPaymentRule {
 
   @Override
-  public void getPayments(IMarketState state) {
+  public void setPayments(IMarketState state) {
     // TODO Auto-generated method stub
     IBidBundle highest = state.getAllocation();
     if (!highest.getType().equals(BundleType.Simple)) {

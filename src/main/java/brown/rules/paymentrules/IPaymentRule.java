@@ -5,7 +5,7 @@ import brown.market.marketstate.IMarketState;
 
 public interface IPaymentRule {
 
-  public void getPayments(IMarketState state); 
+  public void setPayments(IMarketState state); 
   
   public void setPaymentType(IMarketState state);
   

@@ -8,7 +8,7 @@ import brown.rules.paymentrules.IPaymentRule;
 public class LemonadePaymentOld implements IPaymentRule {
 
   @Override
-  public void getPayments(IMarketState state) {
+  public void setPayments(IMarketState state) {
     // TODO Auto-generated method stub
     
   }
