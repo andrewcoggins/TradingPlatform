@@ -32,6 +32,8 @@ import brown.setup.Logging;
 import brown.setup.ISetup;
 import brown.setup.Startup;
 import brown.tradeable.library.Tradeable;
+import brown.value.valuationrepresentation.library.SimpleValuation;
+import brown.value.valuationrepresentation.library.ValuationType;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
@@ -57,6 +59,9 @@ public abstract class AbsServer {
 	private final int PORT;
 	protected Server theServer;
 	protected boolean SHORT;
+	
+	protected ValuationType valType; 
+	protected Map<Integer, Set<Tradeable>> marketGoods; 
 
 	public AbsServer(int port, ISetup gameSetup) {
 		this.PORT = port;
