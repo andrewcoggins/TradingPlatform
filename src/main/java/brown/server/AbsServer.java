@@ -2,6 +2,7 @@ package brown.server;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -28,11 +29,15 @@ import brown.messages.library.NegotiateRequest;
 import brown.messages.library.Registration;
 import brown.messages.library.Trade;
 import brown.messages.library.TradeRequest;
+import brown.messages.library.ValuationRegistration;
 import brown.setup.Logging;
 import brown.setup.ISetup;
 import brown.setup.Startup;
-import brown.tradeable.library.Tradeable;
 import brown.value.config.AbsValueConfig;
+import brown.value.valuation.library.AdditiveValuation;
+import brown.value.valuation.library.BundleValuation;
+import brown.value.valuationrepresentation.AbsValuationRepresentation;
+import brown.value.valuationrepresentation.library.ComplexValuation;
 import brown.value.valuationrepresentation.library.SimpleValuation;
 import brown.value.valuationrepresentation.library.ValuationType;
 
@@ -61,7 +66,13 @@ public abstract class AbsServer {
 	protected Server theServer;
 	protected boolean SHORT;
 	
-	protected AbsValueConfig valueConfig; 
+	protected Map<Integer, AbsValueConfig> valueConfig; 
+	// a map from an agents' private id to its private valuation for goods.
+	// what if there are different sets of goods? 
+	// valuation manager?
+	//each game on the simul axis has a map from integer to private valuation.
+	//does the server even care what the private valuations are? 
+	private Map<Integer, Map<Integer, AbsValuationRepresentation>> privateValuations;
 
 	public AbsServer(int port, ISetup gameSetup) {
 		this.PORT = port;
@@ -132,15 +143,39 @@ public abstract class AbsServer {
 	 * 
 	 * @param registration - details of their game logic agent status
 	 */
-	//TODO: edit for valuatoin.
+	//TODO: how do we determine the exact valuation for the complex case? 
+	//TODO: eventually get out of this enum crisis.
+	//TODO: abstract valuable that can be virtually anything.
+	//TODO: What about initial conditions and states of the world?
+	//TODO: need a data structure storing each agents' private valuation, needed to calculate utility.
+	//TODO: provide some file for logging winners, etc.
 	protected void onRegistration(Connection connection,
 			Registration registration) {
-		Integer theID = this.defaultRegistration(connection, registration);
-		if (theID == null) {
-			// TODO: add rejection
-			return;
+		Integer agentID = this.defaultRegistration(connection, registration);
+    if (agentID == null) {
+      // TODO: add rejection
+      return;
+    }
+		for(Integer marketNum : this.valueConfig.keySet()) {
+		  AbsValueConfig marketConfig = this.valueConfig.get(marketNum);
+		  ValuationRegistration valueReg; 
+		  //ughhhh
+		  if (marketConfig.valueScheme == ValuationType.Simple) {
+		    AdditiveValuation simpleVal = 
+		        new AdditiveValuation(marketConfig.aGenerator, marketConfig.allGoods);
+		    SimpleValuation privateVal = simpleVal.getValuation(marketConfig.allGoods);
+		    valueReg = new ValuationRegistration(agentID, privateVal, simpleVal);
+		    theServer.sendToTCP(connection.getID(), valueReg);
+		  } else if (marketConfig.valueScheme == ValuationType.Complex) {
+		    BundleValuation complexVal = 
+		        new BundleValuation(marketConfig.aGenerator, true, marketConfig.allGoods);
+		        ComplexValuation privateVal = complexVal.getValuation(marketConfig.allGoods);
+		        valueReg = new ValuationRegistration(agentID, privateVal,complexVal);
+		        theServer.sendToTCP(connection.getID(), valueReg);
+		  } else {
+		    theServer.sendToTCP(connection.getID(), new Registration (agentID));
+		  }
 		}
-		theServer.sendToTCP(connection.getID(), new Registration(theID));
 	}
 
 	/*

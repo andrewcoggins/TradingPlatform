@@ -4,10 +4,10 @@ import java.util.Set;
 import java.util.function.Function;
 
 import brown.tradeable.library.Tradeable;
-import brown.value.generator.IValuationGenerator;
+import brown.value.generator.AbsValuationGenerator;
 import brown.value.valuable.library.Value;
 
-public class SizeDependentGenerator implements IValuationGenerator {
+public class SizeDependentGenerator extends AbsValuationGenerator {
 
   private Function<Integer, Double> valFunction; 
   private Double valueScale;

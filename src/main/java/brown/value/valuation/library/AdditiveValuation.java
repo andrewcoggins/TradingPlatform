@@ -6,7 +6,7 @@ import java.util.Set;
 
 import brown.tradeable.IValuable;
 import brown.tradeable.library.Tradeable;
-import brown.value.generator.IValuationGenerator;
+import brown.value.generator.AbsValuationGenerator;
 import brown.value.generator.library.ValRandGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.IIndependentValuation;
@@ -39,7 +39,7 @@ public class AdditiveValuation implements IIndependentValuation {
    * @param valGenerator
    * @param goods
    */
-  public AdditiveValuation(IValuationGenerator valGenerator, Set<Tradeable> goods) {
+  public AdditiveValuation(AbsValuationGenerator valGenerator, Set<Tradeable> goods) {
     this.valMap = new HashMap<Tradeable, Value>();
     for(Tradeable item : goods) {
       Value value = valGenerator.makeValuation(item);

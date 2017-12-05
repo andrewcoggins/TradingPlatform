@@ -8,11 +8,11 @@ import org.apache.commons.math3.random.ISAACRandom;
 import org.apache.commons.math3.random.RandomGenerator;
 
 import brown.tradeable.library.Tradeable;
-import brown.value.generator.IValuationGenerator;
+import brown.value.generator.AbsValuationGenerator;
 import brown.value.valuable.library.Value;
 
 
-public class NormalGenerator implements IValuationGenerator {
+public class NormalGenerator extends AbsValuationGenerator {
 
   private Function<Integer, Double> valFunction; 
   private Double baseVariance; 

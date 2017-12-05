@@ -1,6 +1,8 @@
 package brown.server.library; 
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import brown.market.library.Market;
@@ -50,11 +52,15 @@ public class RunServer extends AbsServer {
     }
   }
   
-  public void runGame( AbsMarketPreset aPreset, 
+  public void runGame(List<AbsMarketPreset> presets, 
       AbsValueConfig valueInfo) throws InterruptedException {
     delay(10);
-    this.valueConfig = valueInfo; 
-    this.manager.open(new Market(aPreset, new InternalState(0, new HashSet<Tradeable>())));
+    this.valueConfig = new HashMap<Integer, AbsValueConfig>(); 
+    for (AbsMarketPreset ruleSet : presets) {
+      this.manager.open(new Market(presets.get(presets.indexOf(ruleSet)),
+          new InternalState(0, new HashSet<Tradeable>())));
+      this.valueConfig.put(presets.indexOf(ruleSet), valueInfo);
+    }
     this.completeAuction(0);
   } 
   

@@ -13,7 +13,7 @@ import org.apache.commons.math3.random.ISAACRandom;
 import org.apache.commons.math3.random.RandomGenerator;
 
 import brown.tradeable.library.Tradeable;
-import brown.value.generator.IValuationGenerator;
+import brown.value.generator.AbsValuationGenerator;
 import brown.value.generator.library.ValRandGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.IDependentValuation;
@@ -32,7 +32,7 @@ import brown.value.valuationrepresentation.library.ComplexValuation;
 public class BundleValuation implements IDependentValuation {
   
   private Map<Set<Tradeable>, Value> valMap;
-  private IValuationGenerator generator;
+  private AbsValuationGenerator generator;
   private Set<Tradeable> goods;
   private Boolean monotonic;
 
@@ -46,7 +46,7 @@ public class BundleValuation implements IDependentValuation {
   // if not monotonic, don't set the constraint. There's gonna have to be some
   // uniformity to the way that these
   // functions operate.
-  public BundleValuation(IValuationGenerator valGenerator, Boolean isMonotonic,
+  public BundleValuation(AbsValuationGenerator valGenerator, Boolean isMonotonic,
       Set<Tradeable> goods) {
     this.generator = valGenerator;
     this.goods = goods;

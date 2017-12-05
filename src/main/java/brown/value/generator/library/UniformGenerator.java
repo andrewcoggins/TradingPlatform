@@ -3,10 +3,10 @@ package brown.value.generator.library;
 import java.util.Set;
 
 import brown.tradeable.library.Tradeable;
-import brown.value.generator.IValuationGenerator;
+import brown.value.generator.AbsValuationGenerator;
 import brown.value.valuable.library.Value;
 
-public class UniformGenerator implements IValuationGenerator {
+public class UniformGenerator extends AbsValuationGenerator {
 
   @Override
   public Value makeValuation(Tradeable good) {
