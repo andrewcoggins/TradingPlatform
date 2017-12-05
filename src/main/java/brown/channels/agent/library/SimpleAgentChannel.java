@@ -116,7 +116,6 @@ public class SimpleAgentChannel implements IAgentChannel {
 		Map<Tradeable, MarketState> fixedBids = new HashMap<Tradeable,MarketState>();
 		for (Entry<Tradeable, Double> bid : bids.entrySet()) {
 			fixedBids.put(bid.getKey(), new MarketState(agent.ID, bid.getValue()));
-			//works here
 			System.out.println("fixed bids " + fixedBids);
 //			if (fixedBids.size() > 10) {
 //				agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
@@ -124,7 +123,7 @@ public class SimpleAgentChannel implements IAgentChannel {
 //			}
 		}
 		if (fixedBids.size() > 0) {
-			agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(new SimpleBid(fixedBids)),this.ID,agent.ID));
+			agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 		}
 	}
 
@@ -133,12 +132,12 @@ public class SimpleAgentChannel implements IAgentChannel {
 		for (Tradeable bid : toBid) {
 			fixedBids.put(bid, new MarketState(agent.ID, 0));
 			if (fixedBids.size() > 10) {
-				agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(new SimpleBid(fixedBids)),this.ID,agent.ID));
+				agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 				fixedBids.clear();
 			}
 		}
 		if (fixedBids.size() != 0) {
-			agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(new SimpleBid(fixedBids)),this.ID,agent.ID));
+			agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 		}
 	}
 	
@@ -155,19 +154,19 @@ public class SimpleAgentChannel implements IAgentChannel {
 			for (Tradeable t : bid.getKey()) {
 				fixedBids.put(t, new MarketState(agent.ID, bid.getValue()));
 				if (fixedBids.size() > 10) {
-					agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(new SimpleBid(fixedBids)),this.ID,agent.ID));
+					agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 					fixedBids.clear();
 				}
 			}
 		}
 		
 		if (fixedBids.size() != 0) {
-			agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(new SimpleBid(fixedBids)),this.ID,agent.ID));
+			agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 		}
 	}
 	
 	public Set<Tradeable> getTradeables() {
-		return this.HIGHBID.getTradeables();
+		return this.HIGHBID.getBids().bids.keySet();
 	}
 
 }

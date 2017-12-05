@@ -43,9 +43,11 @@ import brown.messages.library.ValuationRegistration;
 import brown.rules.clearingrules.IClearingRule;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.library.Tradeable;
+import brown.value.valuable.library.Value;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
 import brown.value.valuationrepresentation.AbsValuationRepresentation;
+import brown.value.valuationrepresentation.library.SimpleValuation;
 
 import org.apache.commons.math3.random.RandomGenerator;
 
@@ -109,6 +111,8 @@ public final class Startup {
 		kryo.register(AdditiveValuation.class);
 		kryo.register(BundleValuation.class);
 		kryo.register(ValuationRegistration.class);
+		kryo.register(Value.class);
+		kryo.register(SimpleValuation.class); 
 		return true;
 	}
 

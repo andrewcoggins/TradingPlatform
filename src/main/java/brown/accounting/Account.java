@@ -1,4 +1,4 @@
-package brown.accounting;
+package brown.accounting; 
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -64,7 +64,6 @@ public class Account {
 		if (newGoods == null) {
 			return new Account(this.ID, newMonies+this.monies, tradeables);
 		}
-		
 		this.tradeables.addAll(newGoods);
 		return new Account(this.ID, newMonies+this.monies, tradeables);
 	}
@@ -75,6 +74,8 @@ public class Account {
 	 * @param newGoods : additional good
 	 * @return updated Account
 	 */
+	//TODO: make this void, along with addall.
+	//TODO: avoid ambiguity
 	public Account add(double newMonies, Tradeable newGood) {
 		if (newGood == null) {
 			return new Account(this.ID, newMonies+this.monies, tradeables);

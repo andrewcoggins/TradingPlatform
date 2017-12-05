@@ -62,13 +62,10 @@ public class SimultaneousSecondPriceServer extends AbsServer {
     
    }
   
-  private void delay(int amt, boolean update) {
+  private void delay(int amt) {
     int i = 0;
     while (i < amt) {
       try {
-        if (update) {
-          this.updateAllAuctions(true);
-        }
         Thread.sleep(1000);
         Logging.log("[-] pause phase " + i++);
       } catch (InterruptedException e) {
@@ -84,9 +81,14 @@ public class SimultaneousSecondPriceServer extends AbsServer {
       Logging.log("[-] setup phase " + time++);
     }
     for(int i = 0; i < 5; i++) { 
-      //TODO: Rules for this game.
-      this.manager.open(new Market(new SimSecondPriceRules(), new InternalState(0, new HashSet<Tradeable>())));
-      delay(3, true);
+      Set<Tradeable> someGoods = new HashSet<Tradeable>(); 
+      for(int j = 0; j < numGoods; j++) {
+        someGoods.add(new Tradeable(j));
+      }
+      this.manager.open(new Market(new SimSecondPriceRules(), new InternalState(0, someGoods)));
+      this.completeAuction(0);
+      for (Account acct : this.acctManager.getAccounts()) 
+        Logging.log(acct.toString()); 
     }
   }
   

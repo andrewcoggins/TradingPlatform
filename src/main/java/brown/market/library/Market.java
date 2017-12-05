@@ -92,6 +92,8 @@ public class Market implements IMarket {
   @Override
   public List<Order> getOrders() {
     this.ARULE.setAllocation(this.STATE);
+    //payments are being set in allocation rule. 
+    //worth reconsidering...
     return this.STATE.getPayments();
   }
 

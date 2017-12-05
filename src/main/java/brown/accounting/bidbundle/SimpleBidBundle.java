@@ -73,6 +73,10 @@ public class SimpleBidBundle extends AbsBidBundle {
 		return new SimpleBid(this.BIDS);
 	}
 	
+	public MarketState getBid(Tradeable t) {
+	  return BIDS.get(t);
+	}
+	
 	@Override
 	public String toString() {
 		return "[" + this.BT + ": " + this.BIDS + "]";

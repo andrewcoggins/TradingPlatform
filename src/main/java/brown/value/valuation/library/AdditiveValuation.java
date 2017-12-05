@@ -27,6 +27,7 @@ public class AdditiveValuation implements IIndependentValuation {
    * @param goods
    */
   public AdditiveValuation(Set<Tradeable> goods) {
+    this.valMap = new HashMap<Tradeable, Value>();
     ValRandGenerator rg = new ValRandGenerator();
     for(Tradeable item : goods) {
       valMap.put(item, rg.makeValuation(item));

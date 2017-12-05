@@ -3,6 +3,8 @@ package brown.agent;
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;
+import brown.messages.library.BidRequest;
+import brown.messages.library.NegotiateRequest;
 import brown.setup.ISetup;
 
 public abstract class AbsSimpleSealedAgent extends AbsAgent {
@@ -22,4 +24,15 @@ public abstract class AbsSimpleSealedAgent extends AbsAgent {
     //Noop
   }
   
+  @Override
+  public void onNegotiateRequest(NegotiateRequest tradeRequest) {
+    // TODO Auto-generated method stub
+    
+  }
+  
+  @Override
+  public void onTradeRequest(BidRequest bidRequest) {
+    // TODO Auto-generated method stub
+    
+  }
 }

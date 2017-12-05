@@ -276,7 +276,6 @@ public abstract class AbsServer {
 	 * auctions about the state of all the public auctions
 	 */
 	public void updateAllAuctions(boolean closeable) {
-	  System.out.println("A");
 		synchronized (this.manager) {;
 			List<Market> toRemove = new LinkedList<Market>();
 			for (Market auction : this.manager.getAuctions()) {
@@ -329,6 +328,7 @@ public abstract class AbsServer {
 						  //maybe the trade request can be a ledger that's only one trade deep.
 						  //before, this sent a blank ledger. 
 						  //trying to send a blank one if it's the first round, or if the allocation rules are null.
+	            System.out.println("A");
 							TradeRequest tr = auction.constructTradeRequest(id.getValue());
 									//this.manager.getLedger(auction.getID())
 									//		.getSanitized(id.getValue()));//TODO: Fix
@@ -358,6 +358,7 @@ public abstract class AbsServer {
 	 * TODO: synchronize.
 	 * TODO: update auction. 
 	 */
+	//not in use.
 	public void innerCycle(Integer marketID, Integer agentID) { 
 	  IMarket market = this.manager.getIMarket(marketID);
 	  market.tick((long) 1.0); 
@@ -394,6 +395,7 @@ public abstract class AbsServer {
 	  }
 	}
 	
+	//not currently in use.
 	public synchronized void outerCycle(Integer marketID, Integer agentID) {
 	  //run every inner cycle of the auction until it is terminated per the inner termination condition.
 	  Market market = this.manager.getIMarket(marketID); 
@@ -408,6 +410,7 @@ public abstract class AbsServer {
 	  Market market = this.manager.getIMarket(marketID); 
 	 while(!market.isOverOuter()) {
 	   while(!market.isOver()) {
+       Thread.sleep(1000);
 	     this.updateAllAuctions(true);
 	     Thread.sleep(1000);
 	   }
