@@ -22,6 +22,14 @@ import brown.value.valuationrepresentation.library.SimpleValuation;
 public class AdditiveValuation implements IIndependentValuation {
 
   private Map<Tradeable, Value> valMap;
+  
+  /**
+   * for kryo do not use.
+   */
+  public AdditiveValuation() {
+      this.valMap = null;
+  }
+  
   /**
    * default constructor.
    * @param goods

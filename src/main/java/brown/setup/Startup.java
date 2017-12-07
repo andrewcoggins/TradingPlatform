@@ -113,6 +113,7 @@ public final class Startup {
 		kryo.register(ValuationRegistration.class);
 		kryo.register(Value.class);
 		kryo.register(SimpleValuation.class); 
+		kryo.register(AdditiveValuation.class);
 		return true;
 	}
 

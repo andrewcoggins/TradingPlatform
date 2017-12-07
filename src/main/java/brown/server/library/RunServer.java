@@ -20,26 +20,6 @@ public class RunServer extends AbsServer {
     super(port, gameSetup);
   }
   
-//  //may need to wash out some initial assumptions here.
-//  @Override
-//  protected void onRegistration(Connection connection,
-//      Registration registration) {
-//  //give agent private ID
-//    Integer agentID = this.defaultRegistration(connection, registration);
-//    if (agentID == null) {
-//      return;
-//    }
-//    AbsValuationRepresentation privateValuation = aValuation.getValuation(this.allGoods);
-//    this.theServer.sendToTCP(connection.getID(), new ValuationRegistration(agentID, privateValuation, aValuation));
-//    //give agent some money
-//    Account oldAccount = this.acctManager.getAccount(connections.get(connection));
-//    Account newAccount = oldAccount.addAll(10000, null); 
-//    this.acctManager.setAccount(connections.get(connection), newAccount);
-//    List<Integer> anID = new ArrayList<Integer>();
-//    anID.add(agentID);
-//    this.sendBankUpdates(anID);
-//  }
-  
   private void delay(int amt) {
     int i = 0;
     while (i < amt) {
@@ -53,13 +33,15 @@ public class RunServer extends AbsServer {
   }
   
   public void runGame(List<AbsMarketPreset> presets, 
-      AbsValueConfig valueInfo) throws InterruptedException {
+      List<AbsValueConfig> valueInfo) throws InterruptedException {
     delay(10);
     this.valueConfig = new HashMap<Integer, AbsValueConfig>(); 
     for (AbsMarketPreset ruleSet : presets) {
+      System.out.println("A");
       this.manager.open(new Market(presets.get(presets.indexOf(ruleSet)),
           new InternalState(0, new HashSet<Tradeable>())));
-      this.valueConfig.put(presets.indexOf(ruleSet), valueInfo);
+      //matches corresponding rule sets and value info sets.
+      this.valueConfig.put(presets.indexOf(ruleSet), valueInfo.get(presets.indexOf(ruleSet)));
     }
     this.completeAuction(0);
   } 

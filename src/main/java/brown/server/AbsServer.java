@@ -159,7 +159,7 @@ public abstract class AbsServer {
 		for(Integer marketNum : this.valueConfig.keySet()) {
 		  AbsValueConfig marketConfig = this.valueConfig.get(marketNum);
 		  ValuationRegistration valueReg; 
-		  //ughhhh
+		  //simple valuations: the agent gets a valuation over single goods.
 		  if (marketConfig.valueScheme == ValuationType.Simple) {
 		    AdditiveValuation simpleVal = 
 		        new AdditiveValuation(marketConfig.aGenerator, marketConfig.allGoods);
@@ -167,12 +167,14 @@ public abstract class AbsServer {
 		    valueReg = new ValuationRegistration(agentID, privateVal, simpleVal);
 		    theServer.sendToTCP(connection.getID(), valueReg);
 		  } else if (marketConfig.valueScheme == ValuationType.Complex) {
+		    //complex valuations: the agent gets a valuation over complex goods.
 		    BundleValuation complexVal = 
 		        new BundleValuation(marketConfig.aGenerator, true, marketConfig.allGoods);
 		        ComplexValuation privateVal = complexVal.getValuation(marketConfig.allGoods);
 		        valueReg = new ValuationRegistration(agentID, privateVal,complexVal);
 		        theServer.sendToTCP(connection.getID(), valueReg);
 		  } else {
+		    //no explicit valuation, as in the lemonade game
 		    theServer.sendToTCP(connection.getID(), new Registration (agentID));
 		  }
 		}
