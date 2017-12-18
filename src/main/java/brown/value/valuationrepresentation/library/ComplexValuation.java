@@ -12,6 +12,10 @@ public class ComplexValuation extends AbsValuationRepresentation {
   
   public final Map<Set<Tradeable>, Value> vals; 
   
+  public ComplexValuation(){ 
+    this.vals = null;
+  }
+  
   public ComplexValuation(Map<Set<Tradeable> , Value> bundle) { 
     this.vals = bundle; 
   }

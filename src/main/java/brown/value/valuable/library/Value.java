@@ -6,6 +6,10 @@ public class Value implements IValue {
   
   public Double value = null; 
   
+  public Value(){ 
+    this.value = null;
+  }
+  
   public Value(double val) {
       this.value = val;
   }

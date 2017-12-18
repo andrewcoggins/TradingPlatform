@@ -39,18 +39,22 @@ public class SSSPAgent extends AbsSimpleSealedAgent {
   @Override
   public void onMarketUpdate(GameReport marketUpdate) {
     // TODO Auto-generated method stub
-    System.out.println("bank update");
+    System.out.println("market update");
   }
 
   @Override
   public void onBankUpdate(BankUpdate bankUpdate) {
     // TODO Auto-generated method stub
     System.out.println("bank update");
+    System.out.println(bankUpdate.toString());
   }
   
   @Override
   public void onRegistration(Registration reg) {
+    this.ID = reg.getID();
+    System.out.println("Registration received");
     if (reg instanceof ValuationRegistration) {
+      System.out.println("Registration received");
       ValuationRegistration valReg = (ValuationRegistration) reg; 
       this.privateValuation = (SimpleValuation) valReg.getValuation();
     }

@@ -151,9 +151,12 @@ public abstract class AbsServer {
 	//TODO: provide some file for logging winners, etc.
 	protected void onRegistration(Connection connection,
 			Registration registration) {
+    System.out.println("onRegistration called");
+    System.out.println(this.valueConfig.keySet().size());
 		Integer agentID = this.defaultRegistration(connection, registration);
     if (agentID == null) {
       // TODO: add rejection
+      System.out.println("Agent ID null");
       return;
     }
 		for(Integer marketNum : this.valueConfig.keySet()) {
@@ -161,6 +164,7 @@ public abstract class AbsServer {
 		  ValuationRegistration valueReg; 
 		  //simple valuations: the agent gets a valuation over single goods.
 		  if (marketConfig.valueScheme == ValuationType.Simple) {
+		    System.out.println("Got here");
 		    AdditiveValuation simpleVal = 
 		        new AdditiveValuation(marketConfig.aGenerator, marketConfig.allGoods);
 		    SimpleValuation privateVal = simpleVal.getValuation(marketConfig.allGoods);
@@ -175,7 +179,7 @@ public abstract class AbsServer {
 		        theServer.sendToTCP(connection.getID(), valueReg);
 		  } else {
 		    //no explicit valuation, as in the lemonade game
-		    theServer.sendToTCP(connection.getID(), new Registration (agentID));
+		    theServer.sendToTCP(connection.getID(), new Registration(agentID));
 		  }
 		}
 	}
@@ -326,7 +330,9 @@ public abstract class AbsServer {
 					auction.tick(System.currentTimeMillis());
 					if (auction.isOver() && closeable) {
 						toRemove.add(auction);
+						System.out.println("update all auction: getOrders()");
 						List<Order> winners = auction.getOrders();
+            System.out.println(winners); 
 						System.out.println(winners.size());
 						if (winners == null) {
 							continue;
@@ -371,7 +377,6 @@ public abstract class AbsServer {
 						  //maybe the trade request can be a ledger that's only one trade deep.
 						  //before, this sent a blank ledger. 
 						  //trying to send a blank one if it's the first round, or if the allocation rules are null.
-	            System.out.println("A");
 							TradeRequest tr = auction.constructTradeRequest(id.getValue());
 									//this.manager.getLedger(auction.getID())
 									//		.getSanitized(id.getValue()));//TODO: Fix

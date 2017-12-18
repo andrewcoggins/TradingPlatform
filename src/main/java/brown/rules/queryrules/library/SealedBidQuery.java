@@ -1,6 +1,5 @@
 package brown.rules.queryrules.library;
 
-import brown.accounting.BundleType;
 import brown.accounting.Ledger;
 import brown.accounting.bidbundle.SimpleBidBundle;
 import brown.channels.MechanismType;
@@ -13,11 +12,12 @@ public class SealedBidQuery implements IQueryRule {
 
 	@Override
 	public void makeChannel(IMarketState state, Ledger ledger) {
-		if (state.getAllocation().getType().equals(BundleType.Simple)) {
+		//if (state.getAllocation().getType().equals(BundleType.Simple)) {
+
 			state.setTRequest(new TradeRequest(0, 
 					new SimpleAgentChannel(state.getID(), ledger, state.getPaymentType(), MechanismType.SealedBid, 
-							(SimpleBidBundle) state.getReserve(), state.getEligibility()), 
+							(SimpleBidBundle) state.getbundleReserve(), state.getEligibility()), 
 							MechanismType.SealedBid));
-		}
+		//}
 	}	
 }

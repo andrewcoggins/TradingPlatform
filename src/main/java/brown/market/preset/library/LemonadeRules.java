@@ -7,7 +7,7 @@ import brown.rules.irpolicies.library.AnonymousPolicy;
 import brown.rules.paymentrules.library.LemonadePayment;
 import brown.rules.queryrules.library.LemonadeQuery;
 import brown.rules.terminationconditions.library.OneShotTermination;
-import brown.rules.terminationconditions.library.XRoundTermination;
+import brown.rules.terminationconditions.library.ThreeRoundTermination;
 
 public class LemonadeRules extends AbsMarketPreset {
 
@@ -22,7 +22,7 @@ public class LemonadeRules extends AbsMarketPreset {
     this.actRule = new OneShotActivity();
     this.infoPolicy = new AnonymousPolicy();
     this.innerTCondition = new OneShotTermination();
-    this.outerTCondition = new XRoundTermination();
+    this.outerTCondition = new ThreeRoundTermination();
   }
 
 }

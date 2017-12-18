@@ -11,6 +11,10 @@ public class SimpleValuation extends AbsValuationRepresentation {
   
   public final Map<Tradeable, Value> vals;
   
+  public SimpleValuation() {
+    this.vals = null;
+  }
+  
   public SimpleValuation(Map<Tradeable, Value> vals) {
     this.vals = vals; 
   }

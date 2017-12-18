@@ -12,5 +12,11 @@ public class SimpleBid extends AbsBid {
   public SimpleBid(Map<Tradeable, MarketState> bids) {
     this.bids = bids; 
   }
+
+  @Override
+  public String toString() {
+    return "SimpleBid [bids=" + bids + "]";
+  }
+  
   
 }

@@ -38,4 +38,12 @@ public class BankUpdate extends AbsMessage {
 		agent.onBankUpdate(this);
 	}
 
+  @Override
+  public String toString() {
+    return "BankUpdate [oldAccount=" + oldAccount + ", newAccount="
+        + newAccount + "]";
+  }
+	
+	
+
 }

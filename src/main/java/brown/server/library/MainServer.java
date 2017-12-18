@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Set;
 
 import brown.market.preset.AbsMarketPreset;
+import brown.market.preset.library.LemonadeRules;
 import brown.market.preset.library.SimSecondPriceRules;
 import brown.setup.library.SimpleSetup;
 import brown.tradeable.library.Tradeable;
 import brown.value.config.AbsValueConfig;
+import brown.value.config.NullConfig;
 import brown.value.config.SSSPConfig;
 
 /*
@@ -29,12 +31,14 @@ public class MainServer {
     List<AbsValueConfig> allValInfo = new ArrayList<AbsValueConfig>();
     //add whatever you want to do.
     Set<Tradeable> allTradeables = new HashSet<Tradeable>(); 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 3; i++) {
       allTradeables.add(new Tradeable(i));
     }
     //out valuation information and rules information.
     allValInfo.add(new SSSPConfig(allTradeables));
     allMarkets.add(new SimSecondPriceRules()); 
+//    allMarkets.add(new LemonadeRules());
+//    allValInfo.add(new NullConfig());
     new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo);
   }
 }

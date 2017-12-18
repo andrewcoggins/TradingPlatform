@@ -116,13 +116,13 @@ public class SimpleAgentChannel implements IAgentChannel {
 		Map<Tradeable, MarketState> fixedBids = new HashMap<Tradeable,MarketState>();
 		for (Entry<Tradeable, Double> bid : bids.entrySet()) {
 			fixedBids.put(bid.getKey(), new MarketState(agent.ID, bid.getValue()));
-			System.out.println("fixed bids " + fixedBids);
 //			if (fixedBids.size() > 10) {
 //				agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 //				fixedBids.clear();
 //			}
 		}
 		if (fixedBids.size() > 0) {
+      System.out.println("fixed bids " + fixedBids);
 			agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 		}
 	}
