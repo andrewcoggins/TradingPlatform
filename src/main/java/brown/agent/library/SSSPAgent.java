@@ -25,7 +25,7 @@ public class SSSPAgent extends AbsSimpleSealedAgent {
     super(host, port, new SimpleSetup());
     // TODO Auto-generated constructor stub
   }
-
+  
   @Override
   public void onSimpleSealed(SimpleAgentChannel simpleChannel) {
     Map<Tradeable, Double> initial = new HashMap<Tradeable, Double>();
