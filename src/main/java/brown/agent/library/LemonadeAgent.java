@@ -42,8 +42,11 @@ public class LemonadeAgent extends AbsLemonadeAgent {
         this.positions[i] = this.positions[i] + lemonadeUpdate.getCount(i);
       }
       System.out.println("Game Report Received");
+      for(int i = 0; i < 12; i++) {
+        System.out.println("players at position " + i + ": " + lemonadeUpdate.getCount(i));
+      }
     }
-    else{
+    else {
       System.out.println("ERROR: Lemonade Report Not Received");
     }
   }

@@ -23,13 +23,9 @@ import brown.value.config.SSSPConfig;
  * hmm... what to do about special registrations?
  * repeated registrations?
  */
-<<<<<<< HEAD:src/main/java/brown/server/library/MainServerSSSP.java
 public class MainServerSSSP {
   
-=======
-public class MainServer {
  
->>>>>>> 3f8cef31ea9eb993de4b006bc530fcf1161e0ce8:src/main/java/brown/server/library/MainServer.java
   public static void main(String[] args) throws InterruptedException {
     //for now just gonna build this where you input things into this file.
     //but later on i'd like to use command line input.

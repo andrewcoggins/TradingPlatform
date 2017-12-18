@@ -1,4 +1,6 @@
-package brown.messages.library; 
+package brown.messages.library;
+
+import brown.messages.library.GameReport;
 
 public class LemonadeReport extends GameReport {
   
