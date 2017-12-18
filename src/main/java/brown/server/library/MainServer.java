@@ -16,18 +16,18 @@ import brown.value.config.SSSPConfig;
 
 /*
  * Use this class to run the server side of your game.
- * just edit the rules to the game that you'd like to play.
+ * Just edit the rules to the game that you'd like to play.
  * 
- * Given a full library on the platform, this is the only file the
- * server-side user should have to edit.
+ * This is the only file the server-side user should have to edit.
+ * 
  * hmm... what to do about special registrations?
  * repeated registrations?
  */
 public class MainServer {
-  
+ 
   public static void main(String[] args) throws InterruptedException {
     //for now just gonna build this where you input things into this file.
-    //But later on i'd like to use command line input.
+    //but later on i'd like to use command line input.
     List<AbsMarketPreset> allMarkets = new ArrayList<AbsMarketPreset>();
     List<AbsValueConfig> allValInfo = new ArrayList<AbsValueConfig>();
     //add whatever you want to do.
@@ -42,4 +42,5 @@ public class MainServer {
 //    allValInfo.add(new NullConfig());
     new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo);
   }
+  
 }

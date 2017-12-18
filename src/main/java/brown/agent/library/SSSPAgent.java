@@ -59,13 +59,13 @@ public class SSSPAgent extends AbsSimpleSealedAgent {
       this.privateValuation = (SimpleValuation) valReg.getValuation();
     }
   }
-
-  
   
   public static void main(String[] args) throws AgentCreationException {
+    //new SSSPAgent("Kerrys-MacBook-Pro-2.local", 2121);
+    //new SSSPAgent("localhost", 2121);
     new SSSPAgent("localhost", 2121);
-    new SSSPAgent("localhost", 2121);
-    new SSSPAgent("localhost", 2121);
+    
     while(true){}
   }
+  
 }

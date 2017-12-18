@@ -24,6 +24,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/gpfs/main/home/acoggins/workspace/jars/kryonet-2.21-all.jar"/>
+	<classpathentry kind="lib" path="/course/cs1951k/platform/kryonet-2.21-all.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
