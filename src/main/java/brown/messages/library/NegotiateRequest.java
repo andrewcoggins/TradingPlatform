@@ -76,11 +76,11 @@ public class NegotiateRequest extends AbsMessage {
    * @return
    */
   public boolean isSatisfied(Account toAccount, Account fromAccount) {
-    if (fromAccount.monies < moniesOffered || !fromAccount.tradeables.containsAll(sharesOffered)) {
+    if (fromAccount.getMonies() < moniesOffered || !fromAccount.getGoods().containsAll(sharesOffered)) {
       return false;
     }
 
-    if (toAccount.monies < moniesRequested || !toAccount.tradeables.containsAll(sharesRequested)) {
+    if (toAccount.getMonies() < moniesRequested || !toAccount.getGoods().containsAll(sharesRequested)) {
       return false;
     }
 

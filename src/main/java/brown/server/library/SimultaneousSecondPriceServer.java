@@ -53,9 +53,10 @@ public class SimultaneousSecondPriceServer extends AbsServer {
     this.numPlayers++;
     this.theServer.sendToTCP(connection.getID(), new ValuationRegistration(agentID, privateValuation, masterValuation));
     //give agent some money
-    Account oldAccount = this.acctManager.getAccount(connections.get(connection));
-    Account newAccount = oldAccount.addAll(10000, null); 
-    this.acctManager.setAccount(connections.get(connection), newAccount);
+    Account acct = this.acctManager.getAccount(connections.get(connection));
+    acct.add(10000); 
+    //not sure if necessary
+    this.acctManager.setAccount(connections.get(connection), acct);
     List<Integer> anID = new ArrayList<Integer>();
     anID.add(agentID);
     this.sendBankUpdates(anID);

@@ -6,7 +6,6 @@ import brown.rules.allocationrules.library.SimpleHighestBidderAllocation;
 import brown.rules.irpolicies.library.AnonymousPolicy;
 import brown.rules.paymentrules.library.SimpleSecondPrice;
 import brown.rules.queryrules.library.SealedBidQuery;
-import brown.rules.terminationconditions.library.OneRoundTermination;
 import brown.rules.terminationconditions.library.OneShotTermination;
 import brown.rules.terminationconditions.library.ThreeRoundTermination;
 

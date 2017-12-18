@@ -231,22 +231,20 @@ public abstract class AbsServer {
 				Account fromAccount = acctManager.getAccount(privateFrom);
 
 				if (trade.tradeRequest.isSatisfied(toAccount, fromAccount)) {
-					Account middleTo = toAccount.remove(
-							trade.tradeRequest.moniesRequested,
-							trade.tradeRequest.sharesRequested);
-					Account newTo = middleTo.addAll(
-							trade.tradeRequest.moniesOffered,
-							trade.tradeRequest.sharesOffered);
-
-					Account middleFrom = fromAccount.remove(
-							trade.tradeRequest.moniesOffered,
-							trade.tradeRequest.sharesOffered);
-					Account newFrom = middleFrom.addAll(
-							trade.tradeRequest.moniesRequested,
-							trade.tradeRequest.sharesRequested);
-
-					acctManager.setAccount(privateTo, newTo);
-					acctManager.setAccount(privateFrom, newFrom);
+          toAccount.remove(
+              trade.tradeRequest.moniesRequested,
+              trade.tradeRequest.sharesRequested);
+				  toAccount.add(
+              trade.tradeRequest.moniesOffered,
+              trade.tradeRequest.sharesOffered);
+	        fromAccount.remove(
+	             trade.tradeRequest.moniesOffered,
+	             trade.tradeRequest.sharesOffered); 
+				  fromAccount.add(
+				     trade.tradeRequest.moniesRequested,
+             trade.tradeRequest.sharesRequested);
+					acctManager.setAccount(privateTo, toAccount);
+					acctManager.setAccount(privateFrom, fromAccount);
 
 					List<Integer> ids = new LinkedList<Integer>();
 					//take a look at locking schemes
@@ -268,7 +266,7 @@ public abstract class AbsServer {
 			synchronized (auction) {
 				Account account = this.acctManager.getAccount(privateID);
 				if (!auction.handleBid(bid.safeCopy(privateID))
-				    || (!this.SHORT && account.monies < bid.Bundle.getCost())) {
+				    || (!this.SHORT && account.getMonies() < bid.Bundle.getCost())) {
 					Ack rej = new Ack(privateID, bid, true);
 					this.theServer.sendToTCP(connection.getID(), rej);
 				}
@@ -295,7 +293,7 @@ public abstract class AbsServer {
 				if (account == null) {
 					continue;
 				}
-				BankUpdate bu = new BankUpdate(ID, null, account.toAgent());
+				BankUpdate bu = new BankUpdate(ID, null, account.copyAccount());
 				theServer.sendToTCP(connection.getID(), bu);
 			}
 		}
@@ -347,12 +345,9 @@ public abstract class AbsServer {
 									//winner.GOOD.setAgentID(winner.TO);
 									ledger.add(winner.toTransaction());
 									
-									Account newA = accountTo.add(
-											-1 * winner.COST,
-											winner.GOOD);
-									this.acctManager.setAccount(winner.TO, newA);
-									this.sendBankUpdate(winner.TO, accountTo,
-											newA);
+									accountTo.add(-1 * winner.COST, winner.GOOD);
+									this.acctManager.setAccount(winner.TO, accountTo);
+									this.sendBankUpdate(winner.TO, accountTo, accountTo);
 								}
 							}
 							if (winner.FROM != null && this.acctManager
@@ -360,13 +355,10 @@ public abstract class AbsServer {
 								Account accountFrom = this.acctManager
 										.getAccount(winner.FROM);
 								synchronized (accountFrom.ID) {									
-									Account newA = accountFrom.remove(
-											-1 * winner.COST,
-											winner.GOOD);
-									this.acctManager.setAccount(winner.FROM, newA);
+									accountFrom.remove(-1 * winner.COST, winner.GOOD);
+									this.acctManager.setAccount(winner.FROM, accountFrom);
 									System.out.println("reached"); 
-									this.sendBankUpdate(winner.FROM, accountFrom,
-											newA);
+									this.sendBankUpdate(winner.FROM, accountFrom, accountFrom);
 								}
 							}
 						}
@@ -425,18 +417,18 @@ public abstract class AbsServer {
           synchronized (accountTo.ID) {
             //winner.GOOD.setAgentID(winner.TO);
             ledger.add(winner.toTransaction()); 
-            Account newA = accountTo.add(-1 * winner.COST, winner.GOOD);
-            this.acctManager.setAccount(winner.TO, newA);
-            this.sendBankUpdate(winner.TO, accountTo, newA);
+            accountTo.add(-1 * winner.COST, winner.GOOD);
+            this.acctManager.setAccount(winner.TO, accountTo);
+            this.sendBankUpdate(winner.TO, accountTo, accountTo);
           }
         }
         if (winner.FROM != null && this.acctManager.containsAcct(winner.FROM)) {
           Account accountFrom = this.acctManager.getAccount(winner.FROM);
           synchronized (accountFrom.ID) {                 
-            Account newA = accountFrom.remove(-1 * winner.COST, winner.GOOD);
-            this.acctManager.setAccount(winner.FROM, newA);
+            accountFrom.remove(-1 * winner.COST, winner.GOOD);
+            this.acctManager.setAccount(winner.FROM, accountFrom);
             this.sendBankUpdate(winner.FROM, accountFrom,
-                newA);
+                accountFrom);
           }
         }
       }
@@ -561,7 +553,7 @@ public abstract class AbsServer {
 	 * @param newA
 	 */
 	public void sendBankUpdate(Integer ID, Account oldA, Account newA) {
-		BankUpdate bu = new BankUpdate(ID, oldA.toAgent(), newA.toAgent());
+		BankUpdate bu = new BankUpdate(ID, oldA.copyAccount(), newA.copyAccount());
 		theServer.sendToTCP(this.privateToConnection(ID).getID(), bu);
 	}
 

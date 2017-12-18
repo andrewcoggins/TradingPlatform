@@ -21,6 +21,7 @@ import brown.value.config.SSSPConfig;
  * Given a full library on the platform, this is the only file the
  * server-side user should have to edit.
  * hmm... what to do about special registrations?
+ * repeated registrations?
  */
 public class MainServer {
   

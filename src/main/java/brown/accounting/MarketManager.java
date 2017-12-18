@@ -45,20 +45,20 @@ public class MarketManager {
 	private void process(AbsServer server, Market market, Ledger ledger, 
 			Transaction t, Account toReplace) {
 		synchronized (t.TO) {
-			Account oldAccount = server.privateToAccount(t
+			Account acct = server.privateToAccount(t
 					.TO);
-			if (oldAccount == null) {
+			if (acct == null) {
 				Logging.log("[X] agent without account "
 						+ t.TO);
 				return;
 			}
 
-			Account newAccount = oldAccount.remove(0, t.TRADEABLE);
+			acct.remove(0, t.TRADEABLE);
 			//possibly change this later
-			server.setAccount(t.TO, newAccount);
+			//server.setAccount(t.TO, newAccount);
 			if (toReplace == null) {
-				server.sendBankUpdate(t.TO, oldAccount,
-						newAccount);
+				server.sendBankUpdate(t.TO, acct,
+						acct);
 			}
 		}
 
@@ -77,12 +77,10 @@ public class MarketManager {
 					return;
 				}
 
-				Account newAccount = oldAccount.add(
-						toReplace.monies, new HashSet<Tradeable>(
-								toReplace.tradeables));
-				server.setAccount(toReplaceID, newAccount);
+				oldAccount.add(toReplace.getMonies(), toReplace.getGoods());
+				server.setAccount(toReplaceID, oldAccount);
 				server.sendBankUpdate(toReplaceID, oldAccount,
-						newAccount);
+						oldAccount);
 			}
 		}
 	}
