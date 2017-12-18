@@ -1,15 +1,15 @@
 package brown.exceptions;
 
 /**
- * Any failure in the construction of an agent
- * will throw this uncatched exception
+ * Any failure in the construction of an agent will throw this unchecked exception
  */
 public class AgentCreationException extends Exception {
 
 	private static final long serialVersionUID = -9089084118116290951L;
 	
 	/**
-	 * Message for when the agent fails to init
+	 * Message for when the agent initialization fails 
+	 * 
 	 * @param message
 	 */
 	public AgentCreationException(String message) {

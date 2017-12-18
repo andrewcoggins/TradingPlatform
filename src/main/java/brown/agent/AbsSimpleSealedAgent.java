@@ -32,7 +32,7 @@ public abstract class AbsSimpleSealedAgent extends AbsAgent {
   
   @Override
   public void onTradeRequest(BidRequest bidRequest) {
-    // TODO Auto-generated method stub
-    
+    // TODO Auto-generated method stub  
   }
+  
 }
