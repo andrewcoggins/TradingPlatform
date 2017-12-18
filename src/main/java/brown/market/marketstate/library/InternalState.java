@@ -88,8 +88,10 @@ public class InternalState implements IMarketState {
     this.ID = ID;
     this.ticks = 0;
     Map<Tradeable, MarketState> reserve = new HashMap<Tradeable, MarketState>();
-    for (Tradeable t : this.TRADEABLES) {
-      reserve.put(t, new MarketState(null,0));
+    if (this.TRADEABLES != null) {
+      for (Tradeable t : this.TRADEABLES) {
+        reserve.put(t, new MarketState(null,0));
+      }
     }
     this.bundleReserve = new SimpleBidBundle(reserve);
     this.maximizing = false;
