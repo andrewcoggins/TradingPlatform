@@ -33,7 +33,7 @@ public class Account {
 	 */
 	public Account(Integer ID) {
 		this.ID = ID;
-		this.monies = new Integer(0);
+		this.monies = 0.0;
 		this.tradeables = new LinkedList<Tradeable>();
 	}
 	
@@ -43,7 +43,7 @@ public class Account {
 	 * @param monies : starting monies
 	 * @param goods : starting goods
 	 */
-	private Account(Integer ID, double monies, List<Tradeable> goods) {
+	public Account(Integer ID, double monies, List<Tradeable> goods) {
 		this.ID = ID;
 		this.monies = monies;
 		if (goods != null) {
@@ -82,7 +82,6 @@ public class Account {
 	 * @param newGoods : additional good
 	 * @return updated Account
 	 */
-	//TODO: make this void, along with addall.
 	public void add(double newMonies, Tradeable newGood) {
 		if (newGood != null) {
 	    this.tradeables.add(newGood);
@@ -128,6 +127,9 @@ public class Account {
 	 */
 	public void remove(double removeMonies, Tradeable t) {
 		if (t != null) {
+		  if (!this.tradeables.contains(t)) {
+		    return;
+		  }
 		  this.tradeables.remove(t); 
 		}
     this.monies -= removeMonies;
@@ -144,6 +146,10 @@ public class Account {
 		this.monies += add;
 	}
 	
+	public void clear() {
+	  this.monies = 0.0;
+	  this.tradeables = new LinkedList<Tradeable>();
+	}
 	/**
 	 * copies this account.
 	 * @return
@@ -158,8 +164,49 @@ public class Account {
 		return new Account(this.ID, this.monies, forAgent);
 	}
 	
+	
 	@Override
 	public String toString () {
 		return "(" + this.ID + ": " + this.monies + ", " + this.tradeables + ")"; 
 	}
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+    long temp;
+    temp = Double.doubleToLongBits(monies);
+    result = prime * result + (int) (temp ^ (temp >>> 32));
+    result =
+        prime * result + ((tradeables == null) ? 0 : tradeables.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Account other = (Account) obj;
+    if (ID == null) {
+      if (other.ID != null)
+        return false;
+    } else if (!ID.equals(other.ID))
+      return false;
+    if (Double.doubleToLongBits(monies) != Double
+        .doubleToLongBits(other.monies))
+      return false;
+    if (tradeables == null) {
+      if (other.tradeables != null)
+        return false;
+    } else if (!tradeables.equals(other.tradeables))
+      return false;
+    return true;
+  }
+	
+	
 }

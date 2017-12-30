@@ -52,22 +52,26 @@ public class CDAServerChannel implements TwoSidedAuction {
 
 	@Override
 	public List<Order> buy(Integer agentID, double shareNum, double sharePrice) {
-		return this.RULE.buy(agentID, shareNum, sharePrice);
+		//return this.RULE.buy(agentID, shareNum, sharePrice);
+	  return null; 
 	}
 
 	@Override
 	public List<Order> sell(Integer agentID, Tradeable opp, double sharePrice) {
-		return this.RULE.sell(agentID, opp, sharePrice);
+		//return this.RULE.sell(agentID, opp, sharePrice);
+	  return null;
 	}
 
 	@Override
 	public double quoteBid(double shareNum, double sharePrice) {
-		return this.RULE.quoteBid(shareNum, sharePrice);
+		//return this.RULE.quoteBid(shareNum, sharePrice);
+	  return -1.0; 
 	}
 
 	@Override
 	public double quoteAsk(double shareNum, double sharePrice) {
-		return this.RULE.quoteAsk(shareNum, sharePrice);
+		//return this.RULE.quoteAsk(shareNum, sharePrice);
+	  return -1.0; 
 	}
 
 	@Override
@@ -82,12 +86,14 @@ public class CDAServerChannel implements TwoSidedAuction {
 
 	@Override
 	public SortedMap<Double, Set<Order>> getBuyBook() {
-		return this.RULE.getBuyBook();
+		//return this.RULE.getBuyBook();
+	  return null;
 	}
 
 	@Override
 	public SortedMap<Double, Set<Order>> getSellBook() {
-		return this.RULE.getSellBook();
+		//return this.RULE.getSellBook();
+	  return null; 
 	}
 
 	@Override
@@ -102,12 +108,13 @@ public class CDAServerChannel implements TwoSidedAuction {
 
 	@Override
 	public boolean permitShort() {
-		return this.RULE.isShort();
+		//return this.RULE.isShort();
+	  return false; 
 	}
 
 	@Override
 	public void cancel(Integer agentID, boolean buy, double shareNum,
 			double sharePrice) {
-		this.RULE.cancel(agentID, buy, shareNum, sharePrice);		
+		//this.RULE.cancel(agentID, buy, shareNum, sharePrice);		
 	}
 }
