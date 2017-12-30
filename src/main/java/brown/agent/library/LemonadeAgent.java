@@ -6,7 +6,6 @@ import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdate;
 import brown.messages.library.GameReport;
 import brown.messages.library.LemonadeReport;
-import brown.setup.Logging;
 import brown.setup.library.SimpleSetup;
 
 /**
@@ -41,10 +40,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
       for (int i = 0; i < 12; i++) {
         this.positions[i] = this.positions[i] + lemonadeUpdate.getCount(i);
       }
-      System.out.println("Game Report Received");
-      for(int i = 0; i < 12; i++) {
-        System.out.println("players at position " + i + ": " + lemonadeUpdate.getCount(i));
-      }
+      printIsland();
     }
     else {
       System.out.println("ERROR: Lemonade Report Not Received");
@@ -55,6 +51,35 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   public void onBankUpdate(BankUpdate bankUpdate) {
     // TODO Auto-generated method stub
     //Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.monies - bankUpdate.oldAccount.monies + ", Total Money: " + bankUpdate.newAccount.monies)); 
+  }
+  
+  //prints the island where there are 12 spaces.
+  private synchronized void printIsland() {
+    System.out.println("Lemonade Arrangement:");
+    for(int i = 0; i < 4; i++) {
+      printNumber(i);
+    }
+    System.out.print('\n');
+    printNumber(11); 
+    System.out.print("            ");
+    printNumber(4); 
+    System.out.print('\n');
+    printNumber(10); 
+    System.out.print("            ");
+    printNumber(5); 
+    System.out.print('\n');
+    for(int i = 9; i > 5; i--) {
+      printNumber(i);
+    }
+    System.out.print('\n');
+  }
+  
+  private void printNumber(Integer aNum) { 
+    if (Math.abs(positions[aNum]) < 10) { 
+      System.out.print("| " + positions[aNum] + " | ");
+    } else {
+      System.out.print("| " + positions[aNum] + "| ");
+    }
   }
   
   public static void main(String[] args) throws AgentCreationException {

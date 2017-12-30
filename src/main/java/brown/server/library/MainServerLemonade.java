@@ -21,15 +21,13 @@ import brown.value.config.NullConfig;
 public class MainServerLemonade {
   
   public static void main(String[] args) throws InterruptedException {
-    //for now just gonna build this where you input things into this file.
-    //But later on i'd like to use command line input.
+    // for now just gonna build this where you input things into this file.
+    // But later on i'd like to use command line input.
     List<AbsMarketPreset> allMarkets = new ArrayList<AbsMarketPreset>();
     List<AbsValueConfig> allValInfo = new ArrayList<AbsValueConfig>();
-    //out valuation information and rules information.
+    // our valuation information and rules information.
     allValInfo.add(new NullConfig());
     allMarkets.add(new LemonadeRules()); 
-//    allMarkets.add(new LemonadeRules());
-//    allValInfo.add(new NullConfig());
     new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo);
   }
 }
