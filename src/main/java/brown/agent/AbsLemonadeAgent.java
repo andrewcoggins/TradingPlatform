@@ -4,10 +4,10 @@ import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.BankUpdate;
-import brown.messages.library.BidRequest;
-import brown.messages.library.GameReport;
-import brown.messages.library.NegotiateRequest;
+import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.BidRequestMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.NegotiateRequestMessage;
 import brown.setup.ISetup;
 
 public abstract class AbsLemonadeAgent extends AbsAgent {
@@ -22,20 +22,20 @@ public abstract class AbsLemonadeAgent extends AbsAgent {
   public abstract void onLemonade(LemonadeChannel channel);
 
   @Override
-  public void onMarketUpdate(GameReport marketUpdate) {
+  public void onMarketUpdate(GameReportMessage marketUpdate) {
     // TODO Auto-generated method 
     
   }
 
 
   @Override
-  public void onTradeRequest(BidRequest bidRequest) {
+  public void onTradeRequest(BidRequestMessage bidRequest) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void onNegotiateRequest(NegotiateRequest tradeRequest) {
+  public void onNegotiateRequest(NegotiateRequestMessage tradeRequest) {
     // noop
     
   }

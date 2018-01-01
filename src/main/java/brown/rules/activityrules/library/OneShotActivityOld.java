@@ -1,7 +1,7 @@
 package brown.rules.activityrules.library;
 
 import brown.market.marketstate.IMarketState;
-import brown.messages.library.Bid;
+import brown.messages.library.BidMessage;
 import brown.rules.activityrules.IActivityRule;
 
 /**
@@ -13,7 +13,7 @@ import brown.rules.activityrules.IActivityRule;
 public class OneShotActivityOld implements IActivityRule {
 
   @Override
-  public void isAcceptable(IMarketState state, Bid aBid) {
+  public void isAcceptable(IMarketState state, BidMessage aBid) {
     // TODO Auto-generated method stub
     
   }

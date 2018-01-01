@@ -6,12 +6,12 @@ import java.util.Map;
 import brown.agent.AbsSimpleSealedAgent;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.BankUpdate;
-import brown.messages.library.BidRequest;
-import brown.messages.library.GameReport;
-import brown.messages.library.NegotiateRequest;
-import brown.messages.library.Registration;
-import brown.messages.library.ValuationRegistration;
+import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.BidRequestMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.NegotiateRequestMessage;
+import brown.messages.library.RegistrationMessage;
+import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.library.SimpleSetup;
 import brown.tradeable.library.Tradeable;
 import brown.value.valuationrepresentation.library.SimpleValuation;
@@ -37,25 +37,25 @@ public class SSSPAgent extends AbsSimpleSealedAgent {
   }
   
   @Override
-  public void onMarketUpdate(GameReport marketUpdate) {
+  public void onMarketUpdate(GameReportMessage marketUpdate) {
     // TODO Auto-generated method stub
     System.out.println("market update");
   }
 
   @Override
-  public void onBankUpdate(BankUpdate bankUpdate) {
+  public void onBankUpdate(BankUpdateMessage bankUpdate) {
     // TODO Auto-generated method stub
     System.out.println("bank update");
     System.out.println(bankUpdate.toString());
   }
   
   @Override
-  public void onRegistration(Registration reg) {
+  public void onRegistration(RegistrationMessage reg) {
     this.ID = reg.getID();
     System.out.println("Registration received");
-    if (reg instanceof ValuationRegistration) {
+    if (reg instanceof ValuationRegistrationMessage) {
       System.out.println("Registration received");
-      ValuationRegistration valReg = (ValuationRegistration) reg; 
+      ValuationRegistrationMessage valReg = (ValuationRegistrationMessage) reg; 
       this.privateValuation = (SimpleValuation) valReg.getValuation();
     }
   }

@@ -5,7 +5,7 @@ import brown.accounting.Ledger;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.market.marketstate.IMarketState;
-import brown.messages.library.TradeRequest;
+import brown.messages.library.TradeRequestMessage;
 import brown.rules.queryrules.IQueryRule;
 import brown.todeprecate.PaymentType;
 

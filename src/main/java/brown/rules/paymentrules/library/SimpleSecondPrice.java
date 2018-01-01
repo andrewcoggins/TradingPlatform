@@ -13,7 +13,7 @@ import brown.accounting.bidbundle.Allocation;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.SimpleBidBundle;
 import brown.market.marketstate.IMarketState;
-import brown.messages.library.Bid;
+import brown.messages.library.BidMessage;
 import brown.rules.paymentrules.IPaymentRule;
 import brown.setup.Logging;
 import brown.tradeable.library.Tradeable;
@@ -35,7 +35,7 @@ public class SimpleSecondPrice implements IPaymentRule {
       int highestBidder = bundle.getBids().bids.get(t).AGENTID;
       //go through all the bids and 
       double nextHighest = -1000;
-      for (Bid b : state.getBids()) {
+      for (BidMessage b : state.getBids()) {
         if (b.AgentID != highestBidder) { 
           SimpleBid a = (SimpleBid) b.Bundle.getBids(); 
               if (a.bids.get(t).PRICE > nextHighest){

@@ -12,7 +12,7 @@ import brown.accounting.bidbundle.SimpleBidBundle;
 import brown.agent.AbsAgent;
 import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;
-import brown.messages.library.Bid;
+import brown.messages.library.BidMessage;
 import brown.setup.Logging;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.library.Tradeable;
@@ -123,7 +123,7 @@ public class SimpleAgentChannel implements IAgentChannel {
 		}
 		if (fixedBids.size() > 0) {
       System.out.println("fixed bids " + fixedBids);
-			agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
+			agent.CLIENT.sendTCP(new BidMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 		}
 	}
 
@@ -132,12 +132,12 @@ public class SimpleAgentChannel implements IAgentChannel {
 		for (Tradeable bid : toBid) {
 			fixedBids.put(bid, new MarketState(agent.ID, 0));
 			if (fixedBids.size() > 10) {
-				agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
+				agent.CLIENT.sendTCP(new BidMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 				fixedBids.clear();
 			}
 		}
 		if (fixedBids.size() != 0) {
-			agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
+			agent.CLIENT.sendTCP(new BidMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 		}
 	}
 	
@@ -154,14 +154,14 @@ public class SimpleAgentChannel implements IAgentChannel {
 			for (Tradeable t : bid.getKey()) {
 				fixedBids.put(t, new MarketState(agent.ID, bid.getValue()));
 				if (fixedBids.size() > 10) {
-					agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
+					agent.CLIENT.sendTCP(new BidMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 					fixedBids.clear();
 				}
 			}
 		}
 		
 		if (fixedBids.size() != 0) {
-			agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
+			agent.CLIENT.sendTCP(new BidMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
 		}
 	}
 	

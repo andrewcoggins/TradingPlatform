@@ -18,11 +18,11 @@ import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.BankUpdate;
-import brown.messages.library.BidRequest;
-import brown.messages.library.GameReport;
-import brown.messages.library.NegotiateRequest;
-import brown.messages.library.TradeRequest;
+import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.BidRequestMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.NegotiateRequestMessage;
+import brown.messages.library.TradeRequestMessage;
 import brown.setup.ISetup;
 import brown.setup.Startup;
 import brown.setup.library.SimpleSetup;
@@ -44,13 +44,13 @@ public class AbsLemonadeAgentTest {
       server.addListener(new Listener() {
         public void received (Connection connection, Object object) {
           if (object.equals("send me a LemonadeReport")) {
-            GameReport g = new GameReport(new Ledger(0));
+            GameReportMessage g = new GameReportMessage(new Ledger(0));
             connection.sendTCP(g);
           } else if (object.equals("send me a LemonadeChannel")) { 
-            TradeRequest t = new TradeRequest(0, new LemonadeChannel(0, new Ledger(0), null, null), null);
+            TradeRequestMessage t = new TradeRequestMessage(0, new LemonadeChannel(0, new Ledger(0), null, null), null);
             connection.sendTCP(t);
           } else if (object.equals("send me a BankUpdate")) {
-            BankUpdate b = new BankUpdate(0, new Account(1), new Account(1));
+            BankUpdateMessage b = new BankUpdateMessage(0, new Account(1), new Account(1));
             connection.sendTCP(b); 
           }
         }
@@ -75,16 +75,16 @@ public class AbsLemonadeAgentTest {
     }
     
     @Override
-    public void onBankUpdate(BankUpdate bankUpdate) {
+    public void onBankUpdate(BankUpdateMessage bankUpdate) {
       // TODO Auto-generated method stub
-      assertTrue(bankUpdate instanceof BankUpdate);
+      assertTrue(bankUpdate instanceof BankUpdateMessage);
       assertTrue(bankUpdate.oldAccount.ID == 1);
       this.myMessage = "Bank Update Received";
     }
     
     @Override
-    public void onMarketUpdate(GameReport marketUpdate) {
-      assertTrue(marketUpdate instanceof GameReport);
+    public void onMarketUpdate(GameReportMessage marketUpdate) {
+      assertTrue(marketUpdate instanceof GameReportMessage);
       assertTrue(marketUpdate.LEDGER.equals(new Ledger(0))); 
       this.myMessage = "Lemonade Report Received";
     }

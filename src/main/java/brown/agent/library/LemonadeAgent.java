@@ -3,9 +3,9 @@ package brown.agent.library;
 import brown.agent.AbsLemonadeAgent;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.BankUpdate;
-import brown.messages.library.GameReport;
-import brown.messages.library.LemonadeReport;
+import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.LemonadeReportMessage;
 import brown.setup.library.SimpleSetup;
 
 /**
@@ -33,10 +33,10 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   }
   
   @Override
-  public void onMarketUpdate(GameReport marketUpdate) {
+  public void onMarketUpdate(GameReportMessage marketUpdate) {
     // TODO Auto-generated method 
-    if (marketUpdate instanceof LemonadeReport) { 
-      LemonadeReport lemonadeUpdate = (LemonadeReport) marketUpdate;
+    if (marketUpdate instanceof LemonadeReportMessage) { 
+      LemonadeReportMessage lemonadeUpdate = (LemonadeReportMessage) marketUpdate;
       for (int i = 0; i < 12; i++) {
         this.positions[i] = this.positions[i] + lemonadeUpdate.getCount(i);
       }
@@ -48,7 +48,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   }
   
   @Override
-  public void onBankUpdate(BankUpdate bankUpdate) {
+  public void onBankUpdate(BankUpdateMessage bankUpdate) {
     // TODO Auto-generated method stub
     //Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.monies - bankUpdate.oldAccount.monies + ", Total Money: " + bankUpdate.newAccount.monies)); 
   }

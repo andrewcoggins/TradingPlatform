@@ -8,8 +8,8 @@ import brown.accounting.BundleType;
 import brown.accounting.Order;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;
-import brown.messages.library.Bid;
-import brown.messages.library.LemonadeReport;
+import brown.messages.library.BidMessage;
+import brown.messages.library.LemonadeReportMessage;
 import brown.rules.allocationrules.IAllocationRule;
 import brown.tradeable.library.Tradeable;
 
@@ -38,10 +38,10 @@ public class LemonadeAllocation implements IAllocationRule {
   
   @Override
   public void setAllocation(IMarketState state) {
-    List<Bid> bids = state.getBids();
+    List<BidMessage> bids = state.getBids();
     List<Order> payoffs = new ArrayList<Order>();
     
-    for (Bid b : bids){
+    for (BidMessage b : bids){
       int index = (int) b.Bundle.getCost();
       slots[index].add(b.AgentID);
     }
@@ -140,7 +140,7 @@ public class LemonadeAllocation implements IAllocationRule {
     for(int i = 0; i < this.SIZE; i++) {
       report[i] = this.slots[i].size();
     }
-    state.setReport(new LemonadeReport(report));
+    state.setReport(new LemonadeReportMessage(report));
   }
 
   

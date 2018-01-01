@@ -17,10 +17,10 @@ import brown.accounting.Ledger;
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.BankUpdate;
-import brown.messages.library.BidRequest;
-import brown.messages.library.GameReport;
-import brown.messages.library.NegotiateRequest;
+import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.BidRequestMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.NegotiateRequestMessage;
 import brown.setup.ISetup;
 import brown.setup.Startup;
 import brown.setup.library.SimpleSetup;
@@ -43,16 +43,16 @@ public class AbsAgentTest {
       server.addListener(new Listener() {
         public void received (Connection connection, Object object) {
           if (object.equals("send me a GameReport")) {
-            GameReport g = new GameReport(new Ledger(0));
+            GameReportMessage g = new GameReportMessage(new Ledger(0));
             connection.sendTCP(g);
           } else if (object.equals("send me a BankUpdate")) {
-            BankUpdate b = new BankUpdate(0, new Account(1), new Account(1));
+            BankUpdateMessage b = new BankUpdateMessage(0, new Account(1), new Account(1));
             connection.sendTCP(b);
           } else if (object.equals("send me a BidRequest")) {
-            BidRequest br = new BidRequest(0, 0, null, null, null);
+            BidRequestMessage br = new BidRequestMessage(0, 0, null, null, null);
             connection.sendTCP(br);
           } else if (object.equals("send me a NegotiateRequest")) {
-            NegotiateRequest nr = new NegotiateRequest(1, 0, 100, null, 50, null);
+            NegotiateRequestMessage nr = new NegotiateRequestMessage(1, 0, 100, null, 50, null);
             connection.sendTCP(nr);
           } else if (object.equals("send me a SimpleAgentChannel")) {
             SimpleAgentChannel sa = new SimpleAgentChannel(0, new Ledger(0), null, null, null, 0); 
@@ -75,31 +75,31 @@ public class AbsAgentTest {
     }
     
     @Test
-    public void onMarketUpdate(GameReport marketUpdate) {
-      assertTrue(marketUpdate instanceof GameReport);
+    public void onMarketUpdate(GameReportMessage marketUpdate) {
+      assertTrue(marketUpdate instanceof GameReportMessage);
       assertTrue(marketUpdate.LEDGER.equals(new Ledger(0)));
        this.myMessage = "Game Report Received";
     }
 
     @Test
-    public void onBankUpdate(BankUpdate bankUpdate) {
-      assertTrue(bankUpdate instanceof BankUpdate);
+    public void onBankUpdate(BankUpdateMessage bankUpdate) {
+      assertTrue(bankUpdate instanceof BankUpdateMessage);
       assertTrue(bankUpdate.getID() == 0);
       // TODO Auto-generated method stub
       this.myMessage = "Bank Update Received"; 
     }
 
     @Test
-    public void onTradeRequest(BidRequest bidRequest) {
-      assertTrue(bidRequest instanceof BidRequest); 
+    public void onTradeRequest(BidRequestMessage bidRequest) {
+      assertTrue(bidRequest instanceof BidRequestMessage); 
       assertTrue(bidRequest.getID() == 0);
       // TODO Auto-generated method stub
       this.myMessage = "Bid Request Received";
     }
 
     @Test
-    public void onNegotiateRequest(NegotiateRequest tradeRequest) {
-      assertTrue(tradeRequest instanceof NegotiateRequest); 
+    public void onNegotiateRequest(NegotiateRequestMessage tradeRequest) {
+      assertTrue(tradeRequest instanceof NegotiateRequestMessage); 
       assertTrue(tradeRequest.toID == 1);
       assertTrue(tradeRequest.fromID == 0);
       // TODO Auto-generated method stub

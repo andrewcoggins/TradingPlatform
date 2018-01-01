@@ -11,7 +11,7 @@ import brown.agent.AbsCDAAgent;
 import brown.agent.AbsAgent;
 import brown.channels.agent.ITwoSidedPriceSetter;
 import brown.channels.server.library.CDAServerChannel;
-import brown.messages.library.MarketOrder;
+import brown.messages.library.MarketOrderMessage;
 import brown.tradeable.library.Tradeable;
 
 /*
@@ -69,12 +69,12 @@ public class CDAAgentChannel implements ITwoSidedPriceSetter {
 
 	@Override
 	public void buy(AbsAgent agent, double shareNum, double sharePrice) {
-		agent.CLIENT.sendTCP(new MarketOrder(0,this.MARKETID, shareNum, 0, sharePrice));
+		agent.CLIENT.sendTCP(new MarketOrderMessage(0,this.MARKETID, shareNum, 0, sharePrice));
 	}
 
 	@Override
 	public void sell(AbsAgent agent, double shareNum, double sharePrice) {
-		agent.CLIENT.sendTCP(new MarketOrder(0, this.MARKETID, 0, shareNum, sharePrice));
+		agent.CLIENT.sendTCP(new MarketOrderMessage(0, this.MARKETID, 0, shareNum, sharePrice));
 	}
 
 	@Override
@@ -102,9 +102,9 @@ public class CDAAgentChannel implements ITwoSidedPriceSetter {
 	@Override
 	public void cancel(AbsAgent agent, boolean buy, double shareNum, double sharePrice) {
 		if (buy) {
-			agent.CLIENT.sendTCP(new MarketOrder(0,this.MARKETID, shareNum, 0, sharePrice, true));
+			agent.CLIENT.sendTCP(new MarketOrderMessage(0,this.MARKETID, shareNum, 0, sharePrice, true));
 		} else {
-			agent.CLIENT.sendTCP(new MarketOrder(0, this.MARKETID, 0, shareNum, sharePrice, true));
+			agent.CLIENT.sendTCP(new MarketOrderMessage(0, this.MARKETID, 0, shareNum, sharePrice, true));
 		}
 	}
 

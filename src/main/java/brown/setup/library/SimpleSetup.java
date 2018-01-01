@@ -3,8 +3,8 @@ package brown.setup.library;
 import com.esotericsoftware.kryo.Kryo;
 
 import brown.channels.agent.library.LemonadeChannel;
-import brown.messages.library.GameReport;
-import brown.messages.library.LemonadeReport;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.LemonadeReportMessage;
 import brown.setup.ISetup;
 import brown.setup.Startup;
 
@@ -19,9 +19,9 @@ public class SimpleSetup implements ISetup {
   public void setup(Kryo kryo) {
     // TODO Auto-generated method stub
     Startup.start(kryo);
-    kryo.register(GameReport.class);
+    kryo.register(GameReportMessage.class);
     kryo.register(LemonadeChannel.class);
-    kryo.register(LemonadeReport.class);
+    kryo.register(LemonadeReportMessage.class);
   } 
   
 }

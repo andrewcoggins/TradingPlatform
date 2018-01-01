@@ -9,16 +9,16 @@ import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.Allocation;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;
-import brown.messages.library.Bid;
-import brown.messages.library.BidRequest;
-import brown.messages.library.GameReport;
-import brown.messages.library.TradeRequest;
+import brown.messages.library.BidMessage;
+import brown.messages.library.BidRequestMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.TradeRequestMessage;
 import brown.todeprecate.PaymentType;
 
 public class SimpleState implements IMarketState {
 
   @Override
-  public void addBid(Bid bid) {
+  public void addBid(BidMessage bid) {
     // TODO Auto-generated method stub
     
   }
@@ -29,7 +29,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public List<Bid> getBids() {
+  public List<BidMessage> getBids() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -119,7 +119,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public BidRequest getRequest() {
+  public BidRequestMessage getRequest() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -143,7 +143,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public Set<Bid> getReserve() {
+  public Set<BidMessage> getReserve() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -161,7 +161,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public GameReport getReport() {
+  public GameReportMessage getReport() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -179,7 +179,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public void setRequest(BidRequest request) {
+  public void setRequest(BidRequestMessage request) {
     // TODO Auto-generated method stub
     
   }
@@ -203,7 +203,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public void setReserve(Set<Bid> r) {
+  public void setReserve(Set<BidMessage> r) {
     // TODO Auto-generated method stub
     
   }
@@ -221,7 +221,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public void setReport(GameReport g) {
+  public void setReport(GameReportMessage g) {
     // TODO Auto-generated method stub
     
   }
@@ -275,13 +275,13 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public TradeRequest getTRequest() {
+  public TradeRequestMessage getTRequest() {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public void setTRequest(TradeRequest t) {
+  public void setTRequest(TradeRequestMessage t) {
     // TODO Auto-generated method stub
     
   }

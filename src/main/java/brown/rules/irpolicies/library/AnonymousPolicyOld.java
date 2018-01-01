@@ -7,7 +7,7 @@ import brown.accounting.Order;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.SimpleState;
-import brown.messages.library.Bid;
+import brown.messages.library.BidMessage;
 import brown.rules.irpolicies.IInformationRevelationPolicy;
 
 public class AnonymousPolicyOld implements IInformationRevelationPolicy {

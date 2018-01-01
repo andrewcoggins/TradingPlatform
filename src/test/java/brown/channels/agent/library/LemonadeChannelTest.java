@@ -15,9 +15,9 @@ import brown.accounting.Ledger;
 import brown.agent.AbsLemonadeAgent;
 import brown.channels.MechanismType;
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.BankUpdate;
-import brown.messages.library.Bid;
-import brown.messages.library.TradeRequest;
+import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.BidMessage;
+import brown.messages.library.TradeRequestMessage;
 import brown.setup.ISetup;
 import brown.setup.Startup;
 import brown.setup.library.SimpleSetup;
@@ -40,9 +40,9 @@ private class TestServer {
         public void received (Connection connection, Object object) {
           //post responses here.
           if (object.equals("send me a trade request")) {
-            connection.sendTCP(new TradeRequest(0,
+            connection.sendTCP(new TradeRequestMessage(0,
                 new LemonadeChannel(0, new Ledger(0), null, MechanismType.Lemonade), MechanismType.Lemonade));
-          } else if (object instanceof Bid) { 
+          } else if (object instanceof BidMessage) { 
             setMessage();
           }
         }
@@ -76,7 +76,7 @@ private class TestServer {
     }
 
     @Override
-    public void onBankUpdate(BankUpdate bankUpdate) {
+    public void onBankUpdate(BankUpdateMessage bankUpdate) {
       // Noop here
     } 
     

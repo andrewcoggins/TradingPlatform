@@ -20,16 +20,16 @@ import brown.channels.server.IServerChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.market.IMarket;
 import brown.market.library.Market;
-import brown.messages.library.Ack;
-import brown.messages.library.BankUpdate;
-import brown.messages.library.Bid;
-import brown.messages.library.GameReport;
-import brown.messages.library.MarketOrder;
-import brown.messages.library.NegotiateRequest;
-import brown.messages.library.Registration;
-import brown.messages.library.Trade;
-import brown.messages.library.TradeRequest;
-import brown.messages.library.ValuationRegistration;
+import brown.messages.library.AckMessage;
+import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.BidMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.MarketOrderMessage;
+import brown.messages.library.NegotiateRequestMessage;
+import brown.messages.library.RegistrationMessage;
+import brown.messages.library.TradeMessage;
+import brown.messages.library.TradeRequestMessage;
+import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.Logging;
 import brown.setup.ISetup;
 import brown.setup.Startup;
@@ -57,7 +57,7 @@ public abstract class AbsServer {
 	protected Map<Connection, Integer> connections;
 	protected Map<Integer, Integer> privateToPublic;
 	// Consider time limiting these
-	protected List<NegotiateRequest> pendingTradeRequests;
+	protected List<NegotiateRequestMessage> pendingTradeRequests;
 	protected AccountManager acctManager;
 	protected MarketManager manager;
 
@@ -80,7 +80,7 @@ public abstract class AbsServer {
 		this.connections = new ConcurrentHashMap<Connection, Integer>();
 		this.privateToPublic = new ConcurrentHashMap<Integer, Integer>();
 		this.acctManager = new AccountManager();
-		this.pendingTradeRequests = new CopyOnWriteArrayList<NegotiateRequest>();
+		this.pendingTradeRequests = new CopyOnWriteArrayList<NegotiateRequestMessage>();
 		this.manager = new MarketManager();
 		this.privateToPublic.put(-1, -1);
 		this.SHORT = false;
@@ -106,26 +106,26 @@ public abstract class AbsServer {
 				Integer id = null;
 				if (connections.containsKey(connection)) {
 					id = connections.get(connection);
-				} else if (message instanceof Registration) {
+				} else if (message instanceof RegistrationMessage) {
 					Logging.log("[-] registration recieved from "
 							+ connection.getID());
-					aServer.onRegistration(connection, (Registration) message);
+					aServer.onRegistration(connection, (RegistrationMessage) message);
 					return;
 				} else {
 					return;
 				}
 
-				if (message instanceof Bid) {
+				if (message instanceof BidMessage) {
 					Logging.log("[-] bid recieved from " + id);
-					aServer.onBid(connection, id, (Bid) message);
-				} else if (message instanceof NegotiateRequest) {
+					aServer.onBid(connection, id, (BidMessage) message);
+				} else if (message instanceof NegotiateRequestMessage) {
 					Logging.log("[-] traderequest recieved from " + id);
 					aServer.onTradeRequest(connection, id,
-							(NegotiateRequest) message);
-				} else if (message instanceof Trade) {
+							(NegotiateRequestMessage) message);
+				} else if (message instanceof TradeMessage) {
 					Logging.log("[-] trade recieved from " + id);
-					aServer.onTrade(connection, (Trade) message);
-				} else if (message instanceof MarketOrder) {
+					aServer.onTrade(connection, (TradeMessage) message);
+				} else if (message instanceof MarketOrderMessage) {
 					Logging.log("[-] limitorder recieved from " + id);
 					Logging.log("ERROR: Limit order functionality not present");
 					//aServer.onLimitOrder(connection, id, (MarketOrder) message);
@@ -150,7 +150,7 @@ public abstract class AbsServer {
 	//TODO: need a data structure storing each agents' private valuation, needed to calculate utility.
 	//TODO: provide some file for logging winners, etc.
 	protected void onRegistration(Connection connection,
-			Registration registration) {
+			RegistrationMessage registration) {
     System.out.println("onRegistration called");
     System.out.println(this.valueConfig.keySet().size());
 		Integer agentID = this.defaultRegistration(connection, registration);
@@ -161,25 +161,25 @@ public abstract class AbsServer {
     }
 		for(Integer marketNum : this.valueConfig.keySet()) {
 		  AbsValueConfig marketConfig = this.valueConfig.get(marketNum);
-		  ValuationRegistration valueReg; 
+		  ValuationRegistrationMessage valueReg; 
 		  //simple valuations: the agent gets a valuation over single goods.
 		  if (marketConfig.valueScheme == ValuationType.Simple) {
 		    System.out.println("Got here");
 		    AdditiveValuation simpleVal = 
 		        new AdditiveValuation(marketConfig.aGenerator, marketConfig.allGoods);
 		    SimpleValuation privateVal = simpleVal.getValuation(marketConfig.allGoods);
-		    valueReg = new ValuationRegistration(agentID, privateVal, simpleVal);
+		    valueReg = new ValuationRegistrationMessage(agentID, privateVal, simpleVal);
 		    theServer.sendToTCP(connection.getID(), valueReg);
 		  } else if (marketConfig.valueScheme == ValuationType.Complex) {
 		    //complex valuations: the agent gets a valuation over complex goods.
 		    BundleValuation complexVal = 
 		        new BundleValuation(marketConfig.aGenerator, true, marketConfig.allGoods);
 		        ComplexValuation privateVal = complexVal.getValuation(marketConfig.allGoods);
-		        valueReg = new ValuationRegistration(agentID, privateVal,complexVal);
+		        valueReg = new ValuationRegistrationMessage(agentID, privateVal,complexVal);
 		        theServer.sendToTCP(connection.getID(), valueReg);
 		  } else {
 		    //no explicit valuation, as in the lemonade game
-		    theServer.sendToTCP(connection.getID(), new Registration(agentID));
+		    theServer.sendToTCP(connection.getID(), new RegistrationMessage(agentID));
 		  }
 		}
 	}
@@ -195,8 +195,8 @@ public abstract class AbsServer {
 	 * @param tradeRequest - the trade request
 	 */
 	protected void onTradeRequest(Connection connection, Integer privateID,
-			NegotiateRequest tradeRequest) {
-		NegotiateRequest tr = tradeRequest.safeCopy(privateToPublic
+			NegotiateRequestMessage tradeRequest) {
+		NegotiateRequestMessage tr = tradeRequest.safeCopy(privateToPublic
 				.get(privateID));
 		if (privateID != -1) {
 			theServer.sendToAllTCP(tr);
@@ -213,7 +213,7 @@ public abstract class AbsServer {
 	 * 
 	 * @param trade - tuple of trade request and acceptance boolean
 	 */
-	protected void onTrade(Connection connection, Trade trade) {
+	protected void onTrade(Connection connection, TradeMessage trade) {
 		Integer privateTo = connections.get(connection);
 		Integer privateFrom = publicToPrivate(trade.tradeRequest.fromID);
 		if (privateFrom == null) {
@@ -260,19 +260,19 @@ public abstract class AbsServer {
 	 * This will handle what happens when an agent sends in a bid in response to
 	 * a BidRequest for an auction
 	 */
-	protected void onBid(Connection connection, Integer privateID, Bid bid) {
+	protected void onBid(Connection connection, Integer privateID, BidMessage bid) {
 		Market auction = this.manager.getIMarket(bid.AuctionID);
 		if (auction != null) {
 			synchronized (auction) {
 				Account account = this.acctManager.getAccount(privateID);
 				if (!auction.handleBid(bid.safeCopy(privateID))
 				    || (!this.SHORT && account.getMonies() < bid.Bundle.getCost())) {
-					Ack rej = new Ack(privateID, bid, true);
+					AckMessage rej = new AckMessage(privateID, bid, true);
 					this.theServer.sendToTCP(connection.getID(), rej);
 				}
 			}
 		} else {
-			Ack rej = new Ack(privateID, bid, true);
+			AckMessage rej = new AckMessage(privateID, bid, true);
 			this.theServer.sendToTCP(connection.getID(), rej);
 		}
 	}
@@ -293,7 +293,7 @@ public abstract class AbsServer {
 				if (account == null) {
 					continue;
 				}
-				BankUpdate bu = new BankUpdate(ID, null, account.copyAccount());
+				BankUpdateMessage bu = new BankUpdateMessage(ID, null, account.copyAccount());
 				theServer.sendToTCP(connection.getID(), bu);
 			}
 		}
@@ -308,7 +308,7 @@ public abstract class AbsServer {
 	public void sendAllMarketUpdates(List<TwoSidedAuction> tsas) {
 		int i = 0;
 		for (TwoSidedAuction sec : tsas) {
-			TradeRequest mupdate = new TradeRequest(i++, sec.wrap(this.manager
+			TradeRequestMessage mupdate = new TradeRequestMessage(i++, sec.wrap(this.manager
 					.getLedger(sec.getID()).getSanitized(null)),
 					sec.getMechanismType());
 			theServer.sendToAllTCP(mupdate);
@@ -369,7 +369,7 @@ public abstract class AbsServer {
 						  //maybe the trade request can be a ledger that's only one trade deep.
 						  //before, this sent a blank ledger. 
 						  //trying to send a blank one if it's the first round, or if the allocation rules are null.
-							TradeRequest tr = auction.constructTradeRequest(id.getValue());
+							TradeRequestMessage tr = auction.constructTradeRequest(id.getValue());
 									//this.manager.getLedger(auction.getID())
 									//		.getSanitized(id.getValue()));//TODO: Fix
 							if (tr == null) {
@@ -384,7 +384,7 @@ public abstract class AbsServer {
 			}
 
 			for (Market auction : toRemove) {
-				GameReport report = auction.getReport();
+				GameReportMessage report = auction.getReport();
 				if (report != null) {
 					this.theServer.sendToAllTCP(report);
 				}
@@ -404,7 +404,7 @@ public abstract class AbsServer {
 	  market.tick((long) 1.0); 
 	  if (!market.isOver()) {
 	    //update the ledger?
-	    TradeRequest tradeReq = market.constructTradeRequest(agentID);
+	    TradeRequestMessage tradeReq = market.constructTradeRequest(agentID);
 	    this.theServer.sendToUDP(agentID, tradeReq);
 	  } else {
 	    //update the bank, send bank update.
@@ -539,7 +539,7 @@ public abstract class AbsServer {
 				if (connection == null) {
 					continue;
 				}
-				BankUpdate bu = new BankUpdate(ID, null, this.acctManager.getAccount(ID));
+				BankUpdateMessage bu = new BankUpdateMessage(ID, null, this.acctManager.getAccount(ID));
 				theServer.sendToTCP(connection.getID(), bu);
 			}
 		}
@@ -553,7 +553,7 @@ public abstract class AbsServer {
 	 * @param newA
 	 */
 	public void sendBankUpdate(Integer ID, Account oldA, Account newA) {
-		BankUpdate bu = new BankUpdate(ID, oldA.copyAccount(), newA.copyAccount());
+		BankUpdateMessage bu = new BankUpdateMessage(ID, oldA.copyAccount(), newA.copyAccount());
 		theServer.sendToTCP(this.privateToConnection(ID).getID(), bu);
 	}
 
@@ -567,12 +567,12 @@ public abstract class AbsServer {
 	 * @return safe privateID mapped to connection
 	 */
 	public Integer defaultRegistration(Connection connection,
-			Registration registration) {
+			RegistrationMessage registration) {
 		if (registration.getID() == null) {
 			return null;
 		}
 
-		this.theServer.sendToTCP(connection.getID(), new Ack(registration,
+		this.theServer.sendToTCP(connection.getID(), new AckMessage(registration,
 				false));
 
 		Collection<Integer> allIds = connections.values();

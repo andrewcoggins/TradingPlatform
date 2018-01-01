@@ -3,9 +3,9 @@ package brown.market;
 import java.util.List;
 
 import brown.accounting.Order;
-import brown.messages.library.Bid;
-import brown.messages.library.GameReport;
-import brown.messages.library.TradeRequest;
+import brown.messages.library.BidMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.TradeRequestMessage;
 
 public interface IMarket {
   
@@ -23,7 +23,7 @@ public interface IMarket {
    * @return
    * a Trade Request, which will be sent over TCP by the server.
    */
-  public TradeRequest constructTradeRequest(Integer ID);
+  public TradeRequestMessage constructTradeRequest(Integer ID);
 
   /**
    * per the (inner) termination condition, determines whether or not
@@ -46,11 +46,11 @@ public interface IMarket {
    * @param bid
    * @return
    */
-  public boolean handleBid(Bid bid);
+  public boolean handleBid(BidMessage bid);
   
   public List<Order> getOrders();
   
-  public GameReport getReport();
+  public GameReportMessage getReport();
   
   public void tick(long time);
   

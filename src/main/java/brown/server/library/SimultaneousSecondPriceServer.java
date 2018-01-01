@@ -11,8 +11,8 @@ import brown.accounting.Account;
 import brown.market.library.Market;
 import brown.market.marketstate.library.InternalState;
 import brown.market.preset.library.SimSecondPriceRules;
-import brown.messages.library.Registration;
-import brown.messages.library.ValuationRegistration;
+import brown.messages.library.RegistrationMessage;
+import brown.messages.library.ValuationRegistrationMessage;
 import brown.server.AbsServer;
 import brown.setup.Logging;
 import brown.setup.ISetup;
@@ -42,7 +42,7 @@ public class SimultaneousSecondPriceServer extends AbsServer {
 
   
   @Override
-  protected void onRegistration(Connection connection, Registration registration) {
+  protected void onRegistration(Connection connection, RegistrationMessage registration) {
     //give agent private ID
     Integer agentID = this.defaultRegistration(connection, registration);
     if (agentID == null) {
@@ -51,7 +51,7 @@ public class SimultaneousSecondPriceServer extends AbsServer {
     //give agent access to private valuation
     SimpleValuation privateValuation = masterValuation.getValuation(this.allGoods);
     this.numPlayers++;
-    this.theServer.sendToTCP(connection.getID(), new ValuationRegistration(agentID, privateValuation, masterValuation));
+    this.theServer.sendToTCP(connection.getID(), new ValuationRegistrationMessage(agentID, privateValuation, masterValuation));
     //give agent some money
     Account acct = this.acctManager.getAccount(connections.get(connection));
     acct.add(10000); 

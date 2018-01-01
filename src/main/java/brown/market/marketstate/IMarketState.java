@@ -8,10 +8,10 @@ import brown.accounting.Order;
 import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.Allocation;
 import brown.channels.MechanismType;
-import brown.messages.library.Bid;
-import brown.messages.library.BidRequest;
-import brown.messages.library.GameReport;
-import brown.messages.library.TradeRequest;
+import brown.messages.library.BidMessage;
+import brown.messages.library.BidRequestMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.TradeRequestMessage;
 import brown.todeprecate.PaymentType;
 
 /**
@@ -23,11 +23,11 @@ import brown.todeprecate.PaymentType;
 public interface IMarketState {
 
     //methods not directly associated with a rule. Look for redundancies here.
-    public void addBid(Bid bid);
+    public void addBid(BidMessage bid);
     
     public void clear();
     
-    public List<Bid> getBids(); 
+    public List<BidMessage> getBids(); 
     
     public Integer getID(); 
     
@@ -60,7 +60,7 @@ public interface IMarketState {
     
     public Allocation getAllocation(); 
     
-    public BidRequest getRequest(); 
+    public BidRequestMessage getRequest(); 
     
     public boolean getPrivate();
     
@@ -68,20 +68,20 @@ public interface IMarketState {
     
     public BundleType getBundleType(); 
     
-    public Set<Bid> getReserve(); 
+    public Set<BidMessage> getReserve(); 
     
     public boolean getValid();
     
     public MechanismType getMType();
     
-    public GameReport getReport(); 
+    public GameReportMessage getReport(); 
     
     //setters for allocation rule.
     public void setTime(long t);
     
     public void setAllocation(Allocation alloc);
 
-    public void setRequest(BidRequest request);
+    public void setRequest(BidRequestMessage request);
     
     public void setPrivate(boolean p); 
     
@@ -89,13 +89,13 @@ public interface IMarketState {
     
     public void setBundleType(BundleType b); 
     
-    public void setReserve(Set<Bid> r); 
+    public void setReserve(Set<BidMessage> r); 
     
     public void setValid(boolean v);
     
     public void setMType(MechanismType m);
     
-    public void setReport(GameReport g);
+    public void setReport(GameReportMessage g);
     
     //getters for payment rules. 
     
@@ -119,9 +119,9 @@ public interface IMarketState {
     
     //for Query Rules
     
-    public TradeRequest getTRequest(); 
+    public TradeRequestMessage getTRequest(); 
     
-    public void setTRequest(TradeRequest t);
+    public void setTRequest(TradeRequestMessage t);
     
     public boolean getAcceptable();
     

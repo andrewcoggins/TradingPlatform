@@ -15,7 +15,7 @@ import brown.agent.AbsLemonadeAgent;
 import brown.agent.library.LemonadeAgent;
 import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;
-import brown.messages.library.Bid;
+import brown.messages.library.BidMessage;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.library.Tradeable;
 
@@ -73,7 +73,7 @@ public class LemonadeChannel implements IAgentChannel {
     Map<Tradeable, MarketState> bids = new HashMap<Tradeable, MarketState>();
     bids.put(new Tradeable(0), new MarketState(agent.ID, (double) position));
     AbsBidBundle toSend = new SimpleBidBundle(bids);
-    agent.CLIENT.sendTCP(new Bid(0, toSend, this.ID, agent.ID));
+    agent.CLIENT.sendTCP(new BidMessage(0, toSend, this.ID, agent.ID));
   }
   
 }

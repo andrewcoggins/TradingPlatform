@@ -15,10 +15,10 @@ import brown.accounting.bidbundle.Allocation;
 import brown.accounting.bidbundle.SimpleBidBundle;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;
-import brown.messages.library.Bid;
-import brown.messages.library.BidRequest;
-import brown.messages.library.GameReport;
-import brown.messages.library.TradeRequest;
+import brown.messages.library.BidMessage;
+import brown.messages.library.BidRequestMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.TradeRequestMessage;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.library.Tradeable;
 
@@ -29,7 +29,7 @@ public class InternalState implements IMarketState {
   //things not directly associated with any rule. There may be some overlap.
   private final double INCREMENT = 20.0;
   private final Integer ID;
-  private final List<Bid> BIDS;
+  private final List<BidMessage> BIDS;
   private final Set<Tradeable> TRADEABLES;
   
   private AbsBidBundle lastAlloc;
@@ -48,14 +48,14 @@ public class InternalState implements IMarketState {
   //allocation rule things.
   private long time; 
   private Allocation alloc;
-  private BidRequest request;
+  private BidRequestMessage request;
   private boolean isPrivate; 
   private boolean isOver; 
   private BundleType bType; 
-  private Set<Bid> reserve; 
+  private Set<BidMessage> reserve; 
   private boolean valid; 
   private MechanismType mType; 
-  private GameReport report;
+  private GameReportMessage report;
   
   //payment rule things
   private List<Order> payments; 
@@ -64,7 +64,7 @@ public class InternalState implements IMarketState {
   private boolean permitShort; 
   
   //query rule things.
-  private TradeRequest tRequest; 
+  private TradeRequestMessage tRequest; 
   
   //activity rule things. 
   private boolean isAcceptable; 
@@ -81,7 +81,7 @@ public class InternalState implements IMarketState {
   
   
   public InternalState(Integer ID, Set<Tradeable> tradeables) {
-    this.BIDS = new LinkedList<Bid>();
+    this.BIDS = new LinkedList<BidMessage>();
     this.lastAlloc = null;
     this.lastPayments = null;
     this.TRADEABLES = tradeables;
@@ -98,7 +98,7 @@ public class InternalState implements IMarketState {
   }
   
   //methods not directly associated with a rule. Look for redundancies here.
-  public void addBid(Bid bid) {
+  public void addBid(BidMessage bid) {
     this.ticks = 0;
     this.BIDS.add(bid);
   }
@@ -113,7 +113,7 @@ public class InternalState implements IMarketState {
     this.BIDS.clear(); 
   }
   
-  public List<Bid> getBids() {
+  public List<BidMessage> getBids() {
     return this.BIDS;
   }
   
@@ -191,7 +191,7 @@ public class InternalState implements IMarketState {
     return this.alloc; 
   }
   
-  public BidRequest getRequest() { 
+  public BidRequestMessage getRequest() { 
     return this.request;
   }
   
@@ -207,7 +207,7 @@ public class InternalState implements IMarketState {
     return this.bType;
   }
   
-  public Set<Bid> getReserve() {
+  public Set<BidMessage> getReserve() {
     return this.reserve; 
   }
   
@@ -219,7 +219,7 @@ public class InternalState implements IMarketState {
     return this.mType; 
   }
   
-  public GameReport getReport() {
+  public GameReportMessage getReport() {
     return this.report; 
   }
   
@@ -232,7 +232,7 @@ public class InternalState implements IMarketState {
     this.alloc = alloc; 
   }
   
-  public void setRequest(BidRequest request) { 
+  public void setRequest(BidRequestMessage request) { 
      this.request = request;
   }
   
@@ -248,7 +248,7 @@ public class InternalState implements IMarketState {
      this.bType = b;
   }
   
-  public void setReserve(Set<Bid> r) {
+  public void setReserve(Set<BidMessage> r) {
      this.reserve = r; 
   }
   
@@ -260,7 +260,7 @@ public class InternalState implements IMarketState {
      this.mType = m; 
   }
   
-  public void setReport(GameReport g) {
+  public void setReport(GameReportMessage g) {
      this.report = g; 
   }
   
@@ -303,11 +303,11 @@ public class InternalState implements IMarketState {
   
   //for Query Rules
   
-  public TradeRequest getTRequest() {
+  public TradeRequestMessage getTRequest() {
       return this.tRequest; 
   }
   
-  public void setTRequest(TradeRequest t) {
+  public void setTRequest(TradeRequestMessage t) {
     this.tRequest = t; 
 }
   

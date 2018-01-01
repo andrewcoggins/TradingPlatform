@@ -8,13 +8,13 @@ import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.AbsMessage;
-import brown.messages.library.Ack;
-import brown.messages.library.BankUpdate;
-import brown.messages.library.BidRequest;
-import brown.messages.library.GameReport;
-import brown.messages.library.NegotiateRequest;
-import brown.messages.library.Registration;
-import brown.messages.library.ValuationRegistration;
+import brown.messages.library.AckMessage;
+import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.BidRequestMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.NegotiateRequestMessage;
+import brown.messages.library.RegistrationMessage;
+import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.Logging;
 import brown.setup.ISetup;
 
@@ -44,7 +44,7 @@ public abstract class AbsAgent extends AbsClient {
       }
     });
 
-    CLIENT.sendTCP(new Registration(-1));
+    CLIENT.sendTCP(new RegistrationMessage(-1));
   }
   
 
@@ -54,7 +54,7 @@ public abstract class AbsAgent extends AbsClient {
    * @param registration
    *            : includes the agent's new ID
    */
-  public void onRegistration(Registration registration) {
+  public void onRegistration(RegistrationMessage registration) {
     this.ID = registration.getID();
   }
   
@@ -65,7 +65,7 @@ public abstract class AbsAgent extends AbsClient {
    * @param rejection
    *            : includes the rejected method and might say why
    */
-  public void onAck(Ack message) {
+  public void onAck(AckMessage message) {
     if (message.REJECTED) {
       Logging.log("[x] rej: " + message.failedBR);
     }
@@ -75,7 +75,7 @@ public abstract class AbsAgent extends AbsClient {
    * Whenever you get a report
    * @param marketUpdate
    */
-  public abstract void onMarketUpdate(GameReport marketUpdate);
+  public abstract void onMarketUpdate(GameReportMessage marketUpdate);
 
   /**
    * Whenever an agent's bank changes, the server sends a bank update
@@ -84,7 +84,7 @@ public abstract class AbsAgent extends AbsClient {
    *            - contains the old bank state and new bank state note: both
    *            accounts provided are immutable
    */
-  public abstract void onBankUpdate(BankUpdate bankUpdate);
+  public abstract void onBankUpdate(BankUpdateMessage bankUpdate);
 
   /**
    * Whenever an auction is occurring, the server will request a bid using
@@ -94,7 +94,7 @@ public abstract class AbsAgent extends AbsClient {
    * @param bidRequest
    *            - auction metadata
    */
-  public abstract void onTradeRequest(BidRequest bidRequest);
+  public abstract void onTradeRequest(BidRequestMessage bidRequest);
 
   /**
    * Whenever another agent requests a trade either directly with this agent
@@ -104,7 +104,7 @@ public abstract class AbsAgent extends AbsClient {
    *            - from fields describe what this agent will receive and to
    *            fields describe what it will give up
    */
-  public abstract void onNegotiateRequest(NegotiateRequest tradeRequest);
+  public abstract void onNegotiateRequest(NegotiateRequestMessage tradeRequest);
   
   /**
    * Provides response to sealed bid auction

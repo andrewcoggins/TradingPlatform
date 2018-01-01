@@ -8,9 +8,9 @@ import brown.accounting.bidbundle.Allocation;
 import brown.market.IMarket;
 import brown.market.marketstate.IMarketState;
 import brown.market.preset.AbsMarketPreset;
-import brown.messages.library.Bid;
-import brown.messages.library.GameReport;
-import brown.messages.library.TradeRequest;
+import brown.messages.library.BidMessage;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.TradeRequestMessage;
 import brown.rules.activityrules.IActivityRule;
 import brown.rules.allocationrules.IAllocationRule;
 import brown.rules.irpolicies.IInformationRevelationPolicy;
@@ -53,16 +53,16 @@ public class Market implements IMarket {
 
   // constructs a trade reques
   @Override
-  public TradeRequest constructTradeRequest(Integer ID) {
+  public TradeRequestMessage constructTradeRequest(Integer ID) {
     //do something with the IR policy.
     Allocation alloc = this.STATE.getAllocation();
     if(alloc != null) {
       this.QRULE.makeChannel(STATE, new Ledger(this.getID(), alloc));
-      TradeRequest request = this.STATE.getTRequest();
+      TradeRequestMessage request = this.STATE.getTRequest();
       return request;
     }
      this.QRULE.makeChannel(STATE, new Ledger(this.getID()));
-     TradeRequest request = this.STATE.getTRequest();
+     TradeRequestMessage request = this.STATE.getTRequest();
      return request;
   }
 
@@ -88,7 +88,7 @@ public class Market implements IMarket {
   // handles a bid from an agent. The activity rule determines if it is 
   // to be accepted or not. 
   @Override
-  public boolean handleBid(Bid bid) {
+  public boolean handleBid(BidMessage bid) {
     this.ACTRULE.isAcceptable(this.STATE, bid); 
     if(this.STATE.getAcceptable()) {
         STATE.addBid(bid);
@@ -117,7 +117,7 @@ public class Market implements IMarket {
   }
   
   @Override 
-  public GameReport getReport() {
+  public GameReportMessage getReport() {
     this.ARULE.setAllocation(this.STATE);
     this.ARULE.setReport(this.STATE);
     return this.STATE.getReport();
