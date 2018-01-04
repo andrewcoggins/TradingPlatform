@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import brown.tradeable.library.Tradeable;
 import brown.value.valuable.library.Value;
+import brown.value.valuation.library.AdditiveValuation;
+import brown.value.valuation.library.BundleValuation;
 import brown.value.valuationrepresentation.library.ComplexValuation;
 import brown.value.valuationrepresentation.library.SimpleValuation;
 
@@ -40,6 +42,15 @@ public class ValuationRegistrationMessageTest {
     assertEquals(personalCom.getValuation(), new ComplexValuation(valsTwo));
     
     // case with an additive distribution.
+    AdditiveValuation av = new AdditiveValuation(tr);
+    BundleValuation bv = new BundleValuation(tr); 
+    ValuationRegistrationMessage pubSimple =
+        new ValuationRegistrationMessage(0, new SimpleValuation(vals), av); 
+    ValuationRegistrationMessage pubComplex = 
+        new ValuationRegistrationMessage(0, new ComplexValuation(valsTwo), bv);
+    assertEquals(pubSimple.getDistribution(), av); 
+    assertEquals(pubComplex.getDistribution(), bv);
+    
     
   }
 }

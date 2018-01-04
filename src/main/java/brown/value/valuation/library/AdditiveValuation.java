@@ -68,5 +68,30 @@ public class AdditiveValuation implements IIndependentValuation {
     }
     return new SimpleValuation(valuation); 
   }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((valMap == null) ? 0 : valMap.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    AdditiveValuation other = (AdditiveValuation) obj;
+    if (valMap == null) {
+      if (other.valMap != null)
+        return false;
+    } else if (!valMap.equals(other.valMap))
+      return false;
+    return true;
+  }
   
 }

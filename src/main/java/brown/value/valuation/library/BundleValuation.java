@@ -200,4 +200,47 @@ public class BundleValuation implements IDependentValuation {
     }
   }
 
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((generator == null) ? 0 : generator.hashCode());
+    result = prime * result + ((goods == null) ? 0 : goods.hashCode());
+    result = prime * result + ((monotonic == null) ? 0 : monotonic.hashCode());
+    result = prime * result + ((valMap == null) ? 0 : valMap.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    BundleValuation other = (BundleValuation) obj;
+    if (generator == null) {
+      if (other.generator != null)
+        return false;
+    } else if (!generator.equals(other.generator))
+      return false;
+    if (goods == null) {
+      if (other.goods != null)
+        return false;
+    } else if (!goods.equals(other.goods))
+      return false;
+    if (monotonic == null) {
+      if (other.monotonic != null)
+        return false;
+    } else if (!monotonic.equals(other.monotonic))
+      return false;
+    if (valMap == null) {
+      if (other.valMap != null)
+        return false;
+    } else if (!valMap.equals(other.valMap))
+      return false;
+    return true;
+  }
+
 }
