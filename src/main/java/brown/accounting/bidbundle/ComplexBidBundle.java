@@ -34,8 +34,8 @@ public class ComplexBidBundle extends AbsBidBundle {
 	 * @param bid : agent's bid
 	 * @param agent : agent ID
 	 */
-	public ComplexBidBundle(ComplexBid bid, Integer agent) {
-		this.BIDS = bid;
+	public ComplexBidBundle(Map<Set<Tradeable>, MarketState> bid, Integer agent) {
+		this.BIDS = new ComplexBid(bid);
 		this.BT = BundleType.Complex;
 	}
 
@@ -50,7 +50,7 @@ public class ComplexBidBundle extends AbsBidBundle {
 
 	@Override
 	public IBidBundle wipeAgent(Integer ID) {
-		return new ComplexBidBundle(this.BIDS, ID);
+		return new ComplexBidBundle(this.BIDS.bids, ID);
 	}
 
 	@Override

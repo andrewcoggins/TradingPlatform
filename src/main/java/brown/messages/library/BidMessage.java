@@ -1,9 +1,6 @@
 package brown.messages.library;
 
-import java.util.Comparator;
-
 import brown.accounting.bidbundle.AbsBidBundle;
-import brown.accounting.bidbundle.IBidBundle;
 import brown.agent.AbsAgent;
 import brown.messages.AbsMessage;
 
@@ -44,24 +41,6 @@ public class BidMessage extends AbsMessage {
 	 */
 	public BidMessage safeCopy(Integer agentID) {
 		return new BidMessage(this.ID, this.Bundle, this.AuctionID, agentID);
-	}
-	
-	public static class BidComparator implements Comparator<BidMessage> {
-		private final boolean ASC;
-		
-		public BidComparator(boolean ascending) {
-			this.ASC = ascending;
-		}
-
-		@Override
-		public int compare(BidMessage o1, BidMessage o2) {
-			if (this.ASC) {
-				return new Double(o1.Bundle.getCost()).compareTo(new Double(o2.Bundle.getCost()));
-			} else {
-				return new Double(o2.Bundle.getCost()).compareTo(new Double(o1.Bundle.getCost()));
-			}
-		}
-		
 	}
 	
 	@Override

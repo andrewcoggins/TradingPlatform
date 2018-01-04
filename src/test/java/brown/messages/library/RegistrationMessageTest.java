@@ -1,11 +1,20 @@
-package brown.messages.library; 
+package brown.messages.library;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
  * tests the registration message. 
- * I
+ * C
  * @author andrew
  *
  */
 public class RegistrationMessageTest {
-  
+  // nothing to test! 
+  @Test
+  public void testRegistrationMessage() {
+    RegistrationMessage rm = new RegistrationMessage(0); 
+    assertEquals(rm.getID(), new Integer(0)); 
+  }
 }

@@ -7,5 +7,5 @@ package brown.messages.library;
  *
  */
 public class BidRequestMessageTest {
-  
+  //not being used.
 }

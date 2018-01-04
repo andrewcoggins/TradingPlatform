@@ -7,5 +7,5 @@ package brown.messages.library;
  *
  */
 public class TradeMessageTest {
-
+  // not being used.
 }

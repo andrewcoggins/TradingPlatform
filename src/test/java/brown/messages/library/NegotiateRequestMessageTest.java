@@ -7,5 +7,5 @@ package brown.messages.library;
  *
  */
 public class NegotiateRequestMessageTest {
-  
+  // not being used.
 }

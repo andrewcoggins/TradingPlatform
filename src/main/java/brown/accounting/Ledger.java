@@ -66,6 +66,7 @@ public class Ledger {
 	}
 	
 	public void addAll(Allocation bids) {
+	  synchronized(transactions) {
 	  if (bids != null) {
 	    for (Entry<Tradeable, MarketState> t : bids.getBids().bids.entrySet()) { 
 	      Transaction tr = new Transaction(t.getValue().AGENTID, null, t.getValue().PRICE, 1, t.getKey());
@@ -74,6 +75,7 @@ public class Ledger {
 	      this.unshared.add(tr);
 	    }
 	  }
+	 }
 	}
 	
 	/**

@@ -8,7 +8,7 @@ import brown.value.valuationrepresentation.AbsValuationRepresentation;
 
 
 public class SimpleValuation extends AbsValuationRepresentation {
-  
+
   public final Map<Tradeable, Value> vals;
   
   public SimpleValuation() {
@@ -17,6 +17,31 @@ public class SimpleValuation extends AbsValuationRepresentation {
   
   public SimpleValuation(Map<Tradeable, Value> vals) {
     this.vals = vals; 
+  }
+  
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((vals == null) ? 0 : vals.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    SimpleValuation other = (SimpleValuation) obj;
+    if (vals == null) {
+      if (other.vals != null)
+        return false;
+    } else if (!vals.equals(other.vals))
+      return false;
+    return true;
   }
   
 }

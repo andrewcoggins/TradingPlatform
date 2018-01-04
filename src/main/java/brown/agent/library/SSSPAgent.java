@@ -33,6 +33,8 @@ public class SSSPAgent extends AbsSimpleSealedAgent {
     for (Tradeable t: this.privateValuation.vals.keySet()) {
       initial.put(t, privateValuation.vals.get(t).value);
     }
+    // this is the SCPP price prediction. Probably not a very good bid. 
+    // where to go from here? 
     simpleChannel.bid(this, initial);
   }
   
