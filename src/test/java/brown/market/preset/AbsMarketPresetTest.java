@@ -2,10 +2,10 @@ package brown.market.preset;
 
 /**
  * tests the abstract market preset. 
- * I
+ * C
  * @author andrew
  *
  */
 public class AbsMarketPresetTest {
-  
+  //nothing to do
 }

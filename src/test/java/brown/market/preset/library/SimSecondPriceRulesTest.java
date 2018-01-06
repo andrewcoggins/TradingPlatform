@@ -1,4 +1,6 @@
-package brown.market.preset.library; 
+package brown.market.preset.library;
+
+import org.junit.Test;
 
 /**
  * test for simple simultaneous rules.
@@ -8,4 +10,8 @@ package brown.market.preset.library;
  */
 public class SimSecondPriceRulesTest {
   
+  @Test 
+  public void testSimSecondPriceRules() {
+    
+  }
 }

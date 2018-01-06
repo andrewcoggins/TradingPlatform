@@ -11,6 +11,7 @@ import java.util.Set;
 import brown.accounting.bidbundle.Allocation;
 import brown.tradeable.library.Tradeable;
 
+//TODO: abstract to the complex case??
 /**
  * A ledger tracks all trades within a Market. 
  * @author lcamery

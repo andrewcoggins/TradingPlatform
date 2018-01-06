@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import brown.tradeable.IValuable;
+import brown.tradeable.AbsTradeable;
 import brown.tradeable.library.Tradeable;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.generator.library.ValRandGenerator;
@@ -63,7 +63,7 @@ public class AdditiveValuation implements IIndependentValuation {
   @Override
   public SimpleValuation getValuation(Set<Tradeable> goods) {
     Map<Tradeable, Value> valuation = new HashMap<Tradeable, Value>();
-    for(IValuable item : goods) {
+    for(Tradeable item : goods) {
       valuation.put((Tradeable) item, valMap.get(item));
     }
     return new SimpleValuation(valuation); 

@@ -10,6 +10,8 @@ import java.util.Set;
 import org.junit.Test;
 
 import brown.accounting.MarketState;
+import brown.accounting.bid.ComplexBid;
+import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.ComplexBidBundle;
 import brown.accounting.bidbundle.SimpleBidBundle;
 import brown.tradeable.library.Tradeable;
@@ -42,5 +44,9 @@ public class BidMessageTest {
     ComplexBidBundle c  = new ComplexBidBundle(complexMap, 0);
     BidMessage cBid = new BidMessage(0, c, 1, 2); 
     assertEquals(cBid, cBid.safeCopy(2)); 
+    assertEquals(cBid.Bundle, c);
+    assertEquals(cBid.Bundle.getBids(), c.getBids());
+    ComplexBid com = (ComplexBid) cBid.Bundle.getBids();
+    assertEquals(com.bids, c.getBids().bids);
   }
 }

@@ -18,7 +18,7 @@ import brown.value.valuationrepresentation.library.SimpleValuation;
 
 /**
  * tests the valuation registration message class. 
- * I
+ * C
  * @author andrew
  *
  */
@@ -50,7 +50,5 @@ public class ValuationRegistrationMessageTest {
         new ValuationRegistrationMessage(0, new ComplexValuation(valsTwo), bv);
     assertEquals(pubSimple.getDistribution(), av); 
     assertEquals(pubComplex.getDistribution(), bv);
-    
-    
   }
 }
