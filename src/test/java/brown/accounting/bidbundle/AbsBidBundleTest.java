@@ -2,10 +2,10 @@ package brown.accounting.bidbundle;
 
 /**
  * test for abstract bid bundle
- * I
+ * C
  * @author andrew
  *
  */
 public class AbsBidBundleTest {
-  
+  // nothing to do
 }

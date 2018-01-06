@@ -23,5 +23,31 @@ public class ComplexBid extends AbsBid {
   public String toString() {
     return "ComplexBid [bids=" + bids + "]";
   }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((bids == null) ? 0 : bids.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    ComplexBid other = (ComplexBid) obj;
+    if (bids == null) {
+      if (other.bids != null)
+        return false;
+    } else if (!bids.equals(other.bids))
+      return false;
+    return true;
+  }
+  
   
 }

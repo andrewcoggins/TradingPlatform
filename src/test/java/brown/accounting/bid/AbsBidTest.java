@@ -2,10 +2,10 @@ package brown.accounting.bid;
 
 /**
  * tests the abstract bid class. 
- * I
+ * C
  * @author andrew
  *
  */
 public class AbsBidTest {
-  
+  // nothing to do!
 }

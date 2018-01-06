@@ -62,4 +62,33 @@ public class ComplexBidBundle extends AbsBidBundle {
 		return this.BIDS;
 	}
 
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((BIDS == null) ? 0 : BIDS.hashCode());
+    result = prime * result + ((BT == null) ? 0 : BT.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    ComplexBidBundle other = (ComplexBidBundle) obj;
+    if (BIDS == null) {
+      if (other.BIDS != null)
+        return false;
+    } else if (!BIDS.equals(other.BIDS))
+      return false;
+    if (BT != other.BT)
+      return false;
+    return true;
+  }
+
+	
 }
