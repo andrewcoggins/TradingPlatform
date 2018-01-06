@@ -84,8 +84,6 @@ public class Transaction {
     if (Double.doubleToLongBits(QUANTITY) != Double
         .doubleToLongBits(other.QUANTITY))
       return false;
-    if (TIMESTAMP != other.TIMESTAMP)
-      return false;
     if (TO == null) {
       if (other.TO != null)
         return false;
@@ -97,6 +95,13 @@ public class Transaction {
     } else if (!TRADEABLE.equals(other.TRADEABLE))
       return false;
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return "Transaction [TO=" + TO + ", TRADEABLE=" + TRADEABLE + ", FROM="
+        + FROM + ", PRICE=" + PRICE + ", QUANTITY=" + QUANTITY + ", TIMESTAMP="
+        + TIMESTAMP + "]";
   }
 
 	

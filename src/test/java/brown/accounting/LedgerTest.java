@@ -18,7 +18,7 @@ import brown.tradeable.library.Tradeable;
 
 /**
  * Test for the Ledger class. 
- * I
+ * C
  * @author andrew
  *
  */
