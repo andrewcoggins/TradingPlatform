@@ -11,6 +11,7 @@ import brown.accounting.MarketState;
 import brown.accounting.Order;
 import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.Allocation;
+import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.SimpleBidBundle;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;
@@ -53,7 +54,7 @@ public class InternalState implements IMarketState {
   //payment rule things
   private List<Order> payments; 
   private PaymentType pType; 
-  private AbsBidBundle reserveBundle; 
+  private IBidBundle reserveBundle; 
   private boolean permitShort; 
   
   //query rule things.
@@ -267,7 +268,7 @@ public class InternalState implements IMarketState {
     return this.pType; 
   }
   
-  public AbsBidBundle getReserveBundle() {
+  public IBidBundle getReserveBundle() {
     return this.reserveBundle;
   }
   
@@ -286,7 +287,7 @@ public class InternalState implements IMarketState {
      this.pType = p; 
   }
   
-  public void setReserveBundle(AbsBidBundle b) {
+  public void setReserveBundle(IBidBundle b) {
      this.reserveBundle = b;
   }
   
@@ -332,7 +333,7 @@ public class InternalState implements IMarketState {
   
   public void incrementOuter() {
     if(this.outerRuns == null) {
-      this.outerRuns = 0;
+      this.outerRuns = 1;
     } else {
       this.outerRuns++;
     }

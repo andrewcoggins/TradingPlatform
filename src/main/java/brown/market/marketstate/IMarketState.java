@@ -7,6 +7,7 @@ import brown.accounting.BundleType;
 import brown.accounting.Order;
 import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.Allocation;
+import brown.accounting.bidbundle.IBidBundle;
 import brown.channels.MechanismType;
 import brown.messages.library.BidMessage;
 import brown.messages.library.BidRequestMessage;
@@ -103,7 +104,7 @@ public interface IMarketState {
     
     public PaymentType getPaymentType();
     
-    public AbsBidBundle getReserveBundle();
+    public IBidBundle getReserveBundle();
     
     public boolean permitShort(); 
     
@@ -113,7 +114,7 @@ public interface IMarketState {
     
     public void setPaymentType(PaymentType p); 
     
-    public void setReserveBundle(AbsBidBundle b); 
+    public void setReserveBundle(IBidBundle b); 
     
     public void setShort(boolean b);
     
