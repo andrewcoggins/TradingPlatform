@@ -1,11 +1,11 @@
 package brown.messages.library;
 
-import brown.accounting.bidbundle.AbsBidBundle;
+import brown.accounting.bidbundle.IBidBundle;
 import brown.agent.AbsAgent;
 import brown.messages.AbsMessage;
 
 public class BidMessage extends AbsMessage {
-	public final AbsBidBundle Bundle;
+	public final IBidBundle Bundle;
 	public final Integer AuctionID;
 	public final Integer AgentID;
 	
@@ -27,7 +27,7 @@ public class BidMessage extends AbsMessage {
 	 * @param auctionID : auction's ID
 	 * @param agentID : agent's ID; verified by server
 	 */
-	public BidMessage(int ID, AbsBidBundle bundle, Integer auctionID, Integer agentID) {
+	public BidMessage(int ID, IBidBundle bundle, Integer auctionID, Integer agentID) {
 		super(ID);
 		this.Bundle = bundle;
 		this.AuctionID = auctionID;

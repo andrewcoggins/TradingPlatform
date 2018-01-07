@@ -9,7 +9,6 @@ import java.util.Set;
 import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.Order;
-import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.Allocation;
 import brown.accounting.bidbundle.SimpleBidBundle;
@@ -38,12 +37,6 @@ public class InternalState implements IMarketState {
   private AbsBidBundle bundleReserve;
   private boolean maximizing;
   
-//  //current and temporary things that could be inputs to arguments.
-//  public Ledger ledge; 
-//  public Map<Integer, Set<Asset>> allocations; 
-//  public Set<Bid> bids; 
-//  public Bid aBid;
-//  public Integer anID;
   
   //allocation rule things.
   private long time; 
@@ -125,11 +118,11 @@ public class InternalState implements IMarketState {
     return this.ID;
   }
   
-  public void setPayments_two(List<Order> payments) {
+  public void setLastPayments(List<Order> payments) {
     this.lastPayments = payments;
   }
   
-  public List<Order> getPayments_two() {
+  public List<Order> getLastPayments() {
     return this.lastPayments;
   }
   

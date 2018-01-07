@@ -31,9 +31,9 @@ public interface IMarketState {
     
     public Integer getID(); 
     
-    public void setPayments_two(List<Order> payments); 
+    public void setLastPayments(List<Order> payments); 
     
-    public List<Order> getPayments_two(); 
+    public List<Order> getLastPayments(); 
     
     public void tick(long time); 
     

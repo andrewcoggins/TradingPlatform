@@ -1,4 +1,6 @@
-package brown.rules.activityrules.library; 
+package brown.rules.activityrules.library;
+
+import org.junit.Test;
 
 /**
  * tests the one shor activity rule. 
@@ -8,4 +10,8 @@ package brown.rules.activityrules.library;
  */
 public class OneShotActivityTest {
   
+  @Test
+  public void testOneShotActivity() {
+    
+  }
 }

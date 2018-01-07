@@ -41,13 +41,13 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public void setPayments_two(List<Order> payments) {
+  public void setLastPayments(List<Order> payments) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public List<Order> getPayments_two() {
+  public List<Order> getLastPayments() {
     // TODO Auto-generated method stub
     return null;
   }

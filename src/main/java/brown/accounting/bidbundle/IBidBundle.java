@@ -3,6 +3,7 @@ package brown.accounting.bidbundle;
 import java.util.Comparator;
 
 import brown.accounting.BundleType;
+import brown.accounting.bid.AbsBid;
 
 /**
  * The BidBundle interface permits the creation of an arbitrary data structure
@@ -27,6 +28,12 @@ public interface IBidBundle {
 	 */
 	double getCost();
 	
+	/**
+	 * returns some kind of bid.
+	 * @return
+	 */
+  public AbsBid getBids();
+  
 	/**
 	 * Removes agent ID
 	 * @return BidBundle w/o agent ID

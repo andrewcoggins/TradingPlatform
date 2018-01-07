@@ -1,5 +1,7 @@
 package brown.market.library;
 
+import org.junit.Test;
+
 /**
  * tests the market class. 
  * I
@@ -8,4 +10,8 @@ package brown.market.library;
  */
 public class MarketTest {
   
+  @Test
+  public void testMarket() {
+    
+  }
 }
