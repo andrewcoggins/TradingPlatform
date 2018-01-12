@@ -8,7 +8,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import brown.accounting.bidbundle.Allocation;
+import brown.accounting.bidbundle.library.Allocation;
+import brown.tradeable.ITradeable;
 import brown.tradeable.library.Tradeable;
 
 //TODO: abstract to the complex case??
@@ -20,7 +21,7 @@ import brown.tradeable.library.Tradeable;
 public class Ledger {
   protected final Integer marketId;
 	protected final List<Transaction> transactions;
-	protected final Map<Tradeable, Transaction> latest;
+	protected final Map<ITradeable, Transaction> latest;
 	protected final List<Transaction> unshared;
 	
 	/**
@@ -38,7 +39,7 @@ public class Ledger {
 	    this.marketId = marketId; 
 	    this.unshared = new LinkedList<Transaction>();
 	    this.transactions = new LinkedList<Transaction>();
-	    this.latest = new HashMap<Tradeable, Transaction>();
+	    this.latest = new HashMap<ITradeable, Transaction>();
 	  }
 	 
 	 /**
@@ -50,7 +51,7 @@ public class Ledger {
      this.marketId = marketId; 
      this.unshared = new LinkedList<Transaction>();
      this.transactions = new LinkedList<Transaction>();
-     this.latest = new HashMap<Tradeable, Transaction>();
+     this.latest = new HashMap<ITradeable, Transaction>();
      this.addAll(initialAlloc);
    }
 

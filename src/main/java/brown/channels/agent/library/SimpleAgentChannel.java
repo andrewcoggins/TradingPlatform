@@ -8,7 +8,7 @@ import java.util.Set;
 import brown.accounting.Ledger;
 import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
-import brown.accounting.bidbundle.SimpleBidBundle;
+import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.agent.AbsAgent;
 import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;

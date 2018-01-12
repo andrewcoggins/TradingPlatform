@@ -5,6 +5,7 @@ import java.util.List;
 import brown.accounting.Account;
 import brown.agent.AbsAgent;
 import brown.messages.AbsMessage;
+import brown.tradeable.ITradeable;
 import brown.tradeable.library.Tradeable;
 
 /**
@@ -19,10 +20,10 @@ public class NegotiateRequestMessage extends AbsMessage {
   public final Integer fromID;
 
   public final Integer moniesRequested;
-  public final List<Tradeable> sharesRequested;
+  public final List<ITradeable> sharesRequested;
 
   public final Integer moniesOffered;
-  public final List<Tradeable> sharesOffered;
+  public final List<ITradeable> sharesOffered;
 
   public NegotiateRequestMessage() {
     super(null);
@@ -46,7 +47,7 @@ public class NegotiateRequestMessage extends AbsMessage {
    * @param sharesOffered
    */
   public NegotiateRequestMessage(Integer toID, Integer fromID, Integer moniesRequested,
-      List<Tradeable> sharesRequested, Integer moniesOffered, List<Tradeable> sharesOffered) {
+      List<ITradeable> sharesRequested, Integer moniesOffered, List<ITradeable> sharesOffered) {
     super(null);
 	this.toID = toID;
     this.fromID = fromID;

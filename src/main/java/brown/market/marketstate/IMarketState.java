@@ -6,8 +6,8 @@ import java.util.Set;
 import brown.accounting.BundleType;
 import brown.accounting.Order;
 import brown.accounting.bidbundle.AbsBidBundle;
-import brown.accounting.bidbundle.Allocation;
 import brown.accounting.bidbundle.IBidBundle;
+import brown.accounting.bidbundle.library.Allocation;
 import brown.channels.MechanismType;
 import brown.messages.library.BidMessage;
 import brown.messages.library.BidRequestMessage;
@@ -59,7 +59,7 @@ public interface IMarketState {
     //getters for all the allocation rules.
     public long getTime(); 
     
-    public Allocation getAllocation(); 
+    public IBidBundle getAllocation(); 
     
     public BidRequestMessage getRequest(); 
     
@@ -80,7 +80,7 @@ public interface IMarketState {
     //setters for allocation rule.
     public void setTime(long t);
     
-    public void setAllocation(Allocation alloc);
+    public void setAllocation(IBidBundle alloc);
 
     public void setRequest(BidRequestMessage request);
     

@@ -13,6 +13,7 @@ import org.junit.Test;
 import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.bid.ComplexBid;
+import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.tradeable.library.Tradeable;
 
 /**

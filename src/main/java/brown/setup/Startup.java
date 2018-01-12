@@ -17,7 +17,7 @@ import brown.accounting.Order;
 import brown.accounting.Transaction;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.SimpleBidBundle;
+import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.agent.AbsAgent;
 import brown.agent.AbsAgent;
 import brown.channels.MechanismType;

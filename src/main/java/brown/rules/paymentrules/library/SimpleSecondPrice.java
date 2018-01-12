@@ -9,9 +9,9 @@ import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.Order;
 import brown.accounting.bid.SimpleBid;
-import brown.accounting.bidbundle.Allocation;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.SimpleBidBundle;
+import brown.accounting.bidbundle.library.Allocation;
+import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.BidMessage;
 import brown.rules.paymentrules.IPaymentRule;
@@ -27,7 +27,6 @@ public class SimpleSecondPrice implements IPaymentRule {
     IBidBundle highest = state.getAllocation();
     Allocation bundle = (Allocation) highest;      
     //get the bids again.
-    System.out.println(highest);
     //loop through the tradeables, get the winner of each tradeable 
     List<Order> payments = new LinkedList<Order>();
     for (Tradeable t : bundle.getBids().bids.keySet()) {

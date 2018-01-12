@@ -10,9 +10,9 @@ import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.Order;
 import brown.accounting.bidbundle.AbsBidBundle;
-import brown.accounting.bidbundle.Allocation;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.SimpleBidBundle;
+import brown.accounting.bidbundle.library.Allocation;
+import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.BidMessage;
@@ -32,7 +32,6 @@ public class InternalState implements IMarketState {
   private final List<BidMessage> BIDS;
   private final Set<Tradeable> TRADEABLES;
   
-  private AbsBidBundle lastAlloc;
   private List<Order> lastPayments;
   private int ticks;
   private AbsBidBundle bundleReserve;
@@ -41,7 +40,7 @@ public class InternalState implements IMarketState {
   
   //allocation rule things.
   private long time; 
-  private Allocation alloc;
+  private IBidBundle alloc;
   private BidRequestMessage request;
   private boolean isPrivate; 
   private boolean isOver; 
@@ -76,7 +75,6 @@ public class InternalState implements IMarketState {
   
   public InternalState(Integer ID, Set<Tradeable> tradeables) {
     this.BIDS = new LinkedList<BidMessage>();
-    this.lastAlloc = null;
     this.lastPayments = null;
     this.TRADEABLES = tradeables;
     this.ID = ID;
@@ -181,7 +179,7 @@ public class InternalState implements IMarketState {
     return this.time; 
   }
   
-  public Allocation getAllocation() {
+  public IBidBundle getAllocation() {
     return this.alloc; 
   }
   
@@ -222,7 +220,7 @@ public class InternalState implements IMarketState {
     this.time = t; 
   }
   
-  public void setAllocation(Allocation alloc) {
+  public void setAllocation(IBidBundle alloc) {
     this.alloc = alloc; 
   }
   

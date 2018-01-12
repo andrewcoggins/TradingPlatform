@@ -12,12 +12,12 @@ import org.junit.Test;
 
 import brown.accounting.BundleType;
 import brown.accounting.MarketState;
-import brown.accounting.bidbundle.SimpleBidBundle;
+import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.tradeable.library.Tradeable;
 
 /**
  * test for the bid request message. 
- * I
+ * C
  * @author andrew
  *
  */

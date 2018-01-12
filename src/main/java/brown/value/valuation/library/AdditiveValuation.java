@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import brown.tradeable.AbsTradeable;
+import brown.tradeable.ITradeable;
 import brown.tradeable.library.Tradeable;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.generator.library.ValRandGenerator;

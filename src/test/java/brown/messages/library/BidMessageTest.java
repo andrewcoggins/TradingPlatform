@@ -12,8 +12,8 @@ import org.junit.Test;
 import brown.accounting.MarketState;
 import brown.accounting.bid.ComplexBid;
 import brown.accounting.bid.SimpleBid;
-import brown.accounting.bidbundle.ComplexBidBundle;
-import brown.accounting.bidbundle.SimpleBidBundle;
+import brown.accounting.bidbundle.library.ComplexBidBundle;
+import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.tradeable.library.Tradeable;
 
 /**

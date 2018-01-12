@@ -1,6 +1,7 @@
 package brown.tradeable.library;
 
-import brown.tradeable.AbsTradeable;
+import brown.tradeable.ITradeable;
+import brown.tradeable.TradeableType;
 
 /**
  * The good to be used in the back-end bidding logic. 
@@ -8,10 +9,11 @@ import brown.tradeable.AbsTradeable;
  * @author acoggins
  *
  */
-public class Tradeable extends AbsTradeable {
+public class Tradeable implements ITradeable {
   
   public final Integer ID; 
   public final Integer COUNT; 
+  public final TradeableType TYPE; 
   
   /**
    * empty constructor.
@@ -19,6 +21,7 @@ public class Tradeable extends AbsTradeable {
   public Tradeable() {
     this.ID = null; 
     this.COUNT = null; 
+    this.TYPE = null; 
   }
 //  
 //  /**
@@ -28,11 +31,13 @@ public class Tradeable extends AbsTradeable {
   public Tradeable(Integer id) {
     this.ID = id; 
     this.COUNT = 1; 
+    this.TYPE = TradeableType.Simple;
   }
   
   public Tradeable(Integer id, Integer count) {
     this.ID = id; 
     this.COUNT = count;
+    this.TYPE = TradeableType.Simple;
   }
 
   @Override

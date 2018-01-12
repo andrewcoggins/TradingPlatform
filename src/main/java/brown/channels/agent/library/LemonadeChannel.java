@@ -9,7 +9,7 @@ import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.SimpleBidBundle;
+import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
 import brown.agent.library.LemonadeAgent;

@@ -4,7 +4,8 @@ import java.util.List;
 
 import brown.accounting.Ledger;
 import brown.accounting.Order;
-import brown.accounting.bidbundle.Allocation;
+import brown.accounting.bidbundle.IBidBundle;
+import brown.accounting.bidbundle.library.Allocation;
 import brown.market.IMarket;
 import brown.market.marketstate.IMarketState;
 import brown.market.preset.AbsMarketPreset;
@@ -55,9 +56,9 @@ public class Market implements IMarket {
   @Override
   public TradeRequestMessage constructTradeRequest(Integer ID) {
     //do something with the IR policy.
-    Allocation alloc = this.STATE.getAllocation();
+    IBidBundle alloc = this.STATE.getAllocation();
     if(alloc != null) {
-      this.QRULE.makeChannel(STATE, new Ledger(this.getID(), alloc));
+      this.QRULE.makeChannel(STATE, new Ledger(this.getID(), (Allocation) alloc));
       TradeRequestMessage request = this.STATE.getTRequest();
       return request;
     }

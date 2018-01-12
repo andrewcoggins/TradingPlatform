@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
+import brown.accounting.bidbundle.library.Allocation;
 import brown.tradeable.library.Tradeable;
 
 /**

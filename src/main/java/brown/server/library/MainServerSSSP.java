@@ -27,8 +27,6 @@ public class MainServerSSSP {
   
  
   public static void main(String[] args) throws InterruptedException {
-    //for now just gonna build this where you input things into this file.
-    //but later on i'd like to use command line input.
     List<AbsMarketPreset> allMarkets = new ArrayList<AbsMarketPreset>();
     List<AbsValueConfig> allValInfo = new ArrayList<AbsValueConfig>();
     //add whatever you want to do.
@@ -36,11 +34,9 @@ public class MainServerSSSP {
     for (int i = 0; i < 3; i++) {
       allTradeables.add(new Tradeable(i));
     }
-    //out valuation information and rules information.
+    //our valuation information and rules information.
     allValInfo.add(new SSSPConfig(allTradeables));
     allMarkets.add(new SimSecondPriceRules()); 
-//    allMarkets.add(new LemonadeRules());
-//    allValInfo.add(new NullConfig());
     new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo);
   }
   

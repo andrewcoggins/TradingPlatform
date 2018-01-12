@@ -328,10 +328,7 @@ public abstract class AbsServer {
 					auction.tick(System.currentTimeMillis());
 					if (auction.isOver() && closeable) {
 						toRemove.add(auction);
-						System.out.println("update all auction: getOrders()");
 						List<Order> winners = auction.getOrders();
-            System.out.println(winners); 
-						System.out.println(winners.size());
 						if (winners == null) {
 							continue;
 						}

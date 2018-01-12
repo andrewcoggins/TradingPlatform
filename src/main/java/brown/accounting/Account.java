@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import brown.tradeable.ITradeable;
 import brown.tradeable.library.Tradeable;
 
 /**
@@ -15,7 +16,7 @@ import brown.tradeable.library.Tradeable;
 public class Account {
 	public final Integer ID;
 	private double monies;
-	private List<Tradeable> tradeables;
+	private List<ITradeable> tradeables;
 	
 	/**
 	 * Kryo objects require a blank constructor
@@ -34,7 +35,7 @@ public class Account {
 	public Account(Integer ID) {
 		this.ID = ID;
 		this.monies = 0.0;
-		this.tradeables = new LinkedList<Tradeable>();
+		this.tradeables = new LinkedList<ITradeable>();
 	}
 	
 	/**
@@ -43,13 +44,13 @@ public class Account {
 	 * @param monies : starting monies
 	 * @param goods : starting goods
 	 */
-	public Account(Integer ID, double monies, List<Tradeable> goods) {
+	public Account(Integer ID, double monies, List<ITradeable> goods) {
 		this.ID = ID;
 		this.monies = monies;
 		if (goods != null) {
 			this.tradeables = goods;
 		}else{
-			this.tradeables = new LinkedList<Tradeable>();
+			this.tradeables = new LinkedList<ITradeable>();
 		}
 	}
 	
@@ -57,7 +58,7 @@ public class Account {
 	  return this.monies;
 	}
 	
-	public List<Tradeable> getGoods() {
+	public List<ITradeable> getGoods() {
 	  return this.tradeables;
 	}
 	
@@ -67,7 +68,7 @@ public class Account {
 	 * @param newGoods : additional goods 
 	 * @return updated Account
 	 */
-	public void add(double newMonies, List<Tradeable> newGoods) {
+	public void add(double newMonies, List<ITradeable> newGoods) {
 		if (newGoods == null) {
 			this.monies += newMonies;
 			return;
@@ -82,7 +83,7 @@ public class Account {
 	 * @param newGoods : additional good
 	 * @return updated Account
 	 */
-	public void add(double newMonies, Tradeable newGood) {
+	public void add(double newMonies, ITradeable newGood) {
 		if (newGood != null) {
 	    this.tradeables.add(newGood);
 		}
@@ -95,9 +96,9 @@ public class Account {
 	 * @param newGoods : additional good
 	 * @return updated Account
 	 */
-	public void add(double newMonies, Set<Tradeable> newGoods) {
+	public void add(double newMonies, Set<ITradeable> newGoods) {
 		if (newGoods != null) {
-	    List<Tradeable> unique = new LinkedList<Tradeable>();
+	    List<ITradeable> unique = new LinkedList<ITradeable>();
 	    unique.addAll(newGoods);
 	    this.tradeables.addAll(unique);
 		}
@@ -110,7 +111,7 @@ public class Account {
 	 * @param newGoods : goods to remove 
 	 * @return updated Account
 	 */
-	public void remove(double removeMonies, List<Tradeable> removeGoods) {
+	public void remove(double removeMonies, List<ITradeable> removeGoods) {
 		if (removeGoods != null) {
 	    this.tradeables.removeAll(removeGoods);
 		}
@@ -125,7 +126,7 @@ public class Account {
 	 * tradeable to be removed
 	 * @return updated account.
 	 */
-	public void remove(double removeMonies, Tradeable t) {
+	public void remove(double removeMonies, ITradeable t) {
 		if (t != null) {
 		  if (!this.tradeables.contains(t)) {
 		    return;
@@ -148,7 +149,7 @@ public class Account {
 	
 	public void clear() {
 	  this.monies = 0.0;
-	  this.tradeables = new LinkedList<Tradeable>();
+	  this.tradeables = new LinkedList<ITradeable>();
 	}
 	/**
 	 * copies this account.
@@ -156,8 +157,8 @@ public class Account {
 	 * copied account.
 	 */
 	public Account copyAccount() {
-		List<Tradeable> forAgent = new LinkedList<Tradeable>();
-		for (Tradeable t : this.tradeables) {
+		List<ITradeable> forAgent = new LinkedList<ITradeable>();
+		for (ITradeable t : this.tradeables) {
 			forAgent.add(t);
 		}
 		

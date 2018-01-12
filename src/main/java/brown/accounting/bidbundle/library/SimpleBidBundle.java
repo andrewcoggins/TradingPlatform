@@ -1,4 +1,4 @@
-package brown.accounting.bidbundle;
+package brown.accounting.bidbundle.library;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +7,8 @@ import java.util.Map.Entry;
 import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
+import brown.accounting.bidbundle.AbsBidBundle;
+import brown.accounting.bidbundle.IBidBundle;
 import brown.tradeable.library.Tradeable;
 
 

@@ -1,7 +1,9 @@
-package brown.accounting.bidbundle;
+package brown.accounting.bidbundle.library;
 
 import brown.accounting.BundleType;
 import brown.accounting.bid.SimpleBid;
+import brown.accounting.bidbundle.AbsBidBundle;
+import brown.accounting.bidbundle.IBidBundle;
 
 public class Allocation extends AbsBidBundle {
 

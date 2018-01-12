@@ -6,8 +6,8 @@ import java.util.Set;
 import brown.accounting.BundleType;
 import brown.accounting.Order;
 import brown.accounting.bidbundle.AbsBidBundle;
-import brown.accounting.bidbundle.Allocation;
 import brown.accounting.bidbundle.IBidBundle;
+import brown.accounting.bidbundle.library.Allocation;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.BidMessage;
@@ -114,7 +114,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public Allocation getAllocation() {
+  public IBidBundle getAllocation() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -174,7 +174,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public void setAllocation(Allocation alloc) {
+  public void setAllocation(IBidBundle alloc) {
     // TODO Auto-generated method stub
     
   }

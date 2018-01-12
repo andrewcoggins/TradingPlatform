@@ -8,5 +8,5 @@ package brown.accounting;
  *
  */
 public enum BundleType {
-	Simple, Complex
+	Simple, Complex, Lemonade
 }
