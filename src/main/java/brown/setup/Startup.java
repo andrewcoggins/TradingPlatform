@@ -42,7 +42,11 @@ import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.rules.clearingrules.IClearingRule;
 import brown.todeprecate.PaymentType;
+import brown.tradeable.TradeableType;
 import brown.tradeable.library.Tradeable;
+import brown.value.config.ComplexConfig;
+import brown.value.generator.AbsValuationGenerator;
+import brown.value.generator.library.NormalGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
@@ -115,6 +119,9 @@ public final class Startup {
 		kryo.register(SimpleValuation.class); 
 		kryo.register(AdditiveValuation.class);
 		kryo.register(Value.class);
+		kryo.register(NormalGenerator.class);
+		kryo.register(TradeableType.class);
+		kryo.register(AbsValuationGenerator.class);
 		return true;
 	}
 

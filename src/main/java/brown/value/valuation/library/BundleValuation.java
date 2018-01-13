@@ -29,6 +29,7 @@ import brown.value.valuationrepresentation.library.ComplexValuation;
  *
  */
 //TODO: keep shifting value.
+// 
 public class BundleValuation implements IDependentValuation {
   
   private Map<Set<Tradeable>, Value> valMap;
@@ -108,7 +109,7 @@ public class BundleValuation implements IDependentValuation {
                 }
                 Value sampledValue = new Value(-0.1);
                 while (sampledValue.value < highestValSubSet.value) {
-                  sampledValue = generator.makeValuation((Set) eCopy.values());
+                  sampledValue = generator.makeValuation(new HashSet<Tradeable>(eCopy.values()));
                 }
                 temp.put(eCopy, sampledValue);
               }

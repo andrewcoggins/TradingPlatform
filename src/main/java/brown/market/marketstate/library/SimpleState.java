@@ -66,13 +66,13 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public void setReserve(AbsBidBundle o) {
+  public void setReserve(IBidBundle o) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public AbsBidBundle getbundleReserve() {
+  public IBidBundle getbundleReserve() {
     // TODO Auto-generated method stub
     return null;
   }

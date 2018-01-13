@@ -40,9 +40,9 @@ public interface IMarketState {
     
     public int getTicks();  
     
-    public void setReserve(AbsBidBundle o); 
+    public void setReserve(IBidBundle o); 
     
-    public AbsBidBundle getbundleReserve(); 
+    public IBidBundle getbundleReserve(); 
     
     public void clearBids(); 
     

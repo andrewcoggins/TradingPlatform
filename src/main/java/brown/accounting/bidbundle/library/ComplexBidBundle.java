@@ -6,7 +6,6 @@ import java.util.Set;
 import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.bid.ComplexBid;
-import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.tradeable.library.Tradeable;
 
@@ -18,7 +17,7 @@ import brown.tradeable.library.Tradeable;
  * @author acoggins
  *
  */
-public class ComplexBidBundle extends AbsBidBundle {
+public class ComplexBidBundle implements IBidBundle {
 	private final ComplexBid BIDS;
 	private final BundleType BT;
 	

@@ -34,7 +34,7 @@ public class InternalState implements IMarketState {
   
   private List<Order> lastPayments;
   private int ticks;
-  private AbsBidBundle bundleReserve;
+  private IBidBundle bundleReserve;
   private boolean maximizing;
   
   
@@ -133,11 +133,11 @@ public class InternalState implements IMarketState {
     return this.ticks;
   } 
   
-  public void setReserve(AbsBidBundle o) {
+  public void setReserve(IBidBundle o) {
     this.bundleReserve = o;
   }
   
-  public AbsBidBundle getbundleReserve() {
+  public IBidBundle getbundleReserve() {
     return this.bundleReserve;
   }
   

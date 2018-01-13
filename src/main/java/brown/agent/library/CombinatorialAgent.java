@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import brown.accounting.MarketState;
-import brown.accounting.bidbundle.library.ComplexBidBundle;
+
 import brown.agent.AbsSimpleSealedAgent;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;
@@ -14,6 +13,7 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.ISetup;
+import brown.setup.library.SimpleSetup;
 import brown.tradeable.library.Tradeable;
 import brown.value.valuationrepresentation.library.ComplexValuation;
 
@@ -26,9 +26,9 @@ public class CombinatorialAgent extends AbsSimpleSealedAgent {
 
   private ComplexValuation privateValuation; 
   
-  public CombinatorialAgent(String host, int port, ISetup gameSetup)
+  public CombinatorialAgent(String host, int port)
       throws AgentCreationException {
-    super(host, port, gameSetup);
+    super(host, port, new SimpleSetup());
     // TODO Auto-generated constructor stub
   }
 
@@ -61,4 +61,8 @@ public class CombinatorialAgent extends AbsSimpleSealedAgent {
     simpleWrapper.xorBid(this, bidMap);
     }
   
+  public static void main(String[] args) throws AgentCreationException {
+    new CombinatorialAgent("localhost", 2121);
+    while(true){}
+  }
 }

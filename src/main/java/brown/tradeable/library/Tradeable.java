@@ -39,16 +39,15 @@ public class Tradeable implements ITradeable {
     this.COUNT = count;
     this.TYPE = TradeableType.Simple;
   }
-
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((COUNT == null) ? 0 : COUNT.hashCode());
     result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+    result = prime * result + ((TYPE == null) ? 0 : TYPE.hashCode());
     return result;
   }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -68,11 +67,14 @@ public class Tradeable implements ITradeable {
         return false;
     } else if (!ID.equals(other.ID))
       return false;
+    if (TYPE != other.TYPE)
+      return false;
     return true;
   }
-
   @Override
   public String toString() {
-    return "Tradeable [ID=" + ID + ", COUNT=" + COUNT + "]";
+    return "Tradeable [ID=" + ID + ", COUNT=" + COUNT + ", TYPE=" + TYPE + "]";
   }
+
+
 }

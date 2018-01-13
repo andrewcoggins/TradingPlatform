@@ -5,7 +5,7 @@ import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.IBidBundle;
 
-public class Allocation extends AbsBidBundle {
+public class Allocation implements IBidBundle {
 
   private final SimpleBid ALLOCATION;
   

@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
-import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.tradeable.library.Tradeable;
 
@@ -16,7 +15,7 @@ import brown.tradeable.library.Tradeable;
  * The built-in BidBundle is called SimpleBidBundle,
  * and holds one double. 
  */
-public class SimpleBidBundle extends AbsBidBundle {
+public class SimpleBidBundle implements IBidBundle {
 	private final Map<Tradeable, MarketState> BIDS;
 	private final BundleType BT;
 	

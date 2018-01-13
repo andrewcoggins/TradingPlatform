@@ -1,6 +1,5 @@
 package brown.rules.paymentrules.library;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +11,7 @@ import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.rules.paymentrules.IPaymentRule;
 import brown.todeprecate.PaymentType;
+import brown.tradeable.library.ComplexTradeable;
 import brown.tradeable.library.Tradeable;
 
 /**
@@ -30,10 +30,8 @@ public class ComFirstPricePayment implements IPaymentRule {
     for (Set<Tradeable> aSet :originalMap.keySet()) {
      double price = originalMap.get(aSet).PRICE;
      int recipient = originalMap.get(aSet).AGENTID;
-     for(Tradeable t : aSet)
-       // hacky?
-       // actually, should it matter? It's just going to be put in the account.
-       orders.add(new Order(recipient, null, price / aSet.size(), 1, t));
+     ComplexTradeable comTradeable = new ComplexTradeable(0, aSet);
+     orders.add(new Order(recipient, null, price, 1, comTradeable));
     }
    state.setPayments(orders);
   }

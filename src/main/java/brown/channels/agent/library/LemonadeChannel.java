@@ -72,7 +72,7 @@ public class LemonadeChannel implements IAgentChannel {
   public void bid(AbsAgent agent, Integer position) {
     Map<Tradeable, MarketState> bids = new HashMap<Tradeable, MarketState>();
     bids.put(new Tradeable(0), new MarketState(agent.ID, (double) position));
-    AbsBidBundle toSend = new SimpleBidBundle(bids);
+    IBidBundle toSend = new SimpleBidBundle(bids);
     agent.CLIENT.sendTCP(new BidMessage(0, toSend, this.ID, agent.ID));
   }
   

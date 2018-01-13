@@ -6,7 +6,6 @@ import brown.accounting.Account;
 import brown.agent.AbsAgent;
 import brown.messages.AbsMessage;
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.Tradeable;
 
 /**
  * Direct Negotiation

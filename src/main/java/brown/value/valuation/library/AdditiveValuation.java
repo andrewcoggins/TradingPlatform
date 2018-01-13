@@ -42,7 +42,7 @@ public class AdditiveValuation implements IIndependentValuation {
     }
   }
   
-  /**import brown.value.valuationrepresentation.AValuationRepresentation;
+  /**
    * constructor with an input IValuationGenerator and its associated parameters.
    * @param valGenerator
    * @param goods

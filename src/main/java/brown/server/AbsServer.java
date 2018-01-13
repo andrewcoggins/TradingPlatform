@@ -171,6 +171,7 @@ public abstract class AbsServer {
 		    valueReg = new ValuationRegistrationMessage(agentID, privateVal, simpleVal);
 		    theServer.sendToTCP(connection.getID(), valueReg);
 		  } else if (marketConfig.valueScheme == ValuationType.Complex) {
+        System.out.println("Got here instead");
 		    //complex valuations: the agent gets a valuation over complex goods.
 		    BundleValuation complexVal = 
 		        new BundleValuation(marketConfig.aGenerator, true, marketConfig.allGoods);
