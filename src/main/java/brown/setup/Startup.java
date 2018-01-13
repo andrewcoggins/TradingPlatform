@@ -27,7 +27,6 @@ import brown.channels.agent.library.LemonadeChannel;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.channels.server.library.CDAServerChannel;
-import brown.market.library.LMSRBackend;
 import brown.messages.AbsMessage;
 import brown.messages.library.AckMessage;
 import brown.messages.library.BankUpdateMessage;
@@ -90,7 +89,6 @@ public final class Startup {
 		kryo.register(Account.class);
 		kryo.register(TradeRequestMessage.class);
 		kryo.register(AckMessage.class);
-		kryo.register(LMSRBackend.class);
 		kryo.register(Timestamp.class);
 		kryo.register(Date.class);
 		kryo.register(IBidBundle.class);

@@ -5,7 +5,6 @@ import java.util.Set;
 
 import brown.accounting.BundleType;
 import brown.accounting.Order;
-import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.Allocation;
 import brown.channels.MechanismType;
