@@ -2,17 +2,13 @@ package brown.channels.agent.library;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import brown.accounting.Ledger;
 import brown.accounting.MarketState;
-import brown.accounting.bid.SimpleBid;
-import brown.accounting.bidbundle.AbsBidBundle;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
-import brown.agent.library.LemonadeAgent;
 import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;
 import brown.messages.library.BidMessage;
