@@ -1,6 +1,7 @@
 package brown.rules.allocationrules.library; 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -77,10 +78,8 @@ public class LemonadeAllocation implements IAllocationRule {
       }
       
       for (int w : winners) { 
-        System.out.println(winners.size());
-        System.out.println(w);
         double payoff = numGlasses / winners.size();
-        System.out.println(payoff);
+        //System.out.println(payoff);
         Order earned = new Order(w,null,-1 * payoff,1,new Tradeable(0));
         payoffs.add(earned);
       }      

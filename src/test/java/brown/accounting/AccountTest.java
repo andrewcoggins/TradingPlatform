@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import brown.tradeable.ITradeable;
 import brown.tradeable.library.Tradeable;
 
 
@@ -21,7 +22,11 @@ public class AccountTest  {
     List<Tradeable> goods = new LinkedList<Tradeable>();
     goods.add(new Tradeable(0)); 
     goods.add(new Tradeable(1));
-    Account acctTwo = new Account(1, 1.0, goods);
+    Account acctTwo = new Account(1);
+    acctTwo.add(1.0);
+    for (Tradeable good : goods) {
+      acctTwo.add(0.0, good);
+    }
     // test that all the accessors work
     assertTrue(acctOne.getMonies() == 0.0);
     assertTrue(acctOne.getGoods().equals(new LinkedList<Tradeable>()));
@@ -39,9 +44,11 @@ public class AccountTest  {
     goodsThree.add(new Tradeable(0)); 
     assertTrue(acctOne.getGoods().equals(goodsThree));
     // adding a list of tradeables
-    goodsThree.add(new Tradeable(1));  
-    acctOne.add(1.0, goodsThree);
-    assertTrue(acctOne.getMonies() == 2.0);
+    goodsThree.add(new Tradeable(1)); 
+    for (Tradeable t : goodsThree) {
+      acctOne.add(1.0, t);
+    }
+    assertTrue(acctOne.getMonies() == 3.0);
     // to make goodsThree equal to what should be in the account.
     goodsThree.add(1, new Tradeable(0));
     assertEquals(acctOne.getGoods(), goodsThree);
@@ -52,13 +59,15 @@ public class AccountTest  {
     Set<Tradeable> someTradeables = new HashSet<Tradeable>();
     someTradeables.add(new Tradeable(0));
     someTradeables.add(new Tradeable(1));
-    acctOne.add(1.0, someTradeables);
-    assertTrue(acctOne.getMonies() == 1.0); 
+    for (Tradeable t : someTradeables) {
+      acctOne.add(0.0, t);
+    }
+    assertTrue(acctOne.getMonies() == 0.0); 
     for (Tradeable t : someTradeables) {
       assertTrue(acctOne.getGoods().contains(t)); 
     }
-    for (Tradeable t : acctOne.getGoods()) {
-      assertTrue(someTradeables.contains(t));
+    for (ITradeable t : acctOne.getGoods()) {
+      assertTrue(someTradeables.contains((Tradeable) t));
     }
     // test just money add. 
     acctOne.clear(); 
@@ -81,14 +90,26 @@ public class AccountTest  {
     // item in set in account. 
     acctOne.clear();
     tList.add(new Tradeable(1)); 
-    acctOne.add(1.0, tList);
-    acctOne.remove(1.0, tList);
+    for (Tradeable t : tList) {
+      acctOne.add(0.0, t);
+      acctOne.remove(0.0, t);
+    }
     assertTrue(acctOne.getMonies() == 0.0);
     assertEquals(acctOne.getGoods(), new LinkedList<Tradeable>());
     // test copying account
-    acctOne.add(1.0, tList);
+    for (Tradeable t : tList){ 
+      acctOne.add(1.0, t);
+    }
     Account acctThree = acctOne.copyAccount(); 
     assertTrue(acctOne.equals(acctThree)); 
+    //try the ITradeables
+    List<ITradeable> aList = new LinkedList<ITradeable>();
+    aList.add(new Tradeable(0));
+    Account acctFour = new Account(0);
+    acctFour.add(5.0, aList);
+    assertTrue(acctFour.getMonies() == 5.0);
+    assertEquals(acctFour.getGoods(), aList);
+    assertEquals((Tradeable) acctFour.getGoods().get(0), aList.get(0));
     // all good.
   }
 }

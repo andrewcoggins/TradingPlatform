@@ -20,7 +20,8 @@ public class BankUpdateMessageTest {
   @Test 
   public void testBankUpdateMessage() { 
     // just test constructor.
-    Account anAccount = new Account(0, 1000.0, new LinkedList<Tradeable>());
+    Account anAccount = new Account(0);
+    anAccount.add(1000);
     Account anotherAccount = anAccount.copyAccount(); 
     anotherAccount.add(-100.0);
     BankUpdateMessage bu = new BankUpdateMessage(0, anAccount, anotherAccount);

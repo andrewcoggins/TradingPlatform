@@ -19,12 +19,20 @@ public class AccountManagerTest {
     List<Tradeable> oneGoods = new LinkedList<Tradeable>();
     oneGoods.add(new Tradeable(0)); 
     oneGoods.add(new Tradeable(1));
-    Account one = new Account(1, 10.0, oneGoods);
+    Account one = new Account(1);
+    one.add(10.0);
+    for (Tradeable t : oneGoods) {
+      one.add(0.0, t);
+    }
     testManager.setAccount(1, one);
     List<Tradeable> twoGoods = new LinkedList<Tradeable>();
     twoGoods.add(new Tradeable(2)); 
     twoGoods.add(new Tradeable(3));
-    Account two = new Account(1, 20.0, twoGoods);
+    Account two = new Account(1);
+    two.add(20.0);
+    for (Tradeable t : twoGoods) {
+      two.add(0.0, t);
+    }
     testManager.setAccount(2, two);
     assertTrue(testManager.containsAcct(1));
     assertTrue(testManager.containsAcct(2));

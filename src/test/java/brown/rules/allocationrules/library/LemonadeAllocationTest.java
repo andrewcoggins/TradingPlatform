@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import brown.accounting.Account;
 import brown.accounting.Order;
 import brown.accounting.bidbundle.library.LemonadeBidBundle;
 import brown.market.marketstate.library.InternalState;
@@ -24,8 +25,12 @@ import brown.tradeable.library.Tradeable;
  */
 public class LemonadeAllocationTest { 
   
+  /*
+   * basic tests.
+   */
   @Test 
   public void testLemonadeAllocation() {
+    Account agentAccount = new Account(0);
     //create lemonade allocation
     LemonadeAllocation lem = new LemonadeAllocation();
     //create internal state.
@@ -48,19 +53,84 @@ public class LemonadeAllocationTest {
     BidMessage aBid = new BidMessage(1, new LemonadeBidBundle(1), 1, 1);
     state.addBid(aBid);
     lem.setAllocation(state);
-    assertEquals(state.getPayments().get(0), new Order(1, null, -2.0, 1, new Tradeable(0)));
-    //a larger game
-//    LemonadeAllocation lemTwo = new LemonadeAllocation();
-//    InternalState stateTwo = new InternalState(0, allTradeables);
-//    BidMessage bidTwo = new BidMessage(2, new LemonadeBidBundle(2), 1, 1);
-//    stateTwo.addBid(aBid);
-//    stateTwo.addBid(bidTwo);
-//    lemTwo.setAllocation(stateTwo);
-//    List<Order> payments = new LinkedList<Order>();
-//    payments.add(new Order(1, null, -1.0, 1, new Tradeable(0)));
-//    payments.add(new Order(2, null, -1.0, 1, new Tradeable(0)));
-//    assertEquals(stateTwo.getPayments(), payments);
-   
+    for (Order o : state.getPayments()) {
+      agentAccount.add(-1 * o.COST);
+    }
+    assertTrue(agentAccount.getMonies() == 24.0);
+    agentAccount.add(-24.0);
+    //add another player and test again. 
+    InternalState stateTwo = new InternalState(0, allTradeables);
+    Account anotherAgentAccount = new Account(2);
+    BidMessage secondBid = new BidMessage(2, new LemonadeBidBundle(2), 1, 2);
+    stateTwo.addBid(aBid);
+    stateTwo.addBid(secondBid);
+    lem.setAllocation(stateTwo);
+    for(Order o : stateTwo.getPayments()) {
+      if (o.TO == 1) {
+        agentAccount.add(-1 * o.COST);
+      } else if (o.TO == 2) {
+        anotherAgentAccount.add(-1 * o.COST);
+      }
+    }
+    assertTrue(agentAccount.getMonies() == 12.0);
+    assertTrue(agentAccount.getMonies() == 12.0);
+  }
+  
+  /*
+   * test with one agent on every space. 
+   */
+  @Test
+  public void testLemonadeAllocationAgain() {
+    LemonadeAllocation lem = new LemonadeAllocation();
+    List<Account> accounts = new LinkedList<Account>();
+    for(int i = 0; i < 12; i++) { 
+      accounts.add(new Account(i));
+    }
+    InternalState state = new InternalState(0, null);
+    List<BidMessage> allBids = new LinkedList<BidMessage>();
+    for(int i = 0; i < 12; i++) {
+      state.addBid(new BidMessage(i, new LemonadeBidBundle(i), 1, i));
+    }
+    lem.setAllocation(state);
+    for (Order o : state.getPayments()) {
+      accounts.get(o.TO).add(-1 * o.COST);
+    }
+    for(int i = 0; i < 12; i++) {
+      assertTrue(accounts.get(i).getMonies() == 2.0);
+    }
+  }
+  
+  /*
+   * test with multiple agents on particular spaces.
+   */
+  @Test
+  public void testLemonadeAllocationThree() {
+    LemonadeAllocation lem = new LemonadeAllocation();
+    List<Account> accounts = new LinkedList<Account>();
+    for (int i = 0; i < 12; i++) {
+      accounts.add(new Account(i));
+    }
+    InternalState state = new InternalState(0, null);
+    for(int i = 0; i < 12; i++) {
+      if (i < 3) state.addBid(new BidMessage(i, new LemonadeBidBundle(0), 1, i));
+      else if (i >= 3 && i < 6) state.addBid(new BidMessage(i, new LemonadeBidBundle(3), 1, i));
+      else if (i >= 6 && i < 9) state.addBid(new BidMessage(i, new LemonadeBidBundle(6), 1, i));
+      else state.addBid(new BidMessage(i, new LemonadeBidBundle(9), 1, i));
+    }
+    lem.setAllocation(state);
+    for (Order o : state.getPayments()) {
+      accounts.get(o.TO).add(-1 * o.COST);
+    }
+    for(int i = 0; i < 12; i++) {
+      assertTrue(accounts.get(i).getMonies() == 2.0);
+    }
+  }
+  
+  /*
+   * something else...
+   */
+  @Test
+  public void testLemonadeAllocationFour() {
     
   }
 }
