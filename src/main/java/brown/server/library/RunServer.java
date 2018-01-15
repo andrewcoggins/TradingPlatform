@@ -33,7 +33,8 @@ public class RunServer extends AbsServer {
   }
   
   public void runGame(List<AbsMarketPreset> presets, 
-      List<AbsValueConfig> valueInfo) throws InterruptedException {
+      List<AbsValueConfig> valueInfo, Double initialMonies,
+      List<Tradeable> initialGoods) throws InterruptedException {
     this.valueConfig = new HashMap<Integer, AbsValueConfig>(); 
     for (AbsMarketPreset ruleSet : presets) {
       this.manager.open(new Market(presets.get(presets.indexOf(ruleSet)),

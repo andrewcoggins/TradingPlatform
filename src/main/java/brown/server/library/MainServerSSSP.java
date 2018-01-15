@@ -37,7 +37,7 @@ public class MainServerSSSP {
     //our valuation information and rules information.
     allValInfo.add(new SSSPConfig(allTradeables));
     allMarkets.add(new SimSecondPriceRules()); 
-    new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo);
+    new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo, 1000.0, null);
   }
   
 }

@@ -26,6 +26,6 @@ public class MainServerLemonade {
     // our valuation information and rules information.
     allValInfo.add(new NullConfig());
     allMarkets.add(new LemonadeRules()); 
-    new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo);
+    new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo, null, null);
   }
 }

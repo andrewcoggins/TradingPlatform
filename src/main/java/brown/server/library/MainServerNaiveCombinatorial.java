@@ -30,6 +30,6 @@ public class MainServerNaiveCombinatorial {
     goods.add(new Tradeable(1));
     allValInfo.add(new ComplexConfig(goods));
     allMarkets.add(new ComSecondPriceRules()); 
-    new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo);
+    new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo, 1000.0, null);
   }
 }
