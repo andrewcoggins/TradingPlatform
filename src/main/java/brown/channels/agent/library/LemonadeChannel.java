@@ -6,6 +6,7 @@ import java.util.Map;
 import brown.accounting.Ledger;
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.IBidBundle;
+import brown.accounting.bidbundle.library.LemonadeBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
@@ -66,9 +67,7 @@ public class LemonadeChannel implements IAgentChannel {
 
   
   public void bid(AbsAgent agent, Integer position) {
-    Map<Tradeable, MarketState> bids = new HashMap<Tradeable, MarketState>();
-    bids.put(new Tradeable(0), new MarketState(agent.ID, (double) position));
-    IBidBundle toSend = new SimpleBidBundle(bids);
+    IBidBundle toSend = new LemonadeBidBundle(position);
     agent.CLIENT.sendTCP(new BidMessage(0, toSend, this.ID, agent.ID));
   }
   

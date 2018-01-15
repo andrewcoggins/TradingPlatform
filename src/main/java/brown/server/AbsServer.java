@@ -572,10 +572,8 @@ public abstract class AbsServer {
 		if (registration.getID() == null) {
 			return null;
 		}
-
 		this.theServer.sendToTCP(connection.getID(), new AckMessage(registration,
 				false));
-
 		Collection<Integer> allIds = connections.values();
 		Integer theID = registration.getID();
 		if (allIds.contains(theID)) {
@@ -591,14 +589,12 @@ public abstract class AbsServer {
 				}
 			}
 			connections.remove(oldConnection);
-
 			return null;
 		} else {
 			theID = new Integer((int) (Math.random() * 1000000000));
 			while (allIds.contains(theID)) {
 				theID = new Integer((int) (Math.random() * 1000000000));
 			}
-
 			privateToPublic.put(theID, agentCount++);
 			Account newAccount = new Account(theID);
 			if (this.initialMonies != null) newAccount.add(initialMonies);
@@ -609,7 +605,6 @@ public abstract class AbsServer {
 			this.acctManager.setAccount(theID, newAccount);
 			connections.put(connection, theID);
 			Logging.log("[-] registered " + theID);
-
 			return theID;
 		}
 	}

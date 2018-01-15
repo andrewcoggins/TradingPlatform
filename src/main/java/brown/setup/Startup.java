@@ -17,6 +17,7 @@ import brown.accounting.Order;
 import brown.accounting.Transaction;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
+import brown.accounting.bidbundle.library.LemonadeBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.agent.AbsAgent;
 import brown.agent.AbsAgent;
@@ -120,6 +121,7 @@ public final class Startup {
 		kryo.register(NormalGenerator.class);
 		kryo.register(TradeableType.class);
 		kryo.register(AbsValuationGenerator.class);
+		kryo.register(LemonadeBidBundle.class);
 		return true;
 	}
 

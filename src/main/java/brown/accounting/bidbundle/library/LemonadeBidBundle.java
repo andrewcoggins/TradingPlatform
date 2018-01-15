@@ -9,6 +9,14 @@ public class LemonadeBidBundle implements IBidBundle {
   private Integer numberBid; 
   private BundleType bType; 
   
+  /**
+   * for kryo do not use.
+   */
+  public LemonadeBidBundle() {
+    this.numberBid = null; 
+    this.bType = null;  
+  }
+  
   public LemonadeBidBundle(Integer numberBid) {
     this.numberBid = numberBid;
     this.bType = BundleType.Lemonade;
