@@ -1,5 +1,6 @@
 package brown.accounting.bid;
 
+
 /**
  * abstract class for the lowest level bid datatype, 
  * which is a wrapped hashmap. Motivation for this is 
@@ -11,4 +12,5 @@ package brown.accounting.bid;
  */
 public abstract class AbsBid {
   
+
 }

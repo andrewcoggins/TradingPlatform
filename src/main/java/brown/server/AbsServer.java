@@ -22,12 +22,12 @@ import brown.market.IMarket;
 import brown.market.library.Market;
 import brown.messages.library.AckMessage;
 import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.MarketOrderMessage;
 import brown.messages.library.NegotiateRequestMessage;
 import brown.messages.library.RegistrationMessage;
-import brown.messages.library.TradeMessage;
+import brown.messages.library.BargainMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.Logging;
@@ -118,16 +118,16 @@ public abstract class AbsServer {
 					return;
 				}
 
-				if (message instanceof BidMessage) {
+				if (message instanceof TradeMessage) {
 					Logging.log("[-] bid recieved from " + id);
-					aServer.onBid(connection, id, (BidMessage) message);
+					aServer.onBid(connection, id, (TradeMessage) message);
 				} else if (message instanceof NegotiateRequestMessage) {
 					Logging.log("[-] traderequest recieved from " + id);
 					aServer.onTradeRequest(connection, id,
 							(NegotiateRequestMessage) message);
-				} else if (message instanceof TradeMessage) {
+				} else if (message instanceof BargainMessage) {
 					Logging.log("[-] trade recieved from " + id);
-					aServer.onTrade(connection, (TradeMessage) message);
+					aServer.onTrade(connection, (BargainMessage) message);
 				} else if (message instanceof MarketOrderMessage) {
 					Logging.log("[-] limitorder recieved from " + id);
 					Logging.log("ERROR: Limit order functionality not present");
@@ -217,7 +217,7 @@ public abstract class AbsServer {
 	 * 
 	 * @param trade - tuple of trade request and acceptance boolean
 	 */
-	protected void onTrade(Connection connection, TradeMessage trade) {
+	protected void onTrade(Connection connection, BargainMessage trade) {
 		Integer privateTo = connections.get(connection);
 		Integer privateFrom = publicToPrivate(trade.tradeRequest.fromID);
 		if (privateFrom == null) {
@@ -264,7 +264,7 @@ public abstract class AbsServer {
 	 * This will handle what happens when an agent sends in a bid in response to
 	 * a BidRequest for an auction
 	 */
-	protected void onBid(Connection connection, Integer privateID, BidMessage bid) {
+	protected void onBid(Connection connection, Integer privateID, TradeMessage bid) {
 		Market auction = this.manager.getIMarket(bid.AuctionID);
 		if (auction != null) {
 			synchronized (auction) {

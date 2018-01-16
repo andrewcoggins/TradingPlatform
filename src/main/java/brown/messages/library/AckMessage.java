@@ -11,7 +11,7 @@ import brown.messages.AbsMessage;
  */
 public class AckMessage extends AbsMessage {
 	public final MarketOrderMessage failedLO;
-	public final BidMessage failedBR;
+	public final TradeMessage failedBR;
 	public final NegotiateRequestMessage failedTR;
 	public final boolean REJECTED;
 	
@@ -46,7 +46,7 @@ public class AckMessage extends AbsMessage {
 	 * @param ID : rejection ID
 	 * @param bid : rejected bid
 	 */
-	public AckMessage(Integer ID, BidMessage bid, boolean rejected) {
+	public AckMessage(Integer ID, TradeMessage bid, boolean rejected) {
 		super(ID);
 		this.failedBR = bid;
 		this.failedTR = null;

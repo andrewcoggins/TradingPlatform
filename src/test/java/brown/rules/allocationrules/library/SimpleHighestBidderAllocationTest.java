@@ -17,7 +17,7 @@ import brown.accounting.bidbundle.library.Allocation;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.market.marketstate.library.InternalState;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.tradeable.library.Tradeable;
 
 /**
@@ -40,7 +40,7 @@ public class SimpleHighestBidderAllocationTest {
     Map<Tradeable, MarketState> aMap = new HashMap<Tradeable, MarketState>();
     aMap.put(new Tradeable(0), new MarketState(1, 1.0));
     SimpleBidBundle sim = new SimpleBidBundle(aMap);
-    BidMessage b = new BidMessage(1, sim, 1, 1);
+    TradeMessage b = new TradeMessage(1, sim, 1, 1);
     state.addBid(b);
     s.setAllocation(state);
     Allocation goods = (Allocation) state.getAllocation();
@@ -64,7 +64,7 @@ public class SimpleHighestBidderAllocationTest {
       aMap.put(new Tradeable(i), new MarketState(1, 1.0));
     }
     SimpleBidBundle sim = new SimpleBidBundle(aMap);
-    BidMessage b = new BidMessage(1, sim, 1, 1);
+    TradeMessage b = new TradeMessage(1, sim, 1, 1);
     state.addBid(b);
     s.setAllocation(state);
     Allocation goods = (Allocation) state.getAllocation();
@@ -95,8 +95,8 @@ public class SimpleHighestBidderAllocationTest {
     }
     SimpleBidBundle sim = new SimpleBidBundle(aMap);
     SimpleBidBundle simTwo = new SimpleBidBundle(aMapTwo);
-    BidMessage b = new BidMessage(1, sim, 1, 1);
-    BidMessage bTwo = new BidMessage(2, simTwo, 2, 2);
+    TradeMessage b = new TradeMessage(1, sim, 1, 1);
+    TradeMessage bTwo = new TradeMessage(2, simTwo, 2, 2);
     state.addBid(b);
     state.addBid(bTwo);
     s.setAllocation(state);
@@ -130,8 +130,8 @@ public class SimpleHighestBidderAllocationTest {
     }
     SimpleBidBundle sim = new SimpleBidBundle(aMap);
     ComplexBidBundle simTwo = new ComplexBidBundle(aMapTwo, 0);
-    BidMessage b = new BidMessage(1, sim, 1, 1);
-    BidMessage bTwo = new BidMessage(2, simTwo, 2, 2);
+    TradeMessage b = new TradeMessage(1, sim, 1, 1);
+    TradeMessage bTwo = new TradeMessage(2, simTwo, 2, 2);
     state.addBid(b);
     state.addBid(bTwo);
     s.setAllocation(state);
@@ -160,7 +160,7 @@ public class SimpleHighestBidderAllocationTest {
       Map<Tradeable, MarketState> aMap = new HashMap<Tradeable, MarketState>();
       aMap.put(new Tradeable(0), new MarketState(bidder, bidderToValuation.get(bidder)));
       SimpleBidBundle sim = new SimpleBidBundle(aMap);
-      BidMessage aBid = new BidMessage(bidder, sim, 0, bidder);
+      TradeMessage aBid = new TradeMessage(bidder, sim, 0, bidder);
       state.addBid(aBid);
     }
     s.setAllocation(state);
@@ -205,7 +205,7 @@ public class SimpleHighestBidderAllocationTest {
         aMap.put(new Tradeable(i), new MarketState(bidder, bidderToValuations.get(bidder).get(i)));
       }
       SimpleBidBundle sim = new SimpleBidBundle(aMap);
-      BidMessage aBid = new BidMessage(bidder, sim, 0, bidder);
+      TradeMessage aBid = new TradeMessage(bidder, sim, 0, bidder);
       state.addBid(aBid);
     }
     s.setAllocation(state);

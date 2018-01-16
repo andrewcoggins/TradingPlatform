@@ -3,7 +3,7 @@ package brown.market;
 import java.util.List;
 
 import brown.accounting.Order;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
 
@@ -46,7 +46,7 @@ public interface IMarket {
    * @param bid
    * @return
    */
-  public boolean handleBid(BidMessage bid);
+  public boolean handleBid(TradeMessage bid);
   
   public List<Order> getOrders();
   

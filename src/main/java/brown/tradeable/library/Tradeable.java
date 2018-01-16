@@ -39,6 +39,16 @@ public class Tradeable implements ITradeable {
     this.COUNT = count;
     this.TYPE = TradeableType.Simple;
   }
+  
+  public Integer getID() {
+    return this.ID; 
+  }
+  
+  public Integer getCount() {
+    return this.COUNT;
+  }
+  
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -71,6 +81,7 @@ public class Tradeable implements ITradeable {
       return false;
     return true;
   }
+  
   @Override
   public String toString() {
     return "Tradeable [ID=" + ID + ", COUNT=" + COUNT + ", TYPE=" + TYPE + "]";

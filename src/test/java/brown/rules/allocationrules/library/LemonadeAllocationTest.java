@@ -14,7 +14,7 @@ import brown.accounting.Account;
 import brown.accounting.Order;
 import brown.accounting.bidbundle.library.LemonadeBidBundle;
 import brown.market.marketstate.library.InternalState;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.tradeable.library.Tradeable;
 
 /**
@@ -50,7 +50,7 @@ public class LemonadeAllocationTest {
     //lem.setAllocation(state);
     //assertEquals(state.getAllocation(), null);
     //one bid. 
-    BidMessage aBid = new BidMessage(1, new LemonadeBidBundle(1), 1, 1);
+    TradeMessage aBid = new TradeMessage(1, new LemonadeBidBundle(1), 1, 1);
     state.addBid(aBid);
     lem.setAllocation(state);
     for (Order o : state.getPayments()) {
@@ -61,7 +61,7 @@ public class LemonadeAllocationTest {
     //add another player and test again. 
     InternalState stateTwo = new InternalState(0, allTradeables);
     Account anotherAgentAccount = new Account(2);
-    BidMessage secondBid = new BidMessage(2, new LemonadeBidBundle(2), 1, 2);
+    TradeMessage secondBid = new TradeMessage(2, new LemonadeBidBundle(2), 1, 2);
     stateTwo.addBid(aBid);
     stateTwo.addBid(secondBid);
     lem.setAllocation(stateTwo);
@@ -87,9 +87,9 @@ public class LemonadeAllocationTest {
       accounts.add(new Account(i));
     }
     InternalState state = new InternalState(0, null);
-    List<BidMessage> allBids = new LinkedList<BidMessage>();
+    List<TradeMessage> allBids = new LinkedList<TradeMessage>();
     for(int i = 0; i < 12; i++) {
-      state.addBid(new BidMessage(i, new LemonadeBidBundle(i), 1, i));
+      state.addBid(new TradeMessage(i, new LemonadeBidBundle(i), 1, i));
     }
     lem.setAllocation(state);
     for (Order o : state.getPayments()) {
@@ -112,10 +112,10 @@ public class LemonadeAllocationTest {
     }
     InternalState state = new InternalState(0, null);
     for(int i = 0; i < 12; i++) {
-      if (i < 3) state.addBid(new BidMessage(i, new LemonadeBidBundle(0), 1, i));
-      else if (i >= 3 && i < 6) state.addBid(new BidMessage(i, new LemonadeBidBundle(3), 1, i));
-      else if (i >= 6 && i < 9) state.addBid(new BidMessage(i, new LemonadeBidBundle(6), 1, i));
-      else state.addBid(new BidMessage(i, new LemonadeBidBundle(9), 1, i));
+      if (i < 3) state.addBid(new TradeMessage(i, new LemonadeBidBundle(0), 1, i));
+      else if (i >= 3 && i < 6) state.addBid(new TradeMessage(i, new LemonadeBidBundle(3), 1, i));
+      else if (i >= 6 && i < 9) state.addBid(new TradeMessage(i, new LemonadeBidBundle(6), 1, i));
+      else state.addBid(new TradeMessage(i, new LemonadeBidBundle(9), 1, i));
     }
     lem.setAllocation(state);
     for (Order o : state.getPayments()) {

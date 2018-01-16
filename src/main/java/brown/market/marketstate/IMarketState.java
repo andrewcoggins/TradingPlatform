@@ -8,7 +8,7 @@ import brown.accounting.Order;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.Allocation;
 import brown.channels.MechanismType;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
@@ -23,11 +23,11 @@ import brown.todeprecate.PaymentType;
 public interface IMarketState {
 
     //methods not directly associated with a rule. Look for redundancies here.
-    public void addBid(BidMessage bid);
+    public void addBid(TradeMessage bid);
     
     public void clear();
     
-    public List<BidMessage> getBids(); 
+    public List<TradeMessage> getBids(); 
     
     public Integer getID(); 
     
@@ -68,7 +68,7 @@ public interface IMarketState {
     
     public BundleType getBundleType(); 
     
-    public Set<BidMessage> getReserve(); 
+    public Set<TradeMessage> getReserve(); 
     
     public boolean getValid();
     
@@ -89,7 +89,7 @@ public interface IMarketState {
     
     public void setBundleType(BundleType b); 
     
-    public void setReserve(Set<BidMessage> r); 
+    public void setReserve(Set<TradeMessage> r); 
     
     public void setValid(boolean v);
     

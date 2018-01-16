@@ -24,16 +24,16 @@ public class AckMessageTest {
     AckMessage ackOne = new AckMessage(new RegistrationMessage(0), true);
     AckMessage ackTwo = new AckMessage(new RegistrationMessage(0), false); 
     AckMessage ackThree = new AckMessage(0, 
-        new BidMessage(0, new SimpleBidBundle(), 0, 0), true); 
+        new TradeMessage(0, new SimpleBidBundle(), 0, 0), true); 
     AckMessage ackFour = new AckMessage(1, 
-        new BidMessage(0, new SimpleBidBundle(), 0, 0), false); 
+        new TradeMessage(0, new SimpleBidBundle(), 0, 0), false); 
     
     // test constructors.
     assertEquals(ackOne.REJECTED, true); 
     assertEquals(ackTwo.REJECTED, false);
     assertEquals(ackThree.REJECTED, true);
     assertEquals(ackFour.REJECTED, false);
-    assertEquals(ackThree.failedBR, new BidMessage(0, new SimpleBidBundle(), 0, 0));
-    assertEquals(ackFour.failedBR, new BidMessage(0, new SimpleBidBundle(), 0, 0));
+    assertEquals(ackThree.failedBR, new TradeMessage(0, new SimpleBidBundle(), 0, 0));
+    assertEquals(ackFour.failedBR, new TradeMessage(0, new SimpleBidBundle(), 0, 0));
   }
 }

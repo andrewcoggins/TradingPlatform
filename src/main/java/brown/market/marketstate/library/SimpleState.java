@@ -9,7 +9,7 @@ import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.Allocation;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
@@ -18,7 +18,7 @@ import brown.todeprecate.PaymentType;
 public class SimpleState implements IMarketState {
 
   @Override
-  public void addBid(BidMessage bid) {
+  public void addBid(TradeMessage bid) {
     // TODO Auto-generated method stub
     
   }
@@ -29,7 +29,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public List<BidMessage> getBids() {
+  public List<TradeMessage> getBids() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -143,7 +143,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public Set<BidMessage> getReserve() {
+  public Set<TradeMessage> getReserve() {
     // TODO Auto-generated method stub
     return null;
   }
@@ -203,7 +203,7 @@ public class SimpleState implements IMarketState {
   }
 
   @Override
-  public void setReserve(Set<BidMessage> r) {
+  public void setReserve(Set<TradeMessage> r) {
     // TODO Auto-generated method stub
     
   }

@@ -8,11 +8,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.Allocation;
+import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.Tradeable;
 
-//TODO: abstract to the complex case??
+//TODO: abstract to the complex case
 /**
  * A ledger tracks all trades within a Market. 
  * @author lcamery
@@ -52,7 +54,9 @@ public class Ledger {
      this.unshared = new LinkedList<Transaction>();
      this.transactions = new LinkedList<Transaction>();
      this.latest = new HashMap<ITradeable, Transaction>();
-     this.addAll(initialAlloc);
+     for (Tradeable t : initialAlloc.getBids().bids.keySet()) {
+       this.add(t, initialAlloc.getBids().bids.get(t));
+     }
    }
 
 	/**
@@ -67,18 +71,34 @@ public class Ledger {
 		}
 	}
 	
-	public void addAll(Allocation bids) {
+	public void add(ITradeable tradeable, MarketState mState) {
 	  synchronized(transactions) {
-	  if (bids != null) {
-	    for (Entry<Tradeable, MarketState> t : bids.getBids().bids.entrySet()) { 
-	      Transaction tr = new Transaction(t.getValue().AGENTID, null, t.getValue().PRICE, 1, t.getKey());
-	      this.latest.put(t.getKey(), tr);
-	      this.transactions.add(tr); 
-	      this.unshared.add(tr);
-	    }
+	    Transaction tr = new Transaction(mState.AGENTID, null, mState.PRICE, tradeable.getCount(), tradeable);
+	    this.latest.put(tradeable, tr);
+	    this.transactions.add(tr);
+	    this.unshared.add(tr);
 	  }
-	 }
 	}
+	
+//	public void addAll(IBidBundle bids) {
+//	  synchronized(transactions) {
+//	  if (bids != null) {
+//	    // how to fix this, how to fix this.
+//	    // could add individual transactions instead.
+//	    if (bids.getType() == BundleType.Simple) {
+//	      SimpleBidBundle castedBids = (SimpleBidBundle) bids;
+//	      for (Entry<Tradeable, MarketState> t : castedBids.getBids().bids.entrySet()) { 
+//	        Transaction tr = new Transaction(t.getValue().AGENTID, null, t.getValue().PRICE, 1, t.getKey());
+//	        this.latest.put(t.getKey(), tr);
+//	        this.transactions.add(tr); 
+//	        this.unshared.add(tr);
+//	      }
+//	    } else if (bids.getType() == BundleType.Complex) {
+//	      
+//	    }
+//	  }
+//	 }
+//	}
 	
 	/**
 	 * Constructs a set of all transactions

@@ -12,7 +12,7 @@ import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
 import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.library.Tradeable;
 
@@ -68,7 +68,7 @@ public class LemonadeChannel implements IAgentChannel {
   
   public void bid(AbsAgent agent, Integer position) {
     IBidBundle toSend = new LemonadeBidBundle(position);
-    agent.CLIENT.sendTCP(new BidMessage(0, toSend, this.ID, agent.ID));
+    agent.CLIENT.sendTCP(new TradeMessage(0, toSend, this.ID, agent.ID));
   }
   
 }

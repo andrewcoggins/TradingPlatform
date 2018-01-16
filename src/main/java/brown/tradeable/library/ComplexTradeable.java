@@ -9,14 +9,24 @@ public class ComplexTradeable implements ITradeable {
   
   public final Integer ID; 
   public final Set<Tradeable> GOODS;
+  public final Integer COUNT; 
   public final TradeableType TYPE; 
   
   public ComplexTradeable(Integer ID, Set<Tradeable> goods) {
    this.ID = ID; 
    this.GOODS = goods;
+   this.COUNT = 1; 
    this.TYPE = TradeableType.Complex;
   }
 
+  public Integer getID() {
+    return this.ID;
+  }
+  
+  public Integer getCount() {
+    return this.COUNT;
+  }
+  
   @Override
   public int hashCode() {
     final int prime = 31;

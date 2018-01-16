@@ -9,7 +9,7 @@ import brown.accounting.bidbundle.library.Allocation;
 import brown.market.IMarket;
 import brown.market.marketstate.IMarketState;
 import brown.market.preset.AbsMarketPreset;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.rules.activityrules.IActivityRule;
@@ -89,7 +89,7 @@ public class Market implements IMarket {
   // handles a bid from an agent. The activity rule determines if it is 
   // to be accepted or not. 
   @Override
-  public boolean handleBid(BidMessage bid) {
+  public boolean handleBid(TradeMessage bid) {
     this.ACTRULE.isAcceptable(this.STATE, bid); 
     if(this.STATE.getAcceptable()) {
         STATE.addBid(bid);
