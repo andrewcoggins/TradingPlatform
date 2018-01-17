@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 
 public class AccountManagerTest {
   // not much to this one. Just test the getter and setter.
@@ -16,21 +16,21 @@ public class AccountManagerTest {
   public void testAccountManager() { 
     AccountManager testManager = new AccountManager();
     //add some accounts
-    List<Tradeable> oneGoods = new LinkedList<Tradeable>();
-    oneGoods.add(new Tradeable(0)); 
-    oneGoods.add(new Tradeable(1));
+    List<Good> oneGoods = new LinkedList<Good>();
+    oneGoods.add(new Good(0)); 
+    oneGoods.add(new Good(1));
     Account one = new Account(1);
     one.add(10.0);
-    for (Tradeable t : oneGoods) {
+    for (Good t : oneGoods) {
       one.add(0.0, t);
     }
     testManager.setAccount(1, one);
-    List<Tradeable> twoGoods = new LinkedList<Tradeable>();
-    twoGoods.add(new Tradeable(2)); 
-    twoGoods.add(new Tradeable(3));
+    List<Good> twoGoods = new LinkedList<Good>();
+    twoGoods.add(new Good(2)); 
+    twoGoods.add(new Good(3));
     Account two = new Account(1);
     two.add(20.0);
-    for (Tradeable t : twoGoods) {
+    for (Good t : twoGoods) {
       two.add(0.0, t);
     }
     testManager.setAccount(2, two);

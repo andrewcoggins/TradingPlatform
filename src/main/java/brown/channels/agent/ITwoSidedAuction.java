@@ -1,6 +1,6 @@
 package brown.channels.agent;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 
 
 /*
@@ -11,5 +11,5 @@ public interface ITwoSidedAuction extends IAgentChannel {
 	 * Gets the full type of tradeable
 	 * @return FullType
 	 */
-	public Tradeable getTradeableType();
+	public Good getTradeableType();
 }

@@ -1,7 +1,7 @@
 package brown.accounting;
 
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 
 public class Order {
 	public final Integer TO;

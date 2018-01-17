@@ -8,7 +8,7 @@ import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 
 
 /*
@@ -16,7 +16,7 @@ import brown.tradeable.library.Tradeable;
  * and holds one double. 
  */
 public class SimpleBidBundle implements IBidBundle {
-	private final Map<Tradeable, MarketState> BIDS;
+	private final Map<Good, MarketState> BIDS;
 	private final BundleType BT;
 	
 	/**
@@ -33,7 +33,7 @@ public class SimpleBidBundle implements IBidBundle {
 	 * @param bid : agent's bid
 	 * @param agent : agent ID
 	 */
-	public SimpleBidBundle(Map<Tradeable, MarketState> bids) {
+	public SimpleBidBundle(Map<Good, MarketState> bids) {
 		if (bids == null) {
 			throw new IllegalArgumentException("Null bids");
 		}
@@ -58,8 +58,8 @@ public class SimpleBidBundle implements IBidBundle {
 
 	@Override
 	public IBidBundle wipeAgent(Integer ID) {
-		Map<Tradeable, MarketState> newBids = new HashMap<Tradeable, MarketState>();
-		for (Entry<Tradeable, MarketState> entry : this.BIDS.entrySet()) {
+		Map<Good, MarketState> newBids = new HashMap<Good, MarketState>();
+		for (Entry<Good, MarketState> entry : this.BIDS.entrySet()) {
 			if (ID.equals(entry.getValue().AGENTID)) {
 				newBids.put(entry.getKey(), entry.getValue());
 			} else {
@@ -74,7 +74,7 @@ public class SimpleBidBundle implements IBidBundle {
 		return new SimpleBid(this.BIDS);
 	}
 	
-	public MarketState getBid(Tradeable t) {
+	public MarketState getBid(Good t) {
 	  return BIDS.get(t);
 	}
 	

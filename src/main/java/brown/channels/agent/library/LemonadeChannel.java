@@ -14,7 +14,7 @@ import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;
 import brown.messages.library.TradeMessage;
 import brown.todeprecate.PaymentType;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 
 /**
  * The channel through which an agent communicates to the server.
