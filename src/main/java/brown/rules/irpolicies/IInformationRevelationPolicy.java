@@ -1,9 +1,11 @@
 package brown.rules.irpolicies;
 
-public interface IInformationRevelationPolicy {
+import brown.market.marketstate.ICompleteState;
 
-	//public MarketInternalState handleInfo(Integer ID, MarketInternalState state);
+public interface IInformationRevelationPolicy {
   
   public void handleInfo();
+
+  public void setReport(ICompleteState state);
 
 }

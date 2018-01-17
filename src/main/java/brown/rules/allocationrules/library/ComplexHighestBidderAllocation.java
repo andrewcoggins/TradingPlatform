@@ -21,11 +21,6 @@ import brown.tradeable.library.Tradeable;
  */
 public class ComplexHighestBidderAllocation implements IAllocationRule {
 
-  @Override
-  public void tick(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
 
   @Override
   public void setAllocation(ICompleteState state) {
@@ -132,54 +127,4 @@ public class ComplexHighestBidderAllocation implements IAllocationRule {
     }
     return true; 
   }
-  
-  @Override
-  public void setBidRequest(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void isPrivate(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void isOver(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void setBundleType(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void withReserve(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void isValid(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void getAllocationType(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void setReport(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-  
-  
 }

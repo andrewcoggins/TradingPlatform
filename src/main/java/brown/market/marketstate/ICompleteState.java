@@ -11,6 +11,7 @@ import brown.market.marketstate.library.MarketState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.BidRequestMessage;
+import brown.messages.library.GameReport;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.todeprecate.PaymentType;
@@ -27,15 +28,13 @@ public interface ICompleteState {
     //methods not directly associated with a rule. Look for redundancies here.
     public void addBid(TradeMessage bid);
     
-    public void clear();
+    public void clearBids();
+    
+    public void clearOrders();
     
     public List<TradeMessage> getBids(); 
     
     public Integer getID(); 
-    
-    public void setLastPayments(List<Order> payments); 
-    
-    public List<Order> getLastPayments(); 
     
     public void tick(long time); 
     
@@ -43,47 +42,17 @@ public interface ICompleteState {
     
     public void setReserve(IBidBundle o); 
     
-    public IBidBundle getbundleReserve(); 
-    
-    public void clearBids(); 
-    
-    public double getIncrement(); 
-    
-    public void setMaximizingRevenue(boolean b); 
-    
-    public boolean isMaximizingRevenue(); 
-  
-    public int getEligibility(); 
-    
-    
-    
-    //getters for all the allocation rules.
+    // allocation rule.
     
     public Allocation getAllocation();  
     
-    //setters for allocation rule.
-    
     public void setAllocation(Allocation alloc);
     
-    //getters for payment rules. 
+    // payment rule. 
     
     public List<Order> getPayments();
     
-    public PaymentType getPaymentType();
-    
-    public IBidBundle getReserveBundle();
-    
-    public boolean permitShort(); 
-    
-    //setter for payment rules.
-    
     public void setPayments(List<Order> orders); 
-    
-    public void setPaymentType(PaymentType p); 
-    
-    public void setReserveBundle(IBidBundle b); 
-    
-    public void setShort(boolean b);
     
     //for Query Rules
     
@@ -91,9 +60,16 @@ public interface ICompleteState {
     
     public void setTRequest(TradeRequestMessage t);
     
+    
+    //activity rules
+    
     public boolean getAcceptable();
     
     public void setAcceptable(boolean b);
+    
+    public IBidBundle getReserve();
+    
+    public void setReserve();
     
     //tcondition things
     public boolean getInnerOver();
@@ -107,5 +83,10 @@ public interface ICompleteState {
     public void incrementOuter();
     
     public Integer getOuterRuns();
+    
+    //IR policy 
+    public GameReportMessage getReport();
+    
+    public void setReport(GameReportMessage gameReport);
 
 }

@@ -26,7 +26,7 @@ public class Market implements IMarket {
   private final IAllocationRule ARULE;
   private final IQueryRule QRULE;
   private final IActivityRule ACTRULE;
-  private final IInformationRevelationPolicy INFOPOLICY;
+  private final IInformationRevelationPolicy IRPOLICY;
   private final IInnerTC ITCONDITION;
   private final IOuterTC OTCONDITION; 
   private final ICompleteState STATE;
@@ -36,15 +36,15 @@ public class Market implements IMarket {
     this.ARULE = rules.aRule;
      this.QRULE = rules.qRule;
      this.ACTRULE = rules.actRule;
-     this.INFOPOLICY = rules.infoPolicy;
+     this.IRPOLICY = rules.infoPolicy;
      this.ITCONDITION = rules.innerTCondition;
      this.OTCONDITION = rules.outerTCondition;
      this.STATE = state;
      
      //set up all of the conditions and stuff needed here.
-     this.ARULE.setBundleType(this.STATE);
-     this.ARULE.getAllocationType(this.STATE);
-     this.PRULE.setPaymentType(this.STATE);
+//     this.ARULE.setBundleType(this.STATE);
+//     this.ARULE.getAllocationType(this.STATE);
+//     this.PRULE.setPaymentType(this.STATE);
  }
   
   @Override
@@ -109,18 +109,19 @@ public class Market implements IMarket {
   // increments time. 
   @Override
   public void tick(long time) {
-    this.STATE.setTime(time);
+    this.STATE.tick(time);
   }
 
   @Override
   public void clearState() { 
-    this.STATE.clear();
+    this.STATE.clearBids();
+    this.STATE.clearOrders();
   }
   
   @Override 
   public GameReportMessage getReport() {
     this.ARULE.setAllocation(this.STATE);
-    this.ARULE.setReport(this.STATE);
+    this.IRPOLICY.setReport(this.STATE);
     return this.STATE.getReport();
 //    Allocation alloc = this.STATE.getAllocation(); 
 //    return new GameReport(new Ledger(this.getID(), alloc));

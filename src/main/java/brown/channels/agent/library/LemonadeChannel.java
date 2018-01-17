@@ -32,7 +32,7 @@ public class LemonadeChannel implements IAgentChannel {
    * @param ledger
    * @param type
    */
-  public LemonadeChannel(Integer ID, Ledger ledger, PaymentType pType, MechanismType type) {
+  public LemonadeChannel(Integer ID, Ledger ledger, MechanismType type) {
     this.ID = ID; 
     this.ledger = ledger;
   }

@@ -38,4 +38,10 @@ public class AnonymousPolicyOld implements IInformationRevelationPolicy {
     
   }
 
+  @Override
+  public void setReport(ICompleteState state) {
+    // TODO Auto-generated method stub
+    
+  }
+
 }

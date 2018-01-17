@@ -18,6 +18,12 @@ public class OneShotActivityOld implements IActivityRule {
     
   }
 
+  @Override
+  public void setReserves() {
+    // TODO Auto-generated method stub
+    
+  }
+
 //	@Override
 //	public boolean isAcceptable(MarketInternalState state, Bid bid) {
 //		return !(state.getBids().contains(bid));

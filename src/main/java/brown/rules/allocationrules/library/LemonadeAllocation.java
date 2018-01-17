@@ -30,13 +30,6 @@ public class LemonadeAllocation implements IAllocationRule {
   }   
   
   @Override
-  public void tick(ICompleteState state) {
-    long time = state.getTime(); 
-    time++; 
-    state.setTime(time); 
-  }
-  
-  @Override
   public void setAllocation(ICompleteState state) {
     List<TradeMessage> bids = state.getBids();
     if(bids.isEmpty()) return;

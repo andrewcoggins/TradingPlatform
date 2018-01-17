@@ -103,6 +103,11 @@ public class CompleteState implements ICompleteState {
   /**
    * add on here as needed.
    */
+  
+  public void tick() {
+    
+  }
+  
   public void clear() {
     if (payments != null) {
       this.payments.clear();
@@ -203,10 +208,7 @@ public class CompleteState implements ICompleteState {
   public BundleType getBundleType() {
     return this.bType;
   }
-  
-  public Set<TradeMessage> getReserve() {
-    return this.reserve; 
-  }
+ 
   
   public boolean getValid() {
     return this.valid;
@@ -220,45 +222,8 @@ public class CompleteState implements ICompleteState {
     return this.report; 
   }
   
-  //setters for allocation rule.
-  public void setTime(long t) {
-    this.time = t; 
-  }
-  
   public void setAllocation(Allocation alloc) {
     this.alloc = alloc; 
-  }
-  
-  public void setRequest(BidRequestMessage request) { 
-     this.request = request;
-  }
-  
-  public void setPrivate(boolean p) {
-     this.isPrivate = p; 
-  }
-  
-  public void setOver(boolean o) {
-     this.isOver = o; 
-  }
-  
-  public void setBundleType(BundleType b) {
-     this.bType = b;
-  }
-  
-  public void setReserve(Set<TradeMessage> r) {
-     this.reserve = r; 
-  }
-  
-  public void setValid(boolean v) {
-     this.valid = v;
-  }
-  
-  public void setMType(MechanismType m) {
-     this.mType = m; 
-  }
-  
-  public void setReport(GameReportMessage g) {
-     this.report = g; 
   }
   
   //getters for payment rules. 
@@ -347,6 +312,24 @@ public class CompleteState implements ICompleteState {
       return 0;
     }
     return this.outerRuns;
+  }
+
+  @Override
+  public void clearOrders() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void setReserve() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public IBidBundle getReserve() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }
