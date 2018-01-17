@@ -68,6 +68,7 @@ public abstract class AbsServer {
 	protected Map<Integer, AbsValueConfig> valueConfig; 
 	protected List<Tradeable> initialGoods;
 	protected Double initialMonies;
+	
 	// a map from an agents' private id to its private valuation for goods.
 	// what if there are different sets of goods? 
 	// valuation manager?
