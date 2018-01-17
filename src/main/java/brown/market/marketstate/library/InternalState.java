@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import brown.accounting.BundleType;
+import abrown.misc.Allocation;
 import brown.accounting.MarketState;
-import brown.accounting.Order;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.library.Allocation;
+import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;

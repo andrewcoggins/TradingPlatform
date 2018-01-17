@@ -2,12 +2,12 @@ package brown.market.library;
 
 import java.util.List;
 
+import abrown.misc.Allocation;
 import brown.accounting.Ledger;
-import brown.accounting.Order;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.library.Allocation;
 import brown.market.IMarket;
 import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.library.Order;
 import brown.market.preset.AbsMarketPreset;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;

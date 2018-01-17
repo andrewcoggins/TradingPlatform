@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 
-import brown.accounting.Order;
+import brown.market.marketstate.library.Order;
 import brown.tradeable.library.Tradeable;
 
 /**
- * the server sends a Wrapper exposing a market’s functionality,
+ * the server sends a Wrapper exposing a market's functionality,
  * and containing information about a market that utilizes the [Mechanism]
  * rule. a TwoSidedAuction is passed into either: onCDA, onCallMarket, 
  * onMarketScoring, or onLMSR

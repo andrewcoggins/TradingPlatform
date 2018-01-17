@@ -1,8 +1,8 @@
-package brown.accounting.bidbundle.library;
+package abrown.misc;
 
-import brown.accounting.BundleType;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
+import brown.accounting.bidbundle.library.BundleType;
 
 public class Allocation implements IBidBundle {
 

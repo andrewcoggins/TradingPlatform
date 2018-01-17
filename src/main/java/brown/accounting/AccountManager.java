@@ -16,6 +16,7 @@ public class AccountManager {
 
 	/**
 	 * manager that stores accounts for use by the server
+	 * accounts - maps agent ID's to accounts
 	 */
 	public AccountManager() {
 		this.accounts = new ConcurrentHashMap<Integer, Account>();

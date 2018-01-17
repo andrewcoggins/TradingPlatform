@@ -5,14 +5,14 @@ package brown.rules.paymentrules.library;
 import java.util.LinkedList;
 import java.util.List;
 
-import brown.accounting.BundleType;
+import abrown.misc.Allocation;
 import brown.accounting.MarketState;
-import brown.accounting.Order;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.library.Allocation;
+import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.rules.paymentrules.IPaymentRule;
 import brown.setup.Logging;

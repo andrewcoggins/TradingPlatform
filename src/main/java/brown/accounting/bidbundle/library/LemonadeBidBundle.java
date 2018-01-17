@@ -1,6 +1,5 @@
 package brown.accounting.bidbundle.library;
 
-import brown.accounting.BundleType;
 import brown.accounting.bid.LemonadeBid;
 import brown.accounting.bidbundle.IBidBundle;
 

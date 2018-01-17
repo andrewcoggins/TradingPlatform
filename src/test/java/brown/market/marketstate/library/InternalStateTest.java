@@ -12,12 +12,11 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.accounting.BundleType;
+import abrown.misc.Allocation;
 import brown.accounting.Ledger;
 import brown.accounting.MarketState;
-import brown.accounting.Order;
 import brown.accounting.bid.SimpleBid;
-import brown.accounting.bidbundle.library.Allocation;
+import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.channels.MechanismType;

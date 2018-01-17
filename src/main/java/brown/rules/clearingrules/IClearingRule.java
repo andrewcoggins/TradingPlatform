@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 
-import brown.accounting.Order;
+import brown.market.marketstate.library.Order;
 import brown.tradeable.library.Tradeable;
 
 public interface IClearingRule {

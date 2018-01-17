@@ -2,8 +2,8 @@ package brown.accounting.bidbundle;
 
 import java.util.Comparator;
 
-import brown.accounting.BundleType;
 import brown.accounting.bid.AbsBid;
+import brown.accounting.bidbundle.library.BundleType;
 
 /**
  * The IBidBundle interface permits the creation of arbitrary data structures
@@ -23,6 +23,7 @@ import brown.accounting.bid.AbsBid;
  */
 public interface IBidBundle {
 	
+  //MAKES NO SENSE!
 	/**
 	 * Gets the aggregate cost of the bid for verification purposes
 	 * @return total cost
@@ -39,6 +40,7 @@ public interface IBidBundle {
 	 * Removes agent ID
 	 * @return BidBundle w/o agent ID
 	 */
+  //DELETE!!
 	IBidBundle wipeAgent(Integer ID);
 
 	/**
@@ -47,6 +49,7 @@ public interface IBidBundle {
 	 */
 	public BundleType getType();
 	
+	//BROKEN!!! DELETE!!!
 	/**
 	 * comparator for BidBundles
 	 */

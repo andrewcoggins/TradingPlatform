@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.accounting.MarketState;
-import brown.accounting.Order;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.library.Order;
 import brown.rules.paymentrules.IPaymentRule;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.library.ComplexTradeable;

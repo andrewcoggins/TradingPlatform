@@ -12,8 +12,8 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import abrown.misc.Allocation;
 import brown.accounting.MarketState;
-import brown.accounting.bidbundle.library.Allocation;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.market.marketstate.library.InternalState;

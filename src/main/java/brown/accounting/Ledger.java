@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import abrown.misc.Allocation;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.library.Allocation;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.Tradeable;
@@ -50,7 +50,7 @@ public class Ledger {
 	}
 	 
 	 /**
-	  * for convenience of implementation in the market class.
+	  * for convenience of implementation in the market class
 	  * @param marketId
 	  * @param initialAlloc
 	  */

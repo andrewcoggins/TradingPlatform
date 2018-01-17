@@ -6,11 +6,11 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import brown.accounting.Ledger;
-import brown.accounting.Order;
 import brown.agent.AbsCDAAgent;
 import brown.agent.AbsAgent;
 import brown.channels.agent.ITwoSidedPriceSetter;
 import brown.channels.server.library.CDAServerChannel;
+import brown.market.marketstate.library.Order;
 import brown.messages.library.MarketOrderMessage;
 import brown.tradeable.library.Tradeable;
 

@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import brown.accounting.BundleType;
+import abrown.misc.Allocation;
 import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
-import brown.accounting.bidbundle.library.Allocation;
+import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;

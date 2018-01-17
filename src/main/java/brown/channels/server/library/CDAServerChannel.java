@@ -5,11 +5,11 @@ import java.util.Set;
 import java.util.SortedMap;
 
 import brown.accounting.Ledger;
-import brown.accounting.Order;
 import brown.channels.MechanismType;
 import brown.channels.agent.ITwoSidedAuction;
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.server.TwoSidedAuction;
+import brown.market.marketstate.library.Order;
 import brown.rules.clearingrules.IClearingRule;
 import brown.tradeable.library.Tradeable;
 

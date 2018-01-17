@@ -8,9 +8,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
+import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.tradeable.library.Tradeable;
 

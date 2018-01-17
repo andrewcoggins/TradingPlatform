@@ -1,11 +1,13 @@
-package brown.accounting;
+package brown.market.library;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import brown.accounting.Account;
+import brown.accounting.Ledger;
+import brown.accounting.Transaction;
 import brown.channels.server.TwoSidedAuction;
-import brown.market.library.Market;
 import brown.server.AbsServer;
 import brown.setup.Logging;
 import brown.todeprecate.StateOfTheWorld;
@@ -175,7 +177,7 @@ public class MarketManager {
 	 * @param ID
 	 * @return
 	 */
-	public Market getIMarket(Integer ID) {
+	public Market getMarket(Integer ID) {
 		return tsauctions.get(ID);
 	}
 

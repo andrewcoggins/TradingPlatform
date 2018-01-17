@@ -14,12 +14,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import brown.accounting.Account;
 import brown.accounting.AccountManager;
 import brown.accounting.Ledger;
-import brown.accounting.MarketManager;
-import brown.accounting.Order;
 import brown.channels.server.IServerChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.market.IMarket;
 import brown.market.library.Market;
+import brown.market.library.MarketManager;
+import brown.market.marketstate.library.Order;
 import brown.messages.library.AckMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.TradeMessage;
@@ -181,7 +181,7 @@ public abstract class AbsServer {
 	 * a BidRequest for an auction
 	 */
 	protected void onBid(Connection connection, Integer privateID, TradeMessage bid) {
-		Market auction = this.manager.getIMarket(bid.AuctionID);
+		Market auction = this.manager.getMarket(bid.AuctionID);
 		if (auction != null) {
 			synchronized (auction) {
 				Account account = this.acctManager.getAccount(privateID);
@@ -317,7 +317,7 @@ public abstract class AbsServer {
 	 */
 	//not in use.
 	public void innerCycle(Integer marketID, Integer agentID) { 
-	  IMarket market = this.manager.getIMarket(marketID);
+	  IMarket market = this.manager.getMarket(marketID);
 	  market.tick((long) 1.0); 
 	  if (!market.isOver()) {
 	    //update the ledger?
@@ -355,7 +355,7 @@ public abstract class AbsServer {
 	//not currently in use.
 	public synchronized void outerCycle(Integer marketID, Integer agentID) {
 	  //run every inner cycle of the auction until it is terminated per the inner termination condition.
-	  Market market = this.manager.getIMarket(marketID); 
+	  Market market = this.manager.getMarket(marketID); 
 	  while (!market.isOver()) { 
 	    this.innerCycle(marketID, agentID);
 	  }
@@ -364,7 +364,7 @@ public abstract class AbsServer {
 	
 	public synchronized void completeAuction(Integer marketID) throws InterruptedException { 
 	  //run every outer cycle of the auction until it is terminated per the outer termination condition.
-	  Market market = this.manager.getIMarket(marketID); 
+	  Market market = this.manager.getMarket(marketID); 
 	 while(!market.isOverOuter()) {
 	   while(!market.isOver()) {
        Thread.sleep(1000);

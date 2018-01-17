@@ -11,9 +11,9 @@ import java.util.Set;
 import org.junit.Test;
 
 import brown.accounting.Account;
-import brown.accounting.Order;
 import brown.accounting.bidbundle.library.LemonadeBidBundle;
 import brown.market.marketstate.library.InternalState;
+import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.tradeable.library.Tradeable;
 

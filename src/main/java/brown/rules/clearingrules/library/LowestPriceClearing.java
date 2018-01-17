@@ -11,7 +11,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.function.Function;
 
-import brown.accounting.Order;
+import brown.market.marketstate.library.Order;
 import brown.rules.clearingrules.IClearingRule;
 
 public class LowestPriceClearing implements IClearingRule {

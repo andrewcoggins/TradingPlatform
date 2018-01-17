@@ -3,11 +3,11 @@ package brown.market.marketstate;
 import java.util.List;
 import java.util.Set;
 
-import brown.accounting.BundleType;
-import brown.accounting.Order;
+import abrown.misc.Allocation;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.library.Allocation;
+import brown.accounting.bidbundle.library.BundleType;
 import brown.channels.MechanismType;
+import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;

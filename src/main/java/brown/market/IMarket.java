@@ -2,8 +2,8 @@ package brown.market;
 
 import java.util.List;
 
-import brown.accounting.Order;
 import brown.messages.library.TradeMessage;
+import brown.market.marketstate.library.Order;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
 

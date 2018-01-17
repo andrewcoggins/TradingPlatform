@@ -7,9 +7,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import abrown.misc.Allocation;
 import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
-import brown.accounting.bidbundle.library.Allocation;
 import brown.tradeable.library.Tradeable;
 
 /**

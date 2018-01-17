@@ -2,7 +2,6 @@ package brown.channels.agent;
 
 import brown.tradeable.library.Tradeable;
 
-
 /*
  * Implements IMarket for Two-Sided auctions
  */
