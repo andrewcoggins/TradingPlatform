@@ -20,7 +20,7 @@ public class OrderTest {
     Order anOrder = new Order(0, 1, 100.0, 5, new Tradeable(0)); 
     assertTrue(anOrder.TO == 0); 
     assertTrue(anOrder.FROM == 1); 
-    assertTrue(anOrder.COST == 100.0); 
+    assertTrue(anOrder.PRICE == 100.0); 
     assertTrue(anOrder.QUANTITY == 5);
     assertTrue(anOrder.GOOD.equals(new Tradeable(0)));
     anOrder.updateQuantity(6);

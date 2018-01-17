@@ -262,7 +262,7 @@ public abstract class AbsServer {
 									//winner.GOOD.setAgentID(winner.TO);
 									ledger.add(winner.toTransaction());
 									
-									accountTo.add(-1 * winner.COST, winner.GOOD);
+									accountTo.add(-1 * winner.PRICE, winner.GOOD);
 									this.acctManager.setAccount(winner.TO, accountTo);
 									this.sendBankUpdate(winner.TO, accountTo, accountTo);
 								}
@@ -272,7 +272,7 @@ public abstract class AbsServer {
 								Account accountFrom = this.acctManager
 										.getAccount(winner.FROM);
 								synchronized (accountFrom.ID) {									
-									accountFrom.remove(-1 * winner.COST, winner.GOOD);
+									accountFrom.remove(-1 * winner.PRICE, winner.GOOD);
 									this.acctManager.setAccount(winner.FROM, accountFrom);
 									System.out.println("reached"); 
 									this.sendBankUpdate(winner.FROM, accountFrom, accountFrom);
@@ -334,7 +334,7 @@ public abstract class AbsServer {
           synchronized (accountTo.ID) {
             //winner.GOOD.setAgentID(winner.TO);
             ledger.add(winner.toTransaction()); 
-            accountTo.add(-1 * winner.COST, winner.GOOD);
+            accountTo.add(-1 * winner.PRICE, winner.GOOD);
             this.acctManager.setAccount(winner.TO, accountTo);
             this.sendBankUpdate(winner.TO, accountTo, accountTo);
           }
@@ -342,7 +342,7 @@ public abstract class AbsServer {
         if (winner.FROM != null && this.acctManager.containsAcct(winner.FROM)) {
           Account accountFrom = this.acctManager.getAccount(winner.FROM);
           synchronized (accountFrom.ID) {                 
-            accountFrom.remove(-1 * winner.COST, winner.GOOD);
+            accountFrom.remove(-1 * winner.PRICE, winner.GOOD);
             this.acctManager.setAccount(winner.FROM, accountFrom);
             this.sendBankUpdate(winner.FROM, accountFrom,
                 accountFrom);

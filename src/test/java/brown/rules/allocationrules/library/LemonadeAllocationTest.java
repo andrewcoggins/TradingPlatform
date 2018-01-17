@@ -54,7 +54,7 @@ public class LemonadeAllocationTest {
     state.addBid(aBid);
     lem.setAllocation(state);
     for (Order o : state.getPayments()) {
-      agentAccount.add(-1 * o.COST);
+      agentAccount.add(-1 * o.PRICE);
     }
     assertTrue(agentAccount.getMonies() == 24.0);
     agentAccount.add(-24.0);
@@ -67,9 +67,9 @@ public class LemonadeAllocationTest {
     lem.setAllocation(stateTwo);
     for(Order o : stateTwo.getPayments()) {
       if (o.TO == 1) {
-        agentAccount.add(-1 * o.COST);
+        agentAccount.add(-1 * o.PRICE);
       } else if (o.TO == 2) {
-        anotherAgentAccount.add(-1 * o.COST);
+        anotherAgentAccount.add(-1 * o.PRICE);
       }
     }
     assertTrue(agentAccount.getMonies() == 12.0);
@@ -93,7 +93,7 @@ public class LemonadeAllocationTest {
     }
     lem.setAllocation(state);
     for (Order o : state.getPayments()) {
-      accounts.get(o.TO).add(-1 * o.COST);
+      accounts.get(o.TO).add(-1 * o.PRICE);
     }
     for(int i = 0; i < 12; i++) {
       assertTrue(accounts.get(i).getMonies() == 2.0);
@@ -119,7 +119,7 @@ public class LemonadeAllocationTest {
     }
     lem.setAllocation(state);
     for (Order o : state.getPayments()) {
-      accounts.get(o.TO).add(-1 * o.COST);
+      accounts.get(o.TO).add(-1 * o.PRICE);
     }
     for(int i = 0; i < 12; i++) {
       assertTrue(accounts.get(i).getMonies() == 2.0);
