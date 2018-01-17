@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 
 import abrown.misc.Allocation;
-import brown.accounting.MarketState;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
@@ -77,10 +76,10 @@ public class InternalState implements IMarketState {
     this.TRADEABLES = tradeables;
     this.ID = ID;
     this.ticks = 0;
-    Map<Tradeable, MarketState> reserve = new HashMap<Tradeable, MarketState>();
+    Map<Tradeable, Double> reserve = new HashMap<Tradeable, Double>();
     if (this.TRADEABLES != null) {
       for (Tradeable t : this.TRADEABLES) {
-        reserve.put(t, new MarketState(null,0));
+        reserve.put(t, 0.);
       }
     }
     this.bundleReserve = new SimpleBidBundle(reserve);

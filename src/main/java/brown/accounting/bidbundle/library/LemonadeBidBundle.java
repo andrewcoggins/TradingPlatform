@@ -5,44 +5,50 @@ import brown.accounting.bidbundle.IBidBundle;
 
 public class LemonadeBidBundle implements IBidBundle {
 
-  private Integer numberBid; 
-  private BundleType bType; 
+  private Integer BIDS;
+  private BundleType BT; 
   
   /**
    * For Kryo do not use
    */
   public LemonadeBidBundle() {
-    this.numberBid = null; 
-    this.bType = null;  
+    this.BIDS = null; 
+    this.BT = null;  
   }
   
   public LemonadeBidBundle(Integer numberBid) {
-    this.numberBid = numberBid;
-    this.bType = BundleType.Lemonade;
+    this.BIDS = numberBid;
+    this.BT = BundleType.Lemonade;
   }
   
   @Override
   public double getCost() {
-    // TODO Auto-generated method stub
-    return this.numberBid;
+    return this.BIDS;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((BT == null) ? 0 : BT.hashCode());
+    result = prime * result + ((BIDS == null) ? 0 : BIDS.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return(obj instanceof LemonadeBidBundle && 
+        ((LemonadeBidBundle) obj).BIDS.equals(this.BIDS) &&
+        ((LemonadeBidBundle) obj).BIDS.equals(this.BT));
   }
 
   @Override
   public LemonadeBid getBids() {
-    // TODO Auto-generated method stub
-    return new LemonadeBid(this.numberBid);
-  }
-
-  @Override
-  public IBidBundle wipeAgent(Integer ID) {
-    // TODO Auto-generated method stub
-    return null;
+    return new LemonadeBid(this.BIDS);
   }
 
   @Override
   public BundleType getType() {
-    // TODO Auto-generated method stub
-    return this.bType;
-  }
-  
+    return this.BT;
+  }  
 }

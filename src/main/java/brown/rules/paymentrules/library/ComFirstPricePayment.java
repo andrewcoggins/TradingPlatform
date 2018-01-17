@@ -26,7 +26,7 @@ public class ComFirstPricePayment implements IPaymentRule {
     // TODO Auto-generated method stub
     List<Order> orders = new LinkedList<Order>();
     ComplexBidBundle original = (ComplexBidBundle) state.getbundleReserve();
-    Map<Set<Tradeable>, MarketState> originalMap = original.getBids().bids;
+    Map<Set<Tradeable>, Double> originalMap = original.getBids().bids;
     for (Set<Tradeable> aSet :originalMap.keySet()) {
      double price = originalMap.get(aSet).PRICE;
      int recipient = originalMap.get(aSet).AGENTID;

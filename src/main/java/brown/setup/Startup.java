@@ -11,7 +11,6 @@ import java.util.TreeSet;
 
 import brown.accounting.Account;
 import brown.accounting.Ledger;
-import brown.accounting.MarketState;
 import brown.accounting.Transaction;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
@@ -93,7 +92,6 @@ public final class Startup {
 		kryo.register(Timestamp.class);
 		kryo.register(Date.class);
 		kryo.register(IBidBundle.class);
-		kryo.register(MarketState.class);
 		kryo.register(BundleType.class);
 		kryo.register(MarketOrderMessage.class);
 		kryo.register(TwoSidedAuction.class);

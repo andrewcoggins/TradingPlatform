@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import brown.accounting.Ledger;
-import brown.accounting.MarketState;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.LemonadeBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;

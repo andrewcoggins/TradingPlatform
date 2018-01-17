@@ -37,27 +37,8 @@ public interface IBidBundle {
   public AbsBid getBids();
   
 	/**
-	 * Removes agent ID
-	 * @return BidBundle w/o agent ID
-	 */
-  //DELETE!!
-	IBidBundle wipeAgent(Integer ID);
-
-	/**
 	 * Identifies the type of the bundle
 	 * @return bundleType
 	 */
-	public BundleType getType();
-	
-	//BROKEN!!! DELETE!!!
-	/**
-	 * comparator for BidBundles
-	 */
-	public static class BidBundleComparator implements Comparator<IBidBundle> {
-		@Override
-		public int compare(IBidBundle arg0, IBidBundle arg1) {
-			return new Double(arg0.getCost()).compareTo(new Double(arg1.getCost()));
-		}
-	}
-	
+	public BundleType getType();	
 }
