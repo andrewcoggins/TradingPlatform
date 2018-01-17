@@ -2,7 +2,6 @@ package brown.messages.library;
 
 import brown.accounting.bidbundle.IBidBundle;
 import brown.agent.AbsAgent;
-import brown.messages.AbsMessage;
 
 public class TradeMessage extends AbsMessage {
 	public final IBidBundle Bundle;

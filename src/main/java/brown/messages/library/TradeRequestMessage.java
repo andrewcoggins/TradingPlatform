@@ -3,7 +3,6 @@ package brown.messages.library;
 import brown.agent.AbsAgent;
 import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;
-import brown.messages.AbsMessage;
 
 /**
  * For each open market, the server then sends all agents a TradeRequest,

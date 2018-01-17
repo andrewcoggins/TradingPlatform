@@ -1,7 +1,6 @@
 package brown.messages.library;
 
 import brown.agent.AbsAgent;
-import brown.messages.AbsMessage;
 
 /**
  * This message provides an avenue for agents to

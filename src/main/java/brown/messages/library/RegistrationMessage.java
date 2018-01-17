@@ -1,7 +1,6 @@
 package brown.messages.library;
 
 import brown.agent.AbsAgent;
-import brown.messages.AbsMessage;
 
 /**
  * a request for an agent to join the server 

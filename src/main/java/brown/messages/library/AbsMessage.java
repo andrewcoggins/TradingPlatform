@@ -1,12 +1,13 @@
-package brown.messages;
+package brown.messages.library;
 
 import brown.agent.AbsAgent;
+import brown.messages.IMessage;
 
 /**
  * a message is used to communicate between the agent and the server
  * @author lcamery
  */
-public abstract class AbsMessage {
+public abstract class AbsMessage implements IMessage {
   
 	protected final Integer ID;
 	
@@ -18,18 +19,10 @@ public abstract class AbsMessage {
 		this.ID = ID;
 	}
 	
-	/**
-	 * Get message ID
-	 * @return ID
-	 */
 	public Integer getID() {
 		return this.ID;
 	}
 	
-	/**
-	 * Tells agent what type of message we are
-	 * @param agent
-	 */
 	public abstract void dispatch(AbsAgent agent);
 	
 }

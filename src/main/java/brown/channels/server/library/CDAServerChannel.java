@@ -6,12 +6,12 @@ import java.util.SortedMap;
 
 import brown.accounting.Ledger;
 import brown.channels.MechanismType;
-import brown.channels.agent.ITwoSidedAuction;
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.market.marketstate.library.Order;
 import brown.rules.clearingrules.IClearingRule;
 import brown.tradeable.library.Tradeable;
+import brown.twosided.ITwoSidedAuction;
 
 public class CDAServerChannel implements TwoSidedAuction {
 	private final Integer ID;
@@ -81,7 +81,7 @@ public class CDAServerChannel implements TwoSidedAuction {
 
 	@Override
 	public MechanismType getMechanismType() {
-		return MechanismType.ContinuousDoubleAuction;
+		return MechanismType.CDA;
 	}
 
 	@Override

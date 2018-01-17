@@ -1,26 +1,26 @@
 package brown.messages.library;
 
 import brown.agent.AbsAgent;
-import brown.messages.AbsMessage;
 
 /**
- * message provided to agent when there is an 
- * error on the server relating to a message the agent sent.
+ * message provided to agent when there is a server error 
+ * caused by a message an agent sent
  * @author andrew
- *
  */
 public class AckMessage extends AbsMessage {
+  
 	public final MarketOrderMessage failedLO;
 	public final TradeMessage failedBR;
 	public final NegotiateRequestMessage failedTR;
 	public final boolean REJECTED;
 	
 	/**
-	 * Empty for kryo
+	 * For kryo
 	 * DO NOT USE
 	 */
 	public AckMessage() {
 		super(null);
+		
 		this.failedBR = null;
 		this.failedTR = null;
 		this.failedLO = null;

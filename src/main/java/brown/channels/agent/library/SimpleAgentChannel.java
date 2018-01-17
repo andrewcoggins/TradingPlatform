@@ -21,6 +21,7 @@ import brown.tradeable.library.Tradeable;
  * Implements IMarket for Simple auctions
  */
 public class SimpleAgentChannel implements IAgentChannel {
+  
 	private final Integer ID;
 	private final Ledger LEDGER;
 	private final SimpleBidBundle HIGHBID;
@@ -65,7 +66,7 @@ public class SimpleAgentChannel implements IAgentChannel {
 	@Override
 	public void dispatchMessage(AbsAgent agent) {
 		switch(this.MTYPE) {
-		case ContinuousDoubleAuction:
+		case CDA:
 			break;
 		case LMSR:
 			break;
@@ -167,23 +168,24 @@ public class SimpleAgentChannel implements IAgentChannel {
 	public Set<Tradeable> getTradeables() {
 		return this.HIGHBID.getBids().bids.keySet();
 	}
-
 	
-	 @Override
-	  public int hashCode() {
-	    final int prime = 31;
-	    int result = 1;
-	    result = prime * result + ELIGIBILITY;
-	    result = prime * result + ((HIGHBID == null) ? 0 : HIGHBID.hashCode());
-	    result = prime * result + ((ID == null) ? 0 : ID.hashCode());
-	    result = prime * result + ((LEDGER == null) ? 0 : LEDGER.hashCode());
-	    result = prime * result + ((MTYPE == null) ? 0 : MTYPE.hashCode());
-	    result = prime * result + ((PTYPE == null) ? 0 : PTYPE.hashCode());
-	    return result;
-	  }
+	//toString
+	
+  @Override
+	public int hashCode() {
+	  final int prime = 31;
+	  int result = 1;
+	  result = prime * result + ELIGIBILITY;
+	  result = prime * result + ((HIGHBID == null) ? 0 : HIGHBID.hashCode());
+	  result = prime * result + ((ID == null) ? 0 : ID.hashCode());
+	  result = prime * result + ((LEDGER == null) ? 0 : LEDGER.hashCode());
+	  result = prime * result + ((MTYPE == null) ? 0 : MTYPE.hashCode());
+	  result = prime * result + ((PTYPE == null) ? 0 : PTYPE.hashCode());
+	  return result;
+	}
 
-	  @Override
-	  public boolean equals(Object obj) {
+	@Override
+	public boolean equals(Object obj) {
 	    if (this == obj)
 	      return true;
 	    if (obj == null)

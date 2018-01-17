@@ -2,7 +2,6 @@ package brown.messages.library;
 
 import brown.accounting.Ledger;
 import brown.agent.AbsAgent;
-import brown.messages.AbsMessage;
 
 /**
  * The markets can also send agents GameReports (e.g., summary statistics) at

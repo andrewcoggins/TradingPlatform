@@ -2,7 +2,6 @@ package brown.messages.library;
 
 import brown.agent.AbsAgent;
 import brown.channels.server.TwoSidedAuction;
-import brown.messages.AbsMessage;
 
 /**
  * Orders that do not fully clear during a given round may

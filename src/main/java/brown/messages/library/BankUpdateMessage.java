@@ -2,7 +2,6 @@ package brown.messages.library;
 
 import brown.accounting.Account;
 import brown.agent.AbsAgent;
-import brown.messages.AbsMessage;
 
 /**
  * Message provided to agents when their accounts change

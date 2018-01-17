@@ -8,16 +8,17 @@ import java.util.TreeMap;
 import brown.accounting.Ledger;
 import brown.agent.AbsCDAAgent;
 import brown.agent.AbsAgent;
-import brown.channels.agent.ITwoSidedPriceSetter;
 import brown.channels.server.library.CDAServerChannel;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.MarketOrderMessage;
 import brown.tradeable.library.Tradeable;
+import brown.twosided.ITwoSidedPriceSetter;
 
 /*
  * Implements IMarket for Continuous Double auctions
  */
 public class CDAAgentChannel implements ITwoSidedPriceSetter {
+  
 	private final Integer MARKETID;
 	private final Tradeable TYPE;
 	private final SortedMap<Double, Double> BUYBOOK;

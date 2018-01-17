@@ -12,8 +12,6 @@ import brown.value.valuable.library.Value;
 import brown.value.valuation.IIndependentValuation;
 import brown.value.valuationrepresentation.library.SimpleValuation;
 
-
-
 /**
  * A Valuation where the values of each good are independent.
  * @author andrew
@@ -24,14 +22,14 @@ public class AdditiveValuation implements IIndependentValuation {
   private Map<Tradeable, Value> valMap;
   
   /**
-   * for kryo do not use.
+   * For kryo do not use
    */
   public AdditiveValuation() {
       this.valMap = null;
   }
   
   /**
-   * default constructor.
+   * default constructor
    * @param goods
    */
   public AdditiveValuation(Set<Tradeable> goods) {

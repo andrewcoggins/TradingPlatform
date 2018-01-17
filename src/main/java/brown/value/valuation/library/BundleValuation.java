@@ -20,7 +20,6 @@ import brown.value.valuation.IDependentValuation;
 import brown.value.valuationrepresentation.AbsValuationRepresentation;
 import brown.value.valuationrepresentation.library.ComplexValuation;
 
-
 /**
  * a bundle valuation is more complicated. I gave it the tools implicit in the
  * creation of values without initially creating those values.

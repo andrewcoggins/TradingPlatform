@@ -5,7 +5,6 @@ import java.util.Set;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.agent.AbsAgent;
-import brown.messages.AbsMessage;
 import brown.tradeable.library.Tradeable;
 
 /**
