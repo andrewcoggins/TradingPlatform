@@ -3,15 +3,16 @@ package brown.messages;
 import brown.agent.AbsAgent;
 
 /**
- * a message communicates between the agent and the server.
+ * a message is used to communicate between the agent and the server
  * @author lcamery
  */
 public abstract class AbsMessage {
+  
 	protected final Integer ID;
 	
 	/**
 	 * Empty message
-	 * @param ID : message ID
+	 * @param ID - message ID
 	 */
 	public AbsMessage(Integer ID) {
 		this.ID = ID;
@@ -30,4 +31,5 @@ public abstract class AbsMessage {
 	 * @param agent
 	 */
 	public abstract void dispatch(AbsAgent agent);
+	
 }

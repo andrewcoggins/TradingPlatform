@@ -1,14 +1,16 @@
 package brown.accounting;
 
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.Tradeable;
 
+/**
+* An order is ...
+*/
 public class Order {
   
 	public final Integer TO;
 	public final ITradeable GOOD;
 	public final Integer FROM;
-	public final double COST;
+	public final double PRICE;
 	public double QUANTITY;
 	
 	/**
@@ -17,7 +19,7 @@ public class Order {
 	public Order() {
 		this.TO = null;
 		this.FROM = null;
-		this.COST = -1;
+		this.PRICE = -1;
 		this.QUANTITY = -1;
 		this.GOOD = null;
 	}
@@ -26,14 +28,14 @@ public class Order {
 	 * Actual order constructor
 	 * @param to
 	 * @param from
-	 * @param cost
+	 * @param price
 	 * @param quantity
 	 * @param good
 	 */
-	public Order(Integer to, Integer from, double cost, double quantity, ITradeable good) {
+	public Order(Integer to, Integer from, double price, double quantity, ITradeable good) {
 		this.TO = to;
 		this.FROM = from;
-		this.COST = cost;
+		this.PRICE = price;
 		this.QUANTITY = quantity;
 		this.GOOD = good;
 	}
@@ -42,21 +44,26 @@ public class Order {
 		this.QUANTITY = quantity;
 	}
 
+	// ??? this is all about Transactions !! 
 	public Transaction toTransaction() {
-		return new Transaction(this.TO,this.FROM,this.COST,this.QUANTITY,this.GOOD);
+		return new Transaction(this.TO, this.FROM, this.PRICE, this.QUANTITY, this.GOOD);
 	}
 
-	public Order updatePrice(double cost) {
-		return new Order(this.TO, this.FROM, cost, this.QUANTITY, this.GOOD);
+	public Order updatePrice(double price) {
+		return new Order(this.TO, this.FROM, price, this.QUANTITY, this.GOOD);
 	}
 
 	public Order updateToAgent(Integer newAgent) {
-		return new Order(newAgent, this.FROM, this.COST, this.QUANTITY, this.GOOD);
+		return new Order(newAgent, this.FROM, this.PRICE, this.QUANTITY, this.GOOD);
 	}
 	
+	public Order updateFromAgent(Integer newAgent) {
+   return new Order(this.TO, newAgent, this.PRICE, this.QUANTITY, this.GOOD);
+  }
+	  
 	@Override
 	public String toString() {
-		return "<" + this.TO + "," + this.GOOD + "," + this.COST + ">";
+		return "<" + this.TO + "," + this.GOOD + "," + this.PRICE + ">";
 	}
 
   @Override
@@ -64,7 +71,7 @@ public class Order {
     final int prime = 31;
     int result = 1;
     long temp;
-    temp = Double.doubleToLongBits(COST);
+    temp = Double.doubleToLongBits(PRICE);
     result = prime * result + (int) (temp ^ (temp >>> 32));
     result = prime * result + ((FROM == null) ? 0 : FROM.hashCode());
     result = prime * result + ((GOOD == null) ? 0 : GOOD.hashCode());
@@ -83,7 +90,7 @@ public class Order {
     if (getClass() != obj.getClass())
       return false;
     Order other = (Order) obj;
-    if (Double.doubleToLongBits(COST) != Double.doubleToLongBits(other.COST))
+    if (Double.doubleToLongBits(PRICE) != Double.doubleToLongBits(other.PRICE))
       return false;
     if (FROM == null) {
       if (other.FROM != null)

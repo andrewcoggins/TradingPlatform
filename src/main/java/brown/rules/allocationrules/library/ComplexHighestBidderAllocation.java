@@ -10,7 +10,7 @@ import java.util.Set;
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.market.marketstate.IMarketState;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.rules.allocationrules.IAllocationRule;
 import brown.tradeable.library.Tradeable;
 
@@ -33,8 +33,8 @@ public class ComplexHighestBidderAllocation implements IAllocationRule {
     //brute force SPP
     Map<Set<Tradeable>, List<MarketState>> all = new HashMap<Set<Tradeable>, List<MarketState>>();
     Set<Set<Tradeable>> combinations = new HashSet<Set<Tradeable>>();
-    List<BidMessage> allBids = state.getBids();
-    for (BidMessage aBid : allBids) { 
+    List<TradeMessage> allBids = state.getBids();
+    for (TradeMessage aBid : allBids) { 
       ComplexBidBundle bundle = (ComplexBidBundle) aBid.Bundle;
       Map<Set<Tradeable>, MarketState> bidMap = bundle.getBids().bids;
       for(Set<Tradeable> aSet : bidMap.keySet()) {

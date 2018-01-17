@@ -30,8 +30,8 @@ public class BidMessageTest {
     Map<Set<Tradeable>, MarketState> complexMap = new HashMap<Set<Tradeable>, MarketState>(); 
     map.put(new Tradeable(0), new MarketState(0, 1.0)); 
     SimpleBidBundle s = new SimpleBidBundle(map); 
-    BidMessage bm = new BidMessage(0, s, 1, 2); 
-    BidMessage bmTwo = bm.safeCopy(2); 
+    TradeMessage bm = new TradeMessage(0, s, 1, 2); 
+    TradeMessage bmTwo = bm.safeCopy(2); 
     //test public fields
     assertEquals(bm.Bundle, s); 
     assertEquals(bm.AuctionID, new Integer(1)); 
@@ -42,7 +42,7 @@ public class BidMessageTest {
     tSet.add(new Tradeable(0)); 
     complexMap.put(tSet, new MarketState(0, 1.0));
     ComplexBidBundle c  = new ComplexBidBundle(complexMap, 0);
-    BidMessage cBid = new BidMessage(0, c, 1, 2); 
+    TradeMessage cBid = new TradeMessage(0, c, 1, 2); 
     assertEquals(cBid, cBid.safeCopy(2)); 
     assertEquals(cBid.Bundle, c);
     assertEquals(cBid.Bundle.getBids(), c.getBids());

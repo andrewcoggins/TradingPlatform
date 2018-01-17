@@ -16,7 +16,7 @@ import brown.agent.AbsLemonadeAgent;
 import brown.channels.MechanismType;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.setup.ISetup;
 import brown.setup.Startup;
@@ -42,7 +42,7 @@ private class TestServer {
           if (object.equals("send me a trade request")) {
             connection.sendTCP(new TradeRequestMessage(0,
                 new LemonadeChannel(0, new Ledger(0), null, MechanismType.Lemonade), MechanismType.Lemonade));
-          } else if (object instanceof BidMessage) { 
+          } else if (object instanceof TradeMessage) { 
             setMessage();
           }
         }

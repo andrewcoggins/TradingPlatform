@@ -10,7 +10,7 @@ import brown.accounting.Order;
 import brown.accounting.bidbundle.library.LemonadeBidBundle;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.messages.library.LemonadeReportMessage;
 import brown.rules.allocationrules.IAllocationRule;
 import brown.tradeable.library.Tradeable;
@@ -38,11 +38,11 @@ public class LemonadeAllocation implements IAllocationRule {
   
   @Override
   public void setAllocation(IMarketState state) {
-    List<BidMessage> bids = state.getBids();
-    if (bids.isEmpty()) return;
+    List<TradeMessage> bids = state.getBids();
+    if(bids.isEmpty()) return;
     List<Order> payoffs = new ArrayList<Order>();
     
-    for (BidMessage b : bids) {
+    for (TradeMessage b : bids) {
       if (b.Bundle.getType() != BundleType.Lemonade)
         continue;
       LemonadeBidBundle lemonadeBid = (LemonadeBidBundle) b.Bundle;

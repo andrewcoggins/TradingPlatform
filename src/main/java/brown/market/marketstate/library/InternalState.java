@@ -14,7 +14,7 @@ import brown.accounting.bidbundle.library.Allocation;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.channels.MechanismType;
 import brown.market.marketstate.IMarketState;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
@@ -28,7 +28,7 @@ public class InternalState implements IMarketState {
   //things not directly associated with any rule. There may be some overlap.
   private final double INCREMENT = 20.0;
   private final Integer ID;
-  private final List<BidMessage> BIDS;
+  private final List<TradeMessage> BIDS;
   private final Set<Tradeable> TRADEABLES;
   
   private List<Order> lastPayments;
@@ -44,7 +44,7 @@ public class InternalState implements IMarketState {
   private boolean isPrivate; 
   private boolean isOver; 
   private BundleType bType; 
-  private Set<BidMessage> reserve; 
+  private Set<TradeMessage> reserve; 
   private boolean valid; 
   private MechanismType mType; 
   private GameReportMessage report;
@@ -73,7 +73,7 @@ public class InternalState implements IMarketState {
   
   
   public InternalState(Integer ID, Set<Tradeable> tradeables) {
-    this.BIDS = new LinkedList<BidMessage>();
+    this.BIDS = new LinkedList<TradeMessage>();
     this.lastPayments = null;
     this.TRADEABLES = tradeables;
     this.ID = ID;
@@ -89,7 +89,7 @@ public class InternalState implements IMarketState {
   }
   
   //methods not directly associated with a rule. Look for redundancies here.
-  public void addBid(BidMessage bid) {
+  public void addBid(TradeMessage bid) {
     this.ticks = 0;
     this.BIDS.add(bid);
   }
@@ -104,7 +104,7 @@ public class InternalState implements IMarketState {
     this.BIDS.clear(); 
   }
   
-  public List<BidMessage> getBids() {
+  public List<TradeMessage> getBids() {
     return this.BIDS;
   }
   
@@ -198,7 +198,7 @@ public class InternalState implements IMarketState {
     return this.bType;
   }
   
-  public Set<BidMessage> getReserve() {
+  public Set<TradeMessage> getReserve() {
     return this.reserve; 
   }
   
@@ -239,7 +239,7 @@ public class InternalState implements IMarketState {
      this.bType = b;
   }
   
-  public void setReserve(Set<BidMessage> r) {
+  public void setReserve(Set<TradeMessage> r) {
      this.reserve = r; 
   }
   

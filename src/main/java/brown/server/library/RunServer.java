@@ -36,6 +36,8 @@ public class RunServer extends AbsServer {
       List<AbsValueConfig> valueInfo, Double initialMonies,
       List<Tradeable> initialGoods) throws InterruptedException {
     this.valueConfig = new HashMap<Integer, AbsValueConfig>(); 
+    this.initialMonies = initialMonies; 
+    this.initialGoods = initialGoods; 
     for (AbsMarketPreset ruleSet : presets) {
       this.manager.open(new Market(presets.get(presets.indexOf(ruleSet)),
           new InternalState(0, valueInfo.get(presets.indexOf(ruleSet)).allGoods)));

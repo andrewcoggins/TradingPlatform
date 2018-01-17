@@ -10,7 +10,7 @@ public class LemonadeBidBundle implements IBidBundle {
   private BundleType bType; 
   
   /**
-   * for kryo do not use.
+   * For Kryo do not use
    */
   public LemonadeBidBundle() {
     this.numberBid = null; 

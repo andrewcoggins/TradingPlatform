@@ -39,6 +39,11 @@ public class Allocation implements IBidBundle {
   }
 
   @Override
+  public String toString() {
+    return "Allocation [ALLOCATION=" + ALLOCATION + "]";
+  }  
+  
+  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -64,9 +69,4 @@ public class Allocation implements IBidBundle {
     return true;
   }
 
-  @Override
-  public String toString() {
-    return "Allocation [ALLOCATION=" + ALLOCATION + "]";
-  }  
-  
 }

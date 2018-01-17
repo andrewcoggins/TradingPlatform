@@ -6,7 +6,6 @@ package brown.accounting;
  * In two-sided auctions, this is an order book. 
  * In bargaining, this the the current buy and sell offers. 
  * @author andrew
- *
  */
 public class MarketState {
   

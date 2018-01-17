@@ -12,7 +12,7 @@ import org.junit.Test;
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.market.marketstate.library.InternalState;
-import brown.messages.library.BidMessage;
+import brown.messages.library.TradeMessage;
 import brown.tradeable.library.Tradeable;
 
 /**
@@ -33,7 +33,7 @@ public class OneShotActivityTest {
     Map<Tradeable, MarketState> aMap = new HashMap<Tradeable, MarketState>();
     aMap.put(new Tradeable(0), new MarketState(0, 1.0));
     SimpleBidBundle s = new SimpleBidBundle(aMap);
-    BidMessage aBid = new BidMessage(1, s, 1, 1);
+    TradeMessage aBid = new TradeMessage(1, s, 1, 1);
     OneShotActivity shot = new OneShotActivity();
     //is initially acceptable because doesn't contain bid. 
     shot.isAcceptable(state, aBid);

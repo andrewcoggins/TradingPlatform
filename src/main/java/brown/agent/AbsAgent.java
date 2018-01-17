@@ -49,19 +49,18 @@ public abstract class AbsAgent extends AbsClient {
   /**
    * Agents must accept their IDs from the server
    * 
-   * @param registration
-   *            : includes the agent's new ID
+   * @param registration - includes the agent's new ID
    */
   public void onRegistration(RegistrationMessage registration) {
     this.ID = registration.getID();
   }
   
+  //A request for what? Do you just mean a message?
   /**
-   * Whenever a request is accepted/rejected, this method is sent with the
-   * request
+   * Whenever a request is accepted/rejected, 
+   * this method is sent with the request
    * 
-   * @param rejection
-   *            : includes the rejected method and might say why
+   * @param rejection - includes the rejected method and might say why
    */
   public void onAck(AckMessage message) {
     if (message.REJECTED) {
@@ -85,42 +84,42 @@ public abstract class AbsAgent extends AbsClient {
   public abstract void onBankUpdate(BankUpdateMessage bankUpdate);
 
   /**
-   * Whenever an auction is occurring, the server will request a bid using
-   * this method and provide information about the auction as a part of the
+   * When an auction is running, the server requests bids using this method,
+   * and provides information about the current market state as a part of the
    * request
    * 
-   * @param bidRequest
-   *            - auction metadata
+   * @param tradeRequest - auction metadata
    */
-  public abstract void onTradeRequest(BidRequestMessage bidRequest);
+  public abstract void onTradeRequest(BidRequestMessage tradeRequest);
 
   /**
-   * Whenever another agent requests a trade either directly with this agent
-   * or to all agents, this method is invoked with the details of the trade.
+   * Whenever another agent requests a trade, either directly with this agent
+   * or to all agents, this method is invoked with the details of the request.
    * 
    * @param tradeRequest
-   *            - from fields describe what this agent will receive and to
-   *            fields describe what it will give up
+   *            - from fields describe what this agent will get
+   *            - to fields describe what it is requested to give
    */
   public abstract void onNegotiateRequest(NegotiateRequestMessage tradeRequest);
   
+  //rename: SimpleSealedBid
   /**
-   * Provides response to sealed bid auction
-   * @param SealedBid wrapper
+   * Provides agent response to sealed-bid auction
+   * @param simpleWrapper - simple agent channel
    */
   public abstract void onSimpleSealed(SimpleAgentChannel simpleWrapper);
 
   /**
-   * Provides agent response to OpenOutcry auction
-   * @param OpenOutcry wrapper
+   * Provides agent response to open outcry auction
+   * @param simpleWrapper - simple agent channel
    */
   public abstract void onSimpleOpenOutcry(SimpleAgentChannel simpleWrapper);
 
   /**
    * Provides agent response to CDAs
-   * @param market : CDA wrapper
+   * @param cdaWrapper - CDA agent channel
    */
-  public abstract void onContinuousDoubleAuction(CDAAgentChannel market);
+  public abstract void onContinuousDoubleAuction(CDAAgentChannel cdaWrapper);
   
 }
 

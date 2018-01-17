@@ -5,20 +5,21 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
+import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.Allocation;
+import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.Tradeable;
 
-//TODO: abstract to the complex case??
+//TODO: abstract to the complex case
 /**
  * A ledger tracks all trades within a Market. 
  * @author lcamery
- *
  */
 public class Ledger {
+  
   protected final Integer marketId;
 	protected final List<Transaction> transactions;
 	protected final Map<ITradeable, Transaction> latest;
@@ -34,13 +35,19 @@ public class Ledger {
 		this.unshared = null;
 	}
 	
-
-	 public Ledger(Integer marketId) {
-	    this.marketId = marketId; 
-	    this.unshared = new LinkedList<Transaction>();
-	    this.transactions = new LinkedList<Transaction>();
-	    this.latest = new HashMap<ITradeable, Transaction>();
-	  }
+	/**
+   * Actual ledger constructor
+   * @param marketId
+   * 
+   * 
+   * 
+   */
+	public Ledger(Integer marketId) {
+	  this.marketId = marketId; 
+	  this.unshared = new LinkedList<Transaction>();
+	  this.transactions = new LinkedList<Transaction>();
+	  this.latest = new HashMap<ITradeable, Transaction>();
+	}
 	 
 	 /**
 	  * for convenience of implementation in the market class.
@@ -52,33 +59,51 @@ public class Ledger {
      this.unshared = new LinkedList<Transaction>();
      this.transactions = new LinkedList<Transaction>();
      this.latest = new HashMap<ITradeable, Transaction>();
-     this.addAll(initialAlloc);
+     for (Tradeable t : initialAlloc.getBids().bids.keySet()) {
+       this.add(t, initialAlloc.getBids().bids.get(t));
+     }
    }
 
 	/**
 	 * Adds a transaction
-	 * @param t : transaction to add
+	 * @param t - transaction to add
 	 */
 	public void add(Transaction t) {
 		synchronized(transactions) {
-			this.latest.put(t.TRADEABLE,t);
+			this.latest.put(t.TRADEABLE, t);
 			this.transactions.add(t);
 			this.unshared.add(t);
 		}
 	}
 	
-	public void addAll(Allocation bids) {
+	public void add(ITradeable good, MarketState mState) {
 	  synchronized(transactions) {
-	  if (bids != null) {
-	    for (Entry<Tradeable, MarketState> t : bids.getBids().bids.entrySet()) { 
-	      Transaction tr = new Transaction(t.getValue().AGENTID, null, t.getValue().PRICE, 1, t.getKey());
-	      this.latest.put(t.getKey(), tr);
-	      this.transactions.add(tr); 
-	      this.unshared.add(tr);
-	    }
+	    Transaction trans = new Transaction(mState.AGENTID, null, mState.PRICE, good.getCount(), good);
+	    this.latest.put(good, trans);
+	    this.transactions.add(trans);
+	    this.unshared.add(trans);
 	  }
-	 }
 	}
+	
+//	public void addAll(IBidBundle bids) {
+//	  synchronized(transactions) {
+//	  if (bids != null) {
+//	    // how to fix this, how to fix this.
+//	    // could add individual transactions instead.
+//	    if (bids.getType() == BundleType.Simple) {
+//	      SimpleBidBundle castedBids = (SimpleBidBundle) bids;
+//	      for (Entry<Tradeable, MarketState> t : castedBids.getBids().bids.entrySet()) { 
+//	        Transaction tr = new Transaction(t.getValue().AGENTID, null, t.getValue().PRICE, 1, t.getKey());
+//	        this.latest.put(t.getKey(), tr);
+//	        this.transactions.add(tr); 
+//	        this.unshared.add(tr);
+//	      }
+//	    } else if (bids.getType() == BundleType.Complex) {
+//	      
+//	    }
+//	  }
+//	 }
+//	}
 	
 	/**
 	 * Constructs a set of all transactions
@@ -98,7 +123,7 @@ public class Ledger {
 
 	/**
 	 * Adds a list of transactions
-	 * @param trans
+	 * @param trans - list of transactions
 	 */
 	public void add(List<Transaction> trans) {
 		synchronized(transactions) {
@@ -112,7 +137,7 @@ public class Ledger {
 	
 	/**
 	 * Gets the ledger without others' IDs
-	 * @param ID : this agent's ID
+	 * @param ID - this agent's ID
 	 * @return ledger
 	 */
 	public Ledger getSanitized(Integer ID) {
@@ -125,13 +150,13 @@ public class Ledger {
 		return ledger;
 	}
 	
+	//IS THIS BUGGY? it clears unshared. what is unshared? vs. latest, anyway?
 	/**
 	 * Clears the latest set
 	 */
 	public void clearLatest() {
 		this.unshared.clear();
 	}
-
 
   @Override
   public int hashCode() {
@@ -144,7 +169,6 @@ public class Ledger {
     result = prime * result + ((unshared == null) ? 0 : unshared.hashCode());
     return result;
   }
-
 
   @Override
   public boolean equals(Object obj) {

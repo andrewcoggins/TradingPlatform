@@ -1,7 +1,6 @@
 package brown.accounting;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -24,7 +23,7 @@ public class MarketManager {
 	private Map<Integer, TwoSidedAuction> twosided;
 
 	/**
-	 * for Kryo do not use.
+	 * For Kryo do not use
 	 */
 	public MarketManager() {
 		this.ledgers = new ConcurrentHashMap<Market, Ledger>();
@@ -45,11 +44,9 @@ public class MarketManager {
 	private void process(AbsServer server, Market market, Ledger ledger, 
 			Transaction t, Account toReplace) {
 		synchronized (t.TO) {
-			Account acct = server.privateToAccount(t
-					.TO);
+			Account acct = server.privateToAccount(t.TO);
 			if (acct == null) {
-				Logging.log("[X] agent without account "
-						+ t.TO);
+				Logging.log("[X] agent without account " + t.TO);
 				return;
 			}
 
@@ -197,6 +194,5 @@ public class MarketManager {
 	public void openTwoSided(TwoSidedAuction tsa) {
 		this.twosided.put(tsa.getID(), tsa);
 	}
-
 
 }

@@ -21,7 +21,7 @@ public class ComplexBidBundle implements IBidBundle {
 	private final BundleType BT;
 	
 	/**
-	 * Empty constructor for kryo net
+	 * For Kryo do not use
 	 */
 	public ComplexBidBundle() {
 		this.BIDS = null;
@@ -29,10 +29,9 @@ public class ComplexBidBundle implements IBidBundle {
 	}
 	
 	/**
-	 * Use this constructor
-	 * ComplexBidBundle uses Set<FullType>
-	 * @param bid : agent's bid
-	 * @param agent : agent ID
+	 * Actual constructor
+	 * @param bid - agent's bid
+	 * @param agent - agent ID
 	 */
 	public ComplexBidBundle(Map<Set<Tradeable>, MarketState> bid, Integer agent) {
 		this.BIDS = new ComplexBid(bid);

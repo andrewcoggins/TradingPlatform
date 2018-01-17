@@ -31,23 +31,23 @@ public class Transaction {
 	 * Actual transaction constructor
 	 * @param to
 	 * @param from
-	 * @param cost
+	 * @param price
 	 * @param quantity
-	 * @param TRADEABLE
+	 * @param good
 	 */
-	public Transaction(Integer to, Integer from, double price, double quantity, ITradeable TRADEABLE) {
+	public Transaction(Integer to, Integer from, double price, double quantity, ITradeable good) {
 		this.TO = to;
 		this.FROM = from;
 		this.PRICE = price;
 		this.QUANTITY = quantity;
-		this.TRADEABLE = TRADEABLE;
+		this.TRADEABLE = good;
 		this.TIMESTAMP = System.currentTimeMillis();
 	}
 
 	public Transaction sanitize(Integer ID) {
 		return new Transaction(ID != null && ID.equals(TO) ? TO : null,
 				ID != null && ID.equals(FROM) ? FROM : null,
-				PRICE,QUANTITY,TRADEABLE);
+				PRICE, QUANTITY, TRADEABLE);
 	}
 
   @Override

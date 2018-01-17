@@ -1,11 +1,11 @@
 package brown.accounting;
 
 /**
- * a bid bundle can be simple or complex. 
- * a simple bid bundle submits one price bid per good. 
- * A complex bid bundle submits bids for vectors of goods.
+ * A bid bundle can be simple or complex:
+ * - a simple bid bundle consists of one price bid per good
+ * - a complex bid bundle consists bids for vectors of goods
+ * - a lemonade bundle consists of an integer action
  * @author acoggins
- *
  */
 public enum BundleType {
 	Simple, Complex, Lemonade
