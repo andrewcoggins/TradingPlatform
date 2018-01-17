@@ -52,11 +52,11 @@ public class Market implements IMarket {
     return this.STATE.getID();
   }
 
-  // constructs a trade reques
+  // constructs a trade request
   @Override
   public TradeRequestMessage constructTradeRequest(Integer ID) {
     //do something with the IR policy.
-    IBidBundle alloc = this.STATE.getAllocation();
+    Allocation alloc = this.STATE.getAllocation();
     if(alloc != null) {
       this.QRULE.makeChannel(STATE, new Ledger(this.getID(), (Allocation) alloc));
       TradeRequestMessage request = this.STATE.getTRequest();

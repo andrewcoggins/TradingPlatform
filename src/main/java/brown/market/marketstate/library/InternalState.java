@@ -176,7 +176,7 @@ public class InternalState implements IMarketState {
     return this.time; 
   }
   
-  public IBidBundle getAllocation() {
+  public Allocation getAllocation() {
     return this.alloc; 
   }
   

@@ -49,20 +49,6 @@ public class Ledger {
 	  this.latest = new HashMap<ITradeable, Transaction>();
 	}
 	 
-	 /**
-	  * for convenience of implementation in the market class
-	  * @param marketId
-	  * @param initialAlloc
-	  */
-	 public Ledger(Integer marketId, Allocation initialAlloc) {
-     this.marketId = marketId; 
-     this.unshared = new LinkedList<Transaction>();
-     this.transactions = new LinkedList<Transaction>();
-     this.latest = new HashMap<ITradeable, Transaction>();
-     for (Tradeable t : initialAlloc.getBids().bids.keySet()) {
-       this.add(t, initialAlloc.getBids().bids.get(t));
-     }
-   }
 
 	/**
 	 * Adds a transaction
