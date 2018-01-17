@@ -1,72 +1,22 @@
 package abrown.misc;
 
-import brown.accounting.bid.SimpleBid;
-import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.library.BundleType;
+import java.util.List;
+import java.util.Map;
 
-public class Allocation implements IBidBundle {
+import brown.tradeable.library.Tradeable;
 
-  private final SimpleBid ALLOCATION;
-  
-  public Allocation(SimpleBid bids) {
-    if (bids == null) {
-      throw new IllegalArgumentException("Null bids");
-    }
-    this.ALLOCATION = bids;
-  }
-  
-  @Override
-  public double getCost() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+public class Allocation implements IAllocation {
 
-  @Override
-  public IBidBundle wipeAgent(Integer ID) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+private Map<List<Tradeable>, Integer> alloc; 
 
-  @Override
-  public BundleType getType() {
-    // TODO Auto-generated method stub
-    return null;
-  }
+public Allocation(Map<List<Tradeable>, Integer> alloc) {
+  this.alloc = alloc;
+}
 
-  @Override
-  public SimpleBid getBids() {
-    return this.ALLOCATION;
-  }
+@Override
+public Map<List<Tradeable>, Integer> getAllocation() {
+  return this.alloc;
+}
 
-  @Override
-  public String toString() {
-    return "Allocation [ALLOCATION=" + ALLOCATION + "]";
-  }  
-  
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result =
-        prime * result + ((ALLOCATION == null) ? 0 : ALLOCATION.hashCode());
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    Allocation other = (Allocation) obj;
-    if (ALLOCATION == null) {
-      if (other.ALLOCATION != null)
-        return false;
-    } else if (!ALLOCATION.equals(other.ALLOCATION))
-      return false;
-    return true;
-  }
 
 }
