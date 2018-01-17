@@ -10,27 +10,33 @@ import brown.setup.library.SimpleSetup;
 import brown.setup.Logging;
 
 /**
- * Agent for students to implement the lemonade game. Underlying methods implemented 
+ * Agent for the lemonade game.
  * @author andrew
- *
  */
 public class LemonadeAgent extends AbsLemonadeAgent {
   
   private int posn;
-  private int[] positions = new int[12];
+  private int NUM_SLOTS = 12;
+  private int[] positions = new int[NUM_SLOTS];
   
   public LemonadeAgent(String host, int port, int position)
       throws AgentCreationException {
     super(host, port, new SimpleSetup());
     this.posn = position; 
-    for(int i = 0; i < 12; i++) {
+    for(int i = 0; i < NUM_SLOTS; i++) {
       positions[i] = 0; 
     }
   } 
   
   public void onLemonade(LemonadeChannel channel) {
-    //enter a position between 0 and 11 inclusive.
+    // Enter a position between 0 and NUM_SLOTS-1 inclusive.
     channel.bid(this, this.posn);
+  }
+  
+  @Override
+  public void onBankUpdate(BankUpdateMessage bankUpdate) {
+    // TODO Auto-generated method stub
+    Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.getMonies() - bankUpdate.oldAccount.getMonies() + ", Total Money: " + bankUpdate.newAccount.getMonies())); 
   }
   
   @Override
@@ -38,7 +44,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     // TODO Auto-generated method 
     if (marketUpdate instanceof LemonadeReportMessage) { 
       LemonadeReportMessage lemonadeUpdate = (LemonadeReportMessage) marketUpdate;
-      for (int i = 0; i < 12; i++) {
+      for (int i = 0; i < NUM_SLOTS; i++) {
         this.positions[i] = this.positions[i] + lemonadeUpdate.getCount(i);
       }
       printIsland();
@@ -48,13 +54,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     }
   }
   
-  @Override
-  public void onBankUpdate(BankUpdateMessage bankUpdate) {
-    // TODO Auto-generated method stub
-    Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.getMonies() - bankUpdate.oldAccount.getMonies() + ", Total Money: " + bankUpdate.newAccount.getMonies())); 
-  }
-  
-  //prints the island where there are 12 spaces.
+  // Prints the island where there are NUM_SLOT slots.
   private synchronized void printIsland() {
     System.out.println("Lemonade Arrangement:");
     for(int i = 0; i < 4; i++) {
@@ -75,6 +75,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     System.out.print('\n');
   }
   
+  // Print ???WHAT
   private void printNumber(Integer aNum) { 
     if (Math.abs(positions[aNum]) < 10) { 
       System.out.print("| " + positions[aNum] + " | ");
@@ -87,6 +88,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     new LemonadeAgent("localhost", 2121, 2);
     new LemonadeAgent("localhost", 2121, 4);
     new LemonadeAgent("localhost", 2121, 9);
+    
     while(true){}
   }
   

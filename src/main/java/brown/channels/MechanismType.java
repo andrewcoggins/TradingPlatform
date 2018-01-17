@@ -1,14 +1,14 @@
 package brown.channels;
 
 /**
- * an auction is either OpenOutcry, SealedBid, LMSR, 
- * CDA or Lemonade
+ * an auction is either SealedBid, OpenOutcry, LMSR, CDA ,or Lemonade
  * @author acoggins
  *
  */
 public enum MechanismType {
-	OpenOutcry,
 	SealedBid,
+  OpenOutcry,
 	LMSR,
-	ContinuousDoubleAuction, Lemonade
+	CDA,
+	Lemonade
 }

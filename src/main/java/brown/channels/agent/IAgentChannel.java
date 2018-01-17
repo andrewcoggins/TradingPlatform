@@ -3,7 +3,6 @@ package brown.channels.agent;
 import brown.accounting.Ledger;
 import brown.agent.AbsAgent;
 
-
 /*
  * Agents are exposed to client-side versions of markets through IMarket:
  * e.g., a OneSidedMarket, a TwoSidedMarket, or a NegotiationMarket. These
@@ -12,6 +11,7 @@ import brown.agent.AbsAgent;
  * and the Wrapper will handle all communication with the server
  */
 public interface IAgentChannel {
+  
 	/**
 	 * Gets the ID of the auction
 	 * @return id
@@ -25,9 +25,9 @@ public interface IAgentChannel {
 	public Ledger getLedger();
 	
 	/**
-	 * Handles the double dispatch for 
-	 * trade request types
+	 * Handles the double dispatch for trade request types
 	 * @param agent
 	 */
 	public void dispatchMessage(AbsAgent agent);
+	
 }

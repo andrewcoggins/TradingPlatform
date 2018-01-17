@@ -4,7 +4,6 @@ import java.util.List;
 
 import brown.accounting.Account;
 import brown.agent.AbsAgent;
-import brown.messages.AbsMessage;
 import brown.tradeable.ITradeable;
 
 /**

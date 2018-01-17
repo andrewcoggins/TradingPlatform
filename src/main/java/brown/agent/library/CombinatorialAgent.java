@@ -4,15 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-
-import brown.agent.AbsSimpleSealedAgent;
+import brown.agent.AbsSimpleSealedBidAgent;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.ValuationRegistrationMessage;
-import brown.setup.ISetup;
 import brown.setup.library.SimpleSetup;
 import brown.tradeable.library.Tradeable;
 import brown.value.valuationrepresentation.library.ComplexValuation;
@@ -22,7 +20,7 @@ import brown.value.valuationrepresentation.library.ComplexValuation;
  * @author andrew
  *
  */
-public class CombinatorialAgent extends AbsSimpleSealedAgent {
+public class CombinatorialAgent extends AbsSimpleSealedBidAgent {
 
   private ComplexValuation privateValuation; 
   
@@ -55,14 +53,16 @@ public class CombinatorialAgent extends AbsSimpleSealedAgent {
   }
   
   @Override
-  public void onSimpleSealed(SimpleAgentChannel simpleWrapper) {
+  public void onSimpleSealedBid(SimpleAgentChannel simpleWrapper) {
     // TODO Auto-generated method stub
-    Map<Set<Tradeable>, Double> bidMap =new HashMap<Set<Tradeable>, Double>();
+    Map<Set<Tradeable>, Double> bidMap = new HashMap<Set<Tradeable>, Double>();
     simpleWrapper.xorBid(this, bidMap);
-    }
+  }
   
   public static void main(String[] args) throws AgentCreationException {
     new CombinatorialAgent("localhost", 2121);
+    
     while(true){}
   }
+  
 }
