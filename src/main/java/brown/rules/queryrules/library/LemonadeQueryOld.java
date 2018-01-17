@@ -6,7 +6,7 @@ import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.channels.agent.library.SimpleAgentChannel;
-import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.ICompleteState;
 import brown.messages.library.TradeRequestMessage;
 import brown.rules.queryrules.IQueryRule;
 import brown.todeprecate.PaymentType;
@@ -14,7 +14,7 @@ import brown.todeprecate.PaymentType;
 public class LemonadeQueryOld implements IQueryRule {
 
   @Override
-  public void makeChannel(IMarketState state, Ledger ledger) {
+  public void makeChannel(ICompleteState state, Ledger ledger) {
     // TODO Auto-generated method stub
     state.setTRequest(new TradeRequestMessage(0, 
         new SimpleAgentChannel(state.getID(), ledger, state.getPaymentType(), MechanismType.SealedBid, 

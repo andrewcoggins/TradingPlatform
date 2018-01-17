@@ -8,7 +8,7 @@ import java.util.List;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.LemonadeBidBundle;
 import brown.channels.MechanismType;
-import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.LemonadeReportMessage;
@@ -30,14 +30,14 @@ public class LemonadeAllocation implements IAllocationRule {
   }   
   
   @Override
-  public void tick(IMarketState state) {
+  public void tick(ICompleteState state) {
     long time = state.getTime(); 
     time++; 
     state.setTime(time); 
   }
   
   @Override
-  public void setAllocation(IMarketState state) {
+  public void setAllocation(ICompleteState state) {
     List<TradeMessage> bids = state.getBids();
     if(bids.isEmpty()) return;
     List<Order> payoffs = new ArrayList<Order>();
@@ -94,17 +94,17 @@ public class LemonadeAllocation implements IAllocationRule {
   }
 
   @Override
-  public void setBidRequest(IMarketState state) {
+  public void setBidRequest(ICompleteState state) {
     // TODO Auto-generated method stub  
   }
 
   @Override
-  public void isPrivate(IMarketState state) {
+  public void isPrivate(ICompleteState state) {
     state.setPrivate(true); 
   }
 
   @Override
-  public void isOver(IMarketState state) {
+  public void isOver(ICompleteState state) {
     long ticks = state.getTime(); 
     if (ticks > 2) { 
       state.setOver(true);
@@ -112,27 +112,27 @@ public class LemonadeAllocation implements IAllocationRule {
   }
 
   @Override
-  public void setBundleType(IMarketState state) {
+  public void setBundleType(ICompleteState state) {
     state.setBundleType(BundleType.Simple);
   }
 
   @Override
-  public void withReserve(IMarketState state) {
+  public void withReserve(ICompleteState state) {
     // TODO Auto-generated method stub
   }
 
   @Override
-  public void isValid(IMarketState state) {
+  public void isValid(ICompleteState state) {
     
   }
 
   @Override
-  public void getAllocationType(IMarketState state) {
+  public void getAllocationType(ICompleteState state) {
     state.setMType(MechanismType.Lemonade);
   }
 
   @Override
-  public void setReport(IMarketState state) {
+  public void setReport(ICompleteState state) {
     int[] report = new int[this.SIZE];
     for(int i = 0; i < this.SIZE; i++) {
       report[i] = this.slots[i].size();

@@ -7,7 +7,7 @@ import java.util.Set;
 
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
-import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Order;
 import brown.rules.paymentrules.IPaymentRule;
 import brown.todeprecate.PaymentType;
@@ -22,7 +22,7 @@ import brown.tradeable.library.Tradeable;
 public class ComFirstPricePayment implements IPaymentRule {
 
   @Override
-  public void setPayments(IMarketState state) {
+  public void setPayments(ICompleteState state) {
     // TODO Auto-generated method stub
     List<Order> orders = new LinkedList<Order>();
     ComplexBidBundle original = (ComplexBidBundle) state.getbundleReserve();
@@ -37,19 +37,19 @@ public class ComFirstPricePayment implements IPaymentRule {
   }
 
   @Override
-  public void setPaymentType(IMarketState state) {
+  public void setPaymentType(ICompleteState state) {
     // TODO Auto-generated method stub
     state.setPaymentType(PaymentType.FirstPrice);
   }
 
   @Override
-  public void setReserve(IMarketState state) {
+  public void setReserve(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void permitShort(IMarketState state) {
+  public void permitShort(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }

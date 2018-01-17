@@ -11,7 +11,7 @@ import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
-import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.rules.paymentrules.IPaymentRule;
@@ -22,7 +22,7 @@ import brown.tradeable.library.Tradeable;
 public class SimpleSecondPrice implements IPaymentRule {
 
   @Override
-  public void setPayments(IMarketState state) {
+  public void setPayments(ICompleteState state) {
     // TODO Auto-generated method stub
     IBidBundle highest = state.getAllocation();
     Allocation bundle = (Allocation) highest;      
@@ -49,19 +49,19 @@ public class SimpleSecondPrice implements IPaymentRule {
   }
 
   @Override
-  public void setPaymentType(IMarketState state) {
+  public void setPaymentType(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void setReserve(IMarketState state) {
+  public void setReserve(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void permitShort(IMarketState state) {
+  public void permitShort(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }

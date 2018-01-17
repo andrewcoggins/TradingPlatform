@@ -1,6 +1,6 @@
 package brown.rules.allocationrules;
 
-import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.ICompleteState;
 
 /**
  * an allocation rule decides two things: 
@@ -9,24 +9,24 @@ import brown.market.marketstate.IMarketState;
  */
 public interface IAllocationRule {
 
-	public void tick(IMarketState state);
+	public void tick(ICompleteState state);
 	
-  public void setAllocation(IMarketState state);
+  public void setAllocation(ICompleteState state);
   
-  public void setBidRequest(IMarketState state);
+  public void setBidRequest(ICompleteState state);
 
-	public void isPrivate(IMarketState state);
+	public void isPrivate(ICompleteState state);
 	
-	public void isOver(IMarketState state);
+	public void isOver(ICompleteState state);
 	
-  public void setBundleType(IMarketState state);
+  public void setBundleType(ICompleteState state);
 
-	public void withReserve(IMarketState state);
+	public void withReserve(ICompleteState state);
 
-	void isValid(IMarketState state);
+	void isValid(ICompleteState state);
 
-	void getAllocationType(IMarketState state);
+	void getAllocationType(ICompleteState state);
 
-  void setReport(IMarketState state);
+  void setReport(ICompleteState state);
 
 }

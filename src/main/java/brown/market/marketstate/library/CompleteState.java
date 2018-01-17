@@ -11,7 +11,7 @@ import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.channels.MechanismType;
-import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.ICompleteState;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
@@ -21,7 +21,10 @@ import brown.tradeable.library.Tradeable;
 
 
 //hopefully an integrating center for information that pertains to markets and rules.
-public class InternalState implements IMarketState {
+public class CompleteState implements ICompleteState {
+  
+  
+  private MarketState marketState; 
   
   //things not directly associated with any rule. There may be some overlap.
   private final double INCREMENT = 20.0;
@@ -37,7 +40,7 @@ public class InternalState implements IMarketState {
   
   //allocation rule things.
   private long time; 
-  private IBidBundle alloc;
+  private Allocation alloc;
   private BidRequestMessage request;
   private boolean isPrivate; 
   private boolean isOver; 
@@ -70,7 +73,7 @@ public class InternalState implements IMarketState {
   
   
   
-  public InternalState(Integer ID, Set<Tradeable> tradeables) {
+  public CompleteState(Integer ID, Set<Tradeable> tradeables) {
     this.BIDS = new LinkedList<TradeMessage>();
     this.lastPayments = null;
     this.TRADEABLES = tradeables;
@@ -84,6 +87,11 @@ public class InternalState implements IMarketState {
     }
     this.bundleReserve = new SimpleBidBundle(reserve);
     this.maximizing = false;
+  }
+  
+  @Override
+  public MarketState getMarketState() {
+    return this.marketState;
   }
   
   //methods not directly associated with a rule. Look for redundancies here.
@@ -217,7 +225,7 @@ public class InternalState implements IMarketState {
     this.time = t; 
   }
   
-  public void setAllocation(IBidBundle alloc) {
+  public void setAllocation(Allocation alloc) {
     this.alloc = alloc; 
   }
   
@@ -340,4 +348,5 @@ public class InternalState implements IMarketState {
     }
     return this.outerRuns;
   }
+
 }

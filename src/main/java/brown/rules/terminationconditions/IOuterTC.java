@@ -1,6 +1,6 @@
 package brown.rules.terminationconditions;
 
-import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.ICompleteState;
 
 /**
  * An outer termination condition determines when a series of single 
@@ -8,6 +8,6 @@ import brown.market.marketstate.IMarketState;
  */
 public interface IOuterTC {
   
-  public void outerTerminated(IMarketState state);
+  public void outerTerminated(ICompleteState state);
 
 }

@@ -6,7 +6,7 @@ import abrown.misc.Allocation;
 import brown.accounting.Ledger;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.market.IMarket;
-import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Order;
 import brown.market.preset.AbsMarketPreset;
 import brown.messages.library.TradeMessage;
@@ -29,9 +29,9 @@ public class Market implements IMarket {
   private final IInformationRevelationPolicy INFOPOLICY;
   private final IInnerTC ITCONDITION;
   private final IOuterTC OTCONDITION; 
-  private final IMarketState STATE;
+  private final ICompleteState STATE;
   
-  public Market(AbsMarketPreset rules, IMarketState state) {
+  public Market(AbsMarketPreset rules, ICompleteState state) {
     this.PRULE = rules.pRule;
     this.ARULE = rules.aRule;
      this.QRULE = rules.qRule;

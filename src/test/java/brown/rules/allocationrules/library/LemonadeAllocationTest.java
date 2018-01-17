@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import brown.accounting.Account;
 import brown.accounting.bidbundle.library.LemonadeBidBundle;
-import brown.market.marketstate.library.InternalState;
+import brown.market.marketstate.library.CompleteState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.tradeable.library.Tradeable;
@@ -38,7 +38,7 @@ public class LemonadeAllocationTest {
     for(int i = 0; i < 3; i++) {
      allTradeables.add(new Tradeable(i));
     }
-    InternalState state = new InternalState(0, allTradeables);
+    CompleteState state = new CompleteState(0, allTradeables);
     //test tick
     lem.tick(state);
     assertTrue(state.getTime() == (long) 1.0);
@@ -59,7 +59,7 @@ public class LemonadeAllocationTest {
     assertTrue(agentAccount.getMonies() == 24.0);
     agentAccount.add(-24.0);
     //add another player and test again. 
-    InternalState stateTwo = new InternalState(0, allTradeables);
+    CompleteState stateTwo = new CompleteState(0, allTradeables);
     Account anotherAgentAccount = new Account(2);
     TradeMessage secondBid = new TradeMessage(2, new LemonadeBidBundle(2), 1, 2);
     stateTwo.addBid(aBid);
@@ -86,7 +86,7 @@ public class LemonadeAllocationTest {
     for(int i = 0; i < 12; i++) { 
       accounts.add(new Account(i));
     }
-    InternalState state = new InternalState(0, null);
+    CompleteState state = new CompleteState(0, null);
     List<TradeMessage> allBids = new LinkedList<TradeMessage>();
     for(int i = 0; i < 12; i++) {
       state.addBid(new TradeMessage(i, new LemonadeBidBundle(i), 1, i));
@@ -110,7 +110,7 @@ public class LemonadeAllocationTest {
     for (int i = 0; i < 12; i++) {
       accounts.add(new Account(i));
     }
-    InternalState state = new InternalState(0, null);
+    CompleteState state = new CompleteState(0, null);
     for(int i = 0; i < 12; i++) {
       if (i < 3) state.addBid(new TradeMessage(i, new LemonadeBidBundle(0), 1, i));
       else if (i >= 3 && i < 6) state.addBid(new TradeMessage(i, new LemonadeBidBundle(3), 1, i));

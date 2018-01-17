@@ -4,14 +4,14 @@ import brown.accounting.Ledger;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.SimpleAgentChannel;
-import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.ICompleteState;
 import brown.messages.library.TradeRequestMessage;
 import brown.rules.queryrules.IQueryRule;
 
 public class SealedBidQuery implements IQueryRule {
 
 	@Override
-	public void makeChannel(IMarketState state, Ledger ledger) {
+	public void makeChannel(ICompleteState state, Ledger ledger) {
 		//if (state.getAllocation().getType().equals(BundleType.Simple)) {
 
 			state.setTRequest(new TradeRequestMessage(0, 

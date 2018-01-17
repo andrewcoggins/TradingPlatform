@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
-import brown.market.marketstate.library.InternalState;
+import brown.market.marketstate.library.CompleteState;
 import brown.tradeable.library.Tradeable;
 
 /**
@@ -22,7 +22,7 @@ public class SimpleSecondPriceTest {
   public void testSimpleSecondPrice() { 
     Map<Tradeable, MarketState> aMap = new HashMap<Tradeable, MarketState>();
     SimpleBidBundle al = new SimpleBidBundle(aMap);
-    InternalState state = new InternalState(0, aMap.keySet());
+    CompleteState state = new CompleteState(0, aMap.keySet());
     state.setAllocation(al);
     
     SimpleSecondPrice sim = new SimpleSecondPrice();

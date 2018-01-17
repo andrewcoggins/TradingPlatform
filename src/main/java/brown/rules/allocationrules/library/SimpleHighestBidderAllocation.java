@@ -9,7 +9,7 @@ import abrown.misc.Allocation;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
-import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.ICompleteState;
 import brown.messages.library.TradeMessage;
 import brown.rules.allocationrules.IAllocationRule;
 import brown.tradeable.library.Tradeable;
@@ -22,13 +22,13 @@ import brown.tradeable.library.Tradeable;
 public class SimpleHighestBidderAllocation implements IAllocationRule {
 
   @Override
-  public void tick(IMarketState state) {
+  public void tick(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void setAllocation(IMarketState state) {
+  public void setAllocation(ICompleteState state) {
     Map<Tradeable, Double> highest = new HashMap<Tradeable, Double>();
     List<TradeMessage> allBids = state.getBids();
     for(TradeMessage bid : allBids) {
@@ -45,49 +45,49 @@ public class SimpleHighestBidderAllocation implements IAllocationRule {
   }
 
   @Override
-  public void setBidRequest(IMarketState state) {
+  public void setBidRequest(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void isPrivate(IMarketState state) {
+  public void isPrivate(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void isOver(IMarketState state) {
+  public void isOver(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void setBundleType(IMarketState state) {
+  public void setBundleType(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void withReserve(IMarketState state) {
+  public void withReserve(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void isValid(IMarketState state) {
+  public void isValid(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void getAllocationType(IMarketState state) {
+  public void getAllocationType(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void setReport(IMarketState state) {
+  public void setReport(ICompleteState state) {
     // TODO Auto-generated method stub
     
   }
