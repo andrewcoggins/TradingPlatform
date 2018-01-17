@@ -68,7 +68,7 @@ public abstract class AbsServer {
 	protected boolean SHORT;
 	
 	protected Map<Integer, AbsValueConfig> valueConfig; 
-	protected List<Tradeable> initialTradeables;
+	protected List<Tradeable> initialGoods;
 	protected Double initialMonies;
 	// a map from an agents' private id to its private valuation for goods.
 	// what if there are different sets of goods? 
@@ -516,8 +516,8 @@ public abstract class AbsServer {
 			privateToPublic.put(theID, agentCount++);
 			Account newAccount = new Account(theID);
 			if (this.initialMonies != null) newAccount.add(initialMonies);
-			if(this.initialTradeables != null) {
-			  for (Tradeable t : this.initialTradeables)
+			if(this.initialGoods != null) {
+			  for (Tradeable t : this.initialGoods)
 			    newAccount.add(0.0, t);
 			}
 			this.acctManager.setAccount(theID, newAccount);
