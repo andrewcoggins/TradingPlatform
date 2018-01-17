@@ -121,18 +121,7 @@ public abstract class AbsServer {
 				if (message instanceof TradeMessage) {
 					Logging.log("[-] bid recieved from " + id);
 					aServer.onBid(connection, id, (TradeMessage) message);
-				} else if (message instanceof NegotiateRequestMessage) {
-					Logging.log("[-] traderequest recieved from " + id);
-					aServer.onTradeRequest(connection, id,
-							(NegotiateRequestMessage) message);
-				} else if (message instanceof BargainMessage) {
-					Logging.log("[-] trade recieved from " + id);
-					aServer.onTrade(connection, (BargainMessage) message);
-				} else if (message instanceof MarketOrderMessage) {
-					Logging.log("[-] limitorder recieved from " + id);
-					Logging.log("ERROR: Limit order functionality not present");
-					//aServer.onLimitOrder(connection, id, (MarketOrder) message);
-				}
+				} 
 			}
 		});
 		Logging.log("[-] server started");
@@ -188,77 +177,6 @@ public abstract class AbsServer {
 		}
 	}
 
-	/*
-	 * The server receives trade requests and forwards them to the correct
-	 * agent(s)
-	 * 
-	 * @param connection - agent connection info
-	 * 
-	 * @param privateID - (safe) privateID of the requesting agent
-	 * 
-	 * @param tradeRequest - the trade request
-	 */
-	protected void onTradeRequest(Connection connection, Integer privateID,
-			NegotiateRequestMessage tradeRequest) {
-		NegotiateRequestMessage tr = tradeRequest.safeCopy(privateToPublic
-				.get(privateID));
-		if (privateID != -1) {
-			theServer.sendToAllTCP(tr);
-		} else {
-			theServer.sendToTCP(connection.getID(), tr);
-		}
-		pendingTradeRequests.add(tr);
-	}
-
-	/*
-	 * What happens when a trade request is accepted or rejected
-	 * 
-	 * @param connection - agent connection info
-	 * 
-	 * @param trade - tuple of trade request and acceptance boolean
-	 */
-	protected void onTrade(Connection connection, BargainMessage trade) {
-		Integer privateTo = connections.get(connection);
-		Integer privateFrom = publicToPrivate(trade.tradeRequest.fromID);
-		if (privateFrom == null) {
-			return;
-		}
-		if (pendingTradeRequests.contains(trade.tradeRequest)) {
-			if (!trade.accept) {
-				if (privateToPublic.get(privateTo) == trade.tradeRequest.fromID
-						|| privateToPublic.get(privateTo) == trade.tradeRequest.toID) {
-					pendingTradeRequests.remove(trade.tradeRequest);
-				}
-			} else if (privateToPublic.get(privateTo) == trade.tradeRequest.toID
-					|| trade.tradeRequest.toID == -1) {
-				Account toAccount = acctManager.getAccount(privateTo);
-				Account fromAccount = acctManager.getAccount(privateFrom);
-
-				if (trade.tradeRequest.isSatisfied(toAccount, fromAccount)) {
-          toAccount.remove(
-              trade.tradeRequest.moniesRequested,
-              trade.tradeRequest.sharesRequested);
-				  toAccount.add(
-              trade.tradeRequest.moniesOffered,
-              trade.tradeRequest.sharesOffered);
-	        fromAccount.remove(
-	             trade.tradeRequest.moniesOffered,
-	             trade.tradeRequest.sharesOffered); 
-				  fromAccount.add(
-				     trade.tradeRequest.moniesRequested,
-             trade.tradeRequest.sharesRequested);
-					acctManager.setAccount(privateTo, toAccount);
-					acctManager.setAccount(privateFrom, fromAccount);
-
-					List<Integer> ids = new LinkedList<Integer>();
-					//take a look at locking schemes
-					ids.add(privateTo);
-					ids.add(privateFrom);
-					sendBankUpdates(ids);
-				}
-			}
-		}
-	}
 
 	/*
 	 * This will handle what happens when an agent sends in a bid in response to
