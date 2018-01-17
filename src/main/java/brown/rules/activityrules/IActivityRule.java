@@ -3,7 +3,6 @@ package brown.rules.activityrules;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.BidMessage;
 
-
 public interface IActivityRule {
   
   //this doesn't quite make sense. But maybe it can be morphed to work.

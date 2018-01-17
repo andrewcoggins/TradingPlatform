@@ -11,11 +11,12 @@ import brown.accounting.bid.AbsBid;
  * Agents do not need to know what BidBundle is used because the auctions
  * expose methods that take in the required information.
  * 
- *  Whenever the server receives a valid BidBundle, the corresponding
- *  market handles it. If a trade clears, depending on the market’s rule,
- *  the server can send a MarketUpdate (i.e., an updated ledger) to all
- *  agents and a BankUpdate to the agents directly involved in the trade;
- *  if not, the market updates its current state.
+ * Whenever the server receives a valid BidBundle, the corresponding
+ * market handles it. If a trade clears, depending on the market's rule,
+ * the server can send a MarketUpdate (i.e., an updated ledger) to all
+ * agents and a BankUpdate to the agents directly involved in the trade;
+ * if not, the market updates its current state.
+ * 
  * @author andrew
  *
  */
@@ -47,8 +48,7 @@ public interface IBidBundle {
 	public BundleType getType();
 	
 	/**
-	 * comparator for BidBundles.
-	 *
+	 * comparator for BidBundles
 	 */
 	public static class BidBundleComparator implements Comparator<IBidBundle> {
 
@@ -56,6 +56,6 @@ public interface IBidBundle {
 		public int compare(IBidBundle arg0, IBidBundle arg1) {
 			return new Double(arg0.getCost()).compareTo(new Double(arg1.getCost()));
 		}
-		
 	}
+	
 }

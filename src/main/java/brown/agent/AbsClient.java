@@ -13,11 +13,11 @@ import brown.setup.Startup;
 public abstract class AbsClient {
   
   public final Client CLIENT;
-  
- public Integer ID;
+  public Integer ID;
   
  /** 
-  * the basic client communication object. 
+  * The basic client communication object.
+  * 
   * @param host
   * @param port
   * @param gameSetup
@@ -41,4 +41,5 @@ public abstract class AbsClient {
       throw new AgentCreationException("Failed to connect to server");
     }
   }
+  
 }

@@ -8,6 +8,7 @@ import brown.accounting.Order;
 import brown.tradeable.library.Tradeable;
 
 public interface IClearingRule {
+  
 //	public List<Order> buy(Integer agentID, double shareNum, double sharePrice);
 //	public List<Order> sell(Integer agentID, Tradeable opp, double sharePrice);
 //	
@@ -22,4 +23,5 @@ public interface IClearingRule {
 //	public boolean isShort();
 //	public void cancel(Integer agentID, boolean buy, double shareNum,
 //			double sharePrice);
+
 }

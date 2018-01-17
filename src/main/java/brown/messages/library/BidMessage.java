@@ -5,6 +5,7 @@ import brown.agent.AbsAgent;
 import brown.messages.AbsMessage;
 
 public class BidMessage extends AbsMessage {
+  
 	public final IBidBundle Bundle;
 	public final Integer AuctionID;
 	public final Integer AgentID;
@@ -89,4 +90,5 @@ public class BidMessage extends AbsMessage {
 	public String toString() {
 		return "[" + this.AuctionID + ":" + this.AgentID + "->" + this.Bundle + "]";
 	}
+	
 }

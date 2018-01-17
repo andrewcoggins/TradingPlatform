@@ -7,6 +7,7 @@ import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
 import brown.setup.library.SimpleSetup;
+import brown.setup.Logging;
 
 /**
  * Agent for students to implement the lemonade game. Underlying methods implemented 
@@ -50,7 +51,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   @Override
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
     // TODO Auto-generated method stub
-    //Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.monies - bankUpdate.oldAccount.monies + ", Total Money: " + bankUpdate.newAccount.monies)); 
+    Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.getMonies() - bankUpdate.oldAccount.getMonies() + ", Total Money: " + bankUpdate.newAccount.getMonies())); 
   }
   
   //prints the island where there are 12 spaces.

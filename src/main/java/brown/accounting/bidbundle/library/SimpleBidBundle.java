@@ -10,11 +10,10 @@ import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.tradeable.library.Tradeable;
 
-
-/*
- * The built-in BidBundle is called SimpleBidBundle,
- * and holds one double. 
- */
+/**
+  * The built-in BidBundle is called SimpleBidBundle,
+  * and holds one double. 
+  */
 public class SimpleBidBundle implements IBidBundle {
 	private final Map<Tradeable, MarketState> BIDS;
 	private final BundleType BT;
@@ -40,7 +39,6 @@ public class SimpleBidBundle implements IBidBundle {
 		this.BIDS = bids;
 		this.BT = BundleType.Simple;
 	}
-
 
   @Override
 	public double getCost() {
@@ -83,7 +81,6 @@ public class SimpleBidBundle implements IBidBundle {
 		return "[" + this.BT + ": " + this.BIDS + "]";
 	}
 	
-
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -111,8 +108,5 @@ public class SimpleBidBundle implements IBidBundle {
       return false;
     return true;
   }
-
-
-	
 	
 }

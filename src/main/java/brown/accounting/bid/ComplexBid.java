@@ -9,6 +9,7 @@ import brown.tradeable.library.Tradeable;
 /**
  * The lowest-level bidding datatype. A mapping from sets of tradeables to 
  * marketstates, which contains bid prices.
+ * 
  * @author andrew
  */
 public class ComplexBid extends AbsBid {

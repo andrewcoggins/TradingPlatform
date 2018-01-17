@@ -2,16 +2,17 @@ package brown.accounting;
 
 import brown.tradeable.ITradeable;
 
-/*
- * a Transaction is recorded in the ledger.
+/**
+ * A transaction is a trade that transpired.
+ * Each one is recorded in the ledger.
  */
 public class Transaction {
+  
 	public final Integer TO;
 	public final ITradeable TRADEABLE;
 	public final Integer FROM;
 	public final double PRICE;
 	public final double QUANTITY;
-	
 	public final long TIMESTAMP;
 	
 	/**
@@ -48,6 +49,13 @@ public class Transaction {
 				ID != null && ID.equals(FROM) ? FROM : null,
 				PRICE,QUANTITY,TRADEABLE);
 	}
+
+  @Override
+  public String toString() {
+    return "Transaction [TO=" + TO + ", TRADEABLE=" + TRADEABLE + ", FROM="
+        + FROM + ", PRICE=" + PRICE + ", QUANTITY=" + QUANTITY + ", TIMESTAMP="
+        + TIMESTAMP + "]";
+  }
 
   @Override
   public int hashCode() {
@@ -96,13 +104,5 @@ public class Transaction {
       return false;
     return true;
   }
-
-  @Override
-  public String toString() {
-    return "Transaction [TO=" + TO + ", TRADEABLE=" + TRADEABLE + ", FROM="
-        + FROM + ", PRICE=" + PRICE + ", QUANTITY=" + QUANTITY + ", TIMESTAMP="
-        + TIMESTAMP + "]";
-  }
-
 	
 }

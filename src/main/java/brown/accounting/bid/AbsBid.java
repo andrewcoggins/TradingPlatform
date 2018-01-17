@@ -7,7 +7,6 @@ package brown.accounting.bid;
  * statements based on a bundletype enum. 
  * 
  * @author andrew
- *
  */
 public abstract class AbsBid {
   

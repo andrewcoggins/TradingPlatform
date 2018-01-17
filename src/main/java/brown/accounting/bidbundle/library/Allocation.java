@@ -67,8 +67,6 @@ public class Allocation implements IBidBundle {
   @Override
   public String toString() {
     return "Allocation [ALLOCATION=" + ALLOCATION + "]";
-  }
-  
-  
+  }  
   
 }

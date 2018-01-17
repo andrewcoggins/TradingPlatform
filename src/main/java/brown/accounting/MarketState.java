@@ -1,13 +1,15 @@
 package brown.accounting;
 
 /**
- * the 'state' of the market. In one sided auctions
- * this is a quote of the highest bid. In a two sided auction
- * this is an order book. with bargaining, this is an offer. 
+ * The 'state' of the market. 
+ * In one-sided auctions, this is tentative allocation and prices. 
+ * In two-sided auctions, this is an order book. 
+ * In bargaining, this the the current buy and sell offers. 
  * @author andrew
  *
  */
 public class MarketState {
+  
 	public final Integer AGENTID;
 	public final double PRICE;
 	
@@ -62,6 +64,5 @@ public class MarketState {
       return false;
     return true;
   }
-	
 	
 }

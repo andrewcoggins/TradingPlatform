@@ -4,12 +4,11 @@ import brown.market.marketstate.IMarketState;
 
 /**
  * an allocation rule decides two things: 
+ * 
  * @author andrew
- *
  */
 public interface IAllocationRule {
 
-  
 	public void tick(IMarketState state);
 	
   public void setAllocation(IMarketState state);

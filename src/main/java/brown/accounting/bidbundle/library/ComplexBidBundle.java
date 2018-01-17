@@ -9,8 +9,6 @@ import brown.accounting.bid.ComplexBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.tradeable.library.Tradeable;
 
-
-
 /**
  * A Complex Bid Bundle is a bid bundle that submits bids for vectors 
  * of goods. i.e. (a b c) = 1
@@ -18,6 +16,7 @@ import brown.tradeable.library.Tradeable;
  *
  */
 public class ComplexBidBundle implements IBidBundle {
+  
 	private final ComplexBid BIDS;
 	private final BundleType BT;
 	
@@ -90,6 +89,5 @@ public class ComplexBidBundle implements IBidBundle {
       return false;
     return true;
   }
-
 	
 }

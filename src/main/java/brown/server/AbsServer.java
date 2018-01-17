@@ -50,9 +50,7 @@ import com.esotericsoftware.kryonet.Server;
 /**
  * This is the server that all trading agent games will implement. It abstracts
  * away all of the communication logic and largely the shared market structures
- * (auctions, markets, trading) so that designers can focus on their game
- * specifics
- * 
+ * (auctions, markets, trading) so that designers can focus on their game specifics
  */
 public abstract class AbsServer {
 	protected Map<Connection, Integer> connections;
@@ -137,7 +135,6 @@ public abstract class AbsServer {
 		});
 		Logging.log("[-] server started");
 	}
-
 
 	/*
 	 * This method is invoked when a new agent connects to the game

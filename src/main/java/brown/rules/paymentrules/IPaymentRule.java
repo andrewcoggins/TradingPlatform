@@ -2,7 +2,6 @@ package brown.rules.paymentrules;
 
 import brown.market.marketstate.IMarketState;
 
-
 public interface IPaymentRule {
 
   public void setPayments(IMarketState state); 

@@ -4,6 +4,7 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.Tradeable;
 
 public class Order {
+  
 	public final Integer TO;
 	public final ITradeable GOOD;
 	public final Integer FROM;
@@ -104,6 +105,5 @@ public class Order {
       return false;
     return true;
   }
-	
 	
 }

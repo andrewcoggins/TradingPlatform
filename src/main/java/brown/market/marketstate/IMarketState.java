@@ -17,8 +17,8 @@ import brown.todeprecate.PaymentType;
 /**
  * stores the internal state of a market as 
  * bidding is occurring.
+ * 
  * @author acoggins
- *
  */
 public interface IMarketState {
 

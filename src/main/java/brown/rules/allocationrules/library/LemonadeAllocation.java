@@ -21,7 +21,6 @@ public class LemonadeAllocation implements IAllocationRule {
   private double numGlasses = 2.0;
   private List<Integer>[] slots;
   
-  
   @SuppressWarnings("unchecked")
   public LemonadeAllocation() {
     this.slots = (List<Integer>[]) new List[SIZE];
@@ -29,7 +28,6 @@ public class LemonadeAllocation implements IAllocationRule {
       slots[i] = new LinkedList<Integer>();
     }
   }   
-  
   
   @Override
   public void tick(IMarketState state) {
@@ -41,7 +39,7 @@ public class LemonadeAllocation implements IAllocationRule {
   @Override
   public void setAllocation(IMarketState state) {
     List<BidMessage> bids = state.getBids();
-    if(bids.isEmpty()) return;
+    if (bids.isEmpty()) return;
     List<Order> payoffs = new ArrayList<Order>();
     
     for (BidMessage b : bids) {
@@ -52,7 +50,7 @@ public class LemonadeAllocation implements IAllocationRule {
       slots[index].add(b.AgentID);
     }
 
-    for (int i=0; i<SIZE; i++) {
+    for (int i = 0; i < SIZE; i++) {
       // Search to right
       int r = 0;
       while(this.slots[Math.floorMod(i+r,SIZE)].isEmpty()) {
@@ -66,9 +64,9 @@ public class LemonadeAllocation implements IAllocationRule {
       
       // Person to pay
       List<Integer> winners = new ArrayList<Integer>();
-      if (r<l) {
+      if (r < l) {
         winners.addAll(slots[Math.floorMod(i+r,SIZE)]);
-      } else if (l<r) {     
+      } else if (l < r) {     
         winners.addAll(slots[Math.floorMod(i-l,SIZE)]);        
       } else { 
         if (i-l != i+r) { 
@@ -79,36 +77,36 @@ public class LemonadeAllocation implements IAllocationRule {
       
       for (int w : winners) { 
         double payoff = numGlasses / winners.size();
-        //System.out.println(payoff);
-        Order earned = new Order(w,null,-1 * payoff,1,new Tradeable(0));
+        // System.out.println(payoff);
+        Order earned = new Order(w, null, -1 * payoff, 1, new Tradeable(0));
         payoffs.add(earned);
       }      
-    }    
-  // hacky and bad.
-  // actually it may not be. The thing being 'allocated' in this
-  // game is just money itself. So if the allocation rule deals with
-  // who gets what good and a payment rule involves mapping this allocation
-  // to a payment scheme, than the payment rule really does nothing in this 
-  // game, because the allocation and payment scheme are the same.
-  state.setPayments(payoffs);
-}
+    } 
+    
+    // hacky and bad.
+    // actually it may not be. 
+    // The thing being 'allocated' in this game is just money itself. 
+    // So if the allocation rule deals with who gets what good and a payment rule 
+    // involves mapping this allocation to a payment scheme, than the payment rule 
+    // really does nothing in this game,
+    // because the allocation and payment scheme are the same.
+    state.setPayments(payoffs);
+  }
 
   @Override
   public void setBidRequest(IMarketState state) {
-    // TODO Auto-generated method stub
-    
+    // TODO Auto-generated method stub  
   }
 
   @Override
   public void isPrivate(IMarketState state) {
     state.setPrivate(true); 
-    
   }
 
   @Override
   public void isOver(IMarketState state) {
     long ticks = state.getTime(); 
-    if(ticks > 2) { 
+    if (ticks > 2) { 
       state.setOver(true);
     }
   }
@@ -116,19 +114,17 @@ public class LemonadeAllocation implements IAllocationRule {
   @Override
   public void setBundleType(IMarketState state) {
     state.setBundleType(BundleType.Simple);
-    
   }
 
   @Override
   public void withReserve(IMarketState state) {
     // TODO Auto-generated method stub
-    
   }
 
   @Override
   public void isValid(IMarketState state) {
-
-    }
+    
+  }
 
   @Override
   public void getAllocationType(IMarketState state) {
@@ -143,6 +139,5 @@ public class LemonadeAllocation implements IAllocationRule {
     }
     state.setReport(new LemonadeReportMessage(report));
   }
-
   
 }

@@ -11,21 +11,20 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  */
 public class AccountManager {
+  
 	private Map<Integer, Account> accounts;
 
 	/**
-	 * manager that stores accounts for use in the server.
+	 * manager that stores accounts for use by the server
 	 */
 	public AccountManager() {
 		this.accounts = new ConcurrentHashMap<Integer, Account>();
 	}
 	
 	/**
-	 * put an account in the account manager.
-	 * @param ID
-	 * ID of agent whose account is put in the manager.
-	 * @param account
-	 * account of agent
+	 * put an account in the account manager
+	 * @param ID - agent's ID whose account is to be put in the manager
+	 * @param account - agent's account
 	 */
 	public void setAccount(Integer ID, Account account) {
 		synchronized (ID) {
@@ -33,32 +32,29 @@ public class AccountManager {
 		}
 	}
 	
+	//PRIVATE??
 	/**
-	 * gets account from an Agent's private id
-	 * @param ID
-	 * agent's private id
-	 * @return
-	 * an account
+	 * gets an account from an Agent's private id
+	 * @param ID - agent's private id
+	 * @return - account
 	 */
 	public Account getAccount(Integer ID) {
+	  //check for existence first? why not necessary?
+	  //if accounts.containsKey(ID) ...
 		return accounts.get(ID);
 	}
 	
 	/**
-	 * get all accounts in the manager, in a List.
-	 * @return
+	 * get all accounts in the manager, in a List
 	 */
 	public List<Account> getAccounts() {
-		List<Account> accountsList = new ArrayList<Account>(accounts.values());
-		return accountsList;
+		return new ArrayList<Account>(accounts.values());
 	}
 	
 	/**
 	 * does the manager contain an account associated with the input ID? 
-	 * @param ID
-	 * agent's private ID
-	 * @return
-	 * whether or not the account exists. 
+	 * @param ID - agent's private ID
+	 * @return whether or not the account exists
 	 */
 	public Boolean containsAcct(Integer ID) {
 		return accounts.containsKey(ID);

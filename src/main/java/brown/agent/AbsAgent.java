@@ -1,6 +1,5 @@
 package brown.agent;
 
-
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
@@ -47,7 +46,6 @@ public abstract class AbsAgent extends AbsClient {
     CLIENT.sendTCP(new RegistrationMessage(-1));
   }
   
-
   /**
    * Agents must accept their IDs from the server
    * 
@@ -117,7 +115,6 @@ public abstract class AbsAgent extends AbsClient {
    * @param OpenOutcry wrapper
    */
   public abstract void onSimpleOpenOutcry(SimpleAgentChannel simpleWrapper);
-
 
   /**
    * Provides agent response to CDAs

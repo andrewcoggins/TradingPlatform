@@ -33,7 +33,7 @@ public class Market implements IMarket {
   
   public Market(AbsMarketPreset rules, IMarketState state) {
     this.PRULE = rules.pRule;
-     this.ARULE = rules.aRule;
+    this.ARULE = rules.aRule;
      this.QRULE = rules.qRule;
      this.ACTRULE = rules.actRule;
      this.INFOPOLICY = rules.infoPolicy;

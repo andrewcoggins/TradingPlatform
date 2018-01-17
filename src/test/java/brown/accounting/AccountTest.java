@@ -112,4 +112,5 @@ public class AccountTest  {
     assertEquals((Tradeable) acctFour.getGoods().get(0), aList.get(0));
     // all good.
   }
+  
 }
