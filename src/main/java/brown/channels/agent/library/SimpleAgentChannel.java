@@ -15,7 +15,7 @@ import brown.channels.agent.IAgentChannel;
 import brown.messages.library.TradeMessage;
 import brown.setup.Logging;
 import brown.todeprecate.PaymentType;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 
 /*
  * Implements IMarket for Simple auctions
@@ -100,7 +100,7 @@ public class SimpleAgentChannel implements IAgentChannel {
 	 * Returns the high bid
 	 * @return double
 	 */
-	public MarketState getMarketState(Tradeable type) {
+	public MarketState getMarketState(Good type) {
 		return this.HIGHBID.getBid(type);
 	}
 	
@@ -112,9 +112,9 @@ public class SimpleAgentChannel implements IAgentChannel {
 		return this.ELIGIBILITY;
 	}
 
-	public void bid(AbsAgent agent, Map<Tradeable, Double> bids) {
-		Map<Tradeable, MarketState> fixedBids = new HashMap<Tradeable,MarketState>();
-		for (Entry<Tradeable, Double> bid : bids.entrySet()) {
+	public void bid(AbsAgent agent, Map<Good, Double> bids) {
+		Map<Good, MarketState> fixedBids = new HashMap<Good,MarketState>();
+		for (Entry<Good, Double> bid : bids.entrySet()) {
 			fixedBids.put(bid.getKey(), new MarketState(agent.ID, bid.getValue()));
 //			if (fixedBids.size() > 10) {
 //				agent.CLIENT.sendTCP(new Bid(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
@@ -127,9 +127,9 @@ public class SimpleAgentChannel implements IAgentChannel {
 		}
 	}
 
-	public void demandSet(AbsAgent agent, Set<Tradeable> toBid) {
-		Map<Tradeable, MarketState> fixedBids = new HashMap<Tradeable,MarketState>();
-		for (Tradeable bid : toBid) {
+	public void demandSet(AbsAgent agent, Set<Good> toBid) {
+		Map<Good, MarketState> fixedBids = new HashMap<Good,MarketState>();
+		for (Good bid : toBid) {
 			fixedBids.put(bid, new MarketState(agent.ID, 0));
 			if (fixedBids.size() > 10) {
 				agent.CLIENT.sendTCP(new TradeMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
@@ -141,17 +141,17 @@ public class SimpleAgentChannel implements IAgentChannel {
 		}
 	}
 	
-	public void xorBid(AbsAgent agent, Map<Set<Tradeable>, Double> toBid) {
+	public void xorBid(AbsAgent agent, Map<Set<Good>, Double> toBid) {
 		if (3 < toBid.size()) {
 			throw new IllegalArgumentException("Attempt to submit too many atomic bids");
 		}
 		
-		Map<Tradeable, MarketState> fixedBids = new HashMap<Tradeable,MarketState>();
-		for (Entry<Set<Tradeable>, Double> bid : toBid.entrySet()) {
+		Map<Good, MarketState> fixedBids = new HashMap<Good,MarketState>();
+		for (Entry<Set<Good>, Double> bid : toBid.entrySet()) {
 			if (this.ELIGIBILITY < bid.getKey().size()) {
 				throw new IllegalArgumentException("Attempt to submit ineligible bid " + bid.getKey());
 			}
-			for (Tradeable t : bid.getKey()) {
+			for (Good t : bid.getKey()) {
 				fixedBids.put(t, new MarketState(agent.ID, bid.getValue()));
 				if (fixedBids.size() > 10) {
 					agent.CLIENT.sendTCP(new TradeMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
@@ -165,7 +165,7 @@ public class SimpleAgentChannel implements IAgentChannel {
 		}
 	}
 	
-	public Set<Tradeable> getTradeables() {
+	public Set<Good> getTradeables() {
 		return this.HIGHBID.getBids().bids.keySet();
 	}
 

@@ -3,7 +3,7 @@ package brown.value.generator.library;
 import java.util.Set;
 import java.util.function.Function;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.valuable.library.Value;
 
@@ -27,12 +27,12 @@ public class SizeDependentGenerator extends AbsValuationGenerator {
   }
   
   @Override
-  public Value makeValuation(Tradeable aGood) {
+  public Value makeValuation(Good aGood) {
    return new Value(valFunction.apply(1) * this.valueScale);
   }
   
   @Override
-  public Value makeValuation(Set<Tradeable> aGood) {
+  public Value makeValuation(Set<Good> aGood) {
    return new Value(valFunction.apply(aGood.size()) * this.valueScale);
   } 
 

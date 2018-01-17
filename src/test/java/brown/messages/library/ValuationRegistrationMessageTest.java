@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
@@ -27,15 +27,15 @@ public class ValuationRegistrationMessageTest {
   @Test
   public void testValuationRegistrationMessage() {
     // simple good case.
-    Map<Tradeable, Value> vals = new HashMap<Tradeable, Value>(); 
-    vals.put(new Tradeable(0), new Value(0.0));
+    Map<Good, Value> vals = new HashMap<Good, Value>(); 
+    vals.put(new Good(0), new Value(0.0));
     ValuationRegistrationMessage personal = 
         new ValuationRegistrationMessage(0, new SimpleValuation(vals)); 
     assertEquals(personal.getValuation(), new SimpleValuation(vals));
     //complex good case.
-    Map<Set<Tradeable>, Value> valsTwo = new HashMap<Set<Tradeable>, Value>();
-    Set<Tradeable> tr = new HashSet<Tradeable>(); 
-    tr.add(new Tradeable(1)); 
+    Map<Set<Good>, Value> valsTwo = new HashMap<Set<Good>, Value>();
+    Set<Good> tr = new HashSet<Good>(); 
+    tr.add(new Good(1)); 
     valsTwo.put(tr, new Value(1.0));
     ValuationRegistrationMessage personalCom = new ValuationRegistrationMessage(0, 
         new ComplexValuation(valsTwo));

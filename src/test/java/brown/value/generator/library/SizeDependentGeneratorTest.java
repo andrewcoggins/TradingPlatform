@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 import org.junit.Test;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 import brown.value.valuable.library.Value;
 
 
@@ -26,7 +26,7 @@ public class SizeDependentGeneratorTest {
     // basic functionality
     Function<Integer, Double> aFunction = x -> (double) x;
     SizeDependentGenerator test = new SizeDependentGenerator(aFunction);
-    Tradeable good = new Tradeable();
+    Good good = new Good();
     assertEquals(new Value(1.0), test.makeValuation(good));
     // a single good 
     Function<Integer, Double> anotherFunction = x -> (double) 2 * x; 
@@ -36,9 +36,9 @@ public class SizeDependentGeneratorTest {
     SizeDependentGenerator testThree = new SizeDependentGenerator(anotherFunction, 2.0);
     assertEquals(new Value(4.0), testThree.makeValuation(good)); 
     // test for a set of goods.
-    Set<Tradeable> goodSet = new HashSet<Tradeable>(); 
+    Set<Good> goodSet = new HashSet<Good>(); 
     for (int i = 0; i < 10; i++) {
-      goodSet.add(new Tradeable(i)); 
+      goodSet.add(new Good(i)); 
     }
     Function<Integer, Double> thirdFunction = x -> (double) x * x; 
     SizeDependentGenerator testFour = new SizeDependentGenerator(thirdFunction);

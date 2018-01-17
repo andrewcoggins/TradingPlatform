@@ -18,7 +18,7 @@ import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.market.marketstate.library.InternalState;
 import brown.messages.library.TradeMessage;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 
 /**
  * test for simple highest bidder allocation rule. 
@@ -33,19 +33,19 @@ public class SimpleHighestBidderAllocationTest {
    */
   @Test
   public void testSimpleHighestBidderAllocation() {
-    Set<Tradeable> allGoods = new HashSet<Tradeable>();
-    allGoods.add(new Tradeable(0));
+    Set<Good> allGoods = new HashSet<Good>();
+    allGoods.add(new Good(0));
     InternalState state = new InternalState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
-    Map<Tradeable, MarketState> aMap = new HashMap<Tradeable, MarketState>();
-    aMap.put(new Tradeable(0), new MarketState(1, 1.0));
+    Map<Good, MarketState> aMap = new HashMap<Good, MarketState>();
+    aMap.put(new Good(0), new MarketState(1, 1.0));
     SimpleBidBundle sim = new SimpleBidBundle(aMap);
     TradeMessage b = new TradeMessage(1, sim, 1, 1);
     state.addBid(b);
     s.setAllocation(state);
     Allocation goods = (Allocation) state.getAllocation();
-    Map<Tradeable, MarketState> bids = goods.getBids().bids;
-    assertEquals(bids.get(new Tradeable(0)), aMap.get(new Tradeable(0)));
+    Map<Good, MarketState> bids = goods.getBids().bids;
+    assertEquals(bids.get(new Good(0)), aMap.get(new Good(0)));
   }
   
   /*
@@ -53,24 +53,24 @@ public class SimpleHighestBidderAllocationTest {
    */
   @Test
   public void testTwo() {
-    Set<Tradeable> allGoods = new HashSet<Tradeable>();
+    Set<Good> allGoods = new HashSet<Good>();
     for (int i = 0; i < 5; i++) {
-      allGoods.add(new Tradeable(i));
+      allGoods.add(new Good(i));
     }
     InternalState state = new InternalState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
-    Map<Tradeable, MarketState> aMap = new HashMap<Tradeable, MarketState>();
+    Map<Good, MarketState> aMap = new HashMap<Good, MarketState>();
     for (int i = 0; i < 5; i++) {
-      aMap.put(new Tradeable(i), new MarketState(1, 1.0));
+      aMap.put(new Good(i), new MarketState(1, 1.0));
     }
     SimpleBidBundle sim = new SimpleBidBundle(aMap);
     TradeMessage b = new TradeMessage(1, sim, 1, 1);
     state.addBid(b);
     s.setAllocation(state);
     Allocation goods = (Allocation) state.getAllocation();
-    Map<Tradeable, MarketState> bids = goods.getBids().bids; 
+    Map<Good, MarketState> bids = goods.getBids().bids; 
     for(int i = 0; i < 5; i++) {
-      assertEquals(bids.get(new Tradeable(i)), aMap.get(new Tradeable(i)));
+      assertEquals(bids.get(new Good(i)), aMap.get(new Good(i)));
     }
   }
   
@@ -79,19 +79,19 @@ public class SimpleHighestBidderAllocationTest {
    */
   @Test
   public void testThree() {
-    Set<Tradeable> allGoods = new HashSet<Tradeable>();
+    Set<Good> allGoods = new HashSet<Good>();
     for (int i = 0; i < 5; i++) {
-      allGoods.add(new Tradeable(i));
+      allGoods.add(new Good(i));
     }
     InternalState state = new InternalState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
-    Map<Tradeable, MarketState> aMap = new HashMap<Tradeable, MarketState>();
+    Map<Good, MarketState> aMap = new HashMap<Good, MarketState>();
     for (int i = 0; i < 5; i++) {
-      aMap.put(new Tradeable(i), new MarketState(1, 1.0));
+      aMap.put(new Good(i), new MarketState(1, 1.0));
     }
-    Map<Tradeable, MarketState> aMapTwo = new HashMap<Tradeable, MarketState>();
+    Map<Good, MarketState> aMapTwo = new HashMap<Good, MarketState>();
     for (int i = 0; i < 5; i++) {
-      aMapTwo.put(new Tradeable(i), new MarketState(2, 2.0));
+      aMapTwo.put(new Good(i), new MarketState(2, 2.0));
     }
     SimpleBidBundle sim = new SimpleBidBundle(aMap);
     SimpleBidBundle simTwo = new SimpleBidBundle(aMapTwo);
@@ -101,9 +101,9 @@ public class SimpleHighestBidderAllocationTest {
     state.addBid(bTwo);
     s.setAllocation(state);
     Allocation goods = (Allocation) state.getAllocation();
-    Map<Tradeable, MarketState> bids = goods.getBids().bids; 
+    Map<Good, MarketState> bids = goods.getBids().bids; 
     for(int i = 0; i < 5; i++) {
-      assertTrue(bids.get(new Tradeable(i)).PRICE == 2.0);
+      assertTrue(bids.get(new Good(i)).PRICE == 2.0);
     }
   }
   
@@ -112,20 +112,20 @@ public class SimpleHighestBidderAllocationTest {
    */
   @Test
   public void testFour() {
-    Set<Tradeable> allGoods = new HashSet<Tradeable>();
+    Set<Good> allGoods = new HashSet<Good>();
     for (int i = 0; i < 5; i++) {
-      allGoods.add(new Tradeable(i));
+      allGoods.add(new Good(i));
     }
     InternalState state = new InternalState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
-    Map<Tradeable, MarketState> aMap = new HashMap<Tradeable, MarketState>();
+    Map<Good, MarketState> aMap = new HashMap<Good, MarketState>();
     for (int i = 0; i < 5; i++) {
-      aMap.put(new Tradeable(i), new MarketState(1, 1.0));
+      aMap.put(new Good(i), new MarketState(1, 1.0));
     }
-    Map<Set<Tradeable>, MarketState> aMapTwo = new HashMap<Set<Tradeable>, MarketState>();
+    Map<Set<Good>, MarketState> aMapTwo = new HashMap<Set<Good>, MarketState>();
     for (int i = 0; i < 5; i++) {
-      Set<Tradeable> tSet = new HashSet<Tradeable>();
-      tSet.add(new Tradeable(i));
+      Set<Good> tSet = new HashSet<Good>();
+      tSet.add(new Good(i));
       aMapTwo.put(tSet, new MarketState(2, 2.0));
     }
     SimpleBidBundle sim = new SimpleBidBundle(aMap);
@@ -136,9 +136,9 @@ public class SimpleHighestBidderAllocationTest {
     state.addBid(bTwo);
     s.setAllocation(state);
     Allocation goods = (Allocation) state.getAllocation();
-    Map<Tradeable, MarketState> bids = goods.getBids().bids; 
+    Map<Good, MarketState> bids = goods.getBids().bids; 
     for(int i = 0; i < 5; i++) {
-      assertTrue(bids.get(new Tradeable(i)).PRICE == 1.0);
+      assertTrue(bids.get(new Good(i)).PRICE == 1.0);
     }
   }
   
@@ -152,28 +152,28 @@ public class SimpleHighestBidderAllocationTest {
       Double aNum = Math.random();
       bidderToValuation.put(i, aNum);
     }
-    Set<Tradeable> allGoods = new HashSet<Tradeable>();
-    allGoods.add(new Tradeable(0));
+    Set<Good> allGoods = new HashSet<Good>();
+    allGoods.add(new Good(0));
     InternalState state = new InternalState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
     for (Integer bidder : bidderToValuation.keySet()) {
-      Map<Tradeable, MarketState> aMap = new HashMap<Tradeable, MarketState>();
-      aMap.put(new Tradeable(0), new MarketState(bidder, bidderToValuation.get(bidder)));
+      Map<Good, MarketState> aMap = new HashMap<Good, MarketState>();
+      aMap.put(new Good(0), new MarketState(bidder, bidderToValuation.get(bidder)));
       SimpleBidBundle sim = new SimpleBidBundle(aMap);
       TradeMessage aBid = new TradeMessage(bidder, sim, 0, bidder);
       state.addBid(aBid);
     }
     s.setAllocation(state);
     Allocation goods = (Allocation) state.getAllocation();
-    Map<Tradeable, MarketState> bids = goods.getBids().bids; 
+    Map<Good, MarketState> bids = goods.getBids().bids; 
     double highestBid = 0.0; 
     for(double p : bidderToValuation.values()) {
       if (p > highestBid) {
         highestBid = p;
       }
     }
-    assertTrue(bids.get(new Tradeable(0)).PRICE == bidderToValuation.get(bids.get(new Tradeable(0)).AGENTID));
-    assertTrue(bids.get(new Tradeable(0)).PRICE == highestBid);
+    assertTrue(bids.get(new Good(0)).PRICE == bidderToValuation.get(bids.get(new Good(0)).AGENTID));
+    assertTrue(bids.get(new Good(0)).PRICE == highestBid);
   }
   
   /*
@@ -193,16 +193,16 @@ public class SimpleHighestBidderAllocationTest {
       }
       bidderToValuations.put(i, valuations);
     }
-    Set<Tradeable> allGoods = new HashSet<Tradeable>();
+    Set<Good> allGoods = new HashSet<Good>();
     for (int i = 0; i < GOODS; i++) {
-      allGoods.add(new Tradeable(i));
+      allGoods.add(new Good(i));
     }
     InternalState state = new InternalState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
     for (Integer bidder : bidderToValuations.keySet()) {
-      Map<Tradeable, MarketState> aMap = new HashMap<Tradeable, MarketState>();
+      Map<Good, MarketState> aMap = new HashMap<Good, MarketState>();
       for(int i = 0; i < GOODS; i++) {
-        aMap.put(new Tradeable(i), new MarketState(bidder, bidderToValuations.get(bidder).get(i)));
+        aMap.put(new Good(i), new MarketState(bidder, bidderToValuations.get(bidder).get(i)));
       }
       SimpleBidBundle sim = new SimpleBidBundle(aMap);
       TradeMessage aBid = new TradeMessage(bidder, sim, 0, bidder);
@@ -210,7 +210,7 @@ public class SimpleHighestBidderAllocationTest {
     }
     s.setAllocation(state);
     Allocation goods = (Allocation) state.getAllocation();
-    Map<Tradeable, MarketState> bids = goods.getBids().bids; 
+    Map<Good, MarketState> bids = goods.getBids().bids; 
     for (int i = 0; i < GOODS; i++) {
       double highestBid = 0.0; 
       for(List<Double> p : bidderToValuations.values()) {
@@ -218,8 +218,8 @@ public class SimpleHighestBidderAllocationTest {
           highestBid = p.get(i);
         }
       }
-      assertTrue(bids.get(new Tradeable(i)).PRICE == bidderToValuations.get(bids.get(new Tradeable(i)).AGENTID).get(i));
-      assertTrue(bids.get(new Tradeable(i)).PRICE == highestBid);
+      assertTrue(bids.get(new Good(i)).PRICE == bidderToValuations.get(bids.get(new Good(i)).AGENTID).get(i));
+      assertTrue(bids.get(new Good(i)).PRICE == highestBid);
     }
   }
 }

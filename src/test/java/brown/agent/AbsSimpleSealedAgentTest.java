@@ -29,7 +29,7 @@ import brown.setup.ISetup;
 import brown.setup.Startup;
 import brown.setup.library.SimpleSetup;
 import brown.todeprecate.PaymentType;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 import brown.value.valuable.library.Value;
 import brown.value.valuationrepresentation.library.SimpleValuation;
 
@@ -59,12 +59,12 @@ public class AbsSimpleSealedAgentTest {
               BankUpdateMessage b = new BankUpdateMessage(0, new Account(1), new Account(1));
               connection.sendTCP(b);
             } else if (object.equals("send me a SimpleAgentChannel")) {
-              Map<Tradeable, MarketState> junk = new HashMap<Tradeable, MarketState>();
+              Map<Good, MarketState> junk = new HashMap<Good, MarketState>();
               SimpleAgentChannel sa = new SimpleAgentChannel(0, new Ledger(0),
                   PaymentType.FirstPrice, MechanismType.SealedBid, new SimpleBidBundle(junk), 0); 
               connection.sendTCP(new TradeRequestMessage(0, sa, MechanismType.SealedBid));
             } else if (object.equals("send me a Registration")) {
-              Map<Tradeable, Value> m = new HashMap<Tradeable, Value>();
+              Map<Good, Value> m = new HashMap<Good, Value>();
               ValuationRegistrationMessage val = new ValuationRegistrationMessage(0,
                   new SimpleValuation(m));
               connection.sendTCP(val);

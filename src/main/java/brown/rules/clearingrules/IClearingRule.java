@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.SortedMap;
 
 import brown.accounting.Order;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 
 public interface IClearingRule {
 //	public List<Order> buy(Integer agentID, double shareNum, double sharePrice);

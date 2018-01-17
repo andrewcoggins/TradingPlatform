@@ -12,7 +12,7 @@ import org.apache.commons.math3.exception.NotStrictlyPositiveException;
 import org.apache.commons.math3.random.ISAACRandom;
 import org.apache.commons.math3.random.RandomGenerator;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.generator.library.ValRandGenerator;
 import brown.value.valuable.library.Value;
@@ -32,15 +32,15 @@ import brown.value.valuationrepresentation.library.ComplexValuation;
 // 
 public class BundleValuation implements IDependentValuation {
   
-  private Map<Set<Tradeable>, Value> valMap;
+  private Map<Set<Good>, Value> valMap;
   private AbsValuationGenerator generator;
-  private Set<Tradeable> goods;
+  private Set<Good> goods;
   private Boolean monotonic;
 
-  public BundleValuation(Set<Tradeable> goods) {
+  public BundleValuation(Set<Good> goods) {
     this.generator = new ValRandGenerator();
     this.goods = goods;
-    this.valMap = new HashMap<Set<Tradeable>, Value>();
+    this.valMap = new HashMap<Set<Good>, Value>();
     this.monotonic = false;
   }
 
@@ -48,38 +48,38 @@ public class BundleValuation implements IDependentValuation {
   // uniformity to the way that these
   // functions operate.
   public BundleValuation(AbsValuationGenerator valGenerator, Boolean isMonotonic,
-      Set<Tradeable> goods) {
+      Set<Good> goods) {
     this.generator = valGenerator;
     this.goods = goods;
-    this.valMap = new HashMap<Set<Tradeable>, Value>();
+    this.valMap = new HashMap<Set<Good>, Value>();
     this.monotonic = isMonotonic;
   }
 
   @Override
-  public ComplexValuation getValuation(Set<Tradeable> goods) {
-    Map<Map<Integer, Tradeable>, Value> existingSetsID =
-        new HashMap<Map<Integer, Tradeable>, Value>();
+  public ComplexValuation getValuation(Set<Good> goods) {
+    Map<Map<Integer, Good>, Value> existingSetsID =
+        new HashMap<Map<Integer, Good>, Value>();
     // map to cater to necessary iteration structure for monotonicity
-    Map<Map<Integer, Tradeable>, Value> previousSize =
-        new HashMap<Map<Integer, Tradeable>, Value>();
-    Map<Integer, Tradeable> numberGoods = new HashMap<Integer, Tradeable>();
+    Map<Map<Integer, Good>, Value> previousSize =
+        new HashMap<Map<Integer, Good>, Value>();
+    Map<Integer, Good> numberGoods = new HashMap<Integer, Good>();
     int count = 0;
-    for (Tradeable good : this.goods) {
+    for (Good good : this.goods) {
       numberGoods.put(count, good);
       count++;
     }
     // give maps starting values
-    existingSetsID.put(new HashMap<Integer, Tradeable>(), new Value(0.0));
-    previousSize.put(new HashMap<Integer, Tradeable>(), new Value(0.0));
+    existingSetsID.put(new HashMap<Integer, Good>(), new Value(0.0));
+    previousSize.put(new HashMap<Integer, Good>(), new Value(0.0));
     for (int i = 0; i < numberGoods.size(); i++) {
       // hashmap populated with every subset of size i;
-      Map<Map<Integer, Tradeable>, Value> temp =
-          new HashMap<Map<Integer, Tradeable>, Value>();
+      Map<Map<Integer, Good>, Value> temp =
+          new HashMap<Map<Integer, Good>, Value>();
       // for each good in the previous size subset
-      for (Map<Integer, Tradeable> e : previousSize.keySet()) {
+      for (Map<Integer, Good> e : previousSize.keySet()) {
         // for each good, create a new bundle, as
         for (Integer id : numberGoods.keySet()) {
-          Map<Integer, Tradeable> eCopy = new HashMap<Integer, Tradeable>(e);
+          Map<Integer, Good> eCopy = new HashMap<Integer, Good>(e);
           if (!e.keySet().contains(id)) {
             eCopy.put(id, numberGoods.get(id));
             if (!temp.containsKey(eCopy)) {
@@ -98,8 +98,8 @@ public class BundleValuation implements IDependentValuation {
                 // apply monotonic constraints.
                 Value highestValSubSet = new Value(0.0);
                 for (Integer anId : eCopy.keySet()) {
-                  Map<Integer, Tradeable> eCopyCopy =
-                      new HashMap<Integer, Tradeable>(eCopy);
+                  Map<Integer, Good> eCopyCopy =
+                      new HashMap<Integer, Good>(eCopy);
                   eCopyCopy.remove(anId);
                   if (existingSetsID.containsKey(eCopyCopy)) {
                     if (existingSetsID.get(eCopyCopy).value > highestValSubSet.value) {
@@ -109,7 +109,7 @@ public class BundleValuation implements IDependentValuation {
                 }
                 Value sampledValue = new Value(-0.1);
                 while (sampledValue.value < highestValSubSet.value) {
-                  sampledValue = generator.makeValuation(new HashSet<Tradeable>(eCopy.values()));
+                  sampledValue = generator.makeValuation(new HashSet<Good>(eCopy.values()));
                 }
                 temp.put(eCopy, sampledValue);
               }
@@ -120,8 +120,8 @@ public class BundleValuation implements IDependentValuation {
       existingSetsID.putAll(temp);
       previousSize = temp;
     }
-    for (Map<Integer, Tradeable> idGood : existingSetsID.keySet()) {
-      Set<Tradeable> goodsSet = new HashSet<Tradeable>(idGood.values());
+    for (Map<Integer, Good> idGood : existingSetsID.keySet()) {
+      Set<Good> goodsSet = new HashSet<Good>(idGood.values());
       valMap.put(goodsSet, existingSetsID.get(idGood));
     }
     return new ComplexValuation(valMap);
@@ -131,7 +131,7 @@ public class BundleValuation implements IDependentValuation {
   public AbsValuationRepresentation getSomeValuations(Integer numValuations,
       Integer bundleSizeMean, Double bundleSizeStdDev) {
     if (bundleSizeMean > 0 && bundleSizeStdDev > 0) {
-      Map<Set<Tradeable>, Value> returnMap = new HashMap<Set<Tradeable>, Value>();
+      Map<Set<Good>, Value> returnMap = new HashMap<Set<Good>, Value>();
       // populateVarCoVarMatrix(bundle);
       RandomGenerator rng = new ISAACRandom();
       NormalDistribution sizeDist =
@@ -139,8 +139,8 @@ public class BundleValuation implements IDependentValuation {
       for (int i = 0; i < numValuations; i++) {
         Boolean reSample = true;
         while (reSample) {
-          List<Tradeable> goodList = new ArrayList<Tradeable>(this.goods);
-          Map<Integer, Tradeable> goodMap = new HashMap<>();
+          List<Good> goodList = new ArrayList<Good>(this.goods);
+          Map<Integer, Good> goodMap = new HashMap<>();
           int size = -1;
           // repeatedly sample bundle size until a valid size is picked.
           while (size < 1 || size > this.goods.size()) {
@@ -150,14 +150,14 @@ public class BundleValuation implements IDependentValuation {
           // sample without replacement goods to add to the bundle size times.
           for (int j = 0; j < size; j++) {
             Integer rand = (int) (Math.random() * goodList.size());
-            Tradeable aGood = goodList.get(rand);
+            Good aGood = goodList.get(rand);
             goodMap.put(rand, aGood);
             goodList.remove(aGood);
           }
           if (!valMap.containsKey(goodMap.values())) {
             reSample = false;
             Double variance = 0.0;
-            Set<Tradeable> goodSet = new HashSet<Tradeable>(goodMap.values());
+            Set<Good> goodSet = new HashSet<Good>(goodMap.values());
             // for (Integer id : goodMap.keySet()) {
             // for (Integer idTwo : goodMap.keySet()) {
             // variance += varCoVar[id][idTwo];
@@ -175,7 +175,7 @@ public class BundleValuation implements IDependentValuation {
             else {
               Value minimumPrice = new Value(0.0);
               Value maximumPrice = new Value(Double.MAX_VALUE);
-              for (Set<Tradeable> goods : this.valMap.keySet()) {
+              for (Set<Good> goods : this.valMap.keySet()) {
                 if (goodSet.containsAll(goods)
                     && valMap.get(goods).value > minimumPrice.value) {
                   minimumPrice = valMap.get(goods);

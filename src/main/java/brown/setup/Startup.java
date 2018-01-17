@@ -43,7 +43,7 @@ import brown.messages.library.ValuationRegistrationMessage;
 import brown.rules.clearingrules.IClearingRule;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.TradeableType;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 import brown.value.config.ComplexConfig;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.generator.library.NormalGenerator;
@@ -102,7 +102,7 @@ public final class Startup {
 		kryo.register(PaymentType.class);
 		kryo.register(CDAAgentChannel.class);
 		kryo.register(IClearingRule.class);
-		kryo.register(Tradeable.class);
+		kryo.register(Good.class);
 		kryo.register(CDAServerChannel.class);
 		kryo.register(Order.class);
 		kryo.register(Ledger.class);

@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.accounting.MarketState;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 
 /**
  * The lowest-level bidding datatype. A mapping from sets of tradeables to 
@@ -13,9 +13,9 @@ import brown.tradeable.library.Tradeable;
  */
 public class ComplexBid extends AbsBid {
   
-  public final Map<Set<Tradeable>, MarketState> bids; 
+  public final Map<Set<Good>, MarketState> bids; 
   
-  public ComplexBid(Map<Set<Tradeable> , MarketState> bundle) { 
+  public ComplexBid(Map<Set<Good> , MarketState> bundle) { 
     this.bids = bundle; 
   }
 

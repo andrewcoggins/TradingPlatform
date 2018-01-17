@@ -2,7 +2,7 @@ package brown.value.config;
 
 import java.util.Set;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.Good;
 import brown.value.generator.library.NormalGenerator;
 import brown.value.valuationrepresentation.library.ValuationType;
 
@@ -14,7 +14,7 @@ import brown.value.valuationrepresentation.library.ValuationType;
  */
 public class SSSPConfig extends AbsValueConfig {
   
-  public SSSPConfig(Set<Tradeable> allGoods) {
+  public SSSPConfig(Set<Good> allGoods) {
     this.allGoods = allGoods; 
     this.valueScheme = ValuationType.Simple;
     this.aGenerator = new NormalGenerator(x -> (double) x, 1.0);
