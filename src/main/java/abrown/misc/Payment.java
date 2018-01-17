@@ -2,24 +2,24 @@ package abrown.misc;
 
 import java.util.Map;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.ITradeable;
 
 /**
- * A payment maps Tradeables to prices for those
+ * A payment maps ITradeables to prices for those
  * tradeables.
  * @author andrew
  *
  */
 public class Payment implements IPayment {
   
-  private Map<Tradeable, Double> aPayment; 
+  private Map<ITradeable, Double> aPayment; 
  
-  public Payment(Map<Tradeable, Double> aPayment) {
+  public Payment(Map<ITradeable, Double> aPayment) {
     this.aPayment = aPayment; 
   }
   
-  public AbsPaymentMapping getPayment() {
-    return new SimplePaymentMapping(this.aPayment); 
+  public Map<ITradeable, Double> getPayment() {
+    return aPayment;
   }
 
   @Override
