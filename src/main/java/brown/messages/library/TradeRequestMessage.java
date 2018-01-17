@@ -10,10 +10,11 @@ import brown.channels.agent.IAgentChannel;
  * and orderBooks for two-sided markets. Whenever an agent wants, it can
  * respond to the TradeRequest by constructing and sending the server a
  * BidBundle (using the methods bid, buy, sell, etc.) for that market.
+ * 
  * @author lcamery
- *
  */
 public class TradeRequestMessage extends AbsMessage {
+  
 	public final IAgentChannel MARKET;
 	public final MechanismType MECHANISM;
 	

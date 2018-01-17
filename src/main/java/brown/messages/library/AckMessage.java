@@ -14,13 +14,8 @@ public class AckMessage extends AbsMessage {
 	public final NegotiateRequestMessage failedTR;
 	public final boolean REJECTED;
 	
-	/**
-	 * For kryo
-	 * DO NOT USE
-	 */
 	public AckMessage() {
 		super(null);
-		
 		this.failedBR = null;
 		this.failedTR = null;
 		this.failedLO = null;
@@ -28,21 +23,21 @@ public class AckMessage extends AbsMessage {
 	}
 	
 	/**
-	 * Constructor for registration
-	 * @param registration 
+	 * Rejection for registration
+	 * @param registration
 	 * @param b : accepted/rejected
 	 */
-	public AckMessage(RegistrationMessage registration, boolean b) {
+	public AckMessage(RegistrationMessage registration, boolean rejected) {
 		super(null);
 		this.failedBR = null;
 		this.failedTR = null;
 		this.failedLO = null;
-		this.REJECTED = b;
+		this.REJECTED = rejected;
 	}
 	
 	/**
-	 * Rejection for a bid;
-	 * notifies the agent that they sent an improper request
+	 * Rejection for a trade;
+	 * notifies the agent that they sent an invalid bid
 	 * @param ID : rejection ID
 	 * @param bid : rejected bid
 	 */
@@ -55,10 +50,10 @@ public class AckMessage extends AbsMessage {
 	}
 	
 	/**
-	 * Rejection for a trade request;
-	 * notifies the agent that they sent an improper request
+	 * Rejection for a negotiation request;
+	 * notifies the agent that they sent an invalid buy/sell offer 
 	 * @param ID : rejection ID
-	 * @param tr : rejected trade request
+	 * @param tr : rejected negotiate request
 	 */
 	public AckMessage(Integer ID, NegotiateRequestMessage tr, boolean rejected) {
 		super(ID);
@@ -69,7 +64,7 @@ public class AckMessage extends AbsMessage {
 	}
 	
 	/**
-	 * For rejected limit orders
+	 * Rejection for limit orders
 	 * @param ID : rejection ID
 	 * @param lo : rejected limit order
 	 */

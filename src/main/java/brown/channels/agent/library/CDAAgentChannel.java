@@ -15,7 +15,7 @@ import brown.tradeable.library.Tradeable;
 import brown.twosided.ITwoSidedPriceSetter;
 
 /*
- * Implements IMarket for Continuous Double auctions
+ * Implements IMarket for Continuous Double Auctions
  */
 public class CDAAgentChannel implements ITwoSidedPriceSetter {
   
@@ -113,10 +113,13 @@ public class CDAAgentChannel implements ITwoSidedPriceSetter {
 	//no. this must be generic. 
 	//two options: 
 	//either I implement every one of these methods for a TPClient, or I 
-	//make the on... generic. 
+	//make the one generic. 
 	@Override
 	public void dispatchMessage(AbsAgent agent) {
-		agent.onContinuousDoubleAuction(this);
+	  if (agent instanceof AbsCDAAgent) {
+      AbsCDAAgent cdaAgent = (AbsCDAAgent) agent; 
+      cdaAgent.onContinuousDoubleAuction(this);
+	  }
 	}
 
 	@Override

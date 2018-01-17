@@ -5,11 +5,11 @@ import brown.channels.server.TwoSidedAuction;
 
 /**
  * Orders that do not fully clear during a given round may
- *  carry over to the next round, or they may be cancelled. 
+ * carry over to the next round, or they may be cancelled. 
  * @author andrew
- *
  */
 public class MarketOrderMessage extends AbsMessage {
+  
 	public final Integer marketID;
 	public final double buyShares;
 	public final double sellShares;
@@ -55,7 +55,7 @@ public class MarketOrderMessage extends AbsMessage {
 
 	@Override
 	public void dispatch(AbsAgent agent) {
-		//Noop
+		// Noop
 	}
 
 }

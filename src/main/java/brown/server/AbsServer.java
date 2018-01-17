@@ -27,7 +27,7 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.MarketOrderMessage;
 import brown.messages.library.NegotiateRequestMessage;
 import brown.messages.library.RegistrationMessage;
-import brown.messages.library.BargainMessage;
+import brown.messages.library.NegotiateMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.Logging;

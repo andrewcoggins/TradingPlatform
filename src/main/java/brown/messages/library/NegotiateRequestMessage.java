@@ -7,13 +7,14 @@ import brown.agent.AbsAgent;
 import brown.tradeable.ITradeable;
 
 /**
- * Direct Negotiation
- * A message sent to the server by an agent when it wants
- * to initiate a trade note: -1 indicates offer to all agents
+ * For direct negotiation:
+ * An agent sends a message to the server when it wants to initiate a trade 
+ * Note: -1 means offer trade to all agents
  * 
  * @author lcamery
  */
 public class NegotiateRequestMessage extends AbsMessage {
+  
   public final Integer toID;
   public final Integer fromID;
 
@@ -59,20 +60,21 @@ public class NegotiateRequestMessage extends AbsMessage {
 
   /**
    * Overwrites the fromID field to prevent malicious offer creation
-   * 
    * @param correctID
-   * @return
    */
   public NegotiateRequestMessage safeCopy(Integer correctID) {
     return new NegotiateRequestMessage(toID, correctID, moniesRequested, sharesRequested, moniesOffered, sharesOffered);
   }
 
+  @Override
+  public void dispatch(AbsAgent agent) {
+    agent.onNegotiateRequest(this);
+  }
+
   /**
    * Method that determines if two agents' accounts satisfy the assets needed to execute this trade
-   * 
    * @param toAccount
    * @param fromAccount
-   * @return
    */
   public boolean isSatisfied(Account toAccount, Account fromAccount) {
     if (fromAccount.getMonies() < moniesOffered || !fromAccount.getGoods().containsAll(sharesOffered)) {
@@ -85,10 +87,5 @@ public class NegotiateRequestMessage extends AbsMessage {
 
     return true;
   }
-
-@Override
-public void dispatch(AbsAgent agent) {
-	agent.onNegotiateRequest(this);
-}
 
 }

@@ -10,7 +10,7 @@ import brown.agent.AbsAgent;
 public class RegistrationMessage extends AbsMessage {
 	
 	/**
-	 * Kryonet requires an empty constructor
+	 * Empty constructor for Kryo
 	 * DO NOT USE
 	 */
 	public RegistrationMessage() {
@@ -18,8 +18,8 @@ public class RegistrationMessage extends AbsMessage {
 	}
 
 	/**
-	 * Registration when an agent connects to the server
-	 * Server sends back with the agent's ID
+	 * Agent sends a registration message initially
+	 * Server sends back a message with the agent's ID
 	 * @param ID : agent's ID
 	 */
 	public RegistrationMessage(Integer ID) {
@@ -30,4 +30,5 @@ public class RegistrationMessage extends AbsMessage {
 	public void dispatch(AbsAgent agent) {
 		agent.onRegistration(this);
 	}
+	
 }

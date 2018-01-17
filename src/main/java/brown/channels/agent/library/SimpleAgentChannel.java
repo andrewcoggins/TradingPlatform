@@ -10,6 +10,9 @@ import brown.accounting.Ledger;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.agent.AbsAgent;
+import brown.agent.AbsLemonadeAgent;
+import brown.agent.AbsOpenOutcryAgent;
+import brown.agent.AbsSimpleSealedBidAgent;
 import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;
 import brown.messages.library.TradeMessage;
@@ -73,10 +76,16 @@ public class SimpleAgentChannel implements IAgentChannel {
 		case Lemonade:
 			break;
 		case OpenOutcry:
-			agent.onSimpleOpenOutcry(this);
+	    if (agent instanceof AbsOpenOutcryAgent) {
+	      AbsOpenOutcryAgent openOutcryAgent = (AbsOpenOutcryAgent) agent; 
+	      openOutcryAgent.onSimpleOpenOutcry(this);
+	    };
 			break;
 		case SealedBid:
-			agent.onSimpleSealed(this);
+      if (agent instanceof AbsSimpleSealedBidAgent) {
+        AbsSimpleSealedBidAgent simpleSealedBidAgent = (AbsSimpleSealedBidAgent) agent; 
+        simpleSealedBidAgent.onSimpleSealedBid(this);
+      };
 			break;
 		default:
 			Logging.log("[X] unknown PaymentType");

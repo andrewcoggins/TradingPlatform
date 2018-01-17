@@ -4,14 +4,11 @@ import brown.accounting.bidbundle.IBidBundle;
 import brown.agent.AbsAgent;
 
 public class TradeMessage extends AbsMessage {
+  
 	public final IBidBundle Bundle;
 	public final Integer AuctionID;
 	public final Integer AgentID;
 	
-	/**
-	 * Empty constructor for kryo
-	 * DO NOT USE
-	 */
 	public TradeMessage() {
 		super(null);
 		this.AgentID = null;
@@ -41,7 +38,17 @@ public class TradeMessage extends AbsMessage {
 	public TradeMessage safeCopy(Integer agentID) {
 		return new TradeMessage(this.ID, this.Bundle, this.AuctionID, agentID);
 	}
+
+  @Override
+  public void dispatch(AbsAgent agent) {
+    // Noop
+  }
 	
+  @Override
+  public String toString() {
+    return "[" + this.AuctionID + ":" + this.AgentID + "->" + this.Bundle + "]";
+  }
+  
 	@Override
   public int hashCode() {
     final int prime = 31;
@@ -78,14 +85,5 @@ public class TradeMessage extends AbsMessage {
       return false;
     return true;
   }
-
-	@Override
-	public void dispatch(AbsAgent agent) {
-		//Noop
-	}
 	
-	@Override
-	public String toString() {
-		return "[" + this.AuctionID + ":" + this.AgentID + "->" + this.Bundle + "]";
-	}
 }
