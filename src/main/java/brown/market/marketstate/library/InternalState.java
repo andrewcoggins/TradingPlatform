@@ -19,7 +19,7 @@ import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.todeprecate.PaymentType;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 
 //hopefully an integrating center for information that pertains to markets and rules.
@@ -29,7 +29,7 @@ public class InternalState implements IMarketState {
   private final double INCREMENT = 20.0;
   private final Integer ID;
   private final List<TradeMessage> BIDS;
-  private final Set<Good> TRADEABLES;
+  private final Set<Tradeable> TRADEABLES;
   
   private List<Order> lastPayments;
   private int ticks;
@@ -72,15 +72,15 @@ public class InternalState implements IMarketState {
   
   
   
-  public InternalState(Integer ID, Set<Good> tradeables) {
+  public InternalState(Integer ID, Set<Tradeable> tradeables) {
     this.BIDS = new LinkedList<TradeMessage>();
     this.lastPayments = null;
     this.TRADEABLES = tradeables;
     this.ID = ID;
     this.ticks = 0;
-    Map<Good, MarketState> reserve = new HashMap<Good, MarketState>();
+    Map<Tradeable, MarketState> reserve = new HashMap<Tradeable, MarketState>();
     if (this.TRADEABLES != null) {
-      for (Good t : this.TRADEABLES) {
+      for (Tradeable t : this.TRADEABLES) {
         reserve.put(t, new MarketState(null,0));
       }
     }
@@ -108,7 +108,7 @@ public class InternalState implements IMarketState {
     return this.BIDS;
   }
   
-  public Set<Good> getTradeables() {
+  public Set<Tradeable> getTradeables() {
     return this.TRADEABLES;
   }
   

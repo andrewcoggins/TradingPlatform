@@ -1,11 +1,11 @@
 package brown.value.valuation;
 
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 import brown.value.valuable.library.Value;
 
 
 public interface IIndependentValuation extends IValuation {
   
-  public Value getValuation(Good good);
+  public Value getValuation(Tradeable good);
     
 }

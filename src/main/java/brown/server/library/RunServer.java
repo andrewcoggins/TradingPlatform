@@ -11,7 +11,7 @@ import brown.market.preset.AbsMarketPreset;
 import brown.server.AbsServer;
 import brown.setup.ISetup;
 import brown.setup.Logging;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 import brown.value.config.AbsValueConfig;
 
 public class RunServer extends AbsServer {
@@ -34,7 +34,7 @@ public class RunServer extends AbsServer {
   
   public void runGame(List<AbsMarketPreset> presets, 
       List<AbsValueConfig> valueInfo, Double initialMonies,
-      List<Good> initialGoods) throws InterruptedException {
+      List<Tradeable> initialGoods) throws InterruptedException {
     this.valueConfig = new HashMap<Integer, AbsValueConfig>(); 
     this.initialMonies = initialMonies; 
     this.initialGoods = initialGoods; 

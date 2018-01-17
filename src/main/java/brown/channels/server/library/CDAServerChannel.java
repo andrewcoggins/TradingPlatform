@@ -11,11 +11,11 @@ import brown.channels.agent.ITwoSidedAuction;
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.rules.clearingrules.IClearingRule;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 public class CDAServerChannel implements TwoSidedAuction {
 	private final Integer ID;
-	private final Good TYPE;
+	private final Tradeable TYPE;
 	private final IClearingRule RULE;
 	
 	/**
@@ -34,7 +34,7 @@ public class CDAServerChannel implements TwoSidedAuction {
 	 * @param type : SecurityType
 	 * @param rule : ClearingRule
 	 */
-	public CDAServerChannel(Integer ID, Good type, IClearingRule rule) {
+	public CDAServerChannel(Integer ID, Tradeable type, IClearingRule rule) {
 		this.ID = ID;
 		this.TYPE = type;
 		this.RULE = rule;
@@ -46,7 +46,7 @@ public class CDAServerChannel implements TwoSidedAuction {
 	}
 
 	@Override
-	public Good getTradeableType() {
+	public Tradeable getTradeableType() {
 		return this.TYPE;
 	}
 
@@ -57,7 +57,7 @@ public class CDAServerChannel implements TwoSidedAuction {
 	}
 
 	@Override
-	public List<Order> sell(Integer agentID, Good opp, double sharePrice) {
+	public List<Order> sell(Integer agentID, Tradeable opp, double sharePrice) {
 		//return this.RULE.sell(agentID, opp, sharePrice);
 	  return null;
 	}

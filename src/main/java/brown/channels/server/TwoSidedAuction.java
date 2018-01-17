@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.SortedMap;
 
 import brown.accounting.Order;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 /**
  * the server sends a Wrapper exposing a market’s functionality,
@@ -16,10 +16,10 @@ import brown.tradeable.library.Good;
  *
  */
 public interface TwoSidedAuction extends IServerChannel {
-	public Good getTradeableType();
+	public Tradeable getTradeableType();
 	
 	public List<Order> buy(Integer agentID, double shareNum, double sharePrice);
-	public List<Order> sell(Integer agentID, Good opp, double sharePrice);
+	public List<Order> sell(Integer agentID, Tradeable opp, double sharePrice);
 	public void cancel(Integer agentID, boolean buy, double shareNum, double sharePrice);
 	
 	public double quoteBid(double shareNum, double sharePrice);

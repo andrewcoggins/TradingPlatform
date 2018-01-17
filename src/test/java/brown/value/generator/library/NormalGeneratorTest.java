@@ -8,7 +8,7 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.random.ISAACRandom;
 import org.junit.Test;
 
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 /**
  * tests the normal generator by constructing histograms of samples 
@@ -45,7 +45,7 @@ public class NormalGeneratorTest {
     NormalGenerator ng = new NormalGenerator(valFunc, 1.0);
     NormalDistribution normalDist = new NormalDistribution(new ISAACRandom(), 1.0, 1.0);
     ValRandGenerator nullGenerator = new ValRandGenerator(minBinVal, maxBinVal);
-    Good good = new Good(0);
+    Tradeable good = new Tradeable(0);
     for(int i = 0; i < NUMTRIALS; i++) {
      Double ngValue = ng.makeValuation(good).value;
      Double nullValue = nullGenerator.makeValuation(good).value;

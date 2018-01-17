@@ -8,11 +8,11 @@ import brown.tradeable.TradeableType;
 public class ComplexTradeable implements ITradeable { 
   
   public final Integer ID; 
-  public final Set<Good> GOODS;
+  public final Set<Tradeable> GOODS;
   public final Integer COUNT; 
   public final TradeableType TYPE; 
   
-  public ComplexTradeable(Integer ID, Set<Good> goods) {
+  public ComplexTradeable(Integer ID, Set<Tradeable> goods) {
    this.ID = ID; 
    this.GOODS = goods;
    this.COUNT = 1; 

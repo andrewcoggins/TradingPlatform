@@ -12,7 +12,7 @@ import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.Allocation;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 //TODO: abstract to the complex case
 /**
@@ -54,7 +54,7 @@ public class Ledger {
      this.unshared = new LinkedList<Transaction>();
      this.transactions = new LinkedList<Transaction>();
      this.latest = new HashMap<ITradeable, Transaction>();
-     for (Good t : initialAlloc.getBids().bids.keySet()) {
+     for (Tradeable t : initialAlloc.getBids().bids.keySet()) {
        this.add(t, initialAlloc.getBids().bids.get(t));
      }
    }

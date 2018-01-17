@@ -8,7 +8,7 @@ import java.util.Set;
 import brown.market.preset.AbsMarketPreset;
 import brown.market.preset.library.ComSecondPriceRules;
 import brown.setup.library.SimpleSetup;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 import brown.value.config.AbsValueConfig;
 import brown.value.config.ComplexConfig;
 
@@ -25,9 +25,9 @@ public class MainServerNaiveCombinatorial {
     List<AbsMarketPreset> allMarkets = new ArrayList<AbsMarketPreset>();
     List<AbsValueConfig> allValInfo = new ArrayList<AbsValueConfig>();
     // our valuation information and rules information.
-    Set<Good> goods = new HashSet<Good>();
-    goods.add(new Good(0));
-    goods.add(new Good(1));
+    Set<Tradeable> goods = new HashSet<Tradeable>();
+    goods.add(new Tradeable(0));
+    goods.add(new Tradeable(1));
     allValInfo.add(new ComplexConfig(goods));
     allMarkets.add(new ComSecondPriceRules()); 
     new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo, 1000.0, null);

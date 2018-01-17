@@ -6,7 +6,7 @@ import brown.accounting.BundleType;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.agent.AbsAgent;
 import brown.messages.AbsMessage;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 /**
  * An Agent sends a bidRequest as
@@ -16,7 +16,7 @@ import brown.tradeable.library.Good;
  */
 public class BidRequestMessage extends AbsMessage {
   public final Integer AuctionID;
-  public final Set<Good> Goods;
+  public final Set<Tradeable> Goods;
   public final IBidBundle Current;
   public final BundleType TYPE;
 
@@ -40,7 +40,7 @@ public class BidRequestMessage extends AbsMessage {
    * @param bundle
    * @param goods
    */
-  public BidRequestMessage(int ID, Integer auctionID, BundleType type, IBidBundle bundle, Set<Good> goods) {
+  public BidRequestMessage(int ID, Integer auctionID, BundleType type, IBidBundle bundle, Set<Tradeable> goods) {
     super(ID);
     this.AuctionID = auctionID;
     this.Current = bundle;

@@ -10,7 +10,7 @@ import brown.market.library.Market;
 import brown.server.AbsServer;
 import brown.setup.Logging;
 import brown.todeprecate.StateOfTheWorld;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 /**
  * Market manager stores and handles multiple markets 
@@ -145,7 +145,7 @@ public class MarketManager {
 	 * @param t
 	 * @return
 	 */
-	public boolean register(Integer ID, Good t) {
+	public boolean register(Integer ID, Tradeable t) {
 		Market tsa = tsauctions.get(ID);
 		if (tsa == null) {
 			return false;

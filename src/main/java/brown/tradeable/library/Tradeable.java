@@ -9,7 +9,7 @@ import brown.tradeable.TradeableType;
  * @author acoggins
  *
  */
-public class Good implements ITradeable {
+public class Tradeable implements ITradeable {
   
   public final Integer ID; 
   public final Integer COUNT; 
@@ -18,7 +18,7 @@ public class Good implements ITradeable {
   /**
    * empty constructor.
    */
-  public Good() {
+  public Tradeable() {
     this.ID = null; 
     this.COUNT = null; 
     this.TYPE = null; 
@@ -28,13 +28,13 @@ public class Good implements ITradeable {
 //   * constructor with ID.
 //   * @param id
 //   */
-  public Good(Integer id) {
+  public Tradeable(Integer id) {
     this.ID = id; 
     this.COUNT = 1; 
     this.TYPE = TradeableType.Simple;
   }
   
-  public Good(Integer id, Integer count) {
+  public Tradeable(Integer id, Integer count) {
     this.ID = id; 
     this.COUNT = count;
     this.TYPE = TradeableType.Simple;
@@ -66,7 +66,7 @@ public class Good implements ITradeable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Good other = (Good) obj;
+    Tradeable other = (Tradeable) obj;
     if (COUNT == null) {
       if (other.COUNT != null)
         return false;

@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import org.junit.Test;
 
 import brown.accounting.Account;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 /**
  * test for the bank update message class. 

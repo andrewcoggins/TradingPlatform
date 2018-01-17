@@ -13,7 +13,7 @@ import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.todeprecate.PaymentType;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 /**
  * tests the trade request message class. 
@@ -27,8 +27,8 @@ public class TradeRequestMessageTest {
   public void testTradeRequestMessage() {
     
     Ledger l = new Ledger();
-    Map<Good, MarketState> bids = new HashMap<Good, MarketState>();
-    bids.put(new Good(0), new MarketState(0, 1.0));
+    Map<Tradeable, MarketState> bids = new HashMap<Tradeable, MarketState>();
+    bids.put(new Tradeable(0), new MarketState(0, 1.0));
     SimpleBidBundle sb = new SimpleBidBundle(bids);
     TradeRequestMessage trm = new TradeRequestMessage(0, 
         new SimpleAgentChannel(new Integer(0), new Ledger(0), PaymentType.SecondPrice,

@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 /**
  * test the valrand Generator
@@ -18,7 +18,7 @@ public class ValRandGeneratorTest {
   public void testVrg() {
     int NUMTRIALS = 100;
     ValRandGenerator vrg = new ValRandGenerator();
-    Good good = new Good(0);
+    Tradeable good = new Tradeable(0);
     
     for(int i = 0; i < NUMTRIALS; i++) {
     assertTrue(vrg.makeValuation(good).value >= 0.0

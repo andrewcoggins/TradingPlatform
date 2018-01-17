@@ -12,14 +12,14 @@ import brown.agent.AbsAgent;
 import brown.channels.agent.ITwoSidedPriceSetter;
 import brown.channels.server.library.CDAServerChannel;
 import brown.messages.library.MarketOrderMessage;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 /*
  * Implements IMarket for Continuous Double auctions
  */
 public class CDAAgentChannel implements ITwoSidedPriceSetter {
 	private final Integer MARKETID;
-	private final Good TYPE;
+	private final Tradeable TYPE;
 	private final SortedMap<Double, Double> BUYBOOK;
 	private final SortedMap<Double, Double> SELLBOOK;
 	private final Ledger LEDGER;
@@ -63,7 +63,7 @@ public class CDAAgentChannel implements ITwoSidedPriceSetter {
 	}
 
 	@Override
-	public Good getTradeableType() {
+	public Tradeable getTradeableType() {
 		return this.TYPE;
 	}
 

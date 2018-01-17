@@ -7,7 +7,7 @@ import brown.accounting.BundleType;
 import brown.accounting.MarketState;
 import brown.accounting.bid.ComplexBid;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.tradeable.library.Good;
+import brown.tradeable.library.Tradeable;
 
 
 
@@ -35,7 +35,7 @@ public class ComplexBidBundle implements IBidBundle {
 	 * @param bid : agent's bid
 	 * @param agent : agent ID
 	 */
-	public ComplexBidBundle(Map<Set<Good>, MarketState> bid, Integer agent) {
+	public ComplexBidBundle(Map<Set<Tradeable>, MarketState> bid, Integer agent) {
 		this.BIDS = new ComplexBid(bid);
 		this.BT = BundleType.Complex;
 	}
