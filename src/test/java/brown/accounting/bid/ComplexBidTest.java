@@ -9,7 +9,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.accounting.MarketState;
 import brown.tradeable.library.Tradeable;
 
 /**
@@ -22,11 +21,11 @@ public class ComplexBidTest {
   
   @Test 
   public void testComplexBid() { 
-    Map<Set<Tradeable>, MarketState> complex = new HashMap<Set<Tradeable>, MarketState>();
+    Map<Set<Tradeable>, Double> complex = new HashMap<Set<Tradeable>, Double>();
     Set<Tradeable> trs = new HashSet<Tradeable>();
     trs.add(new Tradeable(0)); 
     trs.add(new Tradeable(1));
-    complex.put(trs, new MarketState(0, 1.0));
+    complex.put(trs, 1.0);
     ComplexBid aComplexBid = new ComplexBid(complex);
     assertEquals(aComplexBid.bids, complex);
   }

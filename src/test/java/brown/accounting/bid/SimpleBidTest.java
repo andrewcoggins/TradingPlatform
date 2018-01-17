@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import brown.accounting.MarketState;
 import brown.tradeable.library.Tradeable;
 
 /**
@@ -20,9 +19,9 @@ public class SimpleBidTest {
   
   @Test 
   public void testSimpleBid() {
-    Map<Tradeable, MarketState> simple = new HashMap<Tradeable, MarketState>();
-    simple.put(new Tradeable(0), new MarketState(1, 1.0)); 
-    simple.put(new Tradeable(1), new MarketState(1, 1.0)); 
+    Map<Tradeable, Double> simple = new HashMap<Tradeable, Double>();
+    simple.put(new Tradeable(0), 1.0); 
+    simple.put(new Tradeable(1), 2.0); 
     SimpleBid simpleB = new SimpleBid(simple);
     assertEquals(simpleB.bids, simple);
   }

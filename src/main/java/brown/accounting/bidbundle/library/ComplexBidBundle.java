@@ -3,7 +3,6 @@ package brown.accounting.bidbundle.library;
 import java.util.Map;
 import java.util.Set;
 
-import brown.accounting.MarketState;
 import brown.accounting.bid.ComplexBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.tradeable.library.Tradeable;
@@ -16,49 +15,44 @@ import brown.tradeable.library.Tradeable;
  */
 public class ComplexBidBundle implements IBidBundle {
   
-	private final ComplexBid BIDS;
-	private final BundleType BT;
-	
-	/**
-	 * For Kryo do not use
-	 */
-	public ComplexBidBundle() {
-		this.BIDS = null;
-		this.BT = null;
-	}
-	
-	/**
-	 * Actual constructor
-	 * @param bid - agent's bid
-	 * @param agent - agent ID
-	 */
-	public ComplexBidBundle(Map<Set<Tradeable>, MarketState> bid, Integer agent) {
-		this.BIDS = new ComplexBid(bid);
-		this.BT = BundleType.Complex;
-	}
+  private final ComplexBid BIDS;
+  private final BundleType BT;
+  
+  /**
+   * For Kryo do not use
+   */
+  public ComplexBidBundle() {
+    this.BIDS = null;
+    this.BT = null;
+  }
+  
+  /**
+   * Actual constructor
+   * @param bid - agent's bid
+   * @param agent - agent ID
+   */
+  public ComplexBidBundle(Map<Set<Tradeable>, Double> bid) {
+    this.BIDS = new ComplexBid(bid);
+    this.BT = BundleType.Complex;
+  }
 
-	@Override
-	public double getCost() {
-		double max = 0;
-		for (MarketState b : this.BIDS.bids.values()) {
-			max = Math.max(b.PRICE, max);
-		}
-		return max;
-	}
+  @Override
+  public double getCost() {
+    double max = 0;
+    for (Double b : this.BIDS.bids.values()) {
+      max = Math.max(b, max);
+    }
+    return max;
+  }
 
-	@Override
-	public IBidBundle wipeAgent(Integer ID) {
-		return new ComplexBidBundle(this.BIDS.bids, ID);
-	}
-
-	@Override
-	public BundleType getType() {
-		return this.BT;
-	}
-	
-	public ComplexBid getBids() {
-		return this.BIDS;
-	}
+  @Override
+  public BundleType getType() {
+    return this.BT;
+  }
+  
+  public ComplexBid getBids() {
+    return this.BIDS;
+  }
 
   @Override
   public int hashCode() {
@@ -71,21 +65,14 @@ public class ComplexBidBundle implements IBidBundle {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    ComplexBidBundle other = (ComplexBidBundle) obj;
-    if (BIDS == null) {
-      if (other.BIDS != null)
-        return false;
-    } else if (!BIDS.equals(other.BIDS))
-      return false;
-    if (BT != other.BT)
-      return false;
-    return true;
+    return(obj instanceof ComplexBidBundle && 
+        ((ComplexBidBundle) obj).BIDS.equals(this.BIDS) &&
+        ((ComplexBidBundle) obj).BT.equals(this.BT));
   }
-	
+
+  @Override
+  public String toString() {
+    return "ComplexBidBundle [BIDS=" + BIDS + "]";
+  }
+  
 }

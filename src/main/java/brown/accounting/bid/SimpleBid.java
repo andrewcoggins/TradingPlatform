@@ -2,21 +2,20 @@ package brown.accounting.bid;
 
 import java.util.Map;
 
-import brown.accounting.MarketState;
 import brown.tradeable.library.Tradeable;
 
 /**
  * A simple mapping from a tradeable to 
- * a marketstate, which contains a bid price.
+ * a double, which contains a bid price.
  * 
- * @author andrew
+ * @author andrew, modified by kerry
  *
  */
 public class SimpleBid extends AbsBid {
   
-  public final Map<Tradeable, MarketState> bids;
+  public final Map<Tradeable, Double> bids;
   
-  public SimpleBid(Map<Tradeable, MarketState> bids) {
+  public SimpleBid(Map<Tradeable, Double> bids) {
     this.bids = bids; 
   }
   
@@ -35,19 +34,8 @@ public class SimpleBid extends AbsBid {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    SimpleBid other = (SimpleBid) obj;
-    if (bids == null) {
-      if (other.bids != null)
-        return false;
-    } else if (!bids.equals(other.bids))
-      return false;
-    return true;
+    return(obj instanceof SimpleBid && 
+        ((SimpleBid) obj).bids.equals(this.bids));
   }
    
 }

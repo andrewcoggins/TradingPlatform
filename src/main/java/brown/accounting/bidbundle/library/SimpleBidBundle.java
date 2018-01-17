@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.tradeable.library.Tradeable;
@@ -14,7 +13,7 @@ import brown.tradeable.library.Tradeable;
   * and holds one double. 
   */
 public class SimpleBidBundle implements IBidBundle {
-	private final Map<Tradeable, MarketState> BIDS;
+	private final Map<Tradeable, Double> BIDS;
 	private final BundleType BT;
 	
 	/**
@@ -30,7 +29,7 @@ public class SimpleBidBundle implements IBidBundle {
 	 * @param bid - agent's bid
 	 * @param agent - agent ID
 	 */
-	public SimpleBidBundle(Map<Tradeable, MarketState> bids) {
+	public SimpleBidBundle(Map<Tradeable, Double> bids) {
 		if (bids == null) {
 			throw new IllegalArgumentException("Null bids");
 		}
@@ -41,8 +40,8 @@ public class SimpleBidBundle implements IBidBundle {
   @Override
 	public double getCost() {
 		double total = 0;
-		for (MarketState b : this.BIDS.values()) {
-			total += b.PRICE;
+		for (Double b : this.BIDS.values()) {
+			total += b;
 		}
 		return total;
 	}
@@ -51,26 +50,12 @@ public class SimpleBidBundle implements IBidBundle {
 	public BundleType getType() {
 		return this.BT;
 	}
-
-	@Override
-	public IBidBundle wipeAgent(Integer ID) {
-		Map<Tradeable, MarketState> newBids = new HashMap<Tradeable, MarketState>();
-		for (Entry<Tradeable, MarketState> entry : this.BIDS.entrySet()) {
-			if (ID.equals(entry.getValue().AGENTID)) {
-				newBids.put(entry.getKey(), entry.getValue());
-			} else {
-				newBids.put(entry.getKey(), new MarketState(null,entry.getValue().PRICE));
-			}
-		}
-		
-		return new SimpleBidBundle(newBids);
-	}
 	
 	public SimpleBid getBids() {
 		return new SimpleBid(this.BIDS);
 	}
 	
-	public MarketState getBid(Tradeable t) {
+	public Double getBid(Tradeable t) {
 	  return BIDS.get(t);
 	}
 	
@@ -90,21 +75,8 @@ public class SimpleBidBundle implements IBidBundle {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    SimpleBidBundle other = (SimpleBidBundle) obj;
-    if (BIDS == null) {
-      if (other.BIDS != null)
-        return false;
-    } else if (!BIDS.equals(other.BIDS))
-      return false;
-    if (BT != other.BT)
-      return false;
-    return true;
-  }
-	
+    return(obj instanceof SimpleBidBundle && 
+        ((SimpleBidBundle) obj).BIDS.equals(this.BIDS) &&
+        ((SimpleBidBundle) obj).BT.equals(this.BT));
+  }	
 }

@@ -3,20 +3,19 @@ package brown.accounting.bid;
 import java.util.Map;
 import java.util.Set;
 
-import brown.accounting.MarketState;
 import brown.tradeable.library.Tradeable;
 
 /**
  * The lowest-level bidding datatype. A mapping from sets of tradeables to 
- * marketstates, which contains bid prices.
+ * doubles, which contains bid prices.
  * 
- * @author andrew
+ * @author andrew, modified by kerry
  */
 public class ComplexBid extends AbsBid {
   
-  public final Map<Set<Tradeable>, MarketState> bids; 
+  public final Map<Set<Tradeable>, Double> bids; 
   
-  public ComplexBid(Map<Set<Tradeable> , MarketState> bundle) { 
+  public ComplexBid(Map<Set<Tradeable> , Double> bundle) { 
     this.bids = bundle; 
   }
 
@@ -35,20 +34,8 @@ public class ComplexBid extends AbsBid {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    ComplexBid other = (ComplexBid) obj;
-    if (bids == null) {
-      if (other.bids != null)
-        return false;
-    } else if (!bids.equals(other.bids))
-      return false;
-    return true;
+    return(obj instanceof ComplexBid && 
+        ((ComplexBid) obj).bids.equals(this.bids));
   }
-  
   
 }
