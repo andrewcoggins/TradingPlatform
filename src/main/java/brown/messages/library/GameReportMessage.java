@@ -4,14 +4,15 @@ import brown.accounting.Ledger;
 import brown.agent.AbsAgent;
 
 /**
- * The markets can also send agents GameReports (e.g., summary statistics) at
+ * The markets can also send agents game reports (e.g., summary statistics) at
  * other times. For example, in a simulation of two sequential second-price
- * auctions, a GameReports might be sent between the two.
+ * auctions, a GameReport might be sent between the two.
 
  * @author andrew
  *
  */
 public class GameReportMessage extends AbsMessage {
+  
 	public final Ledger LEDGER;
 	
 	public GameReportMessage() {

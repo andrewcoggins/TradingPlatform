@@ -8,7 +8,7 @@ import brown.agent.AbsAgent;
 import brown.tradeable.library.Tradeable;
 
 /**
- * An Agent sends a tradeRequest as a Message to bid on auctions.
+ * An Agent sends a TradeRequest as a Message to bid on auctions.
  * 
  * @author lcamery
  */
@@ -51,9 +51,9 @@ public class BidRequestMessage extends AbsMessage {
     this.TYPE = type;
   }
 
-@Override
-public void dispatch(AbsAgent agent) {
-	agent.onTradeRequest(this); 
-}
+  @Override
+  public void dispatch(AbsAgent agent) {
+	  agent.onTradeRequest(this);
+  }
 
 }

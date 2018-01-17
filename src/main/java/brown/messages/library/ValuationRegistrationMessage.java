@@ -7,9 +7,9 @@ import brown.value.valuation.library.BundleValuation;
 import brown.value.valuationrepresentation.AbsValuationRepresentation;
 
 /**
- * sends agents their valuations from the server.
+ * sends agents their valuations from the server
+ * 
  * @author acoggins
- *
  */
 public class ValuationRegistrationMessage extends RegistrationMessage {
   
@@ -62,11 +62,9 @@ public class ValuationRegistrationMessage extends RegistrationMessage {
       this.addDistribution = null; 
       this.bundleDistribution = null; 
     }
-
   }
   
   /**
-   * getter.
    * @return the agent's valuation
    */
   public AbsValuationRepresentation getValuation() {
@@ -74,19 +72,17 @@ public class ValuationRegistrationMessage extends RegistrationMessage {
   }
   
   /**
-   * getter. 
    * @return the distribution on which the agent is bidding, 
    * if applicable. 
    */
   public IValuation getDistribution() {
     if (addDistribution != null) {
-        return this.addDistribution; 
+      return this.addDistribution; 
     }
     if (bundleDistribution != null) {
       return this.bundleDistribution; 
     }
     return null; 
   }
-  
   
 }

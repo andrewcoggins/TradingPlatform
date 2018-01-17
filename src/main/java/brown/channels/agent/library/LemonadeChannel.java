@@ -19,20 +19,17 @@ public class LemonadeChannel implements IAgentChannel {
   private final Integer ID; 
   private Ledger ledger;
   
-  //Is this for Kryo?
   public LemonadeChannel() { 
     this.ID = null; 
     this.ledger = null;
   }
   
   /**
-   * Do we need other params, such as a bidbundle, an int for eligibility 
-   * as for the mechanism type and payment type, do we need them? Better to send un-needed information...
+   * Actual constructor
    * @param ID
    * @param ledger
-   * @param type
    */
-  public LemonadeChannel(Integer ID, Ledger ledger, PaymentType pType, MechanismType type) {
+  public LemonadeChannel(Integer ID, Ledger ledger) {
     this.ID = ID; 
     this.ledger = ledger;
   }
@@ -51,14 +48,11 @@ public class LemonadeChannel implements IAgentChannel {
 
   @Override
   public void dispatchMessage(AbsAgent agent) {
-    if(agent instanceof AbsLemonadeAgent) {
-
-      AbsLemonadeAgent lemAgent = (AbsLemonadeAgent) agent; 
-      lemAgent.onLemonade(this);   
+    if (agent instanceof AbsLemonadeAgent) {
+      AbsLemonadeAgent lemonadeAgent = (AbsLemonadeAgent) agent; 
+      lemonadeAgent.onLemonade(this);   
     }
   }
-  
-
   
   public void bid(AbsAgent agent, Integer position) {
     IBidBundle toSend = new LemonadeBidBundle(position);

@@ -35,7 +35,7 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.MarketOrderMessage;
 import brown.messages.library.NegotiateRequestMessage;
 import brown.messages.library.RegistrationMessage;
-import brown.messages.library.BargainMessage;
+import brown.messages.library.NegotiateMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.rules.clearingrules.IClearingRule;
@@ -84,7 +84,7 @@ public final class Startup {
 		kryo.register(BidRequestMessage.class);
 		kryo.register(Transaction.class);
 		kryo.register(RegistrationMessage.class);
-		kryo.register(BargainMessage.class);
+		kryo.register(NegotiateMessage.class);
 		kryo.register(NegotiateRequestMessage.class);
 		kryo.register(Account.class);
 		kryo.register(TradeRequestMessage.class);

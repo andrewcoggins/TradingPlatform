@@ -7,13 +7,10 @@ import brown.agent.AbsAgent;
  * Message provided to agents when their accounts change
  */
 public class BankUpdateMessage extends AbsMessage {
+  
 	public final Account oldAccount;
 	public final Account newAccount;
 	
-	/**
-	 * Empty constructor for kryo
-	 * DO NOT USE
-	 */
 	public BankUpdateMessage() {
 		super(null);
 		this.oldAccount = null;
@@ -39,10 +36,7 @@ public class BankUpdateMessage extends AbsMessage {
 
   @Override
   public String toString() {
-    return "BankUpdate [oldAccount=" + oldAccount + ", newAccount="
-        + newAccount + "]";
+    return "BankUpdate [oldAccount=" + oldAccount + ", newAccount=" + newAccount + "]";
   }
 	
-	
-
 }
