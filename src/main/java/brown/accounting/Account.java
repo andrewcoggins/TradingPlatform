@@ -6,7 +6,6 @@ import java.util.Set;
 
 import brown.tradeable.ITradeable;
 
-//CREATE AN INTERFACE
 /**
  * an account belongs to an agent and stores money and goods for that agent
  * 
@@ -14,6 +13,7 @@ import brown.tradeable.ITradeable;
  * @editor amy
  */
 public class Account {
+  
 	public final Integer ID;
 	private double monies;
 	private List<ITradeable> tradeables;
@@ -64,7 +64,7 @@ public class Account {
 		}
 	}
 	
-	//ADDED
+	//ADDED: is this okay, or should this info not be accessible?
 	public double getID() {
     return this.ID;
   }
