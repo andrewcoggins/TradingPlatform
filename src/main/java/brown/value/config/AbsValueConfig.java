@@ -4,7 +4,7 @@ import java.util.Set;
 
 import brown.tradeable.ITradeable;
 import brown.value.generator.AbsValuationGenerator;
-import brown.value.valuationrepresentation.library.ValuationType;
+import brown.value.valuation.library.ValuationType;
 
 /*
  * A value configuration is a combination of what valuables are to be traded on, the scheme by which

@@ -1,15 +1,17 @@
 package brown.value.valuation.library; 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import brown.tradeable.ITradeable;
+import brown.tradeable.library.SimpleTradeable;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.generator.library.ValRandGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.IIndependentValuation;
-import brown.value.valuationrepresentation.library.SimpleValuation;
+import brown.value.valuationrepresentation.library.Valuation;
 
 /**
  * A Valuation where the values of each good are independent.
@@ -36,7 +38,10 @@ public class AdditiveValuation implements IIndependentValuation {
     this.valMap = new HashMap<ITradeable, Value>();
     ValRandGenerator rg = new ValRandGenerator();
     for(ITradeable item : goods) {
-      valMap.put(item, rg.makeValuation(item));
+      List<SimpleTradeable> atoms = item.flatten();
+      for (SimpleTradeable atom : atoms) {
+        valMap.put(atom, rg.makeValuation(atom));
+      }
     }
   }
   
@@ -48,23 +53,30 @@ public class AdditiveValuation implements IIndependentValuation {
   public AdditiveValuation(AbsValuationGenerator valGenerator, Set<ITradeable> goods) {
     this.valMap = new HashMap<ITradeable, Value>();
     for(ITradeable item : goods) {
-      Value value = valGenerator.makeValuation(item);
-      valMap.put(item, value);
+      List<SimpleTradeable> atoms = item.flatten();
+      for (SimpleTradeable atom : atoms) {
+        valMap.put(atom, valGenerator.makeValuation(atom));
+      }
     }
   }
   
   @Override
   public Value getValuation(ITradeable good) {
-    return valMap.get(good);
+    double currentValue = 0.0; 
+    List<SimpleTradeable> atoms = good.flatten();
+    for(SimpleTradeable atom : atoms) {
+      currentValue = currentValue + valMap.get(atom).value;
+    }
+    return new Value(currentValue);
   }
 
   @Override
-  public SimpleValuation getValuation(Set<ITradeable> goods) {
-    Map<ITradeable, Value> valuation = new HashMap<ITradeable, Value>();
-    for(ITradeable item : goods) {
-      valuation.put((ITradeable) item, valMap.get(item));
+  public Valuation getValuation(Set<ITradeable> goods) {
+    Map<ITradeable, Value> values = new HashMap<ITradeable, Value>();
+    for (ITradeable good : goods) { 
+      values.put(good, this.getValuation(good));
     }
-    return new SimpleValuation(valuation); 
+    return new Valuation(values);
   }
 
   @Override
@@ -90,6 +102,11 @@ public class AdditiveValuation implements IIndependentValuation {
     } else if (!valMap.equals(other.valMap))
       return false;
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return "AdditiveValuation [valMap=" + valMap + "]";
   }
   
 }

@@ -4,7 +4,7 @@ import java.util.Set;
 
 import brown.tradeable.ITradeable;
 import brown.value.generator.library.NormalGenerator;
-import brown.value.valuationrepresentation.library.ValuationType;
+import brown.value.valuation.library.ValuationType;
 
 /**
  * simulates a simple simultaneous auction where valuations of goods 
