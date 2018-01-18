@@ -6,7 +6,6 @@ import brown.accounting.Ledger;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.market.IMarket;
 import brown.market.marketstate.ICompleteState;
-import brown.market.marketstate.library.Allocation;
 import brown.market.marketstate.library.Order;
 import brown.market.preset.AbsMarketPreset;
 import brown.messages.library.TradeMessage;
@@ -55,16 +54,14 @@ public class Market implements IMarket {
   // constructs a trade request
   @Override
   public TradeRequestMessage constructTradeRequest(Integer ID) {
-    //do something with the IR policy.
-    Allocation alloc = this.STATE.getMarketState().getAllocation();
-    if(alloc != null) {
-      this.QRULE.makeChannel(STATE, new Ledger(this.getID()));
-      TradeRequestMessage request = this.STATE.getTRequest();
-      return request;
+    Ledger ledge = new Ledger(this.getID());
+    List<Order> allOrders = this.STATE.getOrders(); 
+    for(Order o : allOrders) {
+      ledge.add(o.toTransaction());
     }
-     this.QRULE.makeChannel(STATE, new Ledger(this.getID()));
-     TradeRequestMessage request = this.STATE.getTRequest();
-     return request;
+    this.QRULE.makeChannel(STATE, ledge);
+    TradeRequestMessage request = this.STATE.getTRequest();
+    return request;
   }
 
   // asks if the game in a sequence of games is
