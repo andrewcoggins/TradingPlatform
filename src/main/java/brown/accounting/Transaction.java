@@ -75,34 +75,13 @@ public class Transaction {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    Transaction other = (Transaction) obj;
-    if (FROM == null) {
-      if (other.FROM != null)
-        return false;
-    } else if (!FROM.equals(other.FROM))
-      return false;
-    if (Double.doubleToLongBits(PRICE) != Double.doubleToLongBits(other.PRICE))
-      return false;
-    if (Double.doubleToLongBits(QUANTITY) != Double
-        .doubleToLongBits(other.QUANTITY))
-      return false;
-    if (TO == null) {
-      if (other.TO != null)
-        return false;
-    } else if (!TO.equals(other.TO))
-      return false;
-    if (TRADEABLE == null) {
-      if (other.TRADEABLE != null)
-        return false;
-    } else if (!TRADEABLE.equals(other.TRADEABLE))
-      return false;
-    return true;
+    return ((obj instanceof Transaction) &&
+            ((Transaction)obj).FROM.equals(this.FROM) &&
+            ((Transaction)obj).TO.equals(this.TO) &&
+            ((Transaction)obj).PRICE == this.PRICE &&
+            ((Transaction)obj).QUANTITY == this.QUANTITY &&            
+            ((Transaction)obj).TRADEABLE.equals(this.TRADEABLE) &&
+            ((Transaction)obj).TIMESTAMP == this.TIMESTAMP);
   }
 	
 }
