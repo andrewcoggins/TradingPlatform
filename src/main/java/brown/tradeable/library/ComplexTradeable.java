@@ -1,5 +1,7 @@
 package brown.tradeable.library;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import brown.tradeable.ITradeable;
@@ -31,7 +33,7 @@ public class ComplexTradeable extends AbsTradeable {
   @Override
   public String toString() {
     return "ComplexTradeable [GOODS=" + GOODS + ", ID=" + ID + ", COUNT="
-        + COUNT + ", TYPE=" + TYPE + "]";
+        + COUNT + "]";
   }
 
   @Override
@@ -44,19 +46,19 @@ public class ComplexTradeable extends AbsTradeable {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (!super.equals(obj))
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    ComplexTradeable other = (ComplexTradeable) obj;
-    if (GOODS == null) {
-      if (other.GOODS != null)
-        return false;
-    } else if (!GOODS.equals(other.GOODS))
-      return false;
-    return true;
+    return (obj instanceof ComplexTradeable &&
+            ((ComplexTradeable)obj).COUNT.equals(this.COUNT) &&
+            ((ComplexTradeable)obj).GOODS.equals(this.GOODS) &&
+            ((ComplexTradeable)obj).ID.equals(this.ID) &&
+            ((ComplexTradeable)obj).TYPE.equals(this.TYPE));
   }
-
+  
+  @Override
+  public List<SimpleTradeable> flatten(){
+    LinkedList<SimpleTradeable> toReturn = new LinkedList<SimpleTradeable>();
+    for (ITradeable t: this.GOODS){
+      toReturn.addAll(t.flatten());
+    }
+    return toReturn;
+  }
 }

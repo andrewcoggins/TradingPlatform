@@ -1,5 +1,8 @@
 package brown.tradeable.library;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import brown.tradeable.TradeableType;
 
 /**
@@ -20,4 +23,12 @@ public class MultiTradeable extends AbsTradeable {
     super(ID, COUNT, TradeableType.Multi);
   }
   
+  @Override
+  public List<SimpleTradeable> flatten(){
+    LinkedList<SimpleTradeable> toReturn = new LinkedList<SimpleTradeable>();
+    for (int i=0; i < this.COUNT;i++){
+      toReturn.add(new SimpleTradeable(this.ID)); 
+    }
+    return toReturn;
+  }  
 }
