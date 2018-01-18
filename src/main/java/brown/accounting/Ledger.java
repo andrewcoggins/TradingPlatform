@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import abrown.misc.library.Allocation;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.market.marketstate.library.Allocation;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 

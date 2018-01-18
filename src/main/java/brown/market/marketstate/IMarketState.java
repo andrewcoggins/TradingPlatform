@@ -1,7 +1,7 @@
 package brown.market.marketstate;
 
-import abrown.misc.library.Allocation;
-import abrown.misc.library.Payment;
+import brown.market.marketstate.library.Allocation;
+import brown.market.marketstate.library.Payment;
 
 /**
  * The market state consists of a tentative allocation and tentative payments. 

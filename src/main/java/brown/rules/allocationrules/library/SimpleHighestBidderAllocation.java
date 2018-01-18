@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import abrown.misc.library.Allocation;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.library.Allocation;
 import brown.messages.library.TradeMessage;
 import brown.rules.allocationrules.IAllocationRule;
 import brown.tradeable.library.MultiTradeable;

@@ -1,17 +1,17 @@
-package abrown.misc;
+package brown.market.marketstate;
 
 import java.util.List;
 import java.util.Map;
 
-import brown.tradeable.library.MultiTradeable;
+import brown.tradeable.ITradeable;
 
 /**
  * IAllocation is the interface for allocations.
- * Allocations store a mapping from Tradeables
- * to the IDs of agents that possess them 
- * or will tentatively possess them.
+ * Allocations store a mapping from IDs of agents
+ * to a list of ITradeables that agents are to be 
+ * allocated
  * 
- * @author andrew
+ * @author kerry
  */
 public interface IAllocation {
   
@@ -21,6 +21,6 @@ public interface IAllocation {
    * of tradeables to integers. 
    * @return
    */
-  public Map<List<MultiTradeable>, Integer> getAllocation();
+  public Map<Integer, List<ITradeable>> getAllocation();
   
 }

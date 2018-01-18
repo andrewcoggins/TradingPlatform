@@ -12,7 +12,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import abrown.misc.library.Allocation;
 import brown.accounting.Ledger;
 import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;

@@ -12,8 +12,8 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import abrown.misc.library.Allocation;
 import brown.accounting.bid.SimpleBid;
+import brown.market.marketstate.library.Allocation;
 import brown.tradeable.library.MultiTradeable;
 
 /**
