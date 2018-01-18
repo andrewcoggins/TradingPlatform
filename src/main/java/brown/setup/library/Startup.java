@@ -105,12 +105,10 @@ public final class Startup {
 		kryo.register(SimpleAgentChannel.class);
 		kryo.register(AuctionBidBundle.class);
 		kryo.register(AuctionBid.class);
-		kryo.register(AbsValuationRepresentation.class);
 		kryo.register(AdditiveValuation.class);
 		kryo.register(BundleValuation.class);
 		kryo.register(ValuationRegistrationMessage.class);
 		kryo.register(Value.class);
-		kryo.register(SimpleValuation.class); 
 		kryo.register(AdditiveValuation.class);
 		kryo.register(Value.class);
 		kryo.register(NormalGenerator.class);
