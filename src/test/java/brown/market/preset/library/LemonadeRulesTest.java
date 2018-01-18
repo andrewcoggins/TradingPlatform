@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import brown.rules.activityrules.library.OneShotActivity;
 import brown.rules.allocationrules.library.LemonadeAllocation;
-import brown.rules.irpolicies.library.AnonymousPolicy;
+import brown.rules.irpolicies.library.LemonadeAnonymous;
 import brown.rules.paymentrules.library.LemonadePayment;
 import brown.rules.queryrules.library.LemonadeQuery;
 import brown.rules.terminationconditions.library.OneShotTermination;
@@ -27,7 +27,7 @@ public class LemonadeRulesTest {
     assertEquals(lemonadeRules.pRule, new LemonadePayment());
     assertEquals(lemonadeRules.qRule, new LemonadeQuery());
     assertEquals(lemonadeRules.actRule, new OneShotActivity());
-    assertEquals(lemonadeRules.infoPolicy, new AnonymousPolicy());
+    assertEquals(lemonadeRules.infoPolicy, new LemonadeAnonymous());
     assertEquals(lemonadeRules.innerTCondition, new OneShotTermination());
     assertEquals(lemonadeRules.outerTCondition, new ThreeRoundTermination());
   }

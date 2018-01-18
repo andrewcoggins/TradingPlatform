@@ -1,5 +1,6 @@
 package brown.market.marketstate.library;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,11 @@ public class Allocation implements IAllocation {
 
   private Map<Integer, List<ITradeable>> alloc; 
 
+  public Allocation(){
+    this.alloc = new HashMap<Integer,List<ITradeable>>();
+  }
+  
+  
   public Allocation(Map<Integer, List<ITradeable>> alloc) {
     this.alloc = alloc;
   }

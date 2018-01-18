@@ -12,7 +12,7 @@ import brown.setup.library.LemonadeSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 import brown.value.config.AbsValueConfig;
-import brown.value.config.NullConfig;
+import brown.value.config.LemonadeConfig;
 import brown.value.config.SSSPConfig;
 
 /**

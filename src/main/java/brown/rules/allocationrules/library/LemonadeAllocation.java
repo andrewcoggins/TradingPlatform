@@ -1,33 +1,30 @@
 package brown.rules.allocationrules.library; 
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.GameBidBundle;
-import brown.channels.MechanismType;
 import brown.market.marketstate.ICompleteState;
-import brown.market.marketstate.library.Order;
+import brown.market.marketstate.library.Allocation;
+import brown.market.marketstate.library.MarketState;
 import brown.messages.library.TradeMessage;
-import brown.messages.library.LemonadeReportMessage;
 import brown.rules.allocationrules.IAllocationRule;
+import brown.setup.Logging;
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.tradeable.library.Tradeable;
 
 public class LemonadeAllocation implements IAllocationRule {
-
-  private Integer SIZE = 12;
-  private double numGlasses = 2.0;
   private List<Integer>[] slots;
   
   @SuppressWarnings("unchecked")
   public LemonadeAllocation() {
-    this.slots = (List<Integer>[]) new List[SIZE];
-    for(int i = 0; i < SIZE; i++) {
+    this.slots = (List<Integer>[]) new List[12];
+    for(int i = 0; i < 12; i++) {
       slots[i] = new LinkedList<Integer>();
     }
   }   
@@ -36,8 +33,19 @@ public class LemonadeAllocation implements IAllocationRule {
   public void setAllocation(ICompleteState state) {
     List<TradeMessage> bids = state.getBids();
     if(bids.isEmpty()) return;
-    List<Order> payoffs = new ArrayList<Order>();
+     
+    // Find the number of glasses per slot
+    Set<ITradeable> tradeables = state.getTradeables();
+    List<SimpleTradeable> singleTradeables = new LinkedList<SimpleTradeable>();
+    for (ITradeable t : tradeables){
+      singleTradeables.addAll(t.flatten());
+    }
     
+    double glassesPerSlot = singleTradeables.size() / 12;
+    Logging.log("TEST glasses per slot: " + glassesPerSlot);
+
+    // Put agents where they bid
+    Map<Integer, List<ITradeable>> alloc = new HashMap<Integer,List<ITradeable>>();
     for (TradeMessage b : bids) {
       if (b.Bundle.getType() != BundleType.Lemonade)
         continue;
@@ -46,47 +54,49 @@ public class LemonadeAllocation implements IAllocationRule {
       slots[index].add(b.AgentID);
     }
 
-    for (int i = 0; i < SIZE; i++) {
+    for (int i = 0; i < 12; i++) {
       // Search to right
       int r = 0;
-      while(this.slots[Math.floorMod(i+r,SIZE)].isEmpty()) {
+      while(this.slots[Math.floorMod(i+r,12)].isEmpty()) {
         r++;
       }
       // Search to left
       int l = 0;      
-      while(this.slots[Math.floorMod(i-l,SIZE)].isEmpty()) {
+      while(this.slots[Math.floorMod(i-l,12)].isEmpty()) {
         l++;
-      }
+      }            
       
       // Person to pay
       List<Integer> winners = new ArrayList<Integer>();
-      if (r < l) {
-        winners.addAll(slots[Math.floorMod(i+r,SIZE)]);
+      if (r < l) {        
+        winners.addAll(slots[Math.floorMod(i+r,12)]);
       } else if (l < r) {     
-        winners.addAll(slots[Math.floorMod(i-l,SIZE)]);        
+        winners.addAll(slots[Math.floorMod(i-l,12)]);        
       } else { 
-        if (i-l != i+r) { 
-        }       
-        winners.addAll(slots[Math.floorMod(i+r,SIZE)]);
-        winners.addAll(slots[Math.floorMod(i-l,SIZE)]);                
+        winners.addAll(slots[Math.floorMod(i+r,12)]);
+        winners.addAll(slots[Math.floorMod(i-l,12)]);                
       }
       
       for (int w : winners) { 
-        double payoff = numGlasses / winners.size();
-        // System.out.println(payoff);
-        Order earned = new Order(w, null, -1.0 * payoff, 1, new SimpleTradeable(0));
-        payoffs.add(earned);
+        int numGlasses = (int) Math.floor(glassesPerSlot / winners.size());
+        Logging.log("TEST glasses per person: " + numGlasses);               
+        List<ITradeable> curr =  alloc.getOrDefault(w, new LinkedList<ITradeable>());
+        
+        // manage tradeables in state?
+        for (int z = 0;z<numGlasses;z++){
+          if (singleTradeables.size() == 0){
+            Logging.log("ALLOCATION RULE: OVERALLOCATED TRADEABLE");
+            break;
+          }
+          curr.add(singleTradeables.remove(0));        
+        }        
+        alloc.put(w, curr);
       }      
+      
+      Allocation newAlloc = new Allocation(alloc);
+      MarketState internalState = state.getMarketState();
+      internalState.setAllocation(newAlloc);
+      state.setMarketState(internalState);      
     } 
-    
-    // hacky and bad.
-    // actually it may not be. 
-    // The thing being 'allocated' in this game is just money itself. 
-    // So if the allocation rule deals with who gets what good and a payment rule 
-    // involves mapping this allocation to a payment scheme, than the payment rule 
-    // really does nothing in this game,
-    // because the allocation and payment scheme are the same.
-    state.setOrders(payoffs);
-  }
-  
+  }  
 }

@@ -16,6 +16,12 @@ public abstract class AbsValueConfig {
   public ValuationType valueScheme; 
   public AbsValuationGenerator aGenerator; 
   
+  public AbsValueConfig(Set<ITradeable> allGoods){
+    this.allGoods = allGoods; 
+    this.valueScheme = ValuationType.None; 
+    this.aGenerator = null;    
+  }
+  
   public AbsValueConfig(Set<ITradeable> allGoods, ValuationType valueScheme, AbsValuationGenerator aGenerator) {
     this.allGoods = allGoods; 
     this.valueScheme = valueScheme; 

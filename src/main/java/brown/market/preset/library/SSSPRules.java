@@ -3,7 +3,7 @@ package brown.market.preset.library;
 import brown.market.preset.AbsMarketPreset;
 import brown.rules.activityrules.library.OneShotActivity;
 import brown.rules.allocationrules.library.SimpleHighestBidderAllocation;
-import brown.rules.irpolicies.library.AnonymousPolicy;
+import brown.rules.irpolicies.library.LemonadeAnonymous;
 import brown.rules.paymentrules.library.SimpleSecondPrice;
 import brown.rules.queryrules.library.SealedBidQuery;
 import brown.rules.terminationconditions.library.OneShotTermination;
@@ -20,7 +20,7 @@ public class SSSPRules extends AbsMarketPreset {
         new SimpleSecondPrice(),
         new SealedBidQuery(), 
         new OneShotActivity(),
-        new AnonymousPolicy(),
+        new LemonadeAnonymous(),
         new OneShotTermination(), 
         new ThreeRoundTermination());
   }
