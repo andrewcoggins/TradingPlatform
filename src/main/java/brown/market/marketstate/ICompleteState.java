@@ -4,16 +4,12 @@ import java.util.List;
 import java.util.Set;
 
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.library.BundleType;
-import brown.channels.MechanismType;
 import brown.market.marketstate.library.MarketState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
-import brown.messages.library.BidRequestMessage;
-import brown.messages.library.GameReport;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
-import brown.todeprecate.PaymentType;
+import brown.tradeable.ITradeable;
 
 /**
  * stores the internal state of a market as 
@@ -25,6 +21,8 @@ public interface ICompleteState {
 
     public Integer getID(); 
   
+    public Set<ITradeable> getTradeables();
+    
     public MarketState getMarketState();
     
     public void setMarketState(MarketState m);

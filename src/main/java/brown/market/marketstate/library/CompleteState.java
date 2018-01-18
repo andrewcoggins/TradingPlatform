@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import abrown.misc.library.Allocation;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.messages.library.GameReportMessage;
@@ -16,7 +15,6 @@ public class CompleteState implements ICompleteState {
 
   private final Integer ID;  
   private final Set<ITradeable> TRADEABLES;
-  
   private List<TradeMessage> BIDS;
   private List<Order> orders; 
   private int ticks;  
@@ -25,6 +23,7 @@ public class CompleteState implements ICompleteState {
   private MarketState marketState;
   //query rule
   private TradeRequestMessage tRequest;
+  private Double increment;
   //activity rules
   private Boolean isAcceptable; 
   private IBidBundle reserve;
@@ -43,65 +42,62 @@ public class CompleteState implements ICompleteState {
     this.BIDS = new LinkedList<TradeMessage>();
     this.orders = new LinkedList<Order>();
     this.marketState = new MarketState();
+    this.outerTerminated = false; 
+    this.increment = 0.0;
     this.ticks = 0; 
     this.innerRuns = 0; 
     this.outerRuns = 0; 
     this.innerTerminated = false; 
-    this.outerTerminated = false; 
   }
   
   @Override
   public Integer getID() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.ID; 
   }
 
   @Override
+  public Set<ITradeable> getTradeables() {
+    return this.TRADEABLES; 
+  }
+  
+  @Override
   public MarketState getMarketState() {
-    // TODO Auto-generated method stub
-    return null;
+     return this.marketState; 
   }
 
   @Override
   public void setMarketState(MarketState m) {
-    // TODO Auto-generated method stub
-    
+    this.marketState = m; 
   }
 
   @Override
   public void tick(long time) {
-    // TODO Auto-generated method stub
-    
+    this.ticks++;
   }
 
   @Override
   public int getTicks() {
-    // TODO Auto-generated method stub
-    return 0;
+    return this.ticks; 
   }
 
   @Override
   public void addBid(TradeMessage bid) {
-    // TODO Auto-generated method stub
-    
+    BIDS.add(bid);
   }
 
   @Override
   public void clearBids() {
-    // TODO Auto-generated method stub
-    
+   this.BIDS = new LinkedList<TradeMessage>();
   }
 
   @Override
   public List<TradeMessage> getBids() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.BIDS; 
   }
 
   @Override
   public List<Order> getOrders() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.orders; 
   }
 
   @Override
@@ -112,104 +108,87 @@ public class CompleteState implements ICompleteState {
 
   @Override
   public void clearOrders() {
-    // TODO Auto-generated method stub
-    
+    this.orders = new LinkedList<Order>();
   }
 
   @Override
   public TradeRequestMessage getTRequest() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.tRequest;
   }
 
   @Override
   public void setTRequest(TradeRequestMessage t) {
-    // TODO Auto-generated method stub
-    
+    this.tRequest = t;
   }
   
   @Override
   public Double getIncrement() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.increment;
   }
 
   @Override
   public void setIncrement(Double increment) {
-    // TODO Auto-generated method stub
-    
+   this.increment = increment;
   }
 
   @Override
   public boolean getAcceptable() {
-    // TODO Auto-generated method stub
-    return false;
+    return this.getAcceptable(); 
   }
 
   @Override
-  public void setAcceptable(boolean b) {
-    // TODO Auto-generated method stub
-    
+  public void setAcceptable(boolean acceptable) {
+    this.isAcceptable = acceptable; 
   }
 
   @Override
   public IBidBundle getReserve() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.reserve;
   }
 
   @Override
-  public void setReserve(IBidBundle o) {
-    // TODO Auto-generated method stub
-    
+  public void setReserve(IBidBundle reserve) {
+     this.reserve = reserve;
   }
 
   @Override
   public boolean getInnerOver() {
-    // TODO Auto-generated method stub
-    return false;
+    return this.innerTerminated; 
   }
 
   @Override
-  public void setInnerOver(boolean b) {
-    // TODO Auto-generated method stub
-    
+  public void setInnerOver(boolean over) {
+    this.innerTerminated = over; 
   }
 
   @Override
   public boolean getOuterOver() {
-    // TODO Auto-generated method stub
-    return false;
+    return this.outerTerminated; 
   }
 
   @Override
-  public void setOuterOver(boolean b) {
-    // TODO Auto-generated method stub
-    
+  public void setOuterOver(boolean over) {
+    this.outerTerminated = over;
   }
 
   @Override
   public void incrementOuter() {
-    // TODO Auto-generated method stub
-    
+    this.outerRuns++;
   }
 
   @Override
   public Integer getOuterRuns() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.outerRuns;
   }
 
   @Override
   public GameReportMessage getReport() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.gameReport; 
   }
 
   @Override
   public void setReport(GameReportMessage gameReport) {
-    // TODO Auto-generated method stub
-    
+    this.gameReport = gameReport;
   }
   
 }
