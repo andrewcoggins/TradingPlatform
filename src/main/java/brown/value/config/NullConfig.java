@@ -1,6 +1,6 @@
-package brown.value.config; 
+package brown.value.config;
 
-import brown.value.valuationrepresentation.library.ValuationType;
+import brown.value.valuation.library.ValuationType;
 
 public class NullConfig extends AbsValueConfig {
   

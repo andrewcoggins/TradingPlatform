@@ -4,17 +4,17 @@ import java.util.Map;
 
 import brown.tradeable.ITradeable;
 import brown.value.valuable.library.Value;
-import brown.value.valuationrepresentation.AbsValuationRepresentation;
+import brown.value.valuationrepresentation.IValuationRepresentation;
 
-public class SimpleValuation extends AbsValuationRepresentation {
+public class Valuation implements IValuationRepresentation {
 
   public final Map<ITradeable, Value> vals;
   
-  public SimpleValuation() {
+  public Valuation() {
     this.vals = null;
   }
   
-  public SimpleValuation(Map<ITradeable, Value> vals) {
+  public Valuation(Map<ITradeable, Value> vals) {
     this.vals = vals; 
   }
   
