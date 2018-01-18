@@ -306,7 +306,7 @@ public abstract class AbsServer {
 				if (report != null) {
 					this.theServer.sendToAllTCP(report);
 				}
-				this.manager.close(this, auction.getID(), null);
+				this.manager.close(this, auction.getID());
 			}
 		}
 	}

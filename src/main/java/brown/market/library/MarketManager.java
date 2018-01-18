@@ -10,7 +10,6 @@ import brown.accounting.Transaction;
 import brown.channels.server.TwoSidedAuction;
 import brown.server.AbsServer;
 import brown.setup.Logging;
-import brown.todeprecate.StateOfTheWorld;
 import brown.tradeable.library.MultiTradeable;
 
 /**
@@ -118,8 +117,9 @@ public class MarketManager {
 	 * @param ID
 	 * @param closingState
 	 */
-	public void close(AbsServer server, Integer ID, StateOfTheWorld closingState) {
+	public void close(AbsServer server, Integer ID) {
 		Market market = tsauctions.get(ID);
+		// market.close();
 		//TODO: market.close();
 		//convert(server, market, closingState);
 	}
