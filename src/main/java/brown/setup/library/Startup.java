@@ -38,7 +38,6 @@ import brown.messages.library.NegotiateMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.rules.clearingrules.IClearingRule;
-import brown.todeprecate.PaymentType;
 import brown.tradeable.TradeableType;
 import brown.tradeable.library.MultiTradeable;
 import brown.twosided.ITwoSidedAuction;
@@ -96,7 +95,6 @@ public final class Startup {
 		kryo.register(TwoSidedAuction.class);
 		kryo.register(ITwoSidedAuction.class);
 		kryo.register(MechanismType.class);
-		kryo.register(PaymentType.class);
 		kryo.register(CDAAgentChannel.class);
 		kryo.register(IClearingRule.class);
 		kryo.register(MultiTradeable.class);
