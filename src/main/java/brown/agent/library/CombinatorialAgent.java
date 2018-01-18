@@ -12,6 +12,7 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.library.LemonadeSetup;
+import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 import brown.value.valuationrepresentation.library.ComplexValuation;
 
@@ -54,8 +55,7 @@ public class CombinatorialAgent extends AbsSimpleSealedBidAgent {
   
   @Override
   public void onSimpleSealedBid(SimpleAgentChannel simpleWrapper) {
-    // TODO Auto-generated method stub
-    Map<Set<MultiTradeable>, Double> bidMap = new HashMap<Set<MultiTradeable>, Double>();
+    Map<Set<ITradeable>, Double> bidMap = new HashMap<Set<ITradeable>, Double>();
     simpleWrapper.xorBid(this, bidMap);
   }
   
