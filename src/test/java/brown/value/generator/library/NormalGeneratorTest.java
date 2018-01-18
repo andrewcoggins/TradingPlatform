@@ -42,9 +42,9 @@ public class NormalGeneratorTest {
     
    
     Function<Integer, Double> valFunc = x -> (double) x; 
-    NormalGenerator ng = new NormalGenerator(valFunc, 1.0);
+    NormalValGenerator ng = new NormalValGenerator(valFunc, 1.0);
     NormalDistribution normalDist = new NormalDistribution(new ISAACRandom(), 1.0, 1.0);
-    ValRandGenerator nullGenerator = new ValRandGenerator(minBinVal, maxBinVal);
+    UniformValGenerator nullGenerator = new UniformValGenerator(minBinVal, maxBinVal);
     MultiTradeable good = new MultiTradeable(0);
     for(int i = 0; i < NUMTRIALS; i++) {
      Double ngValue = ng.makeValuation(good).value;

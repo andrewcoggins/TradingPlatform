@@ -4,6 +4,14 @@ public class GameBid extends AbsBid {
   
   public final Integer move; 
   
+  /**
+   * For Kryo 
+   * DO NOT USE
+   */
+  public GameBid() {
+    this.move = null; 
+  }
+  
   public GameBid(Integer bid) {
     this.move = bid; 
   }

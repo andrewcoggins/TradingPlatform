@@ -6,14 +6,12 @@ import java.util.List;
 import java.util.Set;
 
 import brown.market.preset.AbsMarketPreset;
-import brown.market.preset.library.LemonadeRules;
 import brown.market.preset.library.SSSPRules;
 import brown.setup.library.LemonadeSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
-import brown.value.config.AbsValueConfig;
-import brown.value.config.LemonadeConfig;
-import brown.value.config.SSSPConfig;
+import brown.value.config.ValConfig;
+import brown.value.config.SimpleConfig;
 
 /**
  * Use this class to run the server side of your game.
@@ -28,7 +26,7 @@ public class SSSPServer {
 
   public static void main(String[] args) throws InterruptedException {
     List<AbsMarketPreset> allMarkets = new ArrayList<AbsMarketPreset>();
-    List<AbsValueConfig> allValInfo = new ArrayList<AbsValueConfig>();
+    List<ValConfig> allValInfo = new ArrayList<ValConfig>();
     
     //create tradeables
     Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
@@ -37,7 +35,7 @@ public class SSSPServer {
     }
     
     //valuations and rules
-    allValInfo.add(new SSSPConfig(allTradeables));
+    allValInfo.add(new SimpleConfig(allTradeables));
     allMarkets.add(new SSSPRules());
     
     new RunServer(2121, new LemonadeSetup()).runGame(allMarkets, allValInfo, 1000.0, null);

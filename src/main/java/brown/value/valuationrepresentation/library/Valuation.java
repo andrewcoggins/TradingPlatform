@@ -34,7 +34,7 @@ public class Valuation implements IValuationRepresentation {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    SimpleValuation other = (SimpleValuation) obj;
+    Valuation other = (Valuation) obj;
     if (vals == null) {
       if (other.vals != null)
         return false;
@@ -42,5 +42,5 @@ public class Valuation implements IValuationRepresentation {
       return false;
     return true;
   }
-  
+
 }

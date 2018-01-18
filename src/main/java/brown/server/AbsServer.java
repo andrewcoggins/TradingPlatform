@@ -35,7 +35,7 @@ import brown.setup.library.Startup;
 import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
-import brown.value.config.AbsValueConfig;
+import brown.value.config.ValConfig;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
 import brown.value.valuation.library.ValuationType;
@@ -65,7 +65,7 @@ public abstract class AbsServer {
 	protected Server theServer;
 	protected boolean SHORT;
 	
-	protected Map<Integer, AbsValueConfig> valueConfig; 
+	protected Map<Integer, ValConfig> valueConfig; 
 	protected List<ITradeable> initialGoods;
 	protected Double initialMonies;
 	
@@ -150,13 +150,13 @@ public abstract class AbsServer {
       return;
     }
 		for(Integer marketNum : this.valueConfig.keySet()) {
-		  AbsValueConfig marketConfig = this.valueConfig.get(marketNum);
+		  ValConfig marketConfig = this.valueConfig.get(marketNum);
 		  ValuationRegistrationMessage valueReg; 
 		  //simple valuations: the agent gets a valuation over single goods.
 		  if (marketConfig.valueScheme == ValuationType.Simple) {
 		    System.out.println("Got here");
 		    AdditiveValuation simpleVal = 
-		        new AdditiveValuation(marketConfig.aGenerator, marketConfig.allGoods);
+		        new AdditiveValuation(marketConfig.generator, marketConfig.allGoods);
 		    Valuation privateVal = simpleVal.getValuation(marketConfig.allGoods);
 		    valueReg = new ValuationRegistrationMessage(agentID, privateVal, simpleVal);
 		    theServer.sendToTCP(connection.getID(), valueReg);
@@ -164,7 +164,7 @@ public abstract class AbsServer {
         System.out.println("Got here instead");
 		    //complex valuations: the agent gets a valuation over complex goods.
 		    BundleValuation complexVal = 
-		        new BundleValuation(marketConfig.aGenerator, true, marketConfig.allGoods);
+		        new BundleValuation(marketConfig.generator, true, marketConfig.allGoods);
 		        Valuation privateVal = complexVal.getValuation(marketConfig.allGoods);
 		        valueReg = new ValuationRegistrationMessage(agentID, privateVal,complexVal);
 		        theServer.sendToTCP(connection.getID(), valueReg);

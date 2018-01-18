@@ -17,7 +17,7 @@ public class ValRandGeneratorTest {
   @Test
   public void testVrg() {
     int NUMTRIALS = 100;
-    ValRandGenerator vrg = new ValRandGenerator();
+    UniformValGenerator vrg = new UniformValGenerator();
     MultiTradeable good = new MultiTradeable(0);
     
     for(int i = 0; i < NUMTRIALS; i++) {

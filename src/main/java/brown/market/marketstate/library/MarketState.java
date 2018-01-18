@@ -8,9 +8,8 @@ public class MarketState implements IMarketState {
   private Payment payment; 
   
   public MarketState() {
-//    TODO
-//    this.allocation = new Allocation();
-//    this.payment = new Payment();
+    this.allocation = null;
+    this.payment = null;
   }
   
   @Override
@@ -20,18 +19,17 @@ public class MarketState implements IMarketState {
 
   @Override
   public Payment getPayments() {
-    // TODO Auto-generated method stub
     return this.payment;
   }
 
   @Override
   public void setAllocation(Allocation allocation) {
-    // TODO Auto-generated method stub
+    this.allocation = allocation;
   }
 
   @Override
   public void setPayments(Payment payment) {
-    // TODO Auto-generated method stub
+    this.payment = payment;
   }
   
 }

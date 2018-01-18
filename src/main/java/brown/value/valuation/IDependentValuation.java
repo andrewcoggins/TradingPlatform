@@ -1,10 +1,10 @@
 package brown.value.valuation;
 
-import brown.value.valuationrepresentation.AbsValuationRepresentation;
+import brown.value.valuationrepresentation.IValuationRepresentation;
 
 public interface IDependentValuation extends IValuation {
   
-  public AbsValuationRepresentation getSomeValuations(Integer numValuations, 
+  public IValuationRepresentation getSomeValuations(Integer numValuations, 
       Integer bundleSizeMean, Double bundleSizeStdDev);
   
 }

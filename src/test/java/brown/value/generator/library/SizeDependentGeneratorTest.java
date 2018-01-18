@@ -25,15 +25,15 @@ public class SizeDependentGeneratorTest {
   public void testSdg() {
     // basic functionality
     Function<Integer, Double> aFunction = x -> (double) x;
-    SizeDependentGenerator test = new SizeDependentGenerator(aFunction);
+    SizeDepValGenerator test = new SizeDepValGenerator(aFunction);
     MultiTradeable good = new MultiTradeable();
     assertEquals(new Value(1.0), test.makeValuation(good));
     // a single good 
     Function<Integer, Double> anotherFunction = x -> (double) 2 * x; 
-    SizeDependentGenerator testTwo = new SizeDependentGenerator(anotherFunction);
+    SizeDepValGenerator testTwo = new SizeDepValGenerator(anotherFunction);
     assertEquals(new Value(2.0), testTwo.makeValuation(good)); 
     // test value scale feature
-    SizeDependentGenerator testThree = new SizeDependentGenerator(anotherFunction, 2.0);
+    SizeDepValGenerator testThree = new SizeDepValGenerator(anotherFunction, 2.0);
     assertEquals(new Value(4.0), testThree.makeValuation(good)); 
     // test for a set of goods.
     Set<MultiTradeable> goodSet = new HashSet<MultiTradeable>(); 
@@ -41,10 +41,10 @@ public class SizeDependentGeneratorTest {
       goodSet.add(new MultiTradeable(i)); 
     }
     Function<Integer, Double> thirdFunction = x -> (double) x * x; 
-    SizeDependentGenerator testFour = new SizeDependentGenerator(thirdFunction);
+    SizeDepValGenerator testFour = new SizeDepValGenerator(thirdFunction);
     assertEquals(new Value(100.0), testFour.makeValuation(goodSet));
     // set with set and value function
-    SizeDependentGenerator testFive = new SizeDependentGenerator(thirdFunction, 0.5);
+    SizeDepValGenerator testFive = new SizeDepValGenerator(thirdFunction, 0.5);
     assertEquals(new Value(50.0), testFive.makeValuation(goodSet));
   }
 }

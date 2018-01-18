@@ -10,7 +10,7 @@ import brown.server.AbsServer;
 import brown.setup.ISetup;
 import brown.setup.Logging;
 import brown.tradeable.ITradeable;
-import brown.value.config.AbsValueConfig;
+import brown.value.config.ValConfig;
 
 public class RunServer extends AbsServer {
 
@@ -32,12 +32,12 @@ public class RunServer extends AbsServer {
   }
   
   //initialGoods is a List of ITradeables; in other places we use Set; consider standardizing
-  public void runGame(List<AbsMarketPreset> presets, List<AbsValueConfig> valueInfo, 
+  public void runGame(List<AbsMarketPreset> presets, List<ValConfig> valueInfo, 
       Double initialMonies, List<ITradeable> initialGoods) 
           throws InterruptedException {
     
     //valuations
-    this.valueConfig = new HashMap<Integer, AbsValueConfig>(); 
+    this.valueConfig = new HashMap<Integer, ValConfig>(); 
     
     //endowments
     this.initialMonies = initialMonies; 
