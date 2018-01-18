@@ -3,20 +3,19 @@ package brown.value.valuationrepresentation.library;
 import java.util.Map;
 import java.util.Set;
 
-import brown.tradeable.library.MultiTradeable;
+import brown.tradeable.ITradeable;
 import brown.value.valuable.library.Value;
 import brown.value.valuationrepresentation.AbsValuationRepresentation;
 
-
 public class ComplexValuation extends AbsValuationRepresentation {
   
-  public final Map<Set<MultiTradeable>, Value> vals; 
+  public final Map<Set<ITradeable>, Value> vals; 
   
   public ComplexValuation(){ 
     this.vals = null;
   }
   
-  public ComplexValuation(Map<Set<MultiTradeable> , Value> bundle) { 
+  public ComplexValuation(Map<Set<ITradeable>, Value> bundle) { 
     this.vals = bundle; 
   }
 

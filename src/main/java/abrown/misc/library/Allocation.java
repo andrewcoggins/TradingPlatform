@@ -1,8 +1,9 @@
-package abrown.misc;
+package abrown.misc.library;
 
 import java.util.List;
 import java.util.Map;
 
+import abrown.misc.IAllocation;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 

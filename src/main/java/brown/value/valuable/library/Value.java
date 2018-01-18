@@ -4,14 +4,14 @@ import brown.value.valuable.IValue;
 
 public class Value implements IValue {
   
-  public Double value = null; 
+  public Double value = 0.0; 
   
-  public Value(){ 
-    this.value = null;
+  public Value() { 
+    this.value = 0.0;
   }
   
-  public Value(double val) {
-      this.value = val;
+  public Value(double value) {
+      this.value = value;
   }
 
   @Override

@@ -1,7 +1,7 @@
 package brown.market.marketstate.library;
 
-import abrown.misc.Allocation;
-import abrown.misc.Payment;
+import abrown.misc.library.Allocation;
+import abrown.misc.library.Payment;
 import brown.market.marketstate.IMarketState;
 
 public class MarketState implements IMarketState {

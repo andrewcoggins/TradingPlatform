@@ -33,6 +33,7 @@ import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.Logging;
 import brown.setup.library.Startup;
 import brown.setup.ISetup;
+import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 import brown.value.config.AbsValueConfig;
 import brown.value.valuation.library.AdditiveValuation;
@@ -66,7 +67,7 @@ public abstract class AbsServer {
 	protected boolean SHORT;
 	
 	protected Map<Integer, AbsValueConfig> valueConfig; 
-	protected List<MultiTradeable> initialGoods;
+	protected List<ITradeable> initialGoods;
 	protected Double initialMonies;
 	
 	// a map from an agents' private id to its private valuation for goods.

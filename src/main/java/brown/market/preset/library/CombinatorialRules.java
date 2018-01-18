@@ -9,9 +9,9 @@ import brown.rules.queryrules.library.SealedBidQuery;
 import brown.rules.terminationconditions.library.OneRoundTermination;
 import brown.rules.terminationconditions.library.OneShotTermination;
 
-public class ComSecondPriceRules extends AbsMarketPreset {
+public class CombinatorialRules extends AbsMarketPreset {
   
-  public ComSecondPriceRules() {
+  public CombinatorialRules() {
     this.aRule = new ComplexHighestBidderAllocation(); 
     this.pRule = new ComFirstPricePayment(); 
     this.qRule = new SealedBidQuery();

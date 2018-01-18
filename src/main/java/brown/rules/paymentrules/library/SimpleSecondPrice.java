@@ -5,7 +5,7 @@ package brown.rules.paymentrules.library;
 import java.util.LinkedList;
 import java.util.List;
 
-import abrown.misc.Allocation;
+import abrown.misc.library.Allocation;
 import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;

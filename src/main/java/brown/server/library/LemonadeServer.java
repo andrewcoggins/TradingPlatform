@@ -9,14 +9,14 @@ import brown.setup.library.LemonadeSetup;
 import brown.value.config.AbsValueConfig;
 import brown.value.config.NullConfig;
 
-/*
+/**
  * Use this class to run the server side of your game.
- * just edit the rules to the game that you'd like to play.
+ * Just edit the rules to the game that you'd like to play.
  * 
  * Lemonade Game
  * 
  */
-public class MainServerLemonade {
+public class LemonadeServer {
   
   public static void main(String[] args) throws InterruptedException {
     List<AbsMarketPreset> allMarkets = new ArrayList<AbsMarketPreset>();

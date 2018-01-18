@@ -6,7 +6,7 @@ import java.util.Map;
 import brown.tradeable.library.MultiTradeable;
 
 /**
- * IAllocation is the interface for allocations. 
+ * IAllocation is the interface for allocations.
  * Allocations store a mapping from Tradeables
  * to the IDs of agents that possess them 
  * or will tentatively possess them.
