@@ -1,7 +1,8 @@
-package brown.accounting;
+package brown.accounting.library;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import brown.tradeable.ITradeable;
 
 //TODO: abstract to the complex case

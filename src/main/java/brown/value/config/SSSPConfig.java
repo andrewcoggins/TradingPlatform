@@ -15,9 +15,7 @@ import brown.value.valuationrepresentation.library.ValuationType;
 public class SSSPConfig extends AbsValueConfig {
   
   public SSSPConfig(Set<ITradeable> allGoods) {
-    this.allGoods = allGoods; 
-    this.valueScheme = ValuationType.Simple;
-    this.aGenerator = new NormalGenerator(x -> (double) x, 1.0);
+    super(allGoods, ValuationType.Simple, new NormalGenerator(x -> (double) x, 1.0));
   }
   
 }

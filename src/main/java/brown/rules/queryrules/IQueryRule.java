@@ -1,6 +1,6 @@
 package brown.rules.queryrules;
 
-import brown.accounting.Ledger;
+import brown.accounting.library.Ledger;
 import brown.market.marketstate.ICompleteState;
 
 public interface IQueryRule {

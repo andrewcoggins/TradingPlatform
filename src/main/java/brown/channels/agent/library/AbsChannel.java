@@ -1,6 +1,6 @@
 package brown.channels.agent.library;
 
-import brown.accounting.Ledger;
+import brown.accounting.library.Ledger;
 import brown.channels.agent.IAgentChannel;
 
 public abstract class AbsChannel implements IAgentChannel{

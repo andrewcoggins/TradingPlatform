@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
 
-import brown.accounting.Ledger;
+import brown.accounting.library.Ledger;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.server.TwoSidedAuction;

@@ -14,9 +14,6 @@ import brown.value.valuationrepresentation.library.ValuationType;
 public class ComplexConfig extends AbsValueConfig {
   
   public ComplexConfig(Set<ITradeable> allGoods) {
-    this.allGoods = allGoods; 
-    this.valueScheme = ValuationType.Complex;
-    this.aGenerator = new NormalGenerator(x -> (double) x, 1.0);
+    super(allGoods, ValuationType.Complex, new NormalGenerator(x -> (double) x, 1.0));
   }
-  
 }

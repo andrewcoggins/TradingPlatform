@@ -9,13 +9,13 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import brown.accounting.Account;
-import brown.accounting.Ledger;
-import brown.accounting.Transaction;
-import brown.accounting.bid.SimpleBid;
+import brown.accounting.bid.AuctionBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.GameBidBundle;
+import brown.accounting.library.Account;
+import brown.accounting.library.Ledger;
+import brown.accounting.library.Transaction;
 import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.agent.AbsAgent;
 import brown.channels.MechanismType;
@@ -104,7 +104,7 @@ public final class Startup {
 		kryo.register(HashMap.class);
 		kryo.register(SimpleAgentChannel.class);
 		kryo.register(AuctionBidBundle.class);
-		kryo.register(SimpleBid.class);
+		kryo.register(AuctionBid.class);
 		kryo.register(AbsValuationRepresentation.class);
 		kryo.register(AdditiveValuation.class);
 		kryo.register(BundleValuation.class);

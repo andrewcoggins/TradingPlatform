@@ -12,8 +12,8 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
-import brown.accounting.Account;
-import brown.accounting.Ledger;
+import brown.accounting.library.Account;
+import brown.accounting.library.Ledger;
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;

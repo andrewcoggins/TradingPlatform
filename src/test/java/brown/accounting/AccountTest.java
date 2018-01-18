@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import brown.accounting.library.Account;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 

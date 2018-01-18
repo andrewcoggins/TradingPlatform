@@ -1,9 +1,10 @@
-package brown.accounting; 
+package brown.accounting.library; 
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import brown.accounting.IAccount;
 import brown.tradeable.ITradeable;
 
 //TODO: flatten

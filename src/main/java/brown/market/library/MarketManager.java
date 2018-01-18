@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import brown.accounting.Account;
-import brown.accounting.Ledger;
-import brown.accounting.Transaction;
+import brown.accounting.library.Account;
+import brown.accounting.library.Ledger;
+import brown.accounting.library.Transaction;
 import brown.channels.server.TwoSidedAuction;
 import brown.server.AbsServer;
 import brown.setup.Logging;

@@ -2,7 +2,7 @@ package brown.messages.library;
 
 import java.util.List;
 
-import brown.accounting.Account;
+import brown.accounting.library.Account;
 import brown.agent.AbsAgent;
 import brown.tradeable.ITradeable;
 

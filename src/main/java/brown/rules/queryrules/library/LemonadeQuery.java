@@ -1,6 +1,6 @@
 package brown.rules.queryrules.library;
 
-import brown.accounting.Ledger;
+import brown.accounting.library.Ledger;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.market.marketstate.ICompleteState;

@@ -12,12 +12,13 @@ import brown.rules.terminationconditions.library.OneShotTermination;
 public class CombinatorialRules extends AbsMarketPreset {
   
   public CombinatorialRules() {
-    this.aRule = new ComplexHighestBidderAllocation(); 
-    this.pRule = new ComFirstPricePayment(); 
-    this.qRule = new SealedBidQuery();
-    this.actRule = new OneShotActivity();
-    this.infoPolicy = new LemonadeAnonymous();
-    this.innerTCondition = new OneShotTermination();
-    this.outerTCondition = new OneRoundTermination();
+
+    super(new ComplexHighestBidderAllocation(),
+        new ComFirstPricePayment(),
+        new SealedBidQuery(), 
+        new OneShotActivity(),
+        new LemonadeAnonymous(),
+        new OneShotTermination(),
+        new OneRoundTermination());
   }
 }

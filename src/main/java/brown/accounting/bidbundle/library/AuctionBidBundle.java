@@ -2,7 +2,7 @@ package brown.accounting.bidbundle.library;
 
 import java.util.Map;
 
-import brown.accounting.bid.SimpleBid;
+import brown.accounting.bid.AuctionBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.tradeable.ITradeable;
 
@@ -11,7 +11,7 @@ import brown.tradeable.ITradeable;
   * and holds one double. 
   */
 public class AuctionBidBundle implements IBidBundle {
-	private final SimpleBid BIDS;
+	private final AuctionBid BIDS;
 	private final BundleType BT;
 	
 	/**
@@ -31,7 +31,7 @@ public class AuctionBidBundle implements IBidBundle {
 		if (bids == null) {
 			throw new IllegalArgumentException("Null bids");
 		}
-		this.BIDS = new SimpleBid(bids);
+		this.BIDS = new AuctionBid(bids);
 		this.BT = BundleType.Simple;
 	}
 
@@ -44,7 +44,7 @@ public class AuctionBidBundle implements IBidBundle {
 		return total;
 	}
 
-  public SimpleBid getBids() {
+  public AuctionBid getBids() {
     return this.BIDS;
   }
   

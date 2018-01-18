@@ -11,7 +11,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
-import brown.accounting.Ledger;
+import brown.accounting.library.Ledger;
 import brown.agent.AbsLemonadeAgent;
 import brown.channels.MechanismType;
 import brown.exceptions.AgentCreationException;

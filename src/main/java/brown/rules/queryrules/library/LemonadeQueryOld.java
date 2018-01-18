@@ -1,7 +1,7 @@
 package brown.rules.queryrules.library;
 
-import brown.accounting.Ledger;
 import brown.accounting.bidbundle.library.BundleType;
+import brown.accounting.library.Ledger;
 import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.LemonadeChannel;

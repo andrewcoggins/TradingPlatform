@@ -1,6 +1,6 @@
 package brown.messages.library;
 
-import brown.accounting.Ledger;
+import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 
 /**
