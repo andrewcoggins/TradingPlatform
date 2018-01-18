@@ -4,13 +4,13 @@ import brown.messages.library.GameReportMessage;
 
 public class LemonadeReportMessage extends GameReportMessage {
   
-  private final int[] SLOTS;
+  private final Integer[] SLOTS;
   
   public LemonadeReportMessage() {
     this.SLOTS = null;
   }
   
-  public LemonadeReportMessage(int[] slots) {
+  public LemonadeReportMessage(Integer[] slots) {
     this.SLOTS = slots;
   }
   

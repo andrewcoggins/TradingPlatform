@@ -1,5 +1,6 @@
 package brown.agent.library;
 
+import brown.accounting.bidbundle.library.GameBidBundle;
 import brown.agent.AbsLemonadeAgent;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.exceptions.AgentCreationException;
@@ -30,12 +31,11 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   
   public void onLemonade(LemonadeChannel channel) {
     // Enter a position between 0 and NUM_SLOTS-1 inclusive.
-    channel.bid(this, this.posn);
+    channel.bid(this, new GameBidBundle(this.posn));
   }
   
   @Override
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
-    // TODO Auto-generated method stub
     Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.getMonies() - bankUpdate.oldAccount.getMonies() + ", Total Money: " + bankUpdate.newAccount.getMonies())); 
   }
   

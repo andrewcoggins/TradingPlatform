@@ -113,7 +113,12 @@ public class Market implements IMarket {
   
   @Override 
   public GameReportMessage getReport() {
+    // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
+    this.PRULE.setPayments(this.STATE);
+    // Construct orders from allocation and payments
+    this.STATE.constructOrders();    
+
     this.IRPOLICY.setReport(this.STATE);
     return this.STATE.getReport();
   }
