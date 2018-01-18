@@ -39,9 +39,7 @@ import brown.value.config.AbsValueConfig;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
 import brown.value.valuation.library.ValuationType;
-import brown.value.valuationrepresentation.AbsValuationRepresentation;
-import brown.value.valuationrepresentation.library.ComplexValuation;
-import brown.value.valuationrepresentation.library.SimpleValuation;
+import brown.value.valuationrepresentation.IValuationRepresentation;
 import brown.value.valuationrepresentation.library.Valuation;
 
 import com.esotericsoftware.kryo.Kryo;
@@ -76,7 +74,7 @@ public abstract class AbsServer {
 	// valuation manager?
 	//each game on the simul axis has a map from integer to private valuation.
 	//does the server even care what the private valuations are? 
-	private Map<Integer, Map<Integer, AbsValuationRepresentation>> privateValuations;
+	private Map<Integer, Map<Integer, IValuationRepresentation>> privateValuations;
 
 	public AbsServer(int port, ISetup gameSetup) {
 		this.PORT = port;
@@ -165,11 +163,11 @@ public abstract class AbsServer {
 		  } else if (marketConfig.valueScheme == ValuationType.Complex) {
         System.out.println("Got here instead");
 		    //complex valuations: the agent gets a valuation over complex goods.
-		    BundleValuation complexVal = 
-		        new BundleValuation(marketConfig.aGenerator, true, marketConfig.allGoods);
-		        Valuation privateVal = complexVal.getValuation(marketConfig.allGoods);
-		        valueReg = new ValuationRegistrationMessage(agentID, privateVal,complexVal);
-		        theServer.sendToTCP(connection.getID(), valueReg);
+//		    BundleValuation complexVal = 
+//		        new BundleValuation(marketConfig.aGenerator, true, marketConfig.allGoods);
+//		        Valuation privateVal = complexVal.getValuation(marketConfig.allGoods);
+//		        valueReg = new ValuationRegistrationMessage(agentID, privateVal,complexVal);
+//		        theServer.sendToTCP(connection.getID(), valueReg);
 		  } else {
 		    //no explicit valuation, as in the lemonade game
 		    theServer.sendToTCP(connection.getID(), new RegistrationMessage(agentID));

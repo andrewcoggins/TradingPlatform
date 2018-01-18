@@ -133,7 +133,7 @@ public class CompleteState implements ICompleteState {
 
   @Override
   public boolean getAcceptable() {
-    return this.getAcceptable(); 
+    return isAcceptable; 
   }
 
   @Override

@@ -10,6 +10,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import brown.accounting.bid.AuctionBid;
+import brown.accounting.bid.GameBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.GameBidBundle;
@@ -47,8 +48,6 @@ import brown.value.generator.library.NormalGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
-import brown.value.valuationrepresentation.AbsValuationRepresentation;
-import brown.value.valuationrepresentation.library.SimpleValuation;
 
 import org.apache.commons.math3.random.RandomGenerator;
 
@@ -105,19 +104,18 @@ public final class Startup {
 		kryo.register(SimpleAgentChannel.class);
 		kryo.register(AuctionBidBundle.class);
 		kryo.register(AuctionBid.class);
-		kryo.register(AbsValuationRepresentation.class);
 		kryo.register(AdditiveValuation.class);
 		kryo.register(BundleValuation.class);
 		kryo.register(ValuationRegistrationMessage.class);
 		kryo.register(Value.class);
-		kryo.register(SimpleValuation.class); 
 		kryo.register(AdditiveValuation.class);
 		kryo.register(Value.class);
 		kryo.register(NormalGenerator.class);
 		kryo.register(TradeableType.class);
 		kryo.register(AbsValuationGenerator.class);
 		kryo.register(GameBidBundle.class);
-		
+    kryo.register(GameBid.class);
+		kryo.register(Integer[].class);
 		return true;
 	}
 
