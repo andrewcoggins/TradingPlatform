@@ -3,7 +3,6 @@ package brown.market.library;
 import java.util.List;
 
 import brown.accounting.Ledger;
-import brown.accounting.bidbundle.IBidBundle;
 import brown.market.IMarket;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Order;

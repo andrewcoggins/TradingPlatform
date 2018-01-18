@@ -67,26 +67,6 @@ public class Ledger {
 	  }
 	}
 	
-//	public void addAll(IBidBundle bids) {
-//	  synchronized(transactions) {
-//	  if (bids != null) {
-//	    // how to fix this, how to fix this.
-//	    // could add individual transactions instead.
-//	    if (bids.getType() == BundleType.Simple) {
-//	      SimpleBidBundle castedBids = (SimpleBidBundle) bids;
-//	      for (Entry<Tradeable, MarketState> t : castedBids.getBids().bids.entrySet()) { 
-//	        Transaction tr = new Transaction(t.getValue().AGENTID, null, t.getValue().PRICE, 1, t.getKey());
-//	        this.latest.put(t.getKey(), tr);
-//	        this.transactions.add(tr); 
-//	        this.unshared.add(tr);
-//	      }
-//	    } else if (bids.getType() == BundleType.Complex) {
-//	      
-//	    }
-//	  }
-//	 }
-//	}
-	
 	/**
 	 * Constructs a set of all transactions
 	 * @return set
