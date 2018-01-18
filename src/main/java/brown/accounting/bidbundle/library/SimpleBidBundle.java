@@ -1,19 +1,17 @@
 package brown.accounting.bidbundle.library;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.tradeable.library.MultiTradeable;
+import brown.tradeable.ITradeable;
 
 /**
   * The built-in BidBundle is called SimpleBidBundle,
   * and holds one double. 
   */
 public class SimpleBidBundle implements IBidBundle {
-	private final Map<MultiTradeable, Double> BIDS;
+	private final SimpleBid BIDS;
 	private final BundleType BT;
 	
 	/**
@@ -26,28 +24,28 @@ public class SimpleBidBundle implements IBidBundle {
 	
 	/**
 	 * Actual constructor
-	 * @param bid - agent's bid
+	 * @param move - agent's bid
 	 * @param agent - agent ID
 	 */
-	public SimpleBidBundle(Map<MultiTradeable, Double> bids) {
+	public SimpleBidBundle(Map<ITradeable, Double> bids) {
 		if (bids == null) {
 			throw new IllegalArgumentException("Null bids");
 		}
-		this.BIDS = bids;
+		this.BIDS = new SimpleBid(bids);
 		this.BT = BundleType.Simple;
 	}
 
   @Override
 	public double getCost() {
 		double total = 0;
-		for (Double b : this.BIDS.values()) {
+		for (Double b : this.BIDS.bids.values()) {
 			total += b;
 		}
 		return total;
 	}
 
   public SimpleBid getBids() {
-    return new SimpleBid(this.BIDS);
+    return this.BIDS;
   }
   
 	@Override
@@ -55,8 +53,8 @@ public class SimpleBidBundle implements IBidBundle {
 		return this.BT;
 	}
 	
-	public Double getBid(MultiTradeable t) {
-	  return BIDS.get(t);
+	public Double getBid(ITradeable t) {
+	  return BIDS.bids.get(t);
 	}
 	
 	@Override

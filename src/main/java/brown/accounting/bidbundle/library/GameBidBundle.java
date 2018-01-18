@@ -1,35 +1,35 @@
 package brown.accounting.bidbundle.library;
 
-import brown.accounting.bid.LemonadeBid;
+import brown.accounting.bid.GameBid;
 import brown.accounting.bidbundle.IBidBundle;
 
-public class LemonadeBidBundle implements IBidBundle {
+public class GameBidBundle implements IBidBundle {
 
-  private Integer BIDS;
-  private BundleType BT; 
+  private final GameBid BIDS;
+  private final BundleType BT; 
   
   /**
    * For Kryo 
    * DO NOT USE
    */
-  public LemonadeBidBundle() {
+  public GameBidBundle() {
     this.BIDS = null; 
     this.BT = null;  
   }
   
-  public LemonadeBidBundle(Integer numberBid) {
-    this.BIDS = numberBid;
+  public GameBidBundle(Integer numberBid) {
+    this.BIDS = new GameBid(numberBid);
     this.BT = BundleType.Lemonade;
   }
   
   @Override
   public double getCost() {
-    return this.BIDS;
+    return 0.;
   }
   
   @Override
-  public LemonadeBid getBids() {
-    return new LemonadeBid(this.BIDS);
+  public GameBid getBids() {
+    return this.BIDS;
   }
 
   @Override
@@ -50,9 +50,9 @@ public class LemonadeBidBundle implements IBidBundle {
 
   @Override
   public boolean equals(Object obj) {
-    return(obj instanceof LemonadeBidBundle && 
-        ((LemonadeBidBundle) obj).BIDS.equals(this.BIDS) &&
-        ((LemonadeBidBundle) obj).BIDS.equals(this.BT));
+    return(obj instanceof GameBidBundle && 
+        ((GameBidBundle) obj).BIDS.equals(this.BIDS) &&
+        ((GameBidBundle) obj).BIDS.equals(this.BT));
   }
   
 }

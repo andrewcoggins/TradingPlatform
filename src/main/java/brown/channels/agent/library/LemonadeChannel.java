@@ -2,7 +2,7 @@ package brown.channels.agent.library;
 
 import brown.accounting.Ledger;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.library.LemonadeBidBundle;
+import brown.accounting.bidbundle.library.GameBidBundle;
 import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
 import brown.channels.MechanismType;
@@ -55,7 +55,7 @@ public class LemonadeChannel implements IAgentChannel {
   }
   
   public void bid(AbsAgent agent, Integer position) {
-    IBidBundle toSend = new LemonadeBidBundle(position);
+    IBidBundle toSend = new GameBidBundle(position);
     agent.CLIENT.sendTCP(new TradeMessage(0, toSend, this.ID, agent.ID));
   }
   

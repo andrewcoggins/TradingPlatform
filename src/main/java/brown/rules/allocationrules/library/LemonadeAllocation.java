@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import brown.accounting.bidbundle.library.BundleType;
-import brown.accounting.bidbundle.library.LemonadeBidBundle;
+import brown.accounting.bidbundle.library.GameBidBundle;
 import brown.channels.MechanismType;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Order;
@@ -38,8 +38,8 @@ public class LemonadeAllocation implements IAllocationRule {
     for (TradeMessage b : bids) {
       if (b.Bundle.getType() != BundleType.Lemonade)
         continue;
-      LemonadeBidBundle lemonadeBid = (LemonadeBidBundle) b.Bundle;
-      int index = lemonadeBid.getBids().bid;
+      GameBidBundle lemonadeBid = (GameBidBundle) b.Bundle;
+      int index = lemonadeBid.getBids().move;
       slots[index].add(b.AgentID);
     }
 
