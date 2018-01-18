@@ -9,7 +9,7 @@ import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
-import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Allocation;
 import brown.market.marketstate.library.Order;

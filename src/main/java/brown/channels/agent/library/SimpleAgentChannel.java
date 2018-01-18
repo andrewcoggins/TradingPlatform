@@ -7,10 +7,8 @@ import java.util.Set;
 
 import brown.accounting.Ledger;
 
-import brown.accounting.bid.SimpleBid;
-import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.agent.AbsAgent;
-import brown.agent.AbsLemonadeAgent;
 import brown.agent.AbsOpenOutcryAgent;
 import brown.agent.AbsSimpleSealedBidAgent;
 import brown.channels.MechanismType;
@@ -19,7 +17,6 @@ import brown.messages.library.TradeMessage;
 import brown.setup.Logging;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.MultiTradeable;
 
 /*
  * Implements IMarket for Simple auctions
@@ -28,7 +25,7 @@ public class SimpleAgentChannel implements IAgentChannel {
   
 	private final Integer ID;
 	private final Ledger LEDGER;
-	private final SimpleBidBundle HIGHBID;
+	private final AuctionBidBundle HIGHBID;
 	private final int ELIGIBILITY;
 	
 	private final PaymentType PTYPE;
@@ -50,7 +47,7 @@ public class SimpleAgentChannel implements IAgentChannel {
 	 * @param highBid
 	 */
 	public SimpleAgentChannel(Integer ID, Ledger ledger, PaymentType ptype, MechanismType mtype,
-			SimpleBidBundle highBid, int elig) {
+			AuctionBidBundle highBid, int elig) {
 		if (highBid == null || ledger == null) {
 			throw new IllegalArgumentException("Null structures");
 		}
@@ -111,7 +108,7 @@ public class SimpleAgentChannel implements IAgentChannel {
 	 * Returns the high bid
 	 * @return double
 	 */
-	public double getMarketState(MultiTradeable t) {
+	public double getMarketState(ITradeable t) {
 		return this.HIGHBID.getBids().bids.get(t);
 	}
 	
@@ -123,59 +120,59 @@ public class SimpleAgentChannel implements IAgentChannel {
 		return this.ELIGIBILITY;
 	}
 
-	public void bid(AbsAgent agent, Map<MultiTradeable, Double> bids) {
+	public void bid(AbsAgent agent, Map<ITradeable, Double> bids) {
 		Map<ITradeable, Double> fixedBids = new HashMap<ITradeable,Double>();
 		for (Entry<ITradeable, Double> bid : bids.entrySet()) {
 			fixedBids.put(bid.getKey(), bid.getValue());
 			if (fixedBids.size() > 10) {
-				agent.CLIENT.sendTCP(new TradeMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
+				agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
 				fixedBids.clear();
 			}
 		}
 		if (fixedBids.size() > 0) {
-			agent.CLIENT.sendTCP(new TradeMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
+			agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
 		}
 	}
 
-	public void demandSet(AbsAgent agent, Set<MultiTradeable> toBid) {
-		Map<MultiTradeable, Double> fixedBids = new HashMap<MultiTradeable,Double>();
-		for (MultiTradeable bid : toBid) {
+	public void demandSet(AbsAgent agent, Set<ITradeable> toBid) {
+		Map<ITradeable, Double> fixedBids = new HashMap<ITradeable,Double>();
+		for (ITradeable bid : toBid) {
 			fixedBids.put(bid, 0.);
 			if (fixedBids.size() > 10) {
-				agent.CLIENT.sendTCP(new TradeMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
+				agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
 				fixedBids.clear();
 			}
 		}
 		if (fixedBids.size() != 0) {
-			agent.CLIENT.sendTCP(new TradeMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
+			agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
 		}
 	}
 	
-	public void xorBid(AbsAgent agent, Map<Set<MultiTradeable>, Double> toBid) {
+	public void xorBid(AbsAgent agent, Map<Set<ITradeable>, Double> toBid) {
 		if (3 < toBid.size()) {
 			throw new IllegalArgumentException("Attempt to submit too many atomic bids");
 		}
 		
-		Map<MultiTradeable, Double> fixedBids = new HashMap<MultiTradeable,Double>();
-		for (Entry<Set<MultiTradeable>, Double> bid : toBid.entrySet()) {
+		Map<ITradeable, Double> fixedBids = new HashMap<ITradeable,Double>();
+		for (Entry<Set<ITradeable>, Double> bid : toBid.entrySet()) {
 			if (this.ELIGIBILITY < bid.getKey().size()) {
 				throw new IllegalArgumentException("Attempt to submit ineligible bid " + bid.getKey());
 			}
-			for (MultiTradeable t : bid.getKey()) {
+			for (ITradeable t : bid.getKey()) {
 				fixedBids.put(t, bid.getValue());
 				if (fixedBids.size() > 10) {
-					agent.CLIENT.sendTCP(new TradeMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
+					agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
 					fixedBids.clear();
 				}
 			}
 		}
 		
 		if (fixedBids.size() != 0) {
-			agent.CLIENT.sendTCP(new TradeMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
+			agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
 		}
 	}
 	
-	public Set<MultiTradeable> getTradeables() {
+	public Set<ITradeable> getTradeables() {
 		return this.HIGHBID.getBids().bids.keySet();
 	}
 	

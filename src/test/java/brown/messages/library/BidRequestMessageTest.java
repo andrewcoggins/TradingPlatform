@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.BundleType;
-import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.tradeable.library.MultiTradeable;
 
 /**
@@ -28,14 +28,14 @@ public class BidRequestMessageTest {
   public void testBidRequestMessage() {
     Map<MultiTradeable, MarketState> aMap = new HashMap<MultiTradeable, MarketState>();
     aMap.put(new MultiTradeable(0), new MarketState(1, 0.0));
-    SimpleBidBundle s = new SimpleBidBundle(aMap);
+    AuctionBidBundle s = new AuctionBidBundle(aMap);
     Set<MultiTradeable> goods = new HashSet<MultiTradeable>();
     goods.add(new MultiTradeable(0));
     BidRequestMessage b = new BidRequestMessage(0, 0, BundleType.Simple, s, goods);
     assertTrue(b.AuctionID == 0);
     assertEquals(b.TYPE, BundleType.Simple);
     assertEquals(b.Current, s);
-    SimpleBidBundle sCopy = (SimpleBidBundle) b.Current; 
+    AuctionBidBundle sCopy = (AuctionBidBundle) b.Current; 
     assertEquals(s, sCopy);
   }
 }

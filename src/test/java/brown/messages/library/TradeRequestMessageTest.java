@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import brown.accounting.Ledger;
 import brown.accounting.MarketState;
-import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.todeprecate.PaymentType;
@@ -29,7 +29,7 @@ public class TradeRequestMessageTest {
     Ledger l = new Ledger();
     Map<MultiTradeable, MarketState> bids = new HashMap<MultiTradeable, MarketState>();
     bids.put(new MultiTradeable(0), new MarketState(0, 1.0));
-    SimpleBidBundle sb = new SimpleBidBundle(bids);
+    AuctionBidBundle sb = new AuctionBidBundle(bids);
     TradeRequestMessage trm = new TradeRequestMessage(0, 
         new SimpleAgentChannel(new Integer(0), new Ledger(0), PaymentType.SecondPrice,
             MechanismType.SealedBid, sb, 0),

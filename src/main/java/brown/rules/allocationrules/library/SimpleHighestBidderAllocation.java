@@ -7,7 +7,7 @@ import java.util.Map;
 
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.library.BundleType;
-import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Allocation;
 import brown.messages.library.TradeMessage;
@@ -33,7 +33,7 @@ public class SimpleHighestBidderAllocation implements IAllocationRule {
     List<TradeMessage> allBids = state.getBids();
     for(TradeMessage bid : allBids) {
       if(bid.Bundle.getType().equals(BundleType.Simple)) {
-        SimpleBidBundle bundle = (SimpleBidBundle) bid.Bundle; 
+        AuctionBidBundle bundle = (AuctionBidBundle) bid.Bundle; 
         for (MultiTradeable t : bundle.getBids().bids.keySet()) {
           if(highest.get(t) == null || highest.get(t) < bundle.getBids().bids.get(t)) { 
             highest.put(t, bundle.getBids().bids.get(t));

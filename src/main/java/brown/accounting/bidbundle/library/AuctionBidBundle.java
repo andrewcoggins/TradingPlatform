@@ -10,14 +10,14 @@ import brown.tradeable.ITradeable;
   * The built-in BidBundle is called SimpleBidBundle,
   * and holds one double. 
   */
-public class SimpleBidBundle implements IBidBundle {
+public class AuctionBidBundle implements IBidBundle {
 	private final SimpleBid BIDS;
 	private final BundleType BT;
 	
 	/**
 	 * For Kryo do not use
 	 */
-	public SimpleBidBundle() {
+	public AuctionBidBundle() {
 		this.BIDS = null;
 		this.BT = null;
 	}
@@ -27,7 +27,7 @@ public class SimpleBidBundle implements IBidBundle {
 	 * @param move - agent's bid
 	 * @param agent - agent ID
 	 */
-	public SimpleBidBundle(Map<ITradeable, Double> bids) {
+	public AuctionBidBundle(Map<ITradeable, Double> bids) {
 		if (bids == null) {
 			throw new IllegalArgumentException("Null bids");
 		}
@@ -73,8 +73,8 @@ public class SimpleBidBundle implements IBidBundle {
 
   @Override
   public boolean equals(Object obj) {
-    return(obj instanceof SimpleBidBundle && 
-        ((SimpleBidBundle) obj).BIDS.equals(this.BIDS) &&
-        ((SimpleBidBundle) obj).BT.equals(this.BT));
+    return(obj instanceof AuctionBidBundle && 
+        ((AuctionBidBundle) obj).BIDS.equals(this.BIDS) &&
+        ((AuctionBidBundle) obj).BT.equals(this.BT));
   }	
 }

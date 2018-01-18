@@ -13,7 +13,7 @@ import brown.accounting.MarketState;
 import brown.accounting.bid.ComplexBid;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
-import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.tradeable.library.MultiTradeable;
 
 /**
@@ -29,7 +29,7 @@ public class BidMessageTest {
     Map<MultiTradeable, MarketState> map = new HashMap<MultiTradeable, MarketState>(); 
     Map<Set<MultiTradeable>, MarketState> complexMap = new HashMap<Set<MultiTradeable>, MarketState>(); 
     map.put(new MultiTradeable(0), new MarketState(0, 1.0)); 
-    SimpleBidBundle s = new SimpleBidBundle(map); 
+    AuctionBidBundle s = new AuctionBidBundle(map); 
     TradeMessage bm = new TradeMessage(0, s, 1, 2); 
     TradeMessage bmTwo = bm.safeCopy(2); 
     //test public fields

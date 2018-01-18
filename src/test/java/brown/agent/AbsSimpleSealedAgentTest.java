@@ -16,7 +16,7 @@ import com.esotericsoftware.kryonet.Server;
 import brown.accounting.Account;
 import brown.accounting.Ledger;
 import brown.accounting.MarketState;
-import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;
@@ -61,7 +61,7 @@ public class AbsSimpleSealedAgentTest {
             } else if (object.equals("send me a SimpleAgentChannel")) {
               Map<MultiTradeable, MarketState> junk = new HashMap<MultiTradeable, MarketState>();
               SimpleAgentChannel sa = new SimpleAgentChannel(0, new Ledger(0),
-                  PaymentType.FirstPrice, MechanismType.SealedBid, new SimpleBidBundle(junk), 0); 
+                  PaymentType.FirstPrice, MechanismType.SealedBid, new AuctionBidBundle(junk), 0); 
               connection.sendTCP(new TradeRequestMessage(0, sa, MechanismType.SealedBid));
             } else if (object.equals("send me a Registration")) {
               Map<MultiTradeable, Value> m = new HashMap<MultiTradeable, Value>();

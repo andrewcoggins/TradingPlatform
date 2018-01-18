@@ -10,7 +10,7 @@ import java.util.Set;
 import org.junit.Test;
 
 import brown.accounting.MarketState;
-import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.library.CompleteState;
 import brown.messages.library.TradeMessage;
 import brown.tradeable.library.MultiTradeable;
@@ -32,7 +32,7 @@ public class OneShotActivityTest {
     CompleteState state = new CompleteState(0, allTradeables);
     Map<MultiTradeable, MarketState> aMap = new HashMap<MultiTradeable, MarketState>();
     aMap.put(new MultiTradeable(0), new MarketState(0, 1.0));
-    SimpleBidBundle s = new SimpleBidBundle(aMap);
+    AuctionBidBundle s = new AuctionBidBundle(aMap);
     TradeMessage aBid = new TradeMessage(1, s, 1, 1);
     OneShotActivity shot = new OneShotActivity();
     //is initially acceptable because doesn't contain bid. 

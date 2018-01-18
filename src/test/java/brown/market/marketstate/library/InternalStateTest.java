@@ -17,7 +17,7 @@ import brown.accounting.MarketState;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
-import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.messages.library.TradeMessage;
@@ -49,7 +49,7 @@ public class InternalStateTest {
     //going to go through these in order to the best of my ability. 
     Map<MultiTradeable, MarketState> map = new HashMap<MultiTradeable, MarketState>();
     map.put(new MultiTradeable(1), new MarketState(0, 1.0));
-    TradeMessage aBid = new TradeMessage(0, new SimpleBidBundle(map), 0, 0);
+    TradeMessage aBid = new TradeMessage(0, new AuctionBidBundle(map), 0, 0);
     //addBid, getBids
     state.addBid(aBid);
     assertEquals((SimpleBid) state.getBids().get(0).Bundle.getBids(), new SimpleBid(map));
@@ -69,9 +69,9 @@ public class InternalStateTest {
     state.tick((long) 0.0);
     assertTrue(state.getTicks() == 1); 
     //setReserve, getBundleReserve
-    SimpleBidBundle aBundle = new SimpleBidBundle(map);
+    AuctionBidBundle aBundle = new AuctionBidBundle(map);
     state.setReserve(aBundle);
-    SimpleBidBundle gottenBundle = (SimpleBidBundle) state.getbundleReserve();
+    AuctionBidBundle gottenBundle = (AuctionBidBundle) state.getbundleReserve();
     assertEquals(aBundle, gottenBundle);
     //complex case
     Map<Set<MultiTradeable>, MarketState> complexMap = new HashMap<Set<MultiTradeable>, MarketState>();

@@ -16,7 +16,7 @@ import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.GameBidBundle;
-import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.agent.AbsAgent;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.CDAAgentChannel;
@@ -103,7 +103,7 @@ public final class Startup {
 		kryo.register(Ledger.class);
 		kryo.register(HashMap.class);
 		kryo.register(SimpleAgentChannel.class);
-		kryo.register(SimpleBidBundle.class);
+		kryo.register(AuctionBidBundle.class);
 		kryo.register(SimpleBid.class);
 		kryo.register(AbsValuationRepresentation.class);
 		kryo.register(AdditiveValuation.class);

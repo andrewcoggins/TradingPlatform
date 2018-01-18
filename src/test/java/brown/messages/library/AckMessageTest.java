@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import brown.accounting.bidbundle.library.SimpleBidBundle;
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 
 /**
  * tests the ack message. 
@@ -24,16 +24,16 @@ public class AckMessageTest {
     AckMessage ackOne = new AckMessage(new RegistrationMessage(0), true);
     AckMessage ackTwo = new AckMessage(new RegistrationMessage(0), false); 
     AckMessage ackThree = new AckMessage(0, 
-        new TradeMessage(0, new SimpleBidBundle(), 0, 0), true); 
+        new TradeMessage(0, new AuctionBidBundle(), 0, 0), true); 
     AckMessage ackFour = new AckMessage(1, 
-        new TradeMessage(0, new SimpleBidBundle(), 0, 0), false); 
+        new TradeMessage(0, new AuctionBidBundle(), 0, 0), false); 
     
     // test constructors.
     assertEquals(ackOne.REJECTED, true); 
     assertEquals(ackTwo.REJECTED, false);
     assertEquals(ackThree.REJECTED, true);
     assertEquals(ackFour.REJECTED, false);
-    assertEquals(ackThree.failedBR, new TradeMessage(0, new SimpleBidBundle(), 0, 0));
-    assertEquals(ackFour.failedBR, new TradeMessage(0, new SimpleBidBundle(), 0, 0));
+    assertEquals(ackThree.failedBR, new TradeMessage(0, new AuctionBidBundle(), 0, 0));
+    assertEquals(ackFour.failedBR, new TradeMessage(0, new AuctionBidBundle(), 0, 0));
   }
 }
