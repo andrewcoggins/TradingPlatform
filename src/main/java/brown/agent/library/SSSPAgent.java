@@ -11,6 +11,7 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.library.LemonadeSetup;
+import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 import brown.value.valuationrepresentation.library.SimpleValuation;
 
@@ -37,9 +38,9 @@ public class SSSPAgent extends AbsSimpleSealedBidAgent {
   
   @Override
   public void onSimpleSealedBid(SimpleAgentChannel simpleChannel) {
-    Map<MultiTradeable, Double> initial = new HashMap<MultiTradeable, Double>();
+    Map<ITradeable, Double> initial = new HashMap<ITradeable, Double>();
     // TODO Auto-generated method stub
-    for (MultiTradeable t: this.privateValuation.vals.keySet()) {
+    for (ITradeable t: this.privateValuation.vals.keySet()) {
       initial.put(t, privateValuation.vals.get(t).value);
     }
     // this is the SCPP price prediction. Probably not a very good bid. 

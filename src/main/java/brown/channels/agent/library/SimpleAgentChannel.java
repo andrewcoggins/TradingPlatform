@@ -18,6 +18,7 @@ import brown.channels.agent.IAgentChannel;
 import brown.messages.library.TradeMessage;
 import brown.setup.Logging;
 import brown.todeprecate.PaymentType;
+import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 
 /*
@@ -123,8 +124,8 @@ public class SimpleAgentChannel implements IAgentChannel {
 	}
 
 	public void bid(AbsAgent agent, Map<MultiTradeable, Double> bids) {
-		Map<MultiTradeable, Double> fixedBids = new HashMap<MultiTradeable,Double>();
-		for (Entry<MultiTradeable, Double> bid : bids.entrySet()) {
+		Map<ITradeable, Double> fixedBids = new HashMap<ITradeable,Double>();
+		for (Entry<ITradeable, Double> bid : bids.entrySet()) {
 			fixedBids.put(bid.getKey(), bid.getValue());
 			if (fixedBids.size() > 10) {
 				agent.CLIENT.sendTCP(new TradeMessage(0,new SimpleBidBundle(fixedBids),this.ID,agent.ID));
