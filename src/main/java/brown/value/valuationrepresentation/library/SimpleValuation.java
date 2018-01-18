@@ -2,20 +2,19 @@ package brown.value.valuationrepresentation.library;
 
 import java.util.Map;
 
-import brown.tradeable.library.MultiTradeable;
+import brown.tradeable.ITradeable;
 import brown.value.valuable.library.Value;
 import brown.value.valuationrepresentation.AbsValuationRepresentation;
 
-
 public class SimpleValuation extends AbsValuationRepresentation {
 
-  public final Map<MultiTradeable, Value> vals;
+  public final Map<ITradeable, Value> vals;
   
   public SimpleValuation() {
     this.vals = null;
   }
   
-  public SimpleValuation(Map<MultiTradeable, Value> vals) {
+  public SimpleValuation(Map<ITradeable, Value> vals) {
     this.vals = vals; 
   }
   

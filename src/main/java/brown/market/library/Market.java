@@ -2,7 +2,7 @@ package brown.market.library;
 
 import java.util.List;
 
-import abrown.misc.Allocation;
+import abrown.misc.library.Allocation;
 import brown.accounting.Ledger;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.market.IMarket;

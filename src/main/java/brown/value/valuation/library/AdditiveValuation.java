@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.MultiTradeable;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.generator.library.ValRandGenerator;
 import brown.value.valuable.library.Value;
@@ -19,10 +18,11 @@ import brown.value.valuationrepresentation.library.SimpleValuation;
  */
 public class AdditiveValuation implements IIndependentValuation {
 
-  private Map<MultiTradeable, Value> valMap;
+  private Map<ITradeable, Value> valMap;
   
   /**
-   * For kryo do not use
+   * For kryo 
+   * DO NOT USE
    */
   public AdditiveValuation() {
       this.valMap = null;
@@ -32,10 +32,10 @@ public class AdditiveValuation implements IIndependentValuation {
    * default constructor
    * @param goods
    */
-  public AdditiveValuation(Set<MultiTradeable> goods) {
-    this.valMap = new HashMap<MultiTradeable, Value>();
+  public AdditiveValuation(Set<ITradeable> goods) {
+    this.valMap = new HashMap<ITradeable, Value>();
     ValRandGenerator rg = new ValRandGenerator();
-    for(MultiTradeable item : goods) {
+    for(ITradeable item : goods) {
       valMap.put(item, rg.makeValuation(item));
     }
   }
@@ -45,24 +45,24 @@ public class AdditiveValuation implements IIndependentValuation {
    * @param valGenerator
    * @param goods
    */
-  public AdditiveValuation(AbsValuationGenerator valGenerator, Set<MultiTradeable> goods) {
-    this.valMap = new HashMap<MultiTradeable, Value>();
-    for(MultiTradeable item : goods) {
+  public AdditiveValuation(AbsValuationGenerator valGenerator, Set<ITradeable> goods) {
+    this.valMap = new HashMap<ITradeable, Value>();
+    for(ITradeable item : goods) {
       Value value = valGenerator.makeValuation(item);
       valMap.put(item, value);
     }
   }
   
   @Override
-  public Value getValuation(MultiTradeable good) {
+  public Value getValuation(ITradeable good) {
     return valMap.get(good);
   }
 
   @Override
-  public SimpleValuation getValuation(Set<MultiTradeable> goods) {
-    Map<MultiTradeable, Value> valuation = new HashMap<MultiTradeable, Value>();
-    for(MultiTradeable item : goods) {
-      valuation.put((MultiTradeable) item, valMap.get(item));
+  public SimpleValuation getValuation(Set<ITradeable> goods) {
+    Map<ITradeable, Value> valuation = new HashMap<ITradeable, Value>();
+    for(ITradeable item : goods) {
+      valuation.put((ITradeable) item, valMap.get(item));
     }
     return new SimpleValuation(valuation); 
   }

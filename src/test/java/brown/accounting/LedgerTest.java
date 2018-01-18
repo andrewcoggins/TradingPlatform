@@ -12,7 +12,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import abrown.misc.Allocation;
+import abrown.misc.library.Allocation;
 import brown.accounting.bid.SimpleBid;
 import brown.tradeable.library.MultiTradeable;
 

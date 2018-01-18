@@ -1,7 +1,8 @@
-package abrown.misc;
+package abrown.misc.library;
 
 import java.util.Map;
 
+import abrown.misc.IPayment;
 import brown.tradeable.ITradeable;
 
 /**
