@@ -9,7 +9,7 @@ import brown.market.preset.AbsMarketPreset;
 import brown.market.preset.library.CombinatorialRules;
 import brown.setup.library.LemonadeSetup;
 import brown.tradeable.ITradeable;
-import brown.value.config.AbsValueConfig;
+import brown.value.config.ValConfig;
 import brown.value.config.ComplexConfig;
 
 /**
@@ -23,7 +23,7 @@ public class CombinatorialServer {
   
   public static void main(String[] args) throws InterruptedException {
     List<AbsMarketPreset> allMarkets = new ArrayList<AbsMarketPreset>();
-    List<AbsValueConfig> allValInfo = new ArrayList<AbsValueConfig>();
+    List<ValConfig> allValInfo = new ArrayList<ValConfig>();
     
     //create tradeables
     Set<ITradeable> goods = new HashSet<ITradeable>();

@@ -7,28 +7,26 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.random.ISAACRandom;
 import org.apache.commons.math3.random.RandomGenerator;
 
-import brown.tradeable.library.MultiTradeable;
+import brown.tradeable.ITradeable;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.valuable.library.Value;
 
-
-public class NormalGenerator extends AbsValuationGenerator {
+public class NormalValGenerator extends AbsValuationGenerator {
 
   private Function<Integer, Double> valFunction; 
   private Double baseVariance; 
   private Double expectedCovariance; 
   private Double valueScale;
   private Double varCoVar[][];
-
   
-  public NormalGenerator (Function<Integer, Double> valFunction, Double valueScale) {
+  public NormalValGenerator (Function<Integer, Double> valFunction, Double valueScale) {
    this.valFunction = valFunction; 
    this.baseVariance = 1.0;
    this.expectedCovariance = 0.0;
    this.valueScale = valueScale; 
  }
   
-  public NormalGenerator (Function<Integer, Double> valFunction, 
+  public NormalValGenerator (Function<Integer, Double> valFunction, 
       Double baseVariance, Double expectedCovariance, 
       Double valueScale) {
     this.valFunction = valFunction; 
@@ -38,18 +36,19 @@ public class NormalGenerator extends AbsValuationGenerator {
   }
  
   @Override
-  public Value makeValuation(MultiTradeable good) {
-   RandomGenerator rng = new ISAACRandom();
-   Double meanValue = valFunction.apply(1);
-   NormalDistribution normalDist = new NormalDistribution(rng, meanValue, this.baseVariance);
-   Double actualValue = -1.0;
-   while (actualValue < 0)
-     actualValue = normalDist.sample();
-   return new Value(actualValue);
+  public Value makeValuation(ITradeable good) {
+    RandomGenerator rng = new ISAACRandom();
+    Double meanValue = valFunction.apply(1);
+    NormalDistribution normalDist = new NormalDistribution(rng, meanValue, this.baseVariance);
+    Double actualValue = -1.0;
+    while (actualValue < 0)
+      actualValue = normalDist.sample();
+    return new Value(actualValue);
   }
   
+  //this should go away
   @Override
-  public Value makeValuation(Set<MultiTradeable> goods) {
+  public Value makeValuation(Set<ITradeable> goods) {
    RandomGenerator rng = new ISAACRandom();
    Double meanValue = valFunction.apply(goods.size());
    NormalDistribution normalDist = new NormalDistribution(rng, meanValue, this.baseVariance);
@@ -231,8 +230,8 @@ public class NormalGenerator extends AbsValuationGenerator {
       //that assures positive semidefinance as defined by Sylvester's Criterion.
       NormalDistribution varianceDist = new NormalDistribution(new ISAACRandom(),
       expectedCovariance, 0.1);
-     varCoVar = new Double[size][size];
-      for(int i = 0; i < size; i++) {
+      varCoVar = new Double[size][size];
+       for(int i = 0; i < size; i++) {
         for(int j = i; j < size; j++) {
           if (i == j) {
             varCoVar[i][j] = baseVariance; 

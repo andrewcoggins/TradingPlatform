@@ -3,20 +3,17 @@ package brown.value.config;
 import java.util.Set;
 
 import brown.tradeable.ITradeable;
-import brown.value.generator.library.NormalGenerator;
-import brown.value.valuationrepresentation.library.ValuationType;
+import brown.value.generator.library.NormalValGenerator;
+import brown.value.valuation.library.ValuationType;
 
 /**
- * configuration for complex valuations. 
+ * Configuration for complex valuations. 
  * @author andrew
- *
  */
-public class ComplexConfig extends AbsValueConfig {
+public class ComplexConfig extends ValConfig {
   
   public ComplexConfig(Set<ITradeable> allGoods) {
-    this.allGoods = allGoods; 
-    this.valueScheme = ValuationType.Complex;
-    this.aGenerator = new NormalGenerator(x -> (double) x, 1.0);
+    super(allGoods, ValuationType.Complex, new NormalValGenerator(x -> (double) x, 1.0));
   }
   
 }

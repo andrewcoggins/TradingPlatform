@@ -14,7 +14,7 @@ import org.apache.commons.math3.random.RandomGenerator;
 
 import brown.tradeable.ITradeable;
 import brown.value.generator.AbsValuationGenerator;
-import brown.value.generator.library.ValRandGenerator;
+import brown.value.generator.library.UniformValGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.IDependentValuation;
 import brown.value.valuationrepresentation.AbsValuationRepresentation;
@@ -25,7 +25,6 @@ import brown.value.valuationrepresentation.library.ComplexValuation;
  * creation of values without initially creating those values.
  * 
  * @author andrew
- *
  */
 //TODO: keep shifting value.
 // 
@@ -37,7 +36,7 @@ public class BundleValuation implements IDependentValuation {
   private Boolean monotonic;
 
   public BundleValuation(Set<ITradeable> goods) {
-    this.generator = new ValRandGenerator();
+    this.generator = new UniformValGenerator();
     this.goods = goods;
     this.valMap = new HashMap<Set<ITradeable>, Value>();
     this.monotonic = false;

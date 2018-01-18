@@ -1,13 +1,11 @@
 package brown.value.config; 
 
-import brown.value.valuationrepresentation.library.ValuationType;
+import brown.value.valuation.library.ValuationType;
 
-public class NullConfig extends AbsValueConfig {
+public class NullConfig extends ValConfig {
   
   public NullConfig() { 
-    this.allGoods = null; 
-    this.valueScheme = ValuationType.None;
-    this.aGenerator = null;
+    super(null, ValuationType.None, null);
   }
   
 }

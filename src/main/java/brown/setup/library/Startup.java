@@ -43,7 +43,7 @@ import brown.tradeable.library.MultiTradeable;
 import brown.twosided.ITwoSidedAuction;
 import brown.value.config.ComplexConfig;
 import brown.value.generator.AbsValuationGenerator;
-import brown.value.generator.library.NormalGenerator;
+import brown.value.generator.library.NormalValGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
@@ -113,7 +113,7 @@ public final class Startup {
 		kryo.register(SimpleValuation.class); 
 		kryo.register(AdditiveValuation.class);
 		kryo.register(Value.class);
-		kryo.register(NormalGenerator.class);
+		kryo.register(NormalValGenerator.class);
 		kryo.register(TradeableType.class);
 		kryo.register(AbsValuationGenerator.class);
 		kryo.register(GameBidBundle.class);

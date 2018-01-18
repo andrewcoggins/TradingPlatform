@@ -43,6 +43,5 @@ public class ComplexValuation extends AbsValuationRepresentation {
       return false;
     return true;
   }
-  
-  
+ 
 }

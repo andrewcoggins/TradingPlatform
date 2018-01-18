@@ -6,7 +6,7 @@ import java.util.Set;
 
 import brown.tradeable.ITradeable;
 import brown.value.generator.AbsValuationGenerator;
-import brown.value.generator.library.ValRandGenerator;
+import brown.value.generator.library.UniformValGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.IIndependentValuation;
 import brown.value.valuationrepresentation.library.SimpleValuation;
@@ -14,11 +14,10 @@ import brown.value.valuationrepresentation.library.SimpleValuation;
 /**
  * A Valuation where the values of each good are independent.
  * @author andrew
- *
  */
 public class AdditiveValuation implements IIndependentValuation {
 
-  private Map<ITradeable, Value> valMap;
+  private Map<ITradeable, Value> valMap; // rename valuation
   
   /**
    * For kryo 
@@ -34,7 +33,7 @@ public class AdditiveValuation implements IIndependentValuation {
    */
   public AdditiveValuation(Set<ITradeable> goods) {
     this.valMap = new HashMap<ITradeable, Value>();
-    ValRandGenerator rg = new ValRandGenerator();
+    UniformValGenerator rg = new UniformValGenerator();
     for(ITradeable item : goods) {
       valMap.put(item, rg.makeValuation(item));
     }
@@ -65,6 +64,11 @@ public class AdditiveValuation implements IIndependentValuation {
       valuation.put((ITradeable) item, valMap.get(item));
     }
     return new SimpleValuation(valuation); 
+  }
+
+  @Override
+  public String toString() {
+    return "AdditiveValuation [valMap=" + valMap + "]";
   }
 
   @Override

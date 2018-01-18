@@ -42,5 +42,5 @@ public class SimpleValuation extends AbsValuationRepresentation {
       return false;
     return true;
   }
-  
+
 }
