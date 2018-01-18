@@ -3,41 +3,32 @@ package brown.channels.agent.library;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import brown.accounting.Ledger;
-
+import brown.accounting.bid.SimpleBid;
+import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.AuctionBidBundle;
+import brown.accounting.bidbundle.library.BundleType;
 import brown.agent.AbsAgent;
 import brown.agent.AbsOpenOutcryAgent;
 import brown.agent.AbsSimpleSealedBidAgent;
 import brown.channels.MechanismType;
-import brown.channels.agent.IAgentChannel;
 import brown.messages.library.TradeMessage;
 import brown.setup.Logging;
-import brown.todeprecate.PaymentType;
 import brown.tradeable.ITradeable;
 
 /*
  * Implements IMarket for Simple auctions
  */
-public class SimpleAgentChannel implements IAgentChannel {
+public class SimpleAgentChannel extends AbsChannel {
   
-	private final Integer ID;
-	private final Ledger LEDGER;
-	private final AuctionBidBundle HIGHBID;
-	private final int ELIGIBILITY;
-	
-	private final PaymentType PTYPE;
-	private final MechanismType MTYPE;
-	
+	private final AuctionBidBundle HighBid;
+  private final MechanismType MechType;	
+		
 	public SimpleAgentChannel() {
-		this.ID = null;
-		this.LEDGER = null;
-		this.HIGHBID = null;
-		this.PTYPE = null;
-		this.MTYPE = null;
-		this.ELIGIBILITY = 0;
+	  super();
+		this.HighBid = null;
+		this.MechType = null;
 	}
 
   /**
@@ -46,27 +37,15 @@ public class SimpleAgentChannel implements IAgentChannel {
 	 * @param ledger
 	 * @param highBid
 	 */
-	public SimpleAgentChannel(Integer ID, Ledger ledger, PaymentType ptype, MechanismType mtype,
-			AuctionBidBundle highBid, int elig) {
-		if (highBid == null || ledger == null) {
-			throw new IllegalArgumentException("Null structures");
-		}
-		this.ID = ID;
-		this.LEDGER = ledger;
-		this.HIGHBID = highBid;
-		this.PTYPE = ptype;
-		this.MTYPE = mtype;
-		this.ELIGIBILITY = elig;
-	}
-
-	@Override
-	public Ledger getLedger() {
-		return this.LEDGER;
+	public SimpleAgentChannel(Integer ID, Ledger ledger, MechanismType mtype, AuctionBidBundle highBid) {
+    super(ID,ledger);	  
+		this.HighBid = highBid;
+		this.MechType = mtype;
 	}
 
 	@Override
 	public void dispatchMessage(AbsAgent agent) {
-		switch(this.MTYPE) {
+		switch(this.MechType) {
 		case CDA:
 			break;
 		case LMSR:
@@ -91,137 +70,55 @@ public class SimpleAgentChannel implements IAgentChannel {
 		}
 	}
 
-	@Override
-	public Integer getAuctionID() {
-		return this.ID;
-	}
-	
-	/**
-	 * Returns the payment type
-	 * @return
-	 */
-	public PaymentType getPaymentType() {
-		return this.PTYPE;
-	}
-	
 	/**
 	 * Returns the high bid
 	 * @return double
 	 */
-	public double getMarketState(ITradeable t) {
-		return this.HIGHBID.getBids().bids.get(t);
-	}
-	
-	/**
-	 * Returns if this bundle maximizes revenue
-	 * @return boolean
-	 */
-	public int getEligibility() {
-		return this.ELIGIBILITY;
+	public double getHighBId(ITradeable t) {
+		return this.HighBid.getBids().bids.get(t);
 	}
 
-	public void bid(AbsAgent agent, Map<ITradeable, Double> bids) {
-		Map<ITradeable, Double> fixedBids = new HashMap<ITradeable,Double>();
-		for (Entry<ITradeable, Double> bid : bids.entrySet()) {
-			fixedBids.put(bid.getKey(), bid.getValue());
-			if (fixedBids.size() > 10) {
-				agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
-				fixedBids.clear();
-			}
-		}
-		if (fixedBids.size() > 0) {
-			agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
-		}
-	}
-
-	public void demandSet(AbsAgent agent, Set<ITradeable> toBid) {
-		Map<ITradeable, Double> fixedBids = new HashMap<ITradeable,Double>();
-		for (ITradeable bid : toBid) {
-			fixedBids.put(bid, 0.);
-			if (fixedBids.size() > 10) {
-				agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
-				fixedBids.clear();
-			}
-		}
-		if (fixedBids.size() != 0) {
-			agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
-		}
-	}
-	
-	public void xorBid(AbsAgent agent, Map<Set<ITradeable>, Double> toBid) {
-		if (3 < toBid.size()) {
-			throw new IllegalArgumentException("Attempt to submit too many atomic bids");
-		}
-		
-		Map<ITradeable, Double> fixedBids = new HashMap<ITradeable,Double>();
-		for (Entry<Set<ITradeable>, Double> bid : toBid.entrySet()) {
-			if (this.ELIGIBILITY < bid.getKey().size()) {
-				throw new IllegalArgumentException("Attempt to submit ineligible bid " + bid.getKey());
-			}
-			for (ITradeable t : bid.getKey()) {
-				fixedBids.put(t, bid.getValue());
-				if (fixedBids.size() > 10) {
-					agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
-					fixedBids.clear();
-				}
-			}
-		}
-		
-		if (fixedBids.size() != 0) {
-			agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
-		}
-	}
-	
-	public Set<ITradeable> getTradeables() {
-		return this.HIGHBID.getBids().bids.keySet();
-	}
-	
-	//toString
-	
   @Override
-	public int hashCode() {
-	  final int prime = 31;
-	  int result = 1;
-	  result = prime * result + ELIGIBILITY;
-	  result = prime * result + ((HIGHBID == null) ? 0 : HIGHBID.hashCode());
-	  result = prime * result + ((ID == null) ? 0 : ID.hashCode());
-	  result = prime * result + ((LEDGER == null) ? 0 : LEDGER.hashCode());
-	  result = prime * result + ((MTYPE == null) ? 0 : MTYPE.hashCode());
-	  result = prime * result + ((PTYPE == null) ? 0 : PTYPE.hashCode());
-	  return result;
-	}
+  public void bid(AbsAgent agent, IBidBundle bid) {
+    if (bid.getType() == BundleType.Simple){
+      Map<ITradeable, Double> fixedBids = new HashMap<ITradeable,Double>();    
+      for (Entry<ITradeable, Double> b : ((SimpleBid) bid.getBids()).bids.entrySet() ){
+        fixedBids.put(b.getKey(), b.getValue());
+        if (fixedBids.size() > 10) {
+          agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
+          fixedBids.clear();
+        }
+      }
+      if (fixedBids.size() > 0) {
+        agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
+      }     
+    } else {
+      Logging.log("[Channel encountered invalid bid type]");
+      return;      
+    }    
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-	    if (this == obj)
-	      return true;
-	    if (obj == null)
-	      return false;
-	    if (getClass() != obj.getClass())
-	      return false;
-	    SimpleAgentChannel other = (SimpleAgentChannel) obj;
-	    if (ELIGIBILITY != other.ELIGIBILITY)
-	      return false;
-	    if (HIGHBID == null) {
-	      if (other.HIGHBID != null)
-	        return false;
-	    } else if (!HIGHBID.equals(other.HIGHBID))
-	      return false;
-	    if (ID == null) {
-	      if (other.ID != null)
-	        return false;
-	    } else if (!ID.equals(other.ID))
-	      return false;
-	    if (LEDGER == null) {
-	      if (other.LEDGER != null)
-	        return false;
-	    } else if (!LEDGER.equals(other.LEDGER))
-	      return false;
-	    if (MTYPE != other.MTYPE)
-	      return false;
-	    if (PTYPE != other.PTYPE)
-	      return false;
-	    return true;
-	  }
-	  
+  @Override
+  public String toString() {
+    return "SimpleAgentChannel [HighBid=" + HighBid + ", MechType=" + MechType
+        + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((HighBid == null) ? 0 : HighBid.hashCode());
+    result = prime * result + ((MechType == null) ? 0 : MechType.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return (obj instanceof SimpleAgentChannel && 
+        ((SimpleAgentChannel) obj).HighBid.equals(this.HighBid) &&
+        ((SimpleAgentChannel) obj).ID.equals(this.ID) &&
+        ((SimpleAgentChannel) obj).ledger.equals(this.ledger) &&
+        ((SimpleAgentChannel) obj).MechType.equals(this.MechType));
+ }
 }

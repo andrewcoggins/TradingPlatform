@@ -233,7 +233,7 @@ public abstract class AbsServer {
 					.getLedger(sec.getID()).getSanitized(null)),
 					sec.getMechanismType());
 			theServer.sendToAllTCP(mupdate);
-			this.manager.getLedger(sec.getID()).clearLatest();
+			this.manager.getLedger(sec.getID()).clearUnshared();
 		}
 	}
 
