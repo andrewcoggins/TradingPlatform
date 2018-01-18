@@ -11,6 +11,6 @@ public interface AMYIValuation {
   public AMYValuationRepn getValuation();
   
   public Value makeOneValue(ITradeable good);
-  public Value getOneValue(ITradeable good);
+  public Value getOneValue(ITradeable good); // sampling method
   
 }
