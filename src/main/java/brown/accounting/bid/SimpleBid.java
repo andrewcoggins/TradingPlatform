@@ -2,7 +2,7 @@ package brown.accounting.bid;
 
 import java.util.Map;
 
-import brown.tradeable.library.MultiTradeable;
+import brown.tradeable.ITradeable;
 
 /**
  * A map from a tradeable to a bid price.
@@ -12,9 +12,9 @@ import brown.tradeable.library.MultiTradeable;
  */
 public class SimpleBid extends AbsBid {
   
-  public final Map<MultiTradeable, Double> bids;
+  public final Map<ITradeable, Double> bids;
   
-  public SimpleBid(Map<MultiTradeable, Double> bids) {
+  public SimpleBid(Map<ITradeable, Double> bids) {
     this.bids = bids; 
   }
   

@@ -15,7 +15,7 @@ import brown.accounting.Transaction;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
-import brown.accounting.bidbundle.library.LemonadeBidBundle;
+import brown.accounting.bidbundle.library.GameBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.agent.AbsAgent;
 import brown.channels.MechanismType;
@@ -116,7 +116,7 @@ public final class Startup {
 		kryo.register(NormalGenerator.class);
 		kryo.register(TradeableType.class);
 		kryo.register(AbsValuationGenerator.class);
-		kryo.register(LemonadeBidBundle.class);
+		kryo.register(GameBidBundle.class);
 		
 		return true;
 	}
