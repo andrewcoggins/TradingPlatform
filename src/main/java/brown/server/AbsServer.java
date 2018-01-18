@@ -516,7 +516,7 @@ public abstract class AbsServer {
 			Account newAccount = new Account(theID);
 			if (this.initialMonies != null) newAccount.add(initialMonies);
 			if(this.initialGoods != null) {
-			  for (MultiTradeable t : this.initialGoods)
+			  for (ITradeable t : this.initialGoods)
 			    newAccount.add(0.0, t);
 			}
 			this.acctManager.setAccount(theID, newAccount);
