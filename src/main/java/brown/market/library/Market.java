@@ -114,6 +114,7 @@ public class Market implements IMarket {
   @Override 
   public GameReportMessage getReport() {
     this.ARULE.setAllocation(this.STATE);
+    
     this.IRPOLICY.setReport(this.STATE);
     return this.STATE.getReport();
   }

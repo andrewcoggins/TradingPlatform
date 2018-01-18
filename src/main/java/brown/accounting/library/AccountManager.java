@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import brown.accounting.IAccountManager;
+
 /**
  * Account manager stores and manages accounts for the server.
  * 
  * @author acoggins
  */
-public class AccountManager {
+public class AccountManager implements IAccountManager {
   
   // maps agent ID to Account
 	private Map<Integer, Account> accounts;
