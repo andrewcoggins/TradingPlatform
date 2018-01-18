@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import abrown.misc.Allocation;
+import abrown.misc.Payment;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.channels.MechanismType;
@@ -24,41 +25,43 @@ import brown.todeprecate.PaymentType;
  */
 public interface ICompleteState {
 
-    public MarketState getMarketState();
-    //methods not directly associated with a rule. Look for redundancies here.
-    public void addBid(TradeMessage bid);
-    
-    public void clearBids();
-    
-    public void clearOrders();
-    
-    public List<TradeMessage> getBids(); 
-    
     public Integer getID(); 
+  
+    public MarketState getMarketState();
+    
+    public void setMarketState(MarketState m);
     
     public void tick(long time); 
     
     public int getTicks();  
+
+    //bids
     
-    public void setReserve(IBidBundle o); 
+    public void addBid(TradeMessage bid);
     
-    // allocation rule.
+    public void clearBids();
     
-    public Allocation getAllocation();  
+    public List<TradeMessage> getBids(); 
     
-    public void setAllocation(Allocation alloc);
+    // orders
     
-    // payment rule. 
+    public List<Order> getOrders(); 
     
-    public List<Order> getPayments();
+    public void constructOrders();
     
-    public void setPayments(List<Order> orders); 
+    public void clearOrders();
+    
+    //allocation and payment rule interact through marketstate
     
     //for Query Rules
     
     public TradeRequestMessage getTRequest(); 
     
     public void setTRequest(TradeRequestMessage t);
+    
+    public Double getIncrement(); 
+    
+    public void setIncrement(Double increment);
     
     
     //activity rules
@@ -69,7 +72,7 @@ public interface ICompleteState {
     
     public IBidBundle getReserve();
     
-    public void setReserve();
+    public void setReserve(IBidBundle o); 
     
     //tcondition things
     public boolean getInnerOver();
@@ -88,5 +91,7 @@ public interface ICompleteState {
     public GameReportMessage getReport();
     
     public void setReport(GameReportMessage gameReport);
+    
+    //TODO: market update. 
 
 }

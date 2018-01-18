@@ -100,10 +100,11 @@ public class Market implements IMarket {
   @Override
   public List<Order> getOrders() {
     this.ARULE.setAllocation(this.STATE);
+    this.PRULE.setPayments(this.STATE);
     //payments are being set in allocation rule. 
     //what we should have is: 
-    this.PRULE.setPayments(this.STATE);
-    return this.STATE.getPayments();
+    this.STATE.constructOrders();
+    return this.STATE.getOrders();
   }
 
   // increments time. 

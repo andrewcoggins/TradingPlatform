@@ -5,4 +5,6 @@ public interface ITradeable {
   public Integer getID();
   
   public Integer getCount();
+  
+  //TODO: flatten? 
 }
