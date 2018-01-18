@@ -5,10 +5,8 @@ import java.util.Map;
 import brown.tradeable.ITradeable;
 
 /**
- * A payment maps ITradeables to prices for those
- * tradeables.
+ * A payment maps ITradeables to prices.
  * @author andrew
- *
  */
 public class Payment implements IPayment {
   

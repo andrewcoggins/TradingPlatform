@@ -15,7 +15,7 @@ import brown.accounting.bidbundle.library.LemonadeBidBundle;
 import brown.market.marketstate.library.CompleteState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * test the lemonade allocation 
@@ -34,9 +34,9 @@ public class LemonadeAllocationTest {
     //create lemonade allocation
     LemonadeAllocation lem = new LemonadeAllocation();
     //create internal state.
-    Set<Tradeable> allTradeables = new HashSet<Tradeable>();
+    Set<MultiTradeable> allTradeables = new HashSet<MultiTradeable>();
     for(int i = 0; i < 3; i++) {
-     allTradeables.add(new Tradeable(i));
+     allTradeables.add(new MultiTradeable(i));
     }
     CompleteState state = new CompleteState(0, allTradeables);
     //test tick

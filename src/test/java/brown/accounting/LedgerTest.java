@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import abrown.misc.Allocation;
 import brown.accounting.bid.SimpleBid;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * Test for the Ledger class. 
@@ -27,8 +27,8 @@ public class LedgerTest {
   @Test
   public void testLedger() {
     Ledger ledgerOne = new Ledger(0); 
-    Transaction tranOne = new Transaction(0, 1, 100.0, 1, new Tradeable(0));
-    Transaction tranTwo = new Transaction(0, 1, 100.0, 1, new Tradeable(1));
+    Transaction tranOne = new Transaction(0, 1, 100.0, 1, new MultiTradeable(0));
+    Transaction tranTwo = new Transaction(0, 1, 100.0, 1, new MultiTradeable(1));
     ledgerOne.add(tranOne); 
     // test that getList works
     assertEquals(ledgerOne.getList().get(0), tranOne);
@@ -57,13 +57,13 @@ public class LedgerTest {
     Ledger ledgerThree = new Ledger(null);
     assertEquals(ledgerTwo, ledgerThree);
     // now test the allocation parts. 
-    Map<Tradeable, MarketState> m = new HashMap<Tradeable, MarketState>();
-    m.put(new Tradeable(0), new MarketState(1, 1.0));
+    Map<MultiTradeable, MarketState> m = new HashMap<MultiTradeable, MarketState>();
+    m.put(new MultiTradeable(0), new MarketState(1, 1.0));
     SimpleBid s = new SimpleBid(m);
     Allocation al = new Allocation(s);
     Ledger ledgerFour = new Ledger(0, al);
     List<Transaction> transacts = new LinkedList<Transaction>();
-    for(Entry<Tradeable, MarketState> a : m.entrySet()) {
+    for(Entry<MultiTradeable, MarketState> a : m.entrySet()) {
       transacts.add(new Transaction(a.getValue().AGENTID,
           null, a.getValue().PRICE, 1, a.getKey()));
     }

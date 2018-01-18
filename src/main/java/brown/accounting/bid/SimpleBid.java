@@ -2,20 +2,19 @@ package brown.accounting.bid;
 
 import java.util.Map;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
- * A simple mapping from a tradeable to 
- * a double, which contains a bid price.
+ * A map from a tradeable to a bid price.
  * 
  * @author andrew, modified by kerry
  *
  */
 public class SimpleBid extends AbsBid {
   
-  public final Map<Tradeable, Double> bids;
+  public final Map<MultiTradeable, Double> bids;
   
-  public SimpleBid(Map<Tradeable, Double> bids) {
+  public SimpleBid(Map<MultiTradeable, Double> bids) {
     this.bids = bids; 
   }
   

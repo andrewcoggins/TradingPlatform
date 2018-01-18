@@ -5,7 +5,7 @@ import java.util.List;
 
 import brown.market.preset.AbsMarketPreset;
 import brown.market.preset.library.LemonadeRules;
-import brown.setup.library.SimpleSetup;
+import brown.setup.library.LemonadeSetup;
 import brown.value.config.AbsValueConfig;
 import brown.value.config.NullConfig;
 
@@ -24,7 +24,7 @@ public class MainServerLemonade {
     // our valuation information and rules information.
     allValInfo.add(new NullConfig());
     allMarkets.add(new LemonadeRules()); 
-    new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo, null, null);
+    new RunServer(2121, new LemonadeSetup()).runGame(allMarkets, allValInfo, null, null);
   }
   
 }

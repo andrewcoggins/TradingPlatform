@@ -16,7 +16,7 @@ import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.rules.paymentrules.IPaymentRule;
 import brown.setup.Logging;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 
 public class SimpleSecondPrice implements IPaymentRule {
@@ -29,7 +29,7 @@ public class SimpleSecondPrice implements IPaymentRule {
     //get the bids again.
     //loop through the tradeables, get the winner of each tradeable 
     List<Order> payments = new LinkedList<Order>();
-    for (Tradeable t : bundle.getBids().bids.keySet()) {
+    for (MultiTradeable t : bundle.getBids().bids.keySet()) {
       //find the highest bidder
       int highestBidder = bundle.getBids().bids.get(t).AGENTID;
       //go through all the bids and 

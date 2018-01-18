@@ -2,15 +2,15 @@ package brown.accounting.bid;
 
 public class LemonadeBid extends AbsBid {
   
-  @Override
-  public String toString() {
-    return "LemonadeBid [bid=" + bid + "]";
-  }
-
   public final Integer bid; 
   
   public LemonadeBid(Integer bid) {
     this.bid = bid; 
+  }
+
+  @Override
+  public String toString() {
+    return "LemonadeBid [bid=" + bid + "]";
   }
 
   @Override

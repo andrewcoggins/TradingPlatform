@@ -14,7 +14,7 @@ import brown.accounting.bid.ComplexBid;
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * test for the bid message. 
@@ -26,9 +26,9 @@ public class BidMessageTest {
   
   @Test
   public void testBidMessage() {
-    Map<Tradeable, MarketState> map = new HashMap<Tradeable, MarketState>(); 
-    Map<Set<Tradeable>, MarketState> complexMap = new HashMap<Set<Tradeable>, MarketState>(); 
-    map.put(new Tradeable(0), new MarketState(0, 1.0)); 
+    Map<MultiTradeable, MarketState> map = new HashMap<MultiTradeable, MarketState>(); 
+    Map<Set<MultiTradeable>, MarketState> complexMap = new HashMap<Set<MultiTradeable>, MarketState>(); 
+    map.put(new MultiTradeable(0), new MarketState(0, 1.0)); 
     SimpleBidBundle s = new SimpleBidBundle(map); 
     TradeMessage bm = new TradeMessage(0, s, 1, 2); 
     TradeMessage bmTwo = bm.safeCopy(2); 
@@ -38,8 +38,8 @@ public class BidMessageTest {
     assertEquals(bm.AgentID, new Integer(2)); 
     assertEquals(bm, bmTwo); 
     //test complex case
-    Set<Tradeable> tSet = new HashSet<Tradeable>();
-    tSet.add(new Tradeable(0)); 
+    Set<MultiTradeable> tSet = new HashSet<MultiTradeable>();
+    tSet.add(new MultiTradeable(0)); 
     complexMap.put(tSet, new MarketState(0, 1.0));
     ComplexBidBundle c  = new ComplexBidBundle(complexMap, 0);
     TradeMessage cBid = new TradeMessage(0, c, 1, 2); 

@@ -12,7 +12,7 @@ import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.messages.library.TradeMessage;
 import brown.rules.allocationrules.IAllocationRule;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * implements an allocation rule where the highest bidder is allocated the good(?)
@@ -29,12 +29,12 @@ public class SimpleHighestBidderAllocation implements IAllocationRule {
 
   @Override
   public void setAllocation(ICompleteState state) {
-    Map<Tradeable, Double> highest = new HashMap<Tradeable, Double>();
+    Map<MultiTradeable, Double> highest = new HashMap<MultiTradeable, Double>();
     List<TradeMessage> allBids = state.getBids();
     for(TradeMessage bid : allBids) {
       if(bid.Bundle.getType().equals(BundleType.Simple)) {
         SimpleBidBundle bundle = (SimpleBidBundle) bid.Bundle; 
-        for (Tradeable t : bundle.getBids().bids.keySet()) {
+        for (MultiTradeable t : bundle.getBids().bids.keySet()) {
           if(highest.get(t) == null || highest.get(t) < bundle.getBids().bids.get(t)) { 
             highest.put(t, bundle.getBids().bids.get(t));
           }

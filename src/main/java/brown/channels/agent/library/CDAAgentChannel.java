@@ -11,7 +11,7 @@ import brown.agent.AbsAgent;
 import brown.channels.server.library.CDAServerChannel;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.MarketOrderMessage;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 import brown.twosided.ITwoSidedPriceSetter;
 
 /*
@@ -20,7 +20,7 @@ import brown.twosided.ITwoSidedPriceSetter;
 public class CDAAgentChannel implements ITwoSidedPriceSetter {
   
 	private final Integer MARKETID;
-	private final Tradeable TYPE;
+	private final MultiTradeable TYPE;
 	private final SortedMap<Double, Double> BUYBOOK;
 	private final SortedMap<Double, Double> SELLBOOK;
 	private final Ledger LEDGER;
@@ -64,7 +64,7 @@ public class CDAAgentChannel implements ITwoSidedPriceSetter {
 	}
 
 	@Override
-	public Tradeable getTradeableType() {
+	public MultiTradeable getTradeableType() {
 		return this.TYPE;
 	}
 

@@ -19,8 +19,8 @@ import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.setup.ISetup;
-import brown.setup.Startup;
-import brown.setup.library.SimpleSetup;
+import brown.setup.library.LemonadeSetup;
+import brown.setup.library.Startup;
 
 //this test assures that the lemonade channel both sends messages to the server and 
 //interacts appropriately with a lemonade agent. It will impersonate a server and a lemonade agent. 
@@ -86,8 +86,8 @@ private class TestServer {
   //to send a response.
   @Test
   public void testLemonadeChannel() throws AgentCreationException, IOException, InterruptedException {
-    TestServer ts = new TestServer(2121, new SimpleSetup());
-    MockLemonadeAgent m = new MockLemonadeAgent("localhost", 2121, new SimpleSetup());
+    TestServer ts = new TestServer(2121, new LemonadeSetup());
+    MockLemonadeAgent m = new MockLemonadeAgent("localhost", 2121, new LemonadeSetup());
     m.CLIENT.sendTCP("send me a trade request");
     Thread.sleep(100);
     assertEquals(ts.getMessage(), "bid received- lemonade channel functional."); 

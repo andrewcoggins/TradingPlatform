@@ -9,7 +9,6 @@ public class MarketState implements IMarketState {
   private Allocation allocation; 
   private Payment payment; 
   
-  
   @Override
   public Allocation getAllocation() {
     // TODO Auto-generated method stub
@@ -25,13 +24,11 @@ public class MarketState implements IMarketState {
   @Override
   public void setAllocation(Allocation allocation) {
     // TODO Auto-generated method stub
-    
   }
 
   @Override
   public void setPayments(Payment payment) {
     // TODO Auto-generated method stub
-    
   }
   
 }

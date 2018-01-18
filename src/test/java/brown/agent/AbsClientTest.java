@@ -12,7 +12,7 @@ import com.esotericsoftware.kryonet.Server;
 
 import brown.exceptions.AgentCreationException;
 import brown.setup.ISetup;
-import brown.setup.library.SimpleSetup;
+import brown.setup.library.LemonadeSetup;
 
 /**
  * test the ability of the system to send messages. This is all that AbsClient
@@ -47,7 +47,7 @@ public class AbsClientTest {
          assertEquals(object, "This is a test message");
       }
    });
-    TestClient c = new TestClient("localhost", 2121, new SimpleSetup());
+    TestClient c = new TestClient("localhost", 2121, new LemonadeSetup());
     c.send();
   }
 }

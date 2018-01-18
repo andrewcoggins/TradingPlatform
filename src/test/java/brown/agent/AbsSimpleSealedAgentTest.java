@@ -26,10 +26,10 @@ import brown.messages.library.RegistrationMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.ISetup;
-import brown.setup.Startup;
-import brown.setup.library.SimpleSetup;
+import brown.setup.library.LemonadeSetup;
+import brown.setup.library.Startup;
 import brown.todeprecate.PaymentType;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 import brown.value.valuable.library.Value;
 import brown.value.valuationrepresentation.library.SimpleValuation;
 
@@ -59,12 +59,12 @@ public class AbsSimpleSealedAgentTest {
               BankUpdateMessage b = new BankUpdateMessage(0, new Account(1), new Account(1));
               connection.sendTCP(b);
             } else if (object.equals("send me a SimpleAgentChannel")) {
-              Map<Tradeable, MarketState> junk = new HashMap<Tradeable, MarketState>();
+              Map<MultiTradeable, MarketState> junk = new HashMap<MultiTradeable, MarketState>();
               SimpleAgentChannel sa = new SimpleAgentChannel(0, new Ledger(0),
                   PaymentType.FirstPrice, MechanismType.SealedBid, new SimpleBidBundle(junk), 0); 
               connection.sendTCP(new TradeRequestMessage(0, sa, MechanismType.SealedBid));
             } else if (object.equals("send me a Registration")) {
-              Map<Tradeable, Value> m = new HashMap<Tradeable, Value>();
+              Map<MultiTradeable, Value> m = new HashMap<MultiTradeable, Value>();
               ValuationRegistrationMessage val = new ValuationRegistrationMessage(0,
                   new SimpleValuation(m));
               connection.sendTCP(val);
@@ -109,8 +109,8 @@ public class AbsSimpleSealedAgentTest {
   @Test
   public void testAbsSimpleSealedAgent()
       throws InterruptedException, AgentCreationException, IOException {
-    TestServer ts = new TestServer(2121, new SimpleSetup());
-    TestSimpleSealedAgent t = new TestSimpleSealedAgent("localhost", 2121, new SimpleSetup()); 
+    TestServer ts = new TestServer(2121, new LemonadeSetup());
+    TestSimpleSealedAgent t = new TestSimpleSealedAgent("localhost", 2121, new LemonadeSetup()); 
     t.CLIENT.sendTCP("send me a GameReport"); 
     Thread.sleep(100);
     assertEquals(t.confirm(), "Game Report Received");

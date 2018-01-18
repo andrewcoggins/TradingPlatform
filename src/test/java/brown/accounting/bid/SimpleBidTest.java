@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * tests the simple bid class. 
@@ -19,9 +19,9 @@ public class SimpleBidTest {
   
   @Test 
   public void testSimpleBid() {
-    Map<Tradeable, Double> simple = new HashMap<Tradeable, Double>();
-    simple.put(new Tradeable(0), 1.0); 
-    simple.put(new Tradeable(1), 2.0); 
+    Map<MultiTradeable, Double> simple = new HashMap<MultiTradeable, Double>();
+    simple.put(new MultiTradeable(0), 1.0); 
+    simple.put(new MultiTradeable(1), 2.0); 
     SimpleBid simpleB = new SimpleBid(simple);
     assertEquals(simpleB.bids, simple);
   }

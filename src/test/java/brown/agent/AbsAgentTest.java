@@ -22,8 +22,8 @@ import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.NegotiateRequestMessage;
 import brown.setup.ISetup;
-import brown.setup.Startup;
-import brown.setup.library.SimpleSetup;
+import brown.setup.library.LemonadeSetup;
+import brown.setup.library.Startup;
 
 /*
  * The AbsAgent serves as a listener.
@@ -132,8 +132,8 @@ public class AbsAgentTest {
   
   @Test
   public void testAbsAgent() throws IOException, AgentCreationException, InterruptedException {
-    TestServer ts = new TestServer(2121, new SimpleSetup());
-    TestAgent t = new TestAgent("localhost", 2121, new SimpleSetup()); 
+    TestServer ts = new TestServer(2121, new LemonadeSetup());
+    TestAgent t = new TestAgent("localhost", 2121, new LemonadeSetup()); 
     t.CLIENT.sendTCP("send me a GameReport"); 
     Thread.sleep(100);
     assertEquals(t.confirm(), "Game Report Received");

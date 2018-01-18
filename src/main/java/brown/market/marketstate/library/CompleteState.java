@@ -17,7 +17,7 @@ import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.todeprecate.PaymentType;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 
 //hopefully an integrating center for information that pertains to markets and rules.
@@ -30,7 +30,7 @@ public class CompleteState implements ICompleteState {
   private final double INCREMENT = 20.0;
   private final Integer ID;
   private final List<TradeMessage> BIDS;
-  private final Set<Tradeable> TRADEABLES;
+  private final Set<MultiTradeable> TRADEABLES;
   
   private List<Order> lastPayments;
   private int ticks;
@@ -73,15 +73,15 @@ public class CompleteState implements ICompleteState {
   
   
   
-  public CompleteState(Integer ID, Set<Tradeable> tradeables) {
+  public CompleteState(Integer ID, Set<MultiTradeable> tradeables) {
     this.BIDS = new LinkedList<TradeMessage>();
     this.lastPayments = null;
     this.TRADEABLES = tradeables;
     this.ID = ID;
     this.ticks = 0;
-    Map<Tradeable, Double> reserve = new HashMap<Tradeable, Double>();
+    Map<MultiTradeable, Double> reserve = new HashMap<MultiTradeable, Double>();
     if (this.TRADEABLES != null) {
-      for (Tradeable t : this.TRADEABLES) {
+      for (MultiTradeable t : this.TRADEABLES) {
         reserve.put(t, 0.);
       }
     }
@@ -119,7 +119,7 @@ public class CompleteState implements ICompleteState {
     return this.BIDS;
   }
   
-  public Set<Tradeable> getTradeables() {
+  public Set<MultiTradeable> getTradeables() {
     return this.TRADEABLES;
   }
   

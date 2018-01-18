@@ -4,10 +4,8 @@ import abrown.misc.Allocation;
 import abrown.misc.Payment;
 
 /**
- * a tentative allocation. 
- * 
+ * The market state consists of a tentative allocation and tentative payments. 
  * @author andrew
- *
  */
 public interface IMarketState {
   

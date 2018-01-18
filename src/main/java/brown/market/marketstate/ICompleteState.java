@@ -25,6 +25,7 @@ import brown.todeprecate.PaymentType;
 public interface ICompleteState {
 
     public MarketState getMarketState();
+    
     //methods not directly associated with a rule. Look for redundancies here.
     public void addBid(TradeMessage bid);
     

@@ -13,7 +13,7 @@ import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.LemonadeReportMessage;
 import brown.rules.allocationrules.IAllocationRule;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 public class LemonadeAllocation implements IAllocationRule {
 
@@ -71,7 +71,7 @@ public class LemonadeAllocation implements IAllocationRule {
       for (int w : winners) { 
         double payoff = numGlasses / winners.size();
         // System.out.println(payoff);
-        Order earned = new Order(w, null, -1 * payoff, 1, new Tradeable(0));
+        Order earned = new Order(w, null, -1 * payoff, 1, new MultiTradeable(0));
         payoffs.add(earned);
       }      
     } 

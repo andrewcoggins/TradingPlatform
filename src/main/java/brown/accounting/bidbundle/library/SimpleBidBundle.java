@@ -6,14 +6,14 @@ import java.util.Map.Entry;
 
 import brown.accounting.bid.SimpleBid;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
   * The built-in BidBundle is called SimpleBidBundle,
   * and holds one double. 
   */
 public class SimpleBidBundle implements IBidBundle {
-	private final Map<Tradeable, Double> BIDS;
+	private final Map<MultiTradeable, Double> BIDS;
 	private final BundleType BT;
 	
 	/**
@@ -29,7 +29,7 @@ public class SimpleBidBundle implements IBidBundle {
 	 * @param bid - agent's bid
 	 * @param agent - agent ID
 	 */
-	public SimpleBidBundle(Map<Tradeable, Double> bids) {
+	public SimpleBidBundle(Map<MultiTradeable, Double> bids) {
 		if (bids == null) {
 			throw new IllegalArgumentException("Null bids");
 		}
@@ -46,16 +46,16 @@ public class SimpleBidBundle implements IBidBundle {
 		return total;
 	}
 
+  public SimpleBid getBids() {
+    return new SimpleBid(this.BIDS);
+  }
+  
 	@Override
 	public BundleType getType() {
 		return this.BT;
 	}
 	
-	public SimpleBid getBids() {
-		return new SimpleBid(this.BIDS);
-	}
-	
-	public Double getBid(Tradeable t) {
+	public Double getBid(MultiTradeable t) {
 	  return BIDS.get(t);
 	}
 	

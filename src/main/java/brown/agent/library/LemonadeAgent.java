@@ -6,7 +6,7 @@ import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
-import brown.setup.library.SimpleSetup;
+import brown.setup.library.LemonadeSetup;
 import brown.setup.Logging;
 
 /**
@@ -21,7 +21,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   
   public LemonadeAgent(String host, int port, int position)
       throws AgentCreationException {
-    super(host, port, new SimpleSetup());
+    super(host, port, new LemonadeSetup());
     this.posn = position; 
     for(int i = 0; i < NUM_SLOTS; i++) {
       positions[i] = 0; 

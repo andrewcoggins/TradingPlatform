@@ -11,7 +11,7 @@ import abrown.misc.Allocation;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 //TODO: abstract to the complex case
 /**

@@ -9,7 +9,6 @@ public class AgentCreationException extends Exception {
 	
 	/**
 	 * Message for when the agent initialization fails 
-	 * 
 	 * @param message
 	 */
 	public AgentCreationException(String message) {

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 
 /**
@@ -15,13 +15,13 @@ import brown.tradeable.library.Tradeable;
  */
 public class TradeableTest {
   
-  private Tradeable testGood = new Tradeable();
-  private Tradeable testGoodTwo = new Tradeable(0);
+  private MultiTradeable testGood = new MultiTradeable();
+  private MultiTradeable testGoodTwo = new MultiTradeable(0);
   
   @Test 
   public void testGood() {
-    Tradeable i = new Tradeable();
-    Tradeable j = new Tradeable(0);
+    MultiTradeable i = new MultiTradeable();
+    MultiTradeable j = new MultiTradeable(0);
     
     assertEquals(testGood, i);
     assertEquals(testGoodTwo, j);

@@ -2,7 +2,7 @@ package brown.value.config;
 
 import java.util.Set;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 import brown.value.generator.library.NormalGenerator;
 import brown.value.valuationrepresentation.library.ValuationType;
 
@@ -13,7 +13,7 @@ import brown.value.valuationrepresentation.library.ValuationType;
  */
 public class ComplexConfig extends AbsValueConfig {
   
-  public ComplexConfig(Set<Tradeable> allGoods) {
+  public ComplexConfig(Set<MultiTradeable> allGoods) {
     this.allGoods = allGoods; 
     this.valueScheme = ValuationType.Complex;
     this.aGenerator = new NormalGenerator(x -> (double) x, 1.0);

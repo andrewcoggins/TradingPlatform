@@ -1,5 +1,5 @@
 package brown.tradeable; 
 
 public enum TradeableType {
-  Simple, Complex;
+  Simple, Multi, Complex;
 }

@@ -1,7 +1,5 @@
 package brown.rules.paymentrules.library; 
 
-
-
 import brown.market.marketstate.ICompleteState;
 import brown.rules.paymentrules.IPaymentRule;
 import brown.todeprecate.PaymentType;

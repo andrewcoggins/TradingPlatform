@@ -9,7 +9,8 @@ public class LemonadeBidBundle implements IBidBundle {
   private BundleType BT; 
   
   /**
-   * For Kryo do not use
+   * For Kryo 
+   * DO NOT USE
    */
   public LemonadeBidBundle() {
     this.BIDS = null; 
@@ -25,7 +26,19 @@ public class LemonadeBidBundle implements IBidBundle {
   public double getCost() {
     return this.BIDS;
   }
+  
+  @Override
+  public LemonadeBid getBids() {
+    return new LemonadeBid(this.BIDS);
+  }
 
+  @Override
+  public BundleType getType() {
+    return this.BT;
+  } 
+
+  //toString!!
+  
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -41,14 +54,5 @@ public class LemonadeBidBundle implements IBidBundle {
         ((LemonadeBidBundle) obj).BIDS.equals(this.BIDS) &&
         ((LemonadeBidBundle) obj).BIDS.equals(this.BT));
   }
-
-  @Override
-  public LemonadeBid getBids() {
-    return new LemonadeBid(this.BIDS);
-  }
-
-  @Override
-  public BundleType getType() {
-    return this.BT;
-  }  
+  
 }

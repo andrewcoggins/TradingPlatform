@@ -2,7 +2,7 @@ package brown.value.generator.library;
 
 import java.util.Set;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.valuable.library.Value;
 
@@ -28,12 +28,12 @@ public class ValRandGenerator extends AbsValuationGenerator {
   }
 
   @Override
-  public Value makeValuation(Tradeable good) {
+  public Value makeValuation(MultiTradeable good) {
     return new Value((Math.random() * this.maxVal) + this.minVal);
   }
 
   @Override
-  public Value makeValuation(Set<Tradeable> goods) {
+  public Value makeValuation(Set<MultiTradeable> goods) {
     Double setMin = this.minVal * goods.size();
     Double setMax = this.maxVal * goods.size();
     return new Value((Math.random() * setMax) + setMin);

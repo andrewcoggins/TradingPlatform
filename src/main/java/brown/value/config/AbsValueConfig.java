@@ -2,7 +2,7 @@ package brown.value.config;
 
 import java.util.Set;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.valuationrepresentation.library.ValuationType;
 
@@ -13,7 +13,7 @@ import brown.value.valuationrepresentation.library.ValuationType;
 public abstract class AbsValueConfig {
   
   //should be abstract
-  public Set<Tradeable> allGoods; 
+  public Set<MultiTradeable> allGoods; 
   public ValuationType valueScheme; 
   //TODO: state of the world. 
   //can't store this. 
