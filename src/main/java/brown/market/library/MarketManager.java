@@ -28,8 +28,7 @@ public class MarketManager {
 	 */
 	public MarketManager() {
 		this.ledgers = new ConcurrentHashMap<Market, Ledger>();
-		this.tsauctions = new ConcurrentHashMap<Integer, Market>();
-		
+		this.tsauctions = new ConcurrentHashMap<Integer, Market>();		
 		this.twosided = new ConcurrentHashMap<Integer,TwoSidedAuction>();
 	}
 	

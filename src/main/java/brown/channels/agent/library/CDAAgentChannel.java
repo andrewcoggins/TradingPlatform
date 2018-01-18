@@ -6,6 +6,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import brown.agent.AbsCDAAgent;
+import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 import brown.channels.server.library.CDAServerChannel;
@@ -126,5 +127,11 @@ public class CDAAgentChannel implements ITwoSidedPriceSetter {
 	public Ledger getLedger() {
 		return this.LEDGER;
 	}
+
+  @Override
+  public void bid(AbsAgent agent, IBidBundle bid) {
+    // TODO Auto-generated method stub
+    
+  }
 
 }
