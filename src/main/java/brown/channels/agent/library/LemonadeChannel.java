@@ -2,26 +2,20 @@ package brown.channels.agent.library;
 
 import brown.accounting.Ledger;
 import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.library.GameBidBundle;
+import brown.accounting.bidbundle.library.BundleType;
 import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
-import brown.channels.MechanismType;
-import brown.channels.agent.IAgentChannel;
 import brown.messages.library.TradeMessage;
-import brown.todeprecate.PaymentType;
+import brown.setup.Logging;
 
 /**
  * The channel through which an agent communicates to the server in the lemonade game.
  * @author andrew
  */
-public class LemonadeChannel implements IAgentChannel {
+public class LemonadeChannel extends AbsChannel {
 
-  private final Integer ID; 
-  private Ledger ledger;
-  
   public LemonadeChannel() { 
-    this.ID = null; 
-    this.ledger = null;
+    super();
   }
   
   /**
@@ -30,19 +24,16 @@ public class LemonadeChannel implements IAgentChannel {
    * @param ledger
    */
   public LemonadeChannel(Integer ID, Ledger ledger) {
-    this.ID = ID; 
-    this.ledger = ledger;
+    super(ID,ledger);
   }
 
   @Override
   public Integer getAuctionID() {
-    // TODO Auto-generated method stub
     return this.ID;
   }
 
   @Override
   public Ledger getLedger() {
-    // TODO Auto-generated method stub
     return this.ledger;
   }
 
@@ -54,9 +45,14 @@ public class LemonadeChannel implements IAgentChannel {
     }
   }
   
-  public void bid(AbsAgent agent, Integer position) {
-    IBidBundle toSend = new GameBidBundle(position);
-    agent.CLIENT.sendTCP(new TradeMessage(0, toSend, this.ID, agent.ID));
+  @Override
+  public void bid(AbsAgent agent, IBidBundle bid) {
+    if (bid.getType() == BundleType.Lemonade){
+      agent.CLIENT.sendTCP(new TradeMessage(0, bid, this.ID, agent.ID));      
+    } else {
+      Logging.log("[Channel encountered invalid bid type]");
+      return;      
+    }
   }
   
 }

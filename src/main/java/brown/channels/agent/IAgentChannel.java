@@ -1,6 +1,7 @@
 package brown.channels.agent;
 
 import brown.accounting.Ledger;
+import brown.accounting.bidbundle.IBidBundle;
 import brown.agent.AbsAgent;
 
 /*
@@ -29,5 +30,12 @@ public interface IAgentChannel {
 	 * @param agent
 	 */
 	public void dispatchMessage(AbsAgent agent);
+	
+	 /**
+   * bids in the auction
+   * @param agent
+   * @param AbsBid some representation of bid
+   */
+	public void bid(AbsAgent agent, IBidBundle bid);
 	
 }

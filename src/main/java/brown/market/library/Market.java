@@ -3,7 +3,6 @@ package brown.market.library;
 import java.util.List;
 
 import brown.accounting.Ledger;
-import brown.accounting.bidbundle.IBidBundle;
 import brown.market.IMarket;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Order;
@@ -39,11 +38,6 @@ public class Market implements IMarket {
      this.ITCONDITION = rules.innerTCondition;
      this.OTCONDITION = rules.outerTCondition;
      this.STATE = state;
-     
-     //set up all of the conditions and stuff needed here.
-//     this.ARULE.setBundleType(this.STATE);
-//     this.ARULE.getAllocationType(this.STATE);
-//     this.PRULE.setPaymentType(this.STATE);
  }
   
   @Override
@@ -54,12 +48,12 @@ public class Market implements IMarket {
   // constructs a trade request
   @Override
   public TradeRequestMessage constructTradeRequest(Integer ID) {
-    Ledger ledge = new Ledger(this.getID());
+    Ledger ledger = new Ledger(this.getID());
     List<Order> allOrders = this.STATE.getOrders(); 
     for(Order o : allOrders) {
-      ledge.add(o.toTransaction());
+      ledger.add(o.toTransaction());
     }
-    this.QRULE.makeChannel(STATE, ledge);
+    this.QRULE.makeChannel(STATE, ledger);
     TradeRequestMessage request = this.STATE.getTRequest();
     return request;
   }
@@ -68,7 +62,6 @@ public class Market implements IMarket {
   // over per the termination condition
   @Override
   public boolean isOver() {
-    // TODO Auto-generated method stub
     ITCONDITION.innerTerminated(this.STATE);
     return this.STATE.getInnerOver();
   }
@@ -77,7 +70,6 @@ public class Market implements IMarket {
   // over per the outer termination condition.
   @Override
   public boolean isOverOuter() {
-    // TODO Auto-generated method stub
     OTCONDITION.outerTerminated(this.STATE);
     //clear the orders. Maybe clear other things too.
     return this.STATE.getOuterOver();
@@ -94,12 +86,14 @@ public class Market implements IMarket {
     return this.STATE.getAcceptable();
   }
 
+  // Gets the orders to execute at end of auction
   @Override
   public List<Order> getOrders() {
+    // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
     this.PRULE.setPayments(this.STATE);
-    //payments are being set in allocation rule. 
-    //what we should have is: 
+
+    // Construct orders from allocation and payments
     this.STATE.constructOrders();
     return this.STATE.getOrders();
   }
@@ -110,6 +104,7 @@ public class Market implements IMarket {
     this.STATE.tick(time);
   }
 
+  // Clears the in
   @Override
   public void clearState() { 
     this.STATE.clearBids();
@@ -121,8 +116,6 @@ public class Market implements IMarket {
     this.ARULE.setAllocation(this.STATE);
     this.IRPOLICY.setReport(this.STATE);
     return this.STATE.getReport();
-//    Allocation alloc = this.STATE.getAllocation(); 
-//    return new GameReport(new Ledger(this.getID(), alloc));
   }
   
 }
