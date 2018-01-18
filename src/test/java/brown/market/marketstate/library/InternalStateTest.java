@@ -12,11 +12,11 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.accounting.Ledger;
 import brown.accounting.MarketState;
-import brown.accounting.bid.SimpleBid;
+import brown.accounting.bid.AuctionBid;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
+import brown.accounting.library.Ledger;
 import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.LemonadeChannel;
@@ -52,7 +52,7 @@ public class InternalStateTest {
     TradeMessage aBid = new TradeMessage(0, new AuctionBidBundle(map), 0, 0);
     //addBid, getBids
     state.addBid(aBid);
-    assertEquals((SimpleBid) state.getBids().get(0).Bundle.getBids(), new SimpleBid(map));
+    assertEquals((AuctionBid) state.getBids().get(0).Bundle.getBids(), new AuctionBid(map));
     //clear
     state.clear();
     assertEquals(state.getBids().size(), 0);
@@ -100,7 +100,7 @@ public class InternalStateTest {
     //get/set allocation
     Map<MultiTradeable, MarketState> allMap = new HashMap<MultiTradeable, MarketState>();
     allMap.put(new MultiTradeable(0), new MarketState(1, 2.0));
-    Allocation a = new Allocation(new SimpleBid(allMap));
+    Allocation a = new Allocation(new AuctionBid(allMap));
     state.setAllocation(a);
     assertEquals(a, state.getAllocation());
     //get/set bidRequestMessage

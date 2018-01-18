@@ -10,11 +10,19 @@ import brown.tradeable.ITradeable;
  * @author andrew, modified by kerry
  *
  */
-public class SimpleBid extends AbsBid {
+public class AuctionBid extends AbsBid {
   
   public final Map<ITradeable, Double> bids;
   
-  public SimpleBid(Map<ITradeable, Double> bids) {
+  /**
+   * For Kryo 
+   * DO NOT USE
+   */
+  public AuctionBid() {
+    this.bids = null;
+  }
+  
+  public AuctionBid(Map<ITradeable, Double> bids) {
     this.bids = bids; 
   }
   
@@ -33,8 +41,8 @@ public class SimpleBid extends AbsBid {
 
   @Override
   public boolean equals(Object obj) {
-    return(obj instanceof SimpleBid && 
-        ((SimpleBid) obj).bids.equals(this.bids));
+    return(obj instanceof AuctionBid && 
+        ((AuctionBid) obj).bids.equals(this.bids));
   }
    
 }

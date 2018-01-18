@@ -1,6 +1,6 @@
 package brown.rules.queryrules.library;
 
-import brown.accounting.Ledger;
+import brown.accounting.library.Ledger;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.market.marketstate.ICompleteState;
@@ -11,11 +11,8 @@ public class LemonadeQuery implements IQueryRule {
 
   @Override
   public void makeChannel(ICompleteState state, Ledger ledger) {
-    // TODO Auto-generated method stub
       TradeRequestMessage constructedRequest = new TradeRequestMessage(0, 
-          new LemonadeChannel(state.getID(), ledger, state.getPaymentType(), MechanismType.SealedBid), 
-              MechanismType.Lemonade);
+          new LemonadeChannel(state.getID(), ledger),MechanismType.Lemonade);
       state.setTRequest(constructedRequest);
-  }
-  
+  }  
 }

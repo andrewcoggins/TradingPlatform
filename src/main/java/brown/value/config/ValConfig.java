@@ -13,7 +13,7 @@ import brown.value.valuation.library.ValuationType;
  */
 public class ValConfig {
   
-  public Set<ITradeable> allGoods; 
+  public Set<ITradeable> allGoods; // amy wants to get rid of this! (i.e., put it somewhere else)
   public ValuationType valueScheme;
   
   //TODO: state of the world. 

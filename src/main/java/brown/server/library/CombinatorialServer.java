@@ -27,8 +27,8 @@ public class CombinatorialServer {
     
     //create tradeables
     Set<ITradeable> goods = new HashSet<ITradeable>();
-    goods.add(new Tradeable(0));
-    goods.add(new SetTradeable(1));
+//    goods.add(new ComplexTradeable(0));
+//    goods.add(new ComplexTradeable(1));
     
     //valuations and rules
     allValInfo.add(new ComplexConfig(goods));

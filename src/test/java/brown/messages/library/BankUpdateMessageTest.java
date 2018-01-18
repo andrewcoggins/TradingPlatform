@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 import org.junit.Test;
 
-import brown.accounting.Account;
+import brown.accounting.library.Account;
 import brown.tradeable.library.MultiTradeable;
 
 /**

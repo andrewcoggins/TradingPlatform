@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import brown.accounting.Ledger;
-import brown.accounting.bid.SimpleBid;
+import brown.accounting.bid.AuctionBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
+import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 import brown.agent.AbsOpenOutcryAgent;
 import brown.agent.AbsSimpleSealedBidAgent;
@@ -82,7 +82,7 @@ public class SimpleAgentChannel extends AbsChannel {
   public void bid(AbsAgent agent, IBidBundle bid) {
     if (bid.getType() == BundleType.Simple){
       Map<ITradeable, Double> fixedBids = new HashMap<ITradeable,Double>();    
-      for (Entry<ITradeable, Double> b : ((SimpleBid) bid.getBids()).bids.entrySet() ){
+      for (Entry<ITradeable, Double> b : ((AuctionBid) bid.getBids()).bids.entrySet() ){
         fixedBids.put(b.getKey(), b.getValue());
         if (fixedBids.size() > 10) {
           agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));

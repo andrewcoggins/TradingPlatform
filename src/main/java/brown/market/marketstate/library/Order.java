@@ -1,6 +1,6 @@
 package brown.market.marketstate.library; 
 
-import brown.accounting.Transaction;
+import brown.accounting.library.Transaction;
 import brown.tradeable.ITradeable;
 
 /**

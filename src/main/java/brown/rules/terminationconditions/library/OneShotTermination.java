@@ -5,9 +5,9 @@ import brown.rules.terminationconditions.IInnerTC;
 
 public class OneShotTermination implements IInnerTC {
 
+  // If there are bids then a round has happened
   @Override
   public void innerTerminated(ICompleteState state) {
-    // TODO Auto-generated method stub
     boolean over = state.getBids().size() > 0; 
     state.setInnerOver(over);
   }

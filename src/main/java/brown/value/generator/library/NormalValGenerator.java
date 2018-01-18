@@ -45,18 +45,6 @@ public class NormalValGenerator extends AbsValuationGenerator {
       actualValue = normalDist.sample();
     return new Value(actualValue);
   }
-  
-  //this should go away
-  @Override
-  public Value makeValuation(Set<ITradeable> goods) {
-   RandomGenerator rng = new ISAACRandom();
-   Double meanValue = valFunction.apply(goods.size());
-   NormalDistribution normalDist = new NormalDistribution(rng, meanValue, this.baseVariance);
-   Double actualValue = -1.0;
-   while (actualValue < 0)
-     actualValue = normalDist.sample();
-   return new Value(actualValue);
-  }
 
 //  @Override
 //  public BundleValuationSet getAllBundleValuations(Bundle bundle) {

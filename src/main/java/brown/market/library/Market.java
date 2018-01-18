@@ -2,7 +2,7 @@ package brown.market.library;
 
 import java.util.List;
 
-import brown.accounting.Ledger;
+import brown.accounting.library.Ledger;
 import brown.market.IMarket;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Order;
@@ -113,7 +113,12 @@ public class Market implements IMarket {
   
   @Override 
   public GameReportMessage getReport() {
+    // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
+    this.PRULE.setPayments(this.STATE);
+    // Construct orders from allocation and payments
+    this.STATE.constructOrders();    
+
     this.IRPOLICY.setReport(this.STATE);
     return this.STATE.getReport();
   }

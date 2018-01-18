@@ -1,7 +1,5 @@
 package brown.value.generator.library;
 
-import java.util.Set;
-
 import brown.tradeable.ITradeable;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.valuable.library.Value;
@@ -28,14 +26,6 @@ public class UniformValGenerator extends AbsValuationGenerator {
   @Override
   public Value makeValuation(ITradeable good) {
     return new Value((Math.random() * this.MAX) + this.MIN);
-  }
-
-  // this should go away
-  @Override
-  public Value makeValuation(Set<ITradeable> goods) {
-    Double setMin = this.MIN * goods.size();
-    Double setMax = this.MAX * goods.size();
-    return new Value((Math.random() * setMax) + setMin);
   }
   
 }

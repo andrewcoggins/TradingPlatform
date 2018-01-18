@@ -1,6 +1,5 @@
 package brown.value.generator.library;
 
-import java.util.Set;
 import java.util.function.Function;
 
 import brown.tradeable.ITradeable;
@@ -31,9 +30,4 @@ public class SizeDepValGenerator extends AbsValuationGenerator {
     return new Value(valFunction.apply(1) * this.valueScale);
   }
   
-  @Override
-  public Value makeValuation(Set<ITradeable> aGood) {
-    return new Value(valFunction.apply(aGood.size()) * this.valueScale);
-  } 
-
 }

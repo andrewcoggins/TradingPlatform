@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import brown.accounting.library.Account;
 import brown.tradeable.ITradeable;
 
 public interface IAccount {

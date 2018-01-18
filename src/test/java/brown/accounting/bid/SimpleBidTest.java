@@ -22,7 +22,7 @@ public class SimpleBidTest {
     Map<MultiTradeable, Double> simple = new HashMap<MultiTradeable, Double>();
     simple.put(new MultiTradeable(0), 1.0); 
     simple.put(new MultiTradeable(1), 2.0); 
-    SimpleBid simpleB = new SimpleBid(simple);
+    AuctionBid simpleB = new AuctionBid(simple);
     assertEquals(simpleB.bids, simple);
   }
 }

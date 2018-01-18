@@ -1,12 +1,13 @@
-package brown.accounting;
+package brown.accounting.library;
 
+import brown.accounting.ITransaction;
 import brown.tradeable.ITradeable;
 
 /**
  * A transaction is a trade that transpired.
  * Each one is recorded in the ledger.
  */
-public class Transaction {
+public class Transaction implements ITransaction {
   
 	public final Integer TO;
 	public final ITradeable TRADEABLE;

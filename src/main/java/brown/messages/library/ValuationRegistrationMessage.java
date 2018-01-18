@@ -4,7 +4,7 @@ import brown.messages.library.RegistrationMessage;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
-import brown.value.valuationrepresentation.AbsValuationRepresentation;
+import brown.value.valuationrepresentation.IValuationRepresentation;
 
 /**
  * sends agents their valuations from the server
@@ -13,7 +13,7 @@ import brown.value.valuationrepresentation.AbsValuationRepresentation;
  */
 public class ValuationRegistrationMessage extends RegistrationMessage {
   
-  private final AbsValuationRepresentation personalValue; 
+  private final IValuationRepresentation personalValue; 
   private final AdditiveValuation addDistribution; 
   private final BundleValuation bundleDistribution; 
   
@@ -29,7 +29,7 @@ public class ValuationRegistrationMessage extends RegistrationMessage {
    * @param id
    * @param personalValue
    */
-  public ValuationRegistrationMessage(Integer id, AbsValuationRepresentation personalValue){ 
+  public ValuationRegistrationMessage(Integer id, IValuationRepresentation personalValue){ 
     super(id); 
     this.personalValue = personalValue; 
     this.addDistribution = null; 
@@ -41,7 +41,7 @@ public class ValuationRegistrationMessage extends RegistrationMessage {
    * @param id
    * @param personalValue
    */
-  public ValuationRegistrationMessage(Integer id, AbsValuationRepresentation personalValue,
+  public ValuationRegistrationMessage(Integer id, IValuationRepresentation personalValue,
       IValuation distribution) {
     super(id); 
     this.personalValue = personalValue; 
@@ -67,7 +67,7 @@ public class ValuationRegistrationMessage extends RegistrationMessage {
   /**
    * @return the agent's valuation
    */
-  public AbsValuationRepresentation getValuation() {
+  public IValuationRepresentation getValuation() {
     return this.personalValue; 
   }
   

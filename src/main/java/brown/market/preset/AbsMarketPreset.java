@@ -21,4 +21,15 @@ public abstract class AbsMarketPreset {
   public IInnerTC innerTCondition; 
   public IOuterTC outerTCondition; 
   
+  public AbsMarketPreset(IAllocationRule aRule, IPaymentRule pRule, IQueryRule qRule, 
+      IActivityRule actRule, IInformationRevelationPolicy infoPolicy, IInnerTC innerTCondition, 
+      IOuterTC outerTCondition) {
+    this.aRule = aRule; 
+    this.pRule = pRule; 
+    this.qRule = qRule; 
+    this.actRule = actRule; 
+    this.infoPolicy = infoPolicy; 
+    this.innerTCondition = innerTCondition; 
+    this.outerTCondition = outerTCondition; 
+  }
 }

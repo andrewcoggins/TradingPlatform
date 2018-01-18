@@ -11,9 +11,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import brown.accounting.Account;
-import brown.accounting.AccountManager;
-import brown.accounting.Ledger;
+import brown.accounting.library.Account;
+import brown.accounting.library.AccountManager;
+import brown.accounting.library.Ledger;
 import brown.channels.server.IServerChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.market.IMarket;
@@ -39,9 +39,8 @@ import brown.value.config.ValConfig;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
 import brown.value.valuation.library.ValuationType;
-import brown.value.valuationrepresentation.AbsValuationRepresentation;
-import brown.value.valuationrepresentation.library.ComplexValuation;
-import brown.value.valuationrepresentation.library.SimpleValuation;
+import brown.value.valuationrepresentation.IValuationRepresentation;
+import brown.value.valuationrepresentation.library.Valuation;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
@@ -75,7 +74,7 @@ public abstract class AbsServer {
 	// valuation manager?
 	//each game on the simul axis has a map from integer to private valuation.
 	//does the server even care what the private valuations are? 
-	private Map<Integer, Map<Integer, AbsValuationRepresentation>> privateValuations;
+	private Map<Integer, Map<Integer, IValuationRepresentation>> privateValuations;
 
 	public AbsServer(int port, ISetup gameSetup) {
 		this.PORT = port;
@@ -158,7 +157,7 @@ public abstract class AbsServer {
 		    System.out.println("Got here");
 		    AdditiveValuation simpleVal = 
 		        new AdditiveValuation(marketConfig.generator, marketConfig.allGoods);
-		    SimpleValuation privateVal = simpleVal.getValuation(marketConfig.allGoods);
+		    Valuation privateVal = simpleVal.getValuation(marketConfig.allGoods);
 		    valueReg = new ValuationRegistrationMessage(agentID, privateVal, simpleVal);
 		    theServer.sendToTCP(connection.getID(), valueReg);
 		  } else if (marketConfig.valueScheme == ValuationType.Complex) {
@@ -166,7 +165,7 @@ public abstract class AbsServer {
 		    //complex valuations: the agent gets a valuation over complex goods.
 		    BundleValuation complexVal = 
 		        new BundleValuation(marketConfig.generator, true, marketConfig.allGoods);
-		        ComplexValuation privateVal = complexVal.getValuation(marketConfig.allGoods);
+		        Valuation privateVal = complexVal.getValuation(marketConfig.allGoods);
 		        valueReg = new ValuationRegistrationMessage(agentID, privateVal,complexVal);
 		        theServer.sendToTCP(connection.getID(), valueReg);
 		  } else {

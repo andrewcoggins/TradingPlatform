@@ -30,7 +30,7 @@ import brown.value.valuationrepresentation.library.ComplexValuation;
 // 
 public class BundleValuation implements IDependentValuation {
   
-  private Map<Set<ITradeable>, Value> valMap;
+  private Map<ITradeable, Value> valMap;
   private AbsValuationGenerator generator;
   private Set<ITradeable> goods;
   private Boolean monotonic;
@@ -38,7 +38,7 @@ public class BundleValuation implements IDependentValuation {
   public BundleValuation(Set<ITradeable> goods) {
     this.generator = new UniformValGenerator();
     this.goods = goods;
-    this.valMap = new HashMap<Set<ITradeable>, Value>();
+    this.valMap = new HashMap<ITradeable, Value>();
     this.monotonic = false;
   }
 

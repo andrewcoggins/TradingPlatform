@@ -3,6 +3,7 @@ package brown.agent.library;
 import java.util.HashMap;
 import java.util.Map;
 
+import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.agent.AbsSimpleSealedBidAgent;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;
@@ -12,7 +13,6 @@ import brown.messages.library.RegistrationMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.library.LemonadeSetup;
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.MultiTradeable;
 import brown.value.valuationrepresentation.library.SimpleValuation;
 
 public class SSSPAgent extends AbsSimpleSealedBidAgent {
@@ -45,7 +45,7 @@ public class SSSPAgent extends AbsSimpleSealedBidAgent {
     }
     // this is the SCPP price prediction. Probably not a very good bid. 
     // where to go from here? 
-    simpleChannel.bid(this, initial);
+    simpleChannel.bid(this, new AuctionBidBundle(initial));
   }
   
   @Override

@@ -12,7 +12,9 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.accounting.bid.SimpleBid;
+import brown.accounting.bid.AuctionBid;
+import brown.accounting.library.Ledger;
+import brown.accounting.library.Transaction;
 import brown.market.marketstate.library.Allocation;
 import brown.tradeable.library.MultiTradeable;
 
@@ -59,7 +61,7 @@ public class LedgerTest {
     // now test the allocation parts. 
     Map<MultiTradeable, MarketState> m = new HashMap<MultiTradeable, MarketState>();
     m.put(new MultiTradeable(0), new MarketState(1, 1.0));
-    SimpleBid s = new SimpleBid(m);
+    AuctionBid s = new AuctionBid(m);
     Allocation al = new Allocation(s);
     Ledger ledgerFour = new Ledger(0, al);
     List<Transaction> transacts = new LinkedList<Transaction>();

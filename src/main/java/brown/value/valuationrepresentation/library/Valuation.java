@@ -1,24 +1,23 @@
 package brown.value.valuationrepresentation.library;
 
 import java.util.Map;
-import java.util.Set;
 
 import brown.tradeable.ITradeable;
 import brown.value.valuable.library.Value;
-import brown.value.valuationrepresentation.AbsValuationRepresentation;
+import brown.value.valuationrepresentation.IValuationRepresentation;
 
-public class ComplexValuation extends AbsValuationRepresentation {
+public class Valuation implements IValuationRepresentation {
+
+  public final Map<ITradeable, Value> vals;
   
-  public final Map<Set<ITradeable>, Value> vals; 
-  
-  public ComplexValuation(){ 
+  public Valuation() {
     this.vals = null;
   }
   
-  public ComplexValuation(Map<Set<ITradeable>, Value> bundle) { 
-    this.vals = bundle; 
+  public Valuation(Map<ITradeable, Value> vals) {
+    this.vals = vals; 
   }
-
+  
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -35,7 +34,7 @@ public class ComplexValuation extends AbsValuationRepresentation {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    ComplexValuation other = (ComplexValuation) obj;
+    Valuation other = (Valuation) obj;
     if (vals == null) {
       if (other.vals != null)
         return false;
@@ -43,5 +42,5 @@ public class ComplexValuation extends AbsValuationRepresentation {
       return false;
     return true;
   }
- 
+
 }

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import brown.accounting.bid.SimpleBid;
+import brown.accounting.bid.AuctionBid;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.ICompleteState;
@@ -41,7 +41,7 @@ public class SimpleHighestBidderAllocation implements IAllocationRule {
         }
       }
     }
-    state.setAllocation(new Allocation(new SimpleBid(highest)));
+    state.setAllocation(new Allocation(new AuctionBid(highest)));
   }
 
   @Override

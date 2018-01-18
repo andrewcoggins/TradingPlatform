@@ -1,8 +1,9 @@
 package brown.channels.agent.library;
 
-import brown.accounting.Ledger;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
+import brown.accounting.bidbundle.library.GameBidBundle;
+import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
 import brown.messages.library.TradeMessage;
@@ -47,7 +48,7 @@ public class LemonadeChannel extends AbsChannel {
   
   @Override
   public void bid(AbsAgent agent, IBidBundle bid) {
-    if (bid.getType() == BundleType.Lemonade){
+    if (bid.getType() == BundleType.Lemonade) {
       agent.CLIENT.sendTCP(new TradeMessage(0, bid, this.ID, agent.ID));      
     } else {
       Logging.log("[Channel encountered invalid bid type]");
