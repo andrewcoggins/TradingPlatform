@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import brown.accounting.library.Transaction;
 import brown.tradeable.library.MultiTradeable;
 
 /**

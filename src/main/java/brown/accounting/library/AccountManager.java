@@ -1,4 +1,4 @@
-package brown.accounting; 
+package brown.accounting.library; 
 
 import java.util.ArrayList;
 import java.util.List;

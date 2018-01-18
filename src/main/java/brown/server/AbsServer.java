@@ -11,9 +11,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import brown.accounting.Account;
-import brown.accounting.AccountManager;
-import brown.accounting.Ledger;
+import brown.accounting.library.Account;
+import brown.accounting.library.AccountManager;
+import brown.accounting.library.Ledger;
 import brown.channels.server.IServerChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.market.IMarket;
@@ -233,7 +233,7 @@ public abstract class AbsServer {
 					.getLedger(sec.getID()).getSanitized(null)),
 					sec.getMechanismType());
 			theServer.sendToAllTCP(mupdate);
-			this.manager.getLedger(sec.getID()).clearLatest();
+			this.manager.getLedger(sec.getID()).clearUnshared();
 		}
 	}
 

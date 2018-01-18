@@ -16,13 +16,12 @@ public class LemonadeRules extends AbsMarketPreset {
    * need to pass in the market internal state, or otherwise delete it from this constructor.
    */
   public LemonadeRules() {
-    this.aRule = new LemonadeAllocation(); 
-    this.pRule = new LemonadePayment(); 
-    this.qRule = new LemonadeQuery();
-    this.actRule = new OneShotActivity();
-    this.infoPolicy = new AnonymousPolicy();
-    this.innerTCondition = new OneShotTermination();
-    this.outerTCondition = new ThreeRoundTermination();
+    super(new LemonadeAllocation(),
+        new LemonadePayment(), 
+        new LemonadeQuery(),
+        new OneShotActivity(),
+        new AnonymousPolicy(), 
+        new OneShotTermination(),
+        new ThreeRoundTermination());
   }
-
 }

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import brown.accounting.MarketState;
-import brown.accounting.bid.SimpleBid;
+import brown.accounting.bid.AuctionBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.AuctionBidBundle;
@@ -36,7 +36,7 @@ public class SimpleSecondPrice implements IPaymentRule {
       double nextHighest = -1000;
       for (TradeMessage b : state.getBids()) {
         if (b.AgentID != highestBidder) { 
-          SimpleBid a = (SimpleBid) b.Bundle.getBids(); 
+          AuctionBid a = (AuctionBid) b.Bundle.getBids(); 
               if (a.bids.get(t).PRICE > nextHighest){
                 nextHighest = a.bids.get(t).PRICE;
               }

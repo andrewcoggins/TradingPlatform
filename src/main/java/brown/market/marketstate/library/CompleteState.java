@@ -102,7 +102,7 @@ public class CompleteState implements ICompleteState {
 
   @Override
   public void constructOrders() {
-    // TODO Auto-generated method stub
+    // TODO fill this in.
     
   }
 

@@ -13,7 +13,10 @@ import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.LemonadeReportMessage;
 import brown.rules.allocationrules.IAllocationRule;
+import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
+import brown.tradeable.library.SimpleTradeable;
+import brown.tradeable.library.Tradeable;
 
 public class LemonadeAllocation implements IAllocationRule {
 
@@ -71,7 +74,7 @@ public class LemonadeAllocation implements IAllocationRule {
       for (int w : winners) { 
         double payoff = numGlasses / winners.size();
         // System.out.println(payoff);
-        Order earned = new Order(w, null, -1 * payoff, 1, new MultiTradeable(0));
+        Order earned = new Order(w, null, -1.0 * payoff, 1, new SimpleTradeable(0));
         payoffs.add(earned);
       }      
     } 
@@ -83,54 +86,7 @@ public class LemonadeAllocation implements IAllocationRule {
     // involves mapping this allocation to a payment scheme, than the payment rule 
     // really does nothing in this game,
     // because the allocation and payment scheme are the same.
-    state.setPayments(payoffs);
-  }
-
-  @Override
-  public void setBidRequest(ICompleteState state) {
-    // TODO Auto-generated method stub  
-  }
-
-  @Override
-  public void isPrivate(ICompleteState state) {
-    state.setPrivate(true); 
-  }
-
-  @Override
-  public void isOver(ICompleteState state) {
-    long ticks = state.getTime(); 
-    if (ticks > 2) { 
-      state.setOver(true);
-    }
-  }
-
-  @Override
-  public void setBundleType(ICompleteState state) {
-    state.setBundleType(BundleType.Simple);
-  }
-
-  @Override
-  public void withReserve(ICompleteState state) {
-    // TODO Auto-generated method stub
-  }
-
-  @Override
-  public void isValid(ICompleteState state) {
-    
-  }
-
-  @Override
-  public void getAllocationType(ICompleteState state) {
-    state.setMType(MechanismType.Lemonade);
-  }
-
-  @Override
-  public void setReport(ICompleteState state) {
-    int[] report = new int[this.SIZE];
-    for(int i = 0; i < this.SIZE; i++) {
-      report[i] = this.slots[i].size();
-    }
-    state.setReport(new LemonadeReportMessage(report));
+    state.setOrders(payoffs);
   }
   
 }

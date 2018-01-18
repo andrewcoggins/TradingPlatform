@@ -13,10 +13,12 @@ import brown.value.valuationrepresentation.library.ValuationType;
 public abstract class AbsValueConfig {
   
   public Set<ITradeable> allGoods; 
-  public ValuationType valueScheme;
-  
-  //TODO: state of the world. 
-  //can't store this. 
+  public ValuationType valueScheme; 
   public AbsValuationGenerator aGenerator; 
   
+  public AbsValueConfig(Set<ITradeable> allGoods, ValuationType valueScheme, AbsValuationGenerator aGenerator) {
+    this.allGoods = allGoods; 
+    this.valueScheme = valueScheme; 
+    this.aGenerator = aGenerator; 
+  }
 }

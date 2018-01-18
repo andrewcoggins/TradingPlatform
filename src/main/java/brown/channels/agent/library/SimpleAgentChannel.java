@@ -5,9 +5,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import brown.accounting.Ledger;
-
 import brown.accounting.bidbundle.library.AuctionBidBundle;
+import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 import brown.agent.AbsOpenOutcryAgent;
 import brown.agent.AbsSimpleSealedBidAgent;

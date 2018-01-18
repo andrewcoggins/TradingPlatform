@@ -1,6 +1,6 @@
 package brown.channels.server;
 
-import brown.accounting.Ledger;
+import brown.accounting.library.Ledger;
 import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;
 
