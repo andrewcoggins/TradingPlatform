@@ -8,7 +8,7 @@ import brown.rules.queryrules.IQueryRule;
 import brown.rules.terminationconditions.IInnerTC;
 import brown.rules.terminationconditions.IOuterTC;
 
-/*
+/**
  * provides a clean format for creating sets of rules for markets.
  */
 public abstract class AbsMarketPreset {

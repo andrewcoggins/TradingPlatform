@@ -7,7 +7,7 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.random.ISAACRandom;
 import org.apache.commons.math3.random.RandomGenerator;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 import brown.value.generator.AbsValuationGenerator;
 import brown.value.valuable.library.Value;
 
@@ -38,7 +38,7 @@ public class NormalGenerator extends AbsValuationGenerator {
   }
  
   @Override
-  public Value makeValuation(Tradeable good) {
+  public Value makeValuation(MultiTradeable good) {
    RandomGenerator rng = new ISAACRandom();
    Double meanValue = valFunction.apply(1);
    NormalDistribution normalDist = new NormalDistribution(rng, meanValue, this.baseVariance);
@@ -49,7 +49,7 @@ public class NormalGenerator extends AbsValuationGenerator {
   }
   
   @Override
-  public Value makeValuation(Set<Tradeable> goods) {
+  public Value makeValuation(Set<MultiTradeable> goods) {
    RandomGenerator rng = new ISAACRandom();
    Double meanValue = valFunction.apply(goods.size());
    NormalDistribution normalDist = new NormalDistribution(rng, meanValue, this.baseVariance);

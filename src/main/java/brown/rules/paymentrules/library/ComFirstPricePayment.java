@@ -12,7 +12,7 @@ import brown.market.marketstate.library.Order;
 import brown.rules.paymentrules.IPaymentRule;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.library.ComplexTradeable;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * naive first price payment rule.
@@ -26,8 +26,8 @@ public class ComFirstPricePayment implements IPaymentRule {
     // TODO Auto-generated method stub
     List<Order> orders = new LinkedList<Order>();
     ComplexBidBundle original = (ComplexBidBundle) state.getbundleReserve();
-    Map<Set<Tradeable>, Double> originalMap = original.getBids().bids;
-    for (Set<Tradeable> aSet :originalMap.keySet()) {
+    Map<Set<MultiTradeable>, Double> originalMap = original.getBids().bids;
+    for (Set<MultiTradeable> aSet :originalMap.keySet()) {
      double price = originalMap.get(aSet).PRICE;
      int recipient = originalMap.get(aSet).AGENTID;
      ComplexTradeable comTradeable = new ComplexTradeable(0, aSet);

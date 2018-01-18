@@ -17,6 +17,5 @@ public class LemonadeQuery implements IQueryRule {
               MechanismType.Lemonade);
       state.setTRequest(constructedRequest);
   }
- }
   
-  
+}

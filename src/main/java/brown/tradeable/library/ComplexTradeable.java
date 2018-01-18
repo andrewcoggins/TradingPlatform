@@ -5,35 +5,40 @@ import java.util.Set;
 import brown.tradeable.ITradeable;
 import brown.tradeable.TradeableType;
 
-public class ComplexTradeable implements ITradeable { 
+/**
+* A complex tradeable is a set of tradeables.
+* COUNT must be 1!
+* @author amy
+*/
+public class ComplexTradeable extends AbsTradeable { 
   
-  public final Integer ID; 
-  public final Set<Tradeable> GOODS;
-  public final Integer COUNT; 
-  public final TradeableType TYPE; 
+  public final Set<ITradeable> GOODS;
   
-  public ComplexTradeable(Integer ID, Set<Tradeable> goods) {
-   this.ID = ID; 
-   this.GOODS = goods;
-   this.COUNT = 1; 
-   this.TYPE = TradeableType.Complex;
+  /**
+   * For Kryo
+   * DO NOT USE
+   */
+  public ComplexTradeable() {
+    super();
+    this.GOODS = null;
+  }
+  
+  public ComplexTradeable(Integer ID, Set<ITradeable> GOODS) {
+    super(ID, 1, TradeableType.Complex);
+    this.GOODS = GOODS;
   }
 
-  public Integer getID() {
-    return this.ID;
+  @Override
+  public String toString() {
+    return "ComplexTradeable [GOODS=" + GOODS + ", ID=" + ID + ", COUNT="
+        + COUNT + ", TYPE=" + TYPE + "]";
   }
-  
-  public Integer getCount() {
-    return this.COUNT;
-  }
-  
+
   @Override
   public int hashCode() {
     final int prime = 31;
-    int result = 1;
+    int result = super.hashCode();
     result = prime * result + ((GOODS == null) ? 0 : GOODS.hashCode());
-    result = prime * result + ((ID == null) ? 0 : ID.hashCode());
-    result = prime * result + ((TYPE == null) ? 0 : TYPE.hashCode());
     return result;
   }
 
@@ -41,7 +46,7 @@ public class ComplexTradeable implements ITradeable {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null)
+    if (!super.equals(obj))
       return false;
     if (getClass() != obj.getClass())
       return false;
@@ -51,22 +56,7 @@ public class ComplexTradeable implements ITradeable {
         return false;
     } else if (!GOODS.equals(other.GOODS))
       return false;
-    if (ID == null) {
-      if (other.ID != null)
-        return false;
-    } else if (!ID.equals(other.ID))
-      return false;
-    if (TYPE != other.TYPE)
-      return false;
     return true;
   }
 
-  @Override
-  public String toString() {
-    return "ComplexTradeable [ID=" + ID + ", GOODS=" + GOODS + ", TYPE=" + TYPE
-        + "]";
-  }
-  
-  
-  
 }

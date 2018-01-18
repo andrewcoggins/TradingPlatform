@@ -26,7 +26,7 @@ import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.todeprecate.PaymentType;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * tests the internal state class. 
@@ -42,14 +42,14 @@ public class InternalStateTest {
   
   @Test
   public void testInternalState() {
-    Set<Tradeable> tradeables = new HashSet<Tradeable>();
-    tradeables.add(new Tradeable(0));
-    tradeables.add(new Tradeable(1));
-    tradeables.add(new Tradeable(2));
+    Set<MultiTradeable> tradeables = new HashSet<MultiTradeable>();
+    tradeables.add(new MultiTradeable(0));
+    tradeables.add(new MultiTradeable(1));
+    tradeables.add(new MultiTradeable(2));
     CompleteState state = new CompleteState(0, tradeables);
     //going to go through these in order to the best of my ability. 
-    Map<Tradeable, MarketState> map = new HashMap<Tradeable, MarketState>();
-    map.put(new Tradeable(1), new MarketState(0, 1.0));
+    Map<MultiTradeable, MarketState> map = new HashMap<MultiTradeable, MarketState>();
+    map.put(new MultiTradeable(1), new MarketState(0, 1.0));
     TradeMessage aBid = new TradeMessage(0, new SimpleBidBundle(map), 0, 0);
     //addBid, getBids
     state.addBid(aBid);
@@ -63,7 +63,7 @@ public class InternalStateTest {
     assertEquals(state.getID(), new Integer(0));
     //setLastPayments, getLastPayments
     List<Order> lastPayments = new LinkedList<Order>();
-    lastPayments.add(new Order(1, 0, 100.0, 5, new Tradeable(2)));
+    lastPayments.add(new Order(1, 0, 100.0, 5, new MultiTradeable(2)));
     state.setLastPayments(lastPayments);
     assertEquals(state.getLastPayments(), lastPayments);
     //tick, getTicks
@@ -75,7 +75,7 @@ public class InternalStateTest {
     SimpleBidBundle gottenBundle = (SimpleBidBundle) state.getbundleReserve();
     assertEquals(aBundle, gottenBundle);
     //complex case
-    Map<Set<Tradeable>, MarketState> complexMap = new HashMap<Set<Tradeable>, MarketState>();
+    Map<Set<MultiTradeable>, MarketState> complexMap = new HashMap<Set<MultiTradeable>, MarketState>();
     complexMap.put(tradeables, new MarketState(0, 1.0));
     ComplexBidBundle comMap = new ComplexBidBundle(complexMap, 0);
     state.setReserve(comMap); 
@@ -99,8 +99,8 @@ public class InternalStateTest {
     state.setTime((long) 1.0);
     assertTrue(state.getTime() == (long) 1.0);
     //get/set allocation
-    Map<Tradeable, MarketState> allMap = new HashMap<Tradeable, MarketState>();
-    allMap.put(new Tradeable(0), new MarketState(1, 2.0));
+    Map<MultiTradeable, MarketState> allMap = new HashMap<MultiTradeable, MarketState>();
+    allMap.put(new MultiTradeable(0), new MarketState(1, 2.0));
     Allocation a = new Allocation(new SimpleBid(allMap));
     state.setAllocation(a);
     assertEquals(a, state.getAllocation());
@@ -135,7 +135,7 @@ public class InternalStateTest {
     //payment rules. 
     //set/getPayments
     List<Order> someOrders = new LinkedList<Order>();
-    someOrders.add(new Order(0, 1, 100.0, 5, new Tradeable(0)));
+    someOrders.add(new Order(0, 1, 100.0, 5, new MultiTradeable(0)));
     state.setPayments(someOrders);
     assertEquals(state.getPayments(), someOrders);
     //get set paymentType

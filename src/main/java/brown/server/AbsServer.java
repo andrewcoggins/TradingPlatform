@@ -31,9 +31,9 @@ import brown.messages.library.NegotiateMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.Logging;
+import brown.setup.library.Startup;
 import brown.setup.ISetup;
-import brown.setup.Startup;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 import brown.value.config.AbsValueConfig;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
@@ -66,7 +66,7 @@ public abstract class AbsServer {
 	protected boolean SHORT;
 	
 	protected Map<Integer, AbsValueConfig> valueConfig; 
-	protected List<Tradeable> initialGoods;
+	protected List<MultiTradeable> initialGoods;
 	protected Double initialMonies;
 	
 	// a map from an agents' private id to its private valuation for goods.
@@ -515,7 +515,7 @@ public abstract class AbsServer {
 			Account newAccount = new Account(theID);
 			if (this.initialMonies != null) newAccount.add(initialMonies);
 			if(this.initialGoods != null) {
-			  for (Tradeable t : this.initialGoods)
+			  for (MultiTradeable t : this.initialGoods)
 			    newAccount.add(0.0, t);
 			}
 			this.acctManager.setAccount(theID, newAccount);

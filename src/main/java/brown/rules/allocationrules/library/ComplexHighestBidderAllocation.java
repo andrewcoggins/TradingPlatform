@@ -12,7 +12,7 @@ import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.messages.library.TradeMessage;
 import brown.rules.allocationrules.IAllocationRule;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * naive combinatorial auction allocation rule... highest bidder gets the good. no reserve.
@@ -26,13 +26,13 @@ public class ComplexHighestBidderAllocation implements IAllocationRule {
   public void setAllocation(ICompleteState state) {
     // map to fill and set in internal state.
     //brute force SPP
-    Map<Set<Tradeable>, List<MarketState>> all = new HashMap<Set<Tradeable>, List<MarketState>>();
-    Set<Set<Tradeable>> combinations = new HashSet<Set<Tradeable>>();
+    Map<Set<MultiTradeable>, List<MarketState>> all = new HashMap<Set<MultiTradeable>, List<MarketState>>();
+    Set<Set<MultiTradeable>> combinations = new HashSet<Set<MultiTradeable>>();
     List<TradeMessage> allBids = state.getBids();
     for (TradeMessage aBid : allBids) { 
       ComplexBidBundle bundle = (ComplexBidBundle) aBid.Bundle;
-      Map<Set<Tradeable>, MarketState> bidMap = bundle.getBids().bids;
-      for(Set<Tradeable> aSet : bidMap.keySet()) {
+      Map<Set<MultiTradeable>, MarketState> bidMap = bundle.getBids().bids;
+      for(Set<MultiTradeable> aSet : bidMap.keySet()) {
         if (all.keySet().contains(aSet)) {
           // update
           List<MarketState> stateList = all.get(aSet);
@@ -48,23 +48,23 @@ public class ComplexHighestBidderAllocation implements IAllocationRule {
       combinations.addAll(bidMap.keySet());
     }
     //get all tradeables being bid on. 
-    Set<Tradeable> allTradeables = new HashSet<Tradeable>();
-    for(Set<Tradeable> aMap : combinations) {
-      for(Tradeable t: aMap) {
+    Set<MultiTradeable> allTradeables = new HashSet<MultiTradeable>();
+    for(Set<MultiTradeable> aMap : combinations) {
+      for(MultiTradeable t: aMap) {
         allTradeables.add(t);
       }
     }
-    Set<Set<Set<Tradeable>>> allSubsets = allSubsets(combinations, allTradeables, new HashSet<Set<Tradeable>>());
+    Set<Set<Set<MultiTradeable>>> allSubsets = allSubsets(combinations, allTradeables, new HashSet<Set<MultiTradeable>>());
     //OK, now find the best one. 
     //mutually exclusive hashmap.
-    Map<Set<Tradeable>, MarketState> toReturn = new HashMap<Set<Tradeable>, MarketState>();
-    Map<Set<Tradeable>, MarketState> reserve = new HashMap<Set<Tradeable>, MarketState>();
+    Map<Set<MultiTradeable>, MarketState> toReturn = new HashMap<Set<MultiTradeable>, MarketState>();
+    Map<Set<MultiTradeable>, MarketState> reserve = new HashMap<Set<MultiTradeable>, MarketState>();
     double highestBid = 0.0;
     double secondHighest = 0.0;
-    for(Set<Set<Tradeable>> setSets : allSubsets) {
-      Map<Set<Tradeable>, MarketState> current = new HashMap<Set<Tradeable>, MarketState>();
+    for(Set<Set<MultiTradeable>> setSets : allSubsets) {
+      Map<Set<MultiTradeable>, MarketState> current = new HashMap<Set<MultiTradeable>, MarketState>();
       double currentBid = 0.0; 
-      for(Set<Tradeable> set : setSets) {
+      for(Set<MultiTradeable> set : setSets) {
         List<MarketState> states = all.get(set);
         double highestState = 0.0; 
         int position = 0;
@@ -99,19 +99,19 @@ public class ComplexHighestBidderAllocation implements IAllocationRule {
    * @param current
    * @return
    */
-  private Set<Set<Set<Tradeable>>> allSubsets(Set<Set<Tradeable>> combinations, 
-      Set<Tradeable> aSet, Set<Set<Tradeable>> current) {
-    Set<Set<Set<Tradeable>>> setOfSetsOfSets = new HashSet<Set<Set<Tradeable>>>();
+  private Set<Set<Set<MultiTradeable>>> allSubsets(Set<Set<MultiTradeable>> combinations, 
+      Set<MultiTradeable> aSet, Set<Set<MultiTradeable>> current) {
+    Set<Set<Set<MultiTradeable>>> setOfSetsOfSets = new HashSet<Set<Set<MultiTradeable>>>();
     if (aSet.isEmpty()) {
       setOfSetsOfSets.add(current);
       return setOfSetsOfSets;
     }
-    for (Set<Tradeable> s : combinations) {
+    for (Set<MultiTradeable> s : combinations) {
       if (subset(s, aSet)) { 
         current.add(s); 
-        Set<Set<Tradeable>> combinationsCopy = new HashSet<Set<Tradeable>>(combinations);
+        Set<Set<MultiTradeable>> combinationsCopy = new HashSet<Set<MultiTradeable>>(combinations);
         combinationsCopy.remove(s);
-        Set<Tradeable> aSetCopy = new HashSet<Tradeable>(aSet);
+        Set<MultiTradeable> aSetCopy = new HashSet<MultiTradeable>(aSet);
         aSetCopy.removeAll(s);
         setOfSetsOfSets.addAll(allSubsets(combinationsCopy, aSetCopy, current));
         }
@@ -119,8 +119,8 @@ public class ComplexHighestBidderAllocation implements IAllocationRule {
     return setOfSetsOfSets;
   }
   
-  private boolean subset(Set<Tradeable> setOne, Set<Tradeable> setTwo) { 
-    for (Tradeable item : setOne) {
+  private boolean subset(Set<MultiTradeable> setOne, Set<MultiTradeable> setTwo) { 
+    for (MultiTradeable item : setOne) {
       if (setTwo.contains(item))
         continue; 
       else return false; 

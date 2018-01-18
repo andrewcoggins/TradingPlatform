@@ -3,18 +3,19 @@ package abrown.misc;
 import java.util.List;
 import java.util.Map;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.ITradeable;
+import brown.tradeable.library.MultiTradeable;
 
 public class Allocation implements IAllocation {
 
-private Map<List<Tradeable>, Integer> alloc; 
+  private Map<List<ITradeable>, Integer> alloc; 
 
-public Allocation(Map<List<Tradeable>, Integer> alloc) {
-  this.alloc = alloc;
-}
+  public Allocation(Map<List<ITradeable>, Integer> alloc) {
+    this.alloc = alloc;
+  }
 
   @Override
-  public Map<List<Tradeable>, Integer> getAllocation() {
+  public Map<List<ITradeable>, Integer> getAllocation() {
     return this.alloc;
   }
 

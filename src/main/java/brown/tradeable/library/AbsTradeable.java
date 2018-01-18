@@ -3,51 +3,44 @@ package brown.tradeable.library;
 import brown.tradeable.ITradeable;
 import brown.tradeable.TradeableType;
 
-/**
- * The good to be used in the back-end bidding logic. 
- * Consists only of the private ID of the agent.
- * @author acoggins
- *
- */
-public class Tradeable implements ITradeable {
+public abstract class AbsTradeable implements ITradeable { 
   
-  public final Integer ID; 
-  public final Integer COUNT; 
+  public final Integer ID;
+  public Integer COUNT; // Java flaw: final type cannot be inherited! UGH!
   public final TradeableType TYPE; 
   
   /**
-   * empty constructor.
+   * For Kryo
+   * DO NOT USE
    */
-  public Tradeable() {
-    this.ID = null; 
-    this.COUNT = null; 
-    this.TYPE = null; 
-  }
-//  
-//  /**
-//   * constructor with ID.
-//   * @param id
-//   */
-  public Tradeable(Integer id) {
-    this.ID = id; 
-    this.COUNT = 1; 
-    this.TYPE = TradeableType.Simple;
+  public AbsTradeable() {
+    this.ID = 0; 
+    this.COUNT = 0; 
+    this.TYPE = null;
   }
   
-  public Tradeable(Integer id, Integer count) {
-    this.ID = id; 
-    this.COUNT = count;
-    this.TYPE = TradeableType.Simple;
+  public AbsTradeable(Integer ID, Integer count, TradeableType type) {
+   this.ID = ID; 
+   this.COUNT = count;
+   this.TYPE = type;
   }
-  
+
   public Integer getID() {
-    return this.ID; 
+    return this.ID;
   }
   
   public Integer getCount() {
     return this.COUNT;
   }
+
+  public TradeableType getType() {
+    return this.TYPE;
+  }
   
+  @Override
+  public String toString() {
+    return "AbsTradeable [ID=" + ID + ", COUNT=" + COUNT + "]";
+  }
 
   @Override
   public int hashCode() {
@@ -55,9 +48,9 @@ public class Tradeable implements ITradeable {
     int result = 1;
     result = prime * result + ((COUNT == null) ? 0 : COUNT.hashCode());
     result = prime * result + ((ID == null) ? 0 : ID.hashCode());
-    result = prime * result + ((TYPE == null) ? 0 : TYPE.hashCode());
     return result;
   }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -66,7 +59,7 @@ public class Tradeable implements ITradeable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Tradeable other = (Tradeable) obj;
+    AbsTradeable other = (AbsTradeable) obj;
     if (COUNT == null) {
       if (other.COUNT != null)
         return false;
@@ -77,15 +70,7 @@ public class Tradeable implements ITradeable {
         return false;
     } else if (!ID.equals(other.ID))
       return false;
-    if (TYPE != other.TYPE)
-      return false;
     return true;
   }
   
-  @Override
-  public String toString() {
-    return "Tradeable [ID=" + ID + ", COUNT=" + COUNT + ", TYPE=" + TYPE + "]";
-  }
-
-
 }

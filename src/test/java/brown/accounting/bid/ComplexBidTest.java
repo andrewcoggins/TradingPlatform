@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * tests the complex bid class. 
@@ -21,10 +21,10 @@ public class ComplexBidTest {
   
   @Test 
   public void testComplexBid() { 
-    Map<Set<Tradeable>, Double> complex = new HashMap<Set<Tradeable>, Double>();
-    Set<Tradeable> trs = new HashSet<Tradeable>();
-    trs.add(new Tradeable(0)); 
-    trs.add(new Tradeable(1));
+    Map<Set<MultiTradeable>, Double> complex = new HashMap<Set<MultiTradeable>, Double>();
+    Set<MultiTradeable> trs = new HashSet<MultiTradeable>();
+    trs.add(new MultiTradeable(0)); 
+    trs.add(new MultiTradeable(1));
     complex.put(trs, 1.0);
     ComplexBid aComplexBid = new ComplexBid(complex);
     assertEquals(aComplexBid.bids, complex);

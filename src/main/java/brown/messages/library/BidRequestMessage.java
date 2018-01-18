@@ -5,7 +5,7 @@ import java.util.Set;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.agent.AbsAgent;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * An Agent sends a TradeRequest as a Message to bid on auctions.
@@ -19,7 +19,7 @@ import brown.tradeable.library.Tradeable;
 
 public class BidRequestMessage extends AbsMessage {
   public final Integer AuctionID;
-  public final Set<Tradeable> Goods;
+  public final Set<MultiTradeable> Goods;
   public final IBidBundle Current;
   public final BundleType TYPE;
 
@@ -43,7 +43,7 @@ public class BidRequestMessage extends AbsMessage {
    * @param bundle
    * @param goods
    */
-  public BidRequestMessage(int ID, Integer auctionID, BundleType type, IBidBundle bundle, Set<Tradeable> goods) {
+  public BidRequestMessage(int ID, Integer auctionID, BundleType type, IBidBundle bundle, Set<MultiTradeable> goods) {
     super(ID);
     this.AuctionID = auctionID;
     this.Current = bundle;

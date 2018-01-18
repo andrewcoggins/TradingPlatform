@@ -13,7 +13,7 @@ import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
 import brown.market.marketstate.library.CompleteState;
 import brown.messages.library.TradeMessage;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * tests the one shot activity rule. 
@@ -25,13 +25,13 @@ public class OneShotActivityTest {
   
   @Test
   public void testOneShotActivity() {
-    Set<Tradeable> allTradeables = new HashSet<Tradeable>();
+    Set<MultiTradeable> allTradeables = new HashSet<MultiTradeable>();
     for(int i = 0; i < 3; i++) {
-     allTradeables.add(new Tradeable(i));
+     allTradeables.add(new MultiTradeable(i));
     }
     CompleteState state = new CompleteState(0, allTradeables);
-    Map<Tradeable, MarketState> aMap = new HashMap<Tradeable, MarketState>();
-    aMap.put(new Tradeable(0), new MarketState(0, 1.0));
+    Map<MultiTradeable, MarketState> aMap = new HashMap<MultiTradeable, MarketState>();
+    aMap.put(new MultiTradeable(0), new MarketState(0, 1.0));
     SimpleBidBundle s = new SimpleBidBundle(aMap);
     TradeMessage aBid = new TradeMessage(1, s, 1, 1);
     OneShotActivity shot = new OneShotActivity();

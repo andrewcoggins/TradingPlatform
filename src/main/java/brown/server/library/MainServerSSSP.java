@@ -8,8 +8,8 @@ import java.util.Set;
 import brown.market.preset.AbsMarketPreset;
 import brown.market.preset.library.LemonadeRules;
 import brown.market.preset.library.SimSecondPriceRules;
-import brown.setup.library.SimpleSetup;
-import brown.tradeable.library.Tradeable;
+import brown.setup.library.LemonadeSetup;
+import brown.tradeable.library.MultiTradeable;
 import brown.value.config.AbsValueConfig;
 import brown.value.config.NullConfig;
 import brown.value.config.SSSPConfig;
@@ -30,14 +30,14 @@ public class MainServerSSSP {
     List<AbsMarketPreset> allMarkets = new ArrayList<AbsMarketPreset>();
     List<AbsValueConfig> allValInfo = new ArrayList<AbsValueConfig>();
     //add whatever you want to do.
-    Set<Tradeable> allTradeables = new HashSet<Tradeable>(); 
+    Set<MultiTradeable> allTradeables = new HashSet<MultiTradeable>(); 
     for (int i = 0; i < 3; i++) {
-      allTradeables.add(new Tradeable(i));
+      allTradeables.add(new MultiTradeable(i));
     }
     //our valuation information and rules information.
     allValInfo.add(new SSSPConfig(allTradeables));
     allMarkets.add(new SimSecondPriceRules()); 
-    new RunServer(2121, new SimpleSetup()).runGame(allMarkets, allValInfo, 1000.0, null);
+    new RunServer(2121, new LemonadeSetup()).runGame(allMarkets, allValInfo, 1000.0, null);
   }
   
 }

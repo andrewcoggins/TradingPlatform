@@ -11,7 +11,7 @@ import brown.channels.server.TwoSidedAuction;
 import brown.server.AbsServer;
 import brown.setup.Logging;
 import brown.todeprecate.StateOfTheWorld;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 
 /**
  * Market manager stores and handles multiple markets 
@@ -144,7 +144,7 @@ public class MarketManager {
 	 * @param t
 	 * @return
 	 */
-	public boolean register(Integer ID, Tradeable t) {
+	public boolean register(Integer ID, MultiTradeable t) {
 		Market tsa = tsauctions.get(ID);
 		if (tsa == null) {
 			return false;

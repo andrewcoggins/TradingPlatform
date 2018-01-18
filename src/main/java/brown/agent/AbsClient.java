@@ -11,7 +11,7 @@ import brown.messages.library.AckMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.setup.ISetup;
 import brown.setup.Logging;
-import brown.setup.Startup;
+import brown.setup.library.Startup;
 
 public abstract class AbsClient {
   

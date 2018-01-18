@@ -8,5 +8,5 @@ package brown.accounting.bidbundle.library;
  * @author acoggins
  */
 public enum BundleType {
-	Simple, Complex, Lemonade
+	Simple, Lemonade
 }

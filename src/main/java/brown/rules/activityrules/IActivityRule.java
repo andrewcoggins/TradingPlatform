@@ -1,12 +1,10 @@
 package brown.rules.activityrules;
 
 import brown.market.marketstate.ICompleteState;
-import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 
 public interface IActivityRule {
 
-  
   public void isAcceptable(ICompleteState state, TradeMessage aBid);
  
   // handle reserves with this

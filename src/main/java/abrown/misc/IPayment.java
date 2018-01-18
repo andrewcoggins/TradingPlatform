@@ -7,7 +7,6 @@ import brown.tradeable.ITradeable;
 /**
  * an IPayment 
  * @author andrew
- *
  */
 public interface IPayment {
   

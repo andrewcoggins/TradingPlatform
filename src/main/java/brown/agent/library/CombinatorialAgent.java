@@ -11,8 +11,8 @@ import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.ValuationRegistrationMessage;
-import brown.setup.library.SimpleSetup;
-import brown.tradeable.library.Tradeable;
+import brown.setup.library.LemonadeSetup;
+import brown.tradeable.library.MultiTradeable;
 import brown.value.valuationrepresentation.library.ComplexValuation;
 
 /**
@@ -26,7 +26,7 @@ public class CombinatorialAgent extends AbsSimpleSealedBidAgent {
   
   public CombinatorialAgent(String host, int port)
       throws AgentCreationException {
-    super(host, port, new SimpleSetup());
+    super(host, port, new LemonadeSetup());
     // TODO Auto-generated constructor stub
   }
 
@@ -55,7 +55,7 @@ public class CombinatorialAgent extends AbsSimpleSealedBidAgent {
   @Override
   public void onSimpleSealedBid(SimpleAgentChannel simpleWrapper) {
     // TODO Auto-generated method stub
-    Map<Set<Tradeable>, Double> bidMap = new HashMap<Set<Tradeable>, Double>();
+    Map<Set<MultiTradeable>, Double> bidMap = new HashMap<Set<MultiTradeable>, Double>();
     simpleWrapper.xorBid(this, bidMap);
   }
   

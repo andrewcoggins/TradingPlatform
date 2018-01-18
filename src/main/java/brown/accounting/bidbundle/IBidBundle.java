@@ -41,4 +41,5 @@ public interface IBidBundle {
 	 * @return bundleType
 	 */
 	public BundleType getType();	
+	
 }

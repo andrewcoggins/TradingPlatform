@@ -1,4 +1,4 @@
-package brown.setup;
+package brown.setup.library;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -17,7 +17,6 @@ import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.LemonadeBidBundle;
 import brown.accounting.bidbundle.library.SimpleBidBundle;
-import brown.agent.AbsAgent;
 import brown.agent.AbsAgent;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.CDAAgentChannel;
@@ -41,7 +40,7 @@ import brown.messages.library.ValuationRegistrationMessage;
 import brown.rules.clearingrules.IClearingRule;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.TradeableType;
-import brown.tradeable.library.Tradeable;
+import brown.tradeable.library.MultiTradeable;
 import brown.twosided.ITwoSidedAuction;
 import brown.value.config.ComplexConfig;
 import brown.value.generator.AbsValuationGenerator;
@@ -100,7 +99,7 @@ public final class Startup {
 		kryo.register(PaymentType.class);
 		kryo.register(CDAAgentChannel.class);
 		kryo.register(IClearingRule.class);
-		kryo.register(Tradeable.class);
+		kryo.register(MultiTradeable.class);
 		kryo.register(CDAServerChannel.class);
 		kryo.register(Order.class);
 		kryo.register(Ledger.class);
@@ -120,6 +119,7 @@ public final class Startup {
 		kryo.register(TradeableType.class);
 		kryo.register(AbsValuationGenerator.class);
 		kryo.register(LemonadeBidBundle.class);
+		
 		return true;
 	}
 
