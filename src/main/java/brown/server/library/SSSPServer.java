@@ -2,6 +2,7 @@ package brown.server.library;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -38,7 +39,7 @@ public class SSSPServer {
     allValInfo.add(new SimpleConfig(allTradeables));
     allMarkets.add(new SSSPRules());
     
-    new RunServer(2121, new LemonadeSetup()).runGame(allMarkets, allValInfo, 1000.0, null);
+    new RunServer(2121, new LemonadeSetup()).runGame(allTradeables, allMarkets, allValInfo,
+        1000.0, new LinkedList<ITradeable>());
   }
-  
 }

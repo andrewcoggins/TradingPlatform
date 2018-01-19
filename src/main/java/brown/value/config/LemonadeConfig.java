@@ -1,14 +1,10 @@
-package brown.value.config; 
+package brown.value.config;
 
-import java.util.Set;
-
-import brown.tradeable.ITradeable;
-import brown.value.valuation.library.ValuationType;
+import brown.value.andrew.valuation.ValuationType;
 
 public class LemonadeConfig extends ValConfig {
   
-  public LemonadeConfig(Set<ITradeable> allGoods) { 
-    super(allGoods, ValuationType.Simple, null);
+  public LemonadeConfig() { 
+    super(null, ValuationType.Game);
   }
-  
 }

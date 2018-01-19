@@ -36,12 +36,11 @@ import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
+import brown.value.andrew.valuation.IValuation;
+import brown.value.andrew.valuation.ValuationType;
 import brown.value.config.ValConfig;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
-import brown.value.valuation.library.ValuationType;
-import brown.value.valuationrepresentation.IValuationRepresentation;
-import brown.value.valuationrepresentation.library.ValuationRepresentation;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
@@ -75,7 +74,7 @@ public abstract class AbsServer {
 	// valuation manager?
 	//each game on the simul axis has a map from integer to private valuation.
 	//does the server even care what the private valuations are? 
-	private Map<Integer, Map<Integer, IValuationRepresentation>> privateValuations;
+	private Map<Integer, IValuation> privateValuations;
 
 	public AbsServer(int port, ISetup gameSetup) {
 		this.PORT = port;
@@ -152,26 +151,14 @@ public abstract class AbsServer {
     }
 		for(Integer marketNum : this.valueConfig.keySet()) {
 		  ValConfig marketConfig = this.valueConfig.get(marketNum);
-		  ValuationRegistrationMessage valueReg; 
-		  //simple valuations: the agent gets a valuation over single goods.
-		  if (marketConfig.valueScheme == ValuationType.Simple) {
-		    System.out.println("Got here");
-		    AdditiveValuation simpleVal = 
-		        new AdditiveValuation(marketConfig.generator, marketConfig.allGoods);
-		    ValuationRepresentation privateVal = simpleVal.getValuation(marketConfig.allGoods);
-		    valueReg = new ValuationRegistrationMessage(agentID, privateVal, simpleVal);
-		    theServer.sendToTCP(connection.getID(), valueReg);
-		  } else if (marketConfig.valueScheme == ValuationType.Complex) {
-        System.out.println("Got here instead");
-		    //complex valuations: the agent gets a valuation over complex goods.
-		    BundleValuation complexVal = 
-		        new BundleValuation(marketConfig.generator, true, marketConfig.allGoods);
-		        ValuationRepresentation privateVal = complexVal.getValuation(marketConfig.allGoods);
-		        valueReg = new ValuationRegistrationMessage(agentID, privateVal,complexVal);
-		        theServer.sendToTCP(connection.getID(), valueReg);
-		  } else {
-		    //no explicit valuation, as in the lemonade game
-		    theServer.sendToTCP(connection.getID(), new RegistrationMessage(agentID));
+		  if (marketConfig.type == ValuationType.Auction) {
+	      ValuationRegistrationMessage valueReg; 
+	      IValuation privateValuation = marketConfig.valueDistribution.sample();
+	      valueReg = new ValuationRegistrationMessage(agentID, privateValuation, marketConfig.valueDistribution);
+	      theServer.sendToTCP(connection.getID(), valueReg);
+		  } else if (marketConfig.type == ValuationType.Game) {
+	      //no explicit valuation, as in the lemonade game
+	      theServer.sendToTCP(connection.getID(), new RegistrationMessage(agentID));
 		  }
 		}
 	}

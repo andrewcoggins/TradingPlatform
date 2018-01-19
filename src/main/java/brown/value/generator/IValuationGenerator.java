@@ -5,6 +5,6 @@ import brown.value.valuable.library.Value;
 
 public interface IValuationGenerator {
   
-  public abstract Value makeValuation(ITradeable good);
+  public abstract Value makeValuation();
   
 }

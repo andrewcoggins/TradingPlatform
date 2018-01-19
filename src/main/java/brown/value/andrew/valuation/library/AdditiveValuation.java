@@ -1,0 +1,72 @@
+package brown.value.andrew.valuation.library;
+
+import java.util.List;
+import java.util.Map;
+
+import brown.tradeable.ITradeable;
+import brown.tradeable.library.SimpleTradeable;
+import brown.value.andrew.valuation.IMonotonicValuation;
+import brown.value.valuable.library.Value;
+
+/**
+ * additive valuation specifies a valuation over goods, 
+ * where values are additive.
+ * @author andrew
+ *
+ */
+public class AdditiveValuation implements IMonotonicValuation {
+
+  private final Map<SimpleTradeable, Value> valueParams; 
+  
+  /**
+   * additive valuation takes in a mapping from values to 
+   * individual tradeables.
+   * @param valueParams
+   */
+  public AdditiveValuation(Map<SimpleTradeable, Value> valueParams) {
+    this.valueParams = valueParams; 
+  }
+  
+  @Override
+  public Value getValuation(ITradeable tradeable) {
+    double value = 0.0; 
+    List<SimpleTradeable> allTradeables = tradeable.flatten(); 
+    for(SimpleTradeable atom : allTradeables) {
+      value = value + this.valueParams.get(atom).value; 
+    }
+    return new Value(value);
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result =
+        prime * result + ((valueParams == null) ? 0 : valueParams.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    AdditiveValuation other = (AdditiveValuation) obj;
+    if (valueParams == null) {
+      if (other.valueParams != null)
+        return false;
+    } else if (!valueParams.equals(other.valueParams))
+      return false;
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "AdditiveValuation [valueParams=" + valueParams + "]";
+  }
+  
+  
+}
