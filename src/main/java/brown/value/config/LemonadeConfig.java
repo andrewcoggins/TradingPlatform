@@ -1,6 +1,6 @@
 package brown.value.config;
 
-import brown.value.andrew.valuation.ValuationType;
+import brown.value.valuation.ValuationType;
 
 public class LemonadeConfig extends ValConfig {
   

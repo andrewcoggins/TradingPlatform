@@ -35,9 +35,9 @@ import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.andrew.valuation.IValuation;
-import brown.value.andrew.valuation.ValuationType;
 import brown.value.config.ValConfig;
+import brown.value.valuation.IValuation;
+import brown.value.valuation.ValuationType;
 import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
 

@@ -1,4 +1,4 @@
-package brown.value.andrew.valuation;
+package brown.value.valuation;
 
 /**
  * IDMValuation specifies a valuation characterized by

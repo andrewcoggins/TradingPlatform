@@ -1,42 +1,41 @@
-package brown.value.andrew.valuation.library;
+package brown.value.valuation.library;
 
 import java.util.List;
 
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.andrew.valuation.IComplementaryValuation;
 import brown.value.valuable.library.Value;
+import brown.value.valuation.IDMValuation;
 
 /**
- * a complementary valuation produces a valuation of goods, where 
- * bundles are preferred to individual goods.
+ * a valuation over tradeables with diminishing marginal utility.
  * @author andrew
  *
  */
-public class ComplementaryValuation implements IComplementaryValuation {
-  
-  private final Double baseValue; 
-  private final Double delta; 
+public class DMValuation implements IDMValuation {
+
+  public final Double baseValue; 
+  public final Double discountFactor; 
   
   /**
    * 
    * @param baseValue
-   * the base value of an individual good.
-   * @param delta
-   * the factor by which a bundle value is better than a individual values.
+   * base value of a single tradeable.
+   * @param discountFactor
+   * discount factor for marginal values of goods in a bundle.
    */
-  public ComplementaryValuation(Double baseValue, Double delta) {
+  public DMValuation(Double baseValue, Double discountFactor) {
     this.baseValue = baseValue; 
-    this.delta = delta; 
+    this.discountFactor = discountFactor; 
   }
-
+  
   @Override
   public Value getValuation(ITradeable tradeable) {
     List<SimpleTradeable> allTradeables = tradeable.flatten(); 
     int size = allTradeables.size(); 
     double value = 0.0; 
     for (int i = 0; i < size; i++) {
-      value = value + this.baseValue * Math.pow(this.delta, i);
+      value = value + this.baseValue * Math.pow(discountFactor, i);
     }
     return new Value(value);
   }
@@ -46,7 +45,8 @@ public class ComplementaryValuation implements IComplementaryValuation {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((baseValue == null) ? 0 : baseValue.hashCode());
-    result = prime * result + ((delta == null) ? 0 : delta.hashCode());
+    result = prime * result
+        + ((discountFactor == null) ? 0 : discountFactor.hashCode());
     return result;
   }
 
@@ -58,25 +58,26 @@ public class ComplementaryValuation implements IComplementaryValuation {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    ComplementaryValuation other = (ComplementaryValuation) obj;
+    DMValuation other = (DMValuation) obj;
     if (baseValue == null) {
       if (other.baseValue != null)
         return false;
     } else if (!baseValue.equals(other.baseValue))
       return false;
-    if (delta == null) {
-      if (other.delta != null)
+    if (discountFactor == null) {
+      if (other.discountFactor != null)
         return false;
-    } else if (!delta.equals(other.delta))
+    } else if (!discountFactor.equals(other.discountFactor))
       return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "ComplementaryValuation [baseValue=" + baseValue + ", delta=" + delta
-        + "]";
+    return "DMValuation [baseValue=" + baseValue + ", discountFactor="
+        + discountFactor + "]";
   }
+  
   
   
 }

@@ -1,10 +1,10 @@
-package brown.value.andrew.distribution.library;
+package brown.value.distribution.library;
 
-import brown.value.andrew.distribution.IValuationDistribution;
-import brown.value.andrew.valuation.IValuation;
-import brown.value.andrew.valuation.library.DMValuation;
+import brown.value.distribution.IValuationDistribution;
 import brown.value.generator.IValuationGenerator;
 import brown.value.valuable.library.Value;
+import brown.value.valuation.IValuation;
+import brown.value.valuation.library.DMValuation;
 
 public class DMValuationDistribution implements IValuationDistribution {
 

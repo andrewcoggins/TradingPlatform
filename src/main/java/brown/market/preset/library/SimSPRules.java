@@ -7,7 +7,7 @@ import brown.rules.irpolicies.library.LemonadeAnonymous;
 import brown.rules.paymentrules.library.SimpleSecondPrice;
 import brown.rules.queryrules.library.SealedBidQuery;
 import brown.rules.terminationconditions.library.OneShotTermination;
-import brown.rules.terminationconditions.library.ThreeRoundTermination;
+import brown.rules.terminationconditions.library.XRoundTermination;
 
 public class SimSPRules extends AbsMarketPreset {
 
@@ -23,7 +23,7 @@ public class SimSPRules extends AbsMarketPreset {
         new OneShotActivity(),
         new LemonadeAnonymous(),
         new OneShotTermination(), 
-        new ThreeRoundTermination());
+        new XRoundTermination());
   }
   
 }

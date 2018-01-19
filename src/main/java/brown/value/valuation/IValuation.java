@@ -1,4 +1,4 @@
-package brown.value.andrew.valuation;
+package brown.value.valuation;
 
 import brown.tradeable.ITradeable;
 import brown.value.valuable.library.Value;

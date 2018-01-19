@@ -1,12 +1,12 @@
-package brown.value.andrew.valuation.library;
+package brown.value.valuation.library;
 
 import java.util.List;
 import java.util.Map;
 
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.andrew.valuation.IMonotonicValuation;
 import brown.value.valuable.library.Value;
+import brown.value.valuation.IMonotonicValuation;
 
 /**
  * additive valuation specifies a valuation over goods, 

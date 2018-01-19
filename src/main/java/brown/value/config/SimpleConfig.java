@@ -3,9 +3,9 @@ package brown.value.config;
 import java.util.Set;
 
 import brown.tradeable.ITradeable;
-import brown.value.andrew.distribution.library.AdditiveValuationDistribution;
-import brown.value.andrew.valuation.ValuationType;
+import brown.value.distribution.library.AdditiveValuationDistribution;
 import brown.value.generator.library.NormalValGenerator;
+import brown.value.valuation.ValuationType;
 
 /**
  * Configuration for simple valuations. 

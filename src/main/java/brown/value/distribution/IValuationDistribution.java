@@ -1,6 +1,6 @@
-package brown.value.andrew.distribution;
+package brown.value.distribution;
 
-import brown.value.andrew.valuation.IValuation;
+import brown.value.valuation.IValuation;
 
 /**
  * IValuationDistribution samples IValuations

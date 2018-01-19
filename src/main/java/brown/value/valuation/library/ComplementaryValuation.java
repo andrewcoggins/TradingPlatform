@@ -1,41 +1,42 @@
-package brown.value.andrew.valuation.library;
+package brown.value.valuation.library;
 
 import java.util.List;
 
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.andrew.valuation.IDMValuation;
 import brown.value.valuable.library.Value;
+import brown.value.valuation.IComplementaryValuation;
 
 /**
- * a valuation over tradeables with diminishing marginal utility.
+ * a complementary valuation produces a valuation of goods, where 
+ * bundles are preferred to individual goods.
  * @author andrew
  *
  */
-public class DMValuation implements IDMValuation {
-
-  public final Double baseValue; 
-  public final Double discountFactor; 
+public class ComplementaryValuation implements IComplementaryValuation {
+  
+  private final Double baseValue; 
+  private final Double delta; 
   
   /**
    * 
    * @param baseValue
-   * base value of a single tradeable.
-   * @param discountFactor
-   * discount factor for marginal values of goods in a bundle.
+   * the base value of an individual good.
+   * @param delta
+   * the factor by which a bundle value is better than a individual values.
    */
-  public DMValuation(Double baseValue, Double discountFactor) {
+  public ComplementaryValuation(Double baseValue, Double delta) {
     this.baseValue = baseValue; 
-    this.discountFactor = discountFactor; 
+    this.delta = delta; 
   }
-  
+
   @Override
   public Value getValuation(ITradeable tradeable) {
     List<SimpleTradeable> allTradeables = tradeable.flatten(); 
     int size = allTradeables.size(); 
     double value = 0.0; 
     for (int i = 0; i < size; i++) {
-      value = value + this.baseValue * Math.pow(discountFactor, i);
+      value = value + this.baseValue * Math.pow(this.delta, i);
     }
     return new Value(value);
   }
@@ -45,8 +46,7 @@ public class DMValuation implements IDMValuation {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((baseValue == null) ? 0 : baseValue.hashCode());
-    result = prime * result
-        + ((discountFactor == null) ? 0 : discountFactor.hashCode());
+    result = prime * result + ((delta == null) ? 0 : delta.hashCode());
     return result;
   }
 
@@ -58,26 +58,25 @@ public class DMValuation implements IDMValuation {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    DMValuation other = (DMValuation) obj;
+    ComplementaryValuation other = (ComplementaryValuation) obj;
     if (baseValue == null) {
       if (other.baseValue != null)
         return false;
     } else if (!baseValue.equals(other.baseValue))
       return false;
-    if (discountFactor == null) {
-      if (other.discountFactor != null)
+    if (delta == null) {
+      if (other.delta != null)
         return false;
-    } else if (!discountFactor.equals(other.discountFactor))
+    } else if (!delta.equals(other.delta))
       return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "DMValuation [baseValue=" + baseValue + ", discountFactor="
-        + discountFactor + "]";
+    return "ComplementaryValuation [baseValue=" + baseValue + ", delta=" + delta
+        + "]";
   }
-  
   
   
 }

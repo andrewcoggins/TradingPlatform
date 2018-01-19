@@ -1,8 +1,8 @@
 package brown.value.config; 
 
 
-import brown.value.andrew.distribution.IValuationDistribution;
-import brown.value.andrew.valuation.ValuationType;
+import brown.value.distribution.IValuationDistribution;
+import brown.value.valuation.ValuationType;
 
 
 public class ValConfig {

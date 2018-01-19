@@ -1,4 +1,4 @@
-package brown.value.andrew.valuation;
+package brown.value.valuation;
 
 /**
  * IComplementaryValuation specifies a valuation for bundles

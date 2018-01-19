@@ -1,4 +1,4 @@
-package brown.value.andrew.distribution.library;
+package brown.value.distribution.library;
 
 import java.util.HashSet;
 import java.util.List;
@@ -7,11 +7,11 @@ import java.util.Set;
 
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.andrew.distribution.IValuationDistribution;
-import brown.value.andrew.valuation.IValuation;
-import brown.value.andrew.valuation.library.AdditiveValuation;
+import brown.value.distribution.IValuationDistribution;
 import brown.value.generator.IValuationGenerator;
 import brown.value.valuable.library.Value;
+import brown.value.valuation.IValuation;
+import brown.value.valuation.library.AdditiveValuation;
 
 /**
  * distribution for producing samples of additive valuations.

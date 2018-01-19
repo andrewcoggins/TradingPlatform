@@ -1,4 +1,4 @@
-package brown.value.andrew.valuation;
+package brown.value.valuation;
 
 /**
  * IMonotonicValuation specifies Valuations that must be 

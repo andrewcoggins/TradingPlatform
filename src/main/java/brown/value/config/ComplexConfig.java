@@ -3,7 +3,7 @@ package brown.value.config;
 import java.util.Set;
 
 import brown.tradeable.ITradeable;
-import brown.value.andrew.valuation.ValuationType;
+import brown.value.valuation.ValuationType;
 
 /**
  * Configuration for complex valuations. 

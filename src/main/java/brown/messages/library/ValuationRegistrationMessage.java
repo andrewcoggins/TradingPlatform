@@ -1,8 +1,8 @@
 package brown.messages.library; 
 
 import brown.messages.library.RegistrationMessage;
-import brown.value.andrew.distribution.IValuationDistribution;
-import brown.value.andrew.valuation.IValuation;
+import brown.value.distribution.IValuationDistribution;
+import brown.value.valuation.IValuation;
 
 /**
  * sends agents their valuations from the server
