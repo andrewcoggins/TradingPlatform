@@ -15,7 +15,7 @@ public class CompleteState implements ICompleteState {
 
   private final Integer ID;  
   private final Set<ITradeable> TRADEABLES;
-  private List<TradeMessage> BIDS;
+  private List<TradeMessage> bids;
   private int ticks;  
   
   //allocation + payment rule
@@ -38,7 +38,7 @@ public class CompleteState implements ICompleteState {
   public CompleteState(Integer ID, Set<ITradeable> tradeables) {
     this.ID = ID; 
     this.TRADEABLES = tradeables; 
-    this.BIDS = new LinkedList<TradeMessage>();
+    this.bids = new LinkedList<TradeMessage>();
     this.outerTerminated = false; 
     this.increment = 0.0;
     this.ticks = 0; 
@@ -70,17 +70,17 @@ public class CompleteState implements ICompleteState {
 
   @Override
   public void addBid(TradeMessage bid) {
-    BIDS.add(bid);
+    bids.add(bid);
   }
 
   @Override
   public void clearBids() {
-   this.BIDS = new LinkedList<TradeMessage>();
+   this.bids = new LinkedList<TradeMessage>();
   }
 
   @Override
   public List<TradeMessage> getBids() {
-    return this.BIDS; 
+    return this.bids; 
   }
 
   @Override
@@ -171,7 +171,7 @@ public class CompleteState implements ICompleteState {
   // resets everything EXCEPT outer terminated condition and outer runs
   @Override
   public void reset() {
-    this.BIDS = new LinkedList<TradeMessage>();
+    this.bids = new LinkedList<TradeMessage>();
     this.allocation = new Allocation();
     this.payment = new Payment();
     this.increment = 0.0;

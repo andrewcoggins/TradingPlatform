@@ -1,7 +1,5 @@
 package brown.agent;
 
-import brown.channels.agent.library.CDAAgentChannel;
-import brown.channels.agent.library.SimpleAgentChannel;
 import brown.messages.library.AckMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.BidRequestMessage;

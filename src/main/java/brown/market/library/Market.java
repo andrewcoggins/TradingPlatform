@@ -32,12 +32,12 @@ public class Market implements IMarket {
   public Market(AbsMarketPreset rules, ICompleteState state) {
     this.PRULE = rules.pRule;
     this.ARULE = rules.aRule;
-     this.QRULE = rules.qRule;
-     this.ACTRULE = rules.actRule;
-     this.IRPOLICY = rules.infoPolicy;
-     this.ITCONDITION = rules.innerTCondition;
-     this.OTCONDITION = rules.outerTCondition;
-     this.STATE = state;
+    this.QRULE = rules.qRule;
+    this.ACTRULE = rules.actRule;
+    this.IRPOLICY = rules.infoPolicy;
+    this.ITCONDITION = rules.innerTCondition;
+    this.OTCONDITION = rules.outerTCondition;
+    this.STATE = state;
  }
   
   @Override
@@ -45,11 +45,9 @@ public class Market implements IMarket {
     return this.STATE.getID();
   }
 
-  // constructs a trade request
-  @Override
   public TradeRequestMessage constructTradeRequest(Integer ID) {
+    //no idea why ledgers are part of the trade request -- they should be sent as market updates!
     Ledger ledger = new Ledger(this.getID());
-    
     for(Order o : getOrders()) {
       ledger.add(o.toTransaction());
     }
@@ -58,59 +56,30 @@ public class Market implements IMarket {
     return request;
   }
 
-  // asks if the game in a sequence of games is
-  // over per the termination condition
-  @Override
-  public boolean isOver() {
-    ITCONDITION.innerTerminated(this.STATE);
-    return this.STATE.getInnerOver();
-  }
-  
-  // asks if the entire sequence of games is 
-  // over per the outer termination condition.
-  @Override
-  public boolean isOverOuter() {
-    OTCONDITION.outerTerminated(this.STATE);
-    //clear the orders. Maybe clear other things too.
-    return this.STATE.getOuterOver();
-  } 
-
-  // handles a bid from an agent. The activity rule determines if it is 
-  // to be accepted or not. 
-  @Override
+  // this looks like it is checking validity, not processing the bids
+  // name seems misleading
   public boolean handleBid(TradeMessage bid) {
     this.ACTRULE.isAcceptable(this.STATE, bid); 
-    if(this.STATE.getAcceptable()) {
-        STATE.addBid(bid);
+    if (this.STATE.getAcceptable()) {
+      STATE.addBid(bid);
     }
     return this.STATE.getAcceptable();
   }
 
-  // Gets the orders to execute at end of auction
-  @Override
+  // this seems more like constructOrders
   public List<Order> getOrders() {
     // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
     // construct orders
-    this.PRULE.setOrders(this.STATE);
+    this.PRULE.setOrders(this.STATE); // setPayment
 
     // Construct orders from allocation and payments
     return this.STATE.getPayments().getOrders();
   }
 
-  // increments time. 
-  @Override
-  public void tick(long time) {
-    this.STATE.tick(time);
-  }
-
-  // Clears the in
-  @Override
-  public void clearState() { 
-    this.STATE.clearOrders();
-  }
-  
   @Override 
+  // maybe this is constructGameReport
+  // i'm worried about setAllocation and setOrders potentially being called twice in a row
   public GameReportMessage getReport() {
     // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
@@ -119,6 +88,26 @@ public class Market implements IMarket {
 
     this.IRPOLICY.setReport(this.STATE);
     return this.STATE.getReport();
+  }
+
+  public boolean isOver() {
+    ITCONDITION.innerTerminated(this.STATE);
+    return this.STATE.getInnerOver();
+  }
+  
+  public boolean isOverOuter() {
+    OTCONDITION.outerTerminated(this.STATE);
+    return this.STATE.getOuterOver();
+  } 
+
+  public void tick(long time) {
+    this.STATE.tick(time);
+  }
+
+  //why clear so little of the market state? is there not more to clear?
+  public void clearState() { 
+    this.STATE.clearBids();
+    this.STATE.clearOrders();
   }
   
   @Override

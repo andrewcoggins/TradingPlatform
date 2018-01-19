@@ -6,7 +6,7 @@ import java.util.List;
 import brown.market.marketstate.IPayment;
 
 /**
- * A payment maps ITradeables to prices.
+ * A Payment stores a map from Agents to Prices
  * @author andrew
  */
 public class Payment implements IPayment {
@@ -27,6 +27,11 @@ public class Payment implements IPayment {
   }
   
   @Override
+  public String toString() {
+    return "Payment [orders=" + orders + "]";
+  }
+
+  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -38,9 +43,5 @@ public class Payment implements IPayment {
   public boolean equals(Object obj) {
     return (obj instanceof Payment && ((Payment) obj).orders.equals(this.orders));
   }
-
-  @Override
-  public String toString() {
-    return "Payment [" + orders + "]";
-  }  
+  
 }

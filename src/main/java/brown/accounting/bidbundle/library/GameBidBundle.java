@@ -36,23 +36,38 @@ public class GameBidBundle implements IBidBundle {
   public BundleType getType() {
     return this.BT;
   } 
-
-  //toString!!
   
+  @Override
+  public String toString() {
+    return "GameBidBundle [BIDS=" + BIDS + ", BT=" + BT + "]";
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((BT == null) ? 0 : BT.hashCode());
     result = prime * result + ((BIDS == null) ? 0 : BIDS.hashCode());
+    result = prime * result + ((BT == null) ? 0 : BT.hashCode());
     return result;
   }
 
   @Override
   public boolean equals(Object obj) {
-    return(obj instanceof GameBidBundle && 
-        ((GameBidBundle) obj).BIDS.equals(this.BIDS) &&
-        ((GameBidBundle) obj).BIDS.equals(this.BT));
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    GameBidBundle other = (GameBidBundle) obj;
+    if (BIDS == null) {
+      if (other.BIDS != null)
+        return false;
+    } else if (!BIDS.equals(other.BIDS))
+      return false;
+    if (BT != other.BT)
+      return false;
+    return true;
   }
   
 }

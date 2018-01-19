@@ -34,7 +34,7 @@ public interface IAgentChannel {
 	 /**
    * bids in the auction
    * @param agent
-   * @param AbsBid some representation of bid
+   * @param bid
    */
 	public void bid(AbsAgent agent, IBidBundle bid);
 	

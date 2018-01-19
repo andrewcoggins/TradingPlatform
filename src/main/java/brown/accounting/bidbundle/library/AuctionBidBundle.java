@@ -10,10 +10,11 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 
 /**
-  * The built-in BidBundle is called SimpleBidBundle,
+  * The built-in BidBundle is called AuctionBidBundle,
   * and holds one double. 
   */
 public class AuctionBidBundle implements IBidBundle {
+  
 	private final AuctionBid BIDS;
 	private final BundleType BT;
 	
@@ -87,4 +88,5 @@ public class AuctionBidBundle implements IBidBundle {
         ((AuctionBidBundle) obj).BIDS.equals(this.BIDS) &&
         ((AuctionBidBundle) obj).BT.equals(this.BT));
   }	
+  
 }

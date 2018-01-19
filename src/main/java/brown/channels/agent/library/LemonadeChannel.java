@@ -2,7 +2,6 @@ package brown.channels.agent.library;
 
 import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.bidbundle.library.BundleType;
-import brown.accounting.bidbundle.library.GameBidBundle;
 import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
@@ -19,23 +18,8 @@ public class LemonadeChannel extends AbsChannel {
     super();
   }
   
-  /**
-   * Actual constructor
-   * @param ID
-   * @param ledger
-   */
   public LemonadeChannel(Integer ID, Ledger ledger) {
-    super(ID,ledger);
-  }
-
-  @Override
-  public Integer getAuctionID() {
-    return this.ID;
-  }
-
-  @Override
-  public Ledger getLedger() {
-    return this.ledger;
+    super(ID, ledger);
   }
 
   @Override

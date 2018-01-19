@@ -38,7 +38,7 @@ public class SimpleAgentChannel extends AbsChannel {
 	 * @param highBid
 	 */
 	public SimpleAgentChannel(Integer ID, Ledger ledger, MechanismType mtype, AuctionBidBundle highBid) {
-    super(ID,ledger);	  
+    super(ID, ledger);	  
 		this.HighBid = highBid;
 		this.MechType = mtype;
 	}
