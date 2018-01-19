@@ -16,10 +16,9 @@ public class CompleteState implements ICompleteState {
   private final Integer ID;  
   private final Set<ITradeable> TRADEABLES;
   private List<TradeMessage> BIDS;
-  private List<Order> orders; 
   private int ticks;  
   
-  //allocation + payent rule
+  //allocation + payment rule
   private MarketState marketState;
   //query rule
   private TradeRequestMessage tRequest;
@@ -40,7 +39,6 @@ public class CompleteState implements ICompleteState {
     this.ID = ID; 
     this.TRADEABLES = tradeables; 
     this.BIDS = new LinkedList<TradeMessage>();
-    this.orders = new LinkedList<Order>();
     this.marketState = new MarketState();
     this.outerTerminated = false; 
     this.increment = 0.0;
@@ -96,19 +94,8 @@ public class CompleteState implements ICompleteState {
   }
 
   @Override
-  public List<Order> getOrders() {
-    return this.orders; 
-  }
-
-  @Override
-  public void constructOrders() {
-    // TODO fill this in.
-    
-  }
-
-  @Override
   public void clearOrders() {
-    this.orders = new LinkedList<Order>();
+    this.marketState.setPayments(new Payment());
   }
 
   @Override
@@ -190,5 +177,4 @@ public class CompleteState implements ICompleteState {
   public void setReport(GameReportMessage gameReport) {
     this.gameReport = gameReport;
   }
-  
 }

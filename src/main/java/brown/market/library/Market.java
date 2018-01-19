@@ -49,8 +49,7 @@ public class Market implements IMarket {
   @Override
   public TradeRequestMessage constructTradeRequest(Integer ID) {
     Ledger ledger = new Ledger(this.getID());
-    List<Order> allOrders = this.STATE.getOrders(); 
-    for(Order o : allOrders) {
+    for(Order o : getOrders()) {
       ledger.add(o.toTransaction());
     }
     this.QRULE.makeChannel(STATE, ledger);
@@ -91,11 +90,11 @@ public class Market implements IMarket {
   public List<Order> getOrders() {
     // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
-    this.PRULE.setPayments(this.STATE);
+    // construct orders
+    this.PRULE.setOrders(this.STATE);
 
     // Construct orders from allocation and payments
-    this.STATE.constructOrders();
-    return this.STATE.getOrders();
+    return this.STATE.getMarketState().getPayments().getOrders();
   }
 
   // increments time. 
@@ -115,9 +114,8 @@ public class Market implements IMarket {
   public GameReportMessage getReport() {
     // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
-    this.PRULE.setPayments(this.STATE);
+    this.PRULE.setOrders(this.STATE);
     // Construct orders from allocation and payments
-    this.STATE.constructOrders();    
 
     this.IRPOLICY.setReport(this.STATE);
     return this.STATE.getReport();
