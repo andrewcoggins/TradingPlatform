@@ -1,150 +1,48 @@
-//package brown.value.valuation.library; 
-//
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//import java.util.Set;
-//
-//import brown.tradeable.ITradeable;
-//import brown.tradeable.library.SimpleTradeable;
-//import brown.value.generator.IValuationGenerator;
-//import brown.value.valuable.library.Value;
-//import brown.value.valuation.IIndependentValuation;
-//
-///**
-// * A Valuation where the values of each good are independent.
-// * @author andrew
-// */
-//public class AdditiveValuation implements IIndependentValuation {
-//
-//  private IValuationGenerator generator; 
-//  
-//  /**
-//   * For kryo 
-//   * DO NOT USE
-//   */
-//  public AdditiveValuation() {
-//      this.generator = null; 
-//  }
-//  
-//  
-//  /**
-//   * constructor with an input IValuationGenerator and its associated parameters.
-//   * @param valGenerator
-//   * @param goods
-//   */
-//  public AdditiveValuation(IValuationGenerator valGenerator) {
-//    this.generator = valGenerator;
-//  }
-//  
-//  private Value generate(SimpleTradeable good) {
-//    return this.generator.makeValuation(good);
-//  }
-//  
-//  @Override
-//  public Value makeValuation(ITradeable good) {
-//    double currentValue = 0.0; 
-//    List<SimpleTradeable> atoms = good.flatten();
-//    for(SimpleTradeable atom : atoms) {
-//      currentValue = currentValue + this.generate(atom).value;
-//    }
-//    return new Value(currentValue);
-//  }
-//
-//  @Override
-//  public Map<ITradeable, Value> makeValuation(Set<ITradeable> goods) {
-//    Map<ITradeable, Value> values = new HashMap<ITradeable, Value>();
-//    for (ITradeable good : goods) { 
-//      values.put(good, this.makeValuation(good));
-//    }
-//    return values;
-//  }
-//}
+package brown.value.valuation.library;
 
-package brown.value.valuation.library; 
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.generator.IValuationGenerator;
-import brown.value.generator.library.UniformValGenerator;
 import brown.value.valuable.library.Value;
-import brown.value.valuation.IIndependentValuation;
+import brown.value.valuation.IMonotonicValuation;
 
 /**
- * A Valuation where the values of each good are independent.
+ * additive valuation specifies a valuation over goods, 
+ * where values are additive.
  * @author andrew
+ *
  */
-public class AdditiveValuation implements IIndependentValuation {
-  
-  private final Map<ITradeable, Value> valuation;
-  
-  /**
-   * For kryo 
-   * DO NOT USE
-   */
-  public AdditiveValuation() {
-      this.valuation = null;
-  }
-  
-  /**
-   * Default constructor
-   * @param goods
-   */
-  public AdditiveValuation(Set<ITradeable> goods) {
-    this.valuation = new HashMap<ITradeable, Value>();
-    UniformValGenerator rg = new UniformValGenerator();
-    for(ITradeable item : goods) {
-      List<SimpleTradeable> atoms = item.flatten();
-      for (SimpleTradeable atom : atoms) {
-        valuation.put(atom, rg.makeValuation(atom));
-      }
-    }
-  }
-  
-  /**
-   * constructor with an input IValuationGenerator and its associated parameters.
-   * @param valGenerator
-   * @param goods
-   */
-  public AdditiveValuation(IValuationGenerator valGenerator, Set<ITradeable> goods) { // re-order parameters
-    this.valuation = new HashMap<ITradeable, Value>();
-    for(ITradeable item : goods) {
-      List<SimpleTradeable> atoms = item.flatten();
-      for (SimpleTradeable atom : atoms) {
-        valuation.put(atom, valGenerator.makeValuation(atom));
-      }
-    }
-  }
-  
-  @Override
-  public Value getValuation(ITradeable good) {
-    double currentValue = 0.0; 
-    List<SimpleTradeable> atoms = good.flatten();
-    for(SimpleTradeable atom : atoms) {
-      currentValue = currentValue + valuation.get(atom).value;
-    }
-    return new Value(currentValue);
-  }
+public class AdditiveValuation implements IMonotonicValuation {
 
+  private final Map<SimpleTradeable, Value> valueParams; 
+  
+  /**
+   * additive valuation takes in a mapping from values to 
+   * individual tradeables.
+   * @param valueParams
+   */
+  public AdditiveValuation(Map<SimpleTradeable, Value> valueParams) {
+    this.valueParams = valueParams; 
+  }
+  
   @Override
-  public Map<ITradeable, Value> getValuation(Set<ITradeable> goods) {
-    Map<ITradeable, Value> values = new HashMap<ITradeable, Value>();
-    for (ITradeable good : goods) { 
-      values.put(good, this.getValuation(good));
+  public Value getValuation(ITradeable tradeable) {
+    double value = 0.0; 
+    List<SimpleTradeable> allTradeables = tradeable.flatten(); 
+    for(SimpleTradeable atom : allTradeables) {
+      value = value + this.valueParams.get(atom).value; 
     }
-    return values;
+    return new Value(value);
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((valuation == null) ? 0 : valuation.hashCode());
+    result =
+        prime * result + ((valueParams == null) ? 0 : valueParams.hashCode());
     return result;
   }
 
@@ -157,17 +55,18 @@ public class AdditiveValuation implements IIndependentValuation {
     if (getClass() != obj.getClass())
       return false;
     AdditiveValuation other = (AdditiveValuation) obj;
-    if (valuation == null) {
-      if (other.valuation != null)
+    if (valueParams == null) {
+      if (other.valueParams != null)
         return false;
-    } else if (!valuation.equals(other.valuation))
+    } else if (!valueParams.equals(other.valueParams))
       return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "AdditiveValuation [valMap=" + valuation + "]";
+    return "AdditiveValuation [valueParams=" + valueParams + "]";
   }
+  
   
 }

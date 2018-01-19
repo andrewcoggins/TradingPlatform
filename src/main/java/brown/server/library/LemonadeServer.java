@@ -31,10 +31,10 @@ public class LemonadeServer {
     allTradeables.add(new MultiTradeable(1, 24));
     
     // our valuation information and rules information.
-    allValInfo.add(new LemonadeConfig(allTradeables));
+    allValInfo.add(new LemonadeConfig());
     allMarkets.add(new LemonadeRules()); 
     
-    new RunServer(2121, new LemonadeSetup()).runGame(allMarkets, allValInfo, null, null);
+    new RunServer(2121, new LemonadeSetup()).runGame(allTradeables, allMarkets, allValInfo, null, null);
   }
   
 }

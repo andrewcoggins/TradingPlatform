@@ -13,33 +13,19 @@ import brown.value.valuable.library.Value;
 
 public class NormalValGenerator implements IValuationGenerator {
 
-  private Function<Integer, Double> valFunction; 
-  private Double baseVariance; 
-  private Double expectedCovariance; 
-  private Double valueScale;
-  private Double varCoVar[][];
+  private Double mean; 
+  private Double variance; 
+
   
-  public NormalValGenerator (Function<Integer, Double> valFunction, Double valueScale) {
-   this.valFunction = valFunction; 
-   this.baseVariance = 1.0;
-   this.expectedCovariance = 0.0;
-   this.valueScale = valueScale; 
- }
-  
-  public NormalValGenerator (Function<Integer, Double> valFunction, 
-      Double baseVariance, Double expectedCovariance, 
-      Double valueScale) {
-    this.valFunction = valFunction; 
-    this.expectedCovariance = expectedCovariance; 
-    this.baseVariance = baseVariance; 
-    this.valueScale = valueScale; 
+  public NormalValGenerator (Double mean, Double variance) {
+    this.mean = mean; 
+    this.variance = variance; 
   }
  
   @Override
-  public Value makeValuation(ITradeable good) {
+  public Value makeValuation() {
     RandomGenerator rng = new ISAACRandom();
-    Double meanValue = valFunction.apply(1);
-    NormalDistribution normalDist = new NormalDistribution(rng, meanValue, this.baseVariance);
+    NormalDistribution normalDist = new NormalDistribution(rng, mean, variance);
     Double actualValue = -1.0;
     while (actualValue < 0)
       actualValue = normalDist.sample();
@@ -208,33 +194,33 @@ public class NormalValGenerator implements IValuationGenerator {
     
     
  
-    /**
-     * Helper function for populating the variance covariance matrix
-     * for the above methods
-     */
-    private void populateVarCoVarMatrix(Integer size) {
-      //distribution to draw covariance observations. Currently included a default value
-      //to assure positive semidefiniance but hoping to later change this with a method 
-      //that assures positive semidefinance as defined by Sylvester's Criterion.
-      NormalDistribution varianceDist = new NormalDistribution(new ISAACRandom(),
-      expectedCovariance, 0.1);
-      varCoVar = new Double[size][size];
-       for(int i = 0; i < size; i++) {
-        for(int j = i; j < size; j++) {
-          if (i == j) {
-            varCoVar[i][j] = baseVariance; 
-          }
-          else {
-            Double entry = Double.POSITIVE_INFINITY;
-            while (Math.abs(entry) >= baseVariance) {
-              entry = varianceDist.sample();
-            }
-            varCoVar[i][j] = entry;
-            varCoVar[j][i] = entry;
-          }
-        }
-      }
-      }
+//    /**
+//     * Helper function for populating the variance covariance matrix
+//     * for the above methods
+//     */
+//    private void populateVarCoVarMatrix(Integer size) {
+//      //distribution to draw covariance observations. Currently included a default value
+//      //to assure positive semidefiniance but hoping to later change this with a method 
+//      //that assures positive semidefinance as defined by Sylvester's Criterion.
+//      NormalDistribution varianceDist = new NormalDistribution(new ISAACRandom(),
+//      expectedCovariance, 0.1);
+//      varCoVar = new Double[size][size];
+//       for(int i = 0; i < size; i++) {
+//        for(int j = i; j < size; j++) {
+//          if (i == j) {
+//            varCoVar[i][j] = baseVariance; 
+//          }
+//          else {
+//            Double entry = Double.POSITIVE_INFINITY;
+//            while (Math.abs(entry) >= baseVariance) {
+//              entry = varianceDist.sample();
+//            }
+//            varCoVar[i][j] = entry;
+//            varCoVar[j][i] = entry;
+//          }
+//        }
+//      }
+//      }
     
     //Boolean isPositiveDefinite = false; 
     //check the positive definance of the matrix.

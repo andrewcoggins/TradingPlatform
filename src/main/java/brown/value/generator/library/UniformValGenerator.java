@@ -1,6 +1,5 @@
 package brown.value.generator.library;
 
-import brown.tradeable.ITradeable;
 import brown.value.generator.IValuationGenerator;
 import brown.value.valuable.library.Value;
 
@@ -24,7 +23,7 @@ public class UniformValGenerator implements IValuationGenerator {
   }
 
   @Override
-  public Value makeValuation(ITradeable good) {
+  public Value makeValuation() {
     return new Value((Math.random() * this.MAX) + this.MIN);
   }
   

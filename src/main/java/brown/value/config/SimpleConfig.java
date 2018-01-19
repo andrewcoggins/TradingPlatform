@@ -3,8 +3,9 @@ package brown.value.config;
 import java.util.Set;
 
 import brown.tradeable.ITradeable;
+import brown.value.distribution.library.AdditiveValuationDistribution;
 import brown.value.generator.library.NormalValGenerator;
-import brown.value.valuation.library.ValuationType;
+import brown.value.valuation.ValuationType;
 
 /**
  * Configuration for simple valuations. 
@@ -13,7 +14,7 @@ import brown.value.valuation.library.ValuationType;
 public class SimpleConfig extends ValConfig {
   
   public SimpleConfig(Set<ITradeable> allGoods) {
-    super(allGoods, ValuationType.Simple, new NormalValGenerator(x -> (double) x, 1.0));
+    super(new AdditiveValuationDistribution(new NormalValGenerator(1.0, 1.0), allGoods), ValuationType.Auction);
   }
   
 }

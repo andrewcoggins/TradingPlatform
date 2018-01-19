@@ -2,6 +2,7 @@ package brown.server.library;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -34,6 +35,6 @@ public class CombinatorialServer {
     allValInfo.add(new ComplexConfig(goods));
     allMarkets.add(new CombinatorialRules()); 
     
-    new RunServer(2121, new LemonadeSetup()).runGame(allMarkets, allValInfo, 1000.0, null);
+    new RunServer(2121, new LemonadeSetup()).runGame(goods, allMarkets, allValInfo, 1000.0, new LinkedList<ITradeable>());
   }
 }
