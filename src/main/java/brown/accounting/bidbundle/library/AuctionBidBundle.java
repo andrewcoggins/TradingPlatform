@@ -7,7 +7,6 @@ import java.util.Map;
 import brown.accounting.bid.AuctionBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.SimpleTradeable;
 
 /**
   * The built-in BidBundle is called AuctionBidBundle,
@@ -36,25 +35,17 @@ public class AuctionBidBundle implements IBidBundle {
 			throw new IllegalArgumentException("Null bids");
 		}
 		List<ITradeable> t = new LinkedList<ITradeable>();
-		t.add(new SimpleTradeable(0));
 		for (ITradeable b : t) {
 		  bids.put(b, 1.0);
 		}
-		ITradeable a = new SimpleTradeable(0);
-		bids.put(a, 1000.0);
 		this.BIDS = new AuctionBid(bids);
-		this.BT = BundleType.Simple;
+		this.BT = BundleType.AUCTION;
 	}
 
-  @Override
-	public double getCost() {
-		double total = 0;
-		for (Double b : this.BIDS.bids.values()) {
-			total += b;
-		}
-		return total;
-	}
-
+	 /**
+   * @return - get the Bids in auction format (an AuctionBid wrapping a <ITradeable,Double> Map)
+   */
+	@Override
   public AuctionBid getBids() {
     return this.BIDS;
   }
@@ -62,10 +53,6 @@ public class AuctionBidBundle implements IBidBundle {
 	@Override
 	public BundleType getType() {
 		return this.BT;
-	}
-	
-	public Double getBid(ITradeable t) {
-	  return BIDS.bids.get(t);
 	}
 	
 	@Override

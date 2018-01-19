@@ -80,7 +80,7 @@ public class SimpleAgentChannel extends AbsChannel {
 
   @Override
   public void bid(AbsAgent agent, IBidBundle bid) {
-    if (bid.getType() == BundleType.Simple){
+    if (bid.getType() == BundleType.AUCTION){
       Map<ITradeable, Double> fixedBids = new HashMap<ITradeable,Double>();    
       for (Entry<ITradeable, Double> b : ((AuctionBid) bid.getBids()).bids.entrySet() ){
         fixedBids.put(b.getKey(), b.getValue());

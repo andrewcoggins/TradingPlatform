@@ -27,7 +27,7 @@ public class SimpleHighestBidderAllocation implements IAllocationRule {
     Map<MultiTradeable, Double> highest = new HashMap<MultiTradeable, Double>();
     List<TradeMessage> allBids = state.getBids();
     for(TradeMessage bid : allBids) {
-      if(bid.Bundle.getType().equals(BundleType.Simple)) {
+      if(bid.Bundle.getType().equals(BundleType.AUCTION)) {
         AuctionBidBundle bundle = (AuctionBidBundle) bid.Bundle; 
         for (MultiTradeable t : bundle.getBids().bids.keySet()) {
           if(highest.get(t) == null || highest.get(t) < bundle.getBids().bids.get(t)) { 

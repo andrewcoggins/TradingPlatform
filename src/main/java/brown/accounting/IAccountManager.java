@@ -1,15 +1,13 @@
 package brown.accounting;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 import brown.accounting.library.Account;
 
 public interface IAccountManager {
 
   /**
-   * get all accounts in the manager, in a List
+   * Get all accounts from the manager, in a List
    */
   public List<Account> getAccounts();
   
@@ -22,14 +20,14 @@ public interface IAccountManager {
   /**
    * gets an account from an agent's private id, if it exists
    * @param ID - agent's private id
-   * @return - account, if it exists; otherwise, ???
+   * @return - account, if it exists; otherwise null
    */
   public Account getAccount(Integer ID);
   
   /**
    * does the manager contain an account associated with an agent's ID? 
    * @param ID - agent's private ID
-   * @return an account, if it exists; otherwise, ???
+   * @return - Boolean indicating if account manager has this account
    */
   public Boolean containsAcct(Integer ID);
 }

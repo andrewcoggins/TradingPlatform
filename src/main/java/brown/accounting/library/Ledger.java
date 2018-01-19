@@ -3,14 +3,16 @@ package brown.accounting.library;
 import java.util.LinkedList;
 import java.util.List;
 
+import brown.accounting.ILedger;
 import brown.tradeable.ITradeable;
 
-//TODO: abstract to the complex case
 /**
  * A ledger tracks all trades within a Market. 
  * @author lcamery
+ * @editor kerry
+ * 
  */
-public class Ledger {
+public class Ledger implements ILedger{
   
   protected final Integer marketId;
 	protected final List<Transaction> transactions;
@@ -26,24 +28,13 @@ public class Ledger {
 		this.unshared = null;
 	}
 	
-	/**
-   * Actual ledger constructor
-   * @param marketId
-   * 
-   * 
-   * 
-   */
 	public Ledger(Integer marketId) {
 	  this.marketId = marketId; 
 	  this.unshared = new LinkedList<Transaction>();
 	  this.transactions = new LinkedList<Transaction>();
-	}
-	 
+	}	 
 
-	/**
-	 * Adds a transaction
-	 * @param t - transaction to add
-	 */
+  @Override
 	public void add(Transaction t) {
 		synchronized(transactions) {
 			this.transactions.add(t);
@@ -51,6 +42,15 @@ public class Ledger {
 		}
 	}
 	
+  @Override
+	 public void add(List<Transaction> trans) {
+	    synchronized(transactions) {
+	      this.transactions.addAll(trans);
+	      this.unshared.addAll(trans);
+	    }
+	  }
+
+	@Override
 	public void add(ITradeable good, Integer toID, Double price) {
 	  synchronized(transactions) {
 	    Transaction trans = new Transaction(toID, null, price, good.getCount(), good);
@@ -59,31 +59,18 @@ public class Ledger {
 	  }
 	}
 	
-	/**
-	 * Constructs a set of all transactions
-	 * @return set
-	 */
+	@Override
 	public List<Transaction> getList() {
-		return new LinkedList<Transaction>(this.transactions);
+	  return this.transactions;
 	}
-	
-	/**
-	 * Adds a list of transactions
-	 * @param trans - list of transactions
-	 */
-	public void add(List<Transaction> trans) {
-		synchronized(transactions) {
-			this.transactions.addAll(trans);
-			this.unshared.addAll(trans);
-		}
-	}
-	
-	/**
-	 * Gets the ledger without others' IDs
-	 * @param ID - this agent's ID
-	 * @return ledger
-	 */
-	public Ledger getSanitized(Integer ID) {
+		
+  @Override
+  public List<Transaction> getUnshared() {
+    return this.unshared;
+  }
+
+  @Override
+	public Ledger getSanitizedUnshared(Integer ID) {
 		Ledger ledger = new Ledger(this.marketId);
 		synchronized(transactions) {
 			for (Transaction t : this.unshared) {
@@ -93,9 +80,6 @@ public class Ledger {
 		return ledger;
 	}
 	
-	/**
-	 * Clears the latest set
-	 */
 	public void clearUnshared() {
 		this.unshared.clear();
 	}
@@ -123,5 +107,4 @@ public class Ledger {
         ((Ledger)obj).transactions == this.transactions &&
         ((Ledger)obj).unshared == this.unshared);
   }
-
 }

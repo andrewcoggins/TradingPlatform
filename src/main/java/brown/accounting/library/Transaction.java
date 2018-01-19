@@ -85,5 +85,4 @@ public class Transaction implements ITransaction {
             ((Transaction)obj).TRADEABLE.equals(this.TRADEABLE) &&
             ((Transaction)obj).TIMESTAMP == this.TIMESTAMP);
   }
-	
 }

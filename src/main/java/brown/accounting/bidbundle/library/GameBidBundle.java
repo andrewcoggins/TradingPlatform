@@ -19,12 +19,7 @@ public class GameBidBundle implements IBidBundle {
   
   public GameBidBundle(Integer numberBid) {
     this.BIDS = new GameBid(numberBid);
-    this.BT = BundleType.Lemonade;
-  }
-  
-  @Override
-  public double getCost() {
-    return 0.;
+    this.BT = BundleType.GAME;
   }
   
   @Override
@@ -53,21 +48,8 @@ public class GameBidBundle implements IBidBundle {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    GameBidBundle other = (GameBidBundle) obj;
-    if (BIDS == null) {
-      if (other.BIDS != null)
-        return false;
-    } else if (!BIDS.equals(other.BIDS))
-      return false;
-    if (BT != other.BT)
-      return false;
-    return true;
+    return(obj instanceof GameBidBundle && 
+        ((GameBidBundle) obj).BIDS.equals(this.BIDS) &&
+        ((GameBidBundle) obj).BT.equals(this.BT));
   }
-  
 }

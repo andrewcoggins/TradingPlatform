@@ -9,30 +9,48 @@ import brown.tradeable.ITradeable;
 /**
  * A ledger tracks all trades within a Market. 
  * 
- * Not really sure what latest did but I removed it and only kept unshared
- * 
- * @author kerry
+ * @author Kerry
  */
 public interface ILedger {
 
-  // Add a transaction
+  /**
+   * @param t - Transaction to add to the ledger
+   */
   public void add(Transaction t);
   
-  // Add list of transactions
+  /**
+   * @param trans - List of transactions to add to the ledger
+   */
   public void add(List<Transaction> trans); 
   
-  // Add good,ID,price (like in an auction where an agent buys a good)
+  /**
+   * Add a transaction to ledger with just good,ID,and price (e.g. when agent
+   * buys a good from auctioneer)
+   * 
+   * @param good  
+   * @param agent - agentID
+   * @param price
+   */
   public void add(ITradeable good, Integer agent, Double price);
 
-  // Returns full history of transactions
+  /**
+   * @return - List of transactions
+   */
   public List<Transaction> getList();
   
-  // Returns history of transactions
+  /**
+   * @return - List of transactions yet to be shared over kryo
+   */
   public List<Transaction> getUnshared();
   
-  // Clears unshared transactions
-  public void clearUnshared();
+  /**
+   * @param agentID - Agent ID to keep in ledger (wipes other agent IDs)
+   * @return Ledger containing unshared transactions
+   */
+  public Ledger getSanitizedUnshared(Integer agentID);
   
-  // Wipes agent IDs other than this one
-  public Ledger getSanitized(Integer agentD);
+  /**
+   *  Clears unshared transactions
+   */
+  public void clearUnshared();
 }

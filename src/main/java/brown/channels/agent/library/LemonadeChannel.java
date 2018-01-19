@@ -32,7 +32,7 @@ public class LemonadeChannel extends AbsChannel {
   
   @Override
   public void bid(AbsAgent agent, IBidBundle bid) {
-    if (bid.getType() == BundleType.Lemonade) {
+    if (bid.getType() == BundleType.GAME) {
       agent.CLIENT.sendTCP(new TradeMessage(0, bid, this.ID, agent.ID));      
     } else {
       Logging.log("[Channel encountered invalid bid type]");

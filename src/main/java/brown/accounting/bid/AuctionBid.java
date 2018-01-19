@@ -21,6 +21,9 @@ public class AuctionBid extends AbsBid {
     this.bids = null;
   }
   
+  /**
+   * @param bids are represented as a map from ITradeables to doubles
+   */
   public AuctionBid(Map<ITradeable, Double> bids) {
     this.bids = bids; 
   }
@@ -42,6 +45,5 @@ public class AuctionBid extends AbsBid {
   public boolean equals(Object obj) {
     return(obj instanceof AuctionBid && 
         ((AuctionBid) obj).bids.equals(this.bids));
-  }
-   
+  }   
 }
