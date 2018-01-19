@@ -17,7 +17,8 @@ public class Ledger {
 	protected final List<Transaction> unshared;
 	
 	/**
-	 * For Kryo do not use
+	 * For Kryo 
+	 * DO NOT USE
 	 */
 	public Ledger() {
 	  this.marketId = null;
@@ -100,6 +101,11 @@ public class Ledger {
 	}
 
   @Override
+  public String toString() {
+    return "Ledger [marketId=" + marketId + ", transactions=" + transactions
+        + ", unshared=" + unshared + "]";
+  }
+  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -117,12 +123,5 @@ public class Ledger {
         ((Ledger)obj).transactions == this.transactions &&
         ((Ledger)obj).unshared == this.unshared);
   }
-
-  @Override
-  public String toString() {
-    return "Ledger [marketId=" + marketId + ", transactions=" + transactions
-        + ", unshared=" + unshared + "]";
-  }
-
 
 }

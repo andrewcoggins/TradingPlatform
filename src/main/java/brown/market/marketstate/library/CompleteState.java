@@ -15,12 +15,12 @@ public class CompleteState implements ICompleteState {
 
   private final Integer ID;  
   private final Set<ITradeable> TRADEABLES;
-  private List<TradeMessage> BIDS;
-  private List<Order> orders; 
+  private List<TradeMessage> bids;
   private int ticks;  
   
-  //allocation + payent rule
-  private MarketState marketState;
+  //allocation + payment rule
+  private Allocation allocation; 
+  private Payment payment; 
   //query rule
   private TradeRequestMessage tRequest;
   private Double increment;
@@ -32,22 +32,20 @@ public class CompleteState implements ICompleteState {
   //termination condition
   private Boolean innerTerminated; 
   private Boolean outerTerminated; 
-  private Integer innerRuns;
   private Integer outerRuns; 
   
   
   public CompleteState(Integer ID, Set<ITradeable> tradeables) {
     this.ID = ID; 
     this.TRADEABLES = tradeables; 
-    this.BIDS = new LinkedList<TradeMessage>();
-    this.orders = new LinkedList<Order>();
-    this.marketState = new MarketState();
+    this.bids = new LinkedList<TradeMessage>();
     this.outerTerminated = false; 
     this.increment = 0.0;
     this.ticks = 0; 
-    this.innerRuns = 0; 
     this.outerRuns = 0; 
     this.innerTerminated = false; 
+    this.allocation = new Allocation();
+    this.payment = new Payment();
   }
   
   @Override
@@ -61,16 +59,6 @@ public class CompleteState implements ICompleteState {
   }
   
   @Override
-  public MarketState getMarketState() {
-     return this.marketState; 
-  }
-
-  @Override
-  public void setMarketState(MarketState m) {
-    this.marketState = m; 
-  }
-
-  @Override
   public void tick(long time) {
     this.ticks++;
   }
@@ -82,33 +70,22 @@ public class CompleteState implements ICompleteState {
 
   @Override
   public void addBid(TradeMessage bid) {
-    BIDS.add(bid);
+    bids.add(bid);
   }
 
   @Override
   public void clearBids() {
-   this.BIDS = new LinkedList<TradeMessage>();
+   this.bids = new LinkedList<TradeMessage>();
   }
 
   @Override
   public List<TradeMessage> getBids() {
-    return this.BIDS; 
-  }
-
-  @Override
-  public List<Order> getOrders() {
-    return this.orders; 
-  }
-
-  @Override
-  public void constructOrders() {
-    // TODO fill this in.
-    
+    return this.bids; 
   }
 
   @Override
   public void clearOrders() {
-    this.orders = new LinkedList<Order>();
+    this.setPayments(new Payment());
   }
 
   @Override
@@ -190,5 +167,35 @@ public class CompleteState implements ICompleteState {
   public void setReport(GameReportMessage gameReport) {
     this.gameReport = gameReport;
   }
-  
+
+  // resets everything EXCEPT outer terminated condition and outer runs
+  @Override
+  public void reset() {
+    this.bids = new LinkedList<TradeMessage>();
+    this.allocation = new Allocation();
+    this.payment = new Payment();
+    this.increment = 0.0;
+    this.ticks = 0; 
+    this.innerTerminated = false;   
+    }
+
+  @Override
+  public Allocation getAllocation() {
+    return this.allocation;
+  }
+
+  @Override
+  public Payment getPayments() {
+    return this.payment;
+  }
+
+  @Override
+  public void setAllocation(Allocation allocation) {
+    this.allocation = allocation;
+  }
+
+  @Override
+  public void setPayments(Payment payment) {
+    this.payment = payment;
+  }
 }

@@ -28,4 +28,11 @@ public class OneShotActivity implements IActivityRule {
   // Implement Later, not relevant to lemonade game
   public void setReserves() {
   }
+
+
+  @Override
+  public void reset() {
+    // TODO Auto-generated method stub
+    
+  }
 }

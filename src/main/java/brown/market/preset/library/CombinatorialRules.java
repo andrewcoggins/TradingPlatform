@@ -12,7 +12,6 @@ import brown.rules.terminationconditions.library.OneShotTermination;
 public class CombinatorialRules extends AbsMarketPreset {
   
   public CombinatorialRules() {
-
     super(new ComplexHighestBidderAllocation(),
         new ComFirstPricePayment(),
         new SealedBidQuery(), 
@@ -21,4 +20,5 @@ public class CombinatorialRules extends AbsMarketPreset {
         new OneShotTermination(),
         new OneRoundTermination());
   }
+  
 }

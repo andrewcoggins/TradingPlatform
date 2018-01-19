@@ -14,5 +14,9 @@ public class LemonadeQuery implements IQueryRule {
       TradeRequestMessage constructedRequest = new TradeRequestMessage(0, 
           new LemonadeChannel(state.getID(), ledger),MechanismType.Lemonade);
       state.setTRequest(constructedRequest);
+  }
+
+  @Override
+  public void reset() {
   }  
 }

@@ -41,6 +41,7 @@ import brown.messages.library.ValuationRegistrationMessage;
 import brown.rules.clearingrules.IClearingRule;
 import brown.tradeable.TradeableType;
 import brown.tradeable.library.MultiTradeable;
+import brown.tradeable.library.SimpleTradeable;
 import brown.twosided.ITwoSidedAuction;
 import brown.value.config.ComplexConfig;
 import brown.value.generator.library.NormalValGenerator;
@@ -54,7 +55,7 @@ import com.esotericsoftware.kryo.Kryo;
 
 public final class Startup {
 	
-	//TODO: Consider reflection for dynamic loading
+  //TODO: Consider reflection for dynamic loading
   /**
    * registers most necessary classes with Kryo.
    * @param kryo
@@ -114,6 +115,7 @@ public final class Startup {
 		kryo.register(GameBidBundle.class);
     kryo.register(GameBid.class);
 		kryo.register(Integer[].class);
+		kryo.register(SimpleTradeable.class);
 		return true;
 	}
 

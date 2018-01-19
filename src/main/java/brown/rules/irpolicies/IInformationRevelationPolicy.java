@@ -8,4 +8,6 @@ public interface IInformationRevelationPolicy {
 
   public void setReport(ICompleteState state);
 
+  public void reset();
+
 }

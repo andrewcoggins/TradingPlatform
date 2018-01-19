@@ -10,7 +10,7 @@ import brown.rules.irpolicies.library.LemonadeAnonymous;
 import brown.rules.paymentrules.library.LemonadePayment;
 import brown.rules.queryrules.library.LemonadeQuery;
 import brown.rules.terminationconditions.library.OneShotTermination;
-import brown.rules.terminationconditions.library.ThreeRoundTermination;
+import brown.rules.terminationconditions.library.XRoundTermination;
 
 /**
  * test the lemonade rules. 
@@ -29,6 +29,6 @@ public class LemonadeRulesTest {
     assertEquals(lemonadeRules.actRule, new OneShotActivity());
     assertEquals(lemonadeRules.infoPolicy, new LemonadeAnonymous());
     assertEquals(lemonadeRules.innerTCondition, new OneShotTermination());
-    assertEquals(lemonadeRules.outerTCondition, new ThreeRoundTermination());
+    assertEquals(lemonadeRules.outerTCondition, new XRoundTermination());
   }
 }

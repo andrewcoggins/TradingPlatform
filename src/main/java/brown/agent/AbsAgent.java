@@ -11,7 +11,6 @@ import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.NegotiateRequestMessage;
 import brown.messages.library.RegistrationMessage;
-import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.Logging;
 import brown.setup.ISetup;
 

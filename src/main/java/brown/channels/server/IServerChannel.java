@@ -19,7 +19,7 @@ public interface IServerChannel {
 	
 	/**
 	 * What type of allocation mechanism does it use?
-	 * @return AllocationType
+	 * @return MechanismType
 	 */
 	public MechanismType getMechanismType();
 	

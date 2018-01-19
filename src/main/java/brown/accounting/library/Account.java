@@ -21,7 +21,8 @@ public class Account implements IAccount {
 	private List<ITradeable> tradeables;
 	
 	/**
-	 * Kryo objects require a blank constructor
+	 * For Kryo
+	 * DO NOT USE
 	 */
 	public Account() {
 		this.ID = null;
@@ -182,6 +183,12 @@ public class Account implements IAccount {
 	}
 
   @Override
+  public String toString() {
+    return "Account [ID=" + ID + ", monies=" + monies + ", tradeables="
+        + tradeables + "]";
+  }
+  
+  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -219,10 +226,4 @@ public class Account implements IAccount {
     return true;
   }
 
-  @Override
-  public String toString() {
-    return "Account [ID=" + ID + ", monies=" + monies + ", tradeables="
-        + tradeables + "]";
-  }
-	
 }

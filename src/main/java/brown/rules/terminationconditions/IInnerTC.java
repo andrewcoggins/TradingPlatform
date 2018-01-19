@@ -9,4 +9,6 @@ public interface IInnerTC {
   
   public void innerTerminated(ICompleteState state);
 
+  public void reset();
+
 }

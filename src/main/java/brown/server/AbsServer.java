@@ -2,7 +2,6 @@ package brown.server;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -230,12 +229,10 @@ public abstract class AbsServer {
 	 */
 	public void updateAllAuctions(boolean closeable) {
 		synchronized (this.manager) {;
-			List<Market> toRemove = new LinkedList<Market>();
 			for (Market auction : this.manager.getAuctions()) {
-				synchronized (auction) {
+				synchronized (auction) {				  
 					auction.tick(System.currentTimeMillis());
 					if (auction.isOver() && closeable) {
-						toRemove.add(auction);
 						List<Order> winners = auction.getOrders();
 						if (winners == null) {
 							continue;
@@ -267,7 +264,11 @@ public abstract class AbsServer {
 								}
 							}
 						}
-						auction.clearState();
+		        this.theServer.sendToAllTCP(auction.getReport());
+	          if (!auction.isOverOuter()){
+	            Logging.log("[*] Auction has been reset");
+	            auction.reset();              
+	          }         
 					} else {
 						for (Map.Entry<Connection, Integer> id : this.connections
 								.entrySet()) {
@@ -286,14 +287,6 @@ public abstract class AbsServer {
 						//this.manager.getLedger(auction.getID()).clearLatest();
 					}
 				}
-			}
-
-			for (Market auction : toRemove) {
-				GameReportMessage report = auction.getReport();
-				if (report != null) {
-					this.theServer.sendToAllTCP(report);
-				}
-				this.manager.close(this, auction.getID());
 			}
 		}
 	}
@@ -362,6 +355,7 @@ public abstract class AbsServer {
 	   this.updateAllAuctions(true);
      Thread.sleep(1000);
 	 }
+   this.manager.close(this, marketID);
 	}
 
 	/*

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import brown.market.preset.AbsMarketPreset;
-import brown.market.preset.library.SSSPRules;
+import brown.market.preset.library.SimSPRules;
 import brown.setup.library.LemonadeSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
@@ -37,7 +37,7 @@ public class SSSPServer {
     
     //valuations and rules
     allValInfo.add(new SimpleConfig(allTradeables));
-    allMarkets.add(new SSSPRules());
+    allMarkets.add(new SimSPRules());
     
     new RunServer(2121, new LemonadeSetup()).runGame(allTradeables, allMarkets, allValInfo,
         1000.0, new LinkedList<ITradeable>());

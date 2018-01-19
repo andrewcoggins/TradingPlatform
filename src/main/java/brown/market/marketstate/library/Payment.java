@@ -1,43 +1,47 @@
 package brown.market.marketstate.library;
 
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 
 import brown.market.marketstate.IPayment;
-import brown.tradeable.ITradeable;
 
 /**
- * A payment maps ITradeables to prices.
+ * A Payment stores a map from Agents to Prices
  * @author andrew
  */
 public class Payment implements IPayment {
   
-  private Map<Integer, Double> aPayment; 
+  private List<Order> orders; 
  
-  public Payment(Map<Integer, Double> aPayment) {
-    this.aPayment = aPayment; 
+  public Payment(){
+    this.orders = new LinkedList<Order>();
   }
   
-  public Map<Integer, Double> getPayment() {
-    return aPayment;
+  public Payment(List<Order> orders) {
+    this.orders = orders; 
+  }
+  
+  @Override
+  public List<Order> getOrders() {
+    return this.orders;
+  }
+  
+  @Override
+  public String toString() {
+    return "Payment [orders=" + orders + "]";
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((aPayment == null) ? 0 : aPayment.hashCode());
+    result = prime * result + ((orders == null) ? 0 : orders.hashCode());
     return result;
   }
 
   @Override
   public boolean equals(Object obj) {
-    return (obj instanceof Payment && ((Payment) obj).aPayment.equals(this.aPayment));
+    return (obj instanceof Payment && ((Payment) obj).orders.equals(this.orders));
   }
-
-  @Override
-  public String toString() {
-    return "Payment [" + aPayment + "]";
-  }
-  
   
 }

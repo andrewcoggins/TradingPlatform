@@ -123,11 +123,6 @@ public class CDAAgentChannel implements ITwoSidedPriceSetter {
 	  }
 	}
 
-	@Override
-	public Ledger getLedger() {
-		return this.LEDGER;
-	}
-
   @Override
   public void bid(AbsAgent agent, IBidBundle bid) {
     // TODO Auto-generated method stub

@@ -9,5 +9,7 @@ import brown.market.marketstate.ICompleteState;
 public interface IAllocationRule {
 
   public void setAllocation(ICompleteState state);
+
+  public void reset();
   
 }

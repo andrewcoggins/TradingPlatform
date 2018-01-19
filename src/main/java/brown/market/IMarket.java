@@ -9,51 +9,69 @@ import brown.messages.library.TradeRequestMessage;
 
 public interface IMarket {
   
-  /*
-   * The platform supports multiple markets. This
-   * function gets the id of this particular market. 
+  /**
+   * The platform supports multiple simultaneous markets.
+   * This method returns this market's ID.
    */
+  //rename getMarketID
   public Integer getID();
   
   /**
-   * Constructs a trade request to send to a client. How this trade
-   * request is constructed depends on the query rule.
-   * @param ID
-   * Private ID of the client to which this is sent.
-   * @return
-   * a Trade Request, which will be sent over TCP by the server.
+   * Constructs a trade request to send to a client.
+   * How this trade request is constructed depends on the query rule.
+   * @param ID - ID of the agent to which to send this trade request
+   * @return a Trade Request, which will be sent over TCP by the server
    */
   public TradeRequestMessage constructTradeRequest(Integer ID);
 
   /**
-   * per the (inner) termination condition, determines whether or not
-   * the game is over.
-   * @return
-   * a boolean for whether or not the game is over.
+   * Handles a trade. 
+   * First, the activity rule determines if the trade is valid.
+   * If so, it is handled according to the allocation and payment rules.
+   * @param trade
+   * @return ???
    */
+  //what is the meaning of the boolean that is returned?
+  public boolean handleBid(TradeMessage bid);
+  
+  
+  //who asks for the list of orders?
+  //the bank, so it can process them?
+  //needs comments!
+  public List<Order> getOrders();
+  
+  
+  //where is this game report created?
+  public GameReportMessage getReport();
+  //shouldn't this be more like constructGameReport with this description:
+  /**
+   * Constructs a game report to send to a client.
+   * How this game report is constructed depends on the IR rule.
+   * @param ID - ID of the agent to which to send this game report
+   * @return a Game Report, which will be sent over TCP by the server
+   */
+  
+
+  /**
+   * Per the (inner) termination condition, 
+   * determines whether or not the inner market is over.
+   * @return a boolean indicating whether or not the inner market is over.
+   */
+  //rename isInnerOver
   public boolean isOver();
   
   /**
-   * per the (outer) termination condition, determines whether or 
-   * not the game is over.
-   * @return
-   * a boolean for whether or not the game is over.
+   * Per the (outer) termination condition, 
+   * determines whether or not the outer market is over.
+   * @return a boolean indicating whether or not the outer market is over.
    */
   public boolean isOverOuter();
   
-  /**
-   * Handles a bid. The activity rule determines 
-   * @param bid
-   * @return
-   */
-  public boolean handleBid(TradeMessage bid);
-  
-  public List<Order> getOrders();
-  
-  public GameReportMessage getReport();
-  
   public void tick(long time);
   
+  //move to Market state? let it clear itself?
   public void clearState();
+  
+  public void reset();
   
 }

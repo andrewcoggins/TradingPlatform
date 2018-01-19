@@ -1,7 +1,5 @@
 package brown.accounting.bidbundle;
 
-import java.util.Comparator;
-
 import brown.accounting.bid.AbsBid;
 import brown.accounting.bidbundle.library.BundleType;
 

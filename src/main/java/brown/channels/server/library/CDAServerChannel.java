@@ -117,4 +117,5 @@ public class CDAServerChannel implements TwoSidedAuction {
 			double sharePrice) {
 		//this.RULE.cancel(agentID, buy, shareNum, sharePrice);		
 	}
+	
 }
