@@ -32,7 +32,6 @@ public interface IMarket {
    * @return ???
    */
   //what is the meaning of the boolean that is returned?
-  //rename handleTrade (more general for two-sided markets)
   public boolean handleBid(TradeMessage bid);
   
   
