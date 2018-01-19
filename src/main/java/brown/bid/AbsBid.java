@@ -1,4 +1,4 @@
-package brown.accounting.bid;
+package brown.bid;
 
 /**
  * Abstract class for the lowest level bid datatype, which can be either simplebid or gamebid

@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
-import brown.accounting.bidbundle.library.AuctionBidBundle;
+import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.library.Allocation;
 import brown.market.marketstate.library.CompleteState;
 import brown.messages.library.TradeMessage;

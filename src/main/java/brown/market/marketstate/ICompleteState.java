@@ -3,7 +3,7 @@ package brown.market.marketstate;
 import java.util.List;
 import java.util.Set;
 
-import brown.accounting.bidbundle.IBidBundle;
+import brown.bid.bidbundle.IBidBundle;
 import brown.market.marketstate.library.Allocation;
 import brown.market.marketstate.library.Payment;
 import brown.messages.library.TradeMessage;

@@ -11,8 +11,8 @@ import java.util.Set;
 import org.junit.Test;
 
 import brown.accounting.MarketState;
-import brown.accounting.bidbundle.library.BundleType;
-import brown.accounting.bidbundle.library.AuctionBidBundle;
+import brown.bid.bidbundle.BundleType;
+import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.tradeable.library.MultiTradeable;
 
 /**

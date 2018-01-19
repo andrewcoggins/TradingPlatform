@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import brown.accounting.bid.AuctionBid;
-import brown.accounting.bidbundle.library.BundleType;
-import brown.accounting.bidbundle.library.AuctionBidBundle;
+import brown.bid.bidbundle.BundleType;
+import brown.bid.bidbundle.library.AuctionBidBundle;
+import brown.bid.library.AuctionBid;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Allocation;
 import brown.messages.library.TradeMessage;

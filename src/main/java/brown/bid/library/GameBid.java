@@ -1,4 +1,6 @@
-package brown.accounting.bid;
+package brown.bid.library;
+
+import brown.bid.AbsBid;
 
 public class GameBid extends AbsBid {
   

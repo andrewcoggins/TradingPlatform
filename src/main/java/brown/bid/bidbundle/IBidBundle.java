@@ -1,7 +1,6 @@
-package brown.accounting.bidbundle;
+package brown.bid.bidbundle;
 
-import brown.accounting.bid.AbsBid;
-import brown.accounting.bidbundle.library.BundleType;
+import brown.bid.AbsBid;
 
 /**
  * The IBidBundle interface permits the creation of arbitrary data structures

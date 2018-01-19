@@ -1,11 +1,12 @@
-package brown.accounting.bidbundle.library;
+package brown.bid.bidbundle.library;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import brown.accounting.bid.AuctionBid;
-import brown.accounting.bidbundle.IBidBundle;
+import brown.bid.bidbundle.BundleType;
+import brown.bid.bidbundle.IBidBundle;
+import brown.bid.library.AuctionBid;
 import brown.tradeable.ITradeable;
 
 /**

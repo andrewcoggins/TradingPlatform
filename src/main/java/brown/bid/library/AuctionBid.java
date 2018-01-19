@@ -1,7 +1,8 @@
-package brown.accounting.bid;
+package brown.bid.library;
 
 import java.util.Map;
 
+import brown.bid.AbsBid;
 import brown.tradeable.ITradeable;
 
 /**

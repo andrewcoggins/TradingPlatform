@@ -14,9 +14,9 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
 import brown.accounting.MarketState;
-import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.accounting.library.Account;
 import brown.accounting.library.Ledger;
+import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;

@@ -1,4 +1,4 @@
-package brown.accounting.bidbundle.library;
+package brown.bid.bidbundle;
 
 /**
  * A bid bundle can be simple or complex:

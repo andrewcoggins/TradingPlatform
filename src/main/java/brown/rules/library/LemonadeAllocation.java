@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import brown.accounting.bidbundle.library.BundleType;
-import brown.accounting.bidbundle.library.GameBidBundle;
+import brown.bid.bidbundle.BundleType;
+import brown.bid.bidbundle.library.GameBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Allocation;
 import brown.messages.library.TradeMessage;

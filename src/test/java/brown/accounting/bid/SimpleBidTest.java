@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import brown.bid.library.AuctionBid;
 import brown.tradeable.library.MultiTradeable;
 
 /**

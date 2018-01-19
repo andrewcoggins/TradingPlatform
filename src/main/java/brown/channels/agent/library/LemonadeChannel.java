@@ -1,10 +1,10 @@
 package brown.channels.agent.library;
 
-import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
+import brown.bid.bidbundle.BundleType;
+import brown.bid.bidbundle.IBidBundle;
 import brown.messages.library.TradeMessage;
 import brown.setup.Logging;
 

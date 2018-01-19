@@ -3,8 +3,8 @@ package brown.agent.library;
 import java.util.HashMap;
 import java.util.Map;
 
-import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.agent.AbsSimpleSealedBidAgent;
+import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;

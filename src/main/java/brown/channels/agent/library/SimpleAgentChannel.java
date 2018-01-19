@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import brown.accounting.bid.AuctionBid;
-import brown.accounting.bidbundle.IBidBundle;
-import brown.accounting.bidbundle.library.AuctionBidBundle;
-import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 import brown.agent.AbsOpenOutcryAgent;
 import brown.agent.AbsSimpleSealedBidAgent;
+import brown.bid.bidbundle.BundleType;
+import brown.bid.bidbundle.IBidBundle;
+import brown.bid.bidbundle.library.AuctionBidBundle;
+import brown.bid.library.AuctionBid;
 import brown.channels.MechanismType;
 import brown.messages.library.TradeMessage;
 import brown.setup.Logging;
