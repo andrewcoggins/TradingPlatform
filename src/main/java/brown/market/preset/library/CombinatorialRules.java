@@ -1,13 +1,14 @@
 package brown.market.preset.library;
 
 import brown.market.preset.AbsMarketPreset;
-import brown.rules.activityrules.library.OneShotActivity;
-import brown.rules.allocationrules.library.ComplexHighestBidderAllocation;
-import brown.rules.irpolicies.library.LemonadeAnonymous;
-import brown.rules.paymentrules.library.ComFirstPricePayment;
-import brown.rules.queryrules.library.SealedBidQuery;
-import brown.rules.terminationconditions.library.OneRoundTermination;
-import brown.rules.terminationconditions.library.OneShotTermination;
+import brown.rules.library.ComFirstPricePayment;
+import brown.rules.library.ComplexHighestBidderAllocation;
+import brown.rules.library.LemonadeAnonymous;
+import brown.rules.library.OneShotActivity;
+import brown.rules.library.OneShotTermination;
+import brown.rules.library.SealedBidQuery;
+import brown.rules.library.XRoundTermination;
+
 
 public class CombinatorialRules extends AbsMarketPreset {
   
@@ -18,7 +19,7 @@ public class CombinatorialRules extends AbsMarketPreset {
         new OneShotActivity(),
         new LemonadeAnonymous(),
         new OneShotTermination(),
-        new OneRoundTermination());
+        new XRoundTermination());
   }
   
 }

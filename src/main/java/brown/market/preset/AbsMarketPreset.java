@@ -1,12 +1,12 @@
 package brown.market.preset;
 
-import brown.rules.activityrules.IActivityRule;
-import brown.rules.allocationrules.IAllocationRule;
-import brown.rules.irpolicies.IInformationRevelationPolicy;
-import brown.rules.paymentrules.IPaymentRule;
-import brown.rules.queryrules.IQueryRule;
-import brown.rules.terminationconditions.IInnerTC;
-import brown.rules.terminationconditions.IOuterTC;
+import brown.rules.IActivityRule;
+import brown.rules.IAllocationRule;
+import brown.rules.IInformationRevelationPolicy;
+import brown.rules.IInnerTC;
+import brown.rules.IOuterTC;
+import brown.rules.IPaymentRule;
+import brown.rules.IQueryRule;
 
 /**
  * provides a clean format for creating sets of rules for markets.
@@ -22,12 +22,12 @@ public abstract class AbsMarketPreset {
   public IOuterTC outerTCondition; 
   
   public AbsMarketPreset(IAllocationRule aRule, IPaymentRule pRule, IQueryRule qRule, 
-      IActivityRule actRule, IInformationRevelationPolicy infoPolicy, IInnerTC innerTCondition, 
+      IActivityRule oneShotActivity, IInformationRevelationPolicy infoPolicy, IInnerTC innerTCondition, 
       IOuterTC outerTCondition) {
     this.aRule = aRule; 
     this.pRule = pRule; 
     this.qRule = qRule; 
-    this.actRule = actRule; 
+    this.actRule = oneShotActivity; 
     this.infoPolicy = infoPolicy; 
     this.innerTCondition = innerTCondition; 
     this.outerTCondition = outerTCondition; 

@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import brown.accounting.bidbundle.library.AuctionBidBundle;
+import brown.bid.bidbundle.library.AuctionBidBundle;
 
 /**
  * tests the ack message. 

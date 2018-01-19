@@ -12,9 +12,9 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.accounting.bid.AuctionBid;
 import brown.accounting.library.Ledger;
 import brown.accounting.library.Transaction;
+import brown.bid.library.AuctionBid;
 import brown.market.marketstate.library.Allocation;
 import brown.tradeable.library.MultiTradeable;
 

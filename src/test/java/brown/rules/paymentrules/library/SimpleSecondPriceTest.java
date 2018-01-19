@@ -6,8 +6,9 @@ import java.util.Map;
 import org.junit.Test;
 
 import brown.accounting.MarketState;
-import brown.accounting.bidbundle.library.AuctionBidBundle;
+import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.library.CompleteState;
+import brown.rules.library.SimpleSecondPrice;
 import brown.tradeable.library.MultiTradeable;
 
 /**

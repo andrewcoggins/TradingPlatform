@@ -1,8 +1,8 @@
 package brown.channels.agent;
 
-import brown.accounting.bidbundle.IBidBundle;
 import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
+import brown.bid.bidbundle.IBidBundle;
 
 /*
  * Agents are exposed to client-side versions of markets through IMarket:

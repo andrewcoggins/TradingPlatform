@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import brown.accounting.bidbundle.IBidBundle;
+import brown.bid.bidbundle.IBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeMessage;

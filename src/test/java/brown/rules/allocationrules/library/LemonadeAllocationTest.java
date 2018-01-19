@@ -10,11 +10,12 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.accounting.bidbundle.library.GameBidBundle;
 import brown.accounting.library.Account;
+import brown.bid.bidbundle.library.GameBidBundle;
 import brown.market.marketstate.library.CompleteState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
+import brown.rules.library.LemonadeAllocation;
 import brown.tradeable.library.MultiTradeable;
 
 /**

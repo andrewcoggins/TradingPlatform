@@ -8,8 +8,8 @@ import java.util.Map;
 import org.junit.Test;
 
 import brown.accounting.MarketState;
-import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.accounting.library.Ledger;
+import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.todeprecate.PaymentType;
