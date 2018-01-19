@@ -45,7 +45,7 @@ public class LemonadeAllocation implements IAllocationRule {
     // Put agents where they bid
     Map<Integer, List<ITradeable>> alloc = new HashMap<Integer,List<ITradeable>>();
     for (TradeMessage b : bids) {
-      if (b.Bundle.getType() != BundleType.Lemonade)
+      if (b.Bundle.getType() != BundleType.GAME)
         continue;
       GameBidBundle lemonadeBid = (GameBidBundle) b.Bundle;
       int index = lemonadeBid.getBids().move;

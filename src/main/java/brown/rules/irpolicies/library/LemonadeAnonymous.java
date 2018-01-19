@@ -24,7 +24,7 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
     
     List<TradeMessage> bids = state.getBids();
     for (TradeMessage b:bids){
-      if (b.Bundle.getType() != BundleType.Lemonade)
+      if (b.Bundle.getType() != BundleType.GAME)
         continue;
       GameBidBundle lemonadeBid = (GameBidBundle) b.Bundle;
       int index = lemonadeBid.getBids().move;

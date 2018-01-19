@@ -8,23 +8,30 @@ import brown.tradeable.ITradeable;
 
 public interface IAccount {
   
+  /**
+   * @return ID of agent owning the account
+   */
   public double getID();
-  
+
+  /**
+   * @return double representing amount of money in account
+   */
   public double getMonies();
   
+  /**
+   * @return List of ITtradeables representing goods in account
+   */  
   public List<ITradeable> getGoods();
   
   /**
    * Add money to an account
    * @param newMonies - money to be added
-   * @return updated account
    */
   public void add(double newMonies);
   
   /**
    * @param newMonies : add money
    * @param newGoods : add goods 
-   * @return updated account
    */
   public void add(double newMonies, List<ITradeable> newGoods);
   
@@ -35,16 +42,13 @@ public interface IAccount {
    /**
    * Remove money from an account
    * @param newMonies - money to be removed
-   * @return updated account
    */
   public void remove(double newMonies);
 
-  //UGH!!??
   /**
-   * Removes monies and goods; leave 0 or null if gives an already constructed account to a particular agent.not using both
+   * Removes monies and goods
    * @param removeMonies - money to remove
    * @param removeGoods - goods to remove 
-   * @return updated account
    */
   public void remove(double removeMonies, List<ITradeable> removeGoods);
   
@@ -52,7 +56,8 @@ public interface IAccount {
    
   public void remove(double removeMonies, ITradeable removeGood);
 
-  /** clears an account
+  /** 
+   * clears an account
    */
   public void clear();
   

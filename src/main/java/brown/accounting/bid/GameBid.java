@@ -12,6 +12,9 @@ public class GameBid extends AbsBid {
     this.move = null; 
   }
   
+  /**
+   * @param bid - gamebid is represented by a number
+   */
   public GameBid(Integer bid) {
     this.move = bid; 
   }

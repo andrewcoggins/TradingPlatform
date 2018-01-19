@@ -108,7 +108,7 @@ public class InternalStateTest {
     state.setRequest(b);
     assertEquals(state.getRequest(), b); 
     //get/set bundleType
-    BundleType bType = BundleType.Simple;
+    BundleType bType = BundleType.AUCTION;
     state.setBundleType(bType);
     assertEquals(state.getBundleType(), bType);
     //get/set reserve.

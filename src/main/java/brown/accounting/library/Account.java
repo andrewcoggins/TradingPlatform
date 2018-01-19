@@ -1,13 +1,14 @@
 package brown.accounting.library; 
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import brown.accounting.IAccount;
 import brown.tradeable.ITradeable;
+import brown.tradeable.library.SimpleTradeable;
 
-//TODO: flatten
 /**
  * an account belongs to an agent and stores money and goods for that agent
  * 
@@ -60,11 +61,7 @@ public class Account implements IAccount {
 	public Account(Integer ID, double monies, List<ITradeable> goods) {
 		this.ID = ID;
 		this.monies = monies;
-		if (goods != null) {
-			this.tradeables = goods;
-		} else {
-			this.tradeables = new LinkedList<ITradeable>();
-		}
+		this.tradeables = goods;
 	}
 	
 	public double getID() {
@@ -79,106 +76,82 @@ public class Account implements IAccount {
 	  return this.tradeables;
 	}
 	
-	/**
-   * Add money to an account
-   * @param newMonies - money to be added
-   * @return updated account
-   */
   public void add(double newMonies) {
     this.monies += newMonies;
   }
   
-  private void addHelper(double newMonies, List<ITradeable> newGoods) {
-    if (newGoods == null) {
-      throw new NullPointerException("Cannot add null tradeables");
-    }
+  public void add(double newMonies, List<ITradeable> newGoods) {
+    this.tradeables.addAll(newGoods);
+    this.monies += newMonies;    
+  }
+  
+  public void add(double newMonies, Set<ITradeable> newGoods) {
     this.tradeables.addAll(newGoods);
     this.monies += newMonies;
   }
   
-  /**
-   * @param newMonies : add money
-   * @param newGoods : add goods 
-   * @return updated account
-   */
-  public void add(double newMonies, List<ITradeable> newGoods) {
-    addHelper(newMonies, newGoods);
-  }
-  
-  public void add(double newMonies, Set<ITradeable> newGoods) {
-    List<ITradeable> unique = new LinkedList<ITradeable>();
-    unique.addAll(newGoods);
-    addHelper(newMonies, unique);
-  }
-  
-  public void add(double newMonies, ITradeable newGood) {
-    List<ITradeable> oneGood = new LinkedList<ITradeable>();
-    oneGood.add(newGood);
-    addHelper(newMonies, oneGood);
+  public void add(double newMonies, ITradeable newGood) {    
+    this.tradeables.add(newGood);
+    this.monies += newMonies;
   }
 	
-	 /**
-   * Remove money from an account
-   * @param newMonies - money to be removed
-   * @return updated account
-   */
   public void remove(double newMonies) {
     this.monies -= newMonies;
   }
   
-  private void removeHelper(double newMonies, List<ITradeable> newGoods) {
-    if (newGoods == null) {
-      throw new NullPointerException("Cannot remove null tradeables");
+  /**
+   * Flattens collections of ITradeables to lists of SimpleTradeables
+   * @param goods - Collection of ITradeables
+   * @return "Flattened" collection - the goods represented as a list of SimpleTradeables
+   */
+  private List<SimpleTradeable> flattenHelper(Collection<ITradeable> goods) {
+    List<SimpleTradeable>toReturn = new LinkedList<SimpleTradeable>();    
+    for (ITradeable good : goods){
+      toReturn.addAll(good.flatten());
     }
-    this.tradeables.removeAll(newGoods);
-    this.monies -= newMonies;
+    return toReturn;
   }
 	
-	/**
-	 * Removes monies and goods; leave 0 or null if gives an already constructed account to a particular agent.not using both
-	 * @param removeMonies - money to remove
-	 * @param removeGoods - goods to remove 
-	 * @return updated account
-	 */
 	public void remove(double removeMonies, List<ITradeable> removeGoods) {
-		removeHelper(removeMonies, removeGoods);
+	  this.monies -= removeMonies;
+
+	  // Need to flatten goods so they can be compared
+	  List<SimpleTradeable> myGoods = flattenHelper(this.tradeables);	  
+    List<SimpleTradeable> toRemove = flattenHelper(removeGoods);
+
+    myGoods.removeAll(toRemove);    
+    this.tradeables = new LinkedList<ITradeable>(myGoods);
 	}
 	
 	 public void remove(double removeMonies, Set<ITradeable> removeGoods) {
-	   List<ITradeable> removeList = new LinkedList<ITradeable>();
-	   removeList.addAll(removeGoods);
-	   removeHelper(removeMonies, removeList);
+	    this.monies -= removeMonies;
+
+	    List<SimpleTradeable> myGoods = flattenHelper(this.tradeables);   
+	    List<SimpleTradeable> toRemove = flattenHelper(removeGoods);
+
+	    myGoods.removeAll(toRemove);    
+	    this.tradeables = new LinkedList<ITradeable>(myGoods);
 	  }
 
-	/**
-	 * Removes an individual good and money
-	 * @param removeMonies - money to be removed
-	 * @param good - to be removed
-	 * @return updated account
-	 */
 	public void remove(double removeMonies, ITradeable removeGood) {
-		List<ITradeable> removeList = new LinkedList<ITradeable>();
-		removeList.add(removeGood);
-		removeHelper(removeMonies, removeList);
+	   this.monies -= removeMonies;
+
+	  List<SimpleTradeable> myGoods = flattenHelper(this.tradeables);   
+	  
+	  myGoods.remove(removeGood);
+    this.tradeables = new LinkedList<ITradeable>(myGoods);    
 	}
 
-	/** clears an account
-	 */
 	public void clear() {
 	  this.monies = 0.0;
 	  this.tradeables = new LinkedList<ITradeable>();
 	}
 	
-	/**
-	 * copies an account
-	 * @return copied account
-	 */
 	public Account copyAccount() {
 		List<ITradeable> copyTradeables = new LinkedList<ITradeable>();
 		for (ITradeable t : this.tradeables) {
 			copyTradeables.add(t);
-		}
-		
+		}		
 		return new Account(this.ID, this.monies, copyTradeables);
 	}
 
