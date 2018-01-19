@@ -11,7 +11,6 @@ import brown.accounting.bidbundle.library.BundleType;
 import brown.accounting.bidbundle.library.GameBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Allocation;
-import brown.market.marketstate.library.MarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.allocationrules.IAllocationRule;
 import brown.setup.Logging;
@@ -42,7 +41,6 @@ public class LemonadeAllocation implements IAllocationRule {
     }
     
     double glassesPerSlot = singleTradeables.size() / 12;
-    Logging.log("TEST glasses per slot: " + glassesPerSlot);
 
     // Put agents where they bid
     Map<Integer, List<ITradeable>> alloc = new HashMap<Integer,List<ITradeable>>();
@@ -79,7 +77,6 @@ public class LemonadeAllocation implements IAllocationRule {
       
       for (int w : winners) { 
         int numGlasses = (int) Math.floor(glassesPerSlot / winners.size());
-        Logging.log("TEST glasses per person: " + numGlasses);               
         List<ITradeable> curr =  alloc.getOrDefault(w, new LinkedList<ITradeable>());
         
         // manage tradeables in state?
@@ -94,9 +91,16 @@ public class LemonadeAllocation implements IAllocationRule {
       }      
       
       Allocation newAlloc = new Allocation(alloc);
-      MarketState internalState = state.getMarketState();
-      internalState.setAllocation(newAlloc);
-      state.setMarketState(internalState);      
+      state.setAllocation(newAlloc);
     } 
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public void reset() {
+    this.slots = (List<Integer>[]) new List[12];
+    for(int i = 0; i < 12; i++) {
+      slots[i] = new LinkedList<Integer>();
+    }
   }  
 }

@@ -12,5 +12,7 @@ public class OneShotTermination implements IInnerTC {
     state.setInnerOver(over);
   }
 
-  
+  @Override
+  public void reset() {
+  }  
 }

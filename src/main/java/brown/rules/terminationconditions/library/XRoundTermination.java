@@ -3,12 +3,12 @@ package brown.rules.terminationconditions.library;
 import brown.market.marketstate.ICompleteState;
 import brown.rules.terminationconditions.IOuterTC;
 
-public class ThreeRoundTermination implements IOuterTC {
-
+public class XRoundTermination implements IOuterTC {
+  private static final int maxRuns = 3;
+  
 @Override
   public void outerTerminated(ICompleteState state) {
-    state.incrementOuter();
-    boolean over = state.getOuterRuns() >= 3;
+    boolean over = state.getOuterRuns() >= maxRuns;
     state.setOuterOver(over);
   }
 }

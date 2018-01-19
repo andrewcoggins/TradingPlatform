@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Set;
 
 import brown.accounting.bidbundle.IBidBundle;
-import brown.market.marketstate.library.MarketState;
+import brown.market.marketstate.library.Allocation;
+import brown.market.marketstate.library.Payment;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
@@ -22,10 +23,7 @@ public interface ICompleteState {
   
     public Set<ITradeable> getTradeables();
     
-    // Orders contained here
-    public MarketState getMarketState();
-    
-    public void setMarketState(MarketState m);
+    public void reset();
     
     public void tick(long time); 
     
@@ -43,7 +41,17 @@ public interface ICompleteState {
     
     public void clearOrders();
     
-    //allocation and payment rule interact through marketstate
+    //allocation and payment rule
+    
+    public Allocation getAllocation();
+    
+    // Orders contained in payments
+    public Payment getPayments();
+    
+    public void setAllocation(Allocation allocation);
+    
+    public void setPayments(Payment payment);
+    
     
     //for Query Rules
     

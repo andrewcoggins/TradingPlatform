@@ -56,4 +56,6 @@ public interface IMarket {
   
   public void clearState();
   
+  public void reset();
+  
 }

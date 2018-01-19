@@ -49,6 +49,7 @@ public class Market implements IMarket {
   @Override
   public TradeRequestMessage constructTradeRequest(Integer ID) {
     Ledger ledger = new Ledger(this.getID());
+    
     for(Order o : getOrders()) {
       ledger.add(o.toTransaction());
     }
@@ -94,7 +95,7 @@ public class Market implements IMarket {
     this.PRULE.setOrders(this.STATE);
 
     // Construct orders from allocation and payments
-    return this.STATE.getMarketState().getPayments().getOrders();
+    return this.STATE.getPayments().getOrders();
   }
 
   // increments time. 
@@ -106,7 +107,6 @@ public class Market implements IMarket {
   // Clears the in
   @Override
   public void clearState() { 
-    this.STATE.clearBids();
     this.STATE.clearOrders();
   }
   
@@ -121,4 +121,15 @@ public class Market implements IMarket {
     return this.STATE.getReport();
   }
   
+  @Override
+  public void reset(){
+    this.ACTRULE.reset();
+    this.ARULE.reset();
+    this.IRPOLICY.reset();
+    this.ITCONDITION.reset();
+    this.PRULE.reset();
+    this.QRULE.reset();
+    this.STATE.reset();
+    this.STATE.incrementOuter();
+  }  
 }

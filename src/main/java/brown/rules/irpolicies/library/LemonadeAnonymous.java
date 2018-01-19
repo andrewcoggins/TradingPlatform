@@ -13,13 +13,15 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
 
   @Override
   public void handleInfo() {
-    // TODO Auto-generated method stub    
   }
 
   @Override
   public void setReport(ICompleteState state) {
     Integer[] report = new Integer[12];    
-
+    for (int i = 0; i<12;i++){
+      report[i] = 0;
+    }        
+    
     List<TradeMessage> bids = state.getBids();
     for (TradeMessage b:bids){
       if (b.Bundle.getType() != BundleType.Lemonade)
@@ -28,7 +30,10 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
       int index = lemonadeBid.getBids().move;
       report[index] = report[index] + 1;
     }
-    
     state.setReport(new LemonadeReportMessage(report));
+  }
+
+  @Override
+  public void reset() {
   }  
 }

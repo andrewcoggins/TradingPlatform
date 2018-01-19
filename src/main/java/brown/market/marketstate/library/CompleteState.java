@@ -19,7 +19,8 @@ public class CompleteState implements ICompleteState {
   private int ticks;  
   
   //allocation + payment rule
-  private MarketState marketState;
+  private Allocation allocation; 
+  private Payment payment; 
   //query rule
   private TradeRequestMessage tRequest;
   private Double increment;
@@ -31,7 +32,6 @@ public class CompleteState implements ICompleteState {
   //termination condition
   private Boolean innerTerminated; 
   private Boolean outerTerminated; 
-  private Integer innerRuns;
   private Integer outerRuns; 
   
   
@@ -39,13 +39,13 @@ public class CompleteState implements ICompleteState {
     this.ID = ID; 
     this.TRADEABLES = tradeables; 
     this.BIDS = new LinkedList<TradeMessage>();
-    this.marketState = new MarketState();
     this.outerTerminated = false; 
     this.increment = 0.0;
     this.ticks = 0; 
-    this.innerRuns = 0; 
     this.outerRuns = 0; 
     this.innerTerminated = false; 
+    this.allocation = new Allocation();
+    this.payment = new Payment();
   }
   
   @Override
@@ -58,16 +58,6 @@ public class CompleteState implements ICompleteState {
     return this.TRADEABLES; 
   }
   
-  @Override
-  public MarketState getMarketState() {
-     return this.marketState; 
-  }
-
-  @Override
-  public void setMarketState(MarketState m) {
-    this.marketState = m; 
-  }
-
   @Override
   public void tick(long time) {
     this.ticks++;
@@ -95,7 +85,7 @@ public class CompleteState implements ICompleteState {
 
   @Override
   public void clearOrders() {
-    this.marketState.setPayments(new Payment());
+    this.setPayments(new Payment());
   }
 
   @Override
@@ -176,5 +166,36 @@ public class CompleteState implements ICompleteState {
   @Override
   public void setReport(GameReportMessage gameReport) {
     this.gameReport = gameReport;
+  }
+
+  // resets everything EXCEPT outer terminated condition and outer runs
+  @Override
+  public void reset() {
+    this.BIDS = new LinkedList<TradeMessage>();
+    this.allocation = new Allocation();
+    this.payment = new Payment();
+    this.increment = 0.0;
+    this.ticks = 0; 
+    this.innerTerminated = false;   
+    }
+
+  @Override
+  public Allocation getAllocation() {
+    return this.allocation;
+  }
+
+  @Override
+  public Payment getPayments() {
+    return this.payment;
+  }
+
+  @Override
+  public void setAllocation(Allocation allocation) {
+    this.allocation = allocation;
+  }
+
+  @Override
+  public void setPayments(Payment payment) {
+    this.payment = payment;
   }
 }

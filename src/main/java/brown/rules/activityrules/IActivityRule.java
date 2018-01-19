@@ -9,5 +9,7 @@ public interface IActivityRule {
  
   // handle reserves with this
   public void setReserves();
+
+  public void reset();
   
 }

@@ -47,7 +47,8 @@ public class LemonadeAgent extends AbsLemonadeAgent {
       for (int i = 0; i < NUM_SLOTS; i++) {
         this.positions[i] = this.positions[i] + lemonadeUpdate.getCount(i);
       }
-      printIsland();
+      System.out.println(lemonadeUpdate.toString());
+      //printIsland();
     }
     else {
       System.out.println("ERROR: Lemonade Report Not Received");
