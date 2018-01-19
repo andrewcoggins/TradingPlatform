@@ -45,7 +45,7 @@ public class InternalStateTest {
     tradeables.add(new MultiTradeable(0));
     tradeables.add(new MultiTradeable(1));
     tradeables.add(new MultiTradeable(2));
-    CompleteState state = new CompleteState(0, tradeables);
+    MarketState state = new MarketState(0, tradeables);
     //going to go through these in order to the best of my ability. 
     Map<MultiTradeable, MarketState> map = new HashMap<MultiTradeable, MarketState>();
     map.put(new MultiTradeable(1), new MarketState(0, 1.0));

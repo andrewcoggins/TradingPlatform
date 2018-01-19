@@ -69,7 +69,7 @@ public class AbsLemonadeAgentTest {
     @Override
     public void onLemonade(LemonadeChannel channel) {
       assertTrue(channel instanceof LemonadeChannel);
-      assertTrue(channel.getAuctionID() == 0); 
+      assertTrue(channel.getMarketID() == 0); 
       assertTrue(channel.getLedger().equals(new Ledger(0)));
       this.myMessage = "Lemonade Channel Received"; 
     }

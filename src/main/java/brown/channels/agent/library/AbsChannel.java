@@ -29,13 +29,7 @@ public abstract class AbsChannel implements IAgentChannel{
   }
   
   @Override
-  public Integer getAuctionID() {
+  public Integer getMarketID() {
     return this.ID;
   }
-
-  @Override
-  public Ledger getLedger() {
-    return this.ledger;
-  }
-  
 }

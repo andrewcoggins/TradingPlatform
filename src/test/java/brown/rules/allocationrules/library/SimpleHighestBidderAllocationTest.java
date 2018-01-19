@@ -16,7 +16,7 @@ import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.library.Allocation;
-import brown.market.marketstate.library.CompleteState;
+import brown.market.marketstate.library.MarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.library.SimpleHighestBidderAllocation;
 import brown.tradeable.library.MultiTradeable;
@@ -36,7 +36,7 @@ public class SimpleHighestBidderAllocationTest {
   public void testSimpleHighestBidderAllocation() {
     Set<MultiTradeable> allGoods = new HashSet<MultiTradeable>();
     allGoods.add(new MultiTradeable(0));
-    CompleteState state = new CompleteState(0, allGoods);
+    MarketState state = new MarketState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
     Map<MultiTradeable, MarketState> aMap = new HashMap<MultiTradeable, MarketState>();
     aMap.put(new MultiTradeable(0), new MarketState(1, 1.0));
@@ -58,7 +58,7 @@ public class SimpleHighestBidderAllocationTest {
     for (int i = 0; i < 5; i++) {
       allGoods.add(new MultiTradeable(i));
     }
-    CompleteState state = new CompleteState(0, allGoods);
+    MarketState state = new MarketState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
     Map<MultiTradeable, MarketState> aMap = new HashMap<MultiTradeable, MarketState>();
     for (int i = 0; i < 5; i++) {
@@ -84,7 +84,7 @@ public class SimpleHighestBidderAllocationTest {
     for (int i = 0; i < 5; i++) {
       allGoods.add(new MultiTradeable(i));
     }
-    CompleteState state = new CompleteState(0, allGoods);
+    MarketState state = new MarketState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
     Map<MultiTradeable, MarketState> aMap = new HashMap<MultiTradeable, MarketState>();
     for (int i = 0; i < 5; i++) {
@@ -117,7 +117,7 @@ public class SimpleHighestBidderAllocationTest {
     for (int i = 0; i < 5; i++) {
       allGoods.add(new MultiTradeable(i));
     }
-    CompleteState state = new CompleteState(0, allGoods);
+    MarketState state = new MarketState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
     Map<MultiTradeable, MarketState> aMap = new HashMap<MultiTradeable, MarketState>();
     for (int i = 0; i < 5; i++) {
@@ -155,7 +155,7 @@ public class SimpleHighestBidderAllocationTest {
     }
     Set<MultiTradeable> allGoods = new HashSet<MultiTradeable>();
     allGoods.add(new MultiTradeable(0));
-    CompleteState state = new CompleteState(0, allGoods);
+    MarketState state = new MarketState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
     for (Integer bidder : bidderToValuation.keySet()) {
       Map<MultiTradeable, MarketState> aMap = new HashMap<MultiTradeable, MarketState>();
@@ -198,7 +198,7 @@ public class SimpleHighestBidderAllocationTest {
     for (int i = 0; i < GOODS; i++) {
       allGoods.add(new MultiTradeable(i));
     }
-    CompleteState state = new CompleteState(0, allGoods);
+    MarketState state = new MarketState(0, allGoods);
     SimpleHighestBidderAllocation s = new SimpleHighestBidderAllocation();
     for (Integer bidder : bidderToValuations.keySet()) {
       Map<MultiTradeable, MarketState> aMap = new HashMap<MultiTradeable, MarketState>();

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import brown.market.library.Market;
-import brown.market.marketstate.library.CompleteState;
+import brown.market.marketstate.library.MarketState;
 import brown.market.preset.AbsMarketPreset;
 import brown.server.AbsServer;
 import brown.setup.ISetup;
@@ -46,7 +46,7 @@ public class RunServer extends AbsServer {
     //rules
     for (AbsMarketPreset ruleSet : presets) {
       this.manager.open(new Market(presets.get(presets.indexOf(ruleSet)),
-          new CompleteState(new Integer(0), allGoods)));
+          new MarketState(new Integer(0), allGoods)));
       //matches corresponding rule sets and value info sets.
       this.valueConfig.put(presets.indexOf(ruleSet), valueInfo.get(presets.indexOf(ruleSet)));
     }

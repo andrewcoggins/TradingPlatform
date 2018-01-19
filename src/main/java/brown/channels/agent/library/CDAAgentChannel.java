@@ -60,7 +60,7 @@ public class CDAAgentChannel implements ITwoSidedPriceSetter {
 	}
 
 	@Override
-	public Integer getAuctionID() {
+	public Integer getMarketID() {
 		return this.MARKETID;
 	}
 
