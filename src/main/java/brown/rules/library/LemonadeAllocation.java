@@ -1,4 +1,4 @@
-package brown.rules.allocationrules.library; 
+package brown.rules.library; 
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import brown.accounting.bidbundle.library.GameBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Allocation;
 import brown.messages.library.TradeMessage;
-import brown.rules.allocationrules.IAllocationRule;
+import brown.rules.IAllocationRule;
 import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;

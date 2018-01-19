@@ -1,13 +1,13 @@
 package brown.market.preset.library;
 
 import brown.market.preset.AbsMarketPreset;
-import brown.rules.activityrules.library.OneShotActivity;
-import brown.rules.allocationrules.library.LemonadeAllocation;
-import brown.rules.irpolicies.library.LemonadeAnonymous;
-import brown.rules.paymentrules.library.LemonadePayment;
-import brown.rules.queryrules.library.LemonadeQuery;
-import brown.rules.terminationconditions.library.OneShotTermination;
-import brown.rules.terminationconditions.library.XRoundTermination;
+import brown.rules.library.LemonadeAllocation;
+import brown.rules.library.LemonadeAnonymous;
+import brown.rules.library.LemonadePayment;
+import brown.rules.library.LemonadeQuery;
+import brown.rules.library.OneShotActivity;
+import brown.rules.library.OneShotTermination;
+import brown.rules.library.XRoundTermination;
 
 public class LemonadeRules extends AbsMarketPreset {
 

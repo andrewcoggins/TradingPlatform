@@ -15,6 +15,7 @@ import brown.accounting.library.Account;
 import brown.market.marketstate.library.CompleteState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
+import brown.rules.library.LemonadeAllocation;
 import brown.tradeable.library.MultiTradeable;
 
 /**

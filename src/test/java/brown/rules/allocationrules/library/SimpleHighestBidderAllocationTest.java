@@ -18,6 +18,7 @@ import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.library.Allocation;
 import brown.market.marketstate.library.CompleteState;
 import brown.messages.library.TradeMessage;
+import brown.rules.library.SimpleHighestBidderAllocation;
 import brown.tradeable.library.MultiTradeable;
 
 /**

@@ -1,4 +1,4 @@
-package brown.rules.paymentrules.library;
+package brown.rules.library;
 
 
 
@@ -14,7 +14,7 @@ import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Allocation;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
-import brown.rules.paymentrules.IPaymentRule;
+import brown.rules.IPaymentRule;
 import brown.setup.Logging;
 import brown.tradeable.library.MultiTradeable;
 
@@ -48,22 +48,6 @@ public class SimpleSecondPrice implements IPaymentRule {
     state.setPayments(payments);
   }
 
-  @Override
-  public void setPaymentType(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
 
-  @Override
-  public void setReserve(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void permitShort(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
 
 }

@@ -38,7 +38,7 @@ import brown.messages.library.RegistrationMessage;
 import brown.messages.library.NegotiateMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationRegistrationMessage;
-import brown.rules.clearingrules.IClearingRule;
+import brown.rules.IClearingRule;
 import brown.tradeable.TradeableType;
 import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;

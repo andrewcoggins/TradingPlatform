@@ -1,7 +1,7 @@
-package brown.rules.terminationconditions.library; 
+package brown.rules.library; 
 
 import brown.market.marketstate.ICompleteState;
-import brown.rules.terminationconditions.IInnerTC;
+import brown.rules.IInnerTC;
 
 public class OneShotTermination implements IInnerTC {
 

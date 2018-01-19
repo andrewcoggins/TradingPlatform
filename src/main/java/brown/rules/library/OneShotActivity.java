@@ -1,10 +1,10 @@
-package brown.rules.activityrules.library;
+package brown.rules.library;
 
 import java.util.List;
 
 import brown.market.marketstate.ICompleteState;
 import brown.messages.library.TradeMessage;
-import brown.rules.activityrules.IActivityRule;
+import brown.rules.IActivityRule;
 
 public class OneShotActivity implements IActivityRule {
 

@@ -1,4 +1,4 @@
-package brown.rules.activityrules;
+package brown.rules;
 
 import brown.market.marketstate.ICompleteState;
 import brown.messages.library.TradeMessage;

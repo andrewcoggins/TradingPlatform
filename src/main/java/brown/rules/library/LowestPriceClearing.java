@@ -1,4 +1,4 @@
-package brown.rules.clearingrules.library;
+package brown.rules.library;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,7 +12,7 @@ import java.util.TreeMap;
 import java.util.function.Function;
 
 import brown.market.marketstate.library.Order;
-import brown.rules.clearingrules.IClearingRule;
+import brown.rules.IClearingRule;
 
 public class LowestPriceClearing implements IClearingRule {
 //	private final SortedMap<Double, Set<Order>> buyOrderBook;

@@ -1,4 +1,4 @@
-package brown.rules.irpolicies.library; 
+package brown.rules.library; 
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import brown.accounting.bidbundle.library.GameBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.messages.library.LemonadeReportMessage;
 import brown.messages.library.TradeMessage;
-import brown.rules.irpolicies.IInformationRevelationPolicy;
+import brown.rules.IInformationRevelationPolicy;
 
 public class LemonadeAnonymous implements IInformationRevelationPolicy{
 

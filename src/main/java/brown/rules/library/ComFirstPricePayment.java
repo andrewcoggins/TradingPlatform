@@ -1,4 +1,4 @@
-package brown.rules.paymentrules.library;
+package brown.rules.library;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,10 +6,9 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.accounting.MarketState;
-import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Order;
-import brown.rules.paymentrules.IPaymentRule;
+import brown.rules.IPaymentRule;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.library.ComplexTradeable;
 import brown.tradeable.library.MultiTradeable;

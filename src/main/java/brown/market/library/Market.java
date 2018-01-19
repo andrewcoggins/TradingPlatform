@@ -10,13 +10,13 @@ import brown.market.preset.AbsMarketPreset;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
-import brown.rules.activityrules.IActivityRule;
-import brown.rules.allocationrules.IAllocationRule;
-import brown.rules.irpolicies.IInformationRevelationPolicy;
-import brown.rules.paymentrules.IPaymentRule;
-import brown.rules.queryrules.IQueryRule;
-import brown.rules.terminationconditions.IInnerTC;
-import brown.rules.terminationconditions.IOuterTC;
+import brown.rules.IActivityRule;
+import brown.rules.IAllocationRule;
+import brown.rules.IInformationRevelationPolicy;
+import brown.rules.IInnerTC;
+import brown.rules.IOuterTC;
+import brown.rules.IPaymentRule;
+import brown.rules.IQueryRule;
 
 public class Market implements IMarket {
 

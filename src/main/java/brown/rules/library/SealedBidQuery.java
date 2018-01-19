@@ -1,4 +1,4 @@
-package brown.rules.queryrules.library;
+package brown.rules.library;
 
 import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.accounting.library.Ledger;
@@ -6,7 +6,7 @@ import brown.channels.MechanismType;
 import brown.channels.agent.library.SimpleAgentChannel;
 import brown.market.marketstate.ICompleteState;
 import brown.messages.library.TradeRequestMessage;
-import brown.rules.queryrules.IQueryRule;
+import brown.rules.IQueryRule;
 
 public class SealedBidQuery implements IQueryRule {
 
@@ -19,5 +19,11 @@ public class SealedBidQuery implements IQueryRule {
 							(AuctionBidBundle) state.getbundleReserve(), state.getEligibility()), 
 							MechanismType.SealedBid));
 		//}
-	}	
+	}
+
+  @Override
+  public void reset() {
+    // TODO Auto-generated method stub
+    
+  }	
 }

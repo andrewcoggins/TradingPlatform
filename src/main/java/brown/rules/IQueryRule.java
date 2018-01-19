@@ -1,4 +1,4 @@
-package brown.rules.queryrules;
+package brown.rules;
 
 import brown.accounting.library.Ledger;
 import brown.market.marketstate.ICompleteState;

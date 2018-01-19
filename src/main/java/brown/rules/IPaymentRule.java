@@ -1,4 +1,4 @@
-package brown.rules.paymentrules;
+package brown.rules;
 
 import brown.market.marketstate.ICompleteState;
 

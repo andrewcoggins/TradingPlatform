@@ -1,4 +1,4 @@
-package brown.rules.terminationconditions;
+package brown.rules;
 
 import brown.market.marketstate.ICompleteState;
 

@@ -1,7 +1,7 @@
-package brown.rules.terminationconditions.library;
+package brown.rules.library;
 
 import brown.market.marketstate.ICompleteState;
-import brown.rules.terminationconditions.IOuterTC;
+import brown.rules.IOuterTC;
 
 public class XRoundTermination implements IOuterTC {
   private static final int maxRuns = 3;

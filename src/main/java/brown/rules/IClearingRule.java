@@ -1,4 +1,4 @@
-package brown.rules.clearingrules;
+package brown.rules;
 
 import java.util.List;
 import java.util.Set;

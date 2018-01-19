@@ -9,7 +9,7 @@ import brown.channels.MechanismType;
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.market.marketstate.library.Order;
-import brown.rules.clearingrules.IClearingRule;
+import brown.rules.IClearingRule;
 import brown.tradeable.library.MultiTradeable;
 import brown.twosided.ITwoSidedAuction;
 

@@ -1,4 +1,4 @@
-package brown.rules.allocationrules.library;
+package brown.rules.library;
 
 
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import brown.accounting.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.ICompleteState;
 import brown.market.marketstate.library.Allocation;
 import brown.messages.library.TradeMessage;
-import brown.rules.allocationrules.IAllocationRule;
+import brown.rules.IAllocationRule;
 import brown.tradeable.library.MultiTradeable;
 
 /**
@@ -21,11 +21,6 @@ import brown.tradeable.library.MultiTradeable;
  */
 public class SimpleHighestBidderAllocation implements IAllocationRule {
 
-  @Override
-  public void tick(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
 
   @Override
   public void setAllocation(ICompleteState state) {
@@ -44,50 +39,9 @@ public class SimpleHighestBidderAllocation implements IAllocationRule {
     state.setAllocation(new Allocation(new AuctionBid(highest)));
   }
 
-  @Override
-  public void setBidRequest(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
 
   @Override
-  public void isPrivate(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void isOver(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void setBundleType(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void withReserve(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void isValid(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void getAllocationType(ICompleteState state) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void setReport(ICompleteState state) {
+  public void reset() {
     // TODO Auto-generated method stub
     
   }

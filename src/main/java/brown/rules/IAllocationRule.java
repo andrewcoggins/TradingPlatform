@@ -1,4 +1,4 @@
-package brown.rules.allocationrules;
+package brown.rules;
 
 import brown.market.marketstate.ICompleteState;
 
