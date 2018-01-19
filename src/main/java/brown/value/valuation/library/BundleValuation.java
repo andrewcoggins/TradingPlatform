@@ -3,6 +3,7 @@ package brown.value.valuation.library;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,7 +14,9 @@ import org.apache.commons.math3.random.ISAACRandom;
 import org.apache.commons.math3.random.RandomGenerator;
 
 import brown.tradeable.ITradeable;
-import brown.value.generator.AbsValuationGenerator;
+import brown.tradeable.library.ComplexTradeable;
+import brown.tradeable.library.SimpleTradeable;
+import brown.value.generator.IValuationGenerator;
 import brown.value.generator.library.UniformValGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.IDependentValuation;
@@ -31,7 +34,7 @@ import brown.value.valuationrepresentation.library.ComplexValuation;
 public class BundleValuation implements IDependentValuation {
   
   private Map<ITradeable, Value> valMap;
-  private AbsValuationGenerator generator;
+  private IValuationGenerator generator;
   private Set<ITradeable> goods;
   private Boolean monotonic;
 
@@ -42,42 +45,44 @@ public class BundleValuation implements IDependentValuation {
     this.monotonic = false;
   }
 
-  // if not monotonic, don't set the constraint. There's gonna have to be some
-  // uniformity to the way that these
-  // functions operate.
-  public BundleValuation(AbsValuationGenerator valGenerator, Boolean isMonotonic,
+  public BundleValuation(IValuationGenerator valGenerator, Boolean isMonotonic,
       Set<ITradeable> goods) {
     this.generator = valGenerator;
     this.goods = goods;
-    this.valMap = new HashMap<Set<ITradeable>, Value>();
+    this.valMap = new HashMap<ITradeable, Value>();
     this.monotonic = isMonotonic;
   }
 
   @Override
-  public ComplexValuation getValuation(Set<ITradeable> goods) {
-    Map<Map<Integer, ITradeable>, Value> existingSetsID =
-        new HashMap<Map<Integer, ITradeable>, Value>();
+  public Map<ITradeable, Value> getValuation(Set<ITradeable> goods) {
+    Set<SimpleTradeable> simpleTradeablesSet = new HashSet<SimpleTradeable>();
+    for (ITradeable good : goods) {
+      List<SimpleTradeable> simpleTradeables = good.flatten();
+      simpleTradeablesSet.addAll(simpleTradeables);
+    }
+    Map<Map<Integer, SimpleTradeable>, Value> existingSetsID =
+        new HashMap<Map<Integer, SimpleTradeable>, Value>();
     // map to cater to necessary iteration structure for monotonicity
-    Map<Map<Integer, ITradeable>, Value> previousSize =
-        new HashMap<Map<Integer, ITradeable>, Value>();
-    Map<Integer, ITradeable> numberGoods = new HashMap<Integer, ITradeable>();
+    Map<Map<Integer, SimpleTradeable>, Value> previousSize =
+        new HashMap<Map<Integer, SimpleTradeable>, Value>();
+    Map<Integer, SimpleTradeable> numberGoods = new HashMap<Integer, SimpleTradeable>();
     int count = 0;
-    for (ITradeable good : this.goods) {
-      numberGoods.put(count, good);
+    for (SimpleTradeable simpleGood : simpleTradeablesSet) {
+      numberGoods.put(count, simpleGood);
       count++;
     }
     // give maps starting values
-    existingSetsID.put(new HashMap<Integer, ITradeable>(), new Value(0.0));
-    previousSize.put(new HashMap<Integer, ITradeable>(), new Value(0.0));
+    existingSetsID.put(new HashMap<Integer, SimpleTradeable>(), new Value(0.0));
+    previousSize.put(new HashMap<Integer, SimpleTradeable>(), new Value(0.0));
     for (int i = 0; i < numberGoods.size(); i++) {
       // hashmap populated with every subset of size i;
-      Map<Map<Integer, ITradeable>, Value> temp =
-          new HashMap<Map<Integer, ITradeable>, Value>();
+      Map<Map<Integer, SimpleTradeable>, Value> temp =
+          new HashMap<Map<Integer, SimpleTradeable>, Value>();
       // for each good in the previous size subset
-      for (Map<Integer, ITradeable> e : previousSize.keySet()) {
+      for (Map<Integer, SimpleTradeable> e : previousSize.keySet()) {
         // for each good, create a new bundle, as
         for (Integer id : numberGoods.keySet()) {
-          Map<Integer, ITradeable> eCopy = new HashMap<Integer, ITradeable>(e);
+          Map<Integer, SimpleTradeable> eCopy = new HashMap<Integer, SimpleTradeable>(e);
           if (!e.keySet().contains(id)) {
             eCopy.put(id, numberGoods.get(id));
             if (!temp.containsKey(eCopy)) {
@@ -90,14 +95,14 @@ public class BundleValuation implements IDependentValuation {
               if (!monotonic) {
                 Value bundleValue = new Value(-0.1);
                 while (bundleValue.value < 0)
-                  bundleValue = generator.makeValuation((Set) eCopy.values());
+                  bundleValue = generator.makeValuation(new ComplexTradeable(0, (Set) eCopy.values()));
                 temp.put(eCopy, bundleValue);
               } else {
                 // apply monotonic constraints.
                 Value highestValSubSet = new Value(0.0);
                 for (Integer anId : eCopy.keySet()) {
-                  Map<Integer, ITradeable> eCopyCopy =
-                      new HashMap<Integer, ITradeable>(eCopy);
+                  Map<Integer, SimpleTradeable> eCopyCopy =
+                      new HashMap<Integer, SimpleTradeable>(eCopy);
                   eCopyCopy.remove(anId);
                   if (existingSetsID.containsKey(eCopyCopy)) {
                     if (existingSetsID.get(eCopyCopy).value > highestValSubSet.value) {
@@ -107,7 +112,7 @@ public class BundleValuation implements IDependentValuation {
                 }
                 Value sampledValue = new Value(-0.1);
                 while (sampledValue.value < highestValSubSet.value) {
-                  sampledValue = generator.makeValuation(new HashSet<ITradeable>(eCopy.values()));
+                  sampledValue = generator.makeValuation(new ComplexTradeable(0, (Set) eCopy.values()));
                 }
                 temp.put(eCopy, sampledValue);
               }
@@ -118,18 +123,20 @@ public class BundleValuation implements IDependentValuation {
       existingSetsID.putAll(temp);
       previousSize = temp;
     }
-    for (Map<Integer, ITradeable> idGood : existingSetsID.keySet()) {
-      Set<ITradeable> goodsSet = new HashSet<ITradeable>(idGood.values());
-      valMap.put(goodsSet, existingSetsID.get(idGood));
+    for (Map<Integer, SimpleTradeable> idGood : existingSetsID.keySet()) {
+      Set<ITradeable> goodsSet = new HashSet<ITradeable>();
+      goodsSet.addAll(idGood.values());
+      ITradeable toHash = new ComplexTradeable(0, goodsSet);
+      valMap.put(new ComplexTradeable(0, goodsSet), existingSetsID.get(idGood));
     }
-    return new ComplexValuation(valMap);
+    return valMap;
   }
 
   @Override
-  public AbsValuationRepresentation getSomeValuations(Integer numValuations,
+  public Map<ITradeable, Value> getSomeValuations (Integer numValuations,
       Integer bundleSizeMean, Double bundleSizeStdDev) {
     if (bundleSizeMean > 0 && bundleSizeStdDev > 0) {
-      Map<Set<ITradeable>, Value> returnMap = new HashMap<Set<ITradeable>, Value>();
+      Map<ITradeable, Value> returnMap = new HashMap<ITradeable, Value>();
       // populateVarCoVarMatrix(bundle);
       RandomGenerator rng = new ISAACRandom();
       NormalDistribution sizeDist =
@@ -138,6 +145,13 @@ public class BundleValuation implements IDependentValuation {
         Boolean reSample = true;
         while (reSample) {
           List<ITradeable> goodList = new ArrayList<ITradeable>(this.goods);
+          List<SimpleTradeable> simpleGoods = new LinkedList<SimpleTradeable>();
+          for (ITradeable tradeable : goodList) {
+            List<SimpleTradeable> atoms = tradeable.flatten();
+            for (SimpleTradeable atom : atoms) {
+              simpleGoods.add(atom);
+            }
+          }
           Map<Integer, ITradeable> goodMap = new HashMap<>();
           int size = -1;
           // repeatedly sample bundle size until a valid size is picked.
@@ -147,10 +161,10 @@ public class BundleValuation implements IDependentValuation {
           // list of goods to uniformly sample from
           // sample without replacement goods to add to the bundle size times.
           for (int j = 0; j < size; j++) {
-            Integer rand = (int) (Math.random() * goodList.size());
-            ITradeable aGood = goodList.get(rand);
+            Integer rand = (int) (Math.random() * simpleGoods.size());
+            ITradeable aGood = simpleGoods.get(rand);
             goodMap.put(rand, aGood);
-            goodList.remove(aGood);
+            simpleGoods.remove(aGood);
           }
           if (!valMap.containsKey(goodMap.values())) {
             reSample = false;
@@ -163,83 +177,46 @@ public class BundleValuation implements IDependentValuation {
             // }
             if (!this.monotonic) {
               Value bundleValue = new Value(-0.1);
-              while (bundleValue.value < 0)
-                bundleValue = generator.makeValuation(goodSet);
-              returnMap.put(goodSet, bundleValue);
+              ITradeable comTradeable = new ComplexTradeable(0, goodSet);
+              while (bundleValue.value < 0) {
+                bundleValue = generator.makeValuation(comTradeable);
+              }
+              returnMap.put(comTradeable, bundleValue);
             }
-            // if not monotonic, make sure that the added bundle's value is
+            // if monotonic, make sure that the added bundle's value is
             // greater than
             // all subsets and less than all supersets.
             else {
               Value minimumPrice = new Value(0.0);
               Value maximumPrice = new Value(Double.MAX_VALUE);
-              for (Set<ITradeable> goods : this.valMap.keySet()) {
+              for (ITradeable good : this.valMap.keySet()) {
+                List<SimpleTradeable> goods = good.flatten();
                 if (goodSet.containsAll(goods)
-                    && valMap.get(goods).value > minimumPrice.value) {
-                  minimumPrice = valMap.get(goods);
+                    && valMap.get(good).value > minimumPrice.value) {
+                  minimumPrice = valMap.get(good);
                 }
                 if (goods.containsAll(goodSet)
                     && valMap.get(goods).value < maximumPrice.value) {
                   maximumPrice = valMap.get(goods);
                 }
               }
+              ITradeable comGood = new ComplexTradeable(0, goodSet);
               Value bundleValue = new Value(-0.1);
               while (bundleValue.value < minimumPrice.value && bundleValue.value > maximumPrice.value) {
-                bundleValue = generator.makeValuation(goodSet);
+                bundleValue = generator.makeValuation(comGood);
               }
-              returnMap.put(goodSet, bundleValue);
+              returnMap.put(comGood, bundleValue);
             }
           }
         }
       }
-      return new ComplexValuation(returnMap);
+      //return new ComplexValuation(returnMap);
+      return returnMap;
     } else {
       System.out.println("ERROR: bundle size parameters not positive");
       throw new NotStrictlyPositiveException(bundleSizeMean);
     }
   }
 
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((generator == null) ? 0 : generator.hashCode());
-    result = prime * result + ((goods == null) ? 0 : goods.hashCode());
-    result = prime * result + ((monotonic == null) ? 0 : monotonic.hashCode());
-    result = prime * result + ((valMap == null) ? 0 : valMap.hashCode());
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    BundleValuation other = (BundleValuation) obj;
-    if (generator == null) {
-      if (other.generator != null)
-        return false;
-    } else if (!generator.equals(other.generator))
-      return false;
-    if (goods == null) {
-      if (other.goods != null)
-        return false;
-    } else if (!goods.equals(other.goods))
-      return false;
-    if (monotonic == null) {
-      if (other.monotonic != null)
-        return false;
-    } else if (!monotonic.equals(other.monotonic))
-      return false;
-    if (valMap == null) {
-      if (other.valMap != null)
-        return false;
-    } else if (!valMap.equals(other.valMap))
-      return false;
-    return true;
-  }
 
 }

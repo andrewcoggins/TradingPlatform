@@ -1,12 +1,13 @@
 package brown.value.valuation;
 
+import java.util.Map;
 import java.util.Set;
 
 import brown.tradeable.ITradeable;
-import brown.value.valuationrepresentation.IValuationRepresentation;
+import brown.value.valuable.library.Value;
 
 public interface IValuation {
   
-  public IValuationRepresentation getValuation(Set<ITradeable> goods);
+  public Map<ITradeable, Value> getValuation(Set<ITradeable> goods);
   
 }

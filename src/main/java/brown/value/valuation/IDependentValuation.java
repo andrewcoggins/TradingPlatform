@@ -1,10 +1,13 @@
 package brown.value.valuation;
 
-import brown.value.valuationrepresentation.IValuationRepresentation;
+import java.util.Map;
+
+import brown.tradeable.ITradeable;
+import brown.value.valuable.library.Value;
 
 public interface IDependentValuation extends IValuation {
   
-  public IValuationRepresentation getSomeValuations(Integer numValuations, 
+  public Map<ITradeable, Value> getSomeValuations(Integer numValuations, 
       Integer bundleSizeMean, Double bundleSizeStdDev);
   
 }

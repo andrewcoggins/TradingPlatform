@@ -1,6 +1,8 @@
 package brown.market.marketstate;
 
-import java.util.Map;
+import java.util.List;
+
+import brown.market.marketstate.library.Order;
 
 /**
  * IPayment is the interface for Payment
@@ -9,6 +11,6 @@ import java.util.Map;
  */
 public interface IPayment {
   
-  public Map<Integer, Double> getPayment();
+  public List<Order> getOrders();
   
 }

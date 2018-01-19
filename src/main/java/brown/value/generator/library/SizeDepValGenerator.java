@@ -3,10 +3,10 @@ package brown.value.generator.library;
 import java.util.function.Function;
 
 import brown.tradeable.ITradeable;
-import brown.value.generator.AbsValuationGenerator;
+import brown.value.generator.IValuationGenerator;
 import brown.value.valuable.library.Value;
 
-public class SizeDepValGenerator extends AbsValuationGenerator {
+public class SizeDepValGenerator implements IValuationGenerator {
 
   private Function<Integer, Double> valFunction; 
   private Double valueScale;

@@ -1,10 +1,13 @@
 package brown.accounting.bidbundle.library;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import brown.accounting.bid.AuctionBid;
 import brown.accounting.bidbundle.IBidBundle;
 import brown.tradeable.ITradeable;
+import brown.tradeable.library.SimpleTradeable;
 
 /**
   * The built-in BidBundle is called AuctionBidBundle,
@@ -32,6 +35,13 @@ public class AuctionBidBundle implements IBidBundle {
 		if (bids == null) {
 			throw new IllegalArgumentException("Null bids");
 		}
+		List<ITradeable> t = new LinkedList<ITradeable>();
+		t.add(new SimpleTradeable(0));
+		for (ITradeable b : t) {
+		  bids.put(b, 1.0);
+		}
+		ITradeable a = new SimpleTradeable(0);
+		bids.put(a, 1000.0);
 		this.BIDS = new AuctionBid(bids);
 		this.BT = BundleType.Simple;
 	}

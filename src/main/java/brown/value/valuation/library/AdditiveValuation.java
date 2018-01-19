@@ -1,3 +1,66 @@
+//package brown.value.valuation.library; 
+//
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
+//import java.util.Set;
+//
+//import brown.tradeable.ITradeable;
+//import brown.tradeable.library.SimpleTradeable;
+//import brown.value.generator.IValuationGenerator;
+//import brown.value.valuable.library.Value;
+//import brown.value.valuation.IIndependentValuation;
+//
+///**
+// * A Valuation where the values of each good are independent.
+// * @author andrew
+// */
+//public class AdditiveValuation implements IIndependentValuation {
+//
+//  private IValuationGenerator generator; 
+//  
+//  /**
+//   * For kryo 
+//   * DO NOT USE
+//   */
+//  public AdditiveValuation() {
+//      this.generator = null; 
+//  }
+//  
+//  
+//  /**
+//   * constructor with an input IValuationGenerator and its associated parameters.
+//   * @param valGenerator
+//   * @param goods
+//   */
+//  public AdditiveValuation(IValuationGenerator valGenerator) {
+//    this.generator = valGenerator;
+//  }
+//  
+//  private Value generate(SimpleTradeable good) {
+//    return this.generator.makeValuation(good);
+//  }
+//  
+//  @Override
+//  public Value makeValuation(ITradeable good) {
+//    double currentValue = 0.0; 
+//    List<SimpleTradeable> atoms = good.flatten();
+//    for(SimpleTradeable atom : atoms) {
+//      currentValue = currentValue + this.generate(atom).value;
+//    }
+//    return new Value(currentValue);
+//  }
+//
+//  @Override
+//  public Map<ITradeable, Value> makeValuation(Set<ITradeable> goods) {
+//    Map<ITradeable, Value> values = new HashMap<ITradeable, Value>();
+//    for (ITradeable good : goods) { 
+//      values.put(good, this.makeValuation(good));
+//    }
+//    return values;
+//  }
+//}
+
 package brown.value.valuation.library; 
 
 import java.util.HashMap;
@@ -7,11 +70,10 @@ import java.util.Set;
 
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.generator.AbsValuationGenerator;
+import brown.value.generator.IValuationGenerator;
 import brown.value.generator.library.UniformValGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.IIndependentValuation;
-import brown.value.valuationrepresentation.library.ValuationRepresentation;
 
 /**
  * A Valuation where the values of each good are independent.
@@ -49,7 +111,7 @@ public class AdditiveValuation implements IIndependentValuation {
    * @param valGenerator
    * @param goods
    */
-  public AdditiveValuation(AbsValuationGenerator valGenerator, Set<ITradeable> goods) { // re-order parameters
+  public AdditiveValuation(IValuationGenerator valGenerator, Set<ITradeable> goods) { // re-order parameters
     this.valuation = new HashMap<ITradeable, Value>();
     for(ITradeable item : goods) {
       List<SimpleTradeable> atoms = item.flatten();
@@ -70,12 +132,12 @@ public class AdditiveValuation implements IIndependentValuation {
   }
 
   @Override
-  public ValuationRepresentation getValuation(Set<ITradeable> goods) {
+  public Map<ITradeable, Value> getValuation(Set<ITradeable> goods) {
     Map<ITradeable, Value> values = new HashMap<ITradeable, Value>();
     for (ITradeable good : goods) { 
       values.put(good, this.getValuation(good));
     }
-    return new ValuationRepresentation(values);
+    return values;
   }
 
   @Override
