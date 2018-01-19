@@ -4,6 +4,7 @@ import brown.value.valuation.IValuation;
 import brown.exceptions.AgentCreationException;
 import brown.setup.ISetup;
 
+//this class doesn't appear to be used yet.
 public abstract class AbsValnAgent extends AbsAgent implements IAgent { 
 
   private IValuation privateValuation; 

@@ -3,11 +3,8 @@ package brown.market.marketstate;
 import java.util.Map;
 
 /**
- * IPayment is the interface for payment. A payment
- * stores a mapping from agent IDs to a double 
- * representing the cost of each agent's currently
- * allocated bundle.
- * 
+ * IPayment is the interface for Payment
+ * A Payment stores a map from Agents to Prices
  * @author kerry
  */
 public interface IPayment {

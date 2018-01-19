@@ -7,42 +7,43 @@ import java.util.Map;
 import brown.market.marketstate.IAllocation;
 import brown.tradeable.ITradeable;
 
+/**
+* An allocation stores a map from Agents to Lists of Tradeables
+* @author andrew
+*/
 public class Allocation implements IAllocation {
 
-  private Map<Integer, List<ITradeable>> alloc; 
+  private Map<Integer, List<ITradeable>> allocation; 
 
   public Allocation(){
-    this.alloc = new HashMap<Integer,List<ITradeable>>();
+    this.allocation = new HashMap<Integer, List<ITradeable>>();
   }
   
-  
-  public Allocation(Map<Integer, List<ITradeable>> alloc) {
-    this.alloc = alloc;
+  public Allocation(Map<Integer, List<ITradeable>> allocation) {
+    this.allocation = allocation;
   }
 
   @Override
   public Map<Integer, List<ITradeable>> getAllocation() {
-    // make this return a flattened list?
-    return this.alloc;
+    return this.allocation;
+  }
+
+  @Override
+  public String toString() {
+    return "Allocation [" + allocation + "]";
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((alloc == null) ? 0 : alloc.hashCode());
+    result = prime * result + ((allocation == null) ? 0 : allocation.hashCode());
     return result;
   }
 
   @Override
   public boolean equals(Object obj) {
-      return (obj instanceof Allocation && ((Allocation) obj).alloc.equals(this.alloc));
+      return (obj instanceof Allocation && ((Allocation) obj).allocation.equals(this.allocation));
   }
 
-  @Override
-  public String toString() {
-    return "Allocation [" + alloc + "]";
-  }
-
-  
 }

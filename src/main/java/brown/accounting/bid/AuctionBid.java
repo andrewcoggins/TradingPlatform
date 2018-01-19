@@ -5,8 +5,7 @@ import java.util.Map;
 import brown.tradeable.ITradeable;
 
 /**
- * A map from a tradeable to a bid price.
- * 
+ * A map from Tradeables to a Bids.
  * @author andrew, modified by kerry
  *
  */

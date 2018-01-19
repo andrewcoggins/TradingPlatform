@@ -1,6 +1,5 @@
 package brown.accounting;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -40,6 +39,7 @@ public interface IAccount {
    */
   public void remove(double newMonies);
 
+  //UGH!!??
   /**
    * Removes monies and goods; leave 0 or null if gives an already constructed account to a particular agent.not using both
    * @param removeMonies - money to remove
@@ -50,12 +50,6 @@ public interface IAccount {
   
   public void remove(double removeMonies, Set<ITradeable> removeGoods);
    
-  /**
-   * Removes an individual good and money
-   * @param removeMonies - money to be removed
-   * @param good - to be removed
-   * @return updated account
-   */
   public void remove(double removeMonies, ITradeable removeGood);
 
   /** clears an account

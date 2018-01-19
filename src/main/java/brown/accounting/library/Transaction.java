@@ -17,7 +17,8 @@ public class Transaction implements ITransaction {
 	public final long TIMESTAMP;
 	
 	/**
-	 * For Kryo do not use
+	 * For Kryo 
+	 * DO NOT USE
 	 */
 	public Transaction() {
 		this.TO = null;
@@ -29,7 +30,7 @@ public class Transaction implements ITransaction {
 	}
 	
 	/**
-	 * Actual transaction constructor
+	 * Actual constructor
 	 * @param to
 	 * @param from
 	 * @param price

@@ -15,7 +15,7 @@ public class CompleteState implements ICompleteState {
 
   private final Integer ID;  
   private final Set<ITradeable> TRADEABLES;
-  private List<TradeMessage> BIDS;
+  private List<TradeMessage> trades;
   private List<Order> orders; 
   private int ticks;  
   
@@ -39,7 +39,7 @@ public class CompleteState implements ICompleteState {
   public CompleteState(Integer ID, Set<ITradeable> tradeables) {
     this.ID = ID; 
     this.TRADEABLES = tradeables; 
-    this.BIDS = new LinkedList<TradeMessage>();
+    this.trades = new LinkedList<TradeMessage>();
     this.orders = new LinkedList<Order>();
     this.marketState = new MarketState();
     this.outerTerminated = false; 
@@ -82,17 +82,17 @@ public class CompleteState implements ICompleteState {
 
   @Override
   public void addBid(TradeMessage bid) {
-    BIDS.add(bid);
+    trades.add(bid);
   }
 
   @Override
   public void clearBids() {
-   this.BIDS = new LinkedList<TradeMessage>();
+   this.trades = new LinkedList<TradeMessage>();
   }
 
   @Override
   public List<TradeMessage> getBids() {
-    return this.BIDS; 
+    return this.trades; 
   }
 
   @Override

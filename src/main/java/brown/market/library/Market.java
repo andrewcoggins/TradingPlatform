@@ -32,12 +32,12 @@ public class Market implements IMarket {
   public Market(AbsMarketPreset rules, ICompleteState state) {
     this.PRULE = rules.pRule;
     this.ARULE = rules.aRule;
-     this.QRULE = rules.qRule;
-     this.ACTRULE = rules.actRule;
-     this.IRPOLICY = rules.infoPolicy;
-     this.ITCONDITION = rules.innerTCondition;
-     this.OTCONDITION = rules.outerTCondition;
-     this.STATE = state;
+    this.QRULE = rules.qRule;
+    this.ACTRULE = rules.actRule;
+    this.IRPOLICY = rules.infoPolicy;
+    this.ITCONDITION = rules.innerTCondition;
+    this.OTCONDITION = rules.outerTCondition;
+    this.STATE = state;
  }
   
   @Override

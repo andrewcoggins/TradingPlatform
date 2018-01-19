@@ -7,10 +7,7 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.minlog.Log;
 
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.AckMessage;
-import brown.messages.library.RegistrationMessage;
 import brown.setup.ISetup;
-import brown.setup.Logging;
 import brown.setup.library.Startup;
 
 public abstract class AbsClient {

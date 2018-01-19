@@ -3,10 +3,9 @@ package brown.market.marketstate.library;
 import java.util.Map;
 
 import brown.market.marketstate.IPayment;
-import brown.tradeable.ITradeable;
 
 /**
- * A payment maps ITradeables to prices.
+ * A Payment stores a map from Agents to Prices
  * @author andrew
  */
 public class Payment implements IPayment {
@@ -22,6 +21,11 @@ public class Payment implements IPayment {
   }
 
   @Override
+  public String toString() {
+    return "Payment [" + aPayment + "]";
+  }
+
+  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -33,11 +37,5 @@ public class Payment implements IPayment {
   public boolean equals(Object obj) {
     return (obj instanceof Payment && ((Payment) obj).aPayment.equals(this.aPayment));
   }
-
-  @Override
-  public String toString() {
-    return "Payment [" + aPayment + "]";
-  }
-  
   
 }
