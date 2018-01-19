@@ -10,7 +10,7 @@ public class AMYValuationRepn implements AMYIValuationRepn {
   
   public final Map<ITradeable, Value> valuation; 
   
-  public AMYValuationRepn(){ 
+  public AMYValuationRepn() { 
     this.valuation = null;
   }
   

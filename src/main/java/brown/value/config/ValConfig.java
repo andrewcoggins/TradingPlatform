@@ -3,7 +3,7 @@ package brown.value.config;
 import java.util.Set;
 
 import brown.tradeable.ITradeable;
-import brown.value.generator.AbsValuationGenerator;
+import brown.value.generator.IValuationGenerator;
 import brown.value.valuation.library.ValuationType;
 
 /**
@@ -18,7 +18,7 @@ public class ValConfig {
   
   //TODO: state of the world. 
   //can't store this. 
-  public AbsValuationGenerator generator; 
+  public IValuationGenerator generator; 
   
   /**
    * For kryo
@@ -30,7 +30,7 @@ public class ValConfig {
     this.generator = null;
   }
   
-  public ValConfig(Set<ITradeable> allGoods, ValuationType type, AbsValuationGenerator generator) { 
+  public ValConfig(Set<ITradeable> allGoods, ValuationType type, IValuationGenerator generator) { 
     this.allGoods = allGoods; 
     this.valueScheme = type;
     this.generator = generator;

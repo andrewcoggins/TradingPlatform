@@ -1,14 +1,14 @@
 package brown.value.generator.library;
 
 import brown.tradeable.ITradeable;
-import brown.value.generator.AbsValuationGenerator;
+import brown.value.generator.IValuationGenerator;
 import brown.value.valuable.library.Value;
 
 /**
  * Generates a value drawn from a uniformly distribution.
  * @author andrew
  */
-public class UniformValGenerator extends AbsValuationGenerator {
+public class UniformValGenerator implements IValuationGenerator {
   
   private final Double MIN; 
   private final Double MAX; 
