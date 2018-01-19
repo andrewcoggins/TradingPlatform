@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import brown.accounting.library.Account;
 import brown.accounting.library.AccountManager;
-import brown.tradeable.library.MultiTradeable;
+import brown.tradeable.library.SimpleTradeable;
 
 public class AccountManagerTest {
   // not much to this one. Just test the getter and setter.
@@ -18,21 +18,21 @@ public class AccountManagerTest {
   public void testAccountManager() { 
     AccountManager testManager = new AccountManager();
     //add some accounts
-    List<MultiTradeable> oneGoods = new LinkedList<MultiTradeable>();
-    oneGoods.add(new MultiTradeable(0)); 
-    oneGoods.add(new MultiTradeable(1));
+    List<SimpleTradeable> oneGoods = new LinkedList<SimpleTradeable>();
+    oneGoods.add(new SimpleTradeable(0)); 
+    oneGoods.add(new SimpleTradeable(1));
     Account one = new Account(1);
     one.add(10.0);
-    for (MultiTradeable t : oneGoods) {
+    for (SimpleTradeable t : oneGoods) {
       one.add(0.0, t);
     }
     testManager.setAccount(1, one);
-    List<MultiTradeable> twoGoods = new LinkedList<MultiTradeable>();
-    twoGoods.add(new MultiTradeable(2)); 
-    twoGoods.add(new MultiTradeable(3));
+    List<SimpleTradeable> twoGoods = new LinkedList<SimpleTradeable>();
+    twoGoods.add(new SimpleTradeable(2)); 
+    twoGoods.add(new SimpleTradeable(3));
     Account two = new Account(1);
     two.add(20.0);
-    for (MultiTradeable t : twoGoods) {
+    for (SimpleTradeable t : twoGoods) {
       two.add(0.0, t);
     }
     testManager.setAccount(2, two);
