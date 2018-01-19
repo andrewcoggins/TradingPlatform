@@ -74,6 +74,7 @@ import brown.value.generator.IValuationGenerator;
 import brown.value.generator.library.UniformValGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.IIndependentValuation;
+
 /**
  * A Valuation where the values of each good are independent.
  * @author andrew

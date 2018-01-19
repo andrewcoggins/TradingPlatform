@@ -40,8 +40,8 @@ public class SSSPAgent extends AbsSimpleSealedBidAgent {
   public void onSimpleSealedBid(SimpleAgentChannel simpleChannel) {
     Map<ITradeable, Double> initial = new HashMap<ITradeable, Double>();
     // TODO Auto-generated method stub
-    for (ITradeable t: this.privateValuation.vals.keySet()) {
-      initial.put(t, privateValuation.vals.get(t).value);
+    for (ITradeable t: this.privateValuation.valuation.keySet()) {
+      initial.put(t, privateValuation.valuation.get(t).value);
     }
     // this is the SCPP price prediction. Probably not a very good bid. 
     // where to go from here? 

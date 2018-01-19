@@ -41,7 +41,7 @@ import brown.value.valuation.library.AdditiveValuation;
 import brown.value.valuation.library.BundleValuation;
 import brown.value.valuation.library.ValuationType;
 import brown.value.valuationrepresentation.IValuationRepresentation;
-import brown.value.valuationrepresentation.library.Valuation;
+import brown.value.valuationrepresentation.library.ValuationRepresentation;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
@@ -158,7 +158,7 @@ public abstract class AbsServer {
 		    System.out.println("Got here");
 		    AdditiveValuation simpleVal = 
 		        new AdditiveValuation(marketConfig.generator, marketConfig.allGoods);
-		    Valuation privateVal = simpleVal.getValuation(marketConfig.allGoods);
+		    ValuationRepresentation privateVal = simpleVal.getValuation(marketConfig.allGoods);
 		    valueReg = new ValuationRegistrationMessage(agentID, privateVal, simpleVal);
 		    theServer.sendToTCP(connection.getID(), valueReg);
 		  } else if (marketConfig.valueScheme == ValuationType.Complex) {
@@ -166,7 +166,7 @@ public abstract class AbsServer {
 		    //complex valuations: the agent gets a valuation over complex goods.
 		    BundleValuation complexVal = 
 		        new BundleValuation(marketConfig.generator, true, marketConfig.allGoods);
-		        Valuation privateVal = complexVal.getValuation(marketConfig.allGoods);
+		        ValuationRepresentation privateVal = complexVal.getValuation(marketConfig.allGoods);
 		        valueReg = new ValuationRegistrationMessage(agentID, privateVal,complexVal);
 		        theServer.sendToTCP(connection.getID(), valueReg);
 		  } else {
