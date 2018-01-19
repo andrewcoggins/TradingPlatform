@@ -13,7 +13,8 @@ public class LemonadeRules extends AbsMarketPreset {
 
   /**
    * some of these are guesses.
-   * need to pass in the market internal state, or otherwise delete it from this constructor.
+   * need to pass in the market internal state, 
+   * or otherwise delete it from this constructor.
    */
   public LemonadeRules() {
     super(new LemonadeAllocation(),
@@ -24,4 +25,5 @@ public class LemonadeRules extends AbsMarketPreset {
         new OneShotTermination(),
         new ThreeRoundTermination());
   }
+  
 }
