@@ -38,8 +38,6 @@ import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.ValConfig;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.ValuationType;
-import brown.value.valuation.library.AdditiveValuation;
-import brown.value.valuation.library.BundleValuation;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
@@ -67,13 +65,6 @@ public abstract class AbsServer {
 	protected Map<Integer, ValConfig> valueConfig; 
 	protected List<ITradeable> initialGoods;
 	protected Double initialMonies;
-	
-	// a map from an agents' private id to its private valuation for goods.
-	// what if there are different sets of goods? 
-	// valuation manager?
-	//each game on the simul axis has a map from integer to private valuation.
-	//does the server even care what the private valuations are? 
-	private Map<Integer, IValuation> privateValuations;
 
 	public AbsServer(int port, ISetup gameSetup) {
 		this.PORT = port;
@@ -85,7 +76,6 @@ public abstract class AbsServer {
 		this.manager = new MarketManager();
 		this.privateToPublic.put(-1, -1);
 		this.SHORT = false;
-
 		theServer = new Server(8192, 4096);
 		theServer.start();
 		Kryo serverKryo = theServer.getKryo();
@@ -93,14 +83,12 @@ public abstract class AbsServer {
 		if (gameSetup != null) {
 			gameSetup.setup(serverKryo);
 		}
-
 		try {
 			theServer.bind(PORT, PORT);
 		} catch (IOException e) {
 			Logging.log(e + " [X] Server failed to start due to port conflict");
 			return;
 		}
-
 		final AbsServer aServer = this;
 		theServer.addListener(new Listener() {
 			public void received(Connection connection, Object message) {
@@ -132,20 +120,14 @@ public abstract class AbsServer {
 	 * 
 	 * @param registration - details of their game logic agent status
 	 */
-	//TODO: how do we determine the exact valuation for the complex case? 
-	//TODO: eventually get out of this enum crisis.
-	//TODO: abstract valuable that can be virtually anything.
 	//TODO: What about initial conditions and states of the world?
 	//TODO: need a data structure storing each agents' private valuation, needed to calculate utility.
 	//TODO: provide some file for logging winners, etc.
 	protected void onRegistration(Connection connection,
 			RegistrationMessage registration) {
-    System.out.println("onRegistration called");
-    System.out.println(this.valueConfig.keySet().size());
 		Integer agentID = this.defaultRegistration(connection, registration);
     if (agentID == null) {
       // TODO: add rejection
-      System.out.println("Agent ID null");
       return;
     }
 		for(Integer marketNum : this.valueConfig.keySet()) {
@@ -468,13 +450,13 @@ public abstract class AbsServer {
 	public Integer defaultRegistration(Connection connection,
 			RegistrationMessage registration) {
 		if (registration.getID() == null) {
-			return null;
+			throw new NullPointerException("ERROR: Null registration ID");
 		}
-		this.theServer.sendToTCP(connection.getID(), new AckMessage(registration,
-				false));
+		this.theServer.sendToTCP(connection.getID(), new AckMessage(registration, false));
 		Collection<Integer> allIds = connections.values();
 		Integer theID = registration.getID();
 		if (allIds.contains(theID)) {
+		  Logging.log("AbsServer-defaultRegistration: attempting to register an ID that already exists.");
 			Connection oldConnection = null;
 			for (Connection c : connections.keySet()) {
 				if (connections.get(c).equals(theID)) {
@@ -495,11 +477,9 @@ public abstract class AbsServer {
 			}
 			privateToPublic.put(theID, agentCount++);
 			Account newAccount = new Account(theID);
-			if (this.initialMonies != null) newAccount.add(initialMonies);
-			if(this.initialGoods != null) {
-			  for (ITradeable t : this.initialGoods)
-			    newAccount.add(0.0, t);
-			}
+			newAccount.add(initialMonies);
+			for (ITradeable t : this.initialGoods)
+			newAccount.add(0.0, t);
 			this.acctManager.setAccount(theID, newAccount);
 			connections.put(connection, theID);
 			Logging.log("[-] registered " + theID);

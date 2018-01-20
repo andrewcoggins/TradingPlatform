@@ -27,10 +27,10 @@ public class SSSPServer {
 
   public static void main(String[] args) throws InterruptedException {
     List<AbsMarketPreset> allMarkets = new ArrayList<AbsMarketPreset>();
-    List<ValConfig> allValInfo = new ArrayList<ValConfig>();
+    ValConfig allValInfo = new ArrayList<ValConfig>();
     
     //create tradeables
-    Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
+    List<Set<ITradeable>> allTradeables = new HashSet<ITradeable>(); 
     for (int i = 0; i < 3; i++) {
       allTradeables.add(new MultiTradeable(i, 1)); //just one copy of each good for now
     }
