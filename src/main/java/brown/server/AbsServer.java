@@ -39,7 +39,6 @@ import brown.value.config.ValConfig;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.ValuationType;
 import brown.value.valuation.library.AdditiveValuation;
-import brown.value.valuation.library.BundleValuation;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
@@ -232,8 +231,8 @@ public abstract class AbsServer {
 			for (Market auction : this.manager.getAuctions()) {
 				synchronized (auction) {				  
 					auction.tick(System.currentTimeMillis());
-					if (auction.isOver() && closeable) {
-						List<Order> winners = auction.getOrders();
+					if (auction.isInnerOver() && closeable) {
+						List<Order> winners = auction.constructOrders();
 						if (winners == null) {
 							continue;
 						}
@@ -264,10 +263,10 @@ public abstract class AbsServer {
 								}
 							}
 						}
-		        this.theServer.sendToAllTCP(auction.getReport());
+		        this.theServer.sendToAllTCP(auction.constructReport());
 	          if (!auction.isOverOuter()){
 	            Logging.log("[*] Auction has been reset");
-	            auction.reset();              
+	            auction.resetInnerMarket();              
 	          }         
 					} else {
 						for (Map.Entry<Connection, Integer> id : this.connections
@@ -300,13 +299,13 @@ public abstract class AbsServer {
 	public void innerCycle(Integer marketID, Integer agentID) { 
 	  IMarket market = this.manager.getMarket(marketID);
 	  market.tick((long) 1.0); 
-	  if (!market.isOver()) {
+	  if (!market.isInnerOver()) {
 	    //update the ledger?
 	    TradeRequestMessage tradeReq = market.constructTradeRequest(agentID);
 	    this.theServer.sendToUDP(agentID, tradeReq);
 	  } else {
 	    //update the bank, send bank update.
-      List<Order> winners = market.getOrders();	    
+      List<Order> winners = market.constructOrders();	    
       Ledger ledger = this.manager.getLedger(market.getID());
       for (Order winner : winners) {
         if (winner.TO != null && this.
@@ -337,7 +336,7 @@ public abstract class AbsServer {
 	public synchronized void outerCycle(Integer marketID, Integer agentID) {
 	  //run every inner cycle of the auction until it is terminated per the inner termination condition.
 	  Market market = this.manager.getMarket(marketID); 
-	  while (!market.isOver()) { 
+	  while (!market.isInnerOver()) { 
 	    this.innerCycle(marketID, agentID);
 	  }
 	  this.innerCycle(marketID, agentID);
@@ -347,7 +346,7 @@ public abstract class AbsServer {
 	  //run every outer cycle of the auction until it is terminated per the outer termination condition.
 	  Market market = this.manager.getMarket(marketID); 
 	 while(!market.isOverOuter()) {
-	   while(!market.isOver()) {
+	   while(!market.isInnerOver()) {
        Thread.sleep(1000);
 	     this.updateAllAuctions(true);
 	     Thread.sleep(1000);

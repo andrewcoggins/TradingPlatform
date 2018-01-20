@@ -1,17 +1,19 @@
 package brown.market.marketstate.library;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import brown.bid.bidbundle.IBidBundle;
-import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.IMarketState;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.tradeable.ITradeable;
 
-public class MarketState implements ICompleteState {
+public class MarketState implements IMarketState {
 
   private final Integer ID;  
   private final Set<ITradeable> TRADEABLES;
@@ -19,8 +21,8 @@ public class MarketState implements ICompleteState {
   private int ticks;  
   
   //allocation + payment rule
-  private Allocation allocation; 
-  private Payment payment; 
+  private Map<Integer, List<ITradeable>> allocation;   
+  private List<Order> payments; 
   //query rule
   private TradeRequestMessage tRequest;
   private Double increment;
@@ -44,8 +46,8 @@ public class MarketState implements ICompleteState {
     this.ticks = 0; 
     this.outerRuns = 0; 
     this.innerTerminated = false; 
-    this.allocation = new Allocation();
-    this.payment = new Payment();
+    this.allocation = new HashMap<Integer, List<ITradeable>>();
+    this.payments = new LinkedList<Order>();
   }
   
   @Override
@@ -85,7 +87,7 @@ public class MarketState implements ICompleteState {
 
   @Override
   public void clearOrders() {
-    this.setPayments(new Payment());
+    this.setPayments(new LinkedList<Order>());
   }
 
   @Override
@@ -172,30 +174,30 @@ public class MarketState implements ICompleteState {
   @Override
   public void reset() {
     this.bids = new LinkedList<TradeMessage>();
-    this.allocation = new Allocation();
-    this.payment = new Payment();
+    this.allocation = new HashMap<Integer, List<ITradeable>>();
+    this.payments = new LinkedList<Order>();
     this.increment = 0.0;
     this.ticks = 0; 
     this.innerTerminated = false;   
     }
 
   @Override
-  public Allocation getAllocation() {
+  public Map<Integer,List<ITradeable>> getAllocation() {
     return this.allocation;
   }
 
   @Override
-  public Payment getPayments() {
-    return this.payment;
+  public List<Order> getPayments() {
+    return this.payments;
   }
 
   @Override
-  public void setAllocation(Allocation allocation) {
+  public void setAllocation(Map<Integer,List<ITradeable>> allocation) {
     this.allocation = allocation;
   }
 
   @Override
-  public void setPayments(Payment payment) {
-    this.payment = payment;
+  public void setPayments(List<Order> payments) {
+    this.payments = payments;
   }
 }

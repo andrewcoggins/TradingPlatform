@@ -43,13 +43,9 @@ import brown.tradeable.TradeableType;
 import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.twosided.ITwoSidedAuction;
-import brown.value.config.ComplexConfig;
 import brown.value.generator.library.NormalValGenerator;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.library.AdditiveValuation;
-import brown.value.valuation.library.BundleValuation;
-
-import org.apache.commons.math3.random.RandomGenerator;
 
 import com.esotericsoftware.kryo.Kryo;
 
@@ -105,7 +101,6 @@ public final class Startup {
 		kryo.register(AuctionBidBundle.class);
 		kryo.register(AuctionBid.class);
 		kryo.register(AdditiveValuation.class);
-		kryo.register(BundleValuation.class);
 		kryo.register(ValuationRegistrationMessage.class);
 		kryo.register(Value.class);
 		kryo.register(AdditiveValuation.class);
