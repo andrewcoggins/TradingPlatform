@@ -11,7 +11,7 @@ import brown.messages.library.TradeMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.tradeable.ITradeable;
 
-public class CompleteState implements ICompleteState {
+public class MarketState implements ICompleteState {
 
   private final Integer ID;  
   private final Set<ITradeable> TRADEABLES;
@@ -35,7 +35,7 @@ public class CompleteState implements ICompleteState {
   private Integer outerRuns; 
   
   
-  public CompleteState(Integer ID, Set<ITradeable> tradeables) {
+  public MarketState(Integer ID, Set<ITradeable> tradeables) {
     this.ID = ID; 
     this.TRADEABLES = tradeables; 
     this.bids = new LinkedList<TradeMessage>();

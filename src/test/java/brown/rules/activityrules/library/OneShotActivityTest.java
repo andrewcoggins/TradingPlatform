@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import brown.accounting.MarketState;
 import brown.bid.bidbundle.library.AuctionBidBundle;
-import brown.market.marketstate.library.CompleteState;
+import brown.market.marketstate.library.MarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.library.OneShotActivity;
 import brown.tradeable.library.MultiTradeable;
@@ -30,7 +30,7 @@ public class OneShotActivityTest {
     for(int i = 0; i < 3; i++) {
      allTradeables.add(new MultiTradeable(i));
     }
-    CompleteState state = new CompleteState(0, allTradeables);
+    MarketState state = new MarketState(0, allTradeables);
     Map<MultiTradeable, MarketState> aMap = new HashMap<MultiTradeable, MarketState>();
     aMap.put(new MultiTradeable(0), new MarketState(0, 1.0));
     AuctionBidBundle s = new AuctionBidBundle(aMap);

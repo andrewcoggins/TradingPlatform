@@ -216,7 +216,7 @@ public abstract class AbsServer {
 		int i = 0;
 		for (TwoSidedAuction sec : tsas) {
 			TradeRequestMessage mupdate = new TradeRequestMessage(i++, sec.wrap(this.manager
-					.getLedger(sec.getID()).getSanitized(null)),
+					.getLedger(sec.getID()).getSanitizedUnshared(null)),
 					sec.getMechanismType());
 			theServer.sendToAllTCP(mupdate);
 			this.manager.getLedger(sec.getID()).clearUnshared();

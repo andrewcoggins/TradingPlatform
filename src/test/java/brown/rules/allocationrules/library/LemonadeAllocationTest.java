@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import brown.accounting.library.Account;
 import brown.bid.bidbundle.library.GameBidBundle;
-import brown.market.marketstate.library.CompleteState;
+import brown.market.marketstate.library.MarketState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.rules.library.LemonadeAllocation;
@@ -39,7 +39,7 @@ public class LemonadeAllocationTest {
     for(int i = 0; i < 3; i++) {
      allTradeables.add(new MultiTradeable(i));
     }
-    CompleteState state = new CompleteState(0, allTradeables);
+    MarketState state = new MarketState(0, allTradeables);
     //test tick
     lem.tick(state);
     assertTrue(state.getTime() == (long) 1.0);
@@ -60,7 +60,7 @@ public class LemonadeAllocationTest {
     assertTrue(agentAccount.getMonies() == 24.0);
     agentAccount.add(-24.0);
     //add another player and test again. 
-    CompleteState stateTwo = new CompleteState(0, allTradeables);
+    MarketState stateTwo = new MarketState(0, allTradeables);
     Account anotherAgentAccount = new Account(2);
     TradeMessage secondBid = new TradeMessage(2, new GameBidBundle(2), 1, 2);
     stateTwo.addBid(aBid);
@@ -87,7 +87,7 @@ public class LemonadeAllocationTest {
     for(int i = 0; i < 12; i++) { 
       accounts.add(new Account(i));
     }
-    CompleteState state = new CompleteState(0, null);
+    MarketState state = new MarketState(0, null);
     List<TradeMessage> allBids = new LinkedList<TradeMessage>();
     for(int i = 0; i < 12; i++) {
       state.addBid(new TradeMessage(i, new GameBidBundle(i), 1, i));
@@ -111,7 +111,7 @@ public class LemonadeAllocationTest {
     for (int i = 0; i < 12; i++) {
       accounts.add(new Account(i));
     }
-    CompleteState state = new CompleteState(0, null);
+    MarketState state = new MarketState(0, null);
     for(int i = 0; i < 12; i++) {
       if (i < 3) state.addBid(new TradeMessage(i, new GameBidBundle(0), 1, i));
       else if (i >= 3 && i < 6) state.addBid(new TradeMessage(i, new GameBidBundle(3), 1, i));

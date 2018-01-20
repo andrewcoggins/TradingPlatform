@@ -115,10 +115,21 @@ public class SimpleAgentChannel extends AbsChannel {
 
   @Override
   public boolean equals(Object obj) {
-    return (obj instanceof SimpleAgentChannel && 
-        ((SimpleAgentChannel) obj).HighBid.equals(this.HighBid) &&
-        ((SimpleAgentChannel) obj).ID.equals(this.ID) &&
-        ((SimpleAgentChannel) obj).ledger.equals(this.ledger) &&
-        ((SimpleAgentChannel) obj).MechType.equals(this.MechType));
- }
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    SimpleAgentChannel other = (SimpleAgentChannel) obj;
+    if (HighBid == null) {
+      if (other.HighBid != null)
+        return false;
+    } else if (!HighBid.equals(other.HighBid))
+      return false;
+    if (MechType != other.MechType)
+      return false;
+    return true;
+  }
+
 }
