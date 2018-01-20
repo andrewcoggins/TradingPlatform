@@ -53,6 +53,8 @@ public abstract class AbsAgent extends AbsClient implements IAgent {
   public void onAck(AckMessage message) {
     if (message.REJECTED) {
       Logging.log("[x] rej: " + message.failedBR);
+    } else {
+      Logging.log("[+] connected to server");
     }
   }
   

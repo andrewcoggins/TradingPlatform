@@ -10,4 +10,5 @@ public interface IInformationRevelationPolicy {
 
   public void reset();
 
+  public void constructSummaryState(IMarketState state);
 }

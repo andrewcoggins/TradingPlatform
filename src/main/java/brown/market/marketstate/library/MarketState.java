@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import brown.bid.bidbundle.IBidBundle;
+import brown.market.library.PrevStateInfo;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeMessage;
@@ -16,7 +16,7 @@ import brown.tradeable.ITradeable;
 public class MarketState implements IMarketState {
 
   private final Integer ID;  
-  private final Set<ITradeable> TRADEABLES;
+  private final List<ITradeable> TRADEABLES;
   private List<TradeMessage> bids;
   private int ticks;  
   
@@ -36,10 +36,13 @@ public class MarketState implements IMarketState {
   private Boolean outerTerminated; 
   private Integer outerRuns; 
   
+  // carry over information?
+  private PrevStateInfo prevState;
+  private PrevStateInfo summaryState;
   
-  public MarketState(Integer ID, Set<ITradeable> tradeables) {
+  public MarketState(Integer ID, List<ITradeable> allGoods, PrevStateInfo prevState) {
     this.ID = ID; 
-    this.TRADEABLES = tradeables; 
+    this.TRADEABLES = allGoods; 
     this.bids = new LinkedList<TradeMessage>();
     this.outerTerminated = false; 
     this.increment = 0.0;
@@ -48,6 +51,7 @@ public class MarketState implements IMarketState {
     this.innerTerminated = false; 
     this.allocation = new HashMap<Integer, List<ITradeable>>();
     this.payments = new LinkedList<Order>();
+    this.prevState = prevState;
   }
   
   @Override
@@ -56,12 +60,12 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public Set<ITradeable> getTradeables() {
+  public List<ITradeable> getTradeables() {
     return this.TRADEABLES; 
   }
   
   @Override
-  public void tick(long time) {
+  public void tick() {
     this.ticks++;
   }
 
@@ -158,6 +162,21 @@ public class MarketState implements IMarketState {
   @Override
   public Integer getOuterRuns() {
     return this.outerRuns;
+  }
+  
+  @Override
+  public PrevStateInfo getPrevState() {
+    return this.prevState;
+  }
+
+  @Override
+  public PrevStateInfo getSummaryState(){
+    return this.summaryState;
+  }
+  
+  @Override
+  public void setSummaryState(PrevStateInfo prevState){
+    this.summaryState = prevState;
   }
 
   @Override

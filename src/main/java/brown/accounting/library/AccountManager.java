@@ -44,4 +44,8 @@ public class AccountManager implements IAccountManager {
 		return accounts.containsKey(ID);
 	}
 
+  public void reset() {
+    this.accounts.clear();
+  }
+
 }

@@ -100,8 +100,14 @@ public class Market implements IMarket {
     return this.STATE.getOuterOver();
   } 
 
-  public void tick(long time) {
-    this.STATE.tick(time);
+  public void tick() {
+    this.STATE.tick();
+  }
+  
+  @Override
+  public PrevStateInfo constructSummaryState(){
+    this.IRPOLICY.constructSummaryState(this.STATE);
+    return this.STATE.getSummaryState();
   }
   
   @Override

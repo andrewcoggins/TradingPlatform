@@ -3,6 +3,7 @@ package brown.market;
 import java.util.List;
 
 import brown.messages.library.TradeMessage;
+import brown.market.library.PrevStateInfo;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
@@ -66,8 +67,10 @@ public interface IMarket {
    */
   public boolean isOverOuter();
   
-  public void tick(long time);
+  public void tick();
   
   public void resetInnerMarket();
+
+  PrevStateInfo constructSummaryState();
   
 }

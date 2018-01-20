@@ -2,9 +2,9 @@ package brown.market.marketstate;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import brown.bid.bidbundle.IBidBundle;
+import brown.market.library.PrevStateInfo;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
@@ -21,11 +21,11 @@ public interface IMarketState {
 
     public Integer getID(); 
   
-    public Set<ITradeable> getTradeables();
+    public List<ITradeable> getTradeables();
     
     public void reset();
     
-    public void tick(long time); 
+    public void tick(); 
     
     public int getTicks();  
 
@@ -86,10 +86,18 @@ public interface IMarketState {
     
     public Integer getOuterRuns();
     
+    // Previous states
+    public PrevStateInfo getPrevState();
+    
+    PrevStateInfo getSummaryState();
+    
+    void setSummaryState(PrevStateInfo prevState);
+    
     //IR policy 
     public GameReportMessage getReport();
     
     public void setReport(GameReportMessage gameReport);
+
     
     //TODO: market update. 
 
