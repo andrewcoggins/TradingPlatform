@@ -6,7 +6,6 @@ import brown.channels.agent.IAgentChannel;
 public abstract class AbsChannel implements IAgentChannel{
   
   public final Integer ID;
-  public Ledger ledger;
 
 
   /**
@@ -15,7 +14,6 @@ public abstract class AbsChannel implements IAgentChannel{
    */
   public AbsChannel() { 
     this.ID = null; 
-    this.ledger = null;
   }
 
   /**
@@ -25,11 +23,11 @@ public abstract class AbsChannel implements IAgentChannel{
    */
   public AbsChannel(Integer ID, Ledger ledger) {
     this.ID = ID; 
-    this.ledger = ledger;
   }
   
   @Override
   public Integer getMarketID() {
     return this.ID;
   }
+  
 }

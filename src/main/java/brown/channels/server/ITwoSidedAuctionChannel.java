@@ -4,7 +4,7 @@ import brown.accounting.library.Ledger;
 import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;
 
-public interface IServerChannel {
+public interface ITwoSidedAuctionChannel {
 	/**
 	 * Gets the ID of the auction
 	 * @return id
