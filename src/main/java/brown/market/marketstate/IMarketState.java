@@ -1,11 +1,11 @@
 package brown.market.marketstate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import brown.bid.bidbundle.IBidBundle;
-import brown.market.marketstate.library.Allocation;
-import brown.market.marketstate.library.Payment;
+import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
@@ -17,7 +17,7 @@ import brown.tradeable.ITradeable;
  * 
  * @author acoggins
  */
-public interface ICompleteState {
+public interface IMarketState {
 
     public Integer getID(); 
   
@@ -43,14 +43,13 @@ public interface ICompleteState {
     
     //allocation and payment rule
     
-    public Allocation getAllocation();
+    public Map<Integer,List<ITradeable>> getAllocation();
     
-    // Orders contained in payments
-    public Payment getPayments();
+    public List<Order> getPayments();
     
-    public void setAllocation(Allocation allocation);
+    public void setAllocation(Map<Integer,List<ITradeable>> allocation);
     
-    public void setPayments(Payment payment);
+    public void setPayments(List<Order> payment);
     
     
     //for Query Rules

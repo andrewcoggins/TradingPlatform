@@ -8,7 +8,7 @@ import java.util.Map;
 import brown.bid.bidbundle.BundleType;
 import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.bid.library.AuctionBid;
-import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Allocation;
 import brown.messages.library.TradeMessage;
 import brown.rules.IAllocationRule;
@@ -23,7 +23,7 @@ public class SimpleHighestBidderAllocation implements IAllocationRule {
 
 
   @Override
-  public void setAllocation(ICompleteState state) {
+  public void setAllocation(IMarketState state) {
     Map<MultiTradeable, Double> highest = new HashMap<MultiTradeable, Double>();
     List<TradeMessage> allBids = state.getBids();
     for(TradeMessage bid : allBids) {

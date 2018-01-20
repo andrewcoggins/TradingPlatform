@@ -38,11 +38,11 @@ public interface IMarket {
   //who asks for the list of orders?
   //the bank, so it can process them?
   //needs comments!
-  public List<Order> getOrders();
+  public List<Order> constructOrders();
   
   
   //where is this game report created?
-  public GameReportMessage getReport();
+  public GameReportMessage constructReport();
   //shouldn't this be more like constructGameReport with this description:
   /**
    * Constructs a game report to send to a client.
@@ -57,8 +57,7 @@ public interface IMarket {
    * determines whether or not the inner market is over.
    * @return a boolean indicating whether or not the inner market is over.
    */
-  //rename isInnerOver
-  public boolean isOver();
+  public boolean isInnerOver();
   
   /**
    * Per the (outer) termination condition, 
@@ -69,9 +68,6 @@ public interface IMarket {
   
   public void tick(long time);
   
-  //move to Market state? let it clear itself?
-  public void clearState();
-  
-  public void reset();
+  public void resetInnerMarket();
   
 }

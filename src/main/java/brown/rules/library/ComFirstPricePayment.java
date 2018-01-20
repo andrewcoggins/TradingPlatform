@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.accounting.MarketState;
-import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;
 import brown.rules.IPaymentRule;
 import brown.todeprecate.PaymentType;
@@ -21,7 +21,7 @@ import brown.tradeable.library.MultiTradeable;
 public class ComFirstPricePayment implements IPaymentRule {
 
   @Override
-  public void setPayments(ICompleteState state) {
+  public void setPayments(IMarketState state) {
     // TODO Auto-generated method stub
     List<Order> orders = new LinkedList<Order>();
     ComplexBidBundle original = (ComplexBidBundle) state.getbundleReserve();
@@ -36,19 +36,19 @@ public class ComFirstPricePayment implements IPaymentRule {
   }
 
   @Override
-  public void setPaymentType(ICompleteState state) {
+  public void setPaymentType(IMarketState state) {
     // TODO Auto-generated method stub
     state.setPaymentType(PaymentType.FirstPrice);
   }
 
   @Override
-  public void setReserve(ICompleteState state) {
+  public void setReserve(IMarketState state) {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void permitShort(ICompleteState state) {
+  public void permitShort(IMarketState state) {
     // TODO Auto-generated method stub
     
   }

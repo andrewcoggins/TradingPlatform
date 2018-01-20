@@ -3,6 +3,7 @@ package brown.bid.bidbundle.library;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import brown.bid.bidbundle.BundleType;
 import brown.bid.bidbundle.IBidBundle;
@@ -56,6 +57,15 @@ public class AuctionBidBundle implements IBidBundle {
 		return this.BT;
 	}
 	
+  @Override
+  public double getCost() {
+    double cost = 0.;
+    for (Entry<ITradeable,Double> item: this.BIDS.bids.entrySet()){
+      cost+= item.getValue();
+    }
+    return cost;
+  } 
+	
 	@Override
 	public String toString() {
 		return "[" + this.BT + ": " + this.BIDS + "]";
@@ -75,6 +85,5 @@ public class AuctionBidBundle implements IBidBundle {
     return(obj instanceof AuctionBidBundle && 
         ((AuctionBidBundle) obj).BIDS.equals(this.BIDS) &&
         ((AuctionBidBundle) obj).BT.equals(this.BT));
-  }	
-  
+  }  
 }
