@@ -13,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import brown.accounting.library.Account;
 import brown.accounting.library.AccountManager;
 import brown.accounting.library.Ledger;
-import brown.channels.server.IServerChannel;
+import brown.channels.server.ITwoSidedAuctionChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.market.IMarket;
 import brown.market.library.Market;
@@ -363,7 +363,7 @@ public abstract class AbsServer {
 	 * 
 	 * @param Security : the market to update on
 	 */
-	public void sendMarketUpdate(IServerChannel market) {
+	public void sendMarketUpdate(ITwoSidedAuctionChannel market) {
 //		synchronized(market) {
 //			for (Entry<Connection, Integer> ID : this.connections.entrySet()) {
 //				TradeRequest mupdate = new TradeRequest(0, market.wrap(this.manager
