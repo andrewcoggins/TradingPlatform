@@ -7,9 +7,9 @@ import brown.exceptions.AgentCreationException;
 import brown.messages.library.AbsMessage;
 import brown.messages.library.AckMessage;
 import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.NegotiateRequestMessage;
+import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.setup.Logging;
 import brown.setup.ISetup;
@@ -66,19 +66,13 @@ public abstract class AbsAgent extends AbsClient implements IAgent {
   public void onMarketUpdate(GameReportMessage marketUpdate) {
     // TODO
   }
-
-
-  // and provides information about the current market state as a part of the request
-  // REALLY ??
-  public void onTradeRequest(BidRequestMessage tradeRequest) {
-    //Does nothing. I really don't understand!
-  }
- 
   
-  // TODO: Create a NegotiateChannel
-  // Move to AbsNegotiateAgent
-  public void onNegotiateRequest(NegotiateRequestMessage tradeRequest) {
-    // Noop
+  public void onPrivateInformation(PrivateInformationMessage privateInfo) {
+    
+  }
+  
+  public void onNegotiateRequest(NegotiateRequestMessage request) {
+    
   }
   
 }

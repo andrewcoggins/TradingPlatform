@@ -101,7 +101,6 @@ public final class Startup {
 		kryo.register(AuctionBidBundle.class);
 		kryo.register(AuctionBid.class);
 		kryo.register(AdditiveValuation.class);
-		kryo.register(ValuationRegistrationMessage.class);
 		kryo.register(Value.class);
 		kryo.register(AdditiveValuation.class);
 		kryo.register(Value.class);

@@ -3,15 +3,15 @@ package brown.server.library;
 import java.util.List;
 
 import brown.market.preset.AbsMarketPreset;
-import brown.server.AbsServer2;
+import brown.server.AbsServer;
 import brown.setup.ISetup;
 import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;
 
-public class RunServer2 extends AbsServer2{
+public class RunServer extends AbsServer{
 
-  public RunServer2(int port, ISetup gameSetup) {
+  public RunServer(int port, ISetup gameSetup) {
     super(port, gameSetup);
   }
   
@@ -40,6 +40,8 @@ public class RunServer2 extends AbsServer2{
   
   // need to do something with valuation calculating utilities
   public void runSimulation(Simulation sim, int numRuns) throws InterruptedException {
+    //tradeables
+    this.allTradeables = sim.getTradeables();
     //valuations
     this.valueConfig = sim.getValInfo();     
     //endowments

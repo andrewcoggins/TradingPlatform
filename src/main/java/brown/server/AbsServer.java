@@ -15,11 +15,10 @@ import brown.market.library.MarketManager;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.AckMessage;
 import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.NegotiateRequestMessage;
+import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.TradeRequestMessage;
-import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.ISetup;
 import brown.setup.Logging;
 import brown.setup.library.Startup;
@@ -33,12 +32,15 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
-public abstract class AbsServer2 {
+public abstract class AbsServer {
   
   // Server stuff
   private final int PORT;
   protected Server theServer;
 
+  //keeps track of all tradeables
+  protected List<ITradeable> allTradeables; 
+  
   // Fields to keep track of agents
   private int agentCount;  
   protected Map<Connection, Integer> connections;
@@ -52,7 +54,7 @@ public abstract class AbsServer2 {
   protected Double initialMonies;  
 
 
-  public AbsServer2(int port, ISetup gameSetup) {
+  public AbsServer(int port, ISetup gameSetup) {
     this.PORT = port;
     this.agentCount = 0;
     this.connections = new ConcurrentHashMap<Connection, Integer>();
@@ -77,7 +79,7 @@ public abstract class AbsServer2 {
       return;
     }
 
-    final AbsServer2 aServer = this;
+    final AbsServer aServer = this;
     theServer.addListener(new Listener() {
       public void received(Connection connection, Object message) {
         if (connections.containsKey(connection)) {
@@ -113,6 +115,7 @@ public abstract class AbsServer2 {
       privateToPublic.put(theID, agentCount++);
       connections.put(connection, theID);
       Logging.log("[-] registered " + theID);
+      this.theServer.sendToTCP(connection.getID(), new RegistrationMessage(theID));
     } else {
       Logging.log("[x] AbsServer-onRegistration: encountered registration from existing agent");
     }
@@ -132,9 +135,9 @@ public abstract class AbsServer2 {
       
       // send agents private information
       if (marketConfig.type == ValuationType.Auction) {
-        ValuationRegistrationMessage valueReg; 
+        PrivateInformationMessage valueReg; 
         IValuation privateValuation = marketConfig.valueDistribution.sample();
-        valueReg = new ValuationRegistrationMessage(agentID, privateValuation, marketConfig.valueDistribution);
+        valueReg = new PrivateInformationMessage(agentID, this.allTradeables, privateValuation, marketConfig.valueDistribution);
         theServer.sendToTCP(connection.getID(), valueReg);
       } else if (marketConfig.type == ValuationType.Game) {
         //no explicit valuation, as in the lemonade game
@@ -200,7 +203,6 @@ public abstract class AbsServer2 {
                 synchronized (accountTo.ID) {                  
                   // add order to ledger
                   ledger.add(winner.toTransaction());  
-                  
                   // old account
                   Account temp = accountTo;                  
                   

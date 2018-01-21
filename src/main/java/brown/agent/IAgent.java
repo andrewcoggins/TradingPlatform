@@ -2,9 +2,9 @@ package brown.agent;
 
 import brown.messages.library.AckMessage;
 import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.NegotiateRequestMessage;
+import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
 
 public interface IAgent { 
@@ -28,14 +28,6 @@ public interface IAgent {
    */
   public void onMarketUpdate(GameReportMessage marketUpdate);
 
-  // and provides information about the current market state as a part of the request
-  // REALLY ??
-  /**
-   * When an auction is running, the server requests bids using this method
-   * @param tradeRequest - auction metadata
-   */
-  public void onTradeRequest(BidRequestMessage tradeRequest);
-
   //includes the rejected message and might say why??
   /**
    * Whenever a message is rejected, a rejection message is sent
@@ -55,6 +47,12 @@ public interface IAgent {
    *            - to fields describe what it is requested to give
    */
   public void onNegotiateRequest(NegotiateRequestMessage tradeRequest);
+  
+  /**
+   * gives agent any private information they they may need.
+   * @param privateInfo
+   */
+  public void onPrivateInformation(PrivateInformationMessage privateInfo);
   
 }
 
