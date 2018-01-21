@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import brown.bid.bidbundle.BundleType;
 import brown.bid.bidbundle.library.GameBidBundle;
@@ -33,7 +32,7 @@ public class LemonadeAllocation implements IAllocationRule {
     if(bids.isEmpty()) return;
      
     // Find the number of glasses per slot
-    Set<ITradeable> tradeables = state.getTradeables();
+    List<ITradeable> tradeables = state.getTradeables();
     List<SimpleTradeable> singleTradeables = new LinkedList<SimpleTradeable>();
     for (ITradeable t : tradeables){
       singleTradeables.addAll(t.flatten());

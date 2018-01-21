@@ -2,7 +2,6 @@ package brown.server;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -22,23 +21,17 @@ import brown.market.marketstate.library.Order;
 import brown.messages.library.AckMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.TradeMessage;
-import brown.messages.library.GameReportMessage;
-import brown.messages.library.MarketOrderMessage;
 import brown.messages.library.NegotiateRequestMessage;
 import brown.messages.library.RegistrationMessage;
-import brown.messages.library.NegotiateMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationRegistrationMessage;
 import brown.setup.Logging;
 import brown.setup.library.Startup;
 import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.MultiTradeable;
-import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.ValConfig;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.ValuationType;
-import brown.value.valuation.library.AdditiveValuation;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
@@ -63,7 +56,7 @@ public abstract class AbsServer {
 	protected Server theServer;
 	protected boolean SHORT;
 	
-	protected Map<Integer, ValConfig> valueConfig; 
+	protected ValConfig valueConfig; 
 	protected List<ITradeable> initialGoods;
 	protected Double initialMonies;
 

@@ -30,7 +30,7 @@ public class SSSPServer {
     ValConfig allValInfo = new ArrayList<ValConfig>();
     
     //create tradeables
-    List<Set<ITradeable>> allTradeables = new HashSet<ITradeable>(); 
+    Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
     for (int i = 0; i < 3; i++) {
       allTradeables.add(new MultiTradeable(i, 1)); //just one copy of each good for now
     }

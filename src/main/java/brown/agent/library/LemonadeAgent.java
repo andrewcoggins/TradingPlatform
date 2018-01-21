@@ -7,6 +7,7 @@ import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
+import brown.messages.library.NegotiateRequestMessage;
 import brown.setup.library.LemonadeSetup;
 import brown.setup.Logging;
 
@@ -87,8 +88,8 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   
   public static void main(String[] args) throws AgentCreationException {
     new LemonadeAgent("localhost", 2121, 2);
-    new LemonadeAgent("localhost", 2121, 4);
-    new LemonadeAgent("localhost", 2121, 9);
+//    new LemonadeAgent("localhost", 2121, 4);
+//    new LemonadeAgent("localhost", 2121, 9);
     
     while(true){}
   }

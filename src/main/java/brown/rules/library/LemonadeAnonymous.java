@@ -35,5 +35,9 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
 
   @Override
   public void reset() {
+  }
+
+  @Override
+  public void constructSummaryState(IMarketState state) {    
   }  
 }
