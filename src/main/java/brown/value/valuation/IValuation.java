@@ -1,7 +1,7 @@
 package brown.value.valuation;
 
 import brown.tradeable.ITradeable;
-import brown.value.valuable.library.Value;
+
 
 /**
  * IValuation specifies valuations for ITradeables. 
@@ -11,6 +11,6 @@ import brown.value.valuable.library.Value;
  */
 public interface IValuation {
   
-  public Value getValuation(ITradeable tradeable);
+  public Double getValuation(ITradeable tradeable);
   
 }

@@ -9,7 +9,6 @@ public abstract class AbsCDAAgent extends AbsAgent {
   public AbsCDAAgent(String host, int port, ISetup gameSetup)
       throws AgentCreationException {
     super(host, port, gameSetup);
-    // TODO Auto-generated constructor stub
   }
   
   /**

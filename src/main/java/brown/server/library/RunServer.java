@@ -1,11 +1,7 @@
-package brown.server.library; 
+package brown.server.library;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
-import brown.market.library.Market;
-import brown.market.marketstate.library.MarketState;
 import brown.market.preset.AbsMarketPreset;
 import brown.server.AbsServer;
 import brown.setup.ISetup;
@@ -13,16 +9,15 @@ import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;
 
-public class RunServer extends AbsServer {
+public class RunServer extends AbsServer{
 
   public RunServer(int port, ISetup gameSetup) {
     super(port, gameSetup);
   }
   
-  //what is amt?
-  private void delay(int amt) {
+  private void delay(int time) {
     int i = 0;
-    while (i < amt) {
+    while (i < time) {
       try {
         Thread.sleep(1000);
         Logging.log("[-] pause phase " + i++);
@@ -31,29 +26,49 @@ public class RunServer extends AbsServer {
       }
     }
   }
+
+  public void runSimpleSim(List<ITradeable> allGoods, AbsMarketPreset rules,
+      ValConfig valInfo, double initialMonies, List<ITradeable> initialGoods) throws InterruptedException{
+    this.valueConfig = valInfo;
+    this.initialMonies = initialMonies;
+    this.initialGoods = initialGoods;
+    delay(5);
+    initializeAgents();    
+    this.manager.open(rules,0,allGoods);    
+    this.completeAuctions(1000);
+  }
   
-  //initialGoods is a List of ITradeables; in other places we use Set; consider standardizing
-  public void runGame(Set<ITradeable> allGoods, List<AbsMarketPreset> presets, List<ValConfig> valueInfo, 
-      Double initialMonies, List<ITradeable> initialGoods) throws InterruptedException {
-    
+  // need to do something with valuation calculating utilities
+  public void runSimulation(Simulation sim, int numRuns) throws InterruptedException {
+    //tradeables
+    this.allTradeables = sim.getTradeables();
     //valuations
-    this.valueConfig = new HashMap<Integer, ValConfig>(); 
-    
+    this.valueConfig = sim.getValInfo();     
     //endowments
-    this.initialMonies = initialMonies; 
-    this.initialGoods = initialGoods; 
+    this.initialMonies = sim.getInitialMonies(); 
+    this.initialGoods = sim.getInitialGoods(); 
     
-    //rules
-    for (AbsMarketPreset ruleSet : presets) {
-      this.manager.open(new Market(presets.get(presets.indexOf(ruleSet)),
-          new MarketState(new Integer(0), allGoods)));
-      //matches corresponding rule sets and value info sets.
-      this.valueConfig.put(presets.indexOf(ruleSet), valueInfo.get(presets.indexOf(ruleSet)));
+    // time for agents to register (Make registration happen here)
+    delay(10);    
+    
+    int count = 0;
+    while (count < numRuns) {
+      initializeAgents();
+      for (SimulMarkets s : sim.getSequence()){
+        // Open markets
+        runGame(sim.getTradeables(),s.getMarkets());        
+      }        
+      reset();
+      count++;
     }
-    
-    delay(5);// delay time for agents to register.
-    
-    this.completeAuction(0);
   } 
   
+  public void runGame(List<ITradeable> allGoods, List<AbsMarketPreset> presets) throws InterruptedException {        
+    //rules
+    for (AbsMarketPreset ruleSet : presets) {
+      int id = 0;
+      this.manager.open(ruleSet, new Integer(id), allGoods);
+    }    
+    this.completeAuctions(1000);    
+  }
 }

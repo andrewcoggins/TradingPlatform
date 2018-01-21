@@ -4,6 +4,11 @@ import java.util.List;
 
 import brown.accounting.library.Account;
 
+/**
+ * account manager stores agent accounts.
+ * @author andrew
+ *
+ */
 public interface IAccountManager {
 
   /**

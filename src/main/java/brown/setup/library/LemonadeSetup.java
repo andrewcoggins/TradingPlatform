@@ -3,7 +3,6 @@ package brown.setup.library;
 import com.esotericsoftware.kryo.Kryo;
 
 import brown.channels.agent.library.LemonadeChannel;
-import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
 import brown.setup.ISetup;
 
