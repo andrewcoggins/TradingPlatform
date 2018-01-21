@@ -9,7 +9,6 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.generator.IValuationGenerator;
-import brown.value.valuable.library.Value;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.library.AdditiveValuation;
 
@@ -22,7 +21,7 @@ public class AdditiveValuationDistribution implements IValuationDistribution {
 
   private IValuationGenerator generator; 
   Set<SimpleTradeable> toValue; 
-  private Map<SimpleTradeable, Value> values; 
+  private Map<SimpleTradeable, Double> values; 
   
   /**
    * 
@@ -46,7 +45,7 @@ public class AdditiveValuationDistribution implements IValuationDistribution {
   public IValuation sample() {
     // TODO Auto-generated method stub
     for (SimpleTradeable atom : this.toValue){ 
-      Value aValue = this.generator.makeValuation(); 
+      Double aValue = this.generator.makeValuation(); 
       this.values.put(atom, aValue);
     }
     return new AdditiveValuation(this.values);

@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import brown.accounting.library.Ledger;
 import brown.market.marketstate.library.MarketState;
 import brown.market.preset.AbsMarketPreset;
-import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 
 /**

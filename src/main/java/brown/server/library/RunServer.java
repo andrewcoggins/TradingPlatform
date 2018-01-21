@@ -52,7 +52,7 @@ public class RunServer extends AbsServer{
     delay(10);    
     
     int count = 0;
-    while (count < numRuns){
+    while (count < numRuns) {
       initializeAgents();
       for (SimulMarkets s : sim.getSequence()){
         // Open markets

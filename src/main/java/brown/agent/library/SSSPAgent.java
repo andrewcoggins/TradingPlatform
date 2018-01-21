@@ -13,7 +13,6 @@ import brown.messages.library.RegistrationMessage;
 import brown.setup.Logging;
 import brown.setup.library.LemonadeSetup;
 import brown.tradeable.ITradeable;
-import brown.value.valuationrepresentation.library.SimpleValuation;
 
 public class SSSPAgent extends AbsSimpleSealedBidAgent {
 

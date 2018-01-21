@@ -4,7 +4,6 @@ import java.util.List;
 
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.valuable.library.Value;
 import brown.value.valuation.IComplementaryValuation;
 
 /**
@@ -31,14 +30,14 @@ public class ComplementaryValuation implements IComplementaryValuation {
   }
 
   @Override
-  public Value getValuation(ITradeable tradeable) {
+  public Double getValuation(ITradeable tradeable) {
     List<SimpleTradeable> allTradeables = tradeable.flatten(); 
     int size = allTradeables.size(); 
     double value = 0.0; 
     for (int i = 0; i < size; i++) {
       value = value + this.baseValue * Math.pow(this.delta, i);
     }
-    return new Value(value);
+    return value;
   }
 
   @Override

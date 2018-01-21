@@ -1,7 +1,6 @@
 package brown.value.generator.library;
 
 import brown.value.generator.IValuationGenerator;
-import brown.value.valuable.library.Value;
 
 /**
  * Generates a value drawn from a uniformly distribution.
@@ -23,8 +22,8 @@ public class UniformValGenerator implements IValuationGenerator {
   }
 
   @Override
-  public Value makeValuation() {
-    return new Value((Math.random() * this.MAX) + this.MIN);
+  public Double makeValuation() {
+    return (Math.random() * this.MAX) + this.MIN;
   }
   
 }

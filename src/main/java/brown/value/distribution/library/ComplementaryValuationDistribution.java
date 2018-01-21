@@ -2,7 +2,6 @@ package brown.value.distribution.library;
 
 import brown.value.distribution.IValuationDistribution;
 import brown.value.generator.IValuationGenerator;
-import brown.value.valuable.library.Value;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.library.DMValuation;
 
@@ -57,15 +56,15 @@ public class ComplementaryValuationDistribution implements IValuationDistributio
   
   @Override
   public IValuation sample() {
-    Value tentativeBase = new Value(-999);
-    Value tentativeDelta = new Value(-999);
-    while (tentativeBase.value < minBase || tentativeBase.value > maxBase) {
+    double tentativeBase = -999.0;
+    double tentativeDelta = -999.0;
+    while (tentativeBase < minBase || tentativeBase > maxBase) {
       tentativeBase = baseGenerator.makeValuation();
     }
-    while(tentativeDelta.value < minDelta || tentativeDelta.value > maxDelta) {
+    while(tentativeDelta < minDelta || tentativeDelta > maxDelta) {
       tentativeDelta = DeltaGenerator.makeValuation();
     }
-    return new DMValuation(tentativeBase.value, tentativeDelta.value);
+    return new DMValuation(tentativeBase, tentativeDelta);
   }
 
   @Override

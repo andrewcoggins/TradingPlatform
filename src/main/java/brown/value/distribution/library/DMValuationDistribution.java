@@ -2,7 +2,6 @@ package brown.value.distribution.library;
 
 import brown.value.distribution.IValuationDistribution;
 import brown.value.generator.IValuationGenerator;
-import brown.value.valuable.library.Value;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.library.DMValuation;
 
@@ -42,7 +41,7 @@ public class DMValuationDistribution implements IValuationDistribution {
    * @param minDiscount
    * mimimum discount value
    * @param maxDiscount
-   * maximum discount value
+   * maximum discount value (suggested < 1) 
    */
   public DMValuationDistribution(IValuationGenerator generator, IValuationGenerator discountGenerator, 
       Double minBase, Double maxBase, 
@@ -56,15 +55,15 @@ public class DMValuationDistribution implements IValuationDistribution {
   
   @Override
   public IValuation sample() {
-    Value tentativeBase = new Value(-999);
-    Value tentativeDiscount = new Value(-999);
-    while (tentativeBase.value < minBase || tentativeBase.value > maxBase) {
+    Double tentativeBase = -999.0;
+    Double tentativeDiscount = -999.0;
+    while (tentativeBase < minBase || tentativeBase > maxBase) {
       tentativeBase = baseGenerator.makeValuation();
     }
-    while(tentativeDiscount.value < minDiscount || tentativeDiscount.value > maxDiscount) {
+    while(tentativeDiscount < minDiscount || tentativeDiscount > maxDiscount) {
       tentativeDiscount = discountGenerator.makeValuation();
     }
-    return new DMValuation(tentativeBase.value, tentativeDiscount.value);
+    return new DMValuation(tentativeBase, tentativeDiscount);
   }
 
   @Override
