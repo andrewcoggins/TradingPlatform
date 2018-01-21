@@ -4,8 +4,8 @@ import brown.market.preset.AbsMarketPreset;
 import brown.rules.library.LemonadeAnonymous;
 import brown.rules.library.OneShotActivity;
 import brown.rules.library.OneShotTermination;
-import brown.rules.library.SealedBidQuery;
-import brown.rules.library.SimpleHighestBidderAllocation;
+import brown.rules.library.SSSPQuery;
+import brown.rules.library.SSSPAllocation;
 import brown.rules.library.SimpleSecondPrice;
 import brown.rules.library.XRoundTermination;
 
@@ -17,9 +17,9 @@ public class SimSPRules extends AbsMarketPreset {
    * or otherwise delete it from this constructor.
    */
   public SimSPRules() {
-    super(new SimpleHighestBidderAllocation(),
+    super(new SSSPAllocation(),
         new SimpleSecondPrice(),
-        new SealedBidQuery(), 
+        new SSSPQuery(), 
         new OneShotActivity(),
         new LemonadeAnonymous(),
         new OneShotTermination(), 

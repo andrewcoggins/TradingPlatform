@@ -9,7 +9,6 @@ import brown.bid.bidbundle.BundleType;
 import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.bid.library.AuctionBid;
 import brown.market.marketstate.IMarketState;
-import brown.market.marketstate.library.Allocation;
 import brown.messages.library.TradeMessage;
 import brown.rules.IAllocationRule;
 import brown.tradeable.library.MultiTradeable;
@@ -19,7 +18,7 @@ import brown.tradeable.library.MultiTradeable;
  * @author andrew
  *
  */
-public class SimpleHighestBidderAllocation implements IAllocationRule {
+public class SSSPAllocation implements IAllocationRule {
 
 
   @Override

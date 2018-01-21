@@ -16,7 +16,7 @@ import brown.accounting.library.Account;
 import brown.accounting.library.Ledger;
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.agent.library.LemonadeChannel;
-import brown.channels.agent.library.SimpleAgentChannel;
+import brown.channels.agent.library.SSSPChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.BidRequestMessage;

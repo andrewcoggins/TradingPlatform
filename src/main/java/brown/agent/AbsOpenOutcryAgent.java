@@ -1,6 +1,6 @@
 package brown.agent;
 
-import brown.channels.agent.library.SimpleAgentChannel;
+import brown.channels.agent.library.SSSPChannel;
 import brown.exceptions.AgentCreationException;
 import brown.setup.ISetup;
 
@@ -15,6 +15,6 @@ public abstract class AbsOpenOutcryAgent extends AbsAgent {
    * Provides agent response to open outcry auction
    * @param simpleWrapper - simple agent channel
    */
-  public abstract void onSimpleOpenOutcry(SimpleAgentChannel simpleWrapper);
+  public abstract void onSimpleOpenOutcry(SSSPChannel simpleWrapper);
 
 }

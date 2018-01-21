@@ -1,12 +1,12 @@
 package brown.agent;
 
-import brown.channels.agent.library.SimpleAgentChannel;
+import brown.channels.agent.library.SSSPChannel;
 import brown.exceptions.AgentCreationException;
 import brown.setup.ISetup;
 
-public abstract class AbsSimpleSealedBidAgent extends AbsAgent {
+public abstract class AbsSSSPAgent extends AbsAgent {
 
-  public AbsSimpleSealedBidAgent(String host, int port, ISetup gameSetup)
+  public AbsSSSPAgent(String host, int port, ISetup gameSetup)
       throws AgentCreationException {
     super(host, port, gameSetup);
   }
@@ -15,6 +15,6 @@ public abstract class AbsSimpleSealedBidAgent extends AbsAgent {
    * Provides agent response to sealed-bid auction
    * @param simpleWrapper - simple agent channel
    */
-  public abstract void onSimpleSealedBid(SimpleAgentChannel simpleWrapper);
+  public abstract void onSSSP(SSSPChannel channel);
 
 }

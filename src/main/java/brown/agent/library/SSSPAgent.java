@@ -3,44 +3,54 @@ package brown.agent.library;
 import java.util.HashMap;
 import java.util.Map;
 
-import brown.agent.AbsSimpleSealedBidAgent;
+import brown.agent.AbsSSSPAgent;
 import brown.bid.bidbundle.library.AuctionBidBundle;
-import brown.channels.agent.library.SimpleAgentChannel;
+import brown.channels.agent.library.SSSPChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.ValuationRegistrationMessage;
+import brown.setup.Logging;
 import brown.setup.library.LemonadeSetup;
+import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
-import brown.value.valuationrepresentation.library.SimpleValuation;
+import brown.value.distribution.library.AdditiveValuationDistribution;
+import brown.value.valuation.library.AdditiveValuation;
 
-public class SSSPAgent extends AbsSimpleSealedBidAgent {
+public class SSSPAgent extends AbsSSSPAgent {
 
-  private SimpleValuation privateValuation; 
+  private AdditiveValuation valuation; 
+  private AdditiveValuationDistribution dist;
   
   public SSSPAgent(String host, int port)
       throws AgentCreationException {
-    super(host, port, new LemonadeSetup());
+    super(host, port, new SSSPSetup());
     // TODO Auto-generated constructor stub
   }
 
   @Override
   public void onRegistration(RegistrationMessage registration) {
     this.ID = registration.getID();
-    System.out.println("Registration received");
     if (registration instanceof ValuationRegistrationMessage) {
-      System.out.println("Registration received");
+      Logging.log("[SSSPAgent] Valuation received");
       ValuationRegistrationMessage valReg = (ValuationRegistrationMessage) registration; 
-      this.privateValuation = (SimpleValuation) valReg.getValuation();
+      if (!(valReg.getValuation() instanceof AdditiveValuation)){
+        Logging.log("[SSSPAgent] Wrong Valuation Type");
+      }
+      if (!(valReg.getDistribution() instanceof AdditiveValuationDistribution)){
+        Logging.log("[SSSPAgent] Wrong Valuation Distribution");        
+      }      
+      this.valuation = (AdditiveValuation) valReg.getValuation();
+      this.dist = (AdditiveValuationDistribution) valReg.getDistribution();           
     }
   }
   
   @Override
-  public void onSimpleSealedBid(SimpleAgentChannel simpleChannel) {
+  public void onSSSP(SSSPChannel simpleChannel) {
     Map<ITradeable, Double> initial = new HashMap<ITradeable, Double>();
     // TODO Auto-generated method stub
-    for (ITradeable t: this.privateValuation.valuation.keySet()) {
+    for (ITradeable t: this.valuation.) {
       initial.put(t, privateValuation.valuation.get(t).value);
     }
     // this is the SCPP price prediction. Probably not a very good bid. 
@@ -50,24 +60,18 @@ public class SSSPAgent extends AbsSimpleSealedBidAgent {
   
   @Override
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
-    // TODO Auto-generated method stub
     System.out.println("bank update");
     System.out.println(bankUpdate.toString());
   }
 
   @Override
   public void onMarketUpdate(GameReportMessage marketUpdate) {
-    // TODO Auto-generated method stub
     System.out.println("market update");
-    //System.out.println(gameReport.toString());
   }
 
   public static void main(String[] args) throws AgentCreationException {
-    //new SSSPAgent("Kerrys-MacBook-Pro-2.local", 2121);
-    //new SSSPAgent("localhost", 2121);
     new SSSPAgent("localhost", 2121);
     
     while(true){}
   }
-  
 }

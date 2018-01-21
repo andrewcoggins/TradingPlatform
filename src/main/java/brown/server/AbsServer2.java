@@ -49,7 +49,7 @@ public abstract class AbsServer2 {
   protected ValConfig valueConfig; 
   protected List<ITradeable> initialGoods;
   protected Double initialMonies;  
-
+  protected List<ITradeable> allGoods;  
 
   public AbsServer2(int port, ISetup gameSetup) {
     this.PORT = port;
@@ -120,10 +120,8 @@ public abstract class AbsServer2 {
   // Give agents valuations and give them initial goods
   protected void initializeAgents() {
     ValConfig marketConfig = this.valueConfig;
-    System.out.println("INITIALIZE" + this.connections.size());
     for (Connection connection : this.connections.keySet()) {      
       Integer agentID = this.connections.get(connection);
-      System.out.println("INITIALIZE"+agentID);
       //set up agent account
       Account newAccount = new Account(agentID);
       newAccount.add(initialMonies);
@@ -135,7 +133,7 @@ public abstract class AbsServer2 {
       if (marketConfig.type == ValuationType.Auction) {
         ValuationRegistrationMessage valueReg; 
         IValuation privateValuation = marketConfig.valueDistribution.sample();
-        valueReg = new ValuationRegistrationMessage(agentID, privateValuation, marketConfig.valueDistribution);
+        valueReg = new ValuationRegistrationMessage(agentID, privateValuation, marketConfig.valueDistribution, this.allGoods);
         theServer.sendToTCP(connection.getID(), valueReg);
       } else if (marketConfig.type == ValuationType.Game) {
         //no explicit valuation, as in the lemonade game
@@ -196,9 +194,7 @@ public abstract class AbsServer2 {
             Ledger ledger = this.manager.getLedger(auction.getID());
             // Go through winners and execute orders
             for (Order winner : winners) {          
-              System.out.println("UPDATE: " + winner.TO);              
               if (this.acctManager.containsAcct(winner.TO)) {
-                System.out.println("ID: "+ winner.TO);                
                 Account accountTo = this.acctManager.getAccount(winner.TO);
                 synchronized (accountTo.ID) {                  
                   // add order to ledger

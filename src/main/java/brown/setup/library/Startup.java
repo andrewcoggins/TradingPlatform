@@ -19,10 +19,9 @@ import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.bid.bidbundle.library.GameBidBundle;
 import brown.bid.library.AuctionBid;
 import brown.bid.library.GameBid;
-import brown.channels.MechanismType;
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.agent.library.LemonadeChannel;
-import brown.channels.agent.library.SimpleAgentChannel;
+import brown.channels.agent.library.SSSPChannel;
 import brown.channels.server.TwoSidedAuction;
 import brown.channels.server.library.CDAServerChannel;
 import brown.market.marketstate.library.Order;
@@ -89,7 +88,6 @@ public final class Startup {
 		kryo.register(MarketOrderMessage.class);
 		kryo.register(TwoSidedAuction.class);
 		kryo.register(ITwoSidedAuction.class);
-		kryo.register(MechanismType.class);
 		kryo.register(CDAAgentChannel.class);
 		kryo.register(IClearingRule.class);
 		kryo.register(MultiTradeable.class);
@@ -97,7 +95,7 @@ public final class Startup {
 		kryo.register(Order.class);
 		kryo.register(Ledger.class);
 		kryo.register(HashMap.class);
-		kryo.register(SimpleAgentChannel.class);
+		kryo.register(SSSPChannel.class);
 		kryo.register(AuctionBidBundle.class);
 		kryo.register(AuctionBid.class);
 		kryo.register(AdditiveValuation.class);

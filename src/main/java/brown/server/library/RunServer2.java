@@ -45,6 +45,7 @@ public class RunServer2 extends AbsServer2{
     //endowments
     this.initialMonies = sim.getInitialMonies(); 
     this.initialGoods = sim.getInitialGoods(); 
+    this.allGoods = sim.getTradeables();
     
     // time for agents to register (Make registration happen here)
     delay(10);    
