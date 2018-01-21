@@ -10,6 +10,12 @@ import brown.tradeable.ITradeable;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.IValuation;
 
+/**
+ * abstract agent for sealed bid games. 
+ * All sealed bid agents will implement this game.
+ * @author andrew
+ *
+ */
 public abstract class AbsSimpleSealedBidAgent extends AbsValnAgent implements IAgent {
 
   protected IValuation privateValuation; 

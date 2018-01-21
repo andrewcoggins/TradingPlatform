@@ -10,6 +10,12 @@ import brown.exceptions.AgentCreationException;
 import brown.setup.ISetup;
 import brown.setup.library.Startup;
 
+/**
+ * abstract client starts an agent with kryo. 
+ * All agents will extend this class.
+ * @author andrew
+ *
+ */
 public abstract class AbsClient {
   
   public final Client CLIENT;

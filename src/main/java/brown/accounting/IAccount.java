@@ -6,6 +6,11 @@ import java.util.Set;
 import brown.accounting.library.Account;
 import brown.tradeable.ITradeable;
 
+/**
+ * Accounts store agent monies and tradeables.
+ * @author andrew
+ *
+ */
 public interface IAccount {
   
   /**

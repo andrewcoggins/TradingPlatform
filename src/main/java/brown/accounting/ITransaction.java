@@ -2,6 +2,12 @@ package brown.accounting;
 
 import brown.accounting.library.Transaction;
 
+/**
+ * transaction details processed changes in tradeables and monies in 
+ * agent accounts.
+ * @author andrew
+ *
+ */
 public interface ITransaction {
   
   /**

@@ -14,10 +14,15 @@ import brown.messages.library.RegistrationMessage;
 import brown.setup.Logging;
 import brown.setup.ISetup;
 
+/**
+ * every agent class extends this class.
+ * @author andrew
+ *
+ */
 public abstract class AbsAgent extends AbsClient implements IAgent { 
 
   /**
-   * Implementations should always invoke super()
+   * 
    * 
    * @param host
    * @param port

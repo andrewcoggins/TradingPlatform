@@ -7,6 +7,12 @@ import brown.messages.library.NegotiateRequestMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
 
+/**
+ * Agents are responsible for receiving messages from the server and sending bids
+ * in the game.
+ * @author andrew
+ *
+ */
 public interface IAgent { 
 
   /**
