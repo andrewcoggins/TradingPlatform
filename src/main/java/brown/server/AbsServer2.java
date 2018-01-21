@@ -15,6 +15,7 @@ import brown.market.library.MarketManager;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.AckMessage;
 import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.NegotiateRequestMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.TradeRequestMessage;
@@ -224,7 +225,7 @@ public abstract class AbsServer2 {
             }            
             // Send game report
             this.theServer.sendToAllTCP(auction.constructReport());
-            if (!auction.isOverOuter()){
+            if (!auction.isOverOuter()) {
               Logging.log("[*] Auction has been reset");
               auction.resetInnerMarket();              
             } else {

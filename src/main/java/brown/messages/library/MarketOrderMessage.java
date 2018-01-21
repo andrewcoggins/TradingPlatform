@@ -6,7 +6,7 @@ import brown.channels.server.TwoSidedAuction;
 /**
  * Orders that do not fully clear during a given round may
  * carry over to the next round, or they may be cancelled. 
- * @author andrew
+ * @author lcamery
  */
 public class MarketOrderMessage extends AbsMessage {
   

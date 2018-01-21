@@ -14,7 +14,7 @@ import brown.value.valuation.IMonotonicValuation;
  * @author andrew
  *
  */
-public class AdditiveValuation implements IMonotonicValuation {
+public class AdditiveValuation implements IMonotonicValuation { 
 
   private final Map<SimpleTradeable, Value> valueParams; 
   
