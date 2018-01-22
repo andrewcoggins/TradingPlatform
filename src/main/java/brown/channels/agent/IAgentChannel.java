@@ -1,7 +1,8 @@
 package brown.channels.agent;
 
+import brown.accounting.bidbundle.IBidBundle;
+import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
-import brown.bid.bidbundle.IBidBundle;
 
 /*
  * Agents are exposed to client-side versions of markets through IMarket:
@@ -16,7 +17,14 @@ public interface IAgentChannel {
 	 * Gets the ID of the auction
 	 * @return id
 	 */
-	public Integer getMarketID();
+	public Integer getAuctionID();
+	
+	//why do channels have ledgers??
+	/**
+	 * Gets the ledger for this market
+	 * @return ledger
+	 */
+	public Ledger getLedger();
 	
 	/**
 	 * Handles the double dispatch for trade request types

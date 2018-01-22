@@ -47,6 +47,7 @@ public class Market implements IMarket {
 
   public TradeRequestMessage constructTradeRequest(Integer ID) {
     //no idea why ledgers are part of the trade request -- they should be sent as market updates!
+    //maybe tentativeReports should be part of the trade request
     Ledger ledger = new Ledger(this.getID());
     for(Order o : getOrders()) {
       ledger.add(o.toTransaction());
@@ -80,6 +81,7 @@ public class Market implements IMarket {
   @Override 
   // maybe this is constructGameReport
   // i'm worried about setAllocation and setOrders potentially being called twice in a row
+  
   public GameReportMessage getReport() {
     // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
@@ -120,5 +122,6 @@ public class Market implements IMarket {
     this.QRULE.reset();
     this.STATE.reset();
     this.STATE.incrementOuter();
-  }  
+  }
+  
 }
