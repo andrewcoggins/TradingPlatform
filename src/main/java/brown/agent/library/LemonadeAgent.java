@@ -7,6 +7,7 @@ import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
+import brown.messages.library.PrivateInformationMessage;
 import brown.setup.library.LemonadeSetup;
 import brown.setup.Logging;
 
@@ -91,6 +92,11 @@ public class LemonadeAgent extends AbsLemonadeAgent {
 //    new LemonadeAgent("localhost", 2121, 9);
     
     while(true){}
+  }
+
+  // No private info in lemonade
+  @Override
+  public void onPrivateInformation(PrivateInformationMessage privateInfo) {    
   }
   
 }

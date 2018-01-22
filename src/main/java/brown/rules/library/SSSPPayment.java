@@ -13,6 +13,7 @@ import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
 import brown.rules.IPaymentRule;
+import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 
@@ -50,6 +51,7 @@ public class SSSPPayment implements IPaymentRule {
     
     List<Order> orders = new LinkedList<Order>();
     for (SimpleTradeable t : highestAgent.keySet()){
+      Logging.log("2nd highest :" + secondHighestPrice);
       orders.add(new Order(highestAgent.get(t), null, secondHighestPrice.get(t),1,t));
     }
     state.setPayments(orders);

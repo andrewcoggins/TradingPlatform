@@ -26,8 +26,9 @@ import brown.channels.server.TwoSidedAuction;
 import brown.channels.server.library.CDAServerChannel;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.AbsMessage;
-import brown.messages.library.AckMessage;
+import brown.messages.library.ErrorMessage;
 import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.MarketOrderMessage;
@@ -35,11 +36,13 @@ import brown.messages.library.NegotiateRequestMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.NegotiateMessage;
 import brown.messages.library.TradeRequestMessage;
+import brown.messages.library.ValuationInformationMessage;
 import brown.rules.IClearingRule;
 import brown.tradeable.TradeableType;
 import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.twosided.ITwoSidedAuction;
+import brown.value.distribution.library.AdditiveValuationDistribution;
 import brown.value.generator.library.NormalValGenerator;
 import brown.value.valuation.library.AdditiveValuation;
 
@@ -76,7 +79,7 @@ public final class Startup {
 		kryo.register(NegotiateRequestMessage.class);
 		kryo.register(Account.class);
 		kryo.register(TradeRequestMessage.class);
-		kryo.register(AckMessage.class);
+		kryo.register(ErrorMessage.class);
 		kryo.register(Timestamp.class);
 		kryo.register(Date.class);
 		kryo.register(IBidBundle.class);
@@ -102,6 +105,9 @@ public final class Startup {
     kryo.register(GameBid.class);
 		kryo.register(Integer[].class);
 		kryo.register(SimpleTradeable.class);
+		kryo.register(ValuationInformationMessage.class);
+    kryo.register(PrivateInformationMessage.class);		
+    kryo.register(AdditiveValuationDistribution.class);
 		return true;
 	}
 

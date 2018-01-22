@@ -2,7 +2,7 @@ package brown.agent;
 
 import brown.value.valuation.IValuation;
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.PrivateInformationMessage;
+import brown.messages.library.ValuationInformationMessage;
 import brown.setup.ISetup;
 
 //this class doesn't appear to be used yet.
@@ -23,6 +23,6 @@ public abstract class AbsValnAgent extends AbsAgent implements IAgent {
     super(host, port, gameSetup);//??
   }
   
-  public abstract void onPrivateInformation(PrivateInformationMessage privateInfo);
+  public abstract void onPrivateInformation(ValuationInformationMessage privateInfo);
   
 }

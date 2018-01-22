@@ -1,6 +1,6 @@
 package brown.agent;
 
-import brown.messages.library.AckMessage;
+import brown.messages.library.ErrorMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.NegotiateRequestMessage;
@@ -40,7 +40,7 @@ public interface IAgent {
    * 
    * @param message - includes the rejected message and might say why
    */
-  public void onAck(AckMessage message);
+  public void onErrorMessage(ErrorMessage message);
   
   // TODO: Create a NegotiateChannel
   // Move to AbsNegotiateAgent

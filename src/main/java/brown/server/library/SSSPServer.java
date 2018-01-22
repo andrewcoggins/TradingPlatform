@@ -32,6 +32,7 @@ public class SSSPServer {
       SimpleTradeable toAdd = new SimpleTradeable(i);            
       allTradeables.add(toAdd);
       allTradeablesList.add(toAdd);
+      i++;
     }
 
     new RunServer(2121, new SSSPSetup()).runSimpleSim(allTradeablesList, new SSSPRules(), 
