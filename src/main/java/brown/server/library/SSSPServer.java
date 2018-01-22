@@ -32,9 +32,10 @@ public class SSSPServer {
       SimpleTradeable toAdd = new SimpleTradeable(i);            
       allTradeables.add(toAdd);
       allTradeablesList.add(toAdd);
+      i++;
     }
 
-    new RunServer2(2121, new SSSPSetup()).runSimpleSim(allTradeablesList, new SSSPRules(), 
+    new RunServer(2121, new SSSPSetup()).runSimpleSim(allTradeablesList, new SSSPRules(), 
         new SSSPConfig(allTradeables), 100., new LinkedList<ITradeable>());;
   }
 }

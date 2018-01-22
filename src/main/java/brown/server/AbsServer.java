@@ -13,9 +13,9 @@ import brown.accounting.library.Ledger;
 import brown.market.library.Market;
 import brown.market.library.MarketManager;
 import brown.market.marketstate.library.Order;
-import brown.messages.library.AckMessage;
+import brown.messages.library.ErrorMessage;
 import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.PrivateInformationMessage;
+import brown.messages.library.ValuationInformationMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.TradeRequestMessage;
@@ -79,6 +79,7 @@ public abstract class AbsServer {
       return;
     }
 
+    // Set up listener to handle messages
     final AbsServer aServer = this;
     theServer.addListener(new Listener() {
       public void received(Connection connection, Object message) {
@@ -91,15 +92,13 @@ public abstract class AbsServer {
           }
         } else if (message instanceof RegistrationMessage) {
           // If connection is not contained, check if it is registration method
-          Logging.log("[-] registration recieved from "
-              + connection.getID());
           aServer.onRegistration(connection, (RegistrationMessage) message);
           return;
         }}});
     Logging.log("[-] server started");
   }
 
-
+  // A handshake that gives agents IDs and registers them
   protected void onRegistration(Connection connection, RegistrationMessage registration) {
     if (registration.getID() == null) {
       Logging.log("[x] AbsServer-onRegistration: encountered null registration");
@@ -135,9 +134,9 @@ public abstract class AbsServer {
       
       // send agents private information
       if (marketConfig.type == ValuationType.Auction) {
-        PrivateInformationMessage valueReg; 
+        ValuationInformationMessage valueReg; 
         IValuation privateValuation = marketConfig.valueDistribution.sample();
-        valueReg = new PrivateInformationMessage(agentID, this.allTradeables, privateValuation, marketConfig.valueDistribution);
+        valueReg = new ValuationInformationMessage(agentID, this.allTradeables, privateValuation, marketConfig.valueDistribution);
         theServer.sendToTCP(connection.getID(), valueReg);
       } else if (marketConfig.type == ValuationType.Game) {
         //no explicit valuation, as in the lemonade game
@@ -156,13 +155,12 @@ public abstract class AbsServer {
       synchronized (auction) {
         // Handle bid through handleBid method
         if (!auction.handleBid(bid.safeCopy(privateID))) {
-          AckMessage rej = new AckMessage(privateID, bid, true);
-          this.theServer.sendToTCP(connection.getID(), rej);
+          this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid rejected by Activity Rule"));
         }
       }
     } else {
-      AckMessage rej = new AckMessage(privateID, bid, true);
-      this.theServer.sendToTCP(connection.getID(), rej);
+      Logging.log("[x] AbsServer onBid: Bid encountered with unknown auction ID");
+      this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid send to unknown auction"));
     }
   }
   
@@ -249,6 +247,7 @@ public abstract class AbsServer {
     }
   }
   
+  // Reset accounts and markets (but keep information about connections)
   public void reset() {
     this.acctManager.reset();
     this.manager.reset();

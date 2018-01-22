@@ -46,6 +46,5 @@ public abstract class AbsClient {
     } catch (IOException e) {
       throw new AgentCreationException("Failed to connect to server");
     }
-  }
-  
+  }  
 }

@@ -5,7 +5,7 @@ import com.esotericsoftware.kryonet.Listener;
 
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.AbsMessage;
-import brown.messages.library.AckMessage;
+import brown.messages.library.ErrorMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.NegotiateRequestMessage;
@@ -50,17 +50,15 @@ public abstract class AbsAgent extends AbsClient implements IAgent {
   
   //could move up to AbsClient
   public void onRegistration(RegistrationMessage registration) {
-    this.ID = registration.getID();
+    Logging.log("[-] Registered To Server");
+    this.ID = registration.getID();    
+  }
+  
+  public void onErrorMessage(ErrorMessage message) {
+    Logging.log("[x] rej: " + message.error);
   }
 
-  //could move up to AbsClient
-  //includes the rejected message and might say why??
-  public void onAck(AckMessage message) {
-    if (message.REJECTED) {
-      Logging.log("[x] rej: " + message.failedBR);
-    } else {
-      Logging.log("[+] connected to server");
-    }
+  public void onPrivateInformation(PrivateInformationMessage registration) {
   }
   
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
@@ -71,11 +69,7 @@ public abstract class AbsAgent extends AbsClient implements IAgent {
   public void onMarketUpdate(GameReportMessage marketUpdate) {
     // TODO
   }
-  
-  public void onPrivateInformation(PrivateInformationMessage privateInfo) {
     
-  }
-  
   public void onNegotiateRequest(NegotiateRequestMessage request) {
     
   }

@@ -12,6 +12,10 @@ public class NormalValGenerator implements IValuationGenerator {
   private Double mean; 
   private Double variance; 
 
+  public NormalValGenerator(){
+    this.mean = null;
+    this.variance = null;
+  }
   
   public NormalValGenerator (Double mean, Double variance) {
     this.mean = mean; 

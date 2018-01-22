@@ -21,11 +21,11 @@ public class AckMessageTest {
     
     // testing only bid and registration messages. If later use Acks for other
     // messages will add those tests in.
-    AckMessage ackOne = new AckMessage(new RegistrationMessage(0), true);
-    AckMessage ackTwo = new AckMessage(new RegistrationMessage(0), false); 
-    AckMessage ackThree = new AckMessage(0, 
+    ErrorMessage ackOne = new ErrorMessage(new RegistrationMessage(0), true);
+    ErrorMessage ackTwo = new ErrorMessage(new RegistrationMessage(0), false); 
+    ErrorMessage ackThree = new ErrorMessage(0, 
         new TradeMessage(0, new AuctionBidBundle(), 0, 0), true); 
-    AckMessage ackFour = new AckMessage(1, 
+    ErrorMessage ackFour = new ErrorMessage(1, 
         new TradeMessage(0, new AuctionBidBundle(), 0, 0), false); 
     
     // test constructors.
