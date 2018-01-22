@@ -32,8 +32,7 @@ public class RunServer extends AbsServer{
     this.valueConfig = valInfo;
     this.allTradeables = allGoods;
     this.initialMonies = initialMonies;
-    this.initialGoods = initialGoods;
-    System.out.println("GETS HRE");    
+    this.initialGoods = initialGoods;   
     delay(5);
     initializeAgents();   
     this.manager.open(rules,0,allGoods);    
@@ -60,7 +59,7 @@ public class RunServer extends AbsServer{
         // Open markets
         runGame(sim.getTradeables(),s.getMarkets());        
       }        
-      reset();
+      resetSim();
       count++;
     }
   } 

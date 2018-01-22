@@ -4,11 +4,11 @@ import brown.market.marketstate.IMarketState;
 import brown.rules.IOuterTC;
 
 public class XRoundTermination implements IOuterTC {
-  private static final int maxRuns = 50;
+  private static final int numRuns = 50;
   
 @Override
   public void outerTerminated(IMarketState state) {
-    boolean over = state.getOuterRuns() >= maxRuns;
+    boolean over = state.getOuterRuns() >= numRuns;
     state.setOuterOver(over);
   }
 }

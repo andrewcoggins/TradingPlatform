@@ -5,13 +5,11 @@ import com.esotericsoftware.kryonet.Listener;
 
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.AbsMessage;
-import brown.messages.library.ErrorMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.NegotiateRequestMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
-import brown.setup.Logging;
 import brown.setup.ISetup;
 
 /**
@@ -23,7 +21,7 @@ public abstract class AbsAgent extends AbsClient implements IAgent {
 
   /**
    * 
-   * 
+   * AbsAgent takes in a host, a port, an ISetup.
    * @param host
    * @param port
    * @param gameSetup
@@ -32,8 +30,8 @@ public abstract class AbsAgent extends AbsClient implements IAgent {
   public AbsAgent(String host, int port, ISetup gameSetup)
       throws AgentCreationException {
     super(host, port, gameSetup);
-
     final AbsAgent agent = this;
+    // All agents listen for messages.
     CLIENT.addListener(new Listener() {
       public void received(Connection connection, Object message) {
         synchronized (agent) {
@@ -47,27 +45,16 @@ public abstract class AbsAgent extends AbsClient implements IAgent {
 
     CLIENT.sendTCP(new RegistrationMessage(-1));
   }
-  
-  //could move up to AbsClient
-  public void onRegistration(RegistrationMessage registration) {
-    Logging.log("[-] Registered To Server");
-    this.ID = registration.getID();    
-  }
-  
-  public void onErrorMessage(ErrorMessage message) {
-    Logging.log("[x] rej: " + message.error);
-  }
 
   public void onPrivateInformation(PrivateInformationMessage registration) {
   }
   
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
-    // TODO
+
   }
   
-  // FIX ME !!
   public void onMarketUpdate(GameReportMessage marketUpdate) {
-    // TODO
+
   }
     
   public void onNegotiateRequest(NegotiateRequestMessage request) {
