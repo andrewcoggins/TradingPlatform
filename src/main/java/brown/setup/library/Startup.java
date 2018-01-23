@@ -47,7 +47,6 @@ import com.esotericsoftware.kryo.Kryo;
 
 public final class Startup {
 	
-  //TODO: Consider reflection for dynamic loading
   /**
    * registers most necessary classes with kryo
    * @param kryo

@@ -1,20 +1,23 @@
 package brown.messages.library;
 
-import brown.accounting.library.Account;
+
 import brown.agent.AbsAgent;
+import brown.tradeable.ITradeable;
 
 /**
  * Message provided to agents when their accounts change
  */
 public class BankUpdateMessage extends AbsMessage {
   
-	public final Account oldAccount;
-	public final Account newAccount;
+	public final ITradeable tradeableAdded; 
+	public final ITradeable tradeableLost;
+	public final Double moniesAdded; 
 	
 	public BankUpdateMessage() {
 		super(null);
-		this.oldAccount = null;
-		this.newAccount = null;
+		this.tradeableAdded = null; 
+		this.tradeableLost = null;
+		this.moniesAdded = null;
 	}
 
 	/**
@@ -23,10 +26,12 @@ public class BankUpdateMessage extends AbsMessage {
 	 * @param oldAccount : old account
 	 * @param newAccount : new account; contains info relevant to update
 	 */
-	public BankUpdateMessage(int ID, Account oldAccount, Account newAccount) {
+	public BankUpdateMessage(int ID, ITradeable tradeableAdded, ITradeable tradeableLost, 
+	    double moniesAdded) {
 		super(ID);
-		this.oldAccount = oldAccount;
-		this.newAccount = newAccount;
+		this.tradeableAdded = tradeableAdded; 
+		this.tradeableLost = tradeableLost; 
+		this.moniesAdded = moniesAdded; 
 	}
 
 	@Override
@@ -34,9 +39,5 @@ public class BankUpdateMessage extends AbsMessage {
 		agent.onBankUpdate(this);
 	}
 
-  @Override
-  public String toString() {
-    return "BankUpdate [oldAccount=" + oldAccount + ", newAccount=" + newAccount + "]";
-  }
-	
+
 }

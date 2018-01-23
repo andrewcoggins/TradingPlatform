@@ -38,7 +38,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   
   @Override
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
-    Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.getMonies() - bankUpdate.oldAccount.getMonies() + ", Total Money: " + bankUpdate.newAccount.getMonies())); 
+    Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.moniesAdded)); 
   }
   
   @Override

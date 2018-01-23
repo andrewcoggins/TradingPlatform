@@ -173,9 +173,17 @@ public abstract class AbsServer {
    * @param oldA
    * @param newA
    */
-  public void sendBankUpdate(Integer ID, Account oldA, Account newA) {
-    BankUpdateMessage bu = new BankUpdateMessage(ID, oldA.copyAccount(), newA.copyAccount());
-    theServer.sendToTCP(this.privateToConnection(ID).getID(), bu);
+  public void sendBankUpdate(Order anOrder, boolean to) {
+    BankUpdateMessage bu;
+    if (to) {
+      // agent is receiving a good and losing money.
+      bu = new BankUpdateMessage(anOrder.TO, anOrder.GOOD, null, -1 * anOrder.PRICE);
+      theServer.sendToTCP(this.privateToConnection(anOrder.TO).getID(), bu);
+    } else {
+      // agent is losing a good and receiving money.
+      bu = new BankUpdateMessage(anOrder.FROM, null, anOrder.GOOD, anOrder.PRICE);
+      theServer.sendToTCP(this.privateToConnection(anOrder.FROM).getID(), bu);
+    }
   }
   
   /**
@@ -203,26 +211,19 @@ public abstract class AbsServer {
                 synchronized (accountTo.ID) {                  
                   // add order to ledger
                   ledger.add(winner.toTransaction());  
-                  // old account
-                  Account temp = accountTo;                  
-                  
                   // new account
                   accountTo.add(-1 * winner.PRICE, winner.GOOD);
-                  System.out.println(accountTo.getGoods().size());
                   this.acctManager.setAccount(winner.TO, accountTo);
-                  this.sendBankUpdate(winner.TO, temp, accountTo);
+                  this.sendBankUpdate(winner, true);
                 }
               }
               if (winner.FROM != null && this.acctManager.containsAcct(winner.FROM)) {
                 Account accountFrom = this.acctManager.getAccount(winner.FROM);
                 synchronized (accountFrom.ID) {   
-                  // old account
-                  Account temp = accountFrom;
-                  
                   // new account
                   accountFrom.remove(-1 * winner.PRICE, winner.GOOD);
                   this.acctManager.setAccount(winner.FROM, accountFrom);
-                  this.sendBankUpdate(winner.FROM, temp, accountFrom);
+                  this.sendBankUpdate(winner, false);
                 }
               }
             }            
