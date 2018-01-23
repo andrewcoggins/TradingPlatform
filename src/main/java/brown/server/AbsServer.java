@@ -208,6 +208,7 @@ public abstract class AbsServer {
                   
                   // new account
                   accountTo.add(-1 * winner.PRICE, winner.GOOD);
+                  System.out.println(accountTo.getGoods().size());
                   this.acctManager.setAccount(winner.TO, accountTo);
                   this.sendBankUpdate(winner.TO, temp, accountTo);
                 }
