@@ -10,6 +10,11 @@ import brown.messages.library.TradeMessage;
 import brown.rules.IInformationRevelationPolicy;
 
 public class LemonadeAnonymous implements IInformationRevelationPolicy{
+  private int numSlots;
+  
+  public LemonadeAnonymous(int numSlots) {
+    this.numSlots = numSlots;
+  }
 
   @Override
   public void handleInfo() {
@@ -17,8 +22,8 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
 
   @Override
   public void setReport(IMarketState state) {
-    Integer[] report = new Integer[12];    
-    for (int i = 0; i<12;i++){
+    Integer[] report = new Integer[numSlots];    
+    for (int i = 0; i<numSlots;i++){
       report[i] = 0;
     }        
     

@@ -1,5 +1,7 @@
 package brown.agent.library;
 
+import java.util.Arrays;
+
 import brown.agent.AbsLemonadeAgent;
 import brown.bid.bidbundle.library.GameBidBundle;
 import brown.channels.agent.library.LemonadeChannel;
@@ -15,11 +17,10 @@ import brown.setup.Logging;
  * @author andrew
  */
 public class LemonadeAgent extends AbsLemonadeAgent {
-  
+
   private int posn;
-  private int NUM_SLOTS = 12;
+  private int NUM_SLOTS = 50;
   private int[] positions = new int[NUM_SLOTS];
-  private int count = 0; 
   
   public LemonadeAgent(String host, int port, int position)
       throws AgentCreationException {
@@ -38,31 +39,28 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   @Override
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
     super.onBankUpdate(bankUpdate);
-    Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.moniesChanged)); 
+    // Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.moniesChanged)); 
   }
   
   @Override
   public void onGameReport(GameReportMessage marketUpdate) {
-    // TODO Auto-generated method 
     if (marketUpdate instanceof LemonadeReportMessage) { 
       LemonadeReportMessage lemonadeUpdate = (LemonadeReportMessage) marketUpdate;
       for (int i = 0; i < NUM_SLOTS; i++) {
         this.positions[i] = this.positions[i] + lemonadeUpdate.getCount(i);
       }
-      Logging.log(lemonadeUpdate.toString());
+      Logging.log("Cumulative Results:" + Arrays.toString(this.positions));
       Logging.log("Total Monies: " + this.monies);
-      //printIsland();
     }
     else {
       System.out.println("ERROR: Lemonade Report Not Received");
     }
   }
   
-  
   public static void main(String[] args) throws AgentCreationException {
-    new LemonadeAgent("localhost", 2121, 2);
-    new LemonadeAgent("localhost", 2121, 4);
-    new LemonadeAgent("localhost", 2121, 9);
+    new LemonadeAgent("localhost", 2121, 1);
+    new LemonadeAgent("localhost", 2121, 25);
+    new LemonadeAgent("localhost", 2121, 30);
     
     while(true){}
   }  

@@ -16,16 +16,18 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 
 public class LemonadeAllocation implements IAllocationRule {
+  private int numSlots;
   private List<Integer>[] slots;
   
   @SuppressWarnings("unchecked")
-  public LemonadeAllocation() {
-    this.slots = (List<Integer>[]) new List[12];
-    for(int i = 0; i < 12; i++) {
+  public LemonadeAllocation(int numSlots) {
+    this.numSlots = numSlots;
+    this.slots = (List<Integer>[]) new List[numSlots];
+    for(int i = 0; i < this.numSlots; i++) {
       slots[i] = new LinkedList<Integer>();
-    }
-  }   
-  
+    }    
+  }
+
   @Override
   public void setAllocation(IMarketState state) {
     List<TradeMessage> bids = state.getBids();
@@ -38,7 +40,7 @@ public class LemonadeAllocation implements IAllocationRule {
       singleTradeables.addAll(t.flatten());
     }
     
-    double glassesPerSlot = singleTradeables.size() / 12;
+    double glassesPerSlot = singleTradeables.size() / this.numSlots;
 
     // Put agents where they bid
     Map<Integer, List<ITradeable>> alloc = new HashMap<Integer,List<ITradeable>>();
@@ -50,27 +52,27 @@ public class LemonadeAllocation implements IAllocationRule {
       slots[index].add(b.AgentID);
     }
 
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < this.numSlots; i++) {
       // Search to right
       int r = 0;
-      while(this.slots[Math.floorMod(i+r,12)].isEmpty()) {
+      while(this.slots[Math.floorMod(i+r,this.numSlots)].isEmpty()) {
         r++;
       }
       // Search to left
       int l = 0;      
-      while(this.slots[Math.floorMod(i-l,12)].isEmpty()) {
+      while(this.slots[Math.floorMod(i-l,this.numSlots)].isEmpty()) {
         l++;
       }            
       
       // Person to pay
       List<Integer> winners = new ArrayList<Integer>();
       if (r < l) {        
-        winners.addAll(slots[Math.floorMod(i+r,12)]);
+        winners.addAll(slots[Math.floorMod(i+r,this.numSlots)]);
       } else if (l < r) {     
-        winners.addAll(slots[Math.floorMod(i-l,12)]);        
+        winners.addAll(slots[Math.floorMod(i-l,this.numSlots)]);        
       } else { 
-        winners.addAll(slots[Math.floorMod(i+r,12)]);
-        winners.addAll(slots[Math.floorMod(i-l,12)]);                
+        winners.addAll(slots[Math.floorMod(i+r,this.numSlots)]);
+        winners.addAll(slots[Math.floorMod(i-l,this.numSlots)]);                
       }
       
       for (int w : winners) { 
@@ -95,8 +97,8 @@ public class LemonadeAllocation implements IAllocationRule {
   @SuppressWarnings("unchecked")
   @Override
   public void reset() {
-    this.slots = (List<Integer>[]) new List[12];
-    for(int i = 0; i < 12; i++) {
+    this.slots = (List<Integer>[]) new List[this.numSlots];
+    for(int i = 0; i < this.numSlots; i++) {
       slots[i] = new LinkedList<Integer>();
     }
   }  
