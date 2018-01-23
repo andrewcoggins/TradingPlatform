@@ -1,6 +1,5 @@
 package brown.value.generator.library; 
 
-
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.random.ISAACRandom;
 import org.apache.commons.math3.random.RandomGenerator;

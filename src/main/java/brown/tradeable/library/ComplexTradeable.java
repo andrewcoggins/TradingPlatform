@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Set;
 
 import brown.tradeable.ITradeable;
-import brown.tradeable.TradeableType;
 
 /**
 * A complex tradeable is a set of tradeables.

@@ -1,9 +1,7 @@
 package brown.value.config; 
 
-
 import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.ValuationType;
-
 
 public class ValConfig {
   

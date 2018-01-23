@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.distribution.IValuationDistribution;
@@ -15,9 +14,8 @@ import brown.value.valuation.IValuation;
 import brown.value.valuation.library.AdditiveValuation;
 
 /**
- * distribution for producing samples of additive valuations.
+ * Distribution for generating additive valuations.
  * @author andrew
- *
  */
 public class AdditiveValuationDistribution implements IValuationDistribution {
 
@@ -26,14 +24,17 @@ public class AdditiveValuationDistribution implements IValuationDistribution {
   private Map<SimpleTradeable, Double> values; 
   
   
-  // for kryo
+  /**
+   * For kryo
+   * DO NOT USE
+   */
   public AdditiveValuationDistribution(){
     this.generator = null;
     this.toValue = null;
     this.values = null;
   }
+  
   /**
-   * 
    * @param generator
    * a value generator for producing values of individual tradeables.
    * @param goods

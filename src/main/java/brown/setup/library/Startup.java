@@ -38,9 +38,9 @@ import brown.messages.library.NegotiateMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationInformationMessage;
 import brown.rules.IClearingRule;
-import brown.tradeable.TradeableType;
 import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
+import brown.tradeable.library.TradeableType;
 import brown.twosided.ITwoSidedAuction;
 import brown.value.distribution.library.AdditiveValuationDistribution;
 import brown.value.generator.library.NormalValGenerator;
@@ -52,9 +52,9 @@ public final class Startup {
 	
   //TODO: Consider reflection for dynamic loading
   /**
-   * registers most necessary classes with Kryo.
+   * registers most necessary classes with kryo
    * @param kryo
-   * instance of the kryo object.
+   * instance of the kryo object
    * @return
    */
 	public static boolean start(Kryo kryo) {
