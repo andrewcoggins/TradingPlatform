@@ -3,17 +3,15 @@ package brown.value.distribution;
 import brown.value.valuation.IValuation;
 
 /**
- * IValuationDistribution samples IValuations
- * from distributions. 
+ * IValuationDistribution samples IValuations from a distribution. 
  * @author andrew
- *
  */
 public interface IValuationDistribution {
   
-  /*
-   * Samples IValuations from a distribution
+  /**
+   * samples IValuations from a distribution
+   * @return IValuation
    */
   public IValuation sample();
-  
   
 }

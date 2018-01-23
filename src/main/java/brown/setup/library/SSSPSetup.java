@@ -6,6 +6,10 @@ import brown.setup.ISetup;
 
 import com.esotericsoftware.kryo.Kryo;
 
+/**
+ * Additional setup for SSSP.
+ * @author andrew
+ */
 public class SSSPSetup implements ISetup{
 
   @Override
@@ -15,5 +19,4 @@ public class SSSPSetup implements ISetup{
     kryo.register(SSSPReportMessage.class);    
   } 
   
-
 }

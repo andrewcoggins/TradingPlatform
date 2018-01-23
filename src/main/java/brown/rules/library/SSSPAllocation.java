@@ -16,8 +16,8 @@ import brown.messages.library.TradeMessage;
 import brown.rules.IAllocationRule;
 import brown.setup.Logging;
 import brown.tradeable.ITradeable;
-import brown.tradeable.TradeableType;
 import brown.tradeable.library.SimpleTradeable;
+import brown.tradeable.library.TradeableType;
 
 /**
  * implements an allocation rule where the highest bidder is allocated the good(?)

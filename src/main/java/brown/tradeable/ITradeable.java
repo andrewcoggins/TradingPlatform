@@ -3,6 +3,7 @@ package brown.tradeable;
 import java.util.List;
 
 import brown.tradeable.library.SimpleTradeable;
+import brown.tradeable.library.TradeableType;
 
 public interface ITradeable {
   

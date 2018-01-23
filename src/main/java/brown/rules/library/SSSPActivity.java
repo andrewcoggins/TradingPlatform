@@ -8,7 +8,7 @@ import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IActivityRule;
 import brown.tradeable.ITradeable;
-import brown.tradeable.TradeableType;
+import brown.tradeable.library.TradeableType;
 
 public class SSSPActivity implements IActivityRule{
   @Override

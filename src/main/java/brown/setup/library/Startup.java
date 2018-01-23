@@ -19,11 +19,9 @@ import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.bid.bidbundle.library.GameBidBundle;
 import brown.bid.library.AuctionBid;
 import brown.bid.library.GameBid;
-import brown.channels.agent.library.CDAAgentChannel;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.channels.agent.library.SSSPChannel;
 import brown.channels.server.TwoSidedAuction;
-import brown.channels.server.library.CDAServerChannel;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.AbsMessage;
 import brown.messages.library.ErrorMessage;
@@ -31,17 +29,14 @@ import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
-import brown.messages.library.MarketOrderMessage;
 import brown.messages.library.NegotiateRequestMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.NegotiateMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationInformationMessage;
-import brown.rules.IClearingRule;
-import brown.tradeable.TradeableType;
 import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.twosided.ITwoSidedAuction;
+import brown.tradeable.library.TradeableType;
 import brown.value.distribution.library.AdditiveValuationDistribution;
 import brown.value.generator.library.NormalValGenerator;
 import brown.value.valuation.library.AdditiveValuation;
@@ -50,11 +45,10 @@ import com.esotericsoftware.kryo.Kryo;
 
 public final class Startup {
 	
-  //TODO: Consider reflection for dynamic loading
   /**
-   * registers most necessary classes with Kryo.
+   * registers most necessary classes with kryo
    * @param kryo
-   * instance of the kryo object.
+   * instance of the kryo object
    * @return
    */
 	public static boolean start(Kryo kryo) {
@@ -84,13 +78,8 @@ public final class Startup {
 		kryo.register(Date.class);
 		kryo.register(IBidBundle.class);
 		kryo.register(BundleType.class);
-		kryo.register(MarketOrderMessage.class);
 		kryo.register(TwoSidedAuction.class);
-		kryo.register(ITwoSidedAuction.class);
-		kryo.register(CDAAgentChannel.class);
-		kryo.register(IClearingRule.class);
 		kryo.register(MultiTradeable.class);
-		kryo.register(CDAServerChannel.class);
 		kryo.register(Order.class);
 		kryo.register(Ledger.class);
 		kryo.register(HashMap.class);

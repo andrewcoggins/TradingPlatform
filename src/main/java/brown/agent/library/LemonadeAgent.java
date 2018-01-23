@@ -20,6 +20,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   private int posn;
   private int NUM_SLOTS = 12;
   private int[] positions = new int[NUM_SLOTS];
+  private int count = 0; 
   
   public LemonadeAgent(String host, int port, int position)
       throws AgentCreationException {
@@ -37,7 +38,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   
   @Override
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
-    Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.getMonies() - bankUpdate.oldAccount.getMonies() + ", Total Money: " + bankUpdate.newAccount.getMonies())); 
+    Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.moniesChanged)); 
   }
   
   @Override
@@ -56,35 +57,6 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     }
   }
   
-  // Prints the island where there are NUM_SLOT slots.
-  private synchronized void printIsland() {
-    System.out.println("Lemonade Arrangement:");
-    for(int i = 0; i < 4; i++) {
-      printNumber(i);
-    }
-    System.out.print('\n');
-    printNumber(11); 
-    System.out.print("            ");
-    printNumber(4); 
-    System.out.print('\n');
-    printNumber(10); 
-    System.out.print("            ");
-    printNumber(5); 
-    System.out.print('\n');
-    for(int i = 9; i > 5; i--) {
-      printNumber(i);
-    }
-    System.out.print('\n');
-  }
-  
-  // Print ???WHAT
-  private void printNumber(Integer aNum) { 
-    if (Math.abs(positions[aNum]) < 10) { 
-      System.out.print("| " + positions[aNum] + " | ");
-    } else {
-      System.out.print("| " + positions[aNum] + "| ");
-    }
-  }
   
   public static void main(String[] args) throws AgentCreationException {
     new LemonadeAgent("localhost", 2121, 2);

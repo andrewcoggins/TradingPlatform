@@ -1,7 +1,6 @@
 package brown.tradeable.library;
 
 import brown.tradeable.ITradeable;
-import brown.tradeable.TradeableType;
 
 public abstract class AbsTradeable implements ITradeable { 
 

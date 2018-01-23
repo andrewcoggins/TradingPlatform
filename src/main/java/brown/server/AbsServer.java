@@ -13,12 +13,13 @@ import brown.accounting.library.Ledger;
 import brown.market.library.Market;
 import brown.market.library.MarketManager;
 import brown.market.marketstate.library.Order;
-import brown.messages.library.ErrorMessage;
 import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.ValuationInformationMessage;
+import brown.messages.library.ErrorMessage;
+import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.TradeRequestMessage;
+import brown.messages.library.ValuationInformationMessage;
 import brown.setup.ISetup;
 import brown.setup.Logging;
 import brown.setup.library.Startup;
@@ -79,7 +80,6 @@ public abstract class AbsServer {
       return;
     }
 
-    // Set up listener to handle messages
     final AbsServer aServer = this;
     theServer.addListener(new Listener() {
       public void received(Connection connection, Object message) {
@@ -92,14 +92,16 @@ public abstract class AbsServer {
           }
         } else if (message instanceof RegistrationMessage) {
           // If connection is not contained, check if it is registration method
+          Logging.log("[-] registration recieved from "
+              + connection.getID());
           aServer.onRegistration(connection, (RegistrationMessage) message);
           return;
         }}});
     Logging.log("[-] server started");
   }
 
-  // A handshake that gives agents IDs and registers them
-  protected void onRegistration(Connection connection, RegistrationMessage registration) {
+
+  protected void onRegistration(Connection connection, RegistrationMessage registration) { 
     if (registration.getID() == null) {
       Logging.log("[x] AbsServer-onRegistration: encountered null registration");
       return;
@@ -134,7 +136,7 @@ public abstract class AbsServer {
       
       // send agents private information
       if (marketConfig.type == ValuationType.Auction) {
-        ValuationInformationMessage valueReg; 
+        PrivateInformationMessage valueReg; 
         IValuation privateValuation = marketConfig.valueDistribution.sample();
         valueReg = new ValuationInformationMessage(agentID, this.allTradeables, privateValuation, marketConfig.valueDistribution);
         theServer.sendToTCP(connection.getID(), valueReg);
@@ -172,9 +174,17 @@ public abstract class AbsServer {
    * @param oldA
    * @param newA
    */
-  public void sendBankUpdate(Integer ID, Account oldA, Account newA) {
-    BankUpdateMessage bu = new BankUpdateMessage(ID, oldA.copyAccount(), newA.copyAccount());
-    theServer.sendToTCP(this.privateToConnection(ID).getID(), bu);
+  public void sendBankUpdate(Order anOrder, boolean to) {
+    BankUpdateMessage bu;
+    if (to) {
+      // agent is receiving a good and losing money.
+      bu = new BankUpdateMessage(anOrder.TO, anOrder.GOOD, null, -1 * anOrder.PRICE);
+      theServer.sendToTCP(this.privateToConnection(anOrder.TO).getID(), bu);
+    } else {
+      // agent is losing a good and receiving money.
+      bu = new BankUpdateMessage(anOrder.FROM, null, anOrder.GOOD, anOrder.PRICE);
+      theServer.sendToTCP(this.privateToConnection(anOrder.FROM).getID(), bu);
+    }
   }
   
   /**
@@ -202,25 +212,19 @@ public abstract class AbsServer {
                 synchronized (accountTo.ID) {                  
                   // add order to ledger
                   ledger.add(winner.toTransaction());  
-                  // old account
-                  Account temp = accountTo;                  
-                  
                   // new account
                   accountTo.add(-1 * winner.PRICE, winner.GOOD);
                   this.acctManager.setAccount(winner.TO, accountTo);
-                  this.sendBankUpdate(winner.TO, temp, accountTo);
+                  this.sendBankUpdate(winner, true);
                 }
               }
               if (winner.FROM != null && this.acctManager.containsAcct(winner.FROM)) {
                 Account accountFrom = this.acctManager.getAccount(winner.FROM);
                 synchronized (accountFrom.ID) {   
-                  // old account
-                  Account temp = accountFrom;
-                  
                   // new account
                   accountFrom.remove(-1 * winner.PRICE, winner.GOOD);
                   this.acctManager.setAccount(winner.FROM, accountFrom);
-                  this.sendBankUpdate(winner.FROM, temp, accountFrom);
+                  this.sendBankUpdate(winner, false);
                 }
               }
             }            
@@ -248,8 +252,7 @@ public abstract class AbsServer {
     }
   }
   
-  // Reset accounts and markets (but keep information about connections)
-  public void reset() {
+  public void resetSim() {
     this.acctManager.reset();
     this.manager.reset();
   }

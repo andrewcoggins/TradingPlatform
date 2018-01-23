@@ -35,6 +35,6 @@ public class CombinatorialServer {
     allValInfo.add(new ComplexConfig(goods));
     allMarkets.add(new CombinatorialRules()); 
     
-    new RunServer(2121, new LemonadeSetup()).runGame(goods, allMarkets, allValInfo, 1000.0, new LinkedList<ITradeable>());
+   // new RunServer(2121, new LemonadeSetup()).runGame(goods, allMarkets, allValInfo, 1000.0, new LinkedList<ITradeable>());
   }
 }
