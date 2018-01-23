@@ -10,16 +10,12 @@ import brown.setup.ISetup;
  * @author andrew
  *
  */
-public abstract class AbsLemonadeAgent extends AbsAgent {
+public abstract class AbsLemonadeAgent extends AbsAgent implements ILemonadeAgent{
 
   public AbsLemonadeAgent(String host, int port, ISetup gameSetup)
       throws AgentCreationException {
     super(host, port, gameSetup);
   }
   
-  /**
-   * Provides agent response in lemonade game
-   * @param simpleWrapper - lemonade channel
-   */
   public abstract void onLemonade(LemonadeChannel channel);
 }
