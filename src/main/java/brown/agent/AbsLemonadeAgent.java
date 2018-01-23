@@ -22,5 +22,4 @@ public abstract class AbsLemonadeAgent extends AbsAgent {
    * @param simpleWrapper - lemonade channel
    */
   public abstract void onLemonade(LemonadeChannel channel);
-
 }

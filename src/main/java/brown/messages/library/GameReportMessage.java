@@ -11,7 +11,7 @@ import brown.agent.AbsAgent;
  * @author andrew
  *
  */
-public class GameReportMessage extends AbsMessage {
+public abstract class GameReportMessage extends AbsMessage {
   
 	public final Ledger LEDGER;
 	
@@ -27,7 +27,7 @@ public class GameReportMessage extends AbsMessage {
 
 	@Override
 	public void dispatch(AbsAgent agent) {
-		agent.onMarketUpdate(this);
+		agent.onGameReport(this);
 	}
 
 }

@@ -23,7 +23,7 @@ public class CombinatorialAgent extends AbsSSSPAgent {
   }
 
   @Override
-  public void onMarketUpdate(GameReportMessage marketUpdate) {
+  public void onGameReport(GameReportMessage marketUpdate) {
     // TODO Auto-generated method stub
   }
 

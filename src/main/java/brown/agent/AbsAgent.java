@@ -1,5 +1,8 @@
 package brown.agent;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
@@ -7,10 +10,11 @@ import brown.exceptions.AgentCreationException;
 import brown.messages.library.AbsMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
-import brown.messages.library.NegotiateRequestMessage;
+import brown.messages.library.MarketUpdateMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.setup.ISetup;
+import brown.tradeable.ITradeable;
 
 /**
  * every agent class extends this class.
@@ -18,7 +22,9 @@ import brown.setup.ISetup;
  *
  */
 public abstract class AbsAgent extends AbsClient implements IAgent { 
-
+  protected double monies;
+  protected List<ITradeable> goods;
+  
   /**
    * 
    * AbsAgent takes in a host, a port, an ISetup.
@@ -44,23 +50,25 @@ public abstract class AbsAgent extends AbsClient implements IAgent {
     });
 
     CLIENT.sendTCP(new RegistrationMessage(-1));
-  }
-
-  public void onPrivateInformation(PrivateInformationMessage registration) {
+    
+    this.monies = 0.0;
+    this.goods = new LinkedList<ITradeable>();
   }
   
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
-
+    this.monies += bankUpdate.moniesChanged;
+    this.goods.add(bankUpdate.tradeableAdded);
+    this.goods.remove(bankUpdate.tradeableLost);
   }
   
-  public void onMarketUpdate(GameReportMessage marketUpdate) {
-
-  }
-    
-  public void onNegotiateRequest(NegotiateRequestMessage request) {
-    
+  public void onPrivateInformation(PrivateInformationMessage registration) {
   }
   
+  public void onGameReport(GameReportMessage gameReport) {
+  }
+
+  public void onMarketUpdate(MarketUpdateMessage marketUpdateMessage) {
+  }  
 }
 
   

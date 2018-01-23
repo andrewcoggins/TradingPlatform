@@ -15,13 +15,7 @@ import brown.accounting.library.Transaction;
 import brown.agent.AbsAgent;
 import brown.bid.bidbundle.BundleType;
 import brown.bid.bidbundle.IBidBundle;
-import brown.bid.bidbundle.library.AuctionBidBundle;
-import brown.bid.bidbundle.library.GameBidBundle;
-import brown.bid.library.AuctionBid;
-import brown.bid.library.GameBid;
 import brown.channels.agent.library.LemonadeChannel;
-import brown.channels.agent.library.SSSPChannel;
-import brown.channels.server.TwoSidedAuction;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.AbsMessage;
 import brown.messages.library.ErrorMessage;
@@ -29,17 +23,12 @@ import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
-import brown.messages.library.NegotiateRequestMessage;
 import brown.messages.library.RegistrationMessage;
-import brown.messages.library.NegotiateMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationInformationMessage;
 import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.tradeable.library.TradeableType;
-import brown.value.distribution.library.AdditiveValuationDistribution;
-import brown.value.generator.library.NormalValGenerator;
-import brown.value.valuation.library.AdditiveValuation;
 
 import com.esotericsoftware.kryo.Kryo;
 
@@ -69,8 +58,6 @@ public final class Startup {
 		kryo.register(TradeMessage.class);
 		kryo.register(Transaction.class);
 		kryo.register(RegistrationMessage.class);
-		kryo.register(NegotiateMessage.class);
-		kryo.register(NegotiateRequestMessage.class);
 		kryo.register(Account.class);
 		kryo.register(TradeRequestMessage.class);
 		kryo.register(ErrorMessage.class);
@@ -78,25 +65,15 @@ public final class Startup {
 		kryo.register(Date.class);
 		kryo.register(IBidBundle.class);
 		kryo.register(BundleType.class);
-		kryo.register(TwoSidedAuction.class);
 		kryo.register(MultiTradeable.class);
 		kryo.register(Order.class);
 		kryo.register(Ledger.class);
 		kryo.register(HashMap.class);
-		kryo.register(SSSPChannel.class);
-		kryo.register(AuctionBidBundle.class);
-		kryo.register(AuctionBid.class);
-		kryo.register(AdditiveValuation.class);
-		kryo.register(AdditiveValuation.class);
-		kryo.register(NormalValGenerator.class);
 		kryo.register(TradeableType.class);
-		kryo.register(GameBidBundle.class);
-    kryo.register(GameBid.class);
 		kryo.register(Integer[].class);
 		kryo.register(SimpleTradeable.class);
 		kryo.register(ValuationInformationMessage.class);
     kryo.register(PrivateInformationMessage.class);		
-    kryo.register(AdditiveValuationDistribution.class);
 		return true;
 	}
 

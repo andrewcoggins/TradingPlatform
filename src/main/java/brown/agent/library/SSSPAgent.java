@@ -46,7 +46,7 @@ public class SSSPAgent extends AbsSSSPAgent {
 
   // to do
   @Override
-  public void onMarketUpdate(GameReportMessage marketUpdate) {
+  public void onGameReport(GameReportMessage gameReport) {
     System.out.println("market update");
   } 
   

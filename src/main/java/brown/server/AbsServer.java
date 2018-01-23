@@ -142,8 +142,7 @@ public abstract class AbsServer {
         theServer.sendToTCP(connection.getID(), valueReg);
       } else if (marketConfig.type == ValuationType.Game) {
         //no explicit valuation, as in the lemonade game
-        // GameInformationMessage
-        theServer.sendToTCP(connection.getID(), new RegistrationMessage(agentID));
+        // GameInformationMessage or something, not used yet
       }
     }
   }

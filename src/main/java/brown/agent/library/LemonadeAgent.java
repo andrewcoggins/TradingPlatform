@@ -7,7 +7,6 @@ import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
-import brown.messages.library.PrivateInformationMessage;
 import brown.setup.library.LemonadeSetup;
 import brown.setup.Logging;
 
@@ -38,18 +37,20 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   
   @Override
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
+    super.onBankUpdate(bankUpdate);
     Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.moniesChanged)); 
   }
   
   @Override
-  public void onMarketUpdate(GameReportMessage marketUpdate) {
+  public void onGameReport(GameReportMessage marketUpdate) {
     // TODO Auto-generated method 
     if (marketUpdate instanceof LemonadeReportMessage) { 
       LemonadeReportMessage lemonadeUpdate = (LemonadeReportMessage) marketUpdate;
       for (int i = 0; i < NUM_SLOTS; i++) {
         this.positions[i] = this.positions[i] + lemonadeUpdate.getCount(i);
       }
-      System.out.println(lemonadeUpdate.toString());
+      Logging.log(lemonadeUpdate.toString());
+      Logging.log("Total Monies: " + this.monies);
       //printIsland();
     }
     else {
@@ -60,15 +61,9 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   
   public static void main(String[] args) throws AgentCreationException {
     new LemonadeAgent("localhost", 2121, 2);
-//    new LemonadeAgent("localhost", 2121, 4);
-//    new LemonadeAgent("localhost", 2121, 9);
+    new LemonadeAgent("localhost", 2121, 4);
+    new LemonadeAgent("localhost", 2121, 9);
     
     while(true){}
-  }
-
-  // No private info in lemonade
-  @Override
-  public void onPrivateInformation(PrivateInformationMessage privateInfo) {    
-  }
-  
+  }  
 }
