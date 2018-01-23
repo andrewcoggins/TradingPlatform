@@ -3,7 +3,8 @@ package brown.server.library;
 import java.util.LinkedList;
 import java.util.List;
 
-import brown.market.preset.library.LemonadeRules;
+import brown.market.preset.library.LemonadeAnonRules;
+import brown.market.preset.library.LemonadeNonAnonRules;
 import brown.setup.library.LemonadeSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
@@ -20,7 +21,8 @@ public class LemonadeServer {
     List<ITradeable> allTradeables = new LinkedList<ITradeable>(); 
     allTradeables.add(new MultiTradeable(1, numSlots*2));
        
-    new RunServer(2121, new LemonadeSetup()).runSimpleSim(allTradeables, new LemonadeRules(numSlots), 
+    // LemonadeAnon and LemonadeNonAnon
+    new RunServer(2121, new LemonadeSetup()).runSimpleSim(allTradeables, new LemonadeAnonRules(numSlots), 
         new LemonadeConfig(), 0., new LinkedList<ITradeable>());;
   }
 }

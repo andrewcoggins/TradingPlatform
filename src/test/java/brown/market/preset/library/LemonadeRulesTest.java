@@ -22,7 +22,7 @@ public class LemonadeRulesTest {
   
   @Test
   public void testLemonadeRules() {
-    LemonadeRules lemonadeRules = new LemonadeRules();
+    LemonadeAnonRules lemonadeRules = new LemonadeAnonRules();
     assertEquals(lemonadeRules.aRule, new LemonadeAllocation());
     assertEquals(lemonadeRules.pRule, new LemonadePayment());
     assertEquals(lemonadeRules.qRule, new LemonadeQuery());

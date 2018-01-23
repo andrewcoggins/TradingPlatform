@@ -1,6 +1,8 @@
 package brown.agent.library;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import brown.agent.AbsLemonadeAgent;
 import brown.bid.bidbundle.library.GameBidBundle;
@@ -21,6 +23,8 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   private int posn;
   private int NUM_SLOTS = 50;
   private int[] positions = new int[NUM_SLOTS];
+  @SuppressWarnings("unchecked")
+  private List<Integer>[] positions_ids = (List<Integer>[]) new List[NUM_SLOTS];
   
   public LemonadeAgent(String host, int port, int position)
       throws AgentCreationException {
@@ -28,6 +32,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     this.posn = position; 
     for(int i = 0; i < NUM_SLOTS; i++) {
       positions[i] = 0; 
+      positions_ids[i] = new LinkedList<Integer>();
     }
   } 
   
@@ -47,9 +52,13 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     if (marketUpdate instanceof LemonadeReportMessage) { 
       LemonadeReportMessage lemonadeUpdate = (LemonadeReportMessage) marketUpdate;
       for (int i = 0; i < NUM_SLOTS; i++) {
-        this.positions[i] = this.positions[i] + lemonadeUpdate.getCount(i);
+        this.positions[i] = lemonadeUpdate.getCount(i);
+        if (!lemonadeUpdate.isAnon()){
+          this.positions_ids[i] = lemonadeUpdate.getIDs(i);
+          Logging.log("Cumulative Results IDS:" + Arrays.toString(this.positions_ids));                
+        }
       }
-      Logging.log("Cumulative Results:" + Arrays.toString(this.positions));
+      Logging.log("Cumulative Results:" + Arrays.toString(this.positions));      
       Logging.log("Total Monies: " + this.monies);
     }
     else {

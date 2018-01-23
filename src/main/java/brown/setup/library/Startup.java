@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -74,6 +75,7 @@ public final class Startup {
 		kryo.register(SimpleTradeable.class);
 		kryo.register(ValuationInformationMessage.class);
     kryo.register(PrivateInformationMessage.class);		
+    kryo.register(List.class);
 		return true;
 	}
 
