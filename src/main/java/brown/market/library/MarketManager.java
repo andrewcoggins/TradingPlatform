@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import brown.accounting.library.Ledger;
+import brown.market.IMarketManager;
 import brown.market.marketstate.library.MarketState;
 import brown.market.preset.AbsMarketPreset;
 import brown.tradeable.ITradeable;
@@ -15,7 +16,7 @@ import brown.tradeable.ITradeable;
  * @author lcamery
  *
  */
-public class MarketManager {
+public class MarketManager implements IMarketManager {
 	private Map<Market, Ledger> ledgers;
 	private Map<Integer, Market> markets;
 	private PrevStateInfo information;

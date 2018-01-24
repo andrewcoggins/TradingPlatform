@@ -20,7 +20,6 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   private int posn;
   private int NUM_SLOTS = 12;
   private int[] positions = new int[NUM_SLOTS];
-  private int count = 0; 
   
   public LemonadeAgent(String host, int port, int position)
       throws AgentCreationException {

@@ -170,7 +170,7 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public PrevStateInfo getSummaryState(){
+  public PrevStateInfo getSummaryState() {
     return this.summaryState;
   }
   
