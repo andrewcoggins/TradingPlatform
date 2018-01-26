@@ -1,4 +1,4 @@
-package brown.bid.bidbundle;
+package brown.bidbundle;
 
 /**
  * A bid bundle can be simple or complex:

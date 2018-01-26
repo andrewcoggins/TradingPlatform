@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import brown.bid.bidbundle.BundleType;
-import brown.bid.bidbundle.library.AuctionBidBundle;
+import brown.bidbundle.BundleType;
+import brown.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IAllocationRule;

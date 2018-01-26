@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import brown.bid.bidbundle.IBidBundle;
+import brown.bidbundle.IBidBundle;
 import brown.market.library.PrevStateInfo;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.GameReportMessage;

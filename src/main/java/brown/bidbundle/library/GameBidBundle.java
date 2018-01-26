@@ -1,8 +1,8 @@
-package brown.bid.bidbundle.library;
+package brown.bidbundle.library;
 
-import brown.bid.bidbundle.BundleType;
-import brown.bid.bidbundle.IBidBundle;
 import brown.bid.library.GameBid;
+import brown.bidbundle.BundleType;
+import brown.bidbundle.IBidBundle;
 
 public class GameBidBundle implements IBidBundle {
 

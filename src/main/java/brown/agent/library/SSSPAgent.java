@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import brown.agent.AbsSSSPAgent;
-import brown.bid.bidbundle.library.AuctionBidBundle;
+import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.agent.library.SSSPChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
@@ -47,4 +47,5 @@ public class SSSPAgent extends AbsSSSPAgent {
     new SSSPAgent("localhost", 2121);    
     while(true){}
   }
+  
 }

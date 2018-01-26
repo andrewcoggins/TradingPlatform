@@ -1,7 +1,7 @@
 package brown.agent.library;
 
 import brown.agent.AbsLemonadeAgent;
-import brown.bid.bidbundle.library.GameBidBundle;
+import brown.bidbundle.library.GameBidBundle;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.GameReportMessage;

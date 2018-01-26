@@ -2,8 +2,8 @@ package brown.setup.library;
 
 import com.esotericsoftware.kryo.Kryo;
 
-import brown.bid.bidbundle.library.GameBidBundle;
 import brown.bid.library.GameBid;
+import brown.bidbundle.library.GameBidBundle;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.messages.library.LemonadeReportMessage;
 import brown.setup.ISetup;

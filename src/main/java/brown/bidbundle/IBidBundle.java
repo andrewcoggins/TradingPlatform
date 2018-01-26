@@ -1,4 +1,4 @@
-package brown.bid.bidbundle;
+package brown.bidbundle;
 
 import brown.bid.AbsBid;
 

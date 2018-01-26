@@ -1,7 +1,7 @@
 package brown.setup.library;
 
-import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.bid.library.AuctionBid;
+import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.agent.library.SSSPChannel;
 import brown.messages.library.SSSPReportMessage;
 import brown.setup.ISetup;

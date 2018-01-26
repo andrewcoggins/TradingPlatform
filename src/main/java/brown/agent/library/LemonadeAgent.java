@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import brown.agent.AbsLemonadeAgent;
-import brown.bid.bidbundle.library.GameBidBundle;
+import brown.bidbundle.library.GameBidBundle;
 import brown.channels.agent.library.LemonadeChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
@@ -41,7 +41,6 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     channel.bid(this, new GameBidBundle(this.posn));
   }
 
-  
   // Mess with logging here to check if it works, but be warned this will flood your console with high # of agents
   @Override
   public void onGameReport(GameReportMessage gameReport) {
@@ -72,4 +71,5 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     new LemonadeAgent("localhost", 2121, 1);    
     while(true){}
   }  
+  
 }
