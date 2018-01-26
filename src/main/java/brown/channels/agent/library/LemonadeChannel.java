@@ -13,10 +13,18 @@ import brown.setup.Logging;
  */
 public class LemonadeChannel extends AbsChannel {
 
+  /**
+   * For Kryo
+   * DO NOT USE
+   */
   public LemonadeChannel() { 
     super();
   }
   
+  /**
+   * Constructor
+   * @param ID
+   */
   public LemonadeChannel(Integer ID) {
     super(ID);
   }

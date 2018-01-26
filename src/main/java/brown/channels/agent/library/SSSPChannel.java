@@ -19,16 +19,18 @@ import brown.tradeable.ITradeable;
  */
 public class SSSPChannel extends AbsChannel {
 		
+  /**
+   * For Kryo
+   * DO NOT USE
+   */
 	public SSSPChannel() {
 	  super();
 	}
 
   /**
-	 * Contructor
-	 * @param ID
-	 * @param ledger
-	 * @param highBid
-	 */
+   * Constructor
+   * @param ID
+   */
 	public SSSPChannel(Integer ID) {
     super(ID);
 	}

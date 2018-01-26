@@ -32,7 +32,7 @@ public class LemonadeActivity implements IActivityRule {
     // Check that persons bid is a valid slot
     if (aBid.Bundle.getType() != BundleType.GAME){    
       acceptable = false;
-    } else if (((GameBidBundle) aBid.Bundle).getBids().move >= numSlots){    
+    } else if (((GameBidBundle) aBid.Bundle).getBids().move >= numSlots | ((GameBidBundle) aBid.Bundle).getBids().move < 0){    
       acceptable = false;
     }
     

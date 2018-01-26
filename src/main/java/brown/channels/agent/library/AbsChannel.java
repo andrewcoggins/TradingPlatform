@@ -15,9 +15,8 @@ public abstract class AbsChannel implements IAgentChannel{
   }
 
   /**
-   * Actual constructor
+   * Constructor
    * @param ID
-   * @param ledger
    */
   public AbsChannel(Integer ID) {
     this.ID = ID; 
