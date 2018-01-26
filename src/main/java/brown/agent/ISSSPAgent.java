@@ -9,4 +9,5 @@ public interface ISSSPAgent {
    * @param channel - simple agent channel
    */
   public void onSSSP(SSSPChannel channel);
+  
 }

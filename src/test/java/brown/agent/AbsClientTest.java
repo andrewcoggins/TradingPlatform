@@ -25,7 +25,7 @@ public class AbsClientTest {
   /*
    * dummy client sends a message.
    */
-  private class TestClient extends AbsClient {
+  private class TestClient extends TPClient {
     public TestClient(String host, int port, ISetup gameSetup)
         throws AgentCreationException {
       super(host, port, gameSetup);
