@@ -13,7 +13,7 @@ import brown.tradeable.ITradeable;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.IValuation;
 
-public abstract class AbsSSSPAgent extends AbsAgent {
+public abstract class AbsSSSPAgent extends AbsAgent implements ISSSPAgent{
   protected List<ITradeable> tradeables; 
   protected IValuation valuation;
   protected IValuationDistribution vDistribution; 
@@ -25,10 +25,6 @@ public abstract class AbsSSSPAgent extends AbsAgent {
     System.out.println(this.tradeables);
   }
 
-  /**
-   * Provides agent response to sealed-bid auction
-   * @param simpleWrapper - simple agent channel
-   */
   public abstract void onSSSP(SSSPChannel channel);
   
   @Override
