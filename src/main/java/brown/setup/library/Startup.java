@@ -16,7 +16,7 @@ import brown.accounting.library.Transaction;
 import brown.agent.AbsAgent;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
-import brown.channels.agent.library.LemonadeChannel;
+import brown.channels.agent.library.GameChannel;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.AbsMessage;
 import brown.messages.library.ErrorMessage;
@@ -51,7 +51,7 @@ public final class Startup {
 		kryo.register(TreeMap.class);
 		kryo.register(java.util.Collections.reverseOrder().getClass());
 		kryo.register(int[].class);
-		kryo.register(LemonadeChannel.class);
+		kryo.register(GameChannel.class);
 		kryo.register(AbsAgent.class);
 		kryo.register(AbsMessage.class);
 		kryo.register(BankUpdateMessage.class);

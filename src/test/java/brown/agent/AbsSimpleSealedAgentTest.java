@@ -18,7 +18,7 @@ import brown.accounting.library.Account;
 import brown.accounting.library.Ledger;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
-import brown.channels.agent.library.SSSPChannel;
+import brown.channels.agent.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
@@ -60,7 +60,7 @@ public class AbsSimpleSealedAgentTest {
               connection.sendTCP(b);
             } else if (object.equals("send me a SimpleAgentChannel")) {
               Map<MultiTradeable, MarketState> junk = new HashMap<MultiTradeable, MarketState>();
-              SSSPChannel sa = new SSSPChannel(0, new Ledger(0),
+              AuctionChannel sa = new AuctionChannel(0, new Ledger(0),
                   PaymentType.FirstPrice, MechanismType.SealedBid, new AuctionBidBundle(junk), 0); 
               connection.sendTCP(new TradeRequestMessage(0, sa, MechanismType.SealedBid));
             } else if (object.equals("send me a Registration")) {
@@ -97,7 +97,7 @@ public class AbsSimpleSealedAgentTest {
       }
     }
     @Override
-    public void onSimpleSealed(SSSPChannel simpleWrapper) {
+    public void onSimpleSealed(AuctionChannel simpleWrapper) {
      this.myMessage = "SimpleAgentChannel Received";
     }
     public String confirm() {

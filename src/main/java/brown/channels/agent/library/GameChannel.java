@@ -11,13 +11,13 @@ import brown.setup.Logging;
  * The channel through which an agent communicates to the server in the lemonade game.
  * @author andrew
  */
-public class LemonadeChannel extends AbsChannel {
+public class GameChannel extends AbsChannel {
 
   /**
    * For Kryo
    * DO NOT USE
    */
-  public LemonadeChannel() { 
+  public GameChannel() { 
     super();
   }
   
@@ -25,7 +25,7 @@ public class LemonadeChannel extends AbsChannel {
    * Constructor
    * @param ID
    */
-  public LemonadeChannel(Integer ID) {
+  public GameChannel(Integer ID) {
     super(ID);
   }
 

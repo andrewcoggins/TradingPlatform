@@ -5,7 +5,7 @@ import java.util.Map;
 
 import brown.agent.AbsSSSPAgent;
 import brown.bidbundle.library.AuctionBidBundle;
-import brown.channels.agent.library.SSSPChannel;
+import brown.channels.agent.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
@@ -21,7 +21,7 @@ public class SSSPAgent extends AbsSSSPAgent {
   }
   
   @Override
-  public void onSSSP(SSSPChannel simpleChannel) {
+  public void onSSSP(AuctionChannel simpleChannel) {
     Map<ITradeable, Double> initial = new HashMap<ITradeable, Double>();
     System.out.println(this.tradeables);
     for (ITradeable t: this.tradeables) {

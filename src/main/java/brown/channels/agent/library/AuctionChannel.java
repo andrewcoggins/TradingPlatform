@@ -17,13 +17,13 @@ import brown.tradeable.ITradeable;
 /*
  * Implements IMarket for Simple auctions
  */
-public class SSSPChannel extends AbsChannel {
+public class AuctionChannel extends AbsChannel {
 		
   /**
    * For Kryo
    * DO NOT USE
    */
-	public SSSPChannel() {
+	public AuctionChannel() {
 	  super();
 	}
 
@@ -31,7 +31,7 @@ public class SSSPChannel extends AbsChannel {
    * Constructor
    * @param ID
    */
-	public SSSPChannel(Integer ID) {
+	public AuctionChannel(Integer ID) {
     super(ID);
 	}
 

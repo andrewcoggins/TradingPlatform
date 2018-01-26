@@ -15,7 +15,7 @@ import com.esotericsoftware.kryonet.Server;
 import brown.accounting.library.Account;
 import brown.accounting.library.Ledger;
 import brown.channels.agent.library.CDAAgentChannel;
-import brown.channels.agent.library.SSSPChannel;
+import brown.channels.agent.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.BidRequestMessage;
@@ -55,7 +55,7 @@ public class AbsAgentTest {
             NegotiateRequestMessage nr = new NegotiateRequestMessage(1, 0, 100, null, 50, null);
             connection.sendTCP(nr);
           } else if (object.equals("send me a SimpleAgentChannel")) {
-            SSSPChannel sa = new SSSPChannel(0, new Ledger(0), null, null, null, 0); 
+            AuctionChannel sa = new AuctionChannel(0, new Ledger(0), null, null, null, 0); 
             connection.sendTCP(sa);
           } else if (object.equals("send me a CDAAgentChannel")) {
             CDAAgentChannel cd = new CDAAgentChannel(null, new Ledger(0));
@@ -108,13 +108,13 @@ public class AbsAgentTest {
     
     //perhaps later.
     @Test
-    public void onSimpleSealed(SSSPChannel simpleWrapper) {
+    public void onSimpleSealed(AuctionChannel simpleWrapper) {
       // TODO Auto-generated method stub
       System.out.println("SimpleAuctionChannel Received: SS");
     }
 
     @Test
-    public void onSimpleOpenOutcry(SSSPChannel simpleWrapper) {
+    public void onSimpleOpenOutcry(AuctionChannel simpleWrapper) {
       // TODO Auto-generated method stub
       System.out.println("SimpleAuctionChannel Received: OO");
     }

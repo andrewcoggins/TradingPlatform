@@ -15,8 +15,8 @@ import com.esotericsoftware.kryonet.Server;
 import brown.accounting.library.Account;
 import brown.accounting.library.Ledger;
 import brown.channels.agent.library.CDAAgentChannel;
-import brown.channels.agent.library.LemonadeChannel;
-import brown.channels.agent.library.SSSPChannel;
+import brown.channels.agent.library.GameChannel;
+import brown.channels.agent.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.BidRequestMessage;
@@ -47,7 +47,7 @@ public class AbsLemonadeAgentTest {
             GameReportMessage g = new GameReportMessage(new Ledger(0));
             connection.sendTCP(g);
           } else if (object.equals("send me a LemonadeChannel")) { 
-            TradeRequestMessage t = new TradeRequestMessage(0, new LemonadeChannel(0, new Ledger(0), null, null), null);
+            TradeRequestMessage t = new TradeRequestMessage(0, new GameChannel(0, new Ledger(0), null, null), null);
             connection.sendTCP(t);
           } else if (object.equals("send me a BankUpdate")) {
             BankUpdateMessage b = new BankUpdateMessage(0, new Account(1), new Account(1));
@@ -67,8 +67,8 @@ public class AbsLemonadeAgentTest {
     }
     
     @Override
-    public void onLemonade(LemonadeChannel channel) {
-      assertTrue(channel instanceof LemonadeChannel);
+    public void onLemonade(GameChannel channel) {
+      assertTrue(channel instanceof GameChannel);
       assertTrue(channel.getMarketID() == 0); 
       assertTrue(channel.getLedger().equals(new Ledger(0)));
       this.myMessage = "Lemonade Channel Received"; 

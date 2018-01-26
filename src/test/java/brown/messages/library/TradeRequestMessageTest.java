@@ -11,7 +11,7 @@ import brown.accounting.MarketState;
 import brown.accounting.library.Ledger;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
-import brown.channels.agent.library.SSSPChannel;
+import brown.channels.agent.library.AuctionChannel;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.library.MultiTradeable;
 
@@ -31,13 +31,13 @@ public class TradeRequestMessageTest {
     bids.put(new MultiTradeable(0), new MarketState(0, 1.0));
     AuctionBidBundle sb = new AuctionBidBundle(bids);
     TradeRequestMessage trm = new TradeRequestMessage(0, 
-        new SSSPChannel(new Integer(0), new Ledger(0), PaymentType.SecondPrice,
+        new AuctionChannel(new Integer(0), new Ledger(0), PaymentType.SecondPrice,
             MechanismType.SealedBid, sb, 0),
         MechanismType.SealedBid); 
     
     assertEquals(MechanismType.SealedBid, trm.MECHANISM); 
     assertEquals(trm.MARKET,
-        new SSSPChannel(new Integer(0), new Ledger(0), PaymentType.SecondPrice,
+        new AuctionChannel(new Integer(0), new Ledger(0), PaymentType.SecondPrice,
             MechanismType.SealedBid, sb, 0)); 
   }
 }

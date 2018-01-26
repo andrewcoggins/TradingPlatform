@@ -6,7 +6,7 @@ import java.util.List;
 
 import brown.agent.AbsLemonadeAgent;
 import brown.bidbundle.library.GameBidBundle;
-import brown.channels.agent.library.LemonadeChannel;
+import brown.channels.agent.library.GameChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
@@ -36,7 +36,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     }
   } 
   
-  public void onLemonade(LemonadeChannel channel) {
+  public void onLemonade(GameChannel channel) {
     // Enter a position between 0 and NUM_SLOTS-1 inclusive.
     channel.bid(this, new GameBidBundle(this.posn));
   }

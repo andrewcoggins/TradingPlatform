@@ -2,7 +2,7 @@ package brown.agent.library;
 
 import brown.agent.AbsLemonadeAgent;
 import brown.bidbundle.library.GameBidBundle;
-import brown.channels.agent.library.LemonadeChannel;
+import brown.channels.agent.library.GameChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
@@ -21,7 +21,7 @@ public class ExampleLemonadeAgent extends AbsLemonadeAgent {
     // What fields might you want to create here to store data?
   } 
   
-  public void onLemonade(LemonadeChannel channel) {
+  public void onLemonade(GameChannel channel) {
     // Enter a position between 0 and NUM_SLOTS-1 inclusive.
     channel.bid(this, new GameBidBundle(1)); // e.g. bid 1
   }
