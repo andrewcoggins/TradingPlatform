@@ -27,6 +27,7 @@ public class SSSPServer {
     Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
     List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
     int numTradeables = 5;
+    int delay = 10;
     int i = 0;
     while (i<numTradeables){
       SimpleTradeable toAdd = new SimpleTradeable(i);            
@@ -35,7 +36,7 @@ public class SSSPServer {
       i++;
     }
 
-    new RunServer(2121, new SSSPSetup()).runSimpleSim(allTradeablesList, new SSSPRules(), 
-        new SSSPConfig(allTradeables), 100., new LinkedList<ITradeable>());;
+    new RunServer(2121, new SSSPSetup()).runSimpleSim(allTradeablesList, new SSSPRules(5), 
+        new SSSPConfig(allTradeables), 100., new LinkedList<ITradeable>(),delay, 1000);;
   }
 }

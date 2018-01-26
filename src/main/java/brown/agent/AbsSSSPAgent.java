@@ -14,6 +14,7 @@ import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.IValuation;
 
 public abstract class AbsSSSPAgent extends AbsAgent implements ISSSPAgent{
+  
   protected List<ITradeable> tradeables; 
   protected IValuation valuation;
   protected IValuationDistribution vDistribution; 
@@ -38,4 +39,5 @@ public abstract class AbsSSSPAgent extends AbsAgent implements ISSSPAgent{
       Logging.log("[x] AbsSSSPAgent: Wrong Kind of PrivateInformation Received");
     }
   }  
+  
 }

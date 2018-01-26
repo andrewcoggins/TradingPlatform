@@ -20,6 +20,9 @@ public class MarketState implements IMarketState {
   private List<TradeMessage> bids;
   private int ticks;  
   
+  // grouping stuff
+  private List<List<Integer>> groups;
+  
   //allocation + payment rule
   private Map<Integer, List<ITradeable>> allocation;   
   private List<Order> payments; 
@@ -30,7 +33,7 @@ public class MarketState implements IMarketState {
   private Boolean isAcceptable; 
   private IBidBundle reserve;
   //IRPolicy
-  private GameReportMessage gameReport; 
+  private Map<Integer,GameReportMessage> gameReports; 
   //termination condition
   private Boolean innerTerminated; 
   private Boolean outerTerminated; 
@@ -48,10 +51,11 @@ public class MarketState implements IMarketState {
     this.increment = 0.0;
     this.ticks = 0; 
     this.outerRuns = 0; 
-    this.innerTerminated = false; 
+    this.innerTerminated = false;
     this.allocation = new HashMap<Integer, List<ITradeable>>();
     this.payments = new LinkedList<Order>();
     this.prevState = prevState;
+    this.groups = new LinkedList<List<Integer>>();
   }
   
   @Override
@@ -180,16 +184,16 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public GameReportMessage getReport() {
-    return this.gameReport; 
+  public Map<Integer,GameReportMessage>  getReport() {
+    return this.gameReports; 
   }
 
   @Override
-  public void setReport(GameReportMessage gameReport) {
-    this.gameReport = gameReport;
+  public void setReport(Map<Integer,GameReportMessage> gameReport) {
+    this.gameReports = gameReport;
   }
 
-  // resets everything EXCEPT outer terminated condition and outer runs
+  // resets everything EXCEPT outer terminated condition and outer runs and groups
   @Override
   public void reset() {
     this.bids = new LinkedList<TradeMessage>();
@@ -218,5 +222,15 @@ public class MarketState implements IMarketState {
   @Override
   public void setPayments(List<Order> payments) {
     this.payments = payments;
+  }
+
+  @Override
+  public List<List<Integer>> getGroups() {
+    return this.groups;
+  }
+
+  @Override
+  public void setGroups(List<List<Integer>> groups) {
+    this.groups = groups;    
   }
 }

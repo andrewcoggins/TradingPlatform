@@ -6,7 +6,6 @@ public abstract class AbsChannel implements IAgentChannel{
 
   public final Integer ID;
 
-
   /**
    * For Kryo
    * DO NOT USE
@@ -16,9 +15,8 @@ public abstract class AbsChannel implements IAgentChannel{
   }
 
   /**
-   * Actual constructor
+   * Constructor
    * @param ID
-   * @param ledger
    */
   public AbsChannel(Integer ID) {
     this.ID = ID; 
@@ -28,7 +26,6 @@ public abstract class AbsChannel implements IAgentChannel{
   public Integer getMarketID() {
     return this.ID;
   }
-  
   
   @Override
   public int hashCode() {

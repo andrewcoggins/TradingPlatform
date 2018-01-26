@@ -57,6 +57,7 @@ public abstract class AbsClient {
   }
   
   public void onErrorMessage(ErrorMessage message) {
-    Logging.log("[x] rej: " + message.error);
+    Logging.log("[x] rej: " + message.error + ", agent ID: " +this.ID);
   }
+  
 }

@@ -4,7 +4,12 @@ import brown.market.marketstate.IMarketState;
 import brown.rules.IOuterTC;
 
 public class XRoundTermination implements IOuterTC {
-  private static final int numRuns = 5;
+  private final int numRuns;;
+  
+  public XRoundTermination(int numRuns) {
+    this.numRuns = numRuns;
+  }
+
   
 @Override
   public void outerTerminated(IMarketState state) {

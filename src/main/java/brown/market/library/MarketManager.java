@@ -45,14 +45,15 @@ public class MarketManager implements IMarketManager {
 	 * @param market
 	 * @return
 	 */
-	public boolean open(AbsMarketPreset rules, Integer marketID, List<ITradeable> tradeables){
+	public boolean open(AbsMarketPreset rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents){
 	  Market market = new Market(rules, new MarketState(marketID,tradeables,this.information));
 	   if (ledgers.containsKey(market)) {
 	      return false;
 	    }
-	    this.ledgers.put(market, new Ledger(market.getID()));
-	    this.markets.put(market.getID(), market);
-	    return true;
+	   market.setGroupings(agents);
+	   this.ledgers.put(market, new Ledger(market.getID()));
+	   this.markets.put(market.getID(), market);
+	   return true;
 	}
 
 

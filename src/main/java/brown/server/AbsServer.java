@@ -2,10 +2,13 @@ package brown.server;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import brown.accounting.library.Account;
 import brown.accounting.library.AccountManager;
@@ -15,6 +18,7 @@ import brown.market.library.MarketManager;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.ErrorMessage;
+import brown.messages.library.GameReportMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.TradeMessage;
@@ -206,7 +210,7 @@ public abstract class AbsServer {
             Ledger ledger = this.manager.getLedger(auction.getID());
             // Go through winners and execute orders
             for (Order winner : winners) {                      
-              if (this.acctManager.containsAcct(winner.TO)) {               
+              if (this.acctManager.containsAcct(winner.TO)) {
                 Account accountTo = this.acctManager.getAccount(winner.TO);
                 synchronized (accountTo.ID) {                  
                   // add order to ledger
@@ -228,7 +232,10 @@ public abstract class AbsServer {
               }
             }            
             // Send game report
-            this.theServer.sendToAllTCP(auction.constructReport());
+            Map<Integer,GameReportMessage> reports = auction.constructReport();
+            for (Integer agent : reports.keySet()){      
+              this.theServer.sendToTCP(this.privateToConnection(agent).getID(), reports.get(agent).sanitize(agent,this.privateToPublic));
+            }
             if (!auction.isOverOuter()) {
               Logging.log("[*] Auction has been reset");
               auction.resetInnerMarket();              
@@ -256,6 +263,28 @@ public abstract class AbsServer {
     this.manager.reset();
   }
   
+  public void printUtilities(){
+    Map<Integer,Double> toPrint = new HashMap<Integer,Double>();
+    if (this.valueConfig.type == ValuationType.Auction){
+      // do something
+    } else if (this.valueConfig.type == ValuationType.Game){
+      // for lemonade game right now
+      for (Integer agent: this.connections.values()){
+        toPrint.put(agent,this.acctManager.getAccount(agent).getMonies());
+      }
+    }  
+    Logging.log("RESULTS (agent ID -> Utility):");
+    
+    List<Map.Entry<Integer, Double>> sortedByValue = toPrint.entrySet().stream().sorted(Map.Entry.<Integer, Double>comparingByValue().reversed()).collect(Collectors.toList());    
+    int i = 1;
+    for (Map.Entry<Integer,Double> a :sortedByValue){
+      Logging.log(i + ". " + a.getKey()+ ", money: " + a.getValue());
+      this.theServer.sendToTCP(this.privateToConnection(a.getKey()).getID(), new ErrorMessage(0, "Placed: " + Integer.toString(i)));
+      i++;
+    }
+  }
+
+  
   /*
    * Retrieves a connection (needed to send a message to a client) from the
    * agent's private ID
@@ -269,7 +298,7 @@ public abstract class AbsServer {
     Logging.log("[x] AbsServer PrivateToConnection: Connection not found");
     return null;
   }
-    
+      
   // do something with this later
   public void sendAllMarketUpdates(List<Market> markets) {   
   }

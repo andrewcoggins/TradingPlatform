@@ -1,5 +1,6 @@
 package brown.server.library;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import brown.market.preset.AbsMarketPreset;
@@ -28,19 +29,21 @@ public class RunServer extends AbsServer{
   }
 
   public void runSimpleSim(List<ITradeable> allGoods, AbsMarketPreset rules,
-      ValConfig valInfo, double initialMonies, List<ITradeable> initialGoods) throws InterruptedException{
+      ValConfig valInfo, double initialMonies, List<ITradeable> initialGoods, int delay, int lag) throws InterruptedException{
     this.valueConfig = valInfo;
     this.allTradeables = allGoods;
     this.initialMonies = initialMonies;
     this.initialGoods = initialGoods;   
-    delay(5);
+    delay(delay);
     initializeAgents();   
-    this.manager.open(rules,0,allGoods);    
-    this.completeAuctions(1000);
+    this.manager.open(rules,0,allGoods,new LinkedList<Integer>(this.connections.values()));   
+    this.completeAuctions(lag);
+    printUtilities();
   }
   
   // need to do something with valuation calculating utilities
-  public void runSimulation(Simulation sim, int numRuns) throws InterruptedException {
+  // need to do something here about setting groupings
+  public void runSimulation(Simulation sim, int numRuns, int delay) throws InterruptedException {
     //tradeables
     this.allTradeables = sim.getTradeables();
     //valuations
@@ -50,7 +53,7 @@ public class RunServer extends AbsServer{
     this.initialGoods = sim.getInitialGoods(); 
     
     // time for agents to register (Make registration happen here)
-    delay(10);    
+    delay(delay);    
     
     int count = 0;
     while (count < numRuns) {
@@ -68,7 +71,7 @@ public class RunServer extends AbsServer{
     //rules
     for (AbsMarketPreset ruleSet : presets) {
       int id = 0;
-      this.manager.open(ruleSet, new Integer(id), allGoods);
+      this.manager.open(ruleSet, new Integer(id), allGoods,new LinkedList<Integer>(this.connections.values()));
     }    
     this.completeAuctions(1000);    
   }

@@ -6,7 +6,7 @@ public interface ISSSPAgent {
 
   /**
    * Provides agent response to sealed-bid auction
-   * @param simpleWrapper - simple agent channel
+   * @param channel - simple agent channel
    */
-  public abstract void onSSSP(SSSPChannel channel);
+  public void onSSSP(SSSPChannel channel);
 }

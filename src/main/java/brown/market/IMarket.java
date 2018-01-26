@@ -1,6 +1,7 @@
 package brown.market;
 
 import java.util.List;
+import java.util.Map;
 
 import brown.messages.library.TradeMessage;
 import brown.market.library.PrevStateInfo;
@@ -43,7 +44,7 @@ public interface IMarket {
   
   
   //where is this game report created?
-  public GameReportMessage constructReport();
+  public Map<Integer,GameReportMessage> constructReport();
   //shouldn't this be more like constructGameReport with this description:
   /**
    * Constructs a game report to send to a client.
@@ -72,5 +73,8 @@ public interface IMarket {
   public void resetInnerMarket();
 
   PrevStateInfo constructSummaryState();
+
+  // sets groupings
+  public void setGroupings(List<Integer> groups);
   
 }

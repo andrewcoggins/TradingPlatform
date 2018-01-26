@@ -5,7 +5,7 @@ import brown.market.marketstate.IMarketState;
 
 public interface IQueryRule {
 
-  public void makeChannel(IMarketState state, Ledger ledger);
+  public void makeChannel(IMarketState state);
 
   public void reset();
   

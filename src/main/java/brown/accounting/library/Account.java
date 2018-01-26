@@ -115,7 +115,7 @@ public class Account implements IAccount {
 	public void remove(double removeMonies, List<ITradeable> removeGoods) {
 	  this.monies -= removeMonies;
 
-	  // Need to flatten goods so they can be compared
+	  // Need to flatten tradeables so they can be compared
 	  List<SimpleTradeable> myGoods = flattenHelper(this.tradeables);	  
     List<SimpleTradeable> toRemove = flattenHelper(removeGoods);
 
