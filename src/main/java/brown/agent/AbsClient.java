@@ -7,7 +7,10 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.minlog.Log;
 
 import brown.exceptions.AgentCreationException;
+import brown.messages.library.ErrorMessage;
+import brown.messages.library.RegistrationMessage;
 import brown.setup.ISetup;
+import brown.setup.Logging;
 import brown.setup.library.Startup;
 
 /**
@@ -46,5 +49,14 @@ public abstract class AbsClient {
     } catch (IOException e) {
       throw new AgentCreationException("Failed to connect to server");
     }
+  }  
+  
+  public void onRegistration(RegistrationMessage registration) {
+    Logging.log("[-] Registered To Server");
+    this.ID = registration.getID();    
+  }
+  
+  public void onErrorMessage(ErrorMessage message) {
+    Logging.log("[x] rej: " + message.error + ", agent ID: " +this.ID);
   }  
 }

@@ -13,7 +13,7 @@ public class SizeDepValGenerator implements IValuationGenerator {
   }
   
   /**
-   * option with no value scale.
+   * Option without a scale.
    * @param valFunction
    */
   public SizeDepValGenerator(Integer size) {

@@ -48,4 +48,34 @@ public class AccountManager implements IAccountManager {
     this.accounts.clear();
   }
 
+  @Override
+  public String toString() {
+    return "AccountManager [accounts=" + accounts + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((accounts == null) ? 0 : accounts.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    AccountManager other = (AccountManager) obj;
+    if (accounts == null) {
+      if (other.accounts != null)
+        return false;
+    } else if (!accounts.equals(other.accounts))
+      return false;
+    return true;
+  }
+
 }

@@ -16,8 +16,8 @@ import brown.messages.library.TradeMessage;
 import brown.rules.IAllocationRule;
 import brown.setup.Logging;
 import brown.tradeable.ITradeable;
-import brown.tradeable.TradeableType;
 import brown.tradeable.library.SimpleTradeable;
+import brown.tradeable.library.TradeableType;
 
 /**
  * implements an allocation rule where the highest bidder is allocated the good(?)
@@ -91,5 +91,14 @@ public class SSSPAllocation implements IAllocationRule {
   @Override
   public void reset() {
   }
+  
+  // just make one big group, shouldn't be used
+  @Override
+  public void setGroups(IMarketState state, List<Integer> agents) {   
+    List<List<Integer>> groups = new LinkedList<List<Integer>>();
+    groups.add(agents);
+    state.setGroups(groups);
+  }  
+   
 }
 

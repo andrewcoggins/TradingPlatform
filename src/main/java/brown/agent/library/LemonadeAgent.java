@@ -1,5 +1,9 @@
 package brown.agent.library;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import brown.agent.AbsLemonadeAgent;
 import brown.bid.bidbundle.library.GameBidBundle;
 import brown.channels.agent.library.LemonadeChannel;
@@ -7,7 +11,6 @@ import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
-import brown.messages.library.PrivateInformationMessage;
 import brown.setup.library.LemonadeSetup;
 import brown.setup.Logging;
 
@@ -16,10 +19,12 @@ import brown.setup.Logging;
  * @author andrew
  */
 public class LemonadeAgent extends AbsLemonadeAgent {
-  
+
   private int posn;
   private int NUM_SLOTS = 12;
   private int[] positions = new int[NUM_SLOTS];
+  @SuppressWarnings("unchecked")
+  private List<Integer>[] positions_ids = (List<Integer>[]) new List[NUM_SLOTS];
   
   public LemonadeAgent(String host, int port, int position)
       throws AgentCreationException {
@@ -27,6 +32,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     this.posn = position; 
     for(int i = 0; i < NUM_SLOTS; i++) {
       positions[i] = 0; 
+      positions_ids[i] = new LinkedList<Integer>();
     }
   } 
   
@@ -34,69 +40,36 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     // Enter a position between 0 and NUM_SLOTS-1 inclusive.
     channel.bid(this, new GameBidBundle(this.posn));
   }
+
   
+  // Mess with logging here to check if it works, but be warned this will flood your console with high # of agents
   @Override
-  public void onBankUpdate(BankUpdateMessage bankUpdate) {
-    Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.newAccount.getMonies() - bankUpdate.oldAccount.getMonies() + ", Total Money: " + bankUpdate.newAccount.getMonies())); 
-  }
-  
-  @Override
-  public void onMarketUpdate(GameReportMessage marketUpdate) {
-    // TODO Auto-generated method 
-    if (marketUpdate instanceof LemonadeReportMessage) { 
-      LemonadeReportMessage lemonadeUpdate = (LemonadeReportMessage) marketUpdate;
-      for (int i = 0; i < NUM_SLOTS; i++) {
-        this.positions[i] = this.positions[i] + lemonadeUpdate.getCount(i);
+  public void onGameReport(GameReportMessage gameReport) {
+    super.onGameReport(gameReport);
+    LemonadeReportMessage lemonadeUpdate = this.latestGameReport;
+    for (int i = 0; i < NUM_SLOTS; i++) {
+      this.positions[i] = lemonadeUpdate.getCount(i);
+      if (!lemonadeUpdate.isAnon()){
+        this.positions_ids[i] = lemonadeUpdate.getIDs(i);
+        //Logging.log("Cumulative Results IDS:" + Arrays.toString(this.positions_ids));                
       }
-      System.out.println(lemonadeUpdate.toString());
-      //printIsland();
+    }    
+    // Logging.log("Cumulative Results:" + Arrays.toString(this.positions));      
+    Logging.log("Total Monies: " + this.monies);
     }
-    else {
-      System.out.println("ERROR: Lemonade Report Not Received");
-    }
-  }
-  
-  // Prints the island where there are NUM_SLOT slots.
-  private synchronized void printIsland() {
-    System.out.println("Lemonade Arrangement:");
-    for(int i = 0; i < 4; i++) {
-      printNumber(i);
-    }
-    System.out.print('\n');
-    printNumber(11); 
-    System.out.print("            ");
-    printNumber(4); 
-    System.out.print('\n');
-    printNumber(10); 
-    System.out.print("            ");
-    printNumber(5); 
-    System.out.print('\n');
-    for(int i = 9; i > 5; i--) {
-      printNumber(i);
-    }
-    System.out.print('\n');
-  }
-  
-  // Print ???WHAT
-  private void printNumber(Integer aNum) { 
-    if (Math.abs(positions[aNum]) < 10) { 
-      System.out.print("| " + positions[aNum] + " | ");
-    } else {
-      System.out.print("| " + positions[aNum] + "| ");
-    }
-  }
   
   public static void main(String[] args) throws AgentCreationException {
-    new LemonadeAgent("localhost", 2121, 2);
-//    new LemonadeAgent("localhost", 2121, 4);
-//    new LemonadeAgent("localhost", 2121, 9);
-    
+    new LemonadeAgent("localhost", 2121, 1);
+    new LemonadeAgent("localhost", 2121, 1);
+    new LemonadeAgent("localhost", 2121, 6);   
+    new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);
+    new LemonadeAgent("localhost", 2121, 1);    
+    new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);
+    new LemonadeAgent("localhost", 2121, 1);    
+    new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);    
     while(true){}
-  }
-
-  // No private info in lemonade
-  @Override
-  public void onPrivateInformation(PrivateInformationMessage privateInfo) {    
-  }
-  
+  }  
 }

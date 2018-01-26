@@ -1,6 +1,7 @@
 package brown.rules.library; 
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,11 +12,12 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
 import brown.messages.library.TradeMessage;
 import brown.rules.IInformationRevelationPolicy;
+import brown.setup.Logging;
 
-public class LemonadeAnonymous implements IInformationRevelationPolicy{
+public class LemonadeNonAnonymous implements IInformationRevelationPolicy{
   private int numSlots;
   
-  public LemonadeAnonymous(int numSlots) {
+  public LemonadeNonAnonymous(int numSlots) {
     this.numSlots = numSlots;
   }
 
@@ -23,25 +25,30 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
   public void handleInfo() {
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public void setReport(IMarketState state) {
     Map<Integer,GameReportMessage> reports = new HashMap<Integer,GameReportMessage>();    
     
     for (List<Integer> group : state.getGroups()){
-      Integer[] report = new Integer[numSlots];    
+      List<Integer>[] report_id = (List<Integer>[]) new List[numSlots];
+      Integer[] report_count = new Integer[numSlots];    
       for (int i = 0; i<numSlots;i++){
-        report[i] = 0;
+        report_id[i] = new LinkedList<Integer>();
+        report_count[i] = 0;
       }        
-      for (TradeMessage b:state.getBids()){
-        // Must be right type and within relevent group
+      
+      List<TradeMessage> bids = state.getBids();
+      for (TradeMessage b:bids){
         if (b.Bundle.getType() != BundleType.GAME | !group.contains(b.AgentID))
           continue;
         GameBidBundle lemonadeBid = (GameBidBundle) b.Bundle;
         int index = lemonadeBid.getBids().move;
-        report[index] = report[index] + 1;
+        report_id[index].add(b.AgentID);
+        report_count[index] = report_count[index] + 1;
       }
       for (Integer agent : group){
-        reports.put(agent,new LemonadeReportMessage(report,true));
+        reports.put(agent,new LemonadeReportMessage(report_id,report_count,false));
       }
     }
     state.setReport(reports);

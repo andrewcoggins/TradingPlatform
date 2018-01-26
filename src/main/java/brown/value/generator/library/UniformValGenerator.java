@@ -3,7 +3,7 @@ package brown.value.generator.library;
 import brown.value.generator.IValuationGenerator;
 
 /**
- * Generates a value drawn from a uniformly distribution.
+ * Draws a value from a uniformly distribution.
  * @author andrew
  */
 public class UniformValGenerator implements IValuationGenerator {

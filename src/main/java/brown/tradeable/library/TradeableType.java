@@ -1,4 +1,4 @@
-package brown.tradeable; 
+package brown.tradeable.library; 
 
 public enum TradeableType {
   Simple, Multi, Complex;

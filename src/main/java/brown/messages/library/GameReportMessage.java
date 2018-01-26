@@ -1,5 +1,7 @@
 package brown.messages.library;
 
+import java.util.Map;
+
 import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 
@@ -11,7 +13,7 @@ import brown.agent.AbsAgent;
  * @author andrew
  *
  */
-public class GameReportMessage extends AbsMessage {
+public abstract class GameReportMessage extends AbsMessage {
   
 	public final Ledger LEDGER;
 	
@@ -27,7 +29,8 @@ public class GameReportMessage extends AbsMessage {
 
 	@Override
 	public void dispatch(AbsAgent agent) {
-		agent.onMarketUpdate(this);
+		agent.onGameReport(this);
 	}
 
+  public abstract GameReportMessage sanitize(Integer agent, Map<Integer,Integer> privateToPublic);
 }

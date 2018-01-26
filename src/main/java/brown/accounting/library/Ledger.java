@@ -89,6 +89,7 @@ public class Ledger implements ILedger{
     return "Ledger [marketId=" + marketId + ", transactions=" + transactions
         + ", unshared=" + unshared + "]";
   }
+
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -102,9 +103,29 @@ public class Ledger implements ILedger{
 
   @Override
   public boolean equals(Object obj) {
-    return ((obj instanceof Ledger) &&
-        ((Ledger)obj).marketId == this.marketId &&
-        ((Ledger)obj).transactions == this.transactions &&
-        ((Ledger)obj).unshared == this.unshared);
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Ledger other = (Ledger) obj;
+    if (marketId == null) {
+      if (other.marketId != null)
+        return false;
+    } else if (!marketId.equals(other.marketId))
+      return false;
+    if (transactions == null) {
+      if (other.transactions != null)
+        return false;
+    } else if (!transactions.equals(other.transactions))
+      return false;
+    if (unshared == null) {
+      if (other.unshared != null)
+        return false;
+    } else if (!unshared.equals(other.unshared))
+      return false;
+    return true;
   }
+
 }

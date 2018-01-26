@@ -1,6 +1,8 @@
 package brown.market.library;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import brown.accounting.library.Ledger;
 import brown.market.IMarket;
@@ -17,6 +19,7 @@ import brown.rules.IInnerTC;
 import brown.rules.IOuterTC;
 import brown.rules.IPaymentRule;
 import brown.rules.IQueryRule;
+import brown.setup.Logging;
 
 public class Market implements IMarket {
 
@@ -47,12 +50,7 @@ public class Market implements IMarket {
 
   public TradeRequestMessage constructTradeRequest(Integer ID) {
     //no idea why ledgers are part of the trade request -- they should be sent as market updates!
-    //maybe tentativeReports should be part of the trade request
-    Ledger ledger = new Ledger(this.getID());
-    for(Order o : constructOrders()) {
-      ledger.add(o.toTransaction());
-    }
-    this.QRULE.makeChannel(STATE, ledger);
+    this.QRULE.makeChannel(STATE);
     TradeRequestMessage request = this.STATE.getTRequest();
     return request;
   }
@@ -79,14 +77,8 @@ public class Market implements IMarket {
   }
 
   @Override 
-  // maybe this is constructGameReport
-  // i'm worried about setAllocation and setOrders potentially being called twice in a row
-  public GameReportMessage constructReport() {
-    // Set allocation and payment
-    this.ARULE.setAllocation(this.STATE);
-    this.PRULE.setOrders(this.STATE);
-    // Construct orders from allocation and payments
-
+  // Make sure this is called after constructOrders
+  public Map<Integer,GameReportMessage> constructReport() {
     this.IRPOLICY.setReport(this.STATE);
     return this.STATE.getReport();
   }
@@ -123,4 +115,8 @@ public class Market implements IMarket {
     this.STATE.incrementOuter();
   }
   
+  @Override
+  public void setGroupings(List<Integer> agents){
+    this.ARULE.setGroups(this.STATE, agents);
+  }
 }

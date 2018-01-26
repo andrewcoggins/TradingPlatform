@@ -5,6 +5,10 @@ import brown.value.generator.IValuationGenerator;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.library.DMValuation;
 
+/**
+ * Distribution for generating diminishing marginal valuations.
+ * @author andrew
+ */
 public class DMValuationDistribution implements IValuationDistribution {
 
   private IValuationGenerator baseGenerator; 
@@ -15,13 +19,13 @@ public class DMValuationDistribution implements IValuationDistribution {
   private double maxDiscount; 
   
   /**
-   * @param generator
+   * @param baseGenerator
    * generator for base tradeable value
    * @param discountGenerator
    * generator for discount value
    */
-  public DMValuationDistribution(IValuationGenerator generator, IValuationGenerator discountGenerator) {
-    this.baseGenerator = generator; 
+  public DMValuationDistribution(IValuationGenerator baseGenerator, IValuationGenerator discountGenerator) {
+    this.baseGenerator = baseGenerator; 
     this.discountGenerator = discountGenerator; 
     this.minBase = 0.0; 
     this.maxBase = 1.0; 
@@ -30,7 +34,7 @@ public class DMValuationDistribution implements IValuationDistribution {
   }
   
   /**
-   * @param generator
+   * @param baseGenerator
    * generator for base tradeable value
    * @param discountGenerator
    * generator for discount value
@@ -43,10 +47,11 @@ public class DMValuationDistribution implements IValuationDistribution {
    * @param maxDiscount
    * maximum discount value (suggested < 1) 
    */
-  public DMValuationDistribution(IValuationGenerator generator, IValuationGenerator discountGenerator, 
+  public DMValuationDistribution(IValuationGenerator baseGenerator, IValuationGenerator discountGenerator, 
       Double minBase, Double maxBase, 
       Double minDiscount, Double maxDiscount) {
-    this.baseGenerator = generator; 
+    this.baseGenerator = baseGenerator; 
+    this.discountGenerator = discountGenerator; 
     this.minBase = minBase; 
     this.maxBase = maxBase; 
     this.minDiscount = minDiscount; 
@@ -66,6 +71,14 @@ public class DMValuationDistribution implements IValuationDistribution {
     return new DMValuation(tentativeBase, tentativeDiscount);
   }
 
+  @Override
+  public String toString() {
+    return "DMValuationDistribution [baseGenerator=" + baseGenerator
+        + ", discountGenerator=" + discountGenerator + ", minBase=" + minBase
+        + ", maxBase=" + maxBase + ", minDiscount=" + minDiscount
+        + ", maxDiscount=" + maxDiscount + "]";
+  }
+  
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -118,14 +131,6 @@ public class DMValuationDistribution implements IValuationDistribution {
         .doubleToLongBits(other.minDiscount))
       return false;
     return true;
-  }
-
-  @Override
-  public String toString() {
-    return "DMValuationDistribution [baseGenerator=" + baseGenerator
-        + ", discountGenerator=" + discountGenerator + ", minBase=" + minBase
-        + ", maxBase=" + maxBase + ", minDiscount=" + minDiscount
-        + ", maxDiscount=" + maxDiscount + "]";
   }
   
 }

@@ -13,7 +13,7 @@ import brown.accounting.MarketState;
 import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.library.MarketState;
 import brown.messages.library.TradeMessage;
-import brown.rules.library.OneShotActivity;
+import brown.rules.library.LemonadeActivity;
 import brown.tradeable.library.MultiTradeable;
 
 /**
@@ -35,7 +35,7 @@ public class OneShotActivityTest {
     aMap.put(new MultiTradeable(0), new MarketState(0, 1.0));
     AuctionBidBundle s = new AuctionBidBundle(aMap);
     TradeMessage aBid = new TradeMessage(1, s, 1, 1);
-    OneShotActivity shot = new OneShotActivity();
+    LemonadeActivity shot = new LemonadeActivity();
     //is initially acceptable because doesn't contain bid. 
     shot.isAcceptable(state, aBid);
     assertTrue(state.getAcceptable());

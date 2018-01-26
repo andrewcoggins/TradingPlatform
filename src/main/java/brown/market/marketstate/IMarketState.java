@@ -94,10 +94,14 @@ public interface IMarketState {
     void setSummaryState(PrevStateInfo prevState);
     
     //IR policy 
-    public GameReportMessage getReport();
+    public Map<Integer,GameReportMessage> getReport();
     
-    public void setReport(GameReportMessage gameReport);
+    public void setReport(Map<Integer,GameReportMessage> gameReport);
 
+    // Groups
+    public List<List<Integer>> getGroups();
+    
+    public void setGroups(List<List<Integer>> groups);
     
     //TODO: market update. 
 

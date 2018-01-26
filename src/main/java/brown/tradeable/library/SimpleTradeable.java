@@ -3,8 +3,6 @@ package brown.tradeable.library;
 import java.util.LinkedList;
 import java.util.List;
 
-import brown.tradeable.TradeableType;
-
 /**
 * A simple tradeable is a single tradeable.
 * @author amy

@@ -8,21 +8,21 @@ import brown.value.valuation.library.DMValuation;
 public class ComplementaryValuationDistribution implements IValuationDistribution{
 
   private IValuationGenerator baseGenerator; 
-  private IValuationGenerator DeltaGenerator; 
+  private IValuationGenerator deltaGenerator; 
   private double minBase; 
   private double maxBase; 
   private double minDelta; 
   private double maxDelta; 
   
   /**
-   * @param generator
+   * @param baseGenerator
    * generator for the base tradeable value
-   * @param DeltaGenerator
+   * @param deltaGenerator
    * generator for delta value.
    */
-  public ComplementaryValuationDistribution(IValuationGenerator generator, IValuationGenerator DeltaGenerator) {
-    this.baseGenerator = generator; 
-    this.DeltaGenerator = DeltaGenerator; 
+  public ComplementaryValuationDistribution(IValuationGenerator baseGenerator, IValuationGenerator deltaGenerator) {
+    this.baseGenerator = baseGenerator; 
+    this.deltaGenerator = deltaGenerator; 
     this.minBase = 0.0; 
     this.maxBase = 1.0; 
     this.minDelta = 1.0; 
@@ -31,7 +31,7 @@ public class ComplementaryValuationDistribution implements IValuationDistributio
   
   /**
    * 
-   * @param generator
+   * @param baseGenerator
    * generator for base tradeable value
    * @param DeltaGenerator
    * generator for delta value
@@ -44,10 +44,11 @@ public class ComplementaryValuationDistribution implements IValuationDistributio
    * @param maxDelta
    * maximum delta value
    */
-  public ComplementaryValuationDistribution(IValuationGenerator generator, IValuationGenerator DeltaGenerator, 
+  public ComplementaryValuationDistribution(IValuationGenerator baseGenerator, IValuationGenerator deltaGenerator, 
       Double minBase, Double maxBase, 
       Double minDelta, Double maxDelta) {
-    this.baseGenerator = generator; 
+    this.baseGenerator = baseGenerator; 
+    this.deltaGenerator = deltaGenerator; 
     this.minBase = minBase; 
     this.maxBase = maxBase; 
     this.minDelta = minDelta; 
@@ -62,17 +63,25 @@ public class ComplementaryValuationDistribution implements IValuationDistributio
       tentativeBase = baseGenerator.makeValuation();
     }
     while(tentativeDelta < minDelta || tentativeDelta > maxDelta) {
-      tentativeDelta = DeltaGenerator.makeValuation();
+      tentativeDelta = deltaGenerator.makeValuation();
     }
     return new DMValuation(tentativeBase, tentativeDelta);
   }
 
   @Override
+  public String toString() {
+    return "ComplementaryValuationDistribution [baseGenerator=" + baseGenerator
+        + ", deltaGenerator=" + deltaGenerator + ", minBase=" + minBase
+        + ", maxBase=" + maxBase + ", minDelta=" + minDelta + ", maxDelta="
+        + maxDelta + "]";
+  }
+  
+  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
     result = prime * result
-        + ((DeltaGenerator == null) ? 0 : DeltaGenerator.hashCode());
+        + ((deltaGenerator == null) ? 0 : deltaGenerator.hashCode());
     result = prime * result
         + ((baseGenerator == null) ? 0 : baseGenerator.hashCode());
     long temp;
@@ -97,10 +106,10 @@ public class ComplementaryValuationDistribution implements IValuationDistributio
       return false;
     ComplementaryValuationDistribution other =
         (ComplementaryValuationDistribution) obj;
-    if (DeltaGenerator == null) {
-      if (other.DeltaGenerator != null)
+    if (deltaGenerator == null) {
+      if (other.deltaGenerator != null)
         return false;
-    } else if (!DeltaGenerator.equals(other.DeltaGenerator))
+    } else if (!deltaGenerator.equals(other.deltaGenerator))
       return false;
     if (baseGenerator == null) {
       if (other.baseGenerator != null)
@@ -122,12 +131,4 @@ public class ComplementaryValuationDistribution implements IValuationDistributio
     return true;
   }
 
-  @Override
-  public String toString() {
-    return "ComplementaryValuationDistribution [baseGenerator=" + baseGenerator
-        + ", DeltaGenerator=" + DeltaGenerator + ", minBase=" + minBase
-        + ", maxBase=" + maxBase + ", minDelta=" + minDelta + ", maxDelta="
-        + maxDelta + "]";
-  }
-  
 }
