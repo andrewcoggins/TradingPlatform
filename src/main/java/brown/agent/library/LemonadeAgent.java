@@ -21,7 +21,7 @@ import brown.setup.Logging;
 public class LemonadeAgent extends AbsLemonadeAgent {
 
   private int posn;
-  private int NUM_SLOTS = 50;
+  private int NUM_SLOTS = 12;
   private int[] positions = new int[NUM_SLOTS];
   @SuppressWarnings("unchecked")
   private List<Integer>[] positions_ids = (List<Integer>[]) new List[NUM_SLOTS];
@@ -40,37 +40,36 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     // Enter a position between 0 and NUM_SLOTS-1 inclusive.
     channel.bid(this, new GameBidBundle(this.posn));
   }
+
   
+  // Mess with logging here to check if it works, but be warned this will flood your console with high # of agents
   @Override
-  public void onBankUpdate(BankUpdateMessage bankUpdate) {
-    super.onBankUpdate(bankUpdate);
-    // Logging.log("[Bank update]Agent with position " + this.posn + ": " + (bankUpdate.moniesChanged)); 
-  }
-  
-  @Override
-  public void onGameReport(GameReportMessage marketUpdate) {
-    if (marketUpdate instanceof LemonadeReportMessage) { 
-      LemonadeReportMessage lemonadeUpdate = (LemonadeReportMessage) marketUpdate;
-      for (int i = 0; i < NUM_SLOTS; i++) {
-        this.positions[i] = lemonadeUpdate.getCount(i);
-        if (!lemonadeUpdate.isAnon()){
-          this.positions_ids[i] = lemonadeUpdate.getIDs(i);
-          Logging.log("Cumulative Results IDS:" + Arrays.toString(this.positions_ids));                
-        }
+  public void onGameReport(GameReportMessage gameReport) {
+    super.onGameReport(gameReport);
+    LemonadeReportMessage lemonadeUpdate = this.latestGameReport;
+    for (int i = 0; i < NUM_SLOTS; i++) {
+      this.positions[i] = lemonadeUpdate.getCount(i);
+      if (!lemonadeUpdate.isAnon()){
+        this.positions_ids[i] = lemonadeUpdate.getIDs(i);
+        //Logging.log("Cumulative Results IDS:" + Arrays.toString(this.positions_ids));                
       }
-      Logging.log("Cumulative Results:" + Arrays.toString(this.positions));      
-      Logging.log("Total Monies: " + this.monies);
+    }    
+    // Logging.log("Cumulative Results:" + Arrays.toString(this.positions));      
+    Logging.log("Total Monies: " + this.monies);
     }
-    else {
-      System.out.println("ERROR: Lemonade Report Not Received");
-    }
-  }
   
   public static void main(String[] args) throws AgentCreationException {
     new LemonadeAgent("localhost", 2121, 1);
-    new LemonadeAgent("localhost", 2121, 25);
-    new LemonadeAgent("localhost", 2121, 30);
-    
+    new LemonadeAgent("localhost", 2121, 1);
+    new LemonadeAgent("localhost", 2121, 6);   
+    new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);
+    new LemonadeAgent("localhost", 2121, 1);    
+    new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);
+    new LemonadeAgent("localhost", 2121, 1);    
+    new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);    
     while(true){}
   }  
 }

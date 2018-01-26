@@ -1,5 +1,7 @@
 package brown.rules;
 
+import java.util.List;
+
 import brown.market.marketstate.IMarketState;
 
 /**
@@ -10,6 +12,8 @@ public interface IAllocationRule {
 
   public void setAllocation(IMarketState state);
 
-  public void reset();
+  // groups up agents if this is applicable
+  public void setGroups(IMarketState state, List<Integer> agents);
   
+  public void reset();  
 }

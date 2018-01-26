@@ -91,5 +91,14 @@ public class SSSPAllocation implements IAllocationRule {
   @Override
   public void reset() {
   }
+  
+  // just make one big group, shouldn't be used
+  @Override
+  public void setGroups(IMarketState state, List<Integer> agents) {   
+    List<List<Integer>> groups = new LinkedList<List<Integer>>();
+    groups.add(agents);
+    state.setGroups(groups);
+  }  
+   
 }
 

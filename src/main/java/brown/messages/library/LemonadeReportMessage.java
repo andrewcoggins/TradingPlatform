@@ -3,6 +3,7 @@ package brown.messages.library;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import brown.messages.library.GameReportMessage;
 import brown.setup.Logging;
@@ -22,7 +23,7 @@ public class LemonadeReportMessage extends GameReportMessage {
   @Override
   public String toString() {
     return "LemonadeReportMessage [Anon=" + Arrays.toString(slots_anon) + 
-        "\n" + "With IDs:" + Arrays.toString(slots_ids) + "]";
+        "\n" + "With IDs:" + Arrays.toString(slots_ids) + ", isAnon: " + isAnon + "]";
   }
   
   public LemonadeReportMessage(Integer[] slots, boolean isAnon) {
@@ -58,6 +59,22 @@ public class LemonadeReportMessage extends GameReportMessage {
       Logging.log("[x] LemonadeReport: Null slots_ids field");
       return new LinkedList<Integer>();
     }
+  }
+  
+  public GameReportMessage sanitize(Integer agent, Map<Integer,Integer> privateToPublic){    
+    if (this.isAnon){  
+      return this;
+    } else {
+      @SuppressWarnings("unchecked")      
+      List<Integer>[] sanitized_slots = (List<Integer>[]) new List[this.slots_anon.length];;
+      for (int i=0;i<this.slots_anon.length;i++){
+        sanitized_slots[i] = new LinkedList<Integer>();
+        for (Integer a : this.slots_ids[i]){
+          sanitized_slots[i].add((a == agent? a : privateToPublic.get(a)));
+        }
+      }
+      return new LemonadeReportMessage(sanitized_slots,this.slots_anon,false);
+    }   
   }
   
   public boolean isAnon(){

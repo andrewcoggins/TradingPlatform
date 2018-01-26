@@ -21,6 +21,7 @@ public class LemonadeSetup implements ISetup {
     kryo.register(GameBid.class);    
     kryo.register(LemonadeChannel.class);
     kryo.register(LemonadeReportMessage.class);
+    kryo.register(java.util.List[].class);    
   } 
   
 }
