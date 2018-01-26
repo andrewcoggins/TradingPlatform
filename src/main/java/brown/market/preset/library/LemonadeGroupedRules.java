@@ -17,13 +17,13 @@ public class LemonadeGroupedRules extends AbsMarketPreset {
    * need to pass in the market internal state, 
    * or otherwise delete it from this constructor.
    */
-  public LemonadeGroupedRules(int numSlots) {
+  public LemonadeGroupedRules(int numSlots, int numRuns) {
     super(new GroupsThreeFourFiveAlloc(),
         new LemonadeGroupedPayment(numSlots), 
         new LemonadeQuery(),
         new LemonadeActivity(numSlots),
         new LemonadeNonAnonymous(numSlots), 
         new OneShotTermination(),
-        new XRoundTermination());
+        new XRoundTermination(numRuns));
   } 
 }

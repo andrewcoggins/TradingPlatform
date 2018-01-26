@@ -36,7 +36,7 @@ public class SSSPServer {
       i++;
     }
 
-    new RunServer(2121, new SSSPSetup()).runSimpleSim(allTradeablesList, new SSSPRules(), 
-        new SSSPConfig(allTradeables), 100., new LinkedList<ITradeable>(),delay);;
+    new RunServer(2121, new SSSPSetup()).runSimpleSim(allTradeablesList, new SSSPRules(5), 
+        new SSSPConfig(allTradeables), 100., new LinkedList<ITradeable>(),delay, 1000);;
   }
 }

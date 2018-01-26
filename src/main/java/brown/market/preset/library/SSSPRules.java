@@ -16,14 +16,14 @@ public class SSSPRules extends AbsMarketPreset {
    * need to pass in the market internal state, 
    * or otherwise delete it from this constructor.
    */
-  public SSSPRules() {
+  public SSSPRules(int numRuns) {
     super(new SSSPAllocation(),
         new SSSPPayment(),
         new SSSPQuery(), 
         new SSSPActivity(),
         new SSSPAnonymous(),
         new OneShotTermination(), 
-        new XRoundTermination());
+        new XRoundTermination(numRuns));
   }
   
 }

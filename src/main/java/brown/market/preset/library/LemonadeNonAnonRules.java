@@ -16,13 +16,13 @@ public class LemonadeNonAnonRules extends AbsMarketPreset {
    * need to pass in the market internal state, 
    * or otherwise delete it from this constructor.
    */
-  public LemonadeNonAnonRules(int numSlots) {
+  public LemonadeNonAnonRules(int numSlots, int numRuns) {
     super(new LemonadeAllocation(numSlots),
         new LemonadePayment(), 
         new LemonadeQuery(),
         new LemonadeActivity(numSlots),
         new LemonadeNonAnonymous(numSlots), 
         new OneShotTermination(),
-        new XRoundTermination());
+        new XRoundTermination(numRuns));
   } 
 }

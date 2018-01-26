@@ -29,7 +29,7 @@ public class RunServer extends AbsServer{
   }
 
   public void runSimpleSim(List<ITradeable> allGoods, AbsMarketPreset rules,
-      ValConfig valInfo, double initialMonies, List<ITradeable> initialGoods, int delay) throws InterruptedException{
+      ValConfig valInfo, double initialMonies, List<ITradeable> initialGoods, int delay, int lag) throws InterruptedException{
     this.valueConfig = valInfo;
     this.allTradeables = allGoods;
     this.initialMonies = initialMonies;
@@ -37,7 +37,7 @@ public class RunServer extends AbsServer{
     delay(delay);
     initializeAgents();   
     this.manager.open(rules,0,allGoods,new LinkedList<Integer>(this.connections.values()));   
-    this.completeAuctions(1000);
+    this.completeAuctions(lag);
     printUtilities();
   }
   

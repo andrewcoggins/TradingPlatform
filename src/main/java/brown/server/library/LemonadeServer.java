@@ -18,13 +18,17 @@ public class LemonadeServer {
     int numSlots = 12;
     // This is for the 3 person case – the rules will automatically normalize for larger groups
     int totalTradeables = 24;
+    
+    // simulation variables
     int delayTime = 5;
+    int lag = 100; // speed at which rounds run - at lag=100, 100 trials takes 50s-60s
+    int numRuns = 100;
     
     List<ITradeable> allTradeables = new LinkedList<ITradeable>(); 
     allTradeables.add(new MultiTradeable(1, totalTradeables));
        
     // LemonadeAnon and LemonadeNonAnon and lemonadFloat
-    new RunServer(2121, new LemonadeSetup()).runSimpleSim(allTradeables, new LemonadeGroupedRules(numSlots), 
-        new LemonadeConfig(), 0., new LinkedList<ITradeable>(), delayTime);
+    new RunServer(2121, new LemonadeSetup()).runSimpleSim(allTradeables, new LemonadeGroupedRules(numSlots,numRuns), 
+        new LemonadeConfig(), 0., new LinkedList<ITradeable>(), delayTime, lag);
   }
 }
