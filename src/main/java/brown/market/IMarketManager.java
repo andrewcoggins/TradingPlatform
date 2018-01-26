@@ -28,7 +28,7 @@ public interface IMarketManager {
    * @param market
    * @return
    */
-  public boolean open(AbsMarketPreset rules, Integer marketID, List<ITradeable> tradeables);
+  public boolean open(AbsMarketPreset rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents);
 
 
   /**

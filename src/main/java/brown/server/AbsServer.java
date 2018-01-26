@@ -3,7 +3,6 @@ package brown.server;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -233,7 +232,7 @@ public abstract class AbsServer {
             }            
             // Send game report
             Map<Integer,GameReportMessage> reports = auction.constructReport();
-            for (Integer agent : reports.keySet()){      
+            for (Integer agent : reports.keySet()) {      
               this.theServer.sendToTCP(this.privateToConnection(agent).getID(), reports.get(agent).sanitize(agent,this.privateToPublic));
             }
             if (!auction.isOverOuter()) {

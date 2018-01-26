@@ -103,4 +103,5 @@ public class MarketManager implements IMarketManager {
     this.markets.clear();
     this.information = null;
   }
+
 }
