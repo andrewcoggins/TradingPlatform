@@ -1,6 +1,6 @@
 package brown.rules;
 
-import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.IMarketState;
 
 /**
  * An allocation rule allocates tradeables to agents.
@@ -8,7 +8,7 @@ import brown.market.marketstate.ICompleteState;
  */
 public interface IAllocationRule {
 
-  public void setAllocation(ICompleteState state);
+  public void setAllocation(IMarketState state);
 
   public void reset();
   

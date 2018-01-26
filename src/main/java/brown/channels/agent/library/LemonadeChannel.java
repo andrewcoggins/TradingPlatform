@@ -1,6 +1,5 @@
 package brown.channels.agent.library;
 
-import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
 import brown.bid.bidbundle.BundleType;
@@ -18,8 +17,8 @@ public class LemonadeChannel extends AbsChannel {
     super();
   }
   
-  public LemonadeChannel(Integer ID, Ledger ledger) {
-    super(ID, ledger);
+  public LemonadeChannel(Integer ID) {
+    super(ID);
   }
 
   @Override

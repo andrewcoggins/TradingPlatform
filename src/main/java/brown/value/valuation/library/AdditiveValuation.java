@@ -3,9 +3,9 @@ package brown.value.valuation.library;
 import java.util.List;
 import java.util.Map;
 
+import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.valuable.library.Value;
 import brown.value.valuation.IMonotonicValuation;
 
 /**
@@ -14,27 +14,36 @@ import brown.value.valuation.IMonotonicValuation;
  * @author andrew
  *
  */
-public class AdditiveValuation implements IMonotonicValuation {
+public class AdditiveValuation implements IMonotonicValuation { 
 
-  private final Map<SimpleTradeable, Value> valueParams; 
+  private final Map<SimpleTradeable, Double> valueParams; 
+  
+  
+  // for kryo
+  public AdditiveValuation(){
+    this.valueParams = null;
+  }
   
   /**
    * additive valuation takes in a mapping from values to 
    * individual tradeables.
    * @param valueParams
    */
-  public AdditiveValuation(Map<SimpleTradeable, Value> valueParams) {
+  public AdditiveValuation(Map<SimpleTradeable, Double> valueParams) {
     this.valueParams = valueParams; 
   }
   
   @Override
-  public Value getValuation(ITradeable tradeable) {
-    double value = 0.0; 
+  public Double getValuation(ITradeable tradeable) {
+    Double value = 0.0; 
     List<SimpleTradeable> allTradeables = tradeable.flatten(); 
     for(SimpleTradeable atom : allTradeables) {
-      value = value + this.valueParams.get(atom).value; 
+      Logging.log("VALUEPARAMS " + this.valueParams);
+      Logging.log("GET " + this.valueParams.get(atom));
+      Logging.log("TRADEABLE " + atom);      
+      value = value + this.valueParams.get(atom); 
     }
-    return new Value(value);
+    return value;
   }
 
   @Override

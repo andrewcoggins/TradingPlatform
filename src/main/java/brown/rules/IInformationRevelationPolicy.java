@@ -1,13 +1,14 @@
 package brown.rules;
 
-import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.IMarketState;
 
 public interface IInformationRevelationPolicy {
   
   public void handleInfo();
 
-  public void setReport(ICompleteState state);
+  public void setReport(IMarketState state);
 
   public void reset();
 
+  public void constructSummaryState(IMarketState state);
 }

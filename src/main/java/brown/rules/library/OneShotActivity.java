@@ -2,7 +2,7 @@ package brown.rules.library;
 
 import java.util.List;
 
-import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IActivityRule;
 
@@ -10,7 +10,7 @@ public class OneShotActivity implements IActivityRule {
 
   @Override
   // Checks if agent has already bid
-  public void isAcceptable(ICompleteState state, TradeMessage aBid) {
+  public void isAcceptable(IMarketState state, TradeMessage aBid) {
     Integer agent = aBid.AgentID;    
     List<TradeMessage> currBids = state.getBids();
     boolean acceptable = true;
@@ -32,7 +32,5 @@ public class OneShotActivity implements IActivityRule {
 
   @Override
   public void reset() {
-    // TODO Auto-generated method stub
-    
   }
 }

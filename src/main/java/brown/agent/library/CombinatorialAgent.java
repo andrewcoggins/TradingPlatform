@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import brown.agent.AbsSimpleSealedBidAgent;
-import brown.channels.agent.library.SimpleAgentChannel;
+import brown.agent.AbsSSSPAgent;
+import brown.channels.agent.library.SSSPChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
@@ -21,7 +21,7 @@ import brown.value.valuationrepresentation.library.ComplexValuation;
  * @author andrew
  *
  */
-public class CombinatorialAgent extends AbsSimpleSealedBidAgent {
+public class CombinatorialAgent extends AbsSSSPAgent {
 
   private ComplexValuation privateValuation; 
   
@@ -54,7 +54,7 @@ public class CombinatorialAgent extends AbsSimpleSealedBidAgent {
   }
   
   @Override
-  public void onSimpleSealedBid(SimpleAgentChannel simpleWrapper) {
+  public void onSimpleSealedBid(SSSPChannel simpleWrapper) {
     Map<Set<ITradeable>, Double> bidMap = new HashMap<Set<ITradeable>, Double>();
     simpleWrapper.xorBid(this, bidMap);
   }

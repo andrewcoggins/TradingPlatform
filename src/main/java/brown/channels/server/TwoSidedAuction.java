@@ -15,7 +15,7 @@ import brown.tradeable.library.MultiTradeable;
  * @author andrew
  *
  */
-public interface TwoSidedAuction extends IServerChannel {
+public interface TwoSidedAuction extends ITwoSidedAuctionChannel {
 	public MultiTradeable getTradeableType();
 	
 	public List<Order> buy(Integer agentID, double shareNum, double sharePrice);

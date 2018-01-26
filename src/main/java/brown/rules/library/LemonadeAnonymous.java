@@ -4,7 +4,7 @@ import java.util.List;
 
 import brown.bid.bidbundle.BundleType;
 import brown.bid.bidbundle.library.GameBidBundle;
-import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.IMarketState;
 import brown.messages.library.LemonadeReportMessage;
 import brown.messages.library.TradeMessage;
 import brown.rules.IInformationRevelationPolicy;
@@ -16,7 +16,7 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
   }
 
   @Override
-  public void setReport(ICompleteState state) {
+  public void setReport(IMarketState state) {
     Integer[] report = new Integer[12];    
     for (int i = 0; i<12;i++){
       report[i] = 0;
@@ -35,5 +35,9 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
 
   @Override
   public void reset() {
+  }
+
+  @Override
+  public void constructSummaryState(IMarketState state) {    
   }  
 }

@@ -4,9 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;
-import brown.market.marketstate.library.Payment;
 import brown.rules.IPaymentRule;
 import brown.setup.Logging;
 import brown.tradeable.ITradeable;
@@ -15,9 +14,9 @@ import brown.tradeable.TradeableType;
 public class LemonadePayment implements IPaymentRule {
 
   @Override
-  public void setOrders(ICompleteState state) {
+  public void setOrders(IMarketState state) {
     
-    Map<Integer,List<ITradeable>> alloc = state.getAllocation().getAllocation();
+    Map<Integer,List<ITradeable>> alloc = state.getAllocation();
     List<Order> orders = new LinkedList<Order>();
     
     for (Integer agent : alloc.keySet()){
@@ -30,12 +29,12 @@ public class LemonadePayment implements IPaymentRule {
         orders.add(new Order(agent,null,-1.0,1.0,t));     
       }      
     }        
-    state.setPayments(new Payment(orders));
+    state.setPayments(orders);
   }
 
   // Not applicable
   @Override
-  public void permitShort(ICompleteState state) {    
+  public void permitShort(IMarketState state) {    
   }
 
   @Override

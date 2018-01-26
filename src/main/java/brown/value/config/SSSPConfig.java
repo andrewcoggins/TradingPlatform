@@ -11,9 +11,9 @@ import brown.value.valuation.ValuationType;
  * Configuration for simple valuations. 
  * @author acoggins
  */
-public class SimpleConfig extends ValConfig {
+public class SSSPConfig extends ValConfig {
   
-  public SimpleConfig(Set<ITradeable> allGoods) {
+  public SSSPConfig(Set<ITradeable> allGoods) {
     super(new AdditiveValuationDistribution(new NormalValGenerator(1.0, 1.0), allGoods), ValuationType.Auction);
   }
   

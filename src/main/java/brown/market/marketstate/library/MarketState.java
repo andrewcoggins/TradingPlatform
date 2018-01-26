@@ -1,26 +1,28 @@
 package brown.market.marketstate.library;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import brown.bid.bidbundle.IBidBundle;
-import brown.market.marketstate.ICompleteState;
+import brown.market.library.PrevStateInfo;
+import brown.market.marketstate.IMarketState;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.tradeable.ITradeable;
 
-public class MarketState implements ICompleteState {
+public class MarketState implements IMarketState {
 
   private final Integer ID;  
-  private final Set<ITradeable> TRADEABLES;
+  private final List<ITradeable> TRADEABLES;
   private List<TradeMessage> bids;
   private int ticks;  
   
   //allocation + payment rule
-  private Allocation allocation; 
-  private Payment payment; 
+  private Map<Integer, List<ITradeable>> allocation;   
+  private List<Order> payments; 
   //query rule
   private TradeRequestMessage tRequest;
   private Double increment;
@@ -34,18 +36,22 @@ public class MarketState implements ICompleteState {
   private Boolean outerTerminated; 
   private Integer outerRuns; 
   
+  // carry over information?
+  private PrevStateInfo prevState;
+  private PrevStateInfo summaryState;
   
-  public MarketState(Integer ID, Set<ITradeable> tradeables) {
+  public MarketState(Integer ID, List<ITradeable> allGoods, PrevStateInfo prevState) {
     this.ID = ID; 
-    this.TRADEABLES = tradeables; 
+    this.TRADEABLES = allGoods; 
     this.bids = new LinkedList<TradeMessage>();
     this.outerTerminated = false; 
     this.increment = 0.0;
     this.ticks = 0; 
     this.outerRuns = 0; 
     this.innerTerminated = false; 
-    this.allocation = new Allocation();
-    this.payment = new Payment();
+    this.allocation = new HashMap<Integer, List<ITradeable>>();
+    this.payments = new LinkedList<Order>();
+    this.prevState = prevState;
   }
   
   @Override
@@ -54,12 +60,12 @@ public class MarketState implements ICompleteState {
   }
 
   @Override
-  public Set<ITradeable> getTradeables() {
+  public List<ITradeable> getTradeables() {
     return this.TRADEABLES; 
   }
   
   @Override
-  public void tick(long time) {
+  public void tick() {
     this.ticks++;
   }
 
@@ -85,7 +91,7 @@ public class MarketState implements ICompleteState {
 
   @Override
   public void clearOrders() {
-    this.setPayments(new Payment());
+    this.setPayments(new LinkedList<Order>());
   }
 
   @Override
@@ -157,6 +163,21 @@ public class MarketState implements ICompleteState {
   public Integer getOuterRuns() {
     return this.outerRuns;
   }
+  
+  @Override
+  public PrevStateInfo getPrevState() {
+    return this.prevState;
+  }
+
+  @Override
+  public PrevStateInfo getSummaryState(){
+    return this.summaryState;
+  }
+  
+  @Override
+  public void setSummaryState(PrevStateInfo prevState){
+    this.summaryState = prevState;
+  }
 
   @Override
   public GameReportMessage getReport() {
@@ -172,30 +193,30 @@ public class MarketState implements ICompleteState {
   @Override
   public void reset() {
     this.bids = new LinkedList<TradeMessage>();
-    this.allocation = new Allocation();
-    this.payment = new Payment();
+    this.allocation = new HashMap<Integer, List<ITradeable>>();
+    this.payments = new LinkedList<Order>();
     this.increment = 0.0;
     this.ticks = 0; 
     this.innerTerminated = false;   
     }
 
   @Override
-  public Allocation getAllocation() {
+  public Map<Integer,List<ITradeable>> getAllocation() {
     return this.allocation;
   }
 
   @Override
-  public Payment getPayments() {
-    return this.payment;
+  public List<Order> getPayments() {
+    return this.payments;
   }
 
   @Override
-  public void setAllocation(Allocation allocation) {
+  public void setAllocation(Map<Integer,List<ITradeable>> allocation) {
     this.allocation = allocation;
   }
 
   @Override
-  public void setPayments(Payment payment) {
-    this.payment = payment;
+  public void setPayments(List<Order> payments) {
+    this.payments = payments;
   }
 }

@@ -1,18 +1,15 @@
 package brown.server.library; 
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import brown.market.preset.AbsMarketPreset;
-import brown.market.preset.library.SimSPRules;
-import brown.setup.library.LemonadeSetup;
+import brown.market.preset.library.SSSPRules;
+import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.MultiTradeable;
-import brown.value.config.ValConfig;
-import brown.value.config.SimpleConfig;
+import brown.tradeable.library.SimpleTradeable;
+import brown.value.config.SSSPConfig;
 
 /**
  * Use this class to run the server side of your game.
@@ -26,20 +23,19 @@ import brown.value.config.SimpleConfig;
 public class SSSPServer {
 
   public static void main(String[] args) throws InterruptedException {
-    List<AbsMarketPreset> allMarkets = new ArrayList<AbsMarketPreset>();
-    List<ValConfig> allValInfo = new ArrayList<ValConfig>();
-    
-    //create tradeables
+    // Create _ tradeables
     Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
-    for (int i = 0; i < 3; i++) {
-      allTradeables.add(new MultiTradeable(i, 1)); //just one copy of each good for now
+    List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
+    int numTradeables = 5;
+    int i = 0;
+    while (i<numTradeables){
+      SimpleTradeable toAdd = new SimpleTradeable(i);            
+      allTradeables.add(toAdd);
+      allTradeablesList.add(toAdd);
+      i++;
     }
-    
-    //valuations and rules
-    allValInfo.add(new SimpleConfig(allTradeables));
-    allMarkets.add(new SimSPRules());
-    
-    new RunServer(2121, new LemonadeSetup()).runGame(allTradeables, allMarkets, allValInfo,
-        1000.0, new LinkedList<ITradeable>());
+
+    new RunServer(2121, new SSSPSetup()).runSimpleSim(allTradeablesList, new SSSPRules(), 
+        new SSSPConfig(allTradeables), 100., new LinkedList<ITradeable>());;
   }
 }

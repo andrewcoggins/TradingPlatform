@@ -8,7 +8,7 @@ import org.junit.Test;
 import brown.accounting.MarketState;
 import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.library.MarketState;
-import brown.rules.library.SimpleSecondPrice;
+import brown.rules.library.SSSPPayment;
 import brown.tradeable.library.MultiTradeable;
 
 /**
@@ -26,6 +26,6 @@ public class SimpleSecondPriceTest {
     MarketState state = new MarketState(0, aMap.keySet());
     state.setAllocation(al);
     
-    SimpleSecondPrice sim = new SimpleSecondPrice();
+    SSSPPayment sim = new SSSPPayment();
   }
 }

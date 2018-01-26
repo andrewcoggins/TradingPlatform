@@ -1,21 +1,21 @@
 package brown.value.generator.library; 
 
-import java.util.Set;
-import java.util.function.Function;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.random.ISAACRandom;
 import org.apache.commons.math3.random.RandomGenerator;
 
-import brown.tradeable.ITradeable;
 import brown.value.generator.IValuationGenerator;
-import brown.value.valuable.library.Value;
 
 public class NormalValGenerator implements IValuationGenerator {
 
   private Double mean; 
   private Double variance; 
 
+  public NormalValGenerator(){
+    this.mean = null;
+    this.variance = null;
+  }
   
   public NormalValGenerator (Double mean, Double variance) {
     this.mean = mean; 
@@ -23,13 +23,13 @@ public class NormalValGenerator implements IValuationGenerator {
   }
  
   @Override
-  public Value makeValuation() {
+  public Double makeValuation() {
     RandomGenerator rng = new ISAACRandom();
     NormalDistribution normalDist = new NormalDistribution(rng, mean, variance);
     Double actualValue = -1.0;
     while (actualValue < 0)
       actualValue = normalDist.sample();
-    return new Value(actualValue);
+    return actualValue;
   }
 
 //  @Override

@@ -6,7 +6,7 @@ import brown.rules.library.ComplexHighestBidderAllocation;
 import brown.rules.library.LemonadeAnonymous;
 import brown.rules.library.OneShotActivity;
 import brown.rules.library.OneShotTermination;
-import brown.rules.library.SealedBidQuery;
+import brown.rules.library.SSSPQuery;
 import brown.rules.library.XRoundTermination;
 
 
@@ -15,7 +15,7 @@ public class CombinatorialRules extends AbsMarketPreset {
   public CombinatorialRules() {
     super(new ComplexHighestBidderAllocation(),
         new ComFirstPricePayment(),
-        new SealedBidQuery(), 
+        new SSSPQuery(), 
         new OneShotActivity(),
         new LemonadeAnonymous(),
         new OneShotTermination(),

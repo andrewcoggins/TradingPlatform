@@ -1,7 +1,6 @@
 package brown.messages.library;
 
 import brown.agent.AbsAgent;
-import brown.channels.MechanismType;
 import brown.channels.agent.IAgentChannel;
 
 /**
@@ -16,18 +15,15 @@ import brown.channels.agent.IAgentChannel;
 public class TradeRequestMessage extends AbsMessage {
   
 	public final IAgentChannel MARKET;
-	public final MechanismType MECHANISM;
 	
 	public TradeRequestMessage() {
 		super(null);
 		MARKET = null;
-		MECHANISM = null;
 	}
 
-	public TradeRequestMessage(Integer ID, IAgentChannel market, MechanismType mechanism) {
+	public TradeRequestMessage(Integer ID, IAgentChannel market) {
 		super(ID);
 		this.MARKET = market;
-		this.MECHANISM = mechanism;
 	}
 
 	@Override

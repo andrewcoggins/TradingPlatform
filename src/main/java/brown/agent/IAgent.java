@@ -1,12 +1,18 @@
 package brown.agent;
 
-import brown.messages.library.AckMessage;
+import brown.messages.library.ErrorMessage;
 import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.NegotiateRequestMessage;
+import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
 
+/**
+ * Agents are responsible for receiving messages from the server and sending bids
+ * in the game.
+ * @author andrew
+ *
+ */
 public interface IAgent { 
 
   /**
@@ -28,21 +34,13 @@ public interface IAgent {
    */
   public void onMarketUpdate(GameReportMessage marketUpdate);
 
-  // and provides information about the current market state as a part of the request
-  // REALLY ??
-  /**
-   * When an auction is running, the server requests bids using this method
-   * @param tradeRequest - auction metadata
-   */
-  public void onTradeRequest(BidRequestMessage tradeRequest);
-
   //includes the rejected message and might say why??
   /**
    * Whenever a message is rejected, a rejection message is sent
    * 
    * @param message - includes the rejected message and might say why
    */
-  public void onAck(AckMessage message);
+  public void onErrorMessage(ErrorMessage message);
   
   // TODO: Create a NegotiateChannel
   // Move to AbsNegotiateAgent
@@ -55,6 +53,12 @@ public interface IAgent {
    *            - to fields describe what it is requested to give
    */
   public void onNegotiateRequest(NegotiateRequestMessage tradeRequest);
+  
+  /**
+   * gives agent any private information they they may need.
+   * @param privateInfo
+   */
+  public void onPrivateInformation(PrivateInformationMessage privateInfo);
   
 }
 

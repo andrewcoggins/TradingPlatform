@@ -34,6 +34,11 @@ public class GameBidBundle implements IBidBundle {
   } 
   
   @Override
+  public double getCost() {
+    return 0.;
+  }
+  
+  @Override
   public String toString() {
     return "GameBidBundle [BIDS=" + BIDS + ", BT=" + BT + "]";
   }

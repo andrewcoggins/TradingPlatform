@@ -4,7 +4,7 @@ import java.util.List;
 
 import brown.accounting.library.Ledger;
 import brown.market.IMarket;
-import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;
 import brown.market.preset.AbsMarketPreset;
 import brown.messages.library.TradeMessage;
@@ -27,9 +27,9 @@ public class Market implements IMarket {
   private final IInformationRevelationPolicy IRPOLICY;
   private final IInnerTC ITCONDITION;
   private final IOuterTC OTCONDITION; 
-  private final ICompleteState STATE;
+  private final IMarketState STATE;
   
-  public Market(AbsMarketPreset rules, ICompleteState state) {
+  public Market(AbsMarketPreset rules, IMarketState state) {
     this.PRULE = rules.pRule;
     this.ARULE = rules.aRule;
     this.QRULE = rules.qRule;
@@ -49,7 +49,7 @@ public class Market implements IMarket {
     //no idea why ledgers are part of the trade request -- they should be sent as market updates!
     //maybe tentativeReports should be part of the trade request
     Ledger ledger = new Ledger(this.getID());
-    for(Order o : getOrders()) {
+    for(Order o : constructOrders()) {
       ledger.add(o.toTransaction());
     }
     this.QRULE.makeChannel(STATE, ledger);
@@ -68,21 +68,20 @@ public class Market implements IMarket {
   }
 
   // this seems more like constructOrders
-  public List<Order> getOrders() {
+  public List<Order> constructOrders() {
     // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
     // construct orders
     this.PRULE.setOrders(this.STATE); // setPayment
 
     // Construct orders from allocation and payments
-    return this.STATE.getPayments().getOrders();
+    return this.STATE.getPayments();
   }
 
   @Override 
   // maybe this is constructGameReport
   // i'm worried about setAllocation and setOrders potentially being called twice in a row
-  
-  public GameReportMessage getReport() {
+  public GameReportMessage constructReport() {
     // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
     this.PRULE.setOrders(this.STATE);
@@ -92,7 +91,7 @@ public class Market implements IMarket {
     return this.STATE.getReport();
   }
 
-  public boolean isOver() {
+  public boolean isInnerOver() {
     ITCONDITION.innerTerminated(this.STATE);
     return this.STATE.getInnerOver();
   }
@@ -102,18 +101,18 @@ public class Market implements IMarket {
     return this.STATE.getOuterOver();
   } 
 
-  public void tick(long time) {
-    this.STATE.tick(time);
-  }
-
-  //why clear so little of the market state? is there not more to clear?
-  public void clearState() { 
-    this.STATE.clearBids();
-    this.STATE.clearOrders();
+  public void tick() {
+    this.STATE.tick();
   }
   
   @Override
-  public void reset(){
+  public PrevStateInfo constructSummaryState(){
+    this.IRPOLICY.constructSummaryState(this.STATE);
+    return this.STATE.getSummaryState();
+  }
+  
+  @Override
+  public void resetInnerMarket(){
     this.ACTRULE.reset();
     this.ARULE.reset();
     this.IRPOLICY.reset();

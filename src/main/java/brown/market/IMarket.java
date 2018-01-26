@@ -3,6 +3,7 @@ package brown.market;
 import java.util.List;
 
 import brown.messages.library.TradeMessage;
+import brown.market.library.PrevStateInfo;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
@@ -38,11 +39,11 @@ public interface IMarket {
   //who asks for the list of orders?
   //the bank, so it can process them?
   //needs comments!
-  public List<Order> getOrders();
+  public List<Order> constructOrders();
   
   
   //where is this game report created?
-  public GameReportMessage getReport();
+  public GameReportMessage constructReport();
   //shouldn't this be more like constructGameReport with this description:
   /**
    * Constructs a game report to send to a client.
@@ -57,8 +58,7 @@ public interface IMarket {
    * determines whether or not the inner market is over.
    * @return a boolean indicating whether or not the inner market is over.
    */
-  //rename isInnerOver
-  public boolean isOver();
+  public boolean isInnerOver();
   
   /**
    * Per the (outer) termination condition, 
@@ -67,11 +67,10 @@ public interface IMarket {
    */
   public boolean isOverOuter();
   
-  public void tick(long time);
+  public void tick();
   
-  //move to Market state? let it clear itself?
-  public void clearState();
-  
-  public void reset();
+  public void resetInnerMarket();
+
+  PrevStateInfo constructSummaryState();
   
 }

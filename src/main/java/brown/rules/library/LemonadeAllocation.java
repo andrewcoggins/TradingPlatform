@@ -5,12 +5,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import brown.bid.bidbundle.BundleType;
 import brown.bid.bidbundle.library.GameBidBundle;
-import brown.market.marketstate.ICompleteState;
-import brown.market.marketstate.library.Allocation;
+import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IAllocationRule;
 import brown.setup.Logging;
@@ -29,12 +27,12 @@ public class LemonadeAllocation implements IAllocationRule {
   }   
   
   @Override
-  public void setAllocation(ICompleteState state) {
+  public void setAllocation(IMarketState state) {
     List<TradeMessage> bids = state.getBids();
     if(bids.isEmpty()) return;
      
     // Find the number of glasses per slot
-    Set<ITradeable> tradeables = state.getTradeables();
+    List<ITradeable> tradeables = state.getTradeables();
     List<SimpleTradeable> singleTradeables = new LinkedList<SimpleTradeable>();
     for (ITradeable t : tradeables){
       singleTradeables.addAll(t.flatten());
@@ -90,8 +88,7 @@ public class LemonadeAllocation implements IAllocationRule {
         alloc.put(w, curr);
       }      
       
-      Allocation newAlloc = new Allocation(alloc);
-      state.setAllocation(newAlloc);
+      state.setAllocation(alloc);
     } 
   }
 

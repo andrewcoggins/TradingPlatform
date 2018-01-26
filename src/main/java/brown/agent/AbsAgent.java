@@ -5,19 +5,24 @@ import com.esotericsoftware.kryonet.Listener;
 
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.AbsMessage;
-import brown.messages.library.AckMessage;
+import brown.messages.library.ErrorMessage;
 import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.NegotiateRequestMessage;
+import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.setup.Logging;
 import brown.setup.ISetup;
 
+/**
+ * every agent class extends this class.
+ * @author andrew
+ *
+ */
 public abstract class AbsAgent extends AbsClient implements IAgent { 
 
   /**
-   * Implementations should always invoke super()
+   * 
    * 
    * @param host
    * @param port
@@ -45,15 +50,15 @@ public abstract class AbsAgent extends AbsClient implements IAgent {
   
   //could move up to AbsClient
   public void onRegistration(RegistrationMessage registration) {
-    this.ID = registration.getID();
+    Logging.log("[-] Registered To Server");
+    this.ID = registration.getID();    
+  }
+  
+  public void onErrorMessage(ErrorMessage message) {
+    Logging.log("[x] rej: " + message.error);
   }
 
-  //could move up to AbsClient
-  //includes the rejected message and might say why??
-  public void onAck(AckMessage message) {
-    if (message.REJECTED) {
-      Logging.log("[x] rej: " + message.failedBR);
-    }
+  public void onPrivateInformation(PrivateInformationMessage registration) {
   }
   
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
@@ -64,19 +69,9 @@ public abstract class AbsAgent extends AbsClient implements IAgent {
   public void onMarketUpdate(GameReportMessage marketUpdate) {
     // TODO
   }
-
-
-  // and provides information about the current market state as a part of the request
-  // REALLY ??
-  public void onTradeRequest(BidRequestMessage tradeRequest) {
-    //Does nothing. I really don't understand!
-  }
- 
-  
-  // TODO: Create a NegotiateChannel
-  // Move to AbsNegotiateAgent
-  public void onNegotiateRequest(NegotiateRequestMessage tradeRequest) {
-    // Noop
+    
+  public void onNegotiateRequest(NegotiateRequestMessage request) {
+    
   }
   
 }

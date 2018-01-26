@@ -9,7 +9,7 @@ import java.util.Set;
 
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
-import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IAllocationRule;
 import brown.tradeable.library.MultiTradeable;
@@ -23,7 +23,7 @@ public class ComplexHighestBidderAllocation implements IAllocationRule {
 
 
   @Override
-  public void setAllocation(ICompleteState state) {
+  public void setAllocation(IMarketState state) {
     // map to fill and set in internal state.
     //brute force SPP
     Map<Set<MultiTradeable>, List<MarketState>> all = new HashMap<Set<MultiTradeable>, List<MarketState>>();

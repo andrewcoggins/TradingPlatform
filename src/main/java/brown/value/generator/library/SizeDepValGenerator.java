@@ -1,7 +1,6 @@
 package brown.value.generator.library;
 
 import brown.value.generator.IValuationGenerator;
-import brown.value.valuable.library.Value;
 
 public class SizeDepValGenerator implements IValuationGenerator {
 
@@ -23,8 +22,8 @@ public class SizeDepValGenerator implements IValuationGenerator {
   }
   
   @Override
-  public Value makeValuation() {
-    return new Value(this.size * this.valueScale);
+  public Double makeValuation() {
+    return this.size * this.valueScale;
   }
   
 }

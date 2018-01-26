@@ -18,6 +18,8 @@ public interface IBidBundle {
 	 * Identifies the type of the bundle
 	 * @return bundleType
 	 */
-	public BundleType getType();	
+	public BundleType getType();
+
+  public double getCost();	
 	
 }

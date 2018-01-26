@@ -1,12 +1,12 @@
 package brown.rules;
 
-import brown.market.marketstate.ICompleteState;
+import brown.market.marketstate.IMarketState;
 
 public interface IPaymentRule {
 
-  public void setOrders(ICompleteState state);
+  public void setOrders(IMarketState state);
 
-  public void permitShort(ICompleteState state);
+  public void permitShort(IMarketState state);
 
   public void reset();  
 }
