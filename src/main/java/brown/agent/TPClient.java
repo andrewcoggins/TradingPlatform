@@ -19,7 +19,7 @@ import brown.setup.library.Startup;
  * @author andrew
  *
  */
-public abstract class AbsClient {
+public abstract class TPClient implements IClient {
   
   public final Client CLIENT;
   public Integer ID;
@@ -32,7 +32,7 @@ public abstract class AbsClient {
   * @param gameSetup
   * @throws AgentCreationException
   */
-  public AbsClient(String host, int port, ISetup gameSetup) throws AgentCreationException {
+  public TPClient(String host, int port, ISetup gameSetup) throws AgentCreationException {
     this.CLIENT = new Client(8192, 4096);
     this.ID = null;
 
@@ -51,11 +51,13 @@ public abstract class AbsClient {
     }
   }  
   
+  @Override
   public void onRegistration(RegistrationMessage registration) {
     Logging.log("[-] Registered To Server");
     this.ID = registration.getID();    
   }
   
+  @Override
   public void onErrorMessage(ErrorMessage message) {
     Logging.log("[x] rej: " + message.error + ", agent ID: " +this.ID);
   }

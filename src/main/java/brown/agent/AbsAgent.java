@@ -9,9 +9,6 @@ import com.esotericsoftware.kryonet.Listener;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.AbsMessage;
 import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.GameReportMessage;
-import brown.messages.library.MarketUpdateMessage;
-import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
@@ -21,7 +18,8 @@ import brown.tradeable.ITradeable;
  * @author andrew
  *
  */
-public abstract class AbsAgent extends AbsClient implements IAgent { 
+public abstract class AbsAgent extends TPClient implements IAgent { 
+  
   protected double monies;
   protected List<ITradeable> goods;
   
@@ -61,14 +59,6 @@ public abstract class AbsAgent extends AbsClient implements IAgent {
     this.goods.remove(bankUpdate.tradeableLost);
   }
   
-  public void onPrivateInformation(PrivateInformationMessage registration) {
-  }
-  
-  public void onGameReport(GameReportMessage gameReport) {
-  }
-
-  public void onMarketUpdate(MarketUpdateMessage marketUpdateMessage) {
-  }  
 }
 
   

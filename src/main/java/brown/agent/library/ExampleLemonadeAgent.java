@@ -14,7 +14,6 @@ import brown.setup.Logging;
  * @author andrew
  */
 public class ExampleLemonadeAgent extends AbsLemonadeAgent {
-  private int NUM_SLOTS = 12;
   
   public ExampleLemonadeAgent(String host, int port, int position)
       throws AgentCreationException {
@@ -27,7 +26,6 @@ public class ExampleLemonadeAgent extends AbsLemonadeAgent {
     channel.bid(this, new GameBidBundle(1)); // e.g. bid 1
   }
 
-  
   @Override
   public void onGameReport(GameReportMessage gameReport) {
     super.onGameReport(gameReport);
@@ -43,4 +41,5 @@ public class ExampleLemonadeAgent extends AbsLemonadeAgent {
     new ExampleLemonadeAgent("localhost", 2121, 1);
     while(true){}
   }  
+  
 }
