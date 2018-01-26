@@ -3,10 +3,12 @@ package brown.server;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import brown.accounting.library.Account;
 import brown.accounting.library.AccountManager;
@@ -272,7 +274,14 @@ public abstract class AbsServer {
       }
     }  
     Logging.log("RESULTS (agent ID -> Utility):");
-    toPrint.entrySet().stream().sorted(Map.Entry.<Integer, Double>comparingByValue().reversed()).forEach(System.out::println);
+    
+    List<Map.Entry<Integer, Double>> sortedByValue = toPrint.entrySet().stream().sorted(Map.Entry.<Integer, Double>comparingByValue().reversed()).collect(Collectors.toList());    
+    int i = 1;
+    for (Map.Entry<Integer,Double> a :sortedByValue){
+      Logging.log(i + ". " + a.getKey()+ ", money: " + a.getValue());
+      this.theServer.sendToTCP(this.privateToConnection(a.getKey()).getID(), new ErrorMessage(0, "Placed: " + Integer.toString(i)));
+      i++;
+    }
   }
 
   
