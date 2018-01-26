@@ -1,8 +1,8 @@
 package brown.setup.library;
 
-import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.bid.library.AuctionBid;
-import brown.channels.agent.library.SSSPChannel;
+import brown.bidbundle.library.AuctionBidBundle;
+import brown.channels.agent.library.AuctionChannel;
 import brown.messages.library.SSSPReportMessage;
 import brown.setup.ISetup;
 import brown.value.distribution.library.AdditiveValuationDistribution;
@@ -25,7 +25,7 @@ public class SSSPSetup implements ISetup{
     kryo.register(AdditiveValuationDistribution.class);
     kryo.register(AdditiveValuation.class);        
     kryo.register(NormalValGenerator.class);    
-    kryo.register(SSSPChannel.class);
+    kryo.register(AuctionChannel.class);
     kryo.register(SSSPReportMessage.class);    
   } 
   

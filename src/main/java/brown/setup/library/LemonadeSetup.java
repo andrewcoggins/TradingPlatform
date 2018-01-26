@@ -2,9 +2,9 @@ package brown.setup.library;
 
 import com.esotericsoftware.kryo.Kryo;
 
-import brown.bid.bidbundle.library.GameBidBundle;
 import brown.bid.library.GameBid;
-import brown.channels.agent.library.LemonadeChannel;
+import brown.bidbundle.library.GameBidBundle;
+import brown.channels.agent.library.GameChannel;
 import brown.messages.library.LemonadeReportMessage;
 import brown.setup.ISetup;
 
@@ -19,7 +19,7 @@ public class LemonadeSetup implements ISetup {
     Startup.start(kryo);
     kryo.register(GameBidBundle.class);
     kryo.register(GameBid.class);    
-    kryo.register(LemonadeChannel.class);
+    kryo.register(GameChannel.class);
     kryo.register(LemonadeReportMessage.class);
     kryo.register(java.util.List[].class);    
   } 

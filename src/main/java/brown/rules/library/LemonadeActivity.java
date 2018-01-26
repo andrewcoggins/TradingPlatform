@@ -2,8 +2,8 @@ package brown.rules.library;
 
 import java.util.List;
 
-import brown.bid.bidbundle.BundleType;
-import brown.bid.bidbundle.library.GameBidBundle;
+import brown.bidbundle.BundleType;
+import brown.bidbundle.library.GameBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IActivityRule;

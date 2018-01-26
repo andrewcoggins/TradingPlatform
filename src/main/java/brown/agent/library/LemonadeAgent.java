@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import brown.agent.AbsLemonadeAgent;
-import brown.bid.bidbundle.library.GameBidBundle;
-import brown.channels.agent.library.LemonadeChannel;
+import brown.bidbundle.library.GameBidBundle;
+import brown.channels.agent.library.GameChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
@@ -36,12 +36,11 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     }
   } 
   
-  public void onLemonade(LemonadeChannel channel) {
+  public void onLemonade(GameChannel channel) {
     // Enter a position between 0 and NUM_SLOTS-1 inclusive.
     channel.bid(this, new GameBidBundle(this.posn));
   }
 
-  
   // Mess with logging here to check if it works, but be warned this will flood your console with high # of agents
   @Override
   public void onGameReport(GameReportMessage gameReport) {
@@ -72,4 +71,5 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     new LemonadeAgent("localhost", 2121, 1);    
     while(true){}
   }  
+  
 }

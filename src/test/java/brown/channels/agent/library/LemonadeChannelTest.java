@@ -41,7 +41,7 @@ private class TestServer {
           //post responses here.
           if (object.equals("send me a trade request")) {
             connection.sendTCP(new TradeRequestMessage(0,
-                new LemonadeChannel(0, new Ledger(0), null, MechanismType.Lemonade), MechanismType.Lemonade));
+                new GameChannel(0, new Ledger(0), null, MechanismType.Lemonade), MechanismType.Lemonade));
           } else if (object instanceof TradeMessage) { 
             setMessage();
           }
@@ -69,7 +69,7 @@ private class TestServer {
     }
 
     @Override
-    public void onLemonade(LemonadeChannel channel) {
+    public void onLemonade(GameChannel channel) {
       //when the agent receives a lemonade trade request, it is directed 
       //to onLemonade. This invokes the 
       channel.bid(this, 10);

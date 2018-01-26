@@ -15,11 +15,11 @@ import org.junit.Test;
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.accounting.library.Ledger;
-import brown.bid.bidbundle.BundleType;
-import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.bid.library.AuctionBid;
+import brown.bidbundle.BundleType;
+import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
-import brown.channels.agent.library.LemonadeChannel;
+import brown.channels.agent.library.GameChannel;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;
@@ -153,7 +153,7 @@ public class InternalStateTest {
     //query rules
     //get/set TRequest
     TradeRequestMessage tMessge = new TradeRequestMessage(0,
-        new LemonadeChannel(0, new Ledger(1), PaymentType.Lemonade, MechanismType.Lemonade), MechanismType.Lemonade);
+        new GameChannel(0, new Ledger(1), PaymentType.Lemonade, MechanismType.Lemonade), MechanismType.Lemonade);
     state.setTRequest(tMessge);
     assertEquals(state.getTRequest(), tMessge);
     //activity rules

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import brown.bid.bidbundle.BundleType;
-import brown.bid.bidbundle.library.GameBidBundle;
+import brown.bidbundle.BundleType;
+import brown.bidbundle.library.GameBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;

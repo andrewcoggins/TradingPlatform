@@ -6,10 +6,10 @@ import java.util.Map.Entry;
 
 import brown.agent.AbsAgent;
 import brown.agent.AbsSSSPAgent;
-import brown.bid.bidbundle.BundleType;
-import brown.bid.bidbundle.IBidBundle;
-import brown.bid.bidbundle.library.AuctionBidBundle;
 import brown.bid.library.AuctionBid;
+import brown.bidbundle.BundleType;
+import brown.bidbundle.IBidBundle;
+import brown.bidbundle.library.AuctionBidBundle;
 import brown.messages.library.TradeMessage;
 import brown.setup.Logging;
 import brown.tradeable.ITradeable;
@@ -17,13 +17,13 @@ import brown.tradeable.ITradeable;
 /*
  * Implements IMarket for Simple auctions
  */
-public class SSSPChannel extends AbsChannel {
+public class AuctionChannel extends AbsChannel {
 		
   /**
    * For Kryo
    * DO NOT USE
    */
-	public SSSPChannel() {
+	public AuctionChannel() {
 	  super();
 	}
 
@@ -31,7 +31,7 @@ public class SSSPChannel extends AbsChannel {
    * Constructor
    * @param ID
    */
-	public SSSPChannel(Integer ID) {
+	public AuctionChannel(Integer ID) {
     super(ID);
 	}
 
