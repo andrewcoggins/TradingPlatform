@@ -25,7 +25,8 @@ public interface IAccountManager {
   /**
    * gets an account from an agent's private id, if it exists
    * @param ID - agent's private id
-   * @return - account, if it exists; otherwise null
+   * @return - account, if it exists; 
+   *   otherwise null (as per Java maps)
    */
   public Account getAccount(Integer ID);
   
@@ -35,4 +36,5 @@ public interface IAccountManager {
    * @return - Boolean indicating if account manager has this account
    */
   public Boolean containsAcct(Integer ID);
+  
 }

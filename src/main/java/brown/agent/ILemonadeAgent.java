@@ -6,8 +6,8 @@ public interface ILemonadeAgent {
 
   /**
    * Provides agent response in lemonade game
-   * @param simpleWrapper - lemonade channel
+   * @param channel - lemonade channel
    */
-  public abstract void onLemonade(LemonadeChannel channel);
+  public void onLemonade(LemonadeChannel channel);
 
 }

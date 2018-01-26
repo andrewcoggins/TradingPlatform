@@ -2,11 +2,11 @@ package brown.accounting;
 
 import brown.accounting.library.Transaction;
 
+//this comment makes no sense to me. please rewrite!
 /**
  * transaction details processed changes in tradeables and monies in 
  * agent accounts.
  * @author andrew
- *
  */
 public interface ITransaction {
   

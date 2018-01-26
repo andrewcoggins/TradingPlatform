@@ -53,4 +53,5 @@ public interface ILedger {
    *  Clears unshared transactions
    */
   public void clearUnshared();
+  
 }

@@ -1,6 +1,6 @@
 package brown.channels.agent;
 
-import brown.accounting.bidbundle.IBidBundle;
+import brown.bid.bidbundle.IBidBundle;
 import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 
@@ -17,7 +17,7 @@ public interface IAgentChannel {
 	 * Gets the ID of the auction
 	 * @return id
 	 */
-	public Integer getAuctionID();
+	public Integer getMarketID();
 	
 	//why do channels have ledgers??
 	/**

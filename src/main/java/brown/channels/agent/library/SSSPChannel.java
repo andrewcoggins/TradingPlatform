@@ -65,4 +65,5 @@ public class SSSPChannel extends AbsChannel {
   public String toString() {
     return "SimpleAgentChannel [ID: " + this.ID +"]";
   }
+  
 }

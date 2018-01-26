@@ -8,8 +8,8 @@ import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.RegistrationMessage;
 
 /**
- * Agents are responsible for receiving messages from the server and sending bids
- * in the game.
+ * Agents are responsible for receiving messages from the server,
+ * constructing bids, and sending them back.
  * @author andrew
  *
  */

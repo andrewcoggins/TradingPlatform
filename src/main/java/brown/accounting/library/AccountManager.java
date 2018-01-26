@@ -9,7 +9,6 @@ import brown.accounting.IAccountManager;
 
 /**
  * Account manager stores and manages accounts for the server.
- * 
  * @author acoggins, modified by kerry
  */
 public class AccountManager implements IAccountManager {
@@ -18,8 +17,7 @@ public class AccountManager implements IAccountManager {
 	private Map<Integer, Account> accounts;
 
 	/**
-	 * manager that stores accounts for use by the server
-	 * accounts - maps agent IDs to accounts
+	 * @param accounts - maps agent IDs to accounts
 	 */
 	public AccountManager() {
 		this.accounts = new ConcurrentHashMap<Integer, Account>();
@@ -35,8 +33,7 @@ public class AccountManager implements IAccountManager {
 		}
 	}
 	
-// returns null if account does not exist
-	public Account getAccount(Integer ID) {
+  public Account getAccount(Integer ID) {
 		return accounts.get(ID);
 	}
 	
