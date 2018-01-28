@@ -69,8 +69,8 @@ public class LemonadeReportMessage extends GameReportMessage {
       List<Integer>[] sanitized_slots = (List<Integer>[]) new List[this.slots_anon.length];;
       for (int i=0;i<this.slots_anon.length;i++){
         sanitized_slots[i] = new LinkedList<Integer>();
-        for (Integer a : this.slots_ids[i]){
-          sanitized_slots[i].add((a == agent? a : privateToPublic.get(a)));
+        for (Integer a : this.slots_ids[i]){          
+          sanitized_slots[i].add((a.equals(agent)? a : privateToPublic.get(a)));
         }
       }
       return new LemonadeReportMessage(sanitized_slots,this.slots_anon,false);

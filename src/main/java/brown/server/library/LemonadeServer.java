@@ -6,6 +6,7 @@ import java.util.List;
 import brown.market.preset.library.LemonadeAnonRules;
 import brown.market.preset.library.LemonadeFloatRules;
 import brown.market.preset.library.LemonadeGroupedRulesAnon;
+import brown.market.preset.library.LemonadeGroupedRulesNotAnon;
 import brown.market.preset.library.LemonadeNonAnonRules;
 import brown.setup.library.LemonadeSetup;
 import brown.tradeable.ITradeable;
@@ -28,7 +29,7 @@ public class LemonadeServer {
     allTradeables.add(new MultiTradeable(1, totalTradeables));
        
     // LemonadeGroupedRulesAnon and LemonadeGroupedRulesNotAnon
-    new RunServer(2121, new LemonadeSetup()).runSimpleSim(allTradeables, new LemonadeGroupedRulesAnon(numSlots,numRuns), 
+    new RunServer(2121, new LemonadeSetup()).runSimpleSim(allTradeables, new LemonadeGroupedRulesNotAnon(numSlots,numRuns), 
         new LemonadeConfig(), 0., new LinkedList<ITradeable>(), delayTime, lag);
   }
 }

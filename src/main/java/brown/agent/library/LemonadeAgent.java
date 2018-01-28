@@ -11,6 +11,8 @@ import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
+import brown.messages.library.MarketUpdateMessage;
+import brown.messages.library.PrivateInformationMessage;
 import brown.setup.library.LemonadeSetup;
 import brown.setup.Logging;
 
@@ -50,7 +52,7 @@ public class LemonadeAgent extends AbsLemonadeAgent {
       this.positions[i] = lemonadeUpdate.getCount(i);
       if (!lemonadeUpdate.isAnon()){
         this.positions_ids[i] = lemonadeUpdate.getIDs(i);
-        //Logging.log("Cumulative Results IDS:" + Arrays.toString(this.positions_ids));                
+        Logging.log("Cumulative Results IDS:" + Arrays.toString(this.positions_ids));                
       }
     }    
     // Logging.log("Cumulative Results:" + Arrays.toString(this.positions));      
@@ -70,6 +72,18 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     new LemonadeAgent("localhost", 2121, 1);       
     new LemonadeAgent("localhost", 2121, 1);    
     while(true){}
+  }
+
+  @Override
+  public void onMarketUpdate(MarketUpdateMessage marketUpdate) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void onPrivateInformation(PrivateInformationMessage privateInfo) {
+    // TODO Auto-generated method stub
+    
   }  
   
 }
