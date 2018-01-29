@@ -8,10 +8,8 @@ import brown.accounting.library.Account;
 import brown.tradeable.ITradeable;
 import brown.value.valuation.IValuation;
 
-public class AuctionSummary implements IAuctionSummary { 
+public class AuctionSummarizer implements IAuctionSummarizer { 
   
-  private Map<Integer, IValuation> privateValuations;
-  private Double initialMonies; 
   private Map<Integer, Double> totalUtility;
   private Map<Integer, Double> averageUtility; 
   private int numSimulations;
@@ -22,8 +20,7 @@ public class AuctionSummary implements IAuctionSummary {
    * @param privateValuations
    * @param initialMonies
    */
-  public AuctionSummary(Map<Integer, IValuation> privateValuations, Double initialMonies) { 
-   this.privateValuations = privateValuations;  
+  public AuctionSummarizer() { 
    this.totalUtility = new HashMap<Integer, Double>();
    this.averageUtility = new HashMap<Integer, Double>();
    this.numSimulations = 1; 
@@ -39,9 +36,15 @@ public class AuctionSummary implements IAuctionSummary {
     return this.averageUtility; 
   }
   
+  @Override
+  public int getSimulations() {
+    return this.numSimulations;
+  }
+  
   // calculates total and average utility for a round of a simulation.
   @Override
-  public void calculateRoundUtility(List<Account> agentAccounts) {
+  public void collectInformation(List<Account> agentAccounts,
+      Map<Integer, IValuation> privateValuations, double initialMonies) {
     Map<Integer, List<ITradeable>> roundTradeables = new HashMap<Integer, List<ITradeable>>();
     Map<Integer, Double> roundMonies = new HashMap<Integer, Double>();
     for (Account anAccount : agentAccounts) {

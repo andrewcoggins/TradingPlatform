@@ -144,6 +144,8 @@ public abstract class AbsServer {
         IValuation privateValuation = marketConfig.valueDistribution.sample();
         valueReg = new ValuationInformationMessage(agentID, this.allTradeables, privateValuation, marketConfig.valueDistribution);
         theServer.sendToTCP(connection.getID(), valueReg);
+        //give the server private valuation info.
+        this.privateValuations.put(agentID, privateValuation);
       } else if (marketConfig.type == ValuationType.Game) {
         //no explicit valuation, as in the lemonade game
         // GameInformationMessage or something, not used yet

@@ -1,9 +1,7 @@
 package brown.summary;
 
-import java.util.List;
 import java.util.Map;
 
-import brown.accounting.library.Account;
 
 
 /**
@@ -11,7 +9,7 @@ import brown.accounting.library.Account;
  * @author andrew
  *
  */
-public interface IAuctionSummary extends ISimulationSummary {
+public interface IAuctionSummarizer extends ISimulationSummarizer {
   
   /**
    * gets the total utility over all simulations. 
@@ -24,7 +22,10 @@ public interface IAuctionSummary extends ISimulationSummary {
    * @return
    */
   public Map<Integer, Double> getAverageUtility();
-  
-  public void calculateRoundUtility(List<Account> agentAccounts);
-  
+
+  /**
+   * gets the number of simulations so far.
+   * @return
+   */
+  public int getSimulations();
 }
