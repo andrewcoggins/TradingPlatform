@@ -3,9 +3,9 @@ package brown.agent.library;
 import java.util.HashMap;
 import java.util.Map;
 
-import brown.agent.AbsSSSPAgent;
+import brown.agent.AbsSimpleSealedAgent;
 import brown.bidbundle.library.AuctionBidBundle;
-import brown.channels.agent.library.AuctionChannel;
+import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
@@ -13,7 +13,7 @@ import brown.setup.Logging;
 import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 
-public class SSSPAgent extends AbsSSSPAgent {
+public class SSSPAgent extends AbsSimpleSealedAgent {
   
   public SSSPAgent(String host, int port)
       throws AgentCreationException {

@@ -14,6 +14,7 @@ import com.esotericsoftware.kryonet.Server;
 import brown.accounting.library.Ledger;
 import brown.agent.AbsLemonadeAgent;
 import brown.channels.MechanismType;
+import brown.channels.library.GameChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.TradeMessage;

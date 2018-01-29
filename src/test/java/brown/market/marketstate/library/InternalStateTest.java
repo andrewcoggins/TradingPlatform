@@ -19,7 +19,7 @@ import brown.bid.library.AuctionBid;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
-import brown.channels.agent.library.GameChannel;
+import brown.channels.library.GameChannel;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.BidRequestMessage;
 import brown.messages.library.GameReportMessage;

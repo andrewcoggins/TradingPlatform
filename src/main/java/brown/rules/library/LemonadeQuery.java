@@ -1,6 +1,6 @@
 package brown.rules.library;
 
-import brown.channels.agent.library.GameChannel;
+import brown.channels.library.GameChannel;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeRequestMessage;
 import brown.rules.IQueryRule;

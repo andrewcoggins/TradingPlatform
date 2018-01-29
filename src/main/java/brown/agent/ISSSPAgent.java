@@ -1,6 +1,6 @@
 package brown.agent;
 
-import brown.channels.agent.library.AuctionChannel;
+import brown.channels.library.AuctionChannel;
 
 public interface ISSSPAgent {
 

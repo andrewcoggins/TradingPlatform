@@ -12,13 +12,13 @@ import brown.tradeable.ITradeable;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.IValuation;
 
-public abstract class AbsSSSPAgent extends AbsAgent implements ISSSPAgent {
+public abstract class AbsSimpleSealedAgent extends AbsAgent implements ISSSPAgent {
   
   protected List<ITradeable> tradeables; 
   protected IValuation valuation;
   protected IValuationDistribution vDistribution; 
   
-  public AbsSSSPAgent(String host, int port, ISetup gameSetup)
+  public AbsSimpleSealedAgent(String host, int port, ISetup gameSetup)
       throws AgentCreationException {
     super(host, port, gameSetup);
     this.tradeables = new LinkedList<ITradeable>();
@@ -27,7 +27,7 @@ public abstract class AbsSSSPAgent extends AbsAgent implements ISSSPAgent {
   
   @Override
   public void onPrivateInformation(PrivateInformationMessage privateInfo) {   
-    if (privateInfo instanceof ValuationInformationMessage){
+    if (privateInfo instanceof ValuationInformationMessage) {
       Logging.log("[-] Valuation Info Received");
       this.tradeables = ((ValuationInformationMessage) privateInfo).getTradeables();
       this.valuation = ((ValuationInformationMessage) privateInfo).getPrivateValuation();

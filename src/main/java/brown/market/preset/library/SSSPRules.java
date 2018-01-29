@@ -2,11 +2,11 @@ package brown.market.preset.library;
 
 import brown.market.preset.AbsMarketPreset;
 import brown.rules.library.OneShotTermination;
-import brown.rules.library.SSSPActivity;
+import brown.rules.library.SimpleSecondPriceActivity;
 import brown.rules.library.SSSPAnonymous;
-import brown.rules.library.SSSPQuery;
-import brown.rules.library.SSSPAllocation;
-import brown.rules.library.SSSPPayment;
+import brown.rules.library.SimpleSimultaneousQuery;
+import brown.rules.library.SimpleSimultaneousAllocation;
+import brown.rules.library.SimpleSecondPricePayment;
 import brown.rules.library.XRoundTermination;
 
 public class SSSPRules extends AbsMarketPreset {
@@ -17,10 +17,10 @@ public class SSSPRules extends AbsMarketPreset {
    * or otherwise delete it from this constructor.
    */
   public SSSPRules(int numRuns) {
-    super(new SSSPAllocation(),
-        new SSSPPayment(),
-        new SSSPQuery(), 
-        new SSSPActivity(),
+    super(new SimpleSimultaneousAllocation(),
+        new SimpleSecondPricePayment(),
+        new SimpleSimultaneousQuery(), 
+        new SimpleSecondPriceActivity(),
         new SSSPAnonymous(),
         new OneShotTermination(), 
         new XRoundTermination(numRuns));

@@ -49,6 +49,7 @@ public abstract class AbsServer {
   private int agentCount;  
   protected Map<Connection, Integer> connections;
   protected Map<Integer, Integer> privateToPublic;
+  protected Map<Integer, IValuation> privateValuations; 
   protected AccountManager acctManager;
 
   // Track Markets / market config stuff
@@ -250,7 +251,7 @@ public abstract class AbsServer {
   
   public synchronized void completeAuctions(int lag) throws InterruptedException { 
     //run every outer cycle of the auction until it is terminated per the outer termination condition.
-    while (this.manager.anyMarketsOpen()){
+    while (this.manager.anyMarketsOpen()) {
       Thread.sleep(lag);
       this.updateAllAuctions();
       Thread.sleep(lag);      
@@ -262,11 +263,11 @@ public abstract class AbsServer {
     this.manager.reset();
   }
   
-  public void printUtilities(){
+  public void printUtilities() {
     Map<Integer,Double> toPrint = new HashMap<Integer,Double>();
-    if (this.valueConfig.type == ValuationType.Auction){
+    if (this.valueConfig.type == ValuationType.Auction) {
       // do something
-    } else if (this.valueConfig.type == ValuationType.Game){
+    } else if (this.valueConfig.type == ValuationType.Game) {
       // for lemonade game right now
       for (Integer agent: this.connections.values()){
         toPrint.put(agent,this.acctManager.getAccount(agent).getMonies());

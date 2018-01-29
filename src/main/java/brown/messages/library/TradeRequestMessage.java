@@ -1,7 +1,7 @@
 package brown.messages.library;
 
 import brown.agent.AbsAgent;
-import brown.channels.agent.IAgentChannel;
+import brown.channels.IAgentChannel;
 
 /**
  * For each open market, the server then sends all agents a TradeRequest,

@@ -1,4 +1,4 @@
-package brown.channels.agent;
+package brown.channels;
 
 import brown.agent.AbsAgent;
 import brown.bidbundle.IBidBundle;

@@ -6,9 +6,8 @@ import java.util.List;
 
 import brown.agent.AbsLemonadeAgent;
 import brown.bidbundle.library.GameBidBundle;
-import brown.channels.agent.library.GameChannel;
+import brown.channels.library.GameChannel;
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
 import brown.messages.library.MarketUpdateMessage;

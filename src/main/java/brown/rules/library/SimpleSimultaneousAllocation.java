@@ -24,7 +24,7 @@ import brown.tradeable.library.TradeableType;
  * @author andrew
  *
  */
-public class SSSPAllocation implements IAllocationRule {
+public class SimpleSimultaneousAllocation implements IAllocationRule {
 
 
   @Override
@@ -58,9 +58,9 @@ public class SSSPAllocation implements IAllocationRule {
             Logging.log("[x] SSSP Allocation: Bid on non-Simple Tradeable");
           }
           // If either there are no bids for this yet or this bid is higher than those
-          if(highestPrice.get(t) == null || highestPrice.get(t) < bundle.getBids().bids.get(t)) {             
+          if(highestPrice.get(t) == null || highestPrice.get(t) < bundle.getBids().bids.get(t).price) {             
             // Store the highest price and the corresponding agent
-            highestPrice.put((SimpleTradeable) t, bundle.getBids().bids.get(t));
+            highestPrice.put((SimpleTradeable) t, bundle.getBids().bids.get(t).price);
             highestAgent.put((SimpleTradeable) t, bid.AgentID);
           }
         }

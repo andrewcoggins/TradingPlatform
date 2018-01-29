@@ -89,11 +89,6 @@ public class LemonadePaymentFloat implements IPaymentRule {
     } 
   }
 
-  // Not applicable
-  @Override
-  public void permitShort(IMarketState state) {    
-  }
-
   @Override
   public void reset() {
   }  

@@ -1,6 +1,6 @@
-package brown.channels.agent.library;
+package brown.channels.library;
 
-import brown.channels.agent.IAgentChannel;
+import brown.channels.IAgentChannel;
 
 public abstract class AbsChannel implements IAgentChannel{
 

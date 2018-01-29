@@ -2,7 +2,8 @@ package brown.bid.library;
 
 import java.util.Map;
 
-import brown.bid.AbsBid;
+import brown.bid.IBid;
+import brown.bid.interim.BidType;
 import brown.tradeable.ITradeable;
 
 /**
@@ -10,9 +11,9 @@ import brown.tradeable.ITradeable;
  * @author andrew, modified by kerry
  *
  */
-public class AuctionBid extends AbsBid {
+public class AuctionBid implements IBid {
   
-  public final Map<ITradeable, Double> bids;
+  public final Map<ITradeable, BidType> bids;
   
   /**
    * For Kryo 
@@ -25,7 +26,7 @@ public class AuctionBid extends AbsBid {
   /**
    * @param bids are represented as a map from ITradeables to doubles
    */
-  public AuctionBid(Map<ITradeable, Double> bids) {
+  public AuctionBid(Map<ITradeable, BidType> bids) {
     this.bids = bids; 
   }
   

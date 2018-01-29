@@ -1,4 +1,4 @@
-package brown.channels.agent.library;
+package brown.channels.library;
 
 import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;

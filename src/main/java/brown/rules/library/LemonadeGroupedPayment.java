@@ -101,9 +101,5 @@ public class LemonadeGroupedPayment implements IPaymentRule {
   @Override
   public void reset() {
   }
-
-  // not relevant
-  @Override
-  public void permitShort(IMarketState state) {    
-  }  
+  
 }

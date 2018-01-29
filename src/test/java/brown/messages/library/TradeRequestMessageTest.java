@@ -11,7 +11,7 @@ import brown.accounting.MarketState;
 import brown.accounting.library.Ledger;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
-import brown.channels.agent.library.AuctionChannel;
+import brown.channels.library.AuctionChannel;
 import brown.todeprecate.PaymentType;
 import brown.tradeable.library.MultiTradeable;
 

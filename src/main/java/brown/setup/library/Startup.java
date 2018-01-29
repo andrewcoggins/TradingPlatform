@@ -16,7 +16,7 @@ import brown.accounting.library.Transaction;
 import brown.agent.AbsAgent;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
-import brown.channels.agent.library.GameChannel;
+import brown.channels.library.GameChannel;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.AbsMessage;
 import brown.messages.library.ErrorMessage;

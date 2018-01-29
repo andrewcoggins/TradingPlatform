@@ -8,6 +8,6 @@ package brown.bid;
  * 
  * @author andrew
  */
-public abstract class AbsBid {
+public interface IBid {
   
 }

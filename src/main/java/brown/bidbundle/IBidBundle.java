@@ -1,6 +1,6 @@
 package brown.bidbundle;
 
-import brown.bid.AbsBid;
+import brown.bid.IBid;
 
 /**
  * The IBidBundle interface permits the creation of arbitrary data structures
@@ -12,7 +12,7 @@ public interface IBidBundle {
 	 * returns some kind of bid.
 	 * @return
 	 */
-  public AbsBid getBids();
+  public IBid getBids();
   
 	/**
 	 * Identifies the type of the bundle

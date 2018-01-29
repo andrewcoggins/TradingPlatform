@@ -6,7 +6,5 @@ public interface IPaymentRule {
 
   public void setOrders(IMarketState state);
 
-  public void permitShort(IMarketState state);
-
   public void reset();  
 }

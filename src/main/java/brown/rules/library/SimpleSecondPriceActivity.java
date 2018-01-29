@@ -2,7 +2,7 @@ package brown.rules.library;
 
 import java.util.List;
 
-import brown.bid.AbsBid;
+import brown.bid.IBid;
 import brown.bid.library.AuctionBid;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
@@ -10,7 +10,7 @@ import brown.rules.IActivityRule;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.TradeableType;
 
-public class SSSPActivity implements IActivityRule{
+public class SimpleSecondPriceActivity implements IActivityRule {
   @Override
   // Checks if agent has already bid
   public void isAcceptable(IMarketState state, TradeMessage aBid) {
@@ -24,7 +24,7 @@ public class SSSPActivity implements IActivityRule{
       }
     }
     
-    AbsBid bids = aBid.Bundle.getBids();
+    IBid bids = aBid.Bundle.getBids();
     if (!(bids instanceof AuctionBid)){
       acceptable = false;
     } else {

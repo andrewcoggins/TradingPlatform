@@ -1,10 +1,9 @@
 package brown.bidbundle.library;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import brown.bid.interim.BidType;
 import brown.bid.library.AuctionBid;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
@@ -32,13 +31,9 @@ public class AuctionBidBundle implements IBidBundle {
 	 * @param move - agent's bid
 	 * @param agent - agent ID
 	 */
-	public AuctionBidBundle(Map<ITradeable, Double> bids) {
+	public AuctionBidBundle(Map<ITradeable, BidType> bids) {
 		if (bids == null) {
 			throw new IllegalArgumentException("Null bids");
-		}
-		List<ITradeable> t = new LinkedList<ITradeable>();
-		for (ITradeable b : t) {
-		  bids.put(b, 1.0);
 		}
 		this.BIDS = new AuctionBid(bids);
 		this.BT = BundleType.AUCTION;
@@ -60,8 +55,8 @@ public class AuctionBidBundle implements IBidBundle {
   @Override
   public double getCost() {
     double cost = 0.;
-    for (Entry<ITradeable,Double> item: this.BIDS.bids.entrySet()){
-      cost+= item.getValue();
+    for (Entry<ITradeable,BidType> item: this.BIDS.bids.entrySet()){
+      cost += item.getValue().price;
     }
     return cost;
   } 

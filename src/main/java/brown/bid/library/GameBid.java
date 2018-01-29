@@ -1,8 +1,8 @@
 package brown.bid.library;
 
-import brown.bid.AbsBid;
+import brown.bid.IBid;
 
-public class GameBid extends AbsBid {
+public class GameBid implements IBid {
   
   public final Integer move; 
   

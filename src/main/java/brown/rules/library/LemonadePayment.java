@@ -32,11 +32,6 @@ public class LemonadePayment implements IPaymentRule {
     state.setPayments(orders);
   }
 
-  // Not applicable
-  @Override
-  public void permitShort(IMarketState state) {    
-  }
-
   @Override
   public void reset() {
   }  

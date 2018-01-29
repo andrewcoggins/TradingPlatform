@@ -18,7 +18,7 @@ import brown.accounting.library.Account;
 import brown.accounting.library.Ledger;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
-import brown.channels.agent.library.AuctionChannel;
+import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
