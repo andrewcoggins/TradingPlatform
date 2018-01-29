@@ -2,7 +2,7 @@ package brown.agent;
 
 import brown.channels.library.AuctionChannel;
 
-public interface ISSSPAgent {
+public interface ISimpleSealedAgent {
 
   /**
    * Provides agent response to sealed-bid auction

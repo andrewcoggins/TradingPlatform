@@ -4,28 +4,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 import brown.agent.AbsSimpleSealedAgent;
+import brown.bid.interim.BidType;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
+import brown.messages.library.MarketUpdateMessage;
 import brown.setup.Logging;
 import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 
-public class SSSPAgent extends AbsSimpleSealedAgent {
+public class SimpleSealedAgent extends AbsSimpleSealedAgent {
   
-  public SSSPAgent(String host, int port)
+  public SimpleSealedAgent(String host, int port)
       throws AgentCreationException {
     super(host, port, new SSSPSetup());
   }
   
   @Override
   public void onSSSP(AuctionChannel simpleChannel) {
-    Map<ITradeable, Double> initial = new HashMap<ITradeable, Double>();
+    Map<ITradeable, BidType> initial = new HashMap<ITradeable, BidType>();
     System.out.println(this.tradeables);
     for (ITradeable t: this.tradeables) {
-      initial.put(t, this.valuation.getValuation(t).doubleValue());
+      initial.put(t, new BidType(this.valuation.getValuation(t).doubleValue(), 1));
     }
     // just bid valuation 
     simpleChannel.bid(this, new AuctionBidBundle(initial));
@@ -42,10 +44,16 @@ public class SSSPAgent extends AbsSimpleSealedAgent {
   } 
   
   public static void main(String[] args) throws AgentCreationException {
-    new SSSPAgent("localhost", 2121);
-    new SSSPAgent("localhost", 2121);
-    new SSSPAgent("localhost", 2121);    
+    new SimpleSealedAgent("localhost", 2121);
+    new SimpleSealedAgent("localhost", 2121);
+    new SimpleSealedAgent("localhost", 2121);    
     while(true){}
+  }
+
+  @Override
+  public void onMarketUpdate(MarketUpdateMessage marketUpdate) {
+    // TODO Auto-generated method stub
+    
   }
   
 }

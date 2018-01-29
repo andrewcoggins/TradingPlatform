@@ -12,7 +12,7 @@ import brown.tradeable.ITradeable;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.IValuation;
 
-public abstract class AbsSimpleSealedAgent extends AbsAgent implements ISSSPAgent {
+public abstract class AbsSimpleSealedAgent extends AbsAgent implements ISimpleSealedAgent {
   
   protected List<ITradeable> tradeables; 
   protected IValuation valuation;

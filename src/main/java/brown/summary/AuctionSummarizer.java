@@ -60,8 +60,7 @@ public class AuctionSummarizer implements IAuctionSummarizer {
         IValuation agentValuation = privateValuations.get(anID);
         tradeableValue += agentValuation.getValuation(t);
       }
-      double moneyValue = initialMonies - roundMonies.get(anID);
-      roundUtilities.put(anID, tradeableValue - moneyValue);
+      roundUtilities.put(anID, tradeableValue + roundMonies.get(anID));
     }
     // integrate into totals. 
     for (Integer anID : roundUtilities.keySet()) {

@@ -26,6 +26,8 @@ import brown.messages.library.ValuationInformationMessage;
 import brown.setup.ISetup;
 import brown.setup.Logging;
 import brown.setup.library.Startup;
+import brown.summary.AuctionSummarizer;
+import brown.summary.ISimulationSummarizer;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;
 import brown.value.valuation.IValuation;
@@ -51,6 +53,7 @@ public abstract class AbsServer {
   protected Map<Integer, Integer> privateToPublic;
   protected Map<Integer, IValuation> privateValuations; 
   protected AccountManager acctManager;
+  protected ISimulationSummarizer summarizer; 
 
   // Track Markets / market config stuff
   protected MarketManager manager;
