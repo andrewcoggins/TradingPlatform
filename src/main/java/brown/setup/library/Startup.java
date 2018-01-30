@@ -19,6 +19,7 @@ import brown.bidbundle.IBidBundle;
 import brown.channels.library.GameChannel;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.AbsMessage;
+import brown.messages.library.AccountResetMessage;
 import brown.messages.library.ErrorMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.PrivateInformationMessage;
@@ -76,6 +77,7 @@ public final class Startup {
 		kryo.register(ValuationInformationMessage.class);
     kryo.register(PrivateInformationMessage.class);		
     kryo.register(List.class);
+    kryo.register(AccountResetMessage.class);
 		return true;
 	}
 

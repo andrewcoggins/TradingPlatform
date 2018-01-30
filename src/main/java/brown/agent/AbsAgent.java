@@ -8,6 +8,7 @@ import com.esotericsoftware.kryonet.Listener;
 
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.AbsMessage;
+import brown.messages.library.AccountResetMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.setup.ISetup;
@@ -57,6 +58,12 @@ public abstract class AbsAgent extends TPClient implements IAgent {
     this.monies += bankUpdate.moniesChanged;
     this.goods.add(bankUpdate.tradeableAdded);
     this.goods.remove(bankUpdate.tradeableLost);
+  }
+
+  @Override
+  public void onAccountResetMessage(AccountResetMessage accountResetMessage) {
+    this.monies = accountResetMessage.monies;
+    this.goods = accountResetMessage.tradeables;
   }
   
 }

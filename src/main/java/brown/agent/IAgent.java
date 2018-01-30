@@ -1,5 +1,6 @@
 package brown.agent;
 
+import brown.messages.library.AccountResetMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.MarketUpdateMessage;
@@ -37,6 +38,11 @@ public interface IAgent {
    */
   public void onPrivateInformation(PrivateInformationMessage privateInfo);
   
+  /**
+   * Sent whenever an agent's account is reset
+   * @param acctReset - contains acct initialization info
+   */
+  public void onAccountResetMessage(AccountResetMessage accountResetMessage);    
 }
 
   

@@ -4,6 +4,8 @@ import brown.exceptions.AgentCreationException;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
+import brown.messages.library.MarketUpdateMessage;
+import brown.messages.library.PrivateInformationMessage;
 import brown.setup.ISetup;
 import brown.setup.Logging;
 
@@ -33,6 +35,5 @@ public abstract class AbsLemonadeAgent extends AbsAgent implements ILemonadeAgen
     if (gameReport instanceof LemonadeReportMessage) { 
       this.latestGameReport = (LemonadeReportMessage) gameReport;
     }    
-  }
-  
+  }  
 }

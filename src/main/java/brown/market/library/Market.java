@@ -118,5 +118,6 @@ public class Market implements IMarket {
   @Override
   public void setGroupings(List<Integer> agents){
     this.ARULE.setGroups(this.STATE, agents);
+    Logging.log("GROUPS: "+ this.STATE.getGroups().toString());
   }
 }

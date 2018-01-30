@@ -8,6 +8,7 @@ import brown.agent.AbsLemonadeAgent;
 import brown.bidbundle.library.GameBidBundle;
 import brown.channels.library.GameChannel;
 import brown.exceptions.AgentCreationException;
+import brown.messages.library.AccountResetMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
 import brown.messages.library.MarketUpdateMessage;
@@ -63,13 +64,6 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     new LemonadeAgent("localhost", 2121, 1);
     new LemonadeAgent("localhost", 2121, 6);   
     new LemonadeAgent("localhost", 2121, 1);       
-    new LemonadeAgent("localhost", 2121, 1);
-    new LemonadeAgent("localhost", 2121, 1);    
-    new LemonadeAgent("localhost", 2121, 1);       
-    new LemonadeAgent("localhost", 2121, 1);
-    new LemonadeAgent("localhost", 2121, 1);    
-    new LemonadeAgent("localhost", 2121, 1);       
-    new LemonadeAgent("localhost", 2121, 1);    
     while(true){}
   }
 
@@ -83,6 +77,5 @@ public class LemonadeAgent extends AbsLemonadeAgent {
   public void onPrivateInformation(PrivateInformationMessage privateInfo) {
     // TODO Auto-generated method stub
     
-  }  
-  
+  }
 }
