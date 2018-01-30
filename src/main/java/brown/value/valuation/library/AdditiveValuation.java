@@ -37,10 +37,7 @@ public class AdditiveValuation implements IMonotonicValuation {
   public Double getValuation(ITradeable tradeable) {
     Double value = 0.0; 
     List<SimpleTradeable> allTradeables = tradeable.flatten(); 
-    for(SimpleTradeable atom : allTradeables) {
-      Logging.log("VALUEPARAMS " + this.valueParams);
-      Logging.log("GET " + this.valueParams.get(atom));
-      Logging.log("TRADEABLE " + atom);      
+    for(SimpleTradeable atom : allTradeables) {  
       value = value + this.valueParams.get(atom); 
     }
     return value;

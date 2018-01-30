@@ -67,6 +67,7 @@ public abstract class AbsServer {
     this.agentCount = 0;
     this.connections = new ConcurrentHashMap<Connection, Integer>();
     this.privateToPublic = new ConcurrentHashMap<Integer, Integer>();
+    this.privateValuations = new ConcurrentHashMap<Integer, IValuation>();
     this.acctManager = new AccountManager();
     this.manager = new MarketManager();
 
@@ -90,6 +91,7 @@ public abstract class AbsServer {
     final AbsServer aServer = this;
     theServer.addListener(new Listener() {
       public void received(Connection connection, Object message) {
+        System.out.println("something received");
         if (connections.containsKey(connection)) {
           // If the connection is already contained, check if message is a trade
           int id = connections.get(connection);
@@ -161,6 +163,7 @@ public abstract class AbsServer {
    * a BidRequest for an auction
    */
   protected void onBid(Connection connection, Integer privateID, TradeMessage bid) {
+    System.out.println("received");
     Market auction = this.manager.getMarket(bid.AuctionID);
     if (auction != null) {
       synchronized (auction) {
@@ -261,6 +264,7 @@ public abstract class AbsServer {
       this.updateAllAuctions();
       Thread.sleep(lag);      
     }
+    
   }
   
   public void resetSim() {

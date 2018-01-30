@@ -30,6 +30,7 @@ public class SimpleSealedAgent extends AbsSimpleSealedAgent {
       initial.put(t, new BidType(this.valuation.getValuation(t).doubleValue(), 1));
     }
     // just bid valuation 
+    System.out.println("BID: " + initial);
     simpleChannel.bid(this, new AuctionBidBundle(initial));
   }  
 
@@ -45,8 +46,8 @@ public class SimpleSealedAgent extends AbsSimpleSealedAgent {
   
   public static void main(String[] args) throws AgentCreationException {
     new SimpleSealedAgent("localhost", 2121);
-    new SimpleSealedAgent("localhost", 2121);
-    new SimpleSealedAgent("localhost", 2121);    
+    //new SimpleSealedAgent("localhost", 2121);
+    //new SimpleSealedAgent("localhost", 2121);    
     while(true){}
   }
 

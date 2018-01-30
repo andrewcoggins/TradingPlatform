@@ -14,6 +14,7 @@ import brown.accounting.library.Account;
 import brown.accounting.library.Ledger;
 import brown.accounting.library.Transaction;
 import brown.agent.AbsAgent;
+import brown.bid.interim.BidType;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
 import brown.channels.library.GameChannel;
@@ -65,6 +66,7 @@ public final class Startup {
 		kryo.register(Timestamp.class);
 		kryo.register(Date.class);
 		kryo.register(IBidBundle.class);
+		kryo.register(BidType.class);
 		kryo.register(BundleType.class);
 		kryo.register(MultiTradeable.class);
 		kryo.register(Order.class);

@@ -22,7 +22,6 @@ public abstract class AbsSimpleSealedAgent extends AbsAgent implements ISimpleSe
       throws AgentCreationException {
     super(host, port, gameSetup);
     this.tradeables = new LinkedList<ITradeable>();
-    System.out.println(this.tradeables);
   }
   
   @Override
