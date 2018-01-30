@@ -43,11 +43,11 @@ public class RunServer extends AbsServer{
   
   // need to do something with valuation calculating utilities
   // need to do something here about setting groupings
-  public void runSimulation(Simulation sim, int numRuns, int delay) throws InterruptedException {
+  public void runSimulation(Simulation sim, int numRuns, int delay,int lag) throws InterruptedException {
+    //valuations
+    this.valueConfig = sim.getValInfo();         
     //tradeables
     this.allTradeables = sim.getTradeables();
-    //valuations
-    this.valueConfig = sim.getValInfo();     
     //endowments
     this.initialMonies = sim.getInitialMonies(); 
     this.initialGoods = sim.getInitialGoods(); 
@@ -58,22 +58,18 @@ public class RunServer extends AbsServer{
     int count = 0;
     while (count < numRuns) {
       initializeAgents();
-      for (SimulMarkets s : sim.getSequence()) {
-        // Open markets
-        runGame(sim.getTradeables(),s.getMarkets());        
+      int id = 0;              
+      for (SimulMarkets s : sim.getSequence()){
+        for (AbsMarketPreset ruleSet : s.getMarkets()) {
+          this.manager.open(ruleSet, new Integer(id), sim.getTradeables(),new LinkedList<Integer>(this.connections.values()));
+          id++;
+        }    
+        this.completeAuctions(lag);            
       }        
+      
       resetSim();
       
       count++;
     }
   } 
-  
-  public void runGame(List<ITradeable> allGoods, List<AbsMarketPreset> presets) throws InterruptedException {        
-    //rules
-    for (AbsMarketPreset ruleSet : presets) {
-      int id = 0;
-      this.manager.open(ruleSet, new Integer(id), allGoods,new LinkedList<Integer>(this.connections.values()));
-    }    
-    this.completeAuctions(1000);    
-  }
 }

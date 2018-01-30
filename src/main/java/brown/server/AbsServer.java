@@ -15,6 +15,7 @@ import brown.accounting.library.Ledger;
 import brown.market.library.Market;
 import brown.market.library.MarketManager;
 import brown.market.marketstate.library.Order;
+import brown.messages.library.AccountResetMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.ErrorMessage;
 import brown.messages.library.GameReportMessage;
@@ -138,10 +139,11 @@ public abstract class AbsServer {
       Integer agentID = this.connections.get(connection);
       //set up agent account
       Account newAccount = new Account(agentID);
-      newAccount.add(initialMonies);
+      newAccount.add(this.initialMonies);
       for (ITradeable t : this.initialGoods)
         newAccount.add(0.0, t);
       this.acctManager.setAccount(agentID, newAccount);
+      theServer.sendToTCP(connection.getID(), new AccountResetMessage(agentID,this.initialGoods,this.initialMonies));
       
       // send agents private information
       if (marketConfig.type == ValuationType.Auction) {
