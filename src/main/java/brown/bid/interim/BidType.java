@@ -5,6 +5,14 @@ public class BidType implements IBidType {
   public final Double price; 
   public final Integer quantity; 
   
+  /**
+   * for kryo do not use.
+   */
+  public BidType(){ 
+    this.price = null; 
+    this.quantity = null; 
+  }
+  
   public BidType(Double price, Integer quantity) {
     this.price = price; 
     this.quantity = quantity; 

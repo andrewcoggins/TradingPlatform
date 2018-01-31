@@ -27,7 +27,6 @@ import brown.messages.library.ValuationInformationMessage;
 import brown.setup.ISetup;
 import brown.setup.Logging;
 import brown.setup.library.Startup;
-import brown.summary.AuctionSummarizer;
 import brown.summary.ISimulationSummarizer;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;
@@ -92,7 +91,6 @@ public abstract class AbsServer {
     final AbsServer aServer = this;
     theServer.addListener(new Listener() {
       public void received(Connection connection, Object message) {
-        System.out.println("something received");
         if (connections.containsKey(connection)) {
           // If the connection is already contained, check if message is a trade
           int id = connections.get(connection);

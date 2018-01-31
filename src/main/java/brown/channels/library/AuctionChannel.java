@@ -49,8 +49,9 @@ public class AuctionChannel extends AbsChannel {
     if (bid.getType() == BundleType.AUCTION){
       Map<ITradeable, BidType> fixedBids = new HashMap<ITradeable,BidType>();    
       for (Entry<ITradeable, BidType> b : ((AuctionBid) bid.getBids()).bids.entrySet() ){
+        System.out.println("AAA");
         fixedBids.put(b.getKey(), b.getValue());
-        if (fixedBids.size() > 10) {
+        if (fixedBids.size() > 2) {
           agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
           fixedBids.clear();
         }
@@ -59,7 +60,6 @@ public class AuctionChannel extends AbsChannel {
         TradeMessage toSend = (new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
         System.out.println(toSend);
         agent.CLIENT.sendTCP(toSend);
-        System.out.println("this happened");
       }     
     } else {
       Logging.log("[Channel encountered invalid bid type]");
