@@ -24,7 +24,7 @@ import brown.tradeable.library.TradeableType;
  * @author andrew
  *
  */
-public class SimpleSimultaneousAllocation implements IAllocationRule {
+public class HighestPriceAllocation implements IAllocationRule {
 
 
   @Override

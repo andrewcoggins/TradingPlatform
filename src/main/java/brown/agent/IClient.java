@@ -2,6 +2,7 @@ package brown.agent;
 
 import brown.messages.library.ErrorMessage;
 import brown.messages.library.RegistrationMessage;
+import brown.messages.library.StringMessage;
 
 /**
  * Agents are responsible for receiving messages from the server,
@@ -22,7 +23,8 @@ public interface IClient {
    * @param message - includes a string about rejection
    */
   public void onErrorMessage(ErrorMessage message);
-  
+
+  public void onStringMessage(StringMessage message);
 }
 
   

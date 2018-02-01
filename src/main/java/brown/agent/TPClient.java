@@ -9,6 +9,7 @@ import com.esotericsoftware.minlog.Log;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.ErrorMessage;
 import brown.messages.library.RegistrationMessage;
+import brown.messages.library.StringMessage;
 import brown.setup.ISetup;
 import brown.setup.Logging;
 import brown.setup.library.Startup;
@@ -61,5 +62,9 @@ public abstract class TPClient implements IClient {
   public void onErrorMessage(ErrorMessage message) {
     Logging.log("[x] rej: " + message.error + ", agent ID: " +this.ID);
   }
-  
+
+  @Override
+  public void onStringMessage(StringMessage message) {
+    Logging.log("[-] Message Received: " + message.message + ", agent ID: " +this.ID);
+  }  
 }
