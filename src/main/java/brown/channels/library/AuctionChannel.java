@@ -49,7 +49,6 @@ public class AuctionChannel extends AbsChannel {
     if (bid.getType() == BundleType.AUCTION){
       Map<ITradeable, BidType> fixedBids = new HashMap<ITradeable,BidType>();    
       for (Entry<ITradeable, BidType> b : ((AuctionBid) bid.getBids()).bids.entrySet() ){
-        System.out.println("AAA");
         fixedBids.put(b.getKey(), b.getValue());
         if (fixedBids.size() > 2) {
           agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));

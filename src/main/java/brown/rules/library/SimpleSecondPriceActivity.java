@@ -7,6 +7,7 @@ import brown.bid.library.AuctionBid;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IActivityRule;
+import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.TradeableType;
 
@@ -18,6 +19,7 @@ public class SimpleSecondPriceActivity implements IActivityRule {
     List<TradeMessage> currBids = state.getBids();
     boolean acceptable = true;
     for (TradeMessage bid : currBids){
+      Logging.log("SSSP Activity:Curr Bid ID - " + aBid.AgentID + ", Resting bids ID - " + bid.AgentID);
       if (bid.AgentID == agent){
         acceptable = false;
         break;

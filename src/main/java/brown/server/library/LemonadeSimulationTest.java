@@ -25,8 +25,8 @@ public class LemonadeSimulationTest {
     // simulation variables
     int delayTime = 5;
     int lag = 150; // speed at which rounds run - at lag=100, 100 trials takes 50s-60s
-    int numRuns = 50;
-    int numSims = 8;
+    int numRuns = 2;
+    int numSims = 4;
     
     List<ITradeable> allTradeables = new LinkedList<ITradeable>(); 
     allTradeables.add(new MultiTradeable(1, totalTradeables));

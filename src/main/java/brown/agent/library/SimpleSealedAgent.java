@@ -36,7 +36,7 @@ public class SimpleSealedAgent extends AbsSimpleSealedAgent {
 
   @Override
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
-    Logging.log(bankUpdate.toString());
+    Logging.log("AGENT: " + this.ID + ", " + bankUpdate.toString());
   }
 
   @Override
@@ -47,7 +47,7 @@ public class SimpleSealedAgent extends AbsSimpleSealedAgent {
   public static void main(String[] args) throws AgentCreationException {
     new SimpleSealedAgent("localhost", 2121);
     new SimpleSealedAgent("localhost", 2121);
-    //new SimpleSealedAgent("localhost", 2121);    
+    new SimpleSealedAgent("localhost", 2121);    
     while(true){}
   }
 

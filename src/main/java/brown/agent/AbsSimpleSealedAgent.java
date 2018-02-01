@@ -31,6 +31,10 @@ public abstract class AbsSimpleSealedAgent extends AbsAgent implements ISimpleSe
       this.tradeables = ((ValuationInformationMessage) privateInfo).getTradeables();
       this.valuation = ((ValuationInformationMessage) privateInfo).getPrivateValuation();
       this.vDistribution = ((ValuationInformationMessage) privateInfo).getAllValuations();
+      
+      for (ITradeable t: this.tradeables){
+        Logging.log("Agent " + this.ID + ", Good: " + t.toString() + ", Value: " +this.valuation.getValuation(t));
+      }      
     } else {
       Logging.log("[x] AbsSSSPAgent: Wrong Kind of PrivateInformation Received");
     }
