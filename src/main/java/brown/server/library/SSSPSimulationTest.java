@@ -18,8 +18,6 @@ import brown.value.config.SSSPConfig;
  * 
  * This is the only file the server-side user should have to edit.
  * 
- * hmm... what to do about special registrations?
- * repeated registrations?
  */
 public class SSSPSimulationTest {
 
@@ -29,15 +27,14 @@ public class SSSPSimulationTest {
     List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
     int numTradeables = 3;
     int i = 0;
-    while (i<numTradeables){
+    while (i<numTradeables) {
       SimpleTradeable toAdd = new SimpleTradeable(i);            
       allTradeables.add(toAdd);
       allTradeablesList.add(toAdd);
       i++;
     }
-    
     List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
-    oneMarket.add(new SSSPRules(2));    
+    oneMarket.add(new SSSPRules(1));    
     SimulMarkets markets = new SimulMarkets(oneMarket);
 
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  

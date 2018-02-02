@@ -25,7 +25,6 @@ public class SimpleSealedAgent extends AbsSimpleSealedAgent {
   @Override
   public void onSSSP(AuctionChannel simpleChannel) {
     Map<ITradeable, BidType> initial = new HashMap<ITradeable, BidType>();
-    System.out.println(this.tradeables);
     for (ITradeable t: this.tradeables) {
       initial.put(t, new BidType(this.valuation.getValuation(t).doubleValue(), 1));
     }
@@ -36,7 +35,7 @@ public class SimpleSealedAgent extends AbsSimpleSealedAgent {
 
   @Override
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
-    Logging.log("AGENT: " + this.ID + ", " + bankUpdate.toString());
+    Logging.log("BANKUPDATE: Agent: " + this.ID + ", " + bankUpdate.toString());
   }
 
   @Override
@@ -46,8 +45,8 @@ public class SimpleSealedAgent extends AbsSimpleSealedAgent {
   
   public static void main(String[] args) throws AgentCreationException {
     new SimpleSealedAgent("localhost", 2121);
-    new SimpleSealedAgent("localhost", 2121);
-    new SimpleSealedAgent("localhost", 2121);    
+//    new SimpleSealedAgent("localhost", 2121);
+//    new SimpleSealedAgent("localhost", 2121);    
     while(true){}
   }
 

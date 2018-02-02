@@ -27,6 +27,7 @@ import brown.messages.library.ValuationInformationMessage;
 import brown.setup.ISetup;
 import brown.setup.Logging;
 import brown.setup.library.Startup;
+import brown.summary.AuctionSummarizer;
 import brown.summary.ISimulationSummarizer;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;
@@ -53,7 +54,7 @@ public abstract class AbsServer {
   protected Map<Integer, Integer> privateToPublic;
   protected Map<Integer, IValuation> privateValuations; 
   protected AccountManager acctManager;
-  protected ISimulationSummarizer summarizer; 
+  protected AuctionSummarizer summarizer; 
 
   // Track Markets / market config stuff
   protected MarketManager manager;
@@ -276,6 +277,12 @@ public abstract class AbsServer {
     Map<Integer,Double> toPrint = new HashMap<Integer,Double>();
     if (this.valueConfig.type == ValuationType.Auction) {
       // do something
+      Map<Integer, Double> totalUtil = this.summarizer.getTotalUtility();
+      System.out.println(totalUtil);
+      for (Entry<Integer, Double> util : totalUtil.entrySet()) {
+        toPrint.put(util.getKey(), util.getValue());
+        Logging.log("Agent " + this.privateToPublic.get(util.getKey()) + " got " + util.getValue() + " total utility");
+      }
     } else if (this.valueConfig.type == ValuationType.Game) {
       // for lemonade game right now
       for (Integer agent: this.connections.values()){
@@ -287,7 +294,7 @@ public abstract class AbsServer {
     List<Map.Entry<Integer, Double>> sortedByValue = toPrint.entrySet().stream().sorted(Map.Entry.<Integer, Double>comparingByValue().reversed()).collect(Collectors.toList());    
     int i = 1;
     for (Map.Entry<Integer,Double> a :sortedByValue){
-      Logging.log(i + ". " + a.getKey()+ ", money: " + a.getValue());
+      Logging.log(i + ". " + a.getKey()+ ", utility: " + a.getValue());
       this.theServer.sendToTCP(this.privateToConnection(a.getKey()).getID(), new ErrorMessage(0, "Placed: " + Integer.toString(i)));
       i++;
     }

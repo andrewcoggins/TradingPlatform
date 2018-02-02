@@ -13,6 +13,5 @@ import brown.value.valuation.IValuation;
  */
 public interface ISimulationSummarizer {
   
-  public void collectInformation(List<Account> agentAccounts,
-      Map<Integer, IValuation> privateValuations, double initialMonies);
+  public void collectInformation(List<Account> agentAccounts, Map<Integer, IValuation> privateValuations);
 }
