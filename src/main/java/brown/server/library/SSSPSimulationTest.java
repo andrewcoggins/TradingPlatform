@@ -25,14 +25,11 @@ public class SSSPSimulationTest {
     // Create _ tradeables
     Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
     List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
-    int numTradeables = 3;
-    int i = 0;
-    while (i<numTradeables) {
-      SimpleTradeable toAdd = new SimpleTradeable(i);            
-      allTradeables.add(toAdd);
-      allTradeablesList.add(toAdd);
-      i++;
-    }
+
+    // only 1 tradeable
+    allTradeables.add(new SimpleTradeable(0));
+    allTradeablesList.add(new SimpleTradeable(0));
+    
     List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
     oneMarket.add(new SSSPRules(1));    
     SimulMarkets markets = new SimulMarkets(oneMarket);
@@ -40,7 +37,7 @@ public class SSSPSimulationTest {
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
     seq.add(markets);
     
-    Simulation testSim = new Simulation(seq,new SSSPConfig(allTradeables),allTradeablesList,0.,new LinkedList<ITradeable>());    
+    Simulation testSim = new Simulation(seq,new SSSPConfig(allTradeables),allTradeablesList,100.,new LinkedList<ITradeable>());    
     RunServer testServer = new RunServer(2121, new SSSPSetup());
     
     int numSims = 3;

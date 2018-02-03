@@ -264,8 +264,7 @@ public abstract class AbsServer {
       Thread.sleep(lag);
       this.updateAllAuctions();
       Thread.sleep(lag);      
-    }
-    
+    }    
   }
   
   public void resetSim() { 

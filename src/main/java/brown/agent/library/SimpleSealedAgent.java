@@ -44,7 +44,7 @@ public class SimpleSealedAgent extends AbsSimpleSealedAgent {
   
   public static void main(String[] args) throws AgentCreationException {
     new SimpleSealedAgent("localhost", 2121);
-//    new SimpleSealedAgent("localhost", 2121);
+    new SimpleSealedAgent("localhost", 2121);
 //    new SimpleSealedAgent("localhost", 2121);    
     while(true){}
   }  

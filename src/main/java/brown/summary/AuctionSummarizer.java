@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.accounting.library.Account;
+import brown.logging.Logging;
 import brown.tradeable.ITradeable;
 import brown.value.valuation.IValuation;
 
@@ -71,6 +72,7 @@ public class AuctionSummarizer implements IAuctionSummarizer {
       // update total utilities.
       if (totalUtility.containsKey(anID)) {
         totalUtility.put(anID, totalUtility.get(anID) + roundUtilities.get(anID));
+        Logging.log("UTILITY: " + totalUtility.get(anID) + roundUtilities.get(anID));
       }
       // update average utilities.
       if (averageUtility.containsKey(anID)) {

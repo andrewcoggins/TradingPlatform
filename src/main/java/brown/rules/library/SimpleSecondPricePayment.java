@@ -40,7 +40,6 @@ public class SimpleSecondPricePayment implements IPaymentRule {
       for (ITradeable t : aBid.keySet()) {
         if (allTradeables.contains(t)) {
           if (aBid.get(t).price > highest.get(t)) {
-            Logging.log("First highest changed by: " + aMessage.AgentID);            
             highest.put(t, aBid.get(t).price);
             highestID.put(t, aMessage.AgentID);
           }
@@ -53,7 +52,6 @@ public class SimpleSecondPricePayment implements IPaymentRule {
       for (ITradeable t : aBid.keySet()) {
         if (allTradeables.contains(t)) {
           if (aBid.get(t).price > secondHighest.get(t) && highestID.get(t) != aMessage.AgentID) {
-            Logging.log("Second highest changed by: " + aMessage.AgentID);
             secondHighest.put(t, aBid.get(t).price);
           }
         }
