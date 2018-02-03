@@ -10,13 +10,12 @@ import brown.value.generator.IValuationGenerator;
  */
 public class LabTwoValGenerator implements IValuationGenerator {
 
-  public LabTwoValGenerator(){ 
+  public LabTwoValGenerator() { 
     
   }
   
   @Override
   public Double makeValuation() {
-    // TODO Auto-generated method stub
     double y = Math.random();
     Double value = 1 - Math.sqrt(1 - y);
     return value;
