@@ -38,7 +38,7 @@ public class LabTwoValGeneratorTest {
       double rightRatio = rightSamples / (double) NUMTESTS;
       // assert that the ratio of samples is similar to the 
       // area of the region of the pdf to the right of divider
-      // over repeated runss
+      // over repeated runs
       assertTrue(Math.abs(rightRatio - rightArea) < 0.02);
     }
   }
