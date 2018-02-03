@@ -11,7 +11,6 @@ import brown.exceptions.AgentCreationException;
 import brown.logging.Logging;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
-import brown.messages.library.MarketUpdateMessage;
 import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 
@@ -48,12 +47,5 @@ public class SimpleSealedAgent extends AbsSimpleSealedAgent {
 //    new SimpleSealedAgent("localhost", 2121);
 //    new SimpleSealedAgent("localhost", 2121);    
     while(true){}
-  }
-
-  @Override
-  public void onMarketUpdate(MarketUpdateMessage marketUpdate) {
-    // TODO Auto-generated method stub
-    
-  }
-  
+  }  
 }

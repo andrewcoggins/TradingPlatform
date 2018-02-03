@@ -3,7 +3,6 @@ package brown.agent;
 import brown.messages.library.AccountResetMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
-import brown.messages.library.MarketUpdateMessage;
 import brown.messages.library.PrivateInformationMessage;
 
 /**
@@ -20,12 +19,6 @@ public interface IAgent {
    */
   public void onBankUpdate(BankUpdateMessage bankUpdate);
 
-  /**
-   * Sent whenever you get a market update (within an outer round of a game)
-   * @param marketUpdate
-   */
-  public void onMarketUpdate(MarketUpdateMessage marketUpdate);
-  
   /**
    * Sent whenever you get a game report (at the end of each outer round)
    * @param gamereport

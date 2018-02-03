@@ -5,8 +5,6 @@ import brown.logging.Logging;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
-import brown.messages.library.MarketUpdateMessage;
-import brown.messages.library.PrivateInformationMessage;
 import brown.setup.ISetup;
 
 /**

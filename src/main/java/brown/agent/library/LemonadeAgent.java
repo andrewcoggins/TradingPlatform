@@ -9,10 +9,8 @@ import brown.bidbundle.library.GameBidBundle;
 import brown.channels.library.GameChannel;
 import brown.exceptions.AgentCreationException;
 import brown.logging.Logging;
-import brown.messages.library.AccountResetMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
-import brown.messages.library.MarketUpdateMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.setup.library.LemonadeSetup;
 
@@ -71,12 +69,6 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     new LemonadeAgent("localhost", 2121, 1);       
     new LemonadeAgent("localhost", 2121, 1);           
     while(true){}
-  }
-
-  @Override
-  public void onMarketUpdate(MarketUpdateMessage marketUpdate) {
-    // TODO Auto-generated method stub
-    
   }
 
   @Override

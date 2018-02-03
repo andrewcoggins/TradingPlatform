@@ -1,6 +1,7 @@
 package brown.messages.library;
 
 import brown.agent.AbsAgent;
+import brown.bidbundle.IBidBundle;
 import brown.channels.IAgentChannel;
 
 /**
@@ -15,15 +16,19 @@ import brown.channels.IAgentChannel;
 public class TradeRequestMessage extends AbsMessage {
   
 	public final IAgentChannel MARKET;
+	// not used right now
+	public final IBidBundle reserve;
 	
 	public TradeRequestMessage() {
 		super(null);
 		MARKET = null;
+		reserve = null;
 	}
 
 	public TradeRequestMessage(Integer ID, IAgentChannel market) {
 		super(ID);
 		this.MARKET = market;
+		this.reserve = null;
 	}
 
 	@Override
