@@ -110,12 +110,4 @@ public class LemonadeAllocation implements IAllocationRule {
       slots[i] = new LinkedList<Integer>();
     }
   }
-
-  // just make one big group, shouldn't be used
-  @Override
-  public void setGroups(IMarketState state, List<Integer> agents) {   
-    List<List<Integer>> groups = new LinkedList<List<Integer>>();
-    groups.add(agents);
-    state.setGroups(groups);
-  }  
 }

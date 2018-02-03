@@ -2,10 +2,7 @@ package brown.market.library;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import brown.accounting.library.Ledger;
-import brown.logging.Logging;
 import brown.market.IMarket;
 import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;
@@ -15,6 +12,7 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.rules.IActivityRule;
 import brown.rules.IAllocationRule;
+import brown.rules.IGroupingRule;
 import brown.rules.IInformationRevelationPolicy;
 import brown.rules.IInnerTC;
 import brown.rules.IOuterTC;
@@ -26,6 +24,7 @@ public class Market implements IMarket {
   private final IPaymentRule PRULE;
   private final IAllocationRule ARULE;
   private final IQueryRule QRULE;
+  private final IGroupingRule GRULE;
   private final IActivityRule ACTRULE;
   private final IInformationRevelationPolicy IRPOLICY;
   private final IInnerTC ITCONDITION;
@@ -36,6 +35,7 @@ public class Market implements IMarket {
     this.PRULE = rules.pRule;
     this.ARULE = rules.aRule;
     this.QRULE = rules.qRule;
+    this.GRULE = rules.gRule;
     this.ACTRULE = rules.actRule;
     this.IRPOLICY = rules.infoPolicy;
     this.ITCONDITION = rules.innerTCondition;
@@ -111,13 +111,13 @@ public class Market implements IMarket {
     this.ITCONDITION.reset();
     this.PRULE.reset();
     this.QRULE.reset();
+    this.GRULE.reset();
     this.STATE.reset();
     this.STATE.incrementOuter();
   }
   
   @Override
   public void setGroupings(List<Integer> agents){
-    this.ARULE.setGroups(this.STATE, agents);
-   // Logging.log("GROUPS: "+ this.STATE.getGroups().toString());
+    this.GRULE.setGrouping(this.STATE, agents);
   }
 }

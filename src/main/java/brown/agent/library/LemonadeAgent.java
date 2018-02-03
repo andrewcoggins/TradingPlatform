@@ -64,6 +64,12 @@ public class LemonadeAgent extends AbsLemonadeAgent {
     new LemonadeAgent("localhost", 2121, 1);
     new LemonadeAgent("localhost", 2121, 6);   
     new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);       
+    new LemonadeAgent("localhost", 2121, 1);           
     while(true){}
   }
 

@@ -1,6 +1,7 @@
 package brown.market.preset.library;
 
 import brown.market.preset.AbsMarketPreset;
+import brown.rules.library.OneGrouping;
 import brown.rules.library.OneShotTermination;
 import brown.rules.library.SimpleSecondPriceActivity;
 import brown.rules.library.SSSPAnonymous;
@@ -20,6 +21,7 @@ public class SSSPRules extends AbsMarketPreset {
     super(new HighestPriceAllocation(),
         new SimpleSecondPricePayment(),
         new SimpleSimultaneousQuery(), 
+        new OneGrouping(),
         new SimpleSecondPriceActivity(),
         new SSSPAnonymous(),
         new OneShotTermination(), 

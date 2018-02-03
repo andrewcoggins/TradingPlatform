@@ -6,22 +6,12 @@ import java.util.List;
 
 import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
-import brown.rules.IAllocationRule;
+import brown.rules.IGroupingRule;
 
-public class GroupsThreeFourFiveAlloc implements IAllocationRule {
-
-
-  @Override
-  public void setAllocation(IMarketState state) {    
-  }
-
-  @Override
-  public void reset() {
-  }  
+public class ThreeFourFiveGrouping implements IGroupingRule {
   
-  // just make one big group, shouldn't be used
   @Override
-  public void setGroups(IMarketState state, List<Integer> agents) {
+  public void setGrouping(IMarketState state, List<Integer> agents) {
     List<List<Integer>> groups = new LinkedList<List<Integer>>();      
 
     // this effectively randomizes the groups
@@ -56,5 +46,9 @@ public class GroupsThreeFourFiveAlloc implements IAllocationRule {
       }                
     }      
     state.setGroups(groups);
+  }    
+  
+  @Override
+  public void reset() {
   }    
 }

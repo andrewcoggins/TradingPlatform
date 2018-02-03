@@ -5,7 +5,6 @@ import java.util.List;
 
 import brown.market.preset.AbsMarketPreset;
 import brown.market.preset.library.LemonadeAnonRules;
-import brown.market.preset.library.LemonadeFloatRules;
 import brown.market.preset.library.LemonadeGroupedRulesAnon;
 import brown.market.preset.library.LemonadeGroupedRulesNotAnon;
 import brown.market.preset.library.LemonadeNonAnonRules;

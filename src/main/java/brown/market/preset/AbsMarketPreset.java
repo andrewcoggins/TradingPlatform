@@ -2,6 +2,7 @@ package brown.market.preset;
 
 import brown.rules.IActivityRule;
 import brown.rules.IAllocationRule;
+import brown.rules.IGroupingRule;
 import brown.rules.IInformationRevelationPolicy;
 import brown.rules.IInnerTC;
 import brown.rules.IOuterTC;
@@ -19,14 +20,16 @@ public abstract class AbsMarketPreset {
   public IActivityRule actRule; 
   public IInformationRevelationPolicy infoPolicy;
   public IInnerTC innerTCondition; 
-  public IOuterTC outerTCondition; 
+  public IOuterTC outerTCondition;
+  public IGroupingRule gRule; 
   
-  public AbsMarketPreset(IAllocationRule aRule, IPaymentRule pRule, IQueryRule qRule, 
+  public AbsMarketPreset(IAllocationRule aRule, IPaymentRule pRule, IQueryRule qRule, IGroupingRule gRule,
       IActivityRule oneShotActivity, IInformationRevelationPolicy infoPolicy, IInnerTC innerTCondition, 
       IOuterTC outerTCondition) {
     this.aRule = aRule; 
     this.pRule = pRule; 
     this.qRule = qRule; 
+    this.gRule = gRule;
     this.actRule = oneShotActivity; 
     this.infoPolicy = infoPolicy; 
     this.innerTCondition = innerTCondition; 
