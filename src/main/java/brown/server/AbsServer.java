@@ -268,7 +268,7 @@ public abstract class AbsServer {
     
   }
   
-  public void resetSim() {
+  public void resetSim() { 
     this.acctManager.reset();
     this.manager.reset();
   }
