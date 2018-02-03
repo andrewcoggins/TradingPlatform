@@ -1,4 +1,4 @@
-package brown.setup;
+package brown.logging;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class FileLogging {
+public class FileLogging implements ILogging {
   
   // Enable or disable logging here.
   public final static boolean LOGGING = true;

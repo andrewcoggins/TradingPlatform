@@ -11,8 +11,8 @@ import brown.bid.library.AuctionBid;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
 import brown.bidbundle.library.AuctionBidBundle;
+import brown.logging.Logging;
 import brown.messages.library.TradeMessage;
-import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 
 /*

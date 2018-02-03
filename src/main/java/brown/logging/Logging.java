@@ -1,12 +1,11 @@
-package brown.setup;
+package brown.logging;
 
-//move me later!!
 /**
  * Wraps printed messages, so logging can be enabled or disabled.
  * logging.log(X) prints X to console.
  * @author lcamery
  */
-public class Logging {
+public class Logging implements ILogging {
 	
   // Enable or disable logging here.
 	public final static boolean LOGGING = true;

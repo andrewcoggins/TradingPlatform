@@ -8,10 +8,10 @@ import java.util.Map;
 
 import brown.bidbundle.BundleType;
 import brown.bidbundle.library.GameBidBundle;
+import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IAllocationRule;
-import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 

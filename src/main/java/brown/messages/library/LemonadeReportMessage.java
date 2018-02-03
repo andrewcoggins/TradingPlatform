@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import brown.logging.Logging;
 import brown.messages.library.GameReportMessage;
-import brown.setup.Logging;
 
 public class LemonadeReportMessage extends GameReportMessage {
   private List<Integer>[] slots_ids;

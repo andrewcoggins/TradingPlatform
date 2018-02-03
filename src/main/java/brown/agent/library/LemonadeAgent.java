@@ -8,13 +8,13 @@ import brown.agent.AbsLemonadeAgent;
 import brown.bidbundle.library.GameBidBundle;
 import brown.channels.library.GameChannel;
 import brown.exceptions.AgentCreationException;
+import brown.logging.Logging;
 import brown.messages.library.AccountResetMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
 import brown.messages.library.MarketUpdateMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.setup.library.LemonadeSetup;
-import brown.setup.Logging;
 
 /**
  * Agent for the lemonade game.

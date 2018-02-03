@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.accounting.library.Ledger;
+import brown.logging.Logging;
 import brown.market.IMarket;
 import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;
@@ -19,7 +20,6 @@ import brown.rules.IInnerTC;
 import brown.rules.IOuterTC;
 import brown.rules.IPaymentRule;
 import brown.rules.IQueryRule;
-import brown.setup.Logging;
 
 public class Market implements IMarket {
 

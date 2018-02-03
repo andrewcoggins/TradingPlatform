@@ -4,10 +4,10 @@ import java.util.List;
 
 import brown.bid.IBid;
 import brown.bid.library.AuctionBid;
+import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IActivityRule;
-import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.TradeableType;
 

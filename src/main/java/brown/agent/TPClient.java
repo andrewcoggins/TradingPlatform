@@ -7,11 +7,11 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.minlog.Log;
 
 import brown.exceptions.AgentCreationException;
+import brown.logging.Logging;
 import brown.messages.library.ErrorMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.StringMessage;
 import brown.setup.ISetup;
-import brown.setup.Logging;
 import brown.setup.library.Startup;
 
 /**

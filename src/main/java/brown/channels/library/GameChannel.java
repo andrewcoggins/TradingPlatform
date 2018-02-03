@@ -4,8 +4,8 @@ import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
+import brown.logging.Logging;
 import brown.messages.library.TradeMessage;
-import brown.setup.Logging;
 
 /**
  * The channel through which an agent communicates to the server in the lemonade game.

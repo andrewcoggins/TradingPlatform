@@ -4,10 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import brown.exceptions.AgentCreationException;
+import brown.logging.Logging;
 import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.ValuationInformationMessage;
 import brown.setup.ISetup;
-import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.IValuation;

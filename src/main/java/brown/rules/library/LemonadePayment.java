@@ -4,10 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;
 import brown.rules.IPaymentRule;
-import brown.setup.Logging;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.TradeableType;
 

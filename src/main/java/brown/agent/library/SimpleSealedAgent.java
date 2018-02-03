@@ -8,10 +8,10 @@ import brown.bid.interim.BidType;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
+import brown.logging.Logging;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.MarketUpdateMessage;
-import brown.setup.Logging;
 import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 

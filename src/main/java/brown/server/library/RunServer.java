@@ -3,10 +3,10 @@ package brown.server.library;
 import java.util.LinkedList;
 import java.util.List;
 
+import brown.logging.Logging;
 import brown.market.preset.AbsMarketPreset;
 import brown.server.AbsServer;
 import brown.setup.ISetup;
-import brown.setup.Logging;
 import brown.summary.AuctionSummarizer;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;

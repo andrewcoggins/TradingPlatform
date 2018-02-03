@@ -7,12 +7,12 @@ import java.util.Map;
 
 import brown.bidbundle.BundleType;
 import brown.bidbundle.library.GameBidBundle;
+import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.LemonadeReportMessage;
 import brown.messages.library.TradeMessage;
 import brown.rules.IInformationRevelationPolicy;
-import brown.setup.Logging;
 
 public class LemonadeNonAnonymous implements IInformationRevelationPolicy{
   private int numSlots;

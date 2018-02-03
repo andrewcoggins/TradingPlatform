@@ -3,7 +3,7 @@ package brown.value.valuation.library;
 import java.util.List;
 import java.util.Map;
 
-import brown.setup.Logging;
+import brown.logging.Logging;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.valuation.IMonotonicValuation;

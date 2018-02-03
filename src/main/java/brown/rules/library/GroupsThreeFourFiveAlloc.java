@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.rules.IAllocationRule;
-import brown.setup.Logging;
 
 public class GroupsThreeFourFiveAlloc implements IAllocationRule {
 
