@@ -1,5 +1,8 @@
 package brown.messages.library;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import brown.agent.AbsAgent;
 import brown.bidbundle.IBidBundle;
 import brown.channels.IAgentChannel;
@@ -18,17 +21,20 @@ public class TradeRequestMessage extends AbsMessage {
 	public final IAgentChannel MARKET;
 	// not used right now
 	public final IBidBundle reserve;
+	public final Map<Integer,Integer> idToSize;
 	
 	public TradeRequestMessage() {
 		super(null);
 		MARKET = null;
 		reserve = null;
+		idToSize = null;
 	}
 
-	public TradeRequestMessage(Integer ID, IAgentChannel market) {
+	public TradeRequestMessage(Integer ID, IAgentChannel market, Map<Integer, Integer> idToSize) {
 		super(ID);
 		this.MARKET = market;
 		this.reserve = null;
+		this.idToSize = idToSize;
 	}
 
 	@Override
@@ -36,4 +42,15 @@ public class TradeRequestMessage extends AbsMessage {
 		this.MARKET.dispatchMessage(agent);
 	}
 
+	public TradeRequestMessage sanitize(Integer agent, Map<Integer,Integer> privateToPublic){
+	  Map<Integer,Integer> sanitizedMap = new HashMap<Integer,Integer>();
+	  for (Integer id : idToSize.keySet()){
+	    if (id.equals(agent)){
+	      sanitizedMap.put(agent, idToSize.get(agent));
+	    } else {
+	      sanitizedMap.put(privateToPublic.get(agent), idToSize.get(agent));
+	    }
+	  }
+	  return new TradeRequestMessage(this.ID, this.MARKET, sanitizedMap);
+	}	
 }

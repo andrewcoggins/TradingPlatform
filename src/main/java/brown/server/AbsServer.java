@@ -212,7 +212,7 @@ public abstract class AbsServer {
             for (Entry<Connection, Integer> id : this.connections.entrySet()) {
               // maybe send message here? sanitized ledger.
               TradeRequestMessage tr = auction.constructTradeRequest(id.getValue());
-              this.theServer.sendToUDP(id.getKey().getID(), tr);
+              this.theServer.sendToUDP(id.getKey().getID(), tr.sanitize(this.connections.get(id), this.privateToPublic));
             }
           } else {
             List<Order> winners = auction.constructOrders();
