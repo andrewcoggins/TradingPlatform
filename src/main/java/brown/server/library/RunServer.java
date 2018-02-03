@@ -38,7 +38,9 @@ public class RunServer extends AbsServer{
     delay(delay);
     initializeAgents();   
     this.manager.open(rules,0,allGoods,new LinkedList<Integer>(this.connections.values()));   
+    this.summarizer = new AuctionSummarizer(this.privateToPublic.keySet());
     this.completeAuctions(lag);
+    this.summarizer.collectInformation(this.acctManager.getAccounts(), this.privateValuations);
     printUtilities();
   }
   

@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 public class FileLogging implements ILogging {
   
   // Enable or disable logging here.
-  public final static boolean LOGGING = true;
+  public final static boolean FILELOGGING = true;
   
 /**
  * writes a map to an output file. 
@@ -17,7 +17,7 @@ public class FileLogging implements ILogging {
  * @throws IOException 
  */
   public static void log(Map<Integer, Double> aMap, String filePath) throws IOException {
-    if (LOGGING) {
+    if (FILELOGGING) {
       PrintWriter out = new PrintWriter(new FileWriter(filePath));
       for (Entry<Integer, Double> anEntry : aMap.entrySet()) {
         out.println(anEntry.getKey() + ", " + anEntry.getValue());
