@@ -30,7 +30,7 @@ public class RunServer extends AbsServer{
   }
 
   public void runSimpleSim(List<ITradeable> allGoods, AbsMarketPreset rules,
-      ValConfig valInfo, double initialMonies, List<ITradeable> initialGoods, int delay, int lag) throws InterruptedException{
+      ValConfig valInfo, double initialMonies, List<ITradeable> initialGoods, int delay, int lag) throws InterruptedException {
     this.valueConfig = valInfo;
     this.allTradeables = allGoods;
     this.initialMonies = initialMonies;

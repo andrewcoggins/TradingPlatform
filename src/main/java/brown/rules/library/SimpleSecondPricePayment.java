@@ -70,7 +70,6 @@ public class SimpleSecondPricePayment implements IPaymentRule {
 
   @Override
   public void reset() {
-    // TODO Auto-generated method stub
-    
+    // TODO Auto-generated method stub    
   }
 }
