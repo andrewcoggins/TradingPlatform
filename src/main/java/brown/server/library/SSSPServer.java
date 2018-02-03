@@ -24,7 +24,7 @@ import brown.value.config.SSSPConfig;
  */
 public class SSSPServer {
 
-  public static void main(String[] args) throws InterruptedException {
+  public static void main(String[] args) throws InterruptedException { 
     // Create _ tradeables
     Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
     List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
