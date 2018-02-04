@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import brown.market.preset.AbsMarketPreset;
+import brown.market.preset.library.PairSSFP;
 import brown.market.preset.library.PairSSSP;
 import brown.market.preset.library.SSSPRules;
 import brown.setup.library.SSSPSetup;
@@ -21,7 +22,7 @@ import brown.value.config.AdditiveUniformConfig;
  * This is the only file the server-side user should have to edit.
  * 
  */
-public class SSSPServer {
+public class Lab2Server {
 
   public static void main(String[] args) throws InterruptedException {
     // Create _ tradeables
@@ -33,7 +34,8 @@ public class SSSPServer {
     allTradeablesList.add(new SimpleTradeable(0));
     
     List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
-    oneMarket.add(new PairSSSP(1));    
+    // PairSSSP for second price, SSFP for first price
+    oneMarket.add(new PairSSFP(1));    
     SimulMarkets markets = new SimulMarkets(oneMarket);
 
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
@@ -43,7 +45,7 @@ public class SSSPServer {
     Simulation testSim = new Simulation(seq,new AdditiveLab2Config(allTradeables),allTradeablesList,1.,new LinkedList<ITradeable>());    
     RunServer testServer = new RunServer(2121, new SSSPSetup());
     
-    int numSims = 100;
+    int numSims = 3;
     int delayTime = 5; 
     int lag = 100;
     
