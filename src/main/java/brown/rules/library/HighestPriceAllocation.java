@@ -67,6 +67,9 @@ public class HighestPriceAllocation implements IAllocationRule {
               // Store the highest price and the corresponding agent
               highestPrice.put((SimpleTradeable) t, bundle.getBids().bids.get(t).price);
               highestAgent.put((SimpleTradeable) t, bid.AgentID);
+            } else if (highestPrice.get(t) == bundle.getBids().bids.get(t).price && Math.random() > 0.5){
+              highestPrice.put((SimpleTradeable) t, bundle.getBids().bids.get(t).price);
+              highestAgent.put((SimpleTradeable) t, bid.AgentID);              
             }
           }
         }

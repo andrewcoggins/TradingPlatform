@@ -1,10 +1,13 @@
 package brown.rules.library;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.GameReportMessage;
+import brown.messages.library.LemonadeReportMessage;
+import brown.messages.library.SimpleSealedReportMessage;
 import brown.rules.IInformationRevelationPolicy;
 
 public class SSSPAnonymous implements IInformationRevelationPolicy {
@@ -18,6 +21,20 @@ public class SSSPAnonymous implements IInformationRevelationPolicy {
   @Override
   public void setReport(IMarketState state) {
     Map<Integer,GameReportMessage> reports = new HashMap<Integer,GameReportMessage>();    
+    
+    for (List<Integer> group : state.getGroups()){      
+      int winner = group.get(0);
+      // find the winner
+      for (Integer agent : state.getAllocation().keySet()){
+        if (group.contains(agent)){
+          winner = agent;
+        }
+      }
+      // report is winner for this group and the size of group
+      for (Integer agent : group){
+        reports.put(agent,new SimpleSealedReportMessage(winner,group.size()));
+      }
+    }
     state.setReport(reports);
   }
 

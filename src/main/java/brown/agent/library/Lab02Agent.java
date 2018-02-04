@@ -3,6 +3,9 @@ package brown.agent.library;
 import brown.agent.AbsLab02Agent;
 import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
+import brown.logging.Logging;
+import brown.messages.library.GameReportMessage;
+import brown.messages.library.SimpleSealedReportMessage;
 import brown.setup.library.SSSPSetup;
 
 public class Lab02Agent extends AbsLab02Agent {
@@ -16,12 +19,19 @@ public class Lab02Agent extends AbsLab02Agent {
 		// TODO: decide how to bid
 		
 		// this just bids your valuation
-		this.submitBid(channel, 0.5*this.getValuation());
+		this.submitBid(channel, this.getValuation());
 	}
+		
+  @Override
+  public void onGameReport(GameReportMessage gameReport) {
+    Logging.log("Game report received");
+    SimpleSealedReportMessage report = (SimpleSealedReportMessage) gameReport;
+    report.getWinner(); // get who won last game
+    report.getNumPlayers(); //  get the number of players last round
+  } 
 	
 	public static void main(String[] args) throws AgentCreationException {
 		new Lab02Agent("mslab4b-l", 2121);
-		
 		while (true) {}
 	}
 }
