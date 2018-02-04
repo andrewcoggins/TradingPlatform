@@ -152,6 +152,8 @@ public abstract class AbsServer {
         theServer.sendToTCP(connection.getID(), valueReg);
         //give the server private valuation info.
         this.privateValuations.put(agentID, privateValuation);
+        Logging.log("INITIALIZE AGENTS 1: " + agentID + ", pval:" + privateValuation.toString());
+        Logging.log("INITIALIZE AGENTS 2: " + agentID + ", val"+ this.privateValuations.get(agentID).toString());                
       } else if (marketConfig.type == ValuationType.Game) {
         //no explicit valuation, as in the lemonade game
         // GameInformationMessage or something, not used yet
@@ -212,7 +214,7 @@ public abstract class AbsServer {
             for (Entry<Connection, Integer> id : this.connections.entrySet()) {
               // maybe send message here? sanitized ledger.
               TradeRequestMessage tr = auction.constructTradeRequest(id.getValue());
-              this.theServer.sendToUDP(id.getKey().getID(), tr.sanitize(this.connections.get(id), this.privateToPublic));
+              this.theServer.sendToUDP(id.getKey().getID(), tr.sanitize(id.getValue(), this.privateToPublic));
             }
           } else {
             List<Order> winners = auction.constructOrders();
@@ -264,7 +266,11 @@ public abstract class AbsServer {
       Thread.sleep(lag);
       this.updateAllAuctions();
       Thread.sleep(lag);      
-    }    
+    }
+    Logging.log("COMPELTE AUCTIONS P VAL");
+    for (Integer id : this.privateValuations.keySet()){
+      Logging.log("Agent " + id + ", val"+ this.privateValuations.get(id).toString());
+    }
   }
   
   public void resetSim() { 

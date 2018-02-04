@@ -38,6 +38,7 @@ public class PairGrouping implements IGroupingRule{
       }                      
     }
     state.setGroups(groups);    
+    Logging.log("GROUPS: " + groups.toString());    
   }
 
   // Do this if you want to change groups on inner markets

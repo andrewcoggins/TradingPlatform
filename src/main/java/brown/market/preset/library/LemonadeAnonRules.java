@@ -1,7 +1,7 @@
 package brown.market.preset.library;
 
 import brown.market.preset.AbsMarketPreset;
-import brown.rules.BlankAllocation;
+import brown.rules.library.BlankAllocation;
 import brown.rules.library.LemonadeAnonymous;
 import brown.rules.library.LemonadeGroupedPayment;
 import brown.rules.library.LemonadeQuery;

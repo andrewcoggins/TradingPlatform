@@ -1,6 +1,7 @@
-package brown.rules;
+package brown.rules.library;
 
 import brown.market.marketstate.IMarketState;
+import brown.rules.IAllocationRule;
 
 public class BlankAllocation implements IAllocationRule{
 

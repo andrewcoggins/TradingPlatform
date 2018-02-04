@@ -62,6 +62,7 @@ public class AuctionSummarizer implements IAuctionSummarizer {
       List<ITradeable> someTradeables = roundTradeables.get(anID);
       double tradeableValue = 0.0; 
       for (ITradeable t : someTradeables) {
+        Logging.log("Agent " + anID + " values tradeable " + t.toString() + " at " + privateValuations.get(anID).getValuation(t));
         IValuation agentValuation = privateValuations.get(anID);
         tradeableValue += agentValuation.getValuation(t);
       }
