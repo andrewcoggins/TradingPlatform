@@ -23,32 +23,34 @@ import brown.value.config.AdditiveUniformConfig;
  * 
  */
 public class Lab2Server {
+	
+	private static int numSims = 10;
+	private static int delayTime = 5; 
+	private static int lag = 100;
 
-  public static void main(String[] args) throws InterruptedException {
-    // Create _ tradeables
-    Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
-    List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
-
-    // only 1 tradeable
-    allTradeables.add(new SimpleTradeable(0));
-    allTradeablesList.add(new SimpleTradeable(0));
-    
-    List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
-    // PairSSSP for second price, SSFP for first price
-    oneMarket.add(new PairSSFP(1));    
-    SimulMarkets markets = new SimulMarkets(oneMarket);
-
-    List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
-    seq.add(markets);
-    
-    // AdditiveUniformConfig OR AdditiveLab2Config
-    Simulation testSim = new Simulation(seq,new AdditiveLab2Config(allTradeables),allTradeablesList,1.,new LinkedList<ITradeable>());    
-    RunServer testServer = new RunServer(2121, new SSSPSetup());
-    
-    int numSims = 3;
-    int delayTime = 5; 
-    int lag = 100;
-    
-    testServer.runSimulation(testSim, numSims, delayTime, lag);
-  }
+	public static void main(String[] args) throws InterruptedException {
+	    // Create _ tradeables
+	    Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
+	    List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
+	
+	    // only 1 tradeable
+	    allTradeables.add(new SimpleTradeable(0));
+	    allTradeablesList.add(new SimpleTradeable(0));
+	    
+	    List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
+	    // PairSSSP for second price, SSFP for first price
+	    oneMarket.add(new PairSSFP(1));   
+	    // oneMarket.add(new PairSSSP(1));
+	    SimulMarkets markets = new SimulMarkets(oneMarket);
+	
+	    List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
+	    seq.add(markets);
+	    
+	    // AdditiveUniformConfig OR AdditiveLab2Config
+	    Simulation testSim = new Simulation(seq,new AdditiveLab2Config(allTradeables),
+	    		allTradeablesList,1.,new LinkedList<ITradeable>());    
+	    RunServer testServer = new RunServer(2121, new SSSPSetup());
+	    
+	    testServer.runSimulation(testSim, numSims, delayTime, lag);
+	}
 }

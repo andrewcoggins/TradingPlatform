@@ -8,6 +8,8 @@ import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.logging.Logging;
+import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.GameReportMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
@@ -48,6 +50,16 @@ public abstract class AbsLab02Agent extends AbsSimpleSealedAgent {
 	    System.out.println("BID: " + bid);
 	    channel.bid(this, new AuctionBidBundle(bidMap));
 	}
+	
+	@Override
+	public void onBankUpdate(BankUpdateMessage bankUpdate) {
+		Logging.log("BANKUPDATE: Agent: " + this.ID + ", " + bankUpdate.toString());
+	}
+
+	@Override
+	public void onGameReport(GameReportMessage gameReport) {
+		Logging.log("Game report received");
+	} 
 	
 	public double getValuation() {
 		return this.valuation;
