@@ -13,4 +13,6 @@ public interface IValuation {
   
   public Double getValuation(ITradeable tradeable);
   
+  public IValuation safeCopy();
+  
 }

@@ -62,7 +62,6 @@ public class AuctionSummarizer implements IAuctionSummarizer {
       List<ITradeable> someTradeables = roundTradeables.get(anID);
       double tradeableValue = 0.0; 
       for (ITradeable t : someTradeables) {
-        Logging.log("Agent " + anID + " values tradeable " + t.toString() + " at " + privateValuations.get(anID).getValuation(t));
         IValuation agentValuation = privateValuations.get(anID);
         tradeableValue += agentValuation.getValuation(t);
       }
@@ -73,7 +72,6 @@ public class AuctionSummarizer implements IAuctionSummarizer {
       // update total utilities.
       if (totalUtility.containsKey(anID)) {
         totalUtility.put(anID, totalUtility.get(anID) + roundUtilities.get(anID));
-        Logging.log("UTILITY: " + totalUtility.get(anID) + roundUtilities.get(anID));
       }
       // update average utilities.
       if (averageUtility.containsKey(anID)) {

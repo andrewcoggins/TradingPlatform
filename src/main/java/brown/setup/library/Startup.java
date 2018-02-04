@@ -35,6 +35,7 @@ import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.tradeable.library.TradeableType;
 import brown.value.generator.library.LabTwoValGenerator;
+import brown.value.generator.library.UniformValGenerator;
 
 import com.esotericsoftware.kryo.Kryo;
 
@@ -86,6 +87,7 @@ public final class Startup {
     kryo.register(List.class);
     kryo.register(AccountResetMessage.class);
     kryo.register(LabTwoValGenerator.class);
+    kryo.register(UniformValGenerator.class);
 		return true;
 	}
 

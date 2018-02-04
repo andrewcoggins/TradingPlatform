@@ -5,6 +5,7 @@ import java.util.List;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.valuation.IDMValuation;
+import brown.value.valuation.IValuation;
 
 /**
  * a valuation over tradeables with diminishing marginal utility.
@@ -75,6 +76,11 @@ public class DMValuation implements IDMValuation {
   public String toString() {
     return "DMValuation [baseValue=" + baseValue + ", discountFactor="
         + discountFactor + "]";
+  }
+
+  @Override
+  public IValuation safeCopy() {
+    return new DMValuation(this.baseValue, this.discountFactor);
   }
   
   

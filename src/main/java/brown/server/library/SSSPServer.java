@@ -11,7 +11,8 @@ import brown.market.preset.library.SSSPRules;
 import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.config.SSSPConfig;
+import brown.value.config.AdditiveLab2Config;
+import brown.value.config.AdditiveUniformConfig;
 
 /**
  * Use this class to run the server side of your game.
@@ -38,12 +39,13 @@ public class SSSPServer {
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
     seq.add(markets);
     
-    Simulation testSim = new Simulation(seq,new SSSPConfig(allTradeables),allTradeablesList,1.,new LinkedList<ITradeable>());    
+    // AdditiveUniformConfig OR AdditiveLab2Config
+    Simulation testSim = new Simulation(seq,new AdditiveLab2Config(allTradeables),allTradeablesList,1.,new LinkedList<ITradeable>());    
     RunServer testServer = new RunServer(2121, new SSSPSetup());
     
-    int numSims = 3;
+    int numSims = 100;
     int delayTime = 5; 
-    int lag = 150;
+    int lag = 100;
     
     testServer.runSimulation(testSim, numSims, delayTime, lag);
   }

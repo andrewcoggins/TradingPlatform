@@ -1,5 +1,6 @@
 package brown.value.valuation.library;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import brown.logging.Logging;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.valuation.IMonotonicValuation;
+import brown.value.valuation.IValuation;
 
 /**
  * additive valuation specifies a valuation over goods, 
@@ -72,6 +74,15 @@ public class AdditiveValuation implements IMonotonicValuation {
   @Override
   public String toString() {
     return "AdditiveValuation [valueParams=" + valueParams + "]";
+  }
+
+  @Override
+  public IValuation safeCopy() {
+    Map<SimpleTradeable, Double> newValueParams = new HashMap<SimpleTradeable,Double>();
+    for (SimpleTradeable t: this.valueParams.keySet()){
+      newValueParams.put(t, this.valueParams.get(t));
+    }
+    return new AdditiveValuation(newValueParams);
   }
   
   

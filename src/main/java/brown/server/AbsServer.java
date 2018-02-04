@@ -68,7 +68,7 @@ public abstract class AbsServer {
     this.agentCount = 0;
     this.connections = new ConcurrentHashMap<Connection, Integer>();
     this.privateToPublic = new ConcurrentHashMap<Integer, Integer>();
-    this.privateValuations = new ConcurrentHashMap<Integer, IValuation>();
+    this.privateValuations = new HashMap<Integer, IValuation>();
     this.acctManager = new AccountManager();
     this.manager = new MarketManager();
 
@@ -146,14 +146,11 @@ public abstract class AbsServer {
       
       // send agents private information
       if (marketConfig.type == ValuationType.Auction) {
-        PrivateInformationMessage valueReg; 
         IValuation privateValuation = marketConfig.valueDistribution.sample();
-        valueReg = new ValuationInformationMessage(agentID, this.allTradeables, privateValuation, marketConfig.valueDistribution);
+        PrivateInformationMessage valueReg = new ValuationInformationMessage(agentID, this.allTradeables, privateValuation, marketConfig.valueDistribution);
         theServer.sendToTCP(connection.getID(), valueReg);
         //give the server private valuation info.
-        this.privateValuations.put(agentID, privateValuation);
-        Logging.log("INITIALIZE AGENTS 1: " + agentID + ", pval:" + privateValuation.toString());
-        Logging.log("INITIALIZE AGENTS 2: " + agentID + ", val"+ this.privateValuations.get(agentID).toString());                
+        this.privateValuations.put(agentID, privateValuation.safeCopy());
       } else if (marketConfig.type == ValuationType.Game) {
         //no explicit valuation, as in the lemonade game
         // GameInformationMessage or something, not used yet
@@ -166,7 +163,6 @@ public abstract class AbsServer {
    * a BidRequest for an auction
    */
   protected void onBid(Connection connection, Integer privateID, TradeMessage bid) {
-    System.out.println("received");
     Market auction = this.manager.getMarket(bid.AuctionID);
     if (auction != null) {
       synchronized (auction) {
@@ -266,10 +262,6 @@ public abstract class AbsServer {
       Thread.sleep(lag);
       this.updateAllAuctions();
       Thread.sleep(lag);      
-    }
-    Logging.log("COMPELTE AUCTIONS P VAL");
-    for (Integer id : this.privateValuations.keySet()){
-      Logging.log("Agent " + id + ", val"+ this.privateValuations.get(id).toString());
     }
   }
   

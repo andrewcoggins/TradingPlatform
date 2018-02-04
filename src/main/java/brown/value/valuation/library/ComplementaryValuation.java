@@ -5,6 +5,7 @@ import java.util.List;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.valuation.IComplementaryValuation;
+import brown.value.valuation.IValuation;
 
 /**
  * a complementary valuation produces a valuation of goods, where 
@@ -75,6 +76,11 @@ public class ComplementaryValuation implements IComplementaryValuation {
   public String toString() {
     return "ComplementaryValuation [baseValue=" + baseValue + ", delta=" + delta
         + "]";
+  }
+
+  @Override
+  public IValuation safeCopy() {
+    return new ComplementaryValuation(this.baseValue, this.delta);
   }
   
   

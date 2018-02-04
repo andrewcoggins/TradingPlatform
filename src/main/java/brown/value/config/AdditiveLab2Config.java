@@ -11,9 +11,9 @@ import brown.value.valuation.ValuationType;
  * Configuration for simple valuations. 
  * @author acoggins
  */
-public class SSSPConfig extends ValConfig {
+public class AdditiveLab2Config extends ValConfig {
   
-  public SSSPConfig(Set<ITradeable> allGoods) {
+  public AdditiveLab2Config(Set<ITradeable> allGoods) {
     super(new AdditiveValuationDistribution(new LabTwoValGenerator(), allGoods), ValuationType.Auction);
   }
   

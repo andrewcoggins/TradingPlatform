@@ -57,7 +57,6 @@ public class AuctionChannel extends AbsChannel {
       }
       if (fixedBids.size() > 0) {
         TradeMessage toSend = (new TradeMessage(0,new AuctionBidBundle(fixedBids),this.ID,agent.ID));
-        System.out.println(toSend);
         agent.CLIENT.sendTCP(toSend);
       }     
     } else {
