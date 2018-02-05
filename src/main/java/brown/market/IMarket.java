@@ -1,5 +1,6 @@
 package brown.market;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import brown.market.library.PrevStateInfo;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
+import brown.value.valuation.IValuation;
 
 public interface IMarket {
   
@@ -76,5 +78,7 @@ public interface IMarket {
 
   // sets groupings
   public void setGroupings(List<Integer> groups);
+
+  void record(Map<Integer,IValuation> privateVals) throws IOException;
   
 }

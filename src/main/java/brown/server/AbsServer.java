@@ -243,6 +243,12 @@ public abstract class AbsServer {
             for (Integer agent : reports.keySet()) {      
               this.theServer.sendToTCP(this.privateToConnection(agent).getID(), reports.get(agent).sanitize(agent,this.privateToPublic));
             }
+            // record
+            try {
+              auction.record(this.privateValuations);
+            } catch (IOException e) {
+              Logging.log("IOException in record method");
+            }
             if (!auction.isOverOuter()) {
               Logging.log("[*] Auction has been reset");
               auction.resetInnerMarket();              

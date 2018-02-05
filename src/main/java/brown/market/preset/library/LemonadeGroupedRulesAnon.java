@@ -6,6 +6,7 @@ import brown.rules.library.LemonadeAnonymous;
 import brown.rules.library.LemonadeGroupedPayment;
 import brown.rules.library.LemonadeQuery;
 import brown.rules.library.LemonadeActivity;
+import brown.rules.library.NoRecordKeeping;
 import brown.rules.library.ThreeFourFiveGrouping;
 import brown.rules.library.OneShotTermination;
 import brown.rules.library.XRoundTermination;
@@ -25,6 +26,7 @@ public class LemonadeGroupedRulesAnon extends AbsMarketPreset {
         new LemonadeActivity(numSlots),
         new LemonadeAnonymous(numSlots), 
         new OneShotTermination(),
-        new XRoundTermination(numRuns));
+        new XRoundTermination(numRuns),
+        new NoRecordKeeping());
   } 
 }

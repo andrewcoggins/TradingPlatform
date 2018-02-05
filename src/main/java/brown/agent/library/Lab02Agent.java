@@ -31,7 +31,12 @@ public class Lab02Agent extends AbsLab02Agent {
   } 
 	
 	public static void main(String[] args) throws AgentCreationException {
-		new Lab02Agent("mslab4b-l", 2121);
+		new Lab02Agent("localhost", 2121);
+    new Lab02Agent("localhost", 2121);		
+    new Lab02Agent("localhost", 2121);
+    new Lab02Agent("localhost", 2121);  
+    new Lab02Agent("localhost", 2121);
+    new Lab02Agent("localhost", 2121);     
 		while (true) {}
 	}
 }

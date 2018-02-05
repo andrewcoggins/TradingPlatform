@@ -1,5 +1,6 @@
 package brown.market.library;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,8 @@ import brown.rules.IInnerTC;
 import brown.rules.IOuterTC;
 import brown.rules.IPaymentRule;
 import brown.rules.IQueryRule;
+import brown.rules.IRecordKeepingRule;
+import brown.value.valuation.IValuation;
 
 public class Market implements IMarket {
 
@@ -30,6 +33,7 @@ public class Market implements IMarket {
   private final IInnerTC ITCONDITION;
   private final IOuterTC OTCONDITION; 
   private final IMarketState STATE;
+  private final IRecordKeepingRule rRule;
   
   public Market(AbsMarketPreset rules, IMarketState state) {
     this.PRULE = rules.pRule;
@@ -41,6 +45,7 @@ public class Market implements IMarket {
     this.ITCONDITION = rules.innerTCondition;
     this.OTCONDITION = rules.outerTCondition;
     this.STATE = state;
+    this.rRule = rules.rRule;
  }
   
   @Override
@@ -119,5 +124,10 @@ public class Market implements IMarket {
   @Override
   public void setGroupings(List<Integer> agents){
     this.GRULE.setGrouping(this.STATE, agents);
+  }
+  
+  @Override
+  public void record(Map<Integer,IValuation> privateVals) throws IOException{    
+    this.rRule.record(this.STATE, privateVals);
   }
 }

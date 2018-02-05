@@ -8,6 +8,7 @@ import brown.rules.IInnerTC;
 import brown.rules.IOuterTC;
 import brown.rules.IPaymentRule;
 import brown.rules.IQueryRule;
+import brown.rules.IRecordKeepingRule;
 
 /**
  * provides a clean format for creating sets of rules for markets.
@@ -22,10 +23,11 @@ public abstract class AbsMarketPreset {
   public IInnerTC innerTCondition; 
   public IOuterTC outerTCondition;
   public IGroupingRule gRule; 
+  public IRecordKeepingRule rRule;
   
   public AbsMarketPreset(IAllocationRule aRule, IPaymentRule pRule, IQueryRule qRule, IGroupingRule gRule,
       IActivityRule oneShotActivity, IInformationRevelationPolicy infoPolicy, IInnerTC innerTCondition, 
-      IOuterTC outerTCondition) {
+      IOuterTC outerTCondition, IRecordKeepingRule rRule) {
     this.aRule = aRule; 
     this.pRule = pRule; 
     this.qRule = qRule; 
@@ -34,5 +36,6 @@ public abstract class AbsMarketPreset {
     this.infoPolicy = infoPolicy; 
     this.innerTCondition = innerTCondition; 
     this.outerTCondition = outerTCondition; 
+    this.rRule = rRule;
   }
 }

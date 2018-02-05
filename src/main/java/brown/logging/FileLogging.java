@@ -18,7 +18,7 @@ public class FileLogging implements ILogging {
  */
   public static void log(Map<Integer, Double> aMap, String filePath) throws IOException {
     if (FILELOGGING) {
-      PrintWriter out = new PrintWriter(new FileWriter(filePath));
+      PrintWriter out = new PrintWriter(new FileWriter(filePath, true));
       for (Entry<Integer, Double> anEntry : aMap.entrySet()) {
         out.println(anEntry.getKey() + ", " + anEntry.getValue());
       }
