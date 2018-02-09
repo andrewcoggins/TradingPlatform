@@ -8,7 +8,7 @@ import brown.value.generator.library.UniformValGenerator;
 import brown.value.valuation.ValuationType;
 
 /**
- * Configuration for simple valuations. 
+ * Configuration for simple valuations over a uniform distribution.
  * @author acoggins
  */
 public class AdditiveUniformConfig extends ValConfig {

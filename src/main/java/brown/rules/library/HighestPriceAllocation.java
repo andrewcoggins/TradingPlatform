@@ -29,6 +29,7 @@ public class HighestPriceAllocation implements IAllocationRule {
 
   @Override
   public void setAllocation(IMarketState state) {
+    // a grouping is a list of lists of agent IDs.
     List<List<Integer>> grouping = state.getGroups();       
     Map<Integer,List<ITradeable>> alloc = new HashMap<Integer,List<ITradeable>>();
 

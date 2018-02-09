@@ -8,7 +8,7 @@ import brown.logging.Logging;
 import brown.messages.library.TradeMessage;
 
 /**
- * The channel through which an agent communicates to the server in the lemonade game.
+ * Game channel is the channel through which server and agent communicate in non-auction games.
  * @author andrew
  */
 public class GameChannel extends AbsChannel {

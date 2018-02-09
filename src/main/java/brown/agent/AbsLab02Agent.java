@@ -15,6 +15,11 @@ import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
 import brown.value.valuation.IValuation;
 
+/**
+ * Abstract agent for lab 2, first and second price simple sealed auction.
+ * @author acoggins
+ *
+ */
 public abstract class AbsLab02Agent extends AbsSimpleSealedAgent {
 	private double valuation;
 	private ITradeable tradeable;

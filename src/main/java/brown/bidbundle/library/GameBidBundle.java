@@ -4,6 +4,11 @@ import brown.bid.library.GameBid;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
 
+/**
+ * the bid bundle for non-auction games is called GameBidBundle
+ * @author acoggins
+ *
+ */
 public class GameBidBundle implements IBidBundle {
 
   private final GameBid BIDS;

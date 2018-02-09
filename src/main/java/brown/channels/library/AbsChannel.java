@@ -2,6 +2,11 @@ package brown.channels.library;
 
 import brown.channels.IAgentChannel;
 
+/**
+ * abstract agent channel.
+ * @author acoggins
+ *
+ */
 public abstract class AbsChannel implements IAgentChannel{
 
   public final Integer ID;

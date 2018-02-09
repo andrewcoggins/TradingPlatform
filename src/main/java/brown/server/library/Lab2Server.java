@@ -40,8 +40,8 @@ public class Lab2Server {
 	    List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
 	    // PairSSSP for second price, SSFP for first price
 	    // Writes out agentID, bid, valuation
-	    oneMarket.add(new PairSSFP(1,"/Users/Kerry/Documents/Brown/HTA_1951K/testFile.csv"));   
-	    // oneMarket.add(new PairSSSP(1));
+	    // oneMarket.add(new PairSSFP(1,"/Users/Kerry/Documents/Brown/HTA_1951K/testFile.csv"));   
+	    oneMarket.add(new PairSSSP(1));
 	    SimulMarkets markets = new SimulMarkets(oneMarket);
 	
 	    List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  

@@ -10,7 +10,6 @@ import java.util.Map.Entry;
 
 import brown.bid.interim.BidType;
 import brown.bidbundle.library.AuctionBidBundle;
-import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.TradeMessage;
