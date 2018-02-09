@@ -6,7 +6,7 @@ import java.util.List;
 import brown.market.marketstate.IMarketState;
 import brown.rules.IGroupingRule;
 
-public class OneGrouping implements IGroupingRule{
+public class OneGrouping implements IGroupingRule {
 
   @Override
   public void setGrouping(IMarketState state, List<Integer> agents) {
@@ -17,6 +17,7 @@ public class OneGrouping implements IGroupingRule{
 
   // Do this if you want to change groups on inner markets
   @Override
-  public void reset() {    
+  public void reset() { 
+    
   }
 }

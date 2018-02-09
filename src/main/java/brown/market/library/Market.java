@@ -103,13 +103,13 @@ public class Market implements IMarket {
   }
   
   @Override
-  public PrevStateInfo constructSummaryState(){
+  public PrevStateInfo constructSummaryState() {
     this.IRPOLICY.constructSummaryState(this.STATE);
     return this.STATE.getSummaryState();
   }
   
   @Override
-  public void resetInnerMarket(){
+  public void resetInnerMarket() {
     this.ACTRULE.reset();
     this.ARULE.reset();
     this.IRPOLICY.reset();
@@ -122,12 +122,12 @@ public class Market implements IMarket {
   }
   
   @Override
-  public void setGroupings(List<Integer> agents){
+  public void setGroupings(List<Integer> agents) {
     this.GRULE.setGrouping(this.STATE, agents);
   }
   
   @Override
-  public void record(Map<Integer,IValuation> privateVals) throws IOException{    
+  public void record(Map<Integer,IValuation> privateVals) throws IOException {    
     this.rRule.record(this.STATE, privateVals);
   }
 }

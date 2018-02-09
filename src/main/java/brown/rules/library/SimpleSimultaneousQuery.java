@@ -15,7 +15,7 @@ public class SimpleSimultaneousQuery implements IQueryRule {
 	public void makeChannel(IMarketState state) {	  
     Map<Integer,Integer> idToGroup = new HashMap<Integer,Integer>();
     for (List<Integer> agents : state.getGroups()){
-      for (Integer a : agents){
+      for (Integer a : agents) {
         idToGroup.put(a, agents.size());
       }
     }    	  

@@ -40,7 +40,7 @@ public class AuctionChannel extends AbsChannel {
 	public void dispatchMessage(AbsAgent agent) {
 		if (agent instanceof AbsSimpleSealedAgent) {
         AbsSimpleSealedAgent simpleSealedBidAgent = (AbsSimpleSealedAgent) agent; 
-        simpleSealedBidAgent.onSSSP(this);
+        simpleSealedBidAgent.onSimpleSealed(this);
       }
 	}
 

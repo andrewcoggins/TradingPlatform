@@ -30,6 +30,15 @@ public class TradeRequestMessage extends AbsMessage {
 		idToSize = null;
 	}
 
+	/**
+	 * 
+	 * @param ID
+	 * an ID for the trade request
+	 * @param market
+	 * the agent channel to be sent
+	 * @param idToSize
+	 * a map from agents' private IDs to the size of the auctions that they are bidding in. 
+	 */
 	public TradeRequestMessage(Integer ID, IAgentChannel market, Map<Integer, Integer> idToSize) {
 		super(ID);
 		this.MARKET = market;
@@ -42,7 +51,7 @@ public class TradeRequestMessage extends AbsMessage {
 		this.MARKET.dispatchMessage(agent);
 	}
 
-	public TradeRequestMessage sanitize(Integer agent, Map<Integer,Integer> privateToPublic){
+	public TradeRequestMessage sanitize(Integer agent, Map<Integer,Integer> privateToPublic) {
 	  Map<Integer,Integer> sanitizedMap = new HashMap<Integer,Integer>();
 	  for (Integer id : idToSize.keySet()){
 	    if (id.equals(agent)){

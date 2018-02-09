@@ -18,19 +18,19 @@ public class PairGrouping implements IGroupingRule{
     Collections.sort(agents);
     Logging.log("AGENTS: " + agents.toString());
     
-    if (agents.size() <= 2){
+    if (agents.size() <= 2) {
       groups.add(new LinkedList<Integer>(agents));
     } else {
       int remainder  = agents.size() % 2;
       // 1 group of 3
-      if (remainder == 1){
+      if (remainder == 1) {
         List<Integer> toAdd = new LinkedList<Integer>();
         toAdd.add(agents.remove(0));
         toAdd.add(agents.remove(0));
         toAdd.add(agents.remove(0));
         groups.add(toAdd);
       }
-      while (agents.size() > 0){
+      while (agents.size() > 0) {
         List<Integer> toAdd = new LinkedList<Integer>();
         toAdd.add(agents.remove(0));            
         toAdd.add(agents.remove(0));                    

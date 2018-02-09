@@ -17,6 +17,8 @@ public class BidType implements IBidType {
     this.price = price; 
     this.quantity = quantity; 
   }
+  
+  
 
   @Override
   public String toString() {

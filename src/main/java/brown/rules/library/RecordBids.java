@@ -3,7 +3,6 @@ package brown.rules.library;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -16,7 +15,7 @@ import brown.rules.IRecordKeepingRule;
 import brown.tradeable.ITradeable;
 import brown.value.valuation.IValuation;
 
-public class RecordBids implements IRecordKeepingRule{
+public class RecordBids implements IRecordKeepingRule {
   private final String path;
   
   public RecordBids(String path) {
