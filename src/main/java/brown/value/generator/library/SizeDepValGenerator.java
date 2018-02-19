@@ -2,6 +2,14 @@ package brown.value.generator.library;
 
 import brown.value.generator.IValuationGenerator;
 
+/**
+ * size dependent-generator generates valuations over a bundle of
+ * an input size.
+ * Doesn't make a lot of sense with valuations as they are, should
+ * probably be deleted.
+ * @author acoggins
+ *
+ */
 public class SizeDepValGenerator implements IValuationGenerator {
 
   private Integer size; 
@@ -13,8 +21,9 @@ public class SizeDepValGenerator implements IValuationGenerator {
   }
   
   /**
-   * Option without a scale.
-   * @param valFunction
+   * size dependent generator takes in a size.
+   * @param size
+   * size of bundle to be valued.
    */
   public SizeDepValGenerator(Integer size) {
     this.size = size; 

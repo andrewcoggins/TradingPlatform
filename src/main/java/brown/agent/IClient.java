@@ -6,7 +6,7 @@ import brown.messages.library.StringMessage;
 
 /**
  * Agents are responsible for receiving messages from the server,
- * constructing bids, and sending them back.
+ * constructing bids, and sending them back to the server.
  * @author andrew
  *
  */

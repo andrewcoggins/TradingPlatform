@@ -15,6 +15,11 @@ import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
 import brown.value.valuation.IValuation;
 
+/**
+ * Abstract agent for lab 2, first and second price simple sealed auction.
+ * @author acoggins
+ *
+ */
 public abstract class AbsLab02Agent extends AbsSimpleSealedAgent {
 	private double valuation;
 	private ITradeable tradeable;
@@ -23,7 +28,7 @@ public abstract class AbsLab02Agent extends AbsSimpleSealedAgent {
 		super(host, port, gameSetup);
 	}
 	
-	public abstract void onAuction(AuctionChannel channel);
+	public abstract void onSimpleSealed(AuctionChannel channel);
 	
 	@Override
 	public void onPrivateInformation(PrivateInformationMessage privateInfo) {  
@@ -37,10 +42,6 @@ public abstract class AbsLab02Agent extends AbsSimpleSealedAgent {
 		this.valuation = super.valuation.getValuation(this.tradeable);
 	}
 	
-	@Override
-	public void onSSSP(AuctionChannel channel) {
-		this.onAuction(channel);
-	}
 
 	public void submitBid(AuctionChannel channel, double bid) {
 		Map<ITradeable, BidType> bidMap = new HashMap<ITradeable, BidType>();

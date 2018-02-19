@@ -22,7 +22,7 @@ public class SimpleSealedAgent extends AbsSimpleSealedAgent {
   }
   
   @Override
-  public void onSSSP(AuctionChannel simpleChannel) {
+  public void onSimpleSealed(AuctionChannel simpleChannel) {
     Map<ITradeable, BidType> initial = new HashMap<ITradeable, BidType>();
     for (ITradeable t: this.tradeables) {
       initial.put(t, new BidType(this.valuation.getValuation(t).doubleValue(), 1));

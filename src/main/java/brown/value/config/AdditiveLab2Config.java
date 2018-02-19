@@ -8,7 +8,7 @@ import brown.value.generator.library.LabTwoValGenerator;
 import brown.value.valuation.ValuationType;
 
 /**
- * Configuration for simple valuations. 
+ * Configuration for simple valuations over distribution used in lab two. 
  * @author acoggins
  */
 public class AdditiveLab2Config extends ValConfig {

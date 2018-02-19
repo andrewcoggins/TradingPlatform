@@ -12,6 +12,12 @@ import brown.tradeable.ITradeable;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.IValuation;
 
+/**
+ * abstract agent for simple sealed auctions. 
+ * All agents that bid in simple sealed auctions will extend this class.
+ * @author acoggins
+ *
+ */
 public abstract class AbsSimpleSealedAgent extends AbsAgent implements ISimpleSealedAgent {
   
   protected List<ITradeable> tradeables; 
@@ -24,6 +30,7 @@ public abstract class AbsSimpleSealedAgent extends AbsAgent implements ISimpleSe
     this.tradeables = new LinkedList<ITradeable>();
   }
   
+  // stores agent tradeables, valuation and valuation distribution.
   @Override
   public void onPrivateInformation(PrivateInformationMessage privateInfo) {   
     if (privateInfo instanceof ValuationInformationMessage) {

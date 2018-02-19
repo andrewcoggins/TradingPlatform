@@ -6,6 +6,12 @@ import org.apache.commons.math3.random.RandomGenerator;
 
 import brown.value.generator.IValuationGenerator;
 
+/**
+ * generates normally distributed values according to an 
+ * input mean and variance.
+ * @author acoggins
+ *
+ */
 public class NormalValGenerator implements IValuationGenerator {
 
   private Double mean; 

@@ -28,7 +28,6 @@ import brown.messages.library.ValuationInformationMessage;
 import brown.setup.ISetup;
 import brown.setup.library.Startup;
 import brown.summary.AuctionSummarizer;
-import brown.summary.ISimulationSummarizer;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;
 import brown.value.valuation.IValuation;

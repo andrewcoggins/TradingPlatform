@@ -16,7 +16,7 @@ import brown.messages.library.TradeMessage;
 import brown.tradeable.ITradeable;
 
 /*
- * Implements IMarket for Simple auctions
+ * Auction channel is the communication channel between the server and the agent in auctions.
  */
 public class AuctionChannel extends AbsChannel {
 		
@@ -40,7 +40,7 @@ public class AuctionChannel extends AbsChannel {
 	public void dispatchMessage(AbsAgent agent) {
 		if (agent instanceof AbsSimpleSealedAgent) {
         AbsSimpleSealedAgent simpleSealedBidAgent = (AbsSimpleSealedAgent) agent; 
-        simpleSealedBidAgent.onSSSP(this);
+        simpleSealedBidAgent.onSimpleSealed(this);
       }
 	}
 

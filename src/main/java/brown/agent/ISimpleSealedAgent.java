@@ -8,6 +8,6 @@ public interface ISimpleSealedAgent {
    * Provides agent response to sealed-bid auction
    * @param channel - simple agent channel
    */
-  public void onSSSP(AuctionChannel channel);
+  public void onSimpleSealed(AuctionChannel channel);
   
 }
