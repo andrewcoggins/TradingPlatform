@@ -214,6 +214,7 @@ public abstract class AbsServer {
           } else {
             List<Order> winners = auction.constructOrders();
             Ledger ledger = this.manager.getLedger(auction.getID());
+            System.out.println(ledger);
             // Go through winners and execute orders
             for (Order winner : winners) {                      
               if (this.acctManager.containsAcct(winner.TO)) {

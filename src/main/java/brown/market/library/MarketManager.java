@@ -1,6 +1,7 @@
 package brown.market.library;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,6 +10,7 @@ import brown.accounting.library.Ledger;
 import brown.market.IMarketManager;
 import brown.market.marketstate.library.MarketState;
 import brown.market.preset.AbsMarketPreset;
+import brown.server.library.SimulMarkets;
 import brown.tradeable.ITradeable;
 
 /**
@@ -17,45 +19,55 @@ import brown.tradeable.ITradeable;
  *
  */
 public class MarketManager implements IMarketManager {
-	private Map<Market, Ledger> ledgers;
-	private Map<Integer, Market> markets;
+	private List<Map<Market, Ledger>> ledgers;
+	private List<Map<Integer, Market>> markets;
 	private PrevStateInfo information;
+	private Integer index; 
 	
-	/**
-	 * For Kryo do not use
-	 */
+
 	public MarketManager() {
-		this.ledgers = new ConcurrentHashMap<Market, Ledger>();
-		this.markets = new ConcurrentHashMap<Integer, Market>();	
+		this.ledgers = new LinkedList<Map<Market, Ledger>>();
+		this.markets = new LinkedList<Map<Integer, Market>>();	
 		this.information = null;
-	}
-	
-	/**
-	 * Closes a market and tells it to convert if applicable
-	 * @param server
-	 * @param ID
-	 * @param closingState
-	 */
-	public void close(Integer ID) {
-		this.markets.remove(ID);
+		this.index = -1; 
 	}
 
+  public void addSimulMarket(SimulMarkets s, List<ITradeable> tradeables, List<Integer> agents) {
+	  this.index++;
+	  int id = 0; 
+	  this.ledgers.add(new ConcurrentHashMap<Market, Ledger>());
+	  this.markets.add(new ConcurrentHashMap<Integer, Market>());
+	  for (AbsMarketPreset preset : s.getMarkets()) {
+	    this.open(preset, id, tradeables, agents);
+	    id++;
+	  }
+	}
+	  
 	/**
 	 * Opens a market
 	 * @param market
 	 * @return
 	 */
-	public boolean open(AbsMarketPreset rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents){
+	public boolean open(AbsMarketPreset rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents) {
 	  Market market = new Market(rules, new MarketState(marketID,tradeables,this.information));
-	   if (ledgers.containsKey(market)) {
+	   if (ledgers.get(index).containsKey(market)) {
 	      return false;
-	    }
+	   }
 	   market.setGroupings(agents);
-	   this.ledgers.put(market, new Ledger(market.getID()));
-	   this.markets.put(market.getID(), market);
+	   this.ledgers.get(index).put(market, new Ledger(market.getID()));
+	   this.markets.get(index).put(market.getID(), market);
 	   return true;
 	}
-
+	
+	 /**
+   * Closes a market 
+   * @param server
+   * @param ID
+   * @param closingState
+   */
+  public void close(Integer ID) {
+    this.markets.remove(ID);
+  }
 
 	/**
 	 * Gets the ledger for this market ID
@@ -63,7 +75,7 @@ public class MarketManager implements IMarketManager {
 	 * @return
 	 */
 	public Ledger getLedger(Integer ID) {
-		return ledgers.get(markets.get(ID));
+		return ledgers.get(index).get(markets.get(index).get(ID));
 	}
 
 	/**
@@ -72,7 +84,7 @@ public class MarketManager implements IMarketManager {
 	 * @return
 	 */
 	public Market getMarket(Integer ID) {
-		return markets.get(ID);
+		return markets.get(index).get(ID);
 	}
 
 	/**
@@ -80,15 +92,15 @@ public class MarketManager implements IMarketManager {
 	 * @return
 	 */
 	public Collection<Market> getAuctions() {
-		return this.markets.values();
+		return this.markets.get(index).values();
 	}
 
 	// update information from a market
   public void update(Integer marketID) {
-   this.information.combine(this.markets.get(marketID).constructSummaryState());
+   this.information.combine(this.markets.get(index).get(marketID).constructSummaryState());
   }
   
-  public boolean anyMarketsOpen(){
+  public boolean anyMarketsOpen() {
     boolean toReturn = false;
     for (Market m : this.getAuctions()){
       if (!m.isOverOuter()){
@@ -101,6 +113,7 @@ public class MarketManager implements IMarketManager {
   public void reset() {
     this.ledgers.clear();
     this.markets.clear();
+    this.index = -1;
     this.information = null;
   }
 }

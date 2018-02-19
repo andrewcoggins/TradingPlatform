@@ -2,8 +2,6 @@ package brown.server.library;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map.Entry;
-
 import brown.logging.Logging;
 import brown.market.preset.AbsMarketPreset;
 import brown.server.AbsServer;
@@ -11,7 +9,6 @@ import brown.setup.ISetup;
 import brown.summary.AuctionSummarizer;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;
-import brown.value.valuation.IValuation;
 
 public class RunServer extends AbsServer{
 
@@ -67,10 +64,7 @@ public class RunServer extends AbsServer{
       initializeAgents();
       int id = 0;                     
       for (SimulMarkets s : sim.getSequence()) {
-        for (AbsMarketPreset ruleSet : s.getMarkets()) {
-          this.manager.open(ruleSet, new Integer(id), sim.getTradeables(),new LinkedList<Integer>(this.connections.values()));
-          id++;
-        }
+        this.manager.addSimulMarket(s, sim.getTradeables(), new LinkedList<Integer>(this.connections.values()));
         this.completeAuctions(lag);            
       } 
       this.summarizer.collectInformation(this.acctManager.getAccounts(), this.privateValuations);
