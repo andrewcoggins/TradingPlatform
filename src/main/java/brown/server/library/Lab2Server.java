@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import brown.market.preset.AbsMarketPreset;
+import brown.market.preset.library.NormalSSFP;
 import brown.market.preset.library.PairSSFP;
 import brown.market.preset.library.PairSSSP;
 import brown.market.preset.library.SSSPRules;
@@ -40,7 +41,7 @@ public class Lab2Server {
 	    List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
 	    // PairSSSP for second price, SSFP for first price
 	    // Writes out agentID, bid, valuation
-	    oneMarket.add(new PairSSFP(1,"/Users/Kerry/Documents/Brown/HTA_1951K/testFile.csv"));   
+	    oneMarket.add(new NormalSSFP(1,"/Users/Kerry/Documents/Brown/HTA_1951K/testFile.csv"));   
 	    // oneMarket.add(new PairSSSP(1));
 	    SimulMarkets markets = new SimulMarkets(oneMarket);
 	
