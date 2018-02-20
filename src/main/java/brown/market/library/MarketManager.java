@@ -18,8 +18,11 @@ import brown.tradeable.ITradeable;
  * @author lcamery
  *
  */
+
 public class MarketManager implements IMarketManager {
+  // stores all ledgers in a simulation
 	private List<Map<Market, Ledger>> ledgers;
+	// stores all markets in a simulation
 	private List<Map<Integer, Market>> markets;
 	private PrevStateInfo information;
 	private Integer index; 
@@ -66,7 +69,7 @@ public class MarketManager implements IMarketManager {
    * @param closingState
    */
   public void close(Integer ID) {
-    this.markets.remove(ID);
+    this.markets.get(index).remove(ID);
   }
 
 	/**
@@ -102,7 +105,7 @@ public class MarketManager implements IMarketManager {
   
   public boolean anyMarketsOpen() {
     boolean toReturn = false;
-    for (Market m : this.getAuctions()){
+    for (Market m : this.getAuctions()) {
       if (!m.isOverOuter()){
         toReturn = true;
       }
