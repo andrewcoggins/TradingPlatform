@@ -7,5 +7,5 @@ package brown.bidbundle;
  * @author acoggins
  */
 public enum BundleType {
-	AUCTION, GAME
+	AUCTION, GAME, TWOSIDED
 }

@@ -43,6 +43,9 @@ public class MarketState implements IMarketState {
   private PrevStateInfo prevState;
   private PrevStateInfo summaryState;
   
+  // Orderbook for two sided markets
+  private OrderBook orderbook;
+  
   public MarketState(Integer ID, List<ITradeable> allGoods, PrevStateInfo prevState) {
     this.ID = ID; 
     this.TRADEABLES = allGoods; 
@@ -56,6 +59,7 @@ public class MarketState implements IMarketState {
     this.payments = new LinkedList<Order>();
     this.prevState = prevState;
     this.groups = new LinkedList<List<Integer>>();
+    this.orderbook = new OrderBook();
   }
   
   @Override
@@ -80,6 +84,7 @@ public class MarketState implements IMarketState {
 
   @Override
   public void addBid(TradeMessage bid) {
+    orderbook.addTradeMessage(bid);
     bids.add(bid);
   }
 
