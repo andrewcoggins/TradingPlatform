@@ -6,6 +6,7 @@ import java.util.Map;
 import brown.bidbundle.IBidBundle;
 import brown.market.library.PrevStateInfo;
 import brown.market.marketstate.library.Order;
+import brown.market.marketstate.library.OrderBook;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
@@ -102,6 +103,8 @@ public interface IMarketState {
     public List<List<Integer>> getGroups();
     
     public void setGroups(List<List<Integer>> groups);
+
+    public OrderBook getOrderBook();
     
     //TODO: market update. 
 

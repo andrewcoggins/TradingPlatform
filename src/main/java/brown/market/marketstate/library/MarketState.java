@@ -238,4 +238,9 @@ public class MarketState implements IMarketState {
   public void setGroups(List<List<Integer>> groups) {
     this.groups = groups;    
   }
+
+  @Override
+  public OrderBook getOrderBook() {
+    return this.orderbook;
+  }
 }

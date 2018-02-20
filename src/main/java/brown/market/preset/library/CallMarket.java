@@ -1,6 +1,10 @@
 package brown.market.preset.library;
 
 import brown.market.preset.AbsMarketPreset;
+import brown.rules.library.BlankAllocation;
+import brown.rules.library.CallMarketAllocation;
+import brown.rules.library.CallMarketPayment;
+import brown.rules.library.CallMarketQuery;
 import brown.rules.library.NoRecordKeeping;
 import brown.rules.library.OneGrouping;
 import brown.rules.library.OneShotTermination;
@@ -20,7 +24,7 @@ public class CallMarket extends AbsMarketPreset {
    * or otherwise delete it from this constructor.
    */
   public CallMarket(int numRuns, String filePath) {
-    super(new CallMarketAllocation(),
+    super(new BlankAllocation(),
         new CallMarketPayment(),
         new CallMarketQuery(), 
         new OneGrouping(),
