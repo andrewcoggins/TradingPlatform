@@ -2,6 +2,7 @@ package brown.market.preset.library;
 
 import brown.market.preset.AbsMarketPreset;
 import brown.rules.library.BlankAllocation;
+import brown.rules.library.CallMarketActivity;
 import brown.rules.library.CallMarketAllocation;
 import brown.rules.library.CallMarketPayment;
 import brown.rules.library.CallMarketQuery;

@@ -7,7 +7,7 @@ import brown.value.distribution.library.AdditiveValuationDistribution;
 import brown.value.generator.library.LabTwoValGenerator;
 import brown.value.valuation.ValuationType;
 
-public class PredictionMarketDecoysConfig extends ValConfig{
+public class PredictionMarketDecoysConfig extends ValConfig {
   
   
   

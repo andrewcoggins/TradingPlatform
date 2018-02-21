@@ -8,46 +8,10 @@ import brown.bid.library.BidDirection;
 import brown.bid.library.TwoSidedBid;
 import brown.bidbundle.BundleType;
 import brown.logging.Logging;
+import brown.market.marketstate.IOrderBook;
 import brown.messages.library.TradeMessage;
 
-public class OrderBook {
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((buyOrders == null) ? 0 : buyOrders.hashCode());
-    result =
-        prime * result + ((sellOrders == null) ? 0 : sellOrders.hashCode());
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    OrderBook other = (OrderBook) obj;
-    if (buyOrders == null) {
-      if (other.buyOrders != null)
-        return false;
-    } else if (!buyOrders.equals(other.buyOrders))
-      return false;
-    if (sellOrders == null) {
-      if (other.sellOrders != null)
-        return false;
-    } else if (!sellOrders.equals(other.sellOrders))
-      return false;
-    return true;
-  }
-
-  @Override
-  public String toString() {
-    return "OrderBook [buyOrders=" + buyOrders + ", sellOrders=" + sellOrders
-        + "]";
-  }
+public class OrderBook implements IOrderBook {
 
   private List<BuyOrder> buyOrders;
   private List<SellOrder> sellOrders;
@@ -132,4 +96,43 @@ public class OrderBook {
     
     Logging.log(testbook.toString());
   }
+  
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((buyOrders == null) ? 0 : buyOrders.hashCode());
+    result =
+        prime * result + ((sellOrders == null) ? 0 : sellOrders.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    OrderBook other = (OrderBook) obj;
+    if (buyOrders == null) {
+      if (other.buyOrders != null)
+        return false;
+    } else if (!buyOrders.equals(other.buyOrders))
+      return false;
+    if (sellOrders == null) {
+      if (other.sellOrders != null)
+        return false;
+    } else if (!sellOrders.equals(other.sellOrders))
+      return false;
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "OrderBook [buyOrders=" + buyOrders + ", sellOrders=" + sellOrders
+        + "]";
+  }
+  
  }
