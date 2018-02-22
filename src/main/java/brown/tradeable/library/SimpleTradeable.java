@@ -29,5 +29,5 @@ public class SimpleTradeable extends AbsTradeable {
     toReturn.add(this);
     return toReturn;
   }
-
+  
 }

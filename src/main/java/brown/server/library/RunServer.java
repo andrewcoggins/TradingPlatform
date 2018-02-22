@@ -28,6 +28,24 @@ public class RunServer extends AbsServer{
     }
   }
 
+  /**
+   * run a simple simulation with only one market.
+   * @param allGoods
+   * all goods to be traded on. 
+   * @param rules
+   * rules of the market to be traded in.
+   * @param valInfo
+   * vlauation info related to the market.
+   * @param initialMonies
+   * initial money for the agents.
+   * @param initialGoods
+   * initial goods for the agents.
+   * @param delay
+   * delay time between trading rounds
+   * @param lag
+   * lag time for registration phase.
+   * @throws InterruptedException
+   */
   public void runSimpleSim(List<ITradeable> allGoods, AbsMarketPreset rules,
       ValConfig valInfo, double initialMonies, List<ITradeable> initialGoods, int delay, int lag) throws InterruptedException {
     this.valueConfig = valInfo;
@@ -35,41 +53,45 @@ public class RunServer extends AbsServer{
     this.initialMonies = initialMonies;
     this.initialGoods = initialGoods;   
     delay(delay);
-    initializeAgents();   
-    this.manager.open(rules,0,allGoods,new LinkedList<Integer>(this.connections.values()));   
+    initializeAgents();  
+    List<AbsMarketPreset> amp = new LinkedList<AbsMarketPreset>();
+    amp.add(rules);
+    SimulMarkets s = new SimulMarkets(amp);
+    this.manager.addSimulMarket(s, allGoods, new LinkedList<Integer>(this.connections.values())); 
     this.summarizer = new AuctionSummarizer(this.privateToPublic.keySet());
     this.completeAuctions(lag);
-    // this is kinda weird right now
     this.summarizer.collectInformation(this.acctManager.getAccounts(), this.privateValuations);
     printUtilities();
   }
   
-  // need to do something with valuation calculating utilities
-  // need to do something here about setting groupings
+  /**
+   * Runs a series of simulations.=
+   * @param sim
+   * the simluation to be run.  
+   * @param numRuns
+   * number of runs for the simulation.
+   * @param delay
+   * delay time between trading rounds.
+   * @param lag
+   * lag time for registration phase.
+   * @throws InterruptedException
+   */
   public void runSimulation(Simulation sim, int numRuns, int delay,int lag) throws InterruptedException {
-    //valuations
     this.valueConfig = sim.getValInfo();         
-    //tradeables
     this.allTradeables = sim.getTradeables();
-    //endowments
     this.initialMonies = sim.getInitialMonies(); 
     this.initialGoods = sim.getInitialGoods(); 
-    
-    //for now initialize here (later clean this interface/specify what goes where
-    // time for agents to register (Make registration happen here)
     delay(delay);    
     this.summarizer = new AuctionSummarizer(this.privateToPublic.keySet());
     int count = 0;
     while (count < numRuns) {
-      initializeAgents();
-      int id = 0;                     
+      initializeAgents();                   
       for (SimulMarkets s : sim.getSequence()) {
         this.manager.addSimulMarket(s, sim.getTradeables(), new LinkedList<Integer>(this.connections.values()));
         this.completeAuctions(lag);            
       } 
       this.summarizer.collectInformation(this.acctManager.getAccounts(), this.privateValuations);
       resetSim();
-      
       count++;
     }
     printUtilities();

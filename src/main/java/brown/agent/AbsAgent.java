@@ -11,6 +11,7 @@ import brown.messages.library.AbsMessage;
 import brown.messages.library.AccountResetMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.RegistrationMessage;
+import brown.messages.library.TradeRequestMessage;
 import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
 
