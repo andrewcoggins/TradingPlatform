@@ -7,6 +7,7 @@ import java.util.Set;
 
 import brown.market.preset.AbsMarketPreset;
 import brown.market.preset.library.CallMarket;
+import brown.market.preset.library.PredictionMarketSettlement;
 import brown.setup.library.CallMarketSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
@@ -29,12 +30,16 @@ public class CallMarketTest {
     allTradeablesList.add(new SimpleTradeable(0));
     
     List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();          
-    oneMarket.add(new CallMarket(seconds));
+    oneMarket.add(new CallMarket(seconds));        
+    SimulMarkets phase_one = new SimulMarkets(oneMarket);
     
-    SimulMarkets markets = new SimulMarkets(oneMarket);
+    List<AbsMarketPreset> twoMarket = new LinkedList<AbsMarketPreset>();
+    twoMarket.add(new PredictionMarketSettlement());    
+    SimulMarkets phase_two = new SimulMarkets(twoMarket);
     
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
-    seq.add(markets);
+    seq.add(phase_one);
+    seq.add(phase_two);
     
     Simulation testSim = new Simulation(seq,new PredictionMarketDecoysConfig(),
         allTradeablesList,1.,new LinkedList<ITradeable>());    

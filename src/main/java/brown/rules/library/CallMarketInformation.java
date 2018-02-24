@@ -6,6 +6,9 @@ import java.util.Map;
 
 import brown.accounting.library.Ledger;
 import brown.accounting.library.Transaction;
+import brown.logging.Logging;
+import brown.market.library.PredictionMarketInfo;
+import brown.market.library.PrevStateInfo;
 import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.CallMarketReportMessage;
@@ -45,9 +48,9 @@ public class CallMarketInformation implements IInformationRevelationPolicy{
   }
 
   @Override
-  public void constructSummaryState(IMarketState state) {    
-    prevState = 
-    
-    state.setSummaryState(prevState);
+  public void constructSummaryState(IMarketState state) {        
+    PrevStateInfo summary = new PredictionMarketInfo(this.ledger.getList());    
+    Logging.log("Constructing Summary State: " + summary.toString());
+    state.setSummaryState(summary);
   }  
 }

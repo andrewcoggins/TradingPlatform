@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import brown.accounting.library.Ledger;
+import brown.logging.Logging;
 import brown.market.IMarketManager;
 import brown.market.marketstate.library.MarketState;
 import brown.market.preset.AbsMarketPreset;
@@ -53,6 +54,7 @@ public class MarketManager implements IMarketManager {
 	 */
 	public boolean open(AbsMarketPreset rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents) {
 	  Market market = new Market(rules, new MarketState(marketID,tradeables,this.information));
+	  Logging.log("Opening Market, Information: " + this.information);
 	   if (ledgers.get(index).containsKey(market)) {
 	      return false;
 	   }
@@ -101,6 +103,7 @@ public class MarketManager implements IMarketManager {
 	// update information from a market
   public void update(Integer marketID) {
    this.information.combine(this.markets.get(index).get(marketID).constructSummaryState());
+   Logging.log("Updating Market, Information: " + this.information.toString());
   }
 
   public boolean anyMarketsOpen() {

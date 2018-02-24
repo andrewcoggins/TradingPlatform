@@ -19,10 +19,24 @@ public class PredictionMarketInfo extends PrevStateInfo{
     this.type = PrevStateType.PREDICTION;
   }
   
+  public PredictionMarketInfo(List<Transaction> trans) {
+    this.trueCoin = null;
+    this.tradeHistory = trans;
+    this.type = PrevStateType.PREDICTION;
+  }
+  
+  @Override
+  public String toString() {
+    return "PredictionMarketInfo [trueCoin=" + trueCoin + ", tradeHistory="
+        + tradeHistory + ", type=" + type + "]";
+  }
+
   @Override
   public void combine(PrevStateInfo prevState) {
     if (prevState.getType() == PrevStateType.PREDICTION){
       this.tradeHistory.addAll(((PredictionMarketInfo) prevState).tradeHistory);
+    } else if (prevState.getType() == PrevStateType.BLANK){
+      // don't do anything
     } else {
       Logging.log("Trying to combine prev state infos of incompatible types");
     }

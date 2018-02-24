@@ -10,6 +10,7 @@ import brown.market.marketstate.library.BuyOrder;
 import brown.market.marketstate.library.OrderBook;
 import brown.market.marketstate.library.SellOrder;
 import brown.messages.library.CallMarketReportMessage;
+import brown.messages.library.PredictionMarketReport;
 import brown.messages.library.PredictionMarketValuationMessage;
 import brown.setup.ISetup;
 
@@ -28,6 +29,7 @@ public class CallMarketSetup implements ISetup {
     kryo.register(CallMarketReportMessage.class);
     kryo.register(BuyOrder.class);
     kryo.register(SellOrder.class);
+    kryo.register(PredictionMarketReport.class);
   } 
   
 }

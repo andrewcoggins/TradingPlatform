@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import brown.channels.library.CallMarketChannel;
-import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeRequestMessage;
 import brown.rules.IQueryRule;

@@ -190,8 +190,8 @@ public class MarketState implements IMarketState {
   }
   
   @Override
-  public void setSummaryState(PrevStateInfo prevState){
-    this.summaryState = prevState;
+  public void setSummaryState(PrevStateInfo summary){
+    this.summaryState = summary;
   }
 
   @Override

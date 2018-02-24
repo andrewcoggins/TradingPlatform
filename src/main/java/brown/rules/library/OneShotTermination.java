@@ -1,6 +1,5 @@
 package brown.rules.library; 
 
-import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.rules.IInnerTC;
 
@@ -10,7 +9,11 @@ public class OneShotTermination implements IInnerTC {
   @Override
   public void innerTerminated(IMarketState state) {
     boolean over = state.getBids().size() > 0; 
+    if (state.getOuterOver()){
+      over = true;
+    }
     state.setInnerOver(over);
+    
   }
 
   @Override

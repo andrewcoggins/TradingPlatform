@@ -29,7 +29,6 @@ public class CallMarketPayment  implements IPaymentRule {
     PriorityQueue<BuyOrder> buys = book.getBuys();
     PriorityQueue<SellOrder> sells = book.getSells();
 
-    Logging.log(bids.size() + " BIDS");
     for (TradeMessage bid : bids){
       if (bid.Bundle.getType() != BundleType.TWOSIDED){
         Logging.log("Wrong kind of Bid in Call Market payment");
@@ -39,7 +38,6 @@ public class CallMarketPayment  implements IPaymentRule {
         if (tsbid.direction == BidDirection.BUY){
           boolean crossed = true;
           while (numToFill > 0 & sells.size() > 0 & crossed){
-            Logging.log("NUMTOFILL: " + numToFill + ", size of book: " + sells.size());
             // poll the best sell order
             SellOrder bestSell = sells.poll();
             if (bestSell.price <= tsbid.price){
@@ -49,19 +47,16 @@ public class CallMarketPayment  implements IPaymentRule {
               orders.add(new Order(bestSell.agent, bid.AgentID, midpoint, quantity,new SimpleTradeable(tradeableID)));                
               numToFill = Math.max(0, numToFill - bestSell.quantity);                            
             } else {    
-              Logging.log("GETS HERE");
               crossed=false;
             }
           }
           // if OrderBook couldn't completely fill order, add it to unfilled orders          
           if (numToFill > 0 ){
-            Logging.log("Unfilled buy");
             buys.add(new BuyOrder(bid.AgentID, numToFill, tsbid.price));
           }
         } else if (tsbid.direction == BidDirection.SELL) {
           boolean crossed = true;          
-          while (numToFill > 0 & buys.size() > 0 & crossed){
-            Logging.log("NUMTOFILL: " + numToFill + ", size of book: " + buys.size());            
+          while (numToFill > 0 & buys.size() > 0 & crossed){   
             // poll the best sell order
             BuyOrder bestBuy = buys.poll();
             if (bestBuy.price >= tsbid.price){
@@ -75,8 +70,7 @@ public class CallMarketPayment  implements IPaymentRule {
             }
           }
           // if OrderBook couldn't completely fill order, add it to unfilled orders          
-          if (numToFill > 0 ){  
-            Logging.log("Unfilled sell");            
+          if (numToFill > 0 ){   
             sells.add(new SellOrder(bid.AgentID, numToFill, tsbid.price));
           }          
         } else {
@@ -89,8 +83,6 @@ public class CallMarketPayment  implements IPaymentRule {
     book.setSells(sells);
     
     state.setOrderBook(book);
-    Logging.log("BOOK: " + book.toString());    
-    Logging.log("ORDERS: " + orders);
     state.setPayments(orders);
   }
   

@@ -7,8 +7,9 @@ import brown.rules.library.NoBiddingActivity;
 import brown.rules.library.NoBiddingTermination;
 import brown.rules.library.NoRecordKeeping;
 import brown.rules.library.OneGrouping;
-import brown.rules.library.OneShotTermination;
-import brown.rules.library.XTimeTermination;
+import brown.rules.library.PredictionMarketInformation;
+import brown.rules.library.PredictionMarketPayment;
+import brown.rules.library.XRoundTermination;
 
 public class PredictionMarketSettlement extends AbsMarketPreset {
   /**
@@ -16,7 +17,7 @@ public class PredictionMarketSettlement extends AbsMarketPreset {
    * need to pass in the market internal state, 
    * or otherwise delete it from this constructor.
    */
-  public PredictionMarketSettlement(double minutes) {
+  public PredictionMarketSettlement() {
     super(new BlankAllocation(),
         new PredictionMarketPayment(),
         new CallMarketQuery(), 
@@ -24,7 +25,7 @@ public class PredictionMarketSettlement extends AbsMarketPreset {
         new NoBiddingActivity(),
         new PredictionMarketInformation(),
         new NoBiddingTermination(), 
-        new XTimeTermination(minutes),
+        new XRoundTermination(1),
         new NoRecordKeeping());
   }
 }
