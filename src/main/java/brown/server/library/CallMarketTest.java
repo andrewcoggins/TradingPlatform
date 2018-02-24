@@ -42,7 +42,7 @@ public class CallMarketTest {
     seq.add(phase_two);
     
     Simulation testSim = new Simulation(seq,new PredictionMarketDecoysConfig(),
-        allTradeablesList,1.,new LinkedList<ITradeable>());    
+        allTradeablesList,0.0,new LinkedList<ITradeable>());    
     RunServer testServer = new RunServer(2121, new CallMarketSetup());
     
     testServer.runSimulation(testSim, numSims, delayTime, lag);        
