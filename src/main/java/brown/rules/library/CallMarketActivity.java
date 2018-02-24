@@ -1,5 +1,7 @@
 package brown.rules.library;
 
+import brown.bid.library.TwoSidedBid;
+import brown.bidbundle.BundleType;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IActivityRule;
@@ -9,7 +11,15 @@ public class CallMarketActivity implements IActivityRule {
   // Checks if agent has already bid
   public void isAcceptable(IMarketState state, TradeMessage aBid) {
     // in the future might want to have this handle some risk limits or something
-    state.setAcceptable(true);
+    boolean acceptable = true;
+    if (aBid.Bundle.getType() != BundleType.TWOSIDED){
+      acceptable = false;
+    } 
+    TwoSidedBid bid = (TwoSidedBid) aBid.Bundle.getBids();
+    if (bid.price < 0){
+      acceptable = false;
+    }
+    state.setAcceptable(acceptable);
   }
 
   @Override

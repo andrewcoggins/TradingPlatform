@@ -1,5 +1,6 @@
 package brown.value.config; 
 
+import brown.market.library.PrevStateInfo;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.ValuationType;
 
@@ -9,7 +10,7 @@ import brown.value.valuation.ValuationType;
  * @author acoggins
  *
  */
-public class ValConfig {
+public abstract class ValConfig {
   
   public final IValuationDistribution valueDistribution;
   public final ValuationType type; 
@@ -23,9 +24,16 @@ public class ValConfig {
     this.type = null;
   }
   
+  public ValConfig(ValuationType type) { 
+    this.valueDistribution = null;
+    this.type = type; 
+  }
+  
   public ValConfig(IValuationDistribution valueDistribution, ValuationType type) { 
     this.valueDistribution = valueDistribution;
     this.type = type; 
   }
+  
+  public abstract PrevStateInfo generateInfo();
   
 }

@@ -6,7 +6,7 @@ import brown.bid.library.BidDirection;
 import brown.bid.library.TwoSidedBid;
 import brown.logging.Logging;
 
-public class SellOrder {
+public class SellOrder implements Comparable<SellOrder>{
   public final Integer agent;
   public final Integer quantity;
   public final Double price;
@@ -41,6 +41,11 @@ public class SellOrder {
      id = this.agent;
    }
    return new SellOrder(id, this.quantity, this.price);
+ }
+ 
+ @Override
+ public int compareTo(SellOrder o) {
+   return Double.compare(this.price,o.price);
  }
  
  @Override

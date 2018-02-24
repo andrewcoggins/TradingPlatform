@@ -19,6 +19,7 @@ public class MarketState implements IMarketState {
   private final List<ITradeable> TRADEABLES;
   private List<TradeMessage> bids;
   private int ticks;  
+  private long time;
   
   // grouping stuff
   private List<List<Integer>> groups;
@@ -60,6 +61,7 @@ public class MarketState implements IMarketState {
     this.prevState = prevState;
     this.groups = new LinkedList<List<Integer>>();
     this.orderbook = new OrderBook();
+    this.time = System.currentTimeMillis();
   }
   
   @Override
@@ -81,10 +83,14 @@ public class MarketState implements IMarketState {
   public int getTicks() {
     return this.ticks; 
   }
+  
+  @Override
+  public long getTime() {
+    return this.time;
+  }
 
   @Override
   public void addBid(TradeMessage bid) {
-    orderbook.addTradeMessage(bid);
     bids.add(bid);
   }
 
@@ -242,5 +248,10 @@ public class MarketState implements IMarketState {
   @Override
   public OrderBook getOrderBook() {
     return this.orderbook;
+  }
+  
+  @Override
+  public void setOrderBook(OrderBook book){
+    this.orderbook = book;
   }
 }

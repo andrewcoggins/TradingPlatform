@@ -29,6 +29,8 @@ public interface IMarketState {
     public void tick(); 
     
     public int getTicks();  
+    
+    public long getTime();
 
     //bids
     
@@ -105,6 +107,8 @@ public interface IMarketState {
     public void setGroups(List<List<Integer>> groups);
 
     public OrderBook getOrderBook();
+
+    void setOrderBook(OrderBook book);
     
     //TODO: market update. 
 

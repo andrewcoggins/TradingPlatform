@@ -11,7 +11,6 @@ import brown.messages.library.AbsMessage;
 import brown.messages.library.AccountResetMessage;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.RegistrationMessage;
-import brown.messages.library.TradeRequestMessage;
 import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
 
@@ -43,6 +42,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
         synchronized (agent) {
           if (message instanceof AbsMessage) {
             AbsMessage theMessage = (AbsMessage) message;
+            
             theMessage.dispatch(agent);
           }
         }

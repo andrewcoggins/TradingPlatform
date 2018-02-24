@@ -2,6 +2,7 @@ package brown.value.config;
 
 import java.util.Set;
 
+import brown.market.library.PrevStateInfo;
 import brown.tradeable.ITradeable;
 import brown.value.valuation.ValuationType;
 
@@ -15,5 +16,9 @@ public class ComplexConfig extends ValConfig {
   public ComplexConfig(Set<ITradeable> allGoods) {
     super(null, ValuationType.Auction);
   }
-  
+
+  @Override
+  public PrevStateInfo generateInfo() {
+    return null;
+  }
 }

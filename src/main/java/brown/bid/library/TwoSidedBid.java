@@ -1,7 +1,6 @@
 package brown.bid.library;
 
 import brown.bid.IBid;
-import brown.bidbundle.IBidBundle;
 
 /**
  * A map from Tradeables to a Bids.
@@ -31,6 +30,8 @@ public class TwoSidedBid implements IBid {
     this.direction = direction;
     this.price = price;
     this.quantity = quantity;
+    
+
   }
   
   @Override

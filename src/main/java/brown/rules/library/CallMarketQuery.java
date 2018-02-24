@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import brown.channels.library.CallMarketChannel;
+import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeRequestMessage;
 import brown.rules.IQueryRule;
@@ -19,7 +20,8 @@ public class CallMarketQuery implements IQueryRule {
         idToGroup.put(a, agents.size());
       }
     }       
-      state.setTRequest(new TradeRequestMessage(0, new CallMarketChannel(state.getID()),idToGroup));
+    TradeRequestMessage tr = new TradeRequestMessage(0, new CallMarketChannel(state.getID(),state.getOrderBook()),idToGroup);
+    state.setTRequest(tr);
   }
 
   @Override

@@ -56,6 +56,7 @@ public abstract class TPClient implements IClient {
   public void onRegistration(RegistrationMessage registration) {
     Logging.log("[-] Registered To Server");
     this.ID = registration.getID();    
+    Logging.log("ID: " + this.ID);
   }
   
   @Override

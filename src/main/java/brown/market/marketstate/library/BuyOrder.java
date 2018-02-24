@@ -6,7 +6,7 @@ import brown.bid.library.BidDirection;
 import brown.bid.library.TwoSidedBid;
 import brown.logging.Logging;
 
-public class BuyOrder {
+public class BuyOrder implements Comparable<BuyOrder>{
   public final Integer agent;
   public final Integer quantity;
   public final Double price;
@@ -85,6 +85,12 @@ public boolean equals(Object obj) {
     return false;
   return true;
 }
+
+@Override
+public int compareTo(BuyOrder o) {
+  return -1*Double.compare(this.price,o.price);
+}
+
 }
 
 

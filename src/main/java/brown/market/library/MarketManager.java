@@ -102,7 +102,7 @@ public class MarketManager implements IMarketManager {
   public void update(Integer marketID) {
    this.information.combine(this.markets.get(index).get(marketID).constructSummaryState());
   }
-  
+
   public boolean anyMarketsOpen() {
     boolean toReturn = false;
     for (Market m : this.getAuctions()) {
@@ -118,5 +118,9 @@ public class MarketManager implements IMarketManager {
     this.markets.clear();
     this.index = -1;
     this.information = null;
+  }
+
+  public void initializeInfo(PrevStateInfo info) {
+    this.information = info;
   }
 }

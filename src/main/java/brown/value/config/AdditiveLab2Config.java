@@ -2,6 +2,7 @@ package brown.value.config;
 
 import java.util.Set;
 
+import brown.market.library.PrevStateInfo;
 import brown.tradeable.ITradeable;
 import brown.value.distribution.library.AdditiveValuationDistribution;
 import brown.value.generator.library.LabTwoValGenerator;
@@ -17,4 +18,9 @@ public class AdditiveLab2Config extends ValConfig {
     super(new AdditiveValuationDistribution(new LabTwoValGenerator(), allGoods), ValuationType.Auction);
   }
   
+  @Override
+  public PrevStateInfo generateInfo() {
+    return null;
+  }
+
 }

@@ -1,6 +1,6 @@
 package brown.market.marketstate;
 
-import java.util.List;
+import java.util.PriorityQueue;
 
 import brown.market.marketstate.library.BuyOrder;
 import brown.market.marketstate.library.SellOrder;
@@ -10,11 +10,11 @@ public interface IOrderBook {
   
   public void addTradeMessage(TradeMessage tm);
   
-  public List<BuyOrder> getBuys();
+  public PriorityQueue<BuyOrder> getBuys();
   
-  public List<SellOrder> getSells();
+  public PriorityQueue<SellOrder> getSells();
   
-  public void setBuys(List<BuyOrder> buys);
+  public void setBuys(PriorityQueue<BuyOrder> buys);
   
-  public void setSells(List<SellOrder> sells);
+  public void setSells(PriorityQueue<SellOrder> sells);
 }

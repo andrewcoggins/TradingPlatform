@@ -1,8 +1,11 @@
 package brown.market.marketstate.library;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 import brown.bid.library.BidDirection;
 import brown.bid.library.TwoSidedBid;
@@ -13,18 +16,13 @@ import brown.messages.library.TradeMessage;
 
 public class OrderBook implements IOrderBook {
 
-  private List<BuyOrder> buyOrders;
-  private List<SellOrder> sellOrders;
+  private PriorityQueue<BuyOrder> buyOrders;
+  private PriorityQueue<SellOrder> sellOrders;
   
   public OrderBook() {
-    this.buyOrders = new LinkedList<BuyOrder>();
-    this.sellOrders = new LinkedList<SellOrder>();
+    this.buyOrders = new PriorityQueue<BuyOrder>();
+    this.sellOrders = new PriorityQueue<SellOrder>();
   }
-  
-  public OrderBook(List<BuyOrder> buys, List<SellOrder> sells) {
-    this.buyOrders = buys;
-    this.sellOrders = sells;
-  }  
   
   public void addTradeMessage(TradeMessage tm){
     if (tm.Bundle.getType() == BundleType.TWOSIDED){
@@ -37,19 +35,45 @@ public class OrderBook implements IOrderBook {
     }
   }
   
-  public List<BuyOrder> getBuys(){
+  public void addTradeMessage(List<TradeMessage> tms){
+    for (TradeMessage tm: tms){ 
+      addTradeMessage(tm);
+    }
+  }
+  
+  public void addBuy(BuyOrder buy){
+    this.buyOrders.add(buy);
+  }
+  
+  public void addBuy(List<BuyOrder> buys){
+    for (BuyOrder buy : buys){
+      addBuy(buy);
+    }
+  }
+  
+  public void addSell(SellOrder sell){
+    this.sellOrders.add(sell);
+  }
+  
+  public void addSell(List<SellOrder> sells){
+    for (SellOrder sell : sells){
+      addSell(sell);
+    }
+  }
+
+  public PriorityQueue<BuyOrder> getBuys(){
     return this.buyOrders;
   }
   
-  public List<SellOrder> getSells(){
+  public PriorityQueue<SellOrder> getSells(){
     return this.sellOrders;
   }  
   
-  public void setBuys(List<BuyOrder> buys){
+  public void setBuys(PriorityQueue<BuyOrder> buys){
     this.buyOrders = buys;
   }
   
-  public void setSells(List<SellOrder> sells){
+  public void setSells(PriorityQueue<SellOrder> sells){
     this.sellOrders = sells;
   } 
   
@@ -60,41 +84,48 @@ public class OrderBook implements IOrderBook {
     BuyOrder buy3 = new BuyOrder(1,1,20.);
     BuyOrder buy4 = new BuyOrder(1,1,25.);
     BuyOrder buy5 = new BuyOrder(3,1,15.);
-    List<BuyOrder> buylist = new LinkedList<BuyOrder>();
-    buylist.add(buy1);
-    buylist.add(buy2);
-    buylist.add(buy3);
-    buylist.add(buy4);
-    buylist.add(buy5);
+    testbook.addBuy(buy1);
+    testbook.addBuy(buy2);
+    testbook.addBuy(buy3);
+    testbook.addBuy(buy4);
+    testbook.addBuy(buy5);
     
     SellOrder Sell1 = new SellOrder(1,1,15.);
     SellOrder Sell2 = new SellOrder(1,1,10.);
     SellOrder Sell3 = new SellOrder(1,1,20.);
     SellOrder Sell4 = new SellOrder(1,1,25.);
     SellOrder Sell5 = new SellOrder(2,1,15.);
-    List<SellOrder> Selllist = new LinkedList<SellOrder>();
-    Selllist.add(Sell1);
-    Selllist.add(Sell2);
-    Selllist.add(Sell3);
-    Selllist.add(Sell4);
-    Selllist.add(Sell5);    
+    testbook.addSell(Sell1);
+    testbook.addSell(Sell2);
+    testbook.addSell(Sell3);
+    testbook.addSell(Sell4);
+    testbook.addSell(Sell5);
     
-    Logging.log(buylist.toString());
-    Logging.log(Selllist.toString());
-    Collections.sort(buylist,(h1, h2) -> -1*(h1.price.compareTo(h2.price)));
-    Collections.sort(Selllist, (h1, h2) -> h1.price.compareTo(h2.price));
-    Logging.log(buylist.toString());
-    Logging.log(Selllist.toString());   
+    Logging.log(testbook.getBuys().poll().toString());
+    Logging.log(testbook.getBuys().poll().toString());
+    Logging.log(testbook.getBuys().poll().toString());
+    Logging.log(testbook.getBuys().poll().toString());
+    Logging.log(testbook.getBuys().poll().toString());
     
-    testbook.setBuys(buylist);
-    testbook.setSells(Selllist);   
+    Logging.log(testbook.getSells().poll().toString());
+    Logging.log(testbook.getSells().poll().toString());
+    Logging.log(testbook.getSells().poll().toString());
+    Logging.log(testbook.getSells().poll().toString());
+    Logging.log(testbook.getSells().poll().toString());    
     
-    Logging.log(testbook.toString());
-    
-    List<BuyOrder> buys = testbook.getBuys();
-    buys.add(new BuyOrder(5,1,100.));
-    
-    Logging.log(testbook.toString());
+    Map<Integer,Integer> test = new HashMap<Integer,Integer>();
+    test.put(1,1);
+    test.put(2,2);
+    test.put(3,3);
+    test.put(4,4);
+    test.put(5,5);
+    test.put(6,6);
+    List<Integer> testList = new ArrayList<Integer>(test.values());
+    System.out.println(testList);
+    Logging.log(test.toString());
+    Collections.shuffle(testList);
+    System.out.println(testList);
+    Logging.log(test.toString());    
   }
   
   @Override

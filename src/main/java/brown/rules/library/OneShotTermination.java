@@ -1,5 +1,6 @@
 package brown.rules.library; 
 
+import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.rules.IInnerTC;
 

@@ -18,7 +18,13 @@ import brown.channels.IAgentChannel;
  */
 public class TradeRequestMessage extends AbsMessage {
   
-	public final IAgentChannel MARKET;
+	@Override
+  public String toString() {
+    return "TradeRequestMessage [MARKET=" + MARKET + ", reserve=" + reserve
+        + ", idToSize=" + idToSize + "]";
+  }
+
+  public final IAgentChannel MARKET;
 	// not used right now
 	public final IBidBundle reserve;
 	public final Map<Integer,Integer> idToSize;
@@ -47,7 +53,7 @@ public class TradeRequestMessage extends AbsMessage {
 	}
 
 	@Override
-	public void dispatch(AbsAgent agent) {
+	public void dispatch(AbsAgent agent) {	  
 		this.MARKET.dispatchMessage(agent);
 	}
 

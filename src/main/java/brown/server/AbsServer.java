@@ -1,6 +1,7 @@
 package brown.server;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ import brown.setup.ISetup;
 import brown.setup.library.Startup;
 import brown.summary.AuctionSummarizer;
 import brown.tradeable.ITradeable;
+import brown.value.config.GameValuationConfig;
 import brown.value.config.ValConfig;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.ValuationType;
@@ -133,26 +135,40 @@ public abstract class AbsServer {
   // Give agents valuations and give them initial goods
   protected void initializeAgents() {
     ValConfig marketConfig = this.valueConfig;
-    for (Connection connection : this.connections.keySet()) {      
-      Integer agentID = this.connections.get(connection);
+    Map<Integer,PrivateInformationMessage> toSend = new HashMap<Integer,PrivateInformationMessage>();    
+    if (marketConfig.type == ValuationType.Game){
+      GameValuationConfig gconfig = (GameValuationConfig) marketConfig;
+      
+      // flip the true coin, and pass this information to the manager
+      gconfig.initialize();
+      this.manager.initializeInfo(((ValConfig) gconfig).generateInfo());
+      
+      // make valuations all at once            
+      List<Integer> agents = new ArrayList<Integer>(this.connections.values());
+      toSend = gconfig.generateReport(agents);
+     } else if (marketConfig.type == ValuationType.Auction) {       
+       for (Connection connection : this.connections.keySet()){
+         // make valuations one by one
+         IValuation privateValuation = marketConfig.valueDistribution.sample();
+         toSend.put(this.connections.get(connection),new ValuationInformationMessage(this.connections.get(connection), this.allTradeables, privateValuation.safeCopy(), marketConfig.valueDistribution));                  
+         //give the server private valuation info.
+         this.privateValuations.put(this.connections.get(connection), privateValuation.safeCopy());         
+       }
+     }
+    for (Connection connection : this.connections.keySet()){
+      Integer agentID = this.connections.get(connection);               
       //set up agent account
       Account newAccount = new Account(agentID);
       newAccount.add(this.initialMonies);
       for (ITradeable t : this.initialGoods)
         newAccount.add(0.0, t);
       this.acctManager.setAccount(agentID, newAccount);
-      theServer.sendToTCP(connection.getID(), new AccountResetMessage(agentID,this.initialGoods,this.initialMonies));
+           
+      theServer.sendToTCP(connection.getID(), new AccountResetMessage(agentID,this.initialGoods,this.initialMonies));      
       
-      // send agents private information
-      if (marketConfig.type == ValuationType.Auction) {
-        IValuation privateValuation = marketConfig.valueDistribution.sample();
-        PrivateInformationMessage valueReg = new ValuationInformationMessage(agentID, this.allTradeables, privateValuation, marketConfig.valueDistribution);
-        theServer.sendToTCP(connection.getID(), valueReg);
-        //give the server private valuation info.
-        this.privateValuations.put(agentID, privateValuation.safeCopy());
-      } else if (marketConfig.type == ValuationType.Game) {
-        //no explicit valuation, as in the lemonade game
-        // GameInformationMessage or something, not used yet
+      // send out the valuations
+      if (marketConfig.type != ValuationType.Blank){
+        theServer.sendToTCP(connection.getID(),toSend.get(agentID));
       }
     }
   }
@@ -209,7 +225,7 @@ public abstract class AbsServer {
             for (Entry<Connection, Integer> id : this.connections.entrySet()) {
               // maybe send message here? sanitized ledger.
               TradeRequestMessage tr = auction.constructTradeRequest(id.getValue());
-              this.theServer.sendToUDP(id.getKey().getID(), tr.sanitize(id.getValue(), this.privateToPublic));
+              this.theServer.sendToTCP(id.getKey().getID(), tr.sanitize(id.getValue(), this.privateToPublic));
             }
           } else {
             List<Order> winners = auction.constructOrders();
@@ -287,11 +303,12 @@ public abstract class AbsServer {
         Logging.log("Agent " + this.privateToPublic.get(util.getKey()) + " got " + util.getValue() + " total utility");
       }
     } else if (this.valueConfig.type == ValuationType.Game) {
+    } else if (this.valueConfig.type == ValuationType.Blank){
       // for lemonade game right now
       for (Integer agent: this.connections.values()){
         toPrint.put(agent,this.acctManager.getAccount(agent).getMonies());
-      }
-    }  
+      }      
+    }
     Logging.log("RESULTS (agent ID -> Utility):");
     
     List<Map.Entry<Integer, Double>> sortedByValue = toPrint.entrySet().stream().sorted(Map.Entry.<Integer, Double>comparingByValue().reversed()).collect(Collectors.toList());    
