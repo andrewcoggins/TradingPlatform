@@ -130,5 +130,4 @@ public class Market implements IMarket {
   public void record(Map<Integer,IValuation> privateVals) throws IOException {    
     this.rRule.record(this.STATE, privateVals);
   }
-
 }
