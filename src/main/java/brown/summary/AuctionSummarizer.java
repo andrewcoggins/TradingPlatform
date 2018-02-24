@@ -55,17 +55,19 @@ public class AuctionSummarizer implements IAuctionSummarizer {
     for (Account anAccount : agentAccounts) {
       roundTradeables.put(anAccount.ID, anAccount.getGoods());
       roundMonies.put(anAccount.ID, anAccount.getMonies());
-    }
+    }        
     Map<Integer, Double> roundUtilities = new HashMap<Integer, Double>();
     // calculate utility for each agent.
-    for (Integer anID : roundTradeables.keySet()) {
-      List<ITradeable> someTradeables = roundTradeables.get(anID);
-      double tradeableValue = 0.0; 
-      for (ITradeable t : someTradeables) {
-        IValuation agentValuation = privateValuations.get(anID);
-        tradeableValue += agentValuation.getValuation(t);
+    if (!privateValuations.isEmpty()){
+      for (Integer anID : roundTradeables.keySet()) {
+        List<ITradeable> someTradeables = roundTradeables.get(anID);
+        double tradeableValue = 0.0; 
+        for (ITradeable t : someTradeables) {
+          IValuation agentValuation = privateValuations.get(anID);
+          tradeableValue += agentValuation.getValuation(t);
+        }
+        roundUtilities.put(anID, tradeableValue + roundMonies.get(anID));
       }
-      roundUtilities.put(anID, tradeableValue + roundMonies.get(anID));
     }
     // integrate into totals. 
     for (Integer anID : roundUtilities.keySet()) {

@@ -297,6 +297,12 @@ public abstract class AbsServer {
         Logging.log("Agent " + this.privateToPublic.get(util.getKey()) + " got " + util.getValue() + " total utility");
       }
     } else if (this.valueConfig.type == ValuationType.Game) {
+      Map<Integer, Double> totalUtil = this.summarizer.getTotalUtility();
+      System.out.println(totalUtil);
+      for (Entry<Integer, Double> util : totalUtil.entrySet()) {
+        toPrint.put(util.getKey(), util.getValue());
+        Logging.log("Agent " + this.privateToPublic.get(util.getKey()) + " got " + util.getValue() + " total utility");
+      }      
     } else if (this.valueConfig.type == ValuationType.Blank){
       // for lemonade game right now
       for (Integer agent: this.connections.values()){
