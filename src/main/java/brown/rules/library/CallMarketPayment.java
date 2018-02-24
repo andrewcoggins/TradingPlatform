@@ -28,7 +28,7 @@ public class CallMarketPayment  implements IPaymentRule {
     List <TradeMessage> bids = state.getBids();
     PriorityQueue<BuyOrder> buys = book.getBuys();
     PriorityQueue<SellOrder> sells = book.getSells();
-
+    
     for (TradeMessage bid : bids){
       if (bid.Bundle.getType() != BundleType.TWOSIDED){
         Logging.log("Wrong kind of Bid in Call Market payment");
@@ -45,7 +45,10 @@ public class CallMarketPayment  implements IPaymentRule {
               int quantity = Math.min(bestSell.quantity,tsbid.quantity);              
               // make an order an update number to fill
               orders.add(new Order(bestSell.agent, bid.AgentID, midpoint, quantity,new SimpleTradeable(tradeableID)));                
-              numToFill = Math.max(0, numToFill - bestSell.quantity);                            
+              numToFill = Math.max(0, numToFill - bestSell.quantity); 
+              if (bestSell.quantity > tsbid.quantity){
+                sells.add(new SellOrder(bestSell.agent, bestSell.quantity - tsbid.quantity,bestSell.price));
+              }
             } else {    
               crossed=false;
             }
@@ -64,10 +67,13 @@ public class CallMarketPayment  implements IPaymentRule {
               int quantity = Math.min(bestBuy.quantity,tsbid.quantity);              
               // make an order an update number to fill
               orders.add(new Order(bid.AgentID, bestBuy.agent, midpoint, quantity,new SimpleTradeable(tradeableID)));                
-              numToFill = Math.max(0, numToFill - bestBuy.quantity);                            
+              numToFill = Math.max(0, numToFill - bestBuy.quantity);    
+              if (bestBuy.quantity > tsbid.quantity){
+                sells.add(new SellOrder(bestBuy.agent, bestBuy.quantity - tsbid.quantity,bestBuy.price));
+              }              
             } else {     
               crossed=false;
-            }
+            }            
           }
           // if OrderBook couldn't completely fill order, add it to unfilled orders          
           if (numToFill > 0 ){   

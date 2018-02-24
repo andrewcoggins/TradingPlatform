@@ -53,7 +53,6 @@ public class PredictionMarketDecoysConfig extends ValConfig implements GameValua
     }
     // int floors so this generates a random integer from 0 to numDecoys
     Integer whichCoin = (int)(Math.random() * (numDecoys+1));
-    Logging.log("COIN: " + whichCoin.toString());
     return flips[whichCoin];
   }
 

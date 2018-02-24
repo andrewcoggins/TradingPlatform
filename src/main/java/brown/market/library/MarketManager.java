@@ -32,7 +32,7 @@ public class MarketManager implements IMarketManager {
 	public MarketManager() {
 		this.ledgers = new LinkedList<Map<Market, Ledger>>();
 		this.markets = new LinkedList<Map<Integer, Market>>();	
-		this.information = null;
+		this.information = new BlankStateInfo();
 		this.index = -1; 
 	}
 
@@ -125,5 +125,12 @@ public class MarketManager implements IMarketManager {
 
   public void initializeInfo(PrevStateInfo info) {
     this.information = info;
+  }
+
+  public void updateAllInfo() {
+    for (Market market: this.markets.get(index).values()){
+      this.information.combine(market.constructSummaryState());
+      Logging.log("Updating Market, New Information: " + this.information.toString());      
+    }
   }
 }

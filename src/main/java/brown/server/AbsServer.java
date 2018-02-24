@@ -229,15 +229,11 @@ public abstract class AbsServer {
             }
           } else {
             List<Order> winners = auction.constructOrders();
-            Ledger ledger = this.manager.getLedger(auction.getID());
-            System.out.println(ledger);
             // Go through winners and execute orders
             for (Order winner : winners) {                      
               if (this.acctManager.containsAcct(winner.TO)) {
                 Account accountTo = this.acctManager.getAccount(winner.TO);
                 synchronized (accountTo.ID) {                  
-                  // add order to ledger
-                  ledger.add(winner.toTransaction());  
                   // new account
                   accountTo.add(-1 * winner.PRICE, winner.GOOD);
                   this.acctManager.setAccount(winner.TO, accountTo);
@@ -268,9 +264,6 @@ public abstract class AbsServer {
             if (!auction.isOverOuter()) {
               Logging.log("[*] Auction has been reset");
               auction.resetInnerMarket();              
-            } else {
-              this.manager.update(auction.getID());
-              this.manager.close(auction.getID());
             }
           }
         }
@@ -285,7 +278,7 @@ public abstract class AbsServer {
       this.updateAllAuctions();
       Thread.sleep(lag);      
     }
-    this.updateAllAuctions();
+    this.manager.updateAllInfo();    
   }
   
   public void resetSim() { 

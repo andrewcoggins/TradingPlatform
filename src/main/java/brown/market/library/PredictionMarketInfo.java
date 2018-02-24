@@ -27,8 +27,8 @@ public class PredictionMarketInfo extends PrevStateInfo{
   
   @Override
   public String toString() {
-    return "PredictionMarketInfo [trueCoin=" + trueCoin + ", tradeHistory="
-        + tradeHistory + ", type=" + type + "]";
+    return "PredictionMarketInfo [trueCoin=" + trueCoin + ", tradeHistory Size="
+        + tradeHistory.size() + ", type=" + type + "]";
   }
 
   @Override

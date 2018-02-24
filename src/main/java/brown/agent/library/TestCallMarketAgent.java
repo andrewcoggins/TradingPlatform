@@ -9,6 +9,7 @@ import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
 import brown.logging.Logging;
 import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.CallMarketReportMessage;
 import brown.messages.library.GameReportMessage;
 import brown.setup.library.CallMarketSetup;
 
@@ -45,7 +46,11 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   @Override
   public void onGameReport(GameReportMessage gameReport) {
     Logging.log("Game report received");
-    Logging.log(gameReport.toString());
+    if (gameReport instanceof CallMarketReportMessage){
+      Logging.log("size: " + ((CallMarketReportMessage) gameReport).getTransactions().size());
+    } else {
+      Logging.log(gameReport.toString());      
+    }
   } 
   
   public static void main(String[] args) throws AgentCreationException {
