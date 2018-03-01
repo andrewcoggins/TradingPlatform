@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.accounting.library.Account;
-import brown.logging.Logging;
 import brown.tradeable.ITradeable;
 import brown.value.valuation.IValuation;
 
@@ -57,15 +56,22 @@ public class AuctionSummarizer implements IAuctionSummarizer {
       roundMonies.put(anAccount.ID, anAccount.getMonies());
     }
     Map<Integer, Double> roundUtilities = new HashMap<Integer, Double>();
-    // calculate utility for each agent.
-    for (Integer anID : roundTradeables.keySet()) {
-      List<ITradeable> someTradeables = roundTradeables.get(anID);
-      double tradeableValue = 0.0; 
-      for (ITradeable t : someTradeables) {
-        IValuation agentValuation = privateValuations.get(anID);
-        tradeableValue += agentValuation.getValuation(t);
+    // calculate utility as just money if there are no valuations.
+    if (privateValuations.isEmpty()) {
+      for (Integer anID : roundTradeables.keySet()) {
+        roundUtilities.put(anID, roundMonies.get(anID));
       }
-      roundUtilities.put(anID, tradeableValue + roundMonies.get(anID));
+    } else {
+      // calculate utility for each agent (with valuations).
+      for (Integer anID : roundTradeables.keySet()) {
+        List<ITradeable> someTradeables = roundTradeables.get(anID);
+        double tradeableValue = 0.0; 
+        for (ITradeable t : someTradeables) {
+          IValuation agentValuation = privateValuations.get(anID);
+          tradeableValue += agentValuation.getValuation(t);
+        }
+        roundUtilities.put(anID, tradeableValue + roundMonies.get(anID));
+      }
     }
     // integrate into totals. 
     for (Integer anID : roundUtilities.keySet()) {
