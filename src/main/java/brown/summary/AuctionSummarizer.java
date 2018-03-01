@@ -54,7 +54,7 @@ public class AuctionSummarizer implements IAuctionSummarizer {
     for (Account anAccount : agentAccounts) {
       roundTradeables.put(anAccount.ID, anAccount.getGoods());
       roundMonies.put(anAccount.ID, anAccount.getMonies());
-    }
+    }        
     Map<Integer, Double> roundUtilities = new HashMap<Integer, Double>();
     // calculate utility as just money if there are no valuations.
     if (privateValuations.isEmpty()) {
