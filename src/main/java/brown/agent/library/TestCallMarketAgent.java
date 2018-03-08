@@ -3,7 +3,9 @@ package brown.agent.library;
 
 import brown.agent.AbsCallMarketAgent;
 import brown.bid.library.BidDirection;
+import brown.bid.library.CancelBid;
 import brown.bid.library.TwoSidedBid;
+import brown.bidbundle.library.CancelBundle;
 import brown.bidbundle.library.TwoSidedBidBundle;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
@@ -30,12 +32,18 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   @Override
   public void onCallMarket(CallMarketChannel cmChannel) {
     cmChannel.bid(this, new TwoSidedBidBundle(new TwoSidedBid(this.direction, this.price, this.quantity)));
+    Logging.log("Orderbook: " + cmChannel.getOrderBook().toString());
     if (this.direction == BidDirection.SELL){
       Logging.log("AGENT " + this.ID + "selling at " + this.price);      
-      this.price = price+1; 
+      this.price = this.price+1; 
     } else {
-      Logging.log("AGENT " + this.ID + "bidding at " + this.price);            
-      this.price = price-1;       
+      Logging.log("AGENT " + this.ID + " bidding at " + this.price);            
+      if (this.price <= 27){
+        Logging.log("AGENT " + this.ID + " canceling buys at " + 28);
+        // Cancel all buys 27 and above
+        cmChannel.bid(this,new CancelBundle(new CancelBid(this.direction, 28)));
+      }
+      this.price = this.price-1;       
     }
   }  
 
@@ -56,8 +64,6 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   
   public static void main(String[] args) throws AgentCreationException {
     new TestCallMarketAgent("localhost", 2121,"Buy30bot1",BidDirection.BUY,30.,1);    
-      new TestCallMarketAgent("localhost", 2121,"Buy30bot2",BidDirection.BUY,30.,1);
-      new TestCallMarketAgent("localhost", 2121,"Sell20bot1",BidDirection.SELL,20.,2);
       while(true){}      
   }  
 }

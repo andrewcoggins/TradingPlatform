@@ -3,7 +3,9 @@ package brown.setup.library;
 import com.esotericsoftware.kryo.Kryo;
 
 import brown.bid.library.BidDirection;
+import brown.bid.library.CancelBid;
 import brown.bid.library.TwoSidedBid;
+import brown.bidbundle.library.CancelBundle;
 import brown.bidbundle.library.TwoSidedBidBundle;
 import brown.channels.library.CallMarketChannel;
 import brown.market.marketstate.library.BuyOrder;
@@ -30,6 +32,8 @@ public class CallMarketSetup implements ISetup {
     kryo.register(BuyOrder.class);
     kryo.register(SellOrder.class);
     kryo.register(PredictionMarketReport.class);
+    kryo.register(CancelBundle.class);
+    kryo.register(CancelBid.class);
   } 
   
 }

@@ -19,7 +19,7 @@ public class CallMarketTest {
   private static int lag = 500;
   
   public static void main(String[] args) throws InterruptedException {
-    double seconds = 10;
+    double seconds = 15;
     
     // Create _ tradeables
     Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 

@@ -44,8 +44,6 @@ public class PredictionMarketPayment implements IPaymentRule {
           AgentToExposure.put(buyer,(int) trade.QUANTITY);                    
         }
       }
-      Logging.log("TRADE HISTORY SIZE: " + info.tradeHistory.size());
-      Logging.log("AGENT TO EXPOSURE: " + AgentToExposure.toString());
       
       for (Integer agent: AgentToExposure.keySet()){
         if (coin){
