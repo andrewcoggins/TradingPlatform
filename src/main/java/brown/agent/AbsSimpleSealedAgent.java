@@ -30,6 +30,12 @@ public abstract class AbsSimpleSealedAgent extends AbsAgent implements ISimpleSe
     this.tradeables = new LinkedList<ITradeable>();
   }
   
+  public AbsSimpleSealedAgent(String host, int port, ISetup gameSetup, String name)
+      throws AgentCreationException {
+    super(host, port, gameSetup, name);
+    this.tradeables = new LinkedList<ITradeable>();    
+  }  
+  
   // stores agent tradeables, valuation and valuation distribution.
   @Override
   public void onPrivateInformation(PrivateInformationMessage privateInfo) {   

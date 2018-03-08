@@ -8,13 +8,15 @@ import brown.agent.AbsAgent;
  * @author lcamery
  */
 public class RegistrationMessage extends AbsMessage {
-	
+	public String name;
+  
 	/**
 	 * Empty constructor for Kryo
 	 * DO NOT USE
 	 */
 	public RegistrationMessage() {
 		super(null);
+		this.name = null;
 	}
 
 	/**
@@ -24,7 +26,14 @@ public class RegistrationMessage extends AbsMessage {
 	 */
 	public RegistrationMessage(Integer ID) {
 		super(ID);
+		this.name = null;
 	}
+	
+	 public RegistrationMessage(Integer ID, String name) {
+	    super(ID);
+	    this.name = name;
+	  }
+
 
 	@Override
 	public void dispatch(AbsAgent agent) {

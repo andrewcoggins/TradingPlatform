@@ -28,6 +28,10 @@ public abstract class AbsLab02Agent extends AbsSimpleSealedAgent {
 		super(host, port, gameSetup);
 	}
 	
+	 public AbsLab02Agent(String host, int port, ISetup gameSetup, String name) throws AgentCreationException {
+	    super(host, port, gameSetup,name);
+	  }
+	
 	public abstract void onSimpleSealed(AuctionChannel channel);
 	
 	@Override

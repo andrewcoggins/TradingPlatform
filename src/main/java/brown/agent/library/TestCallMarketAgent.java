@@ -19,9 +19,9 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
    private Integer quantity;
    
   
-  public TestCallMarketAgent(String host, int port, BidDirection direction, Double price, Integer quantity)
+  public TestCallMarketAgent(String host, int port, String name, BidDirection direction, Double price, Integer quantity)
       throws AgentCreationException {
-    super(host, port, new CallMarketSetup());
+    super(host, port, new CallMarketSetup(), name);
     this.direction = direction;
     this.price = price;
     this.quantity = quantity;
@@ -29,11 +29,12 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   
   @Override
   public void onCallMarket(CallMarketChannel cmChannel) {
-    Logging.log("AGENT " + this.ID + "bidding at " + this.price);
     cmChannel.bid(this, new TwoSidedBidBundle(new TwoSidedBid(this.direction, this.price, this.quantity)));
     if (this.direction == BidDirection.SELL){
+      Logging.log("AGENT " + this.ID + "selling at " + this.price);      
       this.price = price+1; 
     } else {
+      Logging.log("AGENT " + this.ID + "bidding at " + this.price);            
       this.price = price-1;       
     }
   }  
@@ -54,9 +55,9 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   } 
   
   public static void main(String[] args) throws AgentCreationException {
-    new TestCallMarketAgent("localhost", 2121,BidDirection.BUY,30.,1);    
-      new TestCallMarketAgent("localhost", 2121,BidDirection.BUY,30.,1);
-      new TestCallMarketAgent("localhost", 2121,BidDirection.SELL,20.,2);
+    new TestCallMarketAgent("localhost", 2121,"Buy30bot1",BidDirection.BUY,30.,1);    
+      new TestCallMarketAgent("localhost", 2121,"Buy30bot2",BidDirection.BUY,30.,1);
+      new TestCallMarketAgent("localhost", 2121,"Sell20bot1",BidDirection.SELL,20.,2);
       while(true){}      
   }  
 }

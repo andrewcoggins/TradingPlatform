@@ -53,6 +53,7 @@ public abstract class AbsServer {
   private int agentCount;  
   protected Map<Connection, Integer> connections;
   protected Map<Integer, Integer> privateToPublic;
+  protected Map<Integer, String> IDToName;
   protected Map<Integer, IValuation> privateValuations; 
   protected AccountManager acctManager;
   protected AuctionSummarizer summarizer; 
@@ -69,6 +70,7 @@ public abstract class AbsServer {
     this.agentCount = 0;
     this.connections = new ConcurrentHashMap<Connection, Integer>();
     this.privateToPublic = new ConcurrentHashMap<Integer, Integer>();
+    this.IDToName = new ConcurrentHashMap<Integer,String>();
     this.privateValuations = new HashMap<Integer, IValuation>();
     this.acctManager = new AccountManager();
     this.manager = new MarketManager();
@@ -125,6 +127,9 @@ public abstract class AbsServer {
       }
       privateToPublic.put(theID, agentCount++);
       connections.put(connection, theID);
+      if (registration.name != null){
+          this.IDToName.put(theID, registration.name);
+      }
       Logging.log("[-] registered " + theID);
       this.theServer.sendToTCP(connection.getID(), new RegistrationMessage(theID));
     } else {
@@ -314,7 +319,7 @@ public abstract class AbsServer {
     List<Map.Entry<Integer, Double>> sortedByValue = toPrint.entrySet().stream().sorted(Map.Entry.<Integer, Double>comparingByValue().reversed()).collect(Collectors.toList());    
     int i = 1;
     for (Map.Entry<Integer,Double> a :sortedByValue){
-      Logging.log(i + ". " + a.getKey()+ ", utility: " + a.getValue());
+      Logging.log(i + ". " + this.IDToName.getOrDefault(a.getKey(), "") +", ID: " + a.getKey()+ ", Utility: " + a.getValue());
       this.theServer.sendToTCP(this.privateToConnection(a.getKey()).getID(), new ErrorMessage(0, "Placed: " + Integer.toString(i)));
       i++;
     }
