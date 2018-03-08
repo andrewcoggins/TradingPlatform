@@ -6,7 +6,7 @@ import brown.server.ISimulation;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;
 
-public class Simulation implements ISimulation{
+public class Simulation implements ISimulation {
 
   private final List<SimulMarkets> sequence;
   private final ValConfig valInfo;
@@ -24,22 +24,22 @@ public class Simulation implements ISimulation{
   } 
   
   @Override
-  public List<SimulMarkets> getSequence(){
+  public List<SimulMarkets> getSequence() {
     return this.sequence;
   }
   
   @Override
-  public ValConfig getValInfo(){
+  public ValConfig getValInfo() {
     return this.valInfo;
   }
   
   @Override
-  public List<ITradeable> getTradeables(){
+  public List<ITradeable> getTradeables() {
     return this.allTradeables;    
   }  
   
   @Override
-  public double getInitialMonies(){
+  public double getInitialMonies() {
     return this.initialMonies;
   }
   

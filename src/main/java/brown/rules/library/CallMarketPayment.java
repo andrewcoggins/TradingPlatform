@@ -29,22 +29,22 @@ public class CallMarketPayment  implements IPaymentRule {
     PriorityQueue<BuyOrder> buys = book.getBuys();
     PriorityQueue<SellOrder> sells = book.getSells();
     
-    for (TradeMessage bid : bids){
-      if (bid.Bundle.getType() != BundleType.TWOSIDED){
+    for (TradeMessage bid : bids) {
+      if (bid.Bundle.getType() != BundleType.TWOSIDED) {
         Logging.log("Wrong kind of Bid in Call Market payment");
       } else {
         TwoSidedBid tsbid = (TwoSidedBid) bid.Bundle.getBids();
         int numToFill = tsbid.quantity;
-        if (tsbid.direction == BidDirection.BUY){
+        if (tsbid.direction == BidDirection.BUY) {
           boolean crossed = true;
           while (numToFill > 0 & sells.size() > 0 & crossed){
             // poll the best sell order
             SellOrder bestSell = sells.poll();
-            if (bestSell.price <= tsbid.price){
+            if (bestSell.price <= tsbid.price) {
               double midpoint = (double) ((bestSell.price + tsbid.price) / 2.);            
               int quantity = Math.min(bestSell.quantity,tsbid.quantity);              
               // make an order an update number to fill
-              orders.add(new Order(bestSell.agent, bid.AgentID, midpoint, quantity,new SimpleTradeable(tradeableID)));                
+              orders.add(new Order(bestSell.agent, bid.AgentID, midpoint, quantity, new SimpleTradeable(tradeableID)));                
               numToFill = Math.max(0, numToFill - bestSell.quantity); 
               if (bestSell.quantity > tsbid.quantity){
                 sells.add(new SellOrder(bestSell.agent, bestSell.quantity - tsbid.quantity,bestSell.price));
