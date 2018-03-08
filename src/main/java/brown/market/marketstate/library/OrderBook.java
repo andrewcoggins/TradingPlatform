@@ -77,6 +77,18 @@ public class OrderBook implements IOrderBook {
     this.sellOrders = sells;
   } 
   
+  public OrderBook sanitize(Integer agent, Map<Integer, Integer> privateToPublic){
+    OrderBook toReturn = new OrderBook();
+    for (BuyOrder buy : this.buyOrders){
+      toReturn.addBuy(buy.sanitize(agent, privateToPublic));
+    }
+    for (SellOrder sell : this.sellOrders){
+      toReturn.addSell(sell.sanitize(agent, privateToPublic));
+    }
+    return toReturn;
+  }
+
+  // tests
   public static void main(String[] args) throws InterruptedException {
     OrderBook testbook = new OrderBook();
     BuyOrder buy1 = new BuyOrder(1,1,15.);

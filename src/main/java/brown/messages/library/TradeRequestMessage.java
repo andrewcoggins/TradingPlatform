@@ -66,6 +66,6 @@ public class TradeRequestMessage extends AbsMessage {
 	      sanitizedMap.put(privateToPublic.get(agent), idToSize.get(agent));
 	    }
 	  }
-	  return new TradeRequestMessage(this.ID, this.MARKET, sanitizedMap);
+	  return new TradeRequestMessage(this.ID, this.MARKET.sanitize(agent, privateToPublic), sanitizedMap);
 	}	
 }

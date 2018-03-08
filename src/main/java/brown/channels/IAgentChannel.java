@@ -1,5 +1,7 @@
 package brown.channels;
 
+import java.util.Map;
+
 import brown.agent.AbsAgent;
 import brown.bidbundle.IBidBundle;
 
@@ -30,5 +32,7 @@ public interface IAgentChannel {
    * @param bid
    */
 	public void bid(AbsAgent agent, IBidBundle bid);
+
+  public IAgentChannel sanitize(Integer agent, Map<Integer, Integer> privateToPublic);
 	
 }

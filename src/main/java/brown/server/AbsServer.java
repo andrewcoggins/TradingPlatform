@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 import brown.accounting.library.Account;
 import brown.accounting.library.AccountManager;
-import brown.accounting.library.Ledger;
 import brown.logging.Logging;
 import brown.market.library.Market;
 import brown.market.library.MarketManager;
@@ -222,7 +221,7 @@ public abstract class AbsServer {
    * auctions about the state of all the public auctions
    */
   public void updateAllAuctions() {
-    synchronized (this.manager) {;
+    synchronized (this.manager) {
       for (Market auction : this.manager.getAuctions()) {
         synchronized (auction) {          
           auction.tick();

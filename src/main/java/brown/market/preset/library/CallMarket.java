@@ -17,7 +17,7 @@ public class CallMarket extends AbsMarketPreset {
    * need to pass in the market internal state, 
    * or otherwise delete it from this constructor.
    */
-  public CallMarket(double minutes) {
+  public CallMarket(double seconds) {
     super(new BlankAllocation(),
         new CallMarketPayment(),
         new CallMarketQuery(), 
@@ -25,7 +25,7 @@ public class CallMarket extends AbsMarketPreset {
         new CallMarketActivity(),
         new CallMarketInformation(),
         new OneShotTermination(), 
-        new XTimeTermination(minutes),
+        new XTimeTermination(seconds),
         new NoRecordKeeping());
   }
 }

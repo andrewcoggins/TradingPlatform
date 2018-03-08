@@ -1,9 +1,12 @@
 package brown.channels.library;
 
+import java.util.Map;
+
 import brown.agent.AbsAgent;
 import brown.agent.AbsLemonadeAgent;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
+import brown.channels.IAgentChannel;
 import brown.logging.Logging;
 import brown.messages.library.TradeMessage;
 
@@ -45,6 +48,11 @@ public class GameChannel extends AbsChannel {
       Logging.log("[Channel encountered invalid bid type]");
       return;      
     }
+  }
+
+  @Override
+  public IAgentChannel sanitize(Integer agent,Map<Integer, Integer> privateToPublic) {
+    return this;
   }
   
 }
