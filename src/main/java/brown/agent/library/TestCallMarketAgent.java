@@ -55,7 +55,7 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   @Override
   public void onGameReport(GameReportMessage gameReport) {
     Logging.log("Game report received");
-    if (gameReport instanceof CallMarketReportMessage){
+    if (gameReport instanceof CallMarketReportMessage) {
       Logging.log("size: " + ((CallMarketReportMessage) gameReport).getTransactions().size());
     } else {
       Logging.log(gameReport.toString());      

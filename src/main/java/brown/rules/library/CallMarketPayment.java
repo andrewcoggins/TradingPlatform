@@ -58,12 +58,12 @@ public class CallMarketPayment  implements IPaymentRule {
     for (TradeMessage bid : tradeBids){
         TwoSidedBid tsbid = (TwoSidedBid) bid.Bundle.getBids();
         int numToFill = tsbid.quantity;
-        if (tsbid.direction == BidDirection.BUY){
+        if (tsbid.direction == BidDirection.BUY) {
           boolean crossed = true;
           while (numToFill > 0 & sells.size() > 0 & crossed){
             // poll the best sell order
             SellOrder bestSell = sells.poll();
-            if (bestSell.price <= tsbid.price){
+            if (bestSell.price <= tsbid.price) {
               double midpoint = (double) ((bestSell.price + tsbid.price) / 2.);            
               int quantity = Math.min(bestSell.quantity,tsbid.quantity);              
               // make an order an update number to fill
