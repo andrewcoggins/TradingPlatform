@@ -15,5 +15,9 @@ public abstract class AbsOpenOutcryAgent extends AbsAgent implements ISimpleOpen
       throws AgentCreationException {
     super(host, port, gameSetup);
   }
- 
+  
+  public AbsOpenOutcryAgent(String host, int port, ISetup gameSetup, String name)
+      throws AgentCreationException {
+    super(host, port, gameSetup, name);
+  } 
 }
