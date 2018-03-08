@@ -221,7 +221,7 @@ public abstract class AbsServer {
    * auctions about the state of all the public auctions
    */
   public void updateAllAuctions() {
-    synchronized (this.manager) {;
+    synchronized (this.manager) {
       for (Market auction : this.manager.getAuctions()) {
         synchronized (auction) {          
           auction.tick();
