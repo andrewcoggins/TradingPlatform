@@ -35,7 +35,7 @@ public class MarketState implements IMarketState {
   private Boolean isAcceptable; 
   private IBidBundle reserve;
   //IRPolicy
-  private Map<Integer,GameReportMessage> gameReports; 
+  private Map<Integer,List<GameReportMessage>> gameReports; 
   //termination condition
   private Boolean innerTerminated; 
   private Boolean outerTerminated; 
@@ -207,12 +207,12 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public Map<Integer,GameReportMessage>  getReport() {
+  public Map<Integer,List<GameReportMessage>>  getReport() {
     return this.gameReports; 
   }
 
   @Override
-  public void setReport(Map<Integer,GameReportMessage> gameReport) {
+  public void setReport(Map<Integer,List<GameReportMessage>> gameReport) {
     this.gameReports = gameReport;
   }
 

@@ -31,14 +31,17 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   
   @Override
   public void onCallMarket(CallMarketChannel cmChannel) {
-    cmChannel.bid(this, new TwoSidedBidBundle(new TwoSidedBid(this.direction, this.price, this.quantity)));
-    Logging.log("Orderbook: " + cmChannel.getOrderBook().toString());
+    
+    
+    for (int i = 0; i <100; i++){
+      cmChannel.bid(this, new TwoSidedBidBundle(new TwoSidedBid(this.direction, this.price, this.quantity)));      
+    }
+    
+    Logging.log("Orderbook SIZE: " + (cmChannel.getOrderBook().getBuys().size() + cmChannel.getOrderBook().getSells().size()));
     if (this.direction == BidDirection.SELL){
       Logging.log("AGENT " + this.ID + "selling at " + this.price);      
-      this.price = this.price+1; 
     } else {
       Logging.log("AGENT " + this.ID + " bidding at " + this.price);            
-      this.price = this.price-1;       
     }
   }  
 
@@ -58,8 +61,9 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   } 
   
   public static void main(String[] args) throws AgentCreationException {
-    new TestCallMarketAgent("localhost", 2121,"buyer",BidDirection.BUY,30.,2);    
-    new TestCallMarketAgent("localhost", 2121,"seller",BidDirection.SELL,24.,2);        
+    new TestCallMarketAgent("localhost", 2121,"buyer",BidDirection.BUY,50.,1);    
+    new TestCallMarketAgent("localhost", 2121,"seller",BidDirection.SELL,50.,1);        
+    
       while(true){}      
   }  
 }

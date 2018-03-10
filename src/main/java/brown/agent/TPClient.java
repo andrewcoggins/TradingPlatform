@@ -34,7 +34,7 @@ public abstract class TPClient implements IClient {
   * @throws AgentCreationException
   */
   public TPClient(String host, int port, ISetup gameSetup) throws AgentCreationException {
-    this.CLIENT = new Client(8192, 4096);
+    this.CLIENT = new Client(16384, 8192);
     this.ID = null;
 
     CLIENT.start();

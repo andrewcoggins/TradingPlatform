@@ -1,6 +1,7 @@
 package brown.rules.library; 
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
 
   @Override
   public void setReport(IMarketState state) {
-    Map<Integer,GameReportMessage> reports = new HashMap<Integer,GameReportMessage>();    
+    Map<Integer,List<GameReportMessage>> reports = new HashMap<Integer,List<GameReportMessage>>();    
     
     for (List<Integer> group : state.getGroups()){
       Integer[] report = new Integer[numSlots];    
@@ -41,7 +42,9 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
         report[index] = report[index] + 1;
       }
       for (Integer agent : group){
-        reports.put(agent,new LemonadeReportMessage(report,true));
+        List<GameReportMessage> reportList = new LinkedList<GameReportMessage>();
+        reportList.add(new LemonadeReportMessage(report,true));
+        reports.put(agent,reportList);
       }
     }
     state.setReport(reports);

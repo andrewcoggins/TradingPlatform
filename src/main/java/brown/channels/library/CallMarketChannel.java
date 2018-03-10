@@ -82,6 +82,6 @@ public class CallMarketChannel extends AbsChannel{
 
   @Override
   public IAgentChannel sanitize(Integer agent, Map<Integer, Integer> privateToPublic) {
-    return new CallMarketChannel(this.ID, this.book.sanitize(agent, privateToPublic));
+    return new CallMarketChannel(this.ID, this.book.sanitize(250,agent, privateToPublic));
   }  
 }

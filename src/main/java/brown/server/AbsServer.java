@@ -12,12 +12,14 @@ import java.util.stream.Collectors;
 
 import brown.accounting.library.Account;
 import brown.accounting.library.AccountManager;
+import brown.channels.library.CallMarketChannel;
 import brown.logging.Logging;
 import brown.market.library.Market;
 import brown.market.library.MarketManager;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.AccountResetMessage;
 import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.CallMarketReportMessage;
 import brown.messages.library.ErrorMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.PrivateInformationMessage;
@@ -75,7 +77,7 @@ public abstract class AbsServer {
     this.manager = new MarketManager();
 
     // Kryo Stuff
-    theServer = new Server(8192, 4096);
+    theServer = new Server(16384, 8192);
     theServer.start();    
     Kryo serverKryo = theServer.getKryo();
     Startup.start(serverKryo);
@@ -230,7 +232,9 @@ public abstract class AbsServer {
             for (Entry<Connection, Integer> id : this.connections.entrySet()) {
               // maybe send message here? sanitized ledger.
               TradeRequestMessage tr = auction.constructTradeRequest(id.getValue());
-              this.theServer.sendToTCP(id.getKey().getID(), tr.sanitize(id.getValue(), this.privateToPublic));
+              tr = tr.sanitize(id.getValue(),this.privateToPublic);
+              Logging.log("SIZE:" + ((CallMarketChannel) tr.MARKET).getOrderBook().getBuys().size());              
+              this.theServer.sendToTCP(id.getKey().getID(), tr);
             }
           } else {
             List<Order> winners = auction.constructOrders();
@@ -256,9 +260,11 @@ public abstract class AbsServer {
               }
             }            
             // Send game report
-            Map<Integer,GameReportMessage> reports = auction.constructReport();
-            for (Integer agent : reports.keySet()) {      
-              this.theServer.sendToTCP(this.privateToConnection(agent).getID(), reports.get(agent).sanitize(agent,this.privateToPublic));
+            Map<Integer, List<GameReportMessage>> reports = auction.constructReport();
+            for (Integer agent : reports.keySet()) {  
+              for (GameReportMessage report : reports.get(agent)){
+                this.theServer.sendToTCP(this.privateToConnection(agent).getID(), report.sanitize(agent,this.privateToPublic));                
+              }
             }
             // record
             try {
