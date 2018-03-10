@@ -233,7 +233,6 @@ public abstract class AbsServer {
               // maybe send message here? sanitized ledger.
               TradeRequestMessage tr = auction.constructTradeRequest(id.getValue());
               tr = tr.sanitize(id.getValue(),this.privateToPublic);
-              Logging.log("SIZE:" + ((CallMarketChannel) tr.MARKET).getOrderBook().getBuys().size());              
               this.theServer.sendToTCP(id.getKey().getID(), tr);
             }
           } else {
