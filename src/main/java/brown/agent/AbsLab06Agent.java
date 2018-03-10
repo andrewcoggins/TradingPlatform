@@ -1,6 +1,6 @@
 package brown.agent;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import brown.accounting.library.Transaction;
@@ -20,7 +20,7 @@ import brown.messages.library.PrivateInformationMessage;
 import brown.setup.library.CallMarketSetup;
 
 public abstract class AbsLab06Agent extends AbsCallMarketAgent {
-	private List<Transaction> ledger = Arrays.asList(new Transaction[0]);
+	private List<Transaction> ledger = new ArrayList<Transaction>();
 	private OrderBook orderbook = null;
 
 	public AbsLab06Agent(String host, int port) throws AgentCreationException {
@@ -38,14 +38,14 @@ public abstract class AbsLab06Agent extends AbsCallMarketAgent {
 	}
 	
 	@Override
-	public void onBankUpdate(BankUpdateMessage update) {
-		double price = update.moniesChanged / ((double) update.quantity);
+	public synchronized void onBankUpdate(BankUpdateMessage update) {
 		int quantity = update.quantity == null ? 0 : (int) update.quantity.doubleValue();
+		double price = update.moniesChanged / ((double) quantity);
 		onTransaction(quantity, price);
 	}
 	
 	@Override
-	public void onGameReport(GameReportMessage gmReport) {
+	public synchronized void onGameReport(GameReportMessage gmReport) {
 		if (gmReport instanceof PredictionMarketReport) {
 			PredictionMarketReport pmReport = (PredictionMarketReport) gmReport;
 			System.out.println("Real coin result: " + pmReport.getCoin());
