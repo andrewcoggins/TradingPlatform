@@ -56,24 +56,26 @@ public class CallMarketPayment  implements IPaymentRule {
       }
     }
     
+    Logging.log("BIDS:" + tradeBids);
     for (TradeMessage bid : tradeBids){
         TwoSidedBid tsbid = (TwoSidedBid) bid.Bundle.getBids();
         int numToFill = tsbid.quantity;
         if (tsbid.direction == BidDirection.BUY) {
           boolean crossed = true;
-          while (numToFill > 0 & sells.size() > 0 & crossed){
+          while (numToFill > 0 && sells.size() > 0 && crossed){
             // poll the best sell order
             SellOrder bestSell = sells.poll();
             if (bestSell.price <= tsbid.price) {
               double midpoint = (double) ((bestSell.price + tsbid.price) / 2.);            
               int quantity = Math.min(bestSell.quantity,tsbid.quantity);              
               // make an order an update number to fill
-              orders.add(new Order(bid.AgentID,bestSell.agent, midpoint*quantity, quantity, new MultiTradeable(tradeableID, quantity)));                
+              orders.add(new Order(bid.AgentID,bestSell.agent, midpoint*quantity, quantity, new SimpleTradeable(tradeableID)));                
               numToFill = Math.max(0, numToFill - bestSell.quantity); 
               if (bestSell.quantity > tsbid.quantity){
                 sells.add(new SellOrder(bestSell.agent, bestSell.quantity - tsbid.quantity,bestSell.price));
               }
-            } else {    
+            } else {
+              sells.add(bestSell);
               crossed=false;
             }
           }
@@ -83,19 +85,20 @@ public class CallMarketPayment  implements IPaymentRule {
           }
         } else if (tsbid.direction == BidDirection.SELL) {
           boolean crossed = true;          
-          while (numToFill > 0 & buys.size() > 0 & crossed){   
+          while (numToFill > 0 && buys.size() > 0 && crossed){   
             // poll the best sell order
             BuyOrder bestBuy = buys.poll();
             if (bestBuy.price >= tsbid.price){
               double midpoint = (double) ((bestBuy.price + tsbid.price) / 2.);            
               int quantity = Math.min(bestBuy.quantity,tsbid.quantity);              
               // make an order an update number to fill
-              orders.add(new Order(bestBuy.agent,bid.AgentID, midpoint*quantity, quantity,new MultiTradeable(tradeableID, quantity)));                
+              orders.add(new Order(bestBuy.agent,bid.AgentID, midpoint*quantity, quantity,new SimpleTradeable(tradeableID)));                
               numToFill = Math.max(0, numToFill - bestBuy.quantity);    
               if (bestBuy.quantity > tsbid.quantity){
                 sells.add(new SellOrder(bestBuy.agent, bestBuy.quantity - tsbid.quantity,bestBuy.price));
               }              
             } else {     
+              buys.add(bestBuy);
               crossed=false;
             }            
           }
@@ -108,6 +111,8 @@ public class CallMarketPayment  implements IPaymentRule {
         }               
     }
     // Now update orderbook
+    Logging.log("BUYS: " + buys.toString());
+    Logging.log("SELLS: " + sells.toString());    
     book.setBuys(buys);
     book.setSells(sells);
     

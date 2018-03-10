@@ -88,8 +88,13 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
     this.monies += bankUpdate.moniesChanged;
-    this.goods.add(bankUpdate.tradeableAdded);
-    this.goods.remove(bankUpdate.tradeableLost);
+    
+    // as long as u don't do weird shit with fractions this should work
+    // maybe fix this later
+    for (int i = 0; i < bankUpdate.quantity;i++){
+      this.goods.add(bankUpdate.tradeableAdded);
+      this.goods.remove(bankUpdate.tradeableLost);      
+    }
   }
 
   @Override

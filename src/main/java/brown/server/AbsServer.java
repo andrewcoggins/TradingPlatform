@@ -208,11 +208,11 @@ public abstract class AbsServer {
     BankUpdateMessage bu;
     if (to) {
       // agent is receiving a good and losing money.
-      bu = new BankUpdateMessage(anOrder.TO, anOrder.GOOD, null, -1 * anOrder.PRICE);
+      bu = new BankUpdateMessage(anOrder.TO, anOrder.GOOD, null, -1 * anOrder.PRICE, anOrder.QUANTITY);
       theServer.sendToTCP(this.privateToConnection(anOrder.TO).getID(), bu);
     } else {
       // agent is losing a good and receiving money.
-      bu = new BankUpdateMessage(anOrder.FROM, null, anOrder.GOOD, anOrder.PRICE);
+      bu = new BankUpdateMessage(anOrder.FROM, null, anOrder.GOOD, anOrder.PRICE, anOrder.QUANTITY);
       theServer.sendToTCP(this.privateToConnection(anOrder.FROM).getID(), bu);
     }
   }

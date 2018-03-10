@@ -12,12 +12,14 @@ public class BankUpdateMessage extends AbsMessage {
 	public final ITradeable tradeableAdded; 
 	public final ITradeable tradeableLost;
 	public final Double moniesChanged; 
+	public final Double quantity;
 	
 	public BankUpdateMessage() {
 		super(null);
 		this.tradeableAdded = null; 
 		this.tradeableLost = null;
 		this.moniesChanged = null;
+		this.quantity = null;
 	}
 
 /**
@@ -32,11 +34,12 @@ public class BankUpdateMessage extends AbsMessage {
  * monies added to or removed from agent account
  */
 	public BankUpdateMessage(int ID, ITradeable tradeableAdded, ITradeable tradeableLost, 
-	    double moniesChanged) {
+	    double moniesChanged, double quantity) {
 		super(ID);
 		this.tradeableAdded = tradeableAdded; 
 		this.tradeableLost = tradeableLost; 
 		this.moniesChanged = moniesChanged; 
+		this.quantity = quantity;
 	}
 
 	@Override
@@ -48,19 +51,23 @@ public class BankUpdateMessage extends AbsMessage {
   public String toString() {
     return "BankUpdateMessage [tradeableAdded=" + tradeableAdded
         + ", tradeableLost=" + tradeableLost + ", moniesChanged="
-        + moniesChanged + "]";
+        + moniesChanged + ", quantity=" + quantity + "]";
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result
-        + ((moniesChanged == null) ? 0 : moniesChanged.hashCode());
-    result = prime * result
-        + ((tradeableAdded == null) ? 0 : tradeableAdded.hashCode());
-    result = prime * result
-        + ((tradeableLost == null) ? 0 : tradeableLost.hashCode());
+    result =
+        prime * result
+            + ((moniesChanged == null) ? 0 : moniesChanged.hashCode());
+    result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+    result =
+        prime * result
+            + ((tradeableAdded == null) ? 0 : tradeableAdded.hashCode());
+    result =
+        prime * result
+            + ((tradeableLost == null) ? 0 : tradeableLost.hashCode());
     return result;
   }
 
@@ -78,6 +85,11 @@ public class BankUpdateMessage extends AbsMessage {
         return false;
     } else if (!moniesChanged.equals(other.moniesChanged))
       return false;
+    if (quantity == null) {
+      if (other.quantity != null)
+        return false;
+    } else if (!quantity.equals(other.quantity))
+      return false;
     if (tradeableAdded == null) {
       if (other.tradeableAdded != null)
         return false;
@@ -90,5 +102,4 @@ public class BankUpdateMessage extends AbsMessage {
       return false;
     return true;
   }
-
 }
