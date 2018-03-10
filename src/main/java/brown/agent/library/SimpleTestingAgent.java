@@ -31,15 +31,11 @@ public class SimpleTestingAgent extends AbsLab06Agent{
   public void onMarketRequest(CallMarketChannel channel) {
     if (this.direction == BidDirection.BUY){
       Logging.log(this.ID + " bidding for " + this.price);
-      for (int i = 0; i <200; i++){
-        this.buy(price, quantity, channel);
-      }
+      this.buy(price, quantity, channel);
       this.price = this.price+this.increment;
     } else {
       Logging.log(this.ID + " offering at " + this.price);
-      for (int i = 0; i <200; i++){
-        this.sell(price, quantity, channel);
-      }
+      this.sell(price, quantity, channel);
       this.price = this.price-this.increment;      
     }
     Logging.log("ORDERBOOK SIZE: " + getOrderBook().getBuys().size());
@@ -55,6 +51,12 @@ public class SimpleTestingAgent extends AbsLab06Agent{
     new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,50.,0,1);            
     new SimpleTestingAgent("localhost", 2121,"buyer",BidDirection.BUY,49.,0,1);    
     new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,51.,0,1);         
-      while(true){}      
+    new SimpleTestingAgent("localhost", 2121,"buyer",BidDirection.BUY,50.,0,1);    
+    new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,50.,0,1);            
+    new SimpleTestingAgent("localhost", 2121,"buyer",BidDirection.BUY,49.,0,1);    
+    new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,51.,0,1);         
+    new SimpleTestingAgent("localhost", 2121,"buyer",BidDirection.BUY,49.,0,1);    
+    new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,51.,0,1);         
+    while(true){}      
   }  
 }

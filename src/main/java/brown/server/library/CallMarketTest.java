@@ -14,7 +14,7 @@ import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.PredictionMarketDecoysConfig;
 
 public class CallMarketTest {
-  private static int numSims = 2;
+  private static int numSims = 1;
   private static int delayTime = 5; 
   private static int lag = 50;
   

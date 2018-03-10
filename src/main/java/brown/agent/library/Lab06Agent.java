@@ -28,5 +28,11 @@ public class Lab06Agent extends AbsLab06Agent{
     // TODO Auto-generated method stub
     
   }
+  
+  public static void main(String[] args) throws AgentCreationException {
+    // new Lab06Agent();
+    while(true){}      
+    
+  }
 
 }
