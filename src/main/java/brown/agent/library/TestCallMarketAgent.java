@@ -3,9 +3,7 @@ package brown.agent.library;
 
 import brown.agent.AbsCallMarketAgent;
 import brown.bid.library.BidDirection;
-import brown.bid.library.CancelBid;
 import brown.bid.library.TwoSidedBid;
-import brown.bidbundle.library.CancelBundle;
 import brown.bidbundle.library.TwoSidedBidBundle;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
@@ -58,8 +56,14 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   } 
   
   public static void main(String[] args) throws AgentCreationException {
-    new TestCallMarketAgent("localhost", 2121,"buyer",BidDirection.BUY,30.,2);    
-    new TestCallMarketAgent("localhost", 2121,"seller",BidDirection.SELL,24.,2);        
+   // new TestCallMarketAgent("localhost", 2121,"buyer",BidDirection.BUY,30.,2);    
+   // new TestCallMarketAgent("localhost", 2121,"seller",BidDirection.SELL,24.,2);       
+    
+    new RandomAgent("localhost", 2121,"random1");
+    new RandomAgent("localhost", 2121,"random2");
+    new RandomAgent("localhost", 2121,"random3");
+
+    
       while(true){}      
   }  
 }
