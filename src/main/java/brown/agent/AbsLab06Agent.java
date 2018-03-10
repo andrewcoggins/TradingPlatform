@@ -40,12 +40,14 @@ public abstract class AbsLab06Agent extends AbsCallMarketAgent {
 	public void onBankUpdate(BankUpdateMessage update) {
 		Integer numAdded = update.tradeableAdded.getCount();
 		if (numAdded != null && numAdded > 0) {
-			
+			double price = -1.0 * update.moniesChanged / ((double) numAdded);
+			onTransaction(numAdded, price);
 		}
 		
 		Integer numLost = update.tradeableLost.getCount();
 		if (numLost != null && numLost > 0) {
-			
+			double price = update.moniesChanged / ((double) numLost);
+			onTransaction(-1 * numAdded, price);
 		}
 	}
 	
@@ -83,8 +85,16 @@ public abstract class AbsLab06Agent extends AbsCallMarketAgent {
 		return this.numDecoys;
 	}
 	
+	public List<Transaction> getLedger() {
+		return this.ledger;
+	}
+	
+	public OrderBook getOrderBook() {
+		return this.orderbook;
+	}
+	
 	public abstract void onMarketRequest();
-	public abstract void onTransaction();
+	public abstract void onTransaction(int quantity, double price);
 	
 
 }
