@@ -16,6 +16,7 @@ import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.CallMarketReportMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.PredictionMarketReport;
+import brown.messages.library.PrivateInformationMessage;
 import brown.setup.library.CallMarketSetup;
 
 public abstract class AbsLab06Agent extends AbsCallMarketAgent {
@@ -33,22 +34,14 @@ public abstract class AbsLab06Agent extends AbsCallMarketAgent {
 	@Override
 	public void onCallMarket(CallMarketChannel channel) {
 		this.orderbook = channel.getOrderBook();
-		this.onMarketRequest();
+		this.onMarketRequest(channel);
 	}
 	
 	@Override
 	public void onBankUpdate(BankUpdateMessage update) {
-		Integer numAdded = update.tradeableAdded.getCount();
-		if (numAdded != null && numAdded > 0) {
-			double price = -1.0 * update.moniesChanged / ((double) numAdded);
-			onTransaction(numAdded, price);
-		}
-		
-		Integer numLost = update.tradeableLost.getCount();
-		if (numLost != null && numLost > 0) {
-			double price = update.moniesChanged / ((double) numLost);
-			onTransaction(-1 * numAdded, price);
-		}
+		double price = update.moniesChanged / ((double) update.quantity);
+		int quantity = update.quantity == null ? 0 : (int) update.quantity.doubleValue();
+		onTransaction(quantity, price);
 	}
 	
 	@Override
@@ -60,6 +53,12 @@ public abstract class AbsLab06Agent extends AbsCallMarketAgent {
 			CallMarketReportMessage cmReport = (CallMarketReportMessage) gmReport;
 			ledger.addAll(cmReport.getTransactions());
 		}
+	}
+	
+	@Override
+	public void onPrivateInformation(PrivateInformationMessage privateInfo) {
+		super.onPrivateInformation(privateInfo);
+		onMarketStart();
 	}
 	
 	public void buy(double price, int quantity, CallMarketChannel channel) {
@@ -93,8 +92,7 @@ public abstract class AbsLab06Agent extends AbsCallMarketAgent {
 		return this.orderbook;
 	}
 	
-	public abstract void onMarketRequest();
+	public abstract void onMarketStart();
+	public abstract void onMarketRequest(CallMarketChannel channel);
 	public abstract void onTransaction(int quantity, double price);
-	
-
 }
