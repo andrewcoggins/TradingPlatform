@@ -16,6 +16,7 @@ import brown.market.marketstate.library.OrderBook;
 import brown.market.marketstate.library.SellOrder;
 import brown.messages.library.TradeMessage;
 import brown.rules.IPaymentRule;
+import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
 
 public class CallMarketPayment  implements IPaymentRule {
@@ -67,7 +68,7 @@ public class CallMarketPayment  implements IPaymentRule {
               double midpoint = (double) ((bestSell.price + tsbid.price) / 2.);            
               int quantity = Math.min(bestSell.quantity,tsbid.quantity);              
               // make an order an update number to fill
-              orders.add(new Order(bid.AgentID,bestSell.agent, midpoint, quantity,new SimpleTradeable(tradeableID)));                
+              orders.add(new Order(bid.AgentID,bestSell.agent, midpoint*quantity, quantity, new MultiTradeable(tradeableID, quantity)));                
               numToFill = Math.max(0, numToFill - bestSell.quantity); 
               if (bestSell.quantity > tsbid.quantity){
                 sells.add(new SellOrder(bestSell.agent, bestSell.quantity - tsbid.quantity,bestSell.price));
@@ -89,7 +90,7 @@ public class CallMarketPayment  implements IPaymentRule {
               double midpoint = (double) ((bestBuy.price + tsbid.price) / 2.);            
               int quantity = Math.min(bestBuy.quantity,tsbid.quantity);              
               // make an order an update number to fill
-              orders.add(new Order(bestBuy.agent,bid.AgentID, midpoint, quantity,new SimpleTradeable(tradeableID)));                
+              orders.add(new Order(bestBuy.agent,bid.AgentID, midpoint*quantity, quantity,new MultiTradeable(tradeableID, quantity)));                
               numToFill = Math.max(0, numToFill - bestBuy.quantity);    
               if (bestBuy.quantity > tsbid.quantity){
                 sells.add(new SellOrder(bestBuy.agent, bestBuy.quantity - tsbid.quantity,bestBuy.price));

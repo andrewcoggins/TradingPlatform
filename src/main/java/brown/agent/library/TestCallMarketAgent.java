@@ -38,11 +38,6 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
       this.price = this.price+1; 
     } else {
       Logging.log("AGENT " + this.ID + " bidding at " + this.price);            
-      if (this.price <= 27){
-        Logging.log("AGENT " + this.ID + " canceling buys at " + 28);
-        // Cancel all buys 27 and above
-        cmChannel.bid(this,new CancelBundle(new CancelBid(this.direction, 28)));
-      }
       this.price = this.price-1;       
     }
   }  
@@ -63,7 +58,8 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   } 
   
   public static void main(String[] args) throws AgentCreationException {
-    new TestCallMarketAgent("localhost", 2121,"Buy30bot1",BidDirection.BUY,30.,1);    
+    new TestCallMarketAgent("localhost", 2121,"buyer",BidDirection.BUY,30.,2);    
+    new TestCallMarketAgent("localhost", 2121,"seller",BidDirection.SELL,24.,2);        
       while(true){}      
   }  
 }
