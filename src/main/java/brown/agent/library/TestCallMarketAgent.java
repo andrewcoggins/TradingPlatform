@@ -61,7 +61,8 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
     
     new RandomAgent("localhost", 2121,"random1");
     new RandomAgent("localhost", 2121,"random2");
-    new RandomAgent("localhost", 2121,"random3");
+    new SpreadAgent("localhost", 2121,"Spread1");
+    new UpdateAgent("localhost", 2121,"Update1");
 
     
       while(true){}      

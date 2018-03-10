@@ -42,7 +42,11 @@ public class SpreadAgent extends AbsLab06Agent {
     PriorityQueue<BuyOrder> buys = ob.getBuys();
     PriorityQueue<SellOrder> sells = ob.getSells();
     
-    if(Math.random()<.5) {     
+    if(buys.size()<1 || sells.size()<1) {
+      return;
+    }
+    
+    if(Math.random()<.5) {   
       this.buy(Math.floor(((sells.peek().price  - buys.peek().price)/2 )), 1, channel) ;
     }
     else{

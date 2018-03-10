@@ -23,10 +23,10 @@ public class RandomAgent extends AbsLab06Agent {
     
     
     if(Math.random()<.5) {    
-      this.buy((int)(Math.random()*100), 1, channel); 
+      this.buy(Math.min( 99,Math.max(1, (int)(Math.random()*100))), 1, channel); 
     }
     else{
-      this.sell((int)(Math.random()*100), 1, channel);
+      this.buy(Math.max( 99,Math.max(1, (int)(Math.random()*100))), 1, channel); 
     }
     
   }

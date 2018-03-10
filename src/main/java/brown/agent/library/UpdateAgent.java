@@ -23,13 +23,13 @@ public class UpdateAgent extends AbsLab06Agent {
 
     // TODO Auto-generated method stub
     
-    int decoys = this.getNumDecoys();
+    int decoys = this.getNumDecoys(); 
    
     if(this.getCoin()){
-      fair_value = (double)(2+decoys)/(double)(2*decoys + 2);
+      fair_value = (double)(2+decoys)/(double)(2*decoys + 2) * 100;
     }
     else{   
-      fair_value = (double)(decoys)/(double)(2*decoys + 2);
+      fair_value = (double)(decoys)/(double)(2*decoys + 2) * 100;
     }
     
   }
@@ -45,7 +45,10 @@ public class UpdateAgent extends AbsLab06Agent {
     updated = false;
     }
     
+    System.out.println(fair_value);
+    
     this.buy(Math.floor(fair_value-epsilon), 1, channel);
+
     this.sell(Math.ceil(fair_value+epsilon), 1, channel);
   }
 
@@ -53,11 +56,14 @@ public class UpdateAgent extends AbsLab06Agent {
   public void onTransaction(int quantity, double price) {
 
     // TODO Auto-generated method stub
-    if(quantity>0) {
+    if(price>0) {
       fair_value+=epsilon;
+      fair_value = Math.min(fair_value, 94);
     }
     else{
       fair_value-=epsilon;
+      fair_value = Math.max(fair_value, 06);
+
     }
     updated = true;
   }
