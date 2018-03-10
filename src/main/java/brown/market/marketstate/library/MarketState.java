@@ -18,6 +18,7 @@ public class MarketState implements IMarketState {
   private final Integer ID;  
   private final List<ITradeable> TRADEABLES;
   private List<TradeMessage> bids;
+  private boolean isOpen; 
   private int ticks;  
   private long time;
   
@@ -62,6 +63,7 @@ public class MarketState implements IMarketState {
     this.groups = new LinkedList<List<Integer>>();
     this.orderbook = new OrderBook();
     this.time = System.currentTimeMillis();
+    this.isOpen = true; 
   }
   
   @Override
@@ -98,7 +100,17 @@ public class MarketState implements IMarketState {
   public void clearBids() {
    this.bids = new LinkedList<TradeMessage>();
   }
-
+  
+  @Override
+  public void close() { 
+    this.isOpen = false; 
+  }
+  
+  @Override
+  public boolean isOpen() {
+    return this.isOpen; 
+  }
+    
   @Override
   public List<TradeMessage> getBids() {
     return this.bids; 

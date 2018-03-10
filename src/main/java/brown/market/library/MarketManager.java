@@ -24,7 +24,6 @@ import brown.tradeable.ITradeable;
 //TODO: make sure that if a bid is being sent to a market, that markets exists in the manager. 
 
 
-
 public class MarketManager implements IMarketManager {
   // stores all ledgers in a simulation
 	private List<Map<Market, Ledger>> ledgers;
@@ -32,6 +31,7 @@ public class MarketManager implements IMarketManager {
 	private List<Map<Integer, Market>> markets;
 	private PrevStateInfo information;
 	private Integer index; 
+	private Integer idCount; 
 	
 
 	public MarketManager() {
@@ -39,17 +39,17 @@ public class MarketManager implements IMarketManager {
 		this.markets = new LinkedList<Map<Integer, Market>>();	
 		this.information = new BlankStateInfo();
 		this.index = -1; 
+		this.idCount = 0; 
 	}
 
   public void addSimulMarket(SimulMarkets s, List<ITradeable> tradeables, List<Integer> agents) {
-	  this.index++;
-	  int id = 0; 
+    this.index++;
 	  this.ledgers.add(new ConcurrentHashMap<Market, Ledger>());
 	  this.markets.add(new ConcurrentHashMap<Integer, Market>());
 	  for (AbsMarketPreset preset : s.getMarkets()) {
-	    this.open(preset, id, tradeables, agents);
-	    id++;
-	  }
+	    this.open(preset, idCount, tradeables, agents);
+	    idCount++;
+	  } 
 	}
 	  
 	/**
@@ -76,7 +76,9 @@ public class MarketManager implements IMarketManager {
    * @param closingState
    */
   public void close(Integer ID) {
-    this.markets.get(index).remove(ID);
+    Market toClose = this.markets.get(index).get(ID);
+    toClose.close();
+    this.markets.get(index).put(ID, toClose);
   }
 
 	/**
@@ -94,15 +96,18 @@ public class MarketManager implements IMarketManager {
 	 * @return
 	 */
 	public Market getMarket(Integer ID) {
-	  if (index != -1) {
-	    return markets.get(index).get(ID);
-	  }
+	    return markets.get(index).get(ID);	  
 	}
 
 	
-	public boolean validMarket() {
-	  return false;
-	}
+	public boolean MarketOpen(Integer ID) {
+	  if (index == -1) return false; 
+	  if (markets.get(index).containsKey(ID)) {	
+	    return markets.get(index).get(ID).isOpen();
+	  }
+	  return false; 
+	 }
+	  
 	
 	/**
 	 * Gets all of the auctions
@@ -121,17 +126,18 @@ public class MarketManager implements IMarketManager {
   public boolean anyMarketsOpen() {
     boolean toReturn = false;
     for (Market m : this.getAuctions()) {
-      if (!m.isOverOuter()){
+      if (m.isOpen()) {
         toReturn = true;
+        break;
       }
     }
     return toReturn;    
   }
 
   public void reset() {
+    this.index = -1;
     this.ledgers.clear();
     this.markets.clear();
-    this.index = -1;
     this.information = null;
   }
 
@@ -140,7 +146,7 @@ public class MarketManager implements IMarketManager {
   }
 
   public void updateAllInfo() {
-    for (Market market: this.markets.get(index).values()){
+    for (Market market: this.markets.get(index).values()) {
       this.information.combine(market.constructSummaryState());
       Logging.log("Updating Market, New Information: " + this.information.toString());      
     }

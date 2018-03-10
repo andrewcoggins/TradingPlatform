@@ -31,6 +31,10 @@ public interface IMarketState {
     public int getTicks();  
     
     public long getTime();
+    
+    public void close(); 
+    
+    public boolean isOpen();
 
     //bids
     

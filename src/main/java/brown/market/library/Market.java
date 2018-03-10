@@ -64,7 +64,7 @@ public class Market implements IMarket {
   // name seems misleading
   public boolean handleBid(TradeMessage bid) {
     this.ACTRULE.isAcceptable(this.STATE, bid); 
-    if (this.STATE.getAcceptable()) {
+    if (this.STATE.getAcceptable() && this.STATE.isOpen()) {
       STATE.addBid(bid);
     }
     return this.STATE.getAcceptable();
@@ -129,5 +129,14 @@ public class Market implements IMarket {
   @Override
   public void record(Map<Integer,IValuation> privateVals) throws IOException {    
     this.rRule.record(this.STATE, privateVals);
+  }
+  
+  @Override
+  public void close() {
+    this.STATE.close(); 
+  }
+  
+  public boolean isOpen() {
+    return this.STATE.isOpen(); 
   }
 }

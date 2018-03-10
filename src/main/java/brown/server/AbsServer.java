@@ -182,19 +182,20 @@ public abstract class AbsServer {
    * a BidRequest for an auction
    */
   protected void onBid(Connection connection, Integer privateID, TradeMessage bid) {
-    Market auction = this.manager.getMarket(bid.AuctionID);
-    if (auction != null) {
-      synchronized (auction) {
-        // Handle bid through handleBid method
-        if (!auction.handleBid(bid.safeCopy(privateID))) {
-          this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid rejected by Activity Rule"));
+    if (this.manager.MarketOpen(bid.AuctionID)) {
+      Market auction = this.manager.getMarket(bid.AuctionID);
+        synchronized (auction) {
+          // Handle bid through handleBid method
+          if (!auction.handleBid(bid.safeCopy(privateID))) {
+            this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid rejected by Activity Rule"));
+          }
         }
       }
-    } else {
-      Logging.log("[x] AbsServer onBid: Bid encountered with unknown auction ID");
-      this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid send to unknown auction"));
+      else {
+        Logging.log("[x] AbsServer onBid: Bid encountered with unknown auction ID");
+        this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid send to unknown auction"));
+      }
     }
-  }
   
   /**
    * Singular bank update
@@ -268,6 +269,9 @@ public abstract class AbsServer {
             if (!auction.isOverOuter()) {
               Logging.log("[*] Auction has been reset");
               auction.resetInnerMarket();              
+            } else {
+              // if over, close.
+              auction.close();
             }
           }
         }

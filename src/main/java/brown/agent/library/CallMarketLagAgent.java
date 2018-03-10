@@ -40,8 +40,8 @@ public class CallMarketLagAgent extends AbsCallMarketAgent {
   }
   
   public static void main(String[] args) throws AgentCreationException { 
-    new CallMarketLagAgent("localhost", 2121, "andrew", 5000);
-    new CallMarketLagAgent("localhost", 2121, "andrew", 0);
+    new CallMarketLagAgent("localhost", 2121, "andrew", 3000);
+    new CallMarketLagAgent("localhost", 2121, "andrew", 3000);
     while(true){}
   }
   

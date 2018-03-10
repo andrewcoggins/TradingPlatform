@@ -81,4 +81,7 @@ public interface IMarket {
 
   void record(Map<Integer,IValuation> privateVals) throws IOException;
   
+  //close the market
+  public void close();
+  
 }
