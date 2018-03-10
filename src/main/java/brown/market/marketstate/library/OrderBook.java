@@ -138,6 +138,8 @@ public class OrderBook implements IOrderBook {
     Collections.shuffle(testList);
     System.out.println(testList);
     Logging.log(test.toString());    
+    
+    PriorityQueue<SellOrder> sells = testbook.getSells();
   }
   
   @Override

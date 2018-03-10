@@ -50,7 +50,6 @@ public class CallMarketInformation implements IInformationRevelationPolicy{
   @Override
   public void constructSummaryState(IMarketState state) {        
     PrevStateInfo summary = new PredictionMarketInfo(this.ledger.getList());    
-    Logging.log("Constructing Summary State: " + summary.toString());
     state.setSummaryState(summary);
   }  
 }

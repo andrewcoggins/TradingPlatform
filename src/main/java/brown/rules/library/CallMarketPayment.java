@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 import brown.bid.library.BidDirection;
+import brown.bid.library.CancelBid;
 import brown.bid.library.TwoSidedBid;
 import brown.bidbundle.BundleType;
 import brown.logging.Logging;
@@ -26,13 +27,35 @@ public class CallMarketPayment  implements IPaymentRule {
     
     OrderBook book = state.getOrderBook();
     List <TradeMessage> bids = state.getBids();
+    List<TradeMessage> tradeBids = new LinkedList<TradeMessage>();
+    List<TradeMessage> cancelBids = new LinkedList<TradeMessage>();
+        
+    for (TradeMessage bid : bids){
+      if (bid.Bundle.getType() == BundleType.TWOSIDED){
+        tradeBids.add(bid);
+      } else if (bid.Bundle.getType() == BundleType.CANCEL){
+        cancelBids.add(bid);
+      } else {
+        Logging.log("Invalid Bid Type: Neither a 2 sided bid or a cancelling bid");
+      }
+    }
+
     PriorityQueue<BuyOrder> buys = book.getBuys();
     PriorityQueue<SellOrder> sells = book.getSells();
-    
-    for (TradeMessage bid : bids) {
-      if (bid.Bundle.getType() != BundleType.TWOSIDED) {
-        Logging.log("Wrong kind of Bid in Call Market payment");
+
+    for (TradeMessage bid : cancelBids){
+      Integer agent = bid.AgentID;
+      CancelBid cancel = (CancelBid)  bid.Bundle.getBids();
+      if (cancel.direction == BidDirection.BUY){
+        buys.removeIf(buy -> buy.agent.equals(agent) && buy.price >= cancel.price);
+      } else if (cancel.direction == BidDirection.SELL){
+        sells.removeIf(sell -> sell.agent.equals(agent) && sell.price <= cancel.price);          
       } else {
+        Logging.log("Unknown bid direction in cancel bid");
+      }
+    }
+    
+    for (TradeMessage bid : tradeBids){
         TwoSidedBid tsbid = (TwoSidedBid) bid.Bundle.getBids();
         int numToFill = tsbid.quantity;
         if (tsbid.direction == BidDirection.BUY) {
@@ -80,9 +103,8 @@ public class CallMarketPayment  implements IPaymentRule {
             sells.add(new SellOrder(bid.AgentID, numToFill, tsbid.price));
           }          
         } else {
-          Logging.log("Unknown bid direction in call market payment");
+          Logging.log("Unknown bid direction in two sided bid");
         }               
-      }
     }
     // Now update orderbook
     book.setBuys(buys);
