@@ -1,3 +1,5 @@
+package brown.agent.library;
+
 import brown.agent.AbsLab06Agent;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
@@ -44,7 +46,7 @@ public class UpdateAgent extends AbsLab06Agent {
     }
     
     this.buy(Math.floor(fair_value-epsilon), 1, channel);
-    this.buy(Math.ceil(fair_value+epsilon), 1, channel);
+    this.sell(Math.ceil(fair_value+epsilon), 1, channel);
   }
 
   @Override
