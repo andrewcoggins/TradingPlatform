@@ -3,9 +3,7 @@ package brown.agent.library;
 
 import brown.agent.AbsCallMarketAgent;
 import brown.bid.library.BidDirection;
-import brown.bid.library.CancelBid;
 import brown.bid.library.TwoSidedBid;
-import brown.bidbundle.library.CancelBundle;
 import brown.bidbundle.library.TwoSidedBidBundle;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
