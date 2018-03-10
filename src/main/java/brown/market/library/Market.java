@@ -83,7 +83,7 @@ public class Market implements IMarket {
 
   @Override 
   // Make sure this is called after constructOrders
-  public Map<Integer,GameReportMessage> constructReport() {
+  public Map<Integer, List<GameReportMessage>> constructReport() {
     this.IRPOLICY.setReport(this.STATE);
     return this.STATE.getReport();
   }

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import brown.accounting.ILedger;
+import brown.logging.Logging;
 import brown.tradeable.ITradeable;
 
 /**
@@ -79,6 +80,19 @@ public class Ledger implements ILedger{
 		}
 		return ledger;
 	}
+  
+  public List<Ledger> splitUnshared(Integer n){
+    List<Ledger> toReturn = new LinkedList<Ledger>();        
+    Ledger tempLedger = new Ledger();    
+    for (int i = 0; i < this.unshared.size(); i++){
+      tempLedger.add(this.unshared.get(i));
+      if ((i % 100 == 99) || (i == this.unshared.size()-1)){
+        toReturn.add(tempLedger);
+        tempLedger = new Ledger();
+      }      
+    }
+    return toReturn;
+  }
 	
 	public void clearUnshared() {
 		this.unshared.clear();
@@ -126,6 +140,15 @@ public class Ledger implements ILedger{
     } else if (!unshared.equals(other.unshared))
       return false;
     return true;
+  }
+  
+  public static void main(String[] args) throws InterruptedException {
+    Ledger test = new Ledger();
+    for (int i = 0; i<750;i++){
+      test.add(new Transaction());      
+    }
+    List<Ledger> testList = test.splitUnshared(100);
+    Logging.log("SIZE: " + testList.size());
   }
 
 }

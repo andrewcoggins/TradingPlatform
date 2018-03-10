@@ -56,7 +56,6 @@ public class CallMarketPayment  implements IPaymentRule {
       }
     }
     
-    Logging.log("BIDS:" + tradeBids);
     for (TradeMessage bid : tradeBids){
         TwoSidedBid tsbid = (TwoSidedBid) bid.Bundle.getBids();
         int numToFill = tsbid.quantity;
@@ -111,8 +110,6 @@ public class CallMarketPayment  implements IPaymentRule {
         }               
     }
     // Now update orderbook
-    Logging.log("BUYS: " + buys.toString());
-    Logging.log("SELLS: " + sells.toString());    
     book.setBuys(buys);
     book.setSells(sells);
     

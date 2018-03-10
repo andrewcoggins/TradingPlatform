@@ -46,7 +46,7 @@ public interface IMarket {
   
   
   //where is this game report created?
-  public Map<Integer,GameReportMessage> constructReport();
+  public Map<Integer,List<GameReportMessage>> constructReport();
   //shouldn't this be more like constructGameReport with this description:
   /**
    * Constructs a game report to send to a client.

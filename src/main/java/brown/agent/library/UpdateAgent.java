@@ -9,12 +9,21 @@ import brown.exceptions.AgentCreationException;
 public class UpdateAgent extends AbsLab06Agent {
 
   private double fair_value = 0;
-  private double epsilon = 5;
+  private double update_epsilon = 5;
+  private double spread_epsilon = 5;
   boolean updated = false;
   
   public UpdateAgent(String host, int port, String name)
       throws AgentCreationException {
     super(host, port, name);
+    // TODO Auto-generated constructor stub
+  }
+  
+  public UpdateAgent(String host, int port, String name, double update, double spread)
+      throws AgentCreationException {
+    super(host, port, name);
+    update_epsilon = update;
+    spread_epsilon = spread;
     // TODO Auto-generated constructor stub
   }
 
@@ -47,9 +56,9 @@ public class UpdateAgent extends AbsLab06Agent {
     
     System.out.println(fair_value);
     
-    this.buy(Math.floor(fair_value-epsilon), 1, channel);
+    this.buy(Math.floor(fair_value-spread_epsilon), 1, channel);
 
-    this.sell(Math.ceil(fair_value+epsilon), 1, channel);
+    this.sell(Math.ceil(fair_value+spread_epsilon), 1, channel);
   }
 
   @Override
@@ -57,11 +66,11 @@ public class UpdateAgent extends AbsLab06Agent {
 
     // TODO Auto-generated method stub
     if(price>0) {
-      fair_value+=epsilon;
+      fair_value+=update_epsilon;
       fair_value = Math.min(fair_value, 94);
     }
     else{
-      fair_value-=epsilon;
+      fair_value-=update_epsilon;
       fair_value = Math.max(fair_value, 06);
 
     }

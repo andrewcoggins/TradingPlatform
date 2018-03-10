@@ -14,17 +14,9 @@ import brown.agent.AbsAgent;
  *
  */
 public abstract class GameReportMessage extends AbsMessage {
-  
-	public final Ledger LEDGER;
 	
 	public GameReportMessage() {
 		super(null);
-		this.LEDGER = null;
-	}
-
-	public GameReportMessage(Ledger ledger) {
-		super(null);
-		this.LEDGER = ledger;
 	}
 
 	@Override

@@ -10,7 +10,6 @@ import brown.messages.library.TradeRequestMessage;
 import brown.rules.IQueryRule;
 
 public class CallMarketQuery implements IQueryRule {
-
   @Override
   public void makeChannel(IMarketState state) {           
     Map<Integer,Integer> idToGroup = new HashMap<Integer,Integer>();
