@@ -55,10 +55,46 @@ public abstract class AbsAgent extends TPClient implements IAgent {
     this.goods = new LinkedList<ITradeable>();
   }
   
+  /**
+   * 
+   * AbsAgent takes in a host, a port, an ISetup.
+   * @param host
+   * @param port
+   * @param gameSetup
+   * @throws AgentCreationException
+   */
+  public AbsAgent(String host, int port, ISetup gameSetup,String name)
+      throws AgentCreationException {
+    super(host, port, gameSetup);
+    final AbsAgent agent = this;
+    // All agents listen for messages.
+    CLIENT.addListener(new Listener() {
+      public void received(Connection connection, Object message) {
+        synchronized (agent) {
+          if (message instanceof AbsMessage) {
+            AbsMessage theMessage = (AbsMessage) message;
+            
+            theMessage.dispatch(agent);
+          }
+        }
+      }
+    });
+
+    CLIENT.sendTCP(new RegistrationMessage(-1,name));
+    
+    this.monies = 0.0;
+    this.goods = new LinkedList<ITradeable>();
+  }
+  
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
     this.monies += bankUpdate.moniesChanged;
-    this.goods.add(bankUpdate.tradeableAdded);
-    this.goods.remove(bankUpdate.tradeableLost);
+    
+    // as long as u don't do weird shit with fractions this should work
+    // maybe fix this later
+    for (int i = 0; i < bankUpdate.quantity;i++){
+      this.goods.add(bankUpdate.tradeableAdded);
+      this.goods.remove(bankUpdate.tradeableLost);      
+    }
   }
 
   @Override

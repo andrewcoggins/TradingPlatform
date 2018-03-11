@@ -19,7 +19,7 @@ public class CallMarketReportMessage extends GameReportMessage {
     this.ledger = ledger;
   }  
 
-  public List<Transaction> getTransactions(){
+  public List<Transaction> getTransactions() {
     return this.ledger.getList();
   }
   

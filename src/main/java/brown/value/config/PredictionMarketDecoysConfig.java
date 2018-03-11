@@ -36,7 +36,7 @@ public class PredictionMarketDecoysConfig extends ValConfig implements GameValua
     Map<Integer,PrivateInformationMessage> messages = new HashMap<Integer,PrivateInformationMessage>();
     
     int count = 0;
-    for (Integer agent: agents){
+    for (Integer agent: agents) {
       int nDecoys = (int) count/2 + 1;
       messages.put(agent, new PredictionMarketValuationMessage(agent,flipCoins(nDecoys),nDecoys));
       count++;
@@ -45,7 +45,7 @@ public class PredictionMarketDecoysConfig extends ValConfig implements GameValua
     return messages;
   }   
   
-  public boolean flipCoins(int numDecoys){
+  public boolean flipCoins(int numDecoys) {
     boolean[] flips = new boolean[numDecoys+1];
     flips[0] = this.coin;
     for (int i = 1; i<=numDecoys; i++){

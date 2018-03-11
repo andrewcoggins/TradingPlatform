@@ -2,6 +2,8 @@ package brown.server.library;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import brown.accounting.library.Account;
 import brown.logging.Logging;
 import brown.market.preset.AbsMarketPreset;
 import brown.server.AbsServer;
@@ -81,7 +83,7 @@ public class RunServer extends AbsServer{
     this.allTradeables = sim.getTradeables();
     this.initialMonies = sim.getInitialMonies(); 
     this.initialGoods = sim.getInitialGoods(); 
-    delay(delay);    
+    delay(delay);       
     this.summarizer = new AuctionSummarizer(this.privateToPublic.keySet());
     int count = 0;
     while (count < numRuns) {

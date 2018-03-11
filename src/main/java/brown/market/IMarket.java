@@ -46,7 +46,7 @@ public interface IMarket {
   
   
   //where is this game report created?
-  public Map<Integer,GameReportMessage> constructReport();
+  public Map<Integer,List<GameReportMessage>> constructReport();
   //shouldn't this be more like constructGameReport with this description:
   /**
    * Constructs a game report to send to a client.
@@ -80,5 +80,8 @@ public interface IMarket {
   public void setGroupings(List<Integer> groups);
 
   void record(Map<Integer,IValuation> privateVals) throws IOException;
+  
+  //close the market
+  public void close();
   
 }

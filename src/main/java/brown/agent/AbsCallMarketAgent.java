@@ -17,6 +17,13 @@ public abstract class AbsCallMarketAgent extends AbsAgent implements ICallMarket
     this.numDecoys = null;
   }
   
+  public AbsCallMarketAgent(String host, int port, ISetup gameSetup, String name)
+      throws AgentCreationException {
+    super(host, port, gameSetup,name);
+    this.coin = null;
+    this.numDecoys = null;
+  }
+  
   // stores agent tradeables, valuation and valuation distribution.
   @Override
   public void onPrivateInformation(PrivateInformationMessage privateInfo) {   

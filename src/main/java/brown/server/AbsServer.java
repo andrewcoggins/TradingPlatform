@@ -12,13 +12,14 @@ import java.util.stream.Collectors;
 
 import brown.accounting.library.Account;
 import brown.accounting.library.AccountManager;
-import brown.accounting.library.Ledger;
+import brown.channels.library.CallMarketChannel;
 import brown.logging.Logging;
 import brown.market.library.Market;
 import brown.market.library.MarketManager;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.AccountResetMessage;
 import brown.messages.library.BankUpdateMessage;
+import brown.messages.library.CallMarketReportMessage;
 import brown.messages.library.ErrorMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.PrivateInformationMessage;
@@ -53,6 +54,7 @@ public abstract class AbsServer {
   private int agentCount;  
   protected Map<Connection, Integer> connections;
   protected Map<Integer, Integer> privateToPublic;
+  protected Map<Integer, String> IDToName;
   protected Map<Integer, IValuation> privateValuations; 
   protected AccountManager acctManager;
   protected AuctionSummarizer summarizer; 
@@ -69,12 +71,13 @@ public abstract class AbsServer {
     this.agentCount = 0;
     this.connections = new ConcurrentHashMap<Connection, Integer>();
     this.privateToPublic = new ConcurrentHashMap<Integer, Integer>();
+    this.IDToName = new ConcurrentHashMap<Integer,String>();
     this.privateValuations = new HashMap<Integer, IValuation>();
     this.acctManager = new AccountManager();
     this.manager = new MarketManager();
 
     // Kryo Stuff
-    theServer = new Server(8192, 4096);
+    theServer = new Server(16384, 8192);
     theServer.start();    
     Kryo serverKryo = theServer.getKryo();
     Startup.start(serverKryo);
@@ -125,6 +128,9 @@ public abstract class AbsServer {
       }
       privateToPublic.put(theID, agentCount++);
       connections.put(connection, theID);
+      if (registration.name != null){
+          this.IDToName.put(theID, registration.name);
+      }
       Logging.log("[-] registered " + theID);
       this.theServer.sendToTCP(connection.getID(), new RegistrationMessage(theID));
     } else {
@@ -178,19 +184,20 @@ public abstract class AbsServer {
    * a BidRequest for an auction
    */
   protected void onBid(Connection connection, Integer privateID, TradeMessage bid) {
-    Market auction = this.manager.getMarket(bid.AuctionID);
-    if (auction != null) {
-      synchronized (auction) {
-        // Handle bid through handleBid method
-        if (!auction.handleBid(bid.safeCopy(privateID))) {
-          this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid rejected by Activity Rule"));
+    if (this.manager.MarketOpen(bid.AuctionID)) {
+      Market auction = this.manager.getMarket(bid.AuctionID);
+        synchronized (auction) {
+          // Handle bid through handleBid method
+          if (!auction.handleBid(bid.safeCopy(privateID))) {
+            this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid rejected by Activity Rule"));
+          }
         }
       }
-    } else {
-      Logging.log("[x] AbsServer onBid: Bid encountered with unknown auction ID");
-      this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid send to unknown auction"));
+      else {
+        Logging.log("[x] AbsServer onBid: Bid encountered with unknown auction ID");
+        this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid send to unknown auction"));
+      }
     }
-  }
   
   /**
    * Singular bank update
@@ -203,11 +210,11 @@ public abstract class AbsServer {
     BankUpdateMessage bu;
     if (to) {
       // agent is receiving a good and losing money.
-      bu = new BankUpdateMessage(anOrder.TO, anOrder.GOOD, null, -1 * anOrder.PRICE);
+      bu = new BankUpdateMessage(anOrder.TO, anOrder.GOOD, null, -1 * anOrder.PRICE, anOrder.QUANTITY);
       theServer.sendToTCP(this.privateToConnection(anOrder.TO).getID(), bu);
     } else {
       // agent is losing a good and receiving money.
-      bu = new BankUpdateMessage(anOrder.FROM, null, anOrder.GOOD, anOrder.PRICE);
+      bu = new BankUpdateMessage(anOrder.FROM, null, anOrder.GOOD, anOrder.PRICE, anOrder.QUANTITY);
       theServer.sendToTCP(this.privateToConnection(anOrder.FROM).getID(), bu);
     }
   }
@@ -217,7 +224,7 @@ public abstract class AbsServer {
    * auctions about the state of all the public auctions
    */
   public void updateAllAuctions() {
-    synchronized (this.manager) {;
+    synchronized (this.manager) {
       for (Market auction : this.manager.getAuctions()) {
         synchronized (auction) {          
           auction.tick();
@@ -225,7 +232,8 @@ public abstract class AbsServer {
             for (Entry<Connection, Integer> id : this.connections.entrySet()) {
               // maybe send message here? sanitized ledger.
               TradeRequestMessage tr = auction.constructTradeRequest(id.getValue());
-              this.theServer.sendToTCP(id.getKey().getID(), tr.sanitize(id.getValue(), this.privateToPublic));
+              tr = tr.sanitize(id.getValue(),this.privateToPublic);
+              this.theServer.sendToTCP(id.getKey().getID(), tr);
             }
           } else {
             List<Order> winners = auction.constructOrders();
@@ -251,9 +259,11 @@ public abstract class AbsServer {
               }
             }            
             // Send game report
-            Map<Integer,GameReportMessage> reports = auction.constructReport();
-            for (Integer agent : reports.keySet()) {      
-              this.theServer.sendToTCP(this.privateToConnection(agent).getID(), reports.get(agent).sanitize(agent,this.privateToPublic));
+            Map<Integer, List<GameReportMessage>> reports = auction.constructReport();
+            for (Integer agent : reports.keySet()) {  
+              for (GameReportMessage report : reports.get(agent)){
+                this.theServer.sendToTCP(this.privateToConnection(agent).getID(), report.sanitize(agent,this.privateToPublic));                
+              }
             }
             // record
             try {
@@ -264,6 +274,9 @@ public abstract class AbsServer {
             if (!auction.isOverOuter()) {
               Logging.log("[*] Auction has been reset");
               auction.resetInnerMarket();              
+            } else {
+              // if over, close.
+              auction.close();
             }
           }
         }
@@ -291,17 +304,15 @@ public abstract class AbsServer {
     if (this.valueConfig.type == ValuationType.Auction) {
       // do something
       Map<Integer, Double> totalUtil = this.summarizer.getTotalUtility();
-      System.out.println(totalUtil);
       for (Entry<Integer, Double> util : totalUtil.entrySet()) {
         toPrint.put(util.getKey(), util.getValue());
-        Logging.log("Agent " + this.privateToPublic.get(util.getKey()) + " got " + util.getValue() + " total utility");
+//        Logging.log("Agent " + this.privateToPublic.get(util.getKey()) + " got " + util.getValue() + " total utility");
       }
     } else if (this.valueConfig.type == ValuationType.Game) {
       Map<Integer, Double> totalUtil = this.summarizer.getTotalUtility();
-      System.out.println(totalUtil);
       for (Entry<Integer, Double> util : totalUtil.entrySet()) {
         toPrint.put(util.getKey(), util.getValue());
-        Logging.log("Agent " + this.privateToPublic.get(util.getKey()) + " got " + util.getValue() + " total utility");
+//        Logging.log("Agent " + this.privateToPublic.get(util.getKey()) + " got " + util.getValue() + " total utility");
       }      
     } else if (this.valueConfig.type == ValuationType.Blank){
       // for lemonade game right now
@@ -314,7 +325,7 @@ public abstract class AbsServer {
     List<Map.Entry<Integer, Double>> sortedByValue = toPrint.entrySet().stream().sorted(Map.Entry.<Integer, Double>comparingByValue().reversed()).collect(Collectors.toList());    
     int i = 1;
     for (Map.Entry<Integer,Double> a :sortedByValue){
-      Logging.log(i + ". " + a.getKey()+ ", utility: " + a.getValue());
+      Logging.log(i + ". " + this.IDToName.getOrDefault(a.getKey(), "") +", ID: " + a.getKey()+ ", Utility: " + a.getValue());
       this.theServer.sendToTCP(this.privateToConnection(a.getKey()).getID(), new ErrorMessage(0, "Placed: " + Integer.toString(i)));
       i++;
     }

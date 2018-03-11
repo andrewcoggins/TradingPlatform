@@ -22,6 +22,11 @@ public abstract class AbsLemonadeAgent extends AbsAgent implements ILemonadeAgen
     super(host, port, gameSetup);
   }
   
+  public AbsLemonadeAgent(String host, int port, ISetup gameSetup, String name)
+      throws AgentCreationException {
+    super(host, port, gameSetup,name);
+  }
+  
   @Override 
   public void onBankUpdate(BankUpdateMessage bankUpdate){
     super.onBankUpdate(bankUpdate);

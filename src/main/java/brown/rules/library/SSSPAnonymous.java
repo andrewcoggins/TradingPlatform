@@ -1,6 +1,7 @@
 package brown.rules.library;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class SSSPAnonymous implements IInformationRevelationPolicy {
 
   @Override
   public void setReport(IMarketState state) {
-    Map<Integer,GameReportMessage> reports = new HashMap<Integer,GameReportMessage>();    
+    Map<Integer,List<GameReportMessage>> reports = new HashMap<Integer,List<GameReportMessage>>();    
     
     for (List<Integer> group : state.getGroups()){      
       int winner = group.get(0);
@@ -32,7 +33,9 @@ public class SSSPAnonymous implements IInformationRevelationPolicy {
       }
       // report is winner for this group and the size of group
       for (Integer agent : group){
-        reports.put(agent,new SimpleSealedReportMessage(winner,group.size()));
+        List<GameReportMessage> reportList = new LinkedList<GameReportMessage>();
+        reportList.add(new SimpleSealedReportMessage(winner,group.size()));
+        reports.put(agent,reportList);
       }
     }
     state.setReport(reports);

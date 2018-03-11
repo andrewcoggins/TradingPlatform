@@ -31,6 +31,10 @@ public interface IMarketState {
     public int getTicks();  
     
     public long getTime();
+    
+    public void close(); 
+    
+    public boolean isOpen();
 
     //bids
     
@@ -97,9 +101,9 @@ public interface IMarketState {
     void setSummaryState(PrevStateInfo prevState);
     
     //IR policy 
-    public Map<Integer,GameReportMessage> getReport();
+    public Map<Integer, List<GameReportMessage>> getReport();
     
-    public void setReport(Map<Integer,GameReportMessage> gameReport);
+    public void setReport(Map<Integer,List<GameReportMessage>> gameReport);
 
     // Groups
     public List<List<Integer>> getGroups();

@@ -11,6 +11,7 @@ import brown.bid.library.AuctionBid;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
 import brown.bidbundle.library.AuctionBidBundle;
+import brown.channels.IAgentChannel;
 import brown.logging.Logging;
 import brown.messages.library.TradeMessage;
 import brown.tradeable.ITradeable;
@@ -68,6 +69,11 @@ public class AuctionChannel extends AbsChannel {
   @Override
   public String toString() {
     return "SimpleAgentChannel [ID: " + this.ID +"]";
+  }
+
+  @Override
+  public IAgentChannel sanitize(Integer agent, Map<Integer, Integer> privateToPublic) {
+    return this;
   }
   
 }

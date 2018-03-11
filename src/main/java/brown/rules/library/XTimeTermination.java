@@ -8,7 +8,6 @@ public class XTimeTermination implements IOuterTC {
   
   public XTimeTermination(double seconds) {
     this.mill = (long) (seconds * 1000);
-    System.out.println("MILL: "+ this.mill);
   }
 
   

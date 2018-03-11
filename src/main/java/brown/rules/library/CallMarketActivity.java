@@ -11,13 +11,15 @@ public class CallMarketActivity implements IActivityRule {
   // Checks if agent has already bid
   public void isAcceptable(IMarketState state, TradeMessage aBid) {
     // in the future might want to have this handle some risk limits or something
-    boolean acceptable = true;
-    if (aBid.Bundle.getType() != BundleType.TWOSIDED){
-      acceptable = false;
-    } 
-    TwoSidedBid bid = (TwoSidedBid) aBid.Bundle.getBids();
-    if (bid.price < 0){
-      acceptable = false;
+    boolean acceptable = false;
+    if (aBid.Bundle.getType() == BundleType.CANCEL){
+      acceptable = true;
+    }
+    if (aBid.Bundle.getType() == BundleType.TWOSIDED){
+      TwoSidedBid bid = (TwoSidedBid) aBid.Bundle.getBids();
+      if (bid.price > 0 && bid.quantity > 0){
+        acceptable = true;
+      }
     }
     state.setAcceptable(acceptable);
   }

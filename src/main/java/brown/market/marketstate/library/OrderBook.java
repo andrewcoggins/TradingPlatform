@@ -75,8 +75,42 @@ public class OrderBook implements IOrderBook {
   
   public void setSells(PriorityQueue<SellOrder> sells){
     this.sellOrders = sells;
-  } 
+  }
   
+  public OrderBook sanitize(Integer agent, Map<Integer, Integer> privateToPublic){
+    OrderBook toReturn = new OrderBook();
+    for (BuyOrder buy : this.buyOrders){
+      toReturn.addBuy(buy.sanitize(agent, privateToPublic));
+    }
+    for (SellOrder sell : this.sellOrders){
+      toReturn.addSell(sell.sanitize(agent, privateToPublic));
+    }
+    return toReturn;
+  }
+  
+  public OrderBook sanitize(Integer n, Integer agent, Map<Integer, Integer> privateToPublic){
+    OrderBook toReturn = new OrderBook();
+    int count = 0;
+    for (BuyOrder buy : this.buyOrders){
+      if (count >= n){
+        break;
+      }      
+      toReturn.addBuy(buy.sanitize(agent, privateToPublic));
+      count++;
+    }
+    count = 0;
+    for (SellOrder sell : this.sellOrders){
+      if (count >= n){
+        break;
+      }      
+      toReturn.addSell(sell.sanitize(agent, privateToPublic));
+      count++;
+    }
+    return toReturn;
+  }
+
+
+  // tests
   public static void main(String[] args) throws InterruptedException {
     OrderBook testbook = new OrderBook();
     BuyOrder buy1 = new BuyOrder(1,1,15.);
@@ -126,6 +160,8 @@ public class OrderBook implements IOrderBook {
     Collections.shuffle(testList);
     System.out.println(testList);
     Logging.log(test.toString());    
+    
+    PriorityQueue<SellOrder> sells = testbook.getSells();
   }
   
   @Override
@@ -165,5 +201,4 @@ public class OrderBook implements IOrderBook {
     return "OrderBook [buyOrders=" + buyOrders + ", sellOrders=" + sellOrders
         + "]";
   }
-  
  }

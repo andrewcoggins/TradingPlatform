@@ -28,7 +28,7 @@ public class LemonadeNonAnonymous implements IInformationRevelationPolicy{
   @SuppressWarnings("unchecked")
   @Override
   public void setReport(IMarketState state) {
-    Map<Integer,GameReportMessage> reports = new HashMap<Integer,GameReportMessage>();    
+    Map<Integer,List<GameReportMessage>> reports = new HashMap<Integer,List<GameReportMessage>>();    
     
     for (List<Integer> group : state.getGroups()){
       List<Integer>[] report_id = (List<Integer>[]) new List[numSlots];
@@ -48,7 +48,9 @@ public class LemonadeNonAnonymous implements IInformationRevelationPolicy{
         report_count[index] = report_count[index] + 1;
       }
       for (Integer agent : group){
-        reports.put(agent,new LemonadeReportMessage(report_id,report_count,false));
+        List<GameReportMessage> reportList = new LinkedList<GameReportMessage>();
+        reportList.add(new LemonadeReportMessage(report_id,report_count,false));
+        reports.put(agent,reportList);
       }
     }
     state.setReport(reports);

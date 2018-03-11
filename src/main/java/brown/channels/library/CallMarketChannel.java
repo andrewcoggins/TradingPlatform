@@ -1,9 +1,12 @@
 package brown.channels.library;
 
+import java.util.Map;
+
 import brown.agent.AbsAgent;
 import brown.agent.AbsCallMarketAgent;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
+import brown.channels.IAgentChannel;
 import brown.logging.Logging;
 import brown.market.marketstate.library.OrderBook;
 import brown.messages.library.TradeMessage;
@@ -44,12 +47,7 @@ public class CallMarketChannel extends AbsChannel{
 
   @Override
   public void bid(AbsAgent agent, IBidBundle bid) {
-    if (bid.getType() == BundleType.TWOSIDED){
-      agent.CLIENT.sendTCP(new TradeMessage(0,bid,this.ID,agent.ID));
-    } else {
-      Logging.log("[Channel encountered invalid bid type]");
-      return;      
-    }   
+    agent.CLIENT.sendTCP(new TradeMessage(0,bid,this.ID,agent.ID));
   }
   
   @Override
@@ -80,5 +78,10 @@ public class CallMarketChannel extends AbsChannel{
   @Override
   public String toString() {
     return "CallMarketChannel [book=" + book + "]";
+  }
+
+  @Override
+  public IAgentChannel sanitize(Integer agent, Map<Integer, Integer> privateToPublic) {
+    return new CallMarketChannel(this.ID, this.book.sanitize(250,agent, privateToPublic));
   }  
 }
