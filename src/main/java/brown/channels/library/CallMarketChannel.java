@@ -4,7 +4,6 @@ import java.util.Map;
 
 import brown.agent.AbsAgent;
 import brown.agent.AbsCallMarketAgent;
-import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
 import brown.channels.IAgentChannel;
 import brown.logging.Logging;
@@ -13,6 +12,7 @@ import brown.messages.library.TradeMessage;
 
 public class CallMarketChannel extends AbsChannel{
   private OrderBook book;
+  private Boolean isTest;
 
   
   /**
@@ -22,19 +22,25 @@ public class CallMarketChannel extends AbsChannel{
   public CallMarketChannel() {
     super();
     this.book = new OrderBook();
+    this.isTest= null;
   }
 
   /**
    * Constructor
    * @param ID
    */
-  public CallMarketChannel(Integer ID, OrderBook book) {
+  public CallMarketChannel(Integer ID, OrderBook book, boolean isTest) {
     super(ID);
     this.book = book;
+    this.isTest = isTest;
   }
   
   public OrderBook getOrderBook(){
     return this.book;
+  }
+  
+  public boolean isTest(){
+    return this.isTest;
   }
   
   @Override
@@ -82,6 +88,6 @@ public class CallMarketChannel extends AbsChannel{
 
   @Override
   public IAgentChannel sanitize(Integer agent, Map<Integer, Integer> privateToPublic) {
-    return new CallMarketChannel(this.ID, this.book.sanitize(250,agent, privateToPublic));
+    return new CallMarketChannel(this.ID, this.book.sanitize(250,agent, privateToPublic),this.isTest);
   }  
 }

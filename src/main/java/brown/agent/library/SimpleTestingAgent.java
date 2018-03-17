@@ -39,7 +39,9 @@ public class SimpleTestingAgent extends AbsLab06Agent{
       this.price = this.price-this.increment;      
     }
     Logging.log("ORDERBOOK SIZE: " + getOrderBook().getBuys().size());
+    Logging.log("Orderbook: " + getOrderBook().toString());
     Logging.log("LEDGER SIZE: " + getLedger().size());
+    Logging.log("Ledger: " + getLedger().toString());
   }
 
   @Override
@@ -49,12 +51,6 @@ public class SimpleTestingAgent extends AbsLab06Agent{
   public static void main(String[] args) throws AgentCreationException {
     new SimpleTestingAgent("localhost", 2121,"buyer",BidDirection.BUY,50.,0,1);    
     new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,50.,0,1);            
-    new SimpleTestingAgent("localhost", 2121,"buyer",BidDirection.BUY,49.,0,1);    
-    new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,51.,0,1);         
-    new SimpleTestingAgent("localhost", 2121,"buyer",BidDirection.BUY,50.,0,1);    
-    new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,50.,0,1);            
-    new SimpleTestingAgent("localhost", 2121,"buyer",BidDirection.BUY,49.,0,1);    
-    new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,51.,0,1);         
     new SimpleTestingAgent("localhost", 2121,"buyer",BidDirection.BUY,49.,0,1);    
     new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,51.,0,1);         
     while(true){}      

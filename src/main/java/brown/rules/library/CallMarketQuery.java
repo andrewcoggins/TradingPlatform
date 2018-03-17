@@ -18,7 +18,7 @@ public class CallMarketQuery implements IQueryRule {
         idToGroup.put(a, agents.size());
       }
     }       
-    TradeRequestMessage tr = new TradeRequestMessage(0, new CallMarketChannel(state.getID(),state.getOrderBook()),idToGroup);
+    TradeRequestMessage tr = new TradeRequestMessage(0, new CallMarketChannel(state.getID(),state.getOrderBook(),false),idToGroup);
     state.setTRequest(tr);
   }
 

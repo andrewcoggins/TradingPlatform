@@ -12,7 +12,7 @@ import brown.summary.AuctionSummarizer;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;
 
-public class RunServer extends AbsServer{
+public class RunServer extends AbsServer {
 
   public RunServer(int port, ISetup gameSetup) {
     super(port, gameSetup);

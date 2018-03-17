@@ -11,6 +11,7 @@ import brown.bidbundle.library.CancelBundle;
 import brown.bidbundle.library.TwoSidedBidBundle;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
+import brown.logging.Logging;
 import brown.market.marketstate.library.OrderBook;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.CallMarketReportMessage;
@@ -39,6 +40,10 @@ public abstract class AbsPredictionMarketAgent extends AbsCallMarketAgent {
 	public void onCallMarket(CallMarketChannel channel) {
 		this.orderbook = channel.getOrderBook();
 		this.onMarketRequest(channel);
+		if (channel.isTest()){
+		  Logging.log("Agent: " + this.ID + ", coin: " + this.coin + ", decoys: " + this.numDecoys + ", Highest Buy: " + 
+		      this.getHighestBuy() + ", Lowest Sell: " + this.getLowestSell());
+		}
 	}
 	
 	@Override
@@ -101,4 +106,6 @@ public abstract class AbsPredictionMarketAgent extends AbsCallMarketAgent {
 	public abstract void onMarketStart();
 	public abstract void onMarketRequest(CallMarketChannel channel);
 	public abstract void onTransaction(int quantity, double price);
+	public abstract double getHighestBuy();
+	public abstract double getLowestSell();
 }
