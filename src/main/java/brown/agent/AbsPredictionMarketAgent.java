@@ -19,17 +19,17 @@ import brown.messages.library.PredictionMarketReport;
 import brown.messages.library.PrivateInformationMessage;
 import brown.setup.library.CallMarketSetup;
 
-public abstract class AbsLab06Agent extends AbsCallMarketAgent {
+public abstract class AbsPredictionMarketAgent extends AbsCallMarketAgent {
 	private List<Transaction> ledger;
 	private OrderBook orderbook;
 
-	public AbsLab06Agent(String host, int port) throws AgentCreationException {
+	public AbsPredictionMarketAgent(String host, int port) throws AgentCreationException {
 		super(host, port, new CallMarketSetup());
 		this.ledger = new ArrayList<Transaction>();
-		this.orderbook = new OrderBook();		
+		this.orderbook = new OrderBook();
 	}
 	
-	public AbsLab06Agent(String host, int port, String name) throws AgentCreationException {
+	public AbsPredictionMarketAgent(String host, int port, String name) throws AgentCreationException {
 		super(host, port, new CallMarketSetup(), name);
 		this.ledger = new ArrayList<Transaction>();
 		this.orderbook = new OrderBook();   
@@ -63,7 +63,7 @@ public abstract class AbsLab06Agent extends AbsCallMarketAgent {
 	public void onPrivateInformation(PrivateInformationMessage privateInfo) {
 		super.onPrivateInformation(privateInfo);
 		this.ledger = new ArrayList<Transaction>();
-    this.orderbook = new OrderBook();   
+		this.orderbook = new OrderBook();   
 		onMarketStart();
 	}
 	
