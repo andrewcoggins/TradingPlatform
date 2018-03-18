@@ -13,14 +13,20 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.PredictionMarketDecoysConfig;
 
-public class CallMarketTest {
-  private static int numSims = 1;
-  private static int delayTime = 5; 
-  private static int lag = 50;
+public class CallMarketServer {
+  private int seconds;
+  private int numSims;
+  private int initDelay;; 
+  private int lag;
   
-  public static void main(String[] args) throws InterruptedException {
-    double seconds = 15;
-    
+  public CallMarketServer(int seconds, int numSims, int initDelay, int lag){
+    this.seconds = seconds;
+    this.numSims = numSims;
+    this.initDelay = initDelay;
+    this.lag = lag;
+  }
+
+  public void runAll() throws InterruptedException {                
     // Create _ tradeables
     Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
     List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
@@ -30,7 +36,7 @@ public class CallMarketTest {
     allTradeablesList.add(new SimpleTradeable(0));
     
     List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();          
-    oneMarket.add(new CallMarket(seconds));        
+    oneMarket.add(new CallMarket(this.seconds));        
     SimulMarkets phase_one = new SimulMarkets(oneMarket);
     
     List<AbsMarketPreset> twoMarket = new LinkedList<AbsMarketPreset>();
@@ -45,6 +51,12 @@ public class CallMarketTest {
         allTradeablesList,0.0,new LinkedList<ITradeable>());    
     RunServer testServer = new RunServer(2121, new CallMarketSetup());
     
-    testServer.runSimulation(testSim, numSims, delayTime, lag);        
-    }
+    testServer.runSimulation(testSim, this.numSims, this.initDelay, this.lag);           
+  }
+  
+  
+  public static void main(String[] args) throws InterruptedException {
+    CallMarketServer server = new CallMarketServer(15,1,5,50);
+    server.runAll();
+  }
 }
