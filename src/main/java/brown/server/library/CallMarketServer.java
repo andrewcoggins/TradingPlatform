@@ -19,11 +19,18 @@ public class CallMarketServer {
   private int initDelay;; 
   private int lag;
   
+  private int port;
+  
+  public CallMarketServer(int seconds, int numSims, int initDelay, int lag, int port) {
+	  this.seconds = seconds;
+	  this.numSims = numSims;
+	  this.initDelay = initDelay;
+	  this.lag = lag;
+	  this.port = port;
+  }
+  
   public CallMarketServer(int seconds, int numSims, int initDelay, int lag){
-    this.seconds = seconds;
-    this.numSims = numSims;
-    this.initDelay = initDelay;
-    this.lag = lag;
+	  this(seconds, numSims, initDelay, lag, 2121);
   }
 
   public void runAll() throws InterruptedException {                
@@ -49,7 +56,7 @@ public class CallMarketServer {
     
     Simulation testSim = new Simulation(seq,new PredictionMarketDecoysConfig(),
         allTradeablesList,0.0,new LinkedList<ITradeable>());    
-    RunServer testServer = new RunServer(2121, new CallMarketSetup());
+    RunServer testServer = new RunServer(port, new CallMarketSetup());
     
     testServer.runSimulation(testSim, this.numSims, this.initDelay, this.lag);           
   }
