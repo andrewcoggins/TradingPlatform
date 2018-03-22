@@ -13,7 +13,7 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.PredictionMarketDecoysConfig;
 
-public class CallMarketServer {
+public class PredictionMarketServer {
   private int seconds;
   private int numSims;
   private int initDelay;; 
@@ -21,7 +21,7 @@ public class CallMarketServer {
   
   private int port;
   
-  public CallMarketServer(int seconds, int numSims, int initDelay, int lag, int port) {
+  public PredictionMarketServer(int seconds, int numSims, int initDelay, int lag, int port) {
 	  this.seconds = seconds;
 	  this.numSims = numSims;
 	  this.initDelay = initDelay;
@@ -29,7 +29,7 @@ public class CallMarketServer {
 	  this.port = port;
   }
   
-  public CallMarketServer(int seconds, int numSims, int initDelay, int lag){
+  public PredictionMarketServer(int seconds, int numSims, int initDelay, int lag){
 	  this(seconds, numSims, initDelay, lag, 2121);
   }
 
@@ -64,7 +64,7 @@ public class CallMarketServer {
   
   public static void main(String[] args) throws InterruptedException {
     
-    CallMarketServer server = new CallMarketServer(30,100,5,50);
+    PredictionMarketServer server = new PredictionMarketServer(30,100,5,50);
     server.runAll();
   }
 }
