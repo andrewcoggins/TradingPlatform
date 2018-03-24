@@ -13,17 +13,24 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.PredictionMarketDecoysConfig;
 
-public class CallMarketServer {
+public class PredictionMarketServer {
   private int seconds;
   private int numSims;
   private int initDelay;; 
   private int lag;
   
-  public CallMarketServer(int seconds, int numSims, int initDelay, int lag){
-    this.seconds = seconds;
-    this.numSims = numSims;
-    this.initDelay = initDelay;
-    this.lag = lag;
+  private int port;
+  
+  public PredictionMarketServer(int seconds, int numSims, int initDelay, int lag, int port) {
+	  this.seconds = seconds;
+	  this.numSims = numSims;
+	  this.initDelay = initDelay;
+	  this.lag = lag;
+	  this.port = port;
+  }
+  
+  public PredictionMarketServer(int seconds, int numSims, int initDelay, int lag){
+	  this(seconds, numSims, initDelay, lag, 2121);
   }
 
   public void runAll() throws InterruptedException {                
@@ -49,14 +56,15 @@ public class CallMarketServer {
     
     Simulation testSim = new Simulation(seq,new PredictionMarketDecoysConfig(),
         allTradeablesList,0.0,new LinkedList<ITradeable>());    
-    RunServer testServer = new RunServer(2121, new CallMarketSetup());
+    RunServer testServer = new RunServer(port, new CallMarketSetup());
     
     testServer.runSimulation(testSim, this.numSims, this.initDelay, this.lag);           
   }
   
   
   public static void main(String[] args) throws InterruptedException {
-    CallMarketServer server = new CallMarketServer(15,1,5,50);
+    
+    PredictionMarketServer server = new PredictionMarketServer(30,100,5,50);
     server.runAll();
   }
 }
