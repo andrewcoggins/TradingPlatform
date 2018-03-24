@@ -8,11 +8,11 @@ import brown.tradeable.library.ComplexTradeable;
 import brown.value.valuation.IBundleValuation;
 import brown.value.valuation.IValuation;
 
-public class BundleValuation implements IBundleValuation {
+public class XORValuation implements IBundleValuation {
 
   private final Map<ComplexTradeable, Double> valueParams; 
   
-  public BundleValuation(Map<ComplexTradeable, Double> valueParams) {
+  public XORValuation(Map<ComplexTradeable, Double> valueParams) {
     this.valueParams = valueParams; 
   }
   
@@ -28,7 +28,7 @@ public class BundleValuation implements IBundleValuation {
   @Override
   public IValuation safeCopy() {
     // TODO Auto-generated method stub
-    return null;
+    return new XORValuation(this.valueParams);
   }
   
   

@@ -1,24 +1,22 @@
 package brown.value.distribution.library; 
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import ch.uzh.ifi.ce.mweiss.specval.bidlang.xor.XORBid;
-import ch.uzh.ifi.ce.mweiss.specval.model.Bidder;
 import ch.uzh.ifi.ce.mweiss.specval.model.UnsupportedBiddingLanguageException;
-import ch.uzh.ifi.ce.mweiss.specval.model.mrm.MRMLicense;
-import ch.uzh.ifi.ce.mweiss.specvalopt.vcg.external.domain.Bids;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.ComplexTradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.generator.library.SpecValGenerator;
 import brown.value.valuation.IValuation;
-import brown.value.valuation.library.BundleValuation;
+import brown.value.valuation.library.XORValuation;
 
 /**
  * produces valuations according to the specval generator.
@@ -28,20 +26,32 @@ import brown.value.valuation.library.BundleValuation;
  */
 public class SpecValDistribution implements IValuationDistribution {
 
-  private Set<ITradeable> goods; 
   private SpecValGenerator generator;
   private Map<String, SimpleTradeable> specValMapping; 
+  private int numBidders; 
+  private int numSamples; 
+  private int meanSampleSize; 
+  private double stdSampleSize; 
   
-  public SpecValDistribution(int numBidders, int numSamples, int meanSampleSize,
+  
+  public SpecValDistribution(int numSamples, int meanSampleSize,
       double stdSampleSize) {
+    this.numSamples = numSamples; 
+    this.meanSampleSize = meanSampleSize; 
+    this.stdSampleSize = stdSampleSize; 
     this.generator = new SpecValGenerator(numBidders, numSamples, 
         meanSampleSize, stdSampleSize, 1.0);
     // maps specval goods to platform tradeables.
     for(int i = 0; i < 98; i++) {
       specValMapping.put(i + "", new SimpleTradeable(i));
     }
-    this.goods = goods;
   }
+  
+  public void giveNumBidders(int numBidders) {
+    this.generator = new SpecValGenerator(numBidders, this.numSamples,
+        this.meanSampleSize, this.stdSampleSize, 1.0); 
+  }
+  
   
   public Set<IValuation> sampleAll() {
     try {
@@ -62,7 +72,7 @@ public class SpecValDistribution implements IValuationDistribution {
           ComplexTradeable realTradeable = new ComplexTradeable(0 ,value);
           agentMap.put(realTradeable, toAdd.getValue());
         }
-        allValues.add(new BundleValuation(agentMap));
+        allValues.add(new XORValuation(agentMap));
       }
       return allValues; 
     } catch (UnsupportedBiddingLanguageException e) {
@@ -74,12 +84,19 @@ public class SpecValDistribution implements IValuationDistribution {
   }
   
   /**
-   * not useful becuase valuations are dependent.
+   * samples a valuation from a random distribution. 
+   * The specval generator only makes valuations en masse, unfortunately.
    */
   @Override
   public IValuation sample() {
-
-    return null;
+    Set<IValuation> allValues = sampleAll(); 
+    List<IValuation> aValuation = new LinkedList<IValuation>(allValues);
+    Collections.shuffle(aValuation);
+    if (allValues.size() > 0)
+      return aValuation.get(0);
+    return null; 
+    
+    
   }
   
 }

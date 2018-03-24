@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -36,6 +37,7 @@ import brown.summary.AuctionSummarizer;
 import brown.tradeable.ITradeable;
 import brown.value.config.GameValuationConfig;
 import brown.value.config.ValConfig;
+import brown.value.distribution.library.SpecValDistribution;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.ValuationType;
 
@@ -157,6 +159,20 @@ public abstract class AbsServer {
          toSend.put(this.connections.get(connection),new ValuationInformationMessage(this.connections.get(connection), this.allTradeables, privateValuation.safeCopy(), marketConfig.valueDistribution));                  
          //give the server private valuation info.
          this.privateValuations.put(this.connections.get(connection), privateValuation.safeCopy());         
+       }
+     } else if (marketConfig.type == ValuationType.Spectrum) { 
+       // specval generator-generated valuations
+       // TODO: find a way to do this without using an enum. 
+       int numConnections = this.connections.keySet().size(); 
+       SpecValDistribution dist = (SpecValDistribution) marketConfig.valueDistribution;
+       dist.giveNumBidders(numConnections);
+       Set<IValuation> allSamples = dist.sampleAll(); 
+       for (Connection connection : this.connections.keySet()) {
+         for (IValuation val : allSamples) {
+           toSend.put(this.connections.get(connection),new ValuationInformationMessage(this.connections.get(connection), this.allTradeables, val.safeCopy(), marketConfig.valueDistribution));                  
+           //give the server private valuation info.
+           this.privateValuations.put(this.connections.get(connection), val.safeCopy());         
+         }
        }
      }
     for (Connection connection : this.connections.keySet()){
