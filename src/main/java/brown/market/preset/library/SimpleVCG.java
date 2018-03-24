@@ -12,7 +12,9 @@ import brown.rules.library.VCGPayment;
 import brown.rules.library.XRoundTermination;
 
 public class SimpleVCG extends AbsMarketPreset {
-
+  private int numRuns;
+  
+  
   public SimpleVCG(int numRuns) {
     super(new VCGAllocation(),
         new VCGPayment(),
@@ -23,5 +25,11 @@ public class SimpleVCG extends AbsMarketPreset {
         new OneShotTermination(),
         new XRoundTermination(numRuns),
         new NoRecordKeeping());
+    this.numRuns = numRuns;
+  }
+
+  @Override
+  public AbsMarketPreset copy() {
+    return new SimpleVCG(this.numRuns);
   }
 }

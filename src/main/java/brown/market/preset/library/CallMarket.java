@@ -12,6 +12,8 @@ import brown.rules.library.OneShotTermination;
 import brown.rules.library.XTimeTermination;
 
 public class CallMarket extends AbsMarketPreset {
+  private double seconds;
+  
   /**
    * some of these are guesses.
    * need to pass in the market internal state, 
@@ -27,5 +29,11 @@ public class CallMarket extends AbsMarketPreset {
         new OneShotTermination(), 
         new XTimeTermination(seconds),
         new NoRecordKeeping());
+    this.seconds = seconds;
+  }
+
+  @Override
+  public AbsMarketPreset copy() {
+    return new CallMarket(this.seconds);
   }
 }

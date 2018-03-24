@@ -12,7 +12,7 @@ import brown.rules.library.SimpleSecondPricePayment;
 import brown.rules.library.XRoundTermination;
 
 public class SSSPRules extends AbsMarketPreset {
-
+  private int numRuns;
   /**
    * some of these are guesses.
    * need to pass in the market internal state, 
@@ -28,6 +28,10 @@ public class SSSPRules extends AbsMarketPreset {
         new OneShotTermination(), 
         new XRoundTermination(numRuns),
         new NoRecordKeeping());
+    this.numRuns = numRuns;
   }
-  
+  @Override
+  public AbsMarketPreset copy() {
+    return new SSSPRules(this.numRuns);
+  }
 }

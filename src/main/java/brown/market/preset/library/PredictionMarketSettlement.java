@@ -28,4 +28,9 @@ public class PredictionMarketSettlement extends AbsMarketPreset {
         new XRoundTermination(1),
         new NoRecordKeeping());
   }
+
+  @Override
+  public AbsMarketPreset copy() {
+    return new PredictionMarketSettlement();
+  }
 }

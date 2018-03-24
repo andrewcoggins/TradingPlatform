@@ -12,7 +12,9 @@ import brown.rules.library.HighestPriceAllocation;
 import brown.rules.library.XRoundTermination;
 
 public class PairSSFP extends AbsMarketPreset {
-
+  private int numRuns;
+  private String filePath;
+  
   /**
    * some of these are guesses.
    * need to pass in the market internal state, 
@@ -28,6 +30,14 @@ public class PairSSFP extends AbsMarketPreset {
         new OneShotTermination(), 
         new XRoundTermination(numRuns),
         new RecordBids(filePath));
+    this.numRuns = numRuns;
+    this.filePath = filePath;
   }
+
+  @Override
+  public AbsMarketPreset copy() {
+    return new PairSSFP(this.numRuns, this.filePath);
+  }
+  
   
 }

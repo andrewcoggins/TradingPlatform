@@ -12,6 +12,8 @@ import brown.rules.library.OneShotTermination;
 import brown.rules.library.XRoundTermination;
 
 public class LemonadeNonAnonRules extends AbsMarketPreset {
+  private int numSlots;
+  private int numRuns;
   
   /**
    * some of these are guesses.
@@ -28,5 +30,12 @@ public class LemonadeNonAnonRules extends AbsMarketPreset {
         new OneShotTermination(),
         new XRoundTermination(numRuns),
         new NoRecordKeeping());
+    this.numSlots = numSlots;
+    this.numRuns = numRuns;    
+  }
+
+  @Override
+  public AbsMarketPreset copy() {
+    return new LemonadeNonAnonRules(this.numSlots, this.numRuns);
   } 
 }

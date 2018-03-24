@@ -88,6 +88,7 @@ public class FixedAgent extends AbsPredictionMarketAgent {
 		new FixedAgent("localhost", 2121, "fixed3");
 		new FixedAgent("localhost", 2121, "fixed4");
 		new FixedAgent("localhost", 2121, "fixed5");
+		new UpdateAgent("localhost",2121,"update");
 		
 		while (true) {}
 	}

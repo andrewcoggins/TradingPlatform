@@ -28,9 +28,9 @@ public class MarketManager implements IMarketManager {
   // stores all ledgers in a simulation
 	private List<Map<Market, Ledger>> ledgers;
 	// stores all markets in a simulation
-	private List<Map<Integer, Market>> markets;
-	private PrevStateInfo information;
-	private Integer index; 
+	public List<Map<Integer, Market>> markets;
+	public PrevStateInfo information;
+	public Integer index; 
 	private Integer idCount; 
 	
 
@@ -58,7 +58,7 @@ public class MarketManager implements IMarketManager {
 	 * @return
 	 */
 	public boolean open(AbsMarketPreset rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents) {
-	  Market market = new Market(rules, new MarketState(marketID,tradeables,this.information));
+	  Market market = new Market(rules.copy(), new MarketState(marketID,tradeables,this.information));
 	   if (ledgers.get(index).containsKey(market)) {
 	      return false;
 	   }
@@ -134,9 +134,9 @@ public class MarketManager implements IMarketManager {
 
   public void reset() {
     this.index = -1;
-    this.ledgers.clear();
-    this.markets.clear();
-    this.information = null;
+    this.ledgers = new LinkedList<Map<Market, Ledger>>();
+    this.markets = new LinkedList<Map<Integer, Market>>();  
+    this.information = new BlankStateInfo();;
   }
 
   public void initializeInfo(PrevStateInfo info) {

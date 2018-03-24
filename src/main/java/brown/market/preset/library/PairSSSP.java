@@ -12,6 +12,7 @@ import brown.rules.library.SimpleSecondPricePayment;
 import brown.rules.library.XRoundTermination;
 
 public class PairSSSP extends AbsMarketPreset {
+  private int numRuns;
 
   /**
    * some of these are guesses.
@@ -28,6 +29,12 @@ public class PairSSSP extends AbsMarketPreset {
         new OneShotTermination(), 
         new XRoundTermination(numRuns),
         new NoRecordKeeping());
+    this.numRuns = numRuns;
+  }
+
+  @Override
+  public AbsMarketPreset copy() {
+    return new PairSSSP(this.numRuns);
   }
   
 }

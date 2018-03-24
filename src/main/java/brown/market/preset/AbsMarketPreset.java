@@ -38,4 +38,6 @@ public abstract class AbsMarketPreset {
     this.outerTCondition = outerTCondition; 
     this.rRule = rRule;
   }
+  
+  public abstract AbsMarketPreset copy();
 }

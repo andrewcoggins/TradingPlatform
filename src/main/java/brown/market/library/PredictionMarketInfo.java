@@ -36,7 +36,7 @@ public class PredictionMarketInfo extends PrevStateInfo{
     if (prevState.getType() == PrevStateType.PREDICTION){
       this.tradeHistory.addAll(((PredictionMarketInfo) prevState).tradeHistory);
     } else if (prevState.getType() == PrevStateType.BLANK){
-      // don't do anything
+      // a Blank 
     } else {
       Logging.log("Trying to combine prev state infos of incompatible types");
     }

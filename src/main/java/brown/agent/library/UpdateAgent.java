@@ -32,21 +32,24 @@ public class UpdateAgent extends AbsPredictionMarketAgent {
 
 		switch (decoys) {
 		case 1:
-			update_epsilon = 1;
+			update_epsilon = 0;
 			spread_epsilon = 4;
+			risklimit = 7;
 			break;
 		case 2:
-			update_epsilon = 2;
+			update_epsilon = 1;
 			spread_epsilon = 6;
-
+	    risklimit = 6;
 			break;
 		case 3:
-			update_epsilon = 3;
+			update_epsilon = 2;
 			spread_epsilon = 8;
+	    risklimit = 5;			
 			break;
 		default:
-			update_epsilon = 4;
+			update_epsilon = 3;
 			spread_epsilon = 8;
+	    risklimit = 4;			
 		}
 
 	}

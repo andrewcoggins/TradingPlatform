@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import brown.logging.Logging;
 import brown.market.IMarket;
 import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;

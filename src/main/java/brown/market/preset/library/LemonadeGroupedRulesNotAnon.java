@@ -12,7 +12,9 @@ import brown.rules.library.OneShotTermination;
 import brown.rules.library.XRoundTermination;
 
 public class LemonadeGroupedRulesNotAnon extends AbsMarketPreset {
-  
+  private int numSlots;
+  private int numRuns;
+
   /**
    * some of these are guesses.
    * need to pass in the market internal state, 
@@ -28,5 +30,12 @@ public class LemonadeGroupedRulesNotAnon extends AbsMarketPreset {
         new OneShotTermination(),
         new XRoundTermination(numRuns),
         new NoRecordKeeping());
+    this.numSlots = numSlots;
+    this.numRuns = numRuns;        
+  }
+
+  @Override
+  public AbsMarketPreset copy() {
+    return new LemonadeGroupedRulesNotAnon(this.numSlots,this.numRuns);
   } 
 }

@@ -12,6 +12,8 @@ import brown.rules.library.HighestPriceAllocation;
 import brown.rules.library.XRoundTermination;
 
 public class NormalSSFP extends AbsMarketPreset {
+  private int numRuns;
+  private String filePath;
 
   /**
    * some of these are guesses.
@@ -28,6 +30,13 @@ public class NormalSSFP extends AbsMarketPreset {
         new OneShotTermination(), 
         new XRoundTermination(numRuns),
         new RecordBids(filePath));
+    this.numRuns = numRuns;
+    this.filePath = filePath;    
+  }
+
+  @Override
+  public AbsMarketPreset copy() {
+    return new NormalSSFP(this.numRuns, this.filePath);
   }
   
 }
