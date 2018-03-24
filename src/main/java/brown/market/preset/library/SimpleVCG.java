@@ -24,5 +24,4 @@ public class SimpleVCG extends AbsMarketPreset {
         new XRoundTermination(numRuns),
         new NoRecordKeeping());
   }
-  
 }

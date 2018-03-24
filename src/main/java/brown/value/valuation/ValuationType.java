@@ -1,5 +1,5 @@
 package brown.value.valuation; 
 
 public enum ValuationType {
-  Auction, Game, Blank; 
+  Auction, Game, Spectrum, Blank; 
 }

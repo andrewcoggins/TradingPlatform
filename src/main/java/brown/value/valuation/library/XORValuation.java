@@ -28,7 +28,7 @@ public class XORValuation implements IBundleValuation {
   @Override
   public IValuation safeCopy() {
     // TODO Auto-generated method stub
-    return null;
+    return new XORValuation(this.valueParams);
   }
   
   
