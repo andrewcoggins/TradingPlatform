@@ -12,7 +12,7 @@ public class RandomAgent extends AbsPredictionMarketAgent {
     // TODO Auto-generated constructor stub
   }
   
-  public RandomAgent(String host, int port, String name) throws AgentCreationException {
+  public RandomAgent(String host, Integer port, String name) throws AgentCreationException {
     super(host, port, name);
   }
 
