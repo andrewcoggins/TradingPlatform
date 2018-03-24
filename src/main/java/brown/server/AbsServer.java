@@ -10,16 +10,19 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryonet.Connection;
+import com.esotericsoftware.kryonet.Listener;
+import com.esotericsoftware.kryonet.Server;
+
 import brown.accounting.library.Account;
 import brown.accounting.library.AccountManager;
-import brown.channels.library.CallMarketChannel;
 import brown.logging.Logging;
 import brown.market.library.Market;
 import brown.market.library.MarketManager;
 import brown.market.marketstate.library.Order;
 import brown.messages.library.AccountResetMessage;
 import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.CallMarketReportMessage;
 import brown.messages.library.ErrorMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.PrivateInformationMessage;
@@ -35,11 +38,6 @@ import brown.value.config.GameValuationConfig;
 import brown.value.config.ValConfig;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.ValuationType;
-
-import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
-import com.esotericsoftware.kryonet.Server;
 
 public abstract class AbsServer {
   
@@ -194,6 +192,7 @@ public abstract class AbsServer {
         }
       }
       else {
+       
         Logging.log("[x] AbsServer onBid: Bid encountered with unknown auction ID");
         this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid send to unknown auction"));
       }

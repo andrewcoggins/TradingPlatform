@@ -1,11 +1,11 @@
 package brown.agent.library;
 
-import brown.agent.AbsLab06Agent;
+import brown.agent.AbsPredictionMarketAgent;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
 
 // This agent buys or sells randomly with uniform distribution
-public class RandomAgent extends AbsLab06Agent {
+public class RandomAgent extends AbsPredictionMarketAgent {
 
   public RandomAgent(String host, int port) throws AgentCreationException {
     super(host, port);
@@ -26,7 +26,7 @@ public class RandomAgent extends AbsLab06Agent {
       this.buy(Math.min( 99,Math.max(1, (int)(Math.random()*100))), 1, channel); 
     }
     else{
-      this.buy(Math.max( 99,Math.max(1, (int)(Math.random()*100))), 1, channel); 
+      this.sell(Math.max( 99,Math.max(1, (int)(Math.random()*100))), 1, channel); 
     }
     
   }
@@ -44,6 +44,30 @@ public class RandomAgent extends AbsLab06Agent {
     // TODO Auto-generated method stub
     
   }
+  
+  public static void main(String[] args) throws AgentCreationException {
+
+    new RandomAgent("localhost", 2121,"Random1");    
+    new RandomAgent("localhost", 2121,"Random2");    
+    new RandomAgent("localhost", 2121,"Random3");    
+    new RandomAgent("localhost", 2121,"Random4");    
+    
+      while(true){}      
+  }
+
+  @Override
+  public double getHighestBuy() {
+
+    // TODO Auto-generated method stub
+    return 1;
+  }
+
+  @Override
+  public double getLowestSell() {
+
+    // TODO Auto-generated method stub
+    return 99;
+  }  
   
   
   
