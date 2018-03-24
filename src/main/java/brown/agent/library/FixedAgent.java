@@ -4,103 +4,91 @@ import brown.agent.AbsPredictionMarketAgent;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
 
-
-// Calculates fair value and then updates in direction of trades it does
+// Calculates fair value and never updates
 public class FixedAgent extends AbsPredictionMarketAgent {
 
-  private double fair_value = 0;
-  private double spread_epsilon = 5;
-  private int exposure=0; //Net number of contracts owned
-  private int risklimit = 10;
-  
-  
-  public FixedAgent(String host, int port, String name)
-      throws AgentCreationException {
-    super(host, port, name);
-    // TODO Auto-generated constructor stub
-  }
-  
-  public FixedAgent(String host, int port, String name, double update, double spread)
-      throws AgentCreationException {
-    super(host, port, name);
-    spread_epsilon = spread;
-    // TODO Auto-generated constructor stub
-  }
+	private double fair_value = 0;
+	private double spread_epsilon = 5;
+	private int exposure = 0; // Net number of contracts owned
+	private int risklimit = 5;
+	
+	private String name;
+	
+	public FixedAgent(String host, int port, String name) throws AgentCreationException {
+		super(host, port, name);
+		
+		this.name = name;
+	}
 
-  @Override
-  public void onMarketStart() {
+	public FixedAgent(String host, int port, String name, double spread) throws AgentCreationException {
+		super(host, port, name);
+		spread_epsilon = spread;
+		
+		this.name = name;
+	}
 
-    // TODO Auto-generated method stub
-    
-    int decoys = this.getNumDecoys(); 
-   
-    if(this.getCoin()){
-      fair_value = (double)(2+decoys)/(double)(2*decoys + 2) * 100;
-    }
-    else{   
-      fair_value = (double)(decoys)/(double)(2*decoys + 2) * 100;
-    }
-    
-  }
+	@Override
+	public void onMarketStart() {
+		int decoys = this.getNumDecoys();
+		exposure = 0;
 
-  @Override
-  public void onMarketRequest(CallMarketChannel channel) {
+		if (this.getCoin()) {
+			fair_value = (double) (2 + decoys) / (double) (2 * decoys + 2) * 100;
+		} else {
+			fair_value = (double) (decoys) / (double) (2 * decoys + 2) * 100;
+		}
+		
+		System.out.println(name + ": " + decoys + " decoys, " + this.getCoin());
+	}
 
-    // TODO Auto-generated method stub
-    
-    if(exposure>=risklimit) {
-      this.cancel(1, true, channel);
-    }
-    else {
-      this.buy(Math.floor(fair_value-spread_epsilon), 1, channel);
-    }
-    
-    if (exposure <= -1 * risklimit) {
-      this.cancel(100, false, channel);
-    }
-    else {
-      this.sell(Math.ceil(fair_value+spread_epsilon), 1, channel);
-    }
-    
+	@Override
+	public void onMarketRequest(CallMarketChannel channel) {
+		if (exposure >= risklimit) {
+			this.cancel(1, true, channel);
+		} else {
+			this.buy(Math.floor(fair_value - spread_epsilon), 1, channel);
+		}
 
-  }
+		if (exposure <= -1 * risklimit) {
+			this.cancel(100, false, channel);
+		} else {
+			this.sell(Math.ceil(fair_value + spread_epsilon), 1, channel);
+		}
 
-  @Override
-  public void onTransaction(int quantity, double price) {
-    
-    if(price>0) { //contracts sold 
-      exposure-= quantity;
-    }
-    else {
-      exposure+= quantity;
-    }
-    
-    
-  }
-  
-  public static void main(String[] args) throws AgentCreationException {
+	}
 
-    new FixedAgent("localhost", 2121,"Fixed1");    
-//    new FixedAgent("localhost", 2121,"Fixed2");    
-//    new FixedAgent("localhost", 2121,"Fixed3");    
-//    new FixedAgent("localhost", 2121,"Fixed4");    
-//    
-      while(true){}      
-  }
+	@Override
+	public void onTransaction(int quantity, double price) {
+		if (price > 0) { // contracts sold
+			exposure -= quantity;
+		} else {
+			exposure += quantity;
+		}
+		
+		if (price > 0) {
+			System.out.println(name + ": sold " + quantity + " for " + price + ", exposure: " + exposure);
+		} else {
+			System.out.println(name + ": bought " + quantity + " for " + price + ", exposure: " + exposure);
+		}
+	}
+	
+	@Override
+	public double getHighestBuy() {
+		return fair_value - spread_epsilon;
+	}
 
-  @Override
-  public double getHighestBuy() {
+	@Override
+	public double getLowestSell() {
+		return fair_value + spread_epsilon;
+	}
 
-    // TODO Auto-generated method stub
-    return fair_value-spread_epsilon;
-  }
-
-  @Override
-  public double getLowestSell() {
-
-    // TODO Auto-generated method stub
-    return fair_value+spread_epsilon;
-  }  
-  
-
+	public static void main(String[] args) throws AgentCreationException {
+		new FixedAgent("localhost", 2121, "fixed1");
+		new FixedAgent("localhost", 2121, "fixed2");
+		new FixedAgent("localhost", 2121, "fixed3");
+		new FixedAgent("localhost", 2121, "fixed4");
+		new FixedAgent("localhost", 2121, "fixed5");
+		
+		while (true) {}
+	}
 }

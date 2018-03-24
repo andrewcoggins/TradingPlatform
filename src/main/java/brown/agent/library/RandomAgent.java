@@ -7,69 +7,47 @@ import brown.exceptions.AgentCreationException;
 // This agent buys or sells randomly with uniform distribution
 public class RandomAgent extends AbsPredictionMarketAgent {
 
-  public RandomAgent(String host, int port) throws AgentCreationException {
-    super(host, port);
-    // TODO Auto-generated constructor stub
-  }
-  
-  public RandomAgent(String host, Integer port, String name) throws AgentCreationException {
-    super(host, port, name);
-  }
+	public RandomAgent(String host, int port) throws AgentCreationException {
+		super(host, port);
+	}
 
-  @Override
-  public void onMarketRequest(CallMarketChannel channel) {
+	public RandomAgent(String host, Integer port, String name) throws AgentCreationException {
+		super(host, port, name);
+	}
 
-    // TODO Auto-generated method stub
-    
-    
-    if(Math.random()<.5) {    
-      this.buy(Math.min( 99,Math.max(1, (int)(Math.random()*100))), 1, channel); 
-    }
-    else{
-      this.sell(Math.max( 99,Math.max(1, (int)(Math.random()*100))), 1, channel); 
-    }
-    
-  }
+	@Override
+	public void onMarketRequest(CallMarketChannel channel) {
+		if (Math.random() < .5) {
+			this.buy(Math.random() * 98 + 1, 1, channel);
+		} else {
+			this.sell(Math.random() * 98 + 1, 1, channel);
+		}
+	}
 
-  @Override
-  public void onTransaction(int quantity, double price) {
+	@Override
+	public void onTransaction(int quantity, double price) {}
 
-    // TODO Auto-generated method stub
-    
-  }
+	@Override
+	public void onMarketStart() {}
+	
+	@Override
+	public double getHighestBuy() {
+		return 1;
+	}
 
-  @Override
-  public void onMarketStart() {
+	@Override
+	public double getLowestSell() {
+		return 99;
+	}
 
-    // TODO Auto-generated method stub
-    
-  }
-  
-  public static void main(String[] args) throws AgentCreationException {
+	public static void main(String[] args) throws AgentCreationException {
 
-    new RandomAgent("localhost", 2121,"Random1");    
-    new RandomAgent("localhost", 2121,"Random2");    
-    new RandomAgent("localhost", 2121,"Random3");    
-    new RandomAgent("localhost", 2121,"Random4");    
-    
-      while(true){}      
-  }
+		new RandomAgent("localhost", 2121, "Random1");
+		new RandomAgent("localhost", 2121, "Random2");
+		new RandomAgent("localhost", 2121, "Random3");
+		new RandomAgent("localhost", 2121, "Random4");
 
-  @Override
-  public double getHighestBuy() {
-
-    // TODO Auto-generated method stub
-    return 1;
-  }
-
-  @Override
-  public double getLowestSell() {
-
-    // TODO Auto-generated method stub
-    return 99;
-  }  
-  
-  
-  
-
+		while (true) {
+		}
+	}
 }
