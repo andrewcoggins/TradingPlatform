@@ -1,7 +1,9 @@
 package brown.value.distribution.library; 
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -18,7 +20,7 @@ import brown.tradeable.library.SimpleTradeable;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.generator.library.SpecValGenerator;
 import brown.value.valuation.IValuation;
-import brown.value.valuation.library.BundleValuation;
+import brown.value.valuation.library.XORValuation;
 
 /**
  * produces valuations according to the specval generator.
@@ -62,7 +64,7 @@ public class SpecValDistribution implements IValuationDistribution {
           ComplexTradeable realTradeable = new ComplexTradeable(0 ,value);
           agentMap.put(realTradeable, toAdd.getValue());
         }
-        allValues.add(new BundleValuation(agentMap));
+        allValues.add(new XORValuation(agentMap));
       }
       return allValues; 
     } catch (UnsupportedBiddingLanguageException e) {
@@ -74,12 +76,19 @@ public class SpecValDistribution implements IValuationDistribution {
   }
   
   /**
-   * not useful becuase valuations are dependent.
+   * samples a valuation from a random distribution. 
+   * The specval generator only makes valuations en masse, unfortunately.
    */
   @Override
   public IValuation sample() {
-
-    return null;
+    Set<IValuation> allValues = sampleAll(); 
+    List<IValuation> aValuation = new LinkedList<IValuation>(allValues);
+    Collections.shuffle(aValuation);
+    if (allValues.size() > 0)
+      return aValuation.get(0);
+    return null; 
+    
+    
   }
   
 }

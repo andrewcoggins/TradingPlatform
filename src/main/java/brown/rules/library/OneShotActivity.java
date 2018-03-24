@@ -10,7 +10,7 @@ import brown.rules.IActivityRule;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.TradeableType;
 
-public class SimpleSecondPriceActivity implements IActivityRule {
+public class OneShotActivity implements IActivityRule {
   @Override
   // Checks if agent has already bid
   public void isAcceptable(IMarketState state, TradeMessage aBid) {

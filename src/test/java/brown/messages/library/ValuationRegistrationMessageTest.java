@@ -12,7 +12,7 @@ import org.junit.Test;
 import brown.tradeable.library.MultiTradeable;
 import brown.value.valuable.library.Value;
 import brown.value.valuation.library.AdditiveValuation;
-import brown.value.valuation.library.BundleValuation;
+import brown.value.valuation.library.XORValuation;
 import brown.value.valuationrepresentation.library.ComplexValuation;
 import brown.value.valuationrepresentation.library.SimpleValuation;
 
@@ -43,7 +43,7 @@ public class ValuationRegistrationMessageTest {
     
     // case with an additive distribution.
     AdditiveValuation av = new AdditiveValuation(tr);
-    BundleValuation bv = new BundleValuation(tr); 
+    XORValuation bv = new XORValuation(tr); 
     ValuationRegistrationMessage pubSimple =
         new ValuationRegistrationMessage(0, new SimpleValuation(vals), av); 
     ValuationRegistrationMessage pubComplex = 
