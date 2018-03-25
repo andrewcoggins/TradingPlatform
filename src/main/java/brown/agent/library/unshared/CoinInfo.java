@@ -1,4 +1,4 @@
-package brown.agent.library;
+package brown.agent.library.unshared;
 
 /**
  * This class represents a pair (Info, NumDecoys) with the information and the number of decoys received by an agent.

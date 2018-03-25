@@ -1,8 +1,8 @@
 package brown.server.library;
 
 public class PredictionMarketServerTemplate {
-	static private int seconds = 5;
-	static private int nSims = 50;
+	static private int seconds = 10;
+	static private int nSims = 100;
 	static private int init_delay = 5;
 	static private int lag = 25;
   
