@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,6 +41,7 @@ import brown.value.config.ValConfig;
 import brown.value.distribution.library.SpecValDistribution;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.ValuationType;
+import brown.value.valuation.library.XORValuation;
 
 public abstract class AbsServer {
   
@@ -156,7 +158,8 @@ public abstract class AbsServer {
        for (Connection connection : this.connections.keySet()){
          // make valuations one by one
          IValuation privateValuation = marketConfig.valueDistribution.sample();
-         toSend.put(this.connections.get(connection),new ValuationInformationMessage(this.connections.get(connection), this.allTradeables, privateValuation.safeCopy(), marketConfig.valueDistribution));                  
+         toSend.put(this.connections.get(connection), 
+             new ValuationInformationMessage(this.connections.get(connection), this.allTradeables, privateValuation.safeCopy(), marketConfig.valueDistribution));                  
          //give the server private valuation info.
          this.privateValuations.put(this.connections.get(connection), privateValuation.safeCopy());         
        }
@@ -167,12 +170,15 @@ public abstract class AbsServer {
        SpecValDistribution dist = (SpecValDistribution) marketConfig.valueDistribution;
        dist.giveNumBidders(numConnections);
        Set<IValuation> allSamples = dist.sampleAll(); 
+       List<IValuation> allSamplesList = new LinkedList<IValuation>(allSamples); 
+       int i = 0; 
        for (Connection connection : this.connections.keySet()) {
-         for (IValuation val : allSamples) {
-           toSend.put(this.connections.get(connection),new ValuationInformationMessage(this.connections.get(connection), this.allTradeables, val.safeCopy(), marketConfig.valueDistribution));                  
-           //give the server private valuation info.
-           this.privateValuations.put(this.connections.get(connection), val.safeCopy());         
-         }
+         toSend.put(this.connections.get(connection),
+             new ValuationInformationMessage(this.connections.get(connection), this.allTradeables, allSamplesList.get(i).safeCopy()));    
+         ValuationInformationMessage v = (ValuationInformationMessage) toSend.get(this.connections.get(connection)); 
+         //give the server private valuation info.
+         this.privateValuations.put(this.connections.get(connection), allSamplesList.get(i).safeCopy());         
+         i++;
        }
      }
     for (Connection connection : this.connections.keySet()){

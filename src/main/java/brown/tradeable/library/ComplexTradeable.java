@@ -13,8 +13,8 @@ import brown.tradeable.ITradeable;
 */
 public class ComplexTradeable extends AbsTradeable { 
   
+  public final int ID; 
   public final Set<ITradeable> GOODS;
-  
   /**
    * For Kryo
    * DO NOT USE
@@ -22,17 +22,19 @@ public class ComplexTradeable extends AbsTradeable {
   public ComplexTradeable() {
     super();
     this.GOODS = null;
+    this.ID = 0; 
   }
   
   public ComplexTradeable(Integer ID, Set<ITradeable> GOODS) {
     super(ID, 1, TradeableType.Complex);
     this.GOODS = GOODS;
+    this.ID = ID; 
   }
+  
 
   @Override
   public String toString() {
-    return "ComplexTradeable [GOODS=" + GOODS + ", ID=" + ID + ", COUNT="
-        + COUNT + "]";
+    return "ComplexTradeable [ID=" + ID + ", GOODS=" + GOODS + "]";
   }
 
   @Override
@@ -40,18 +42,29 @@ public class ComplexTradeable extends AbsTradeable {
     final int prime = 31;
     int result = super.hashCode();
     result = prime * result + ((GOODS == null) ? 0 : GOODS.hashCode());
+    result = prime * result + ID;
     return result;
   }
 
   @Override
   public boolean equals(Object obj) {
-    return (obj instanceof ComplexTradeable &&
-            ((ComplexTradeable)obj).COUNT.equals(this.COUNT) &&
-            ((ComplexTradeable)obj).GOODS.equals(this.GOODS) &&
-            ((ComplexTradeable)obj).ID.equals(this.ID) &&
-            ((ComplexTradeable)obj).TYPE.equals(this.TYPE));
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    ComplexTradeable other = (ComplexTradeable) obj;
+    if (GOODS == null) {
+      if (other.GOODS != null)
+        return false;
+    } else if (!GOODS.equals(other.GOODS))
+      return false;
+    if (ID != other.ID)
+      return false;
+    return true;
   }
-  
+
   @Override
   public List<SimpleTradeable> flatten(){
     LinkedList<SimpleTradeable> toReturn = new LinkedList<SimpleTradeable>();

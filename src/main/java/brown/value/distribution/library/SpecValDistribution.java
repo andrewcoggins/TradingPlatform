@@ -28,7 +28,6 @@ public class SpecValDistribution implements IValuationDistribution {
 
   private SpecValGenerator generator;
   private Map<String, SimpleTradeable> specValMapping; 
-  private int numBidders; 
   private int numSamples; 
   private int meanSampleSize; 
   private double stdSampleSize; 
@@ -39,9 +38,8 @@ public class SpecValDistribution implements IValuationDistribution {
     this.numSamples = numSamples; 
     this.meanSampleSize = meanSampleSize; 
     this.stdSampleSize = stdSampleSize; 
-    this.generator = new SpecValGenerator(numBidders, numSamples, 
-        meanSampleSize, stdSampleSize, 1.0);
     // maps specval goods to platform tradeables.
+    this.specValMapping = new HashMap<String, SimpleTradeable>(); 
     for(int i = 0; i < 98; i++) {
       specValMapping.put(i + "", new SimpleTradeable(i));
     }
@@ -49,7 +47,7 @@ public class SpecValDistribution implements IValuationDistribution {
   
   public void giveNumBidders(int numBidders) {
     this.generator = new SpecValGenerator(numBidders, this.numSamples,
-        this.meanSampleSize, this.stdSampleSize, 1.0); 
+        this.meanSampleSize, this.stdSampleSize, 1E-6); 
   }
   
   
@@ -57,22 +55,24 @@ public class SpecValDistribution implements IValuationDistribution {
     try {
       generator.makeValuations();
       Map<String, Map<Set<String>, Double>> allBids = generator
-          .convertAllBidsToSimpleBids(generator.allBidderValuations);
+          .convertAllBidsToSimpleBids(generator.allBidderValuations); 
       Set<IValuation> allValues = new HashSet<IValuation>();
       //each agent.
       for(Entry<String, Map<Set<String>, Double>> entry : allBids.entrySet()) {
         Map<ComplexTradeable, Double> agentMap = new HashMap<ComplexTradeable, Double>();
         Map<Set<String>, Double> each = entry.getValue(); 
+        int i = 0; 
         for(Entry<Set<String>, Double> toAdd : each.entrySet()) {
           Set<ITradeable> value = new HashSet<ITradeable>();
           for (String s : toAdd.getKey()) {
             SimpleTradeable aTradeable = specValMapping.get(s);
             value.add(aTradeable); 
           }
-          ComplexTradeable realTradeable = new ComplexTradeable(0 ,value);
+          ComplexTradeable realTradeable = new ComplexTradeable(i ,value);
           agentMap.put(realTradeable, toAdd.getValue());
+          i++;
         }
-        allValues.add(new XORValuation(agentMap));
+        allValues.add(new XORValuation(agentMap)); 
       }
       return allValues; 
     } catch (UnsupportedBiddingLanguageException e) {
