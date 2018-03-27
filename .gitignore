@@ -5,5 +5,4 @@
 .idea/*
 *.iml
 *.DS_Store
-bugs.txt
 /sats_output/
