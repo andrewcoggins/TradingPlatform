@@ -247,7 +247,7 @@ public class SpecValGenerator {
   }
   
   public Bundle<MRMLicense> convertSimpleBundleToBundle(Set<String> simpleBundle) {
-    Bundle<MRMLicense> convertedBundle = new Bundle<MRMLicense>();
+    Bundle<MRMLicense> convertedBundle = new Bundle<MRMLicense>(); 
     for (String g : simpleBundle) {
       Long goodId = Long.parseLong(g);
       MRMLicense l = this.licenseIdToLicense.get(goodId);
@@ -297,6 +297,7 @@ public class SpecValGenerator {
       Map<Set<String>, Double> valuations = purportedTypes.get(id);
       Set <XORValue<MRMLicense>> allBids = convertManyBidsToXORValue(valuations);
       Bidder<MRMLicense> bidder = this.bidderIdToBidder.get(bidderId);
+      System.out.println(this.bidderIdToBidder); 
       allBidsMadeByBidders.addBid(new XORBid.Builder<MRMLicense>(bidder, allBids).build());
     }
     return allBidsMadeByBidders;
