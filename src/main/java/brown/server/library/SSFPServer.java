@@ -6,18 +6,18 @@ import java.util.List;
 import java.util.Set;
 
 import brown.market.preset.AbsMarketPreset;
-import brown.market.preset.library.SSSPRules;
+import brown.market.preset.library.SSFPNoRecord;
 import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.AdditiveUniformConfig;
 
 /**
- * second price auction for multiple goods.
+ * runs a simple simultaneous first price auction.
  * @author acoggins
  *
  */
-public class SSSPServer {
+public class SSFPServer { 
   
   private static int numSims = 5;
   private static int numTradeables = 7;
@@ -26,7 +26,6 @@ public class SSSPServer {
   
   public static void main(String[] args) throws InterruptedException {
     // Create tradeables
-    // TODO: only one collection of tradeables is needed.
     Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
     List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
     // add tradeables.
@@ -36,7 +35,7 @@ public class SSSPServer {
     }
     // one market in this game.
     List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
-    oneMarket.add(new SSSPRules(1));
+    oneMarket.add(new SSFPNoRecord(1));
     SimulMarkets markets = new SimulMarkets(oneMarket);
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
     seq.add(markets);
