@@ -1,0 +1,53 @@
+package brown.server.library; 
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+import brown.market.preset.AbsMarketPreset;
+import brown.market.preset.library.SSSPRules;
+import brown.market.preset.library.SimpleSMRADiscovery;
+import brown.setup.library.SSSPSetup;
+import brown.tradeable.ITradeable;
+import brown.tradeable.library.SimpleTradeable;
+
+public class SMRASecondPriceServer { 
+  
+  private static int numSims = 5;
+  private static int numTradeables = 7;
+  private static int delayTime = 5; 
+  private static int lag = 300;
+  
+  public static void main(String[] args) throws InterruptedException { 
+    // Create tradeables
+    Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
+    List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
+    // add tradeables.
+    for (int i = 0; i < numTradeables; i++) {
+      allTradeables.add(new SimpleTradeable(i));
+      allTradeablesList.add(new SimpleTradeable(i));
+    }
+    // construct sequence.
+    List<SimulMarkets> seq = new LinkedList<SimulMarkets>();
+    //construct price discovery rounds.
+    List<AbsMarketPreset> discoveryMarkets = new LinkedList<AbsMarketPreset>(); 
+    for (int i = 0; i < numTradeables; i++) {
+      //TODO: fill in rules.
+      discoveryMarkets.add(new SimpleSMRADiscovery()); 
+    }
+    SimulMarkets discovery = new SimulMarkets(discoveryMarkets); 
+    seq.add(discovery);
+    //construct settlement round.
+    List<AbsMarketPreset> settlementMarket = new LinkedList<AbsMarketPreset>(); 
+    settlementMarket.add(new SSSPRules(1)); 
+    SimulMarkets settlement = new SimulMarkets(settlementMarket); 
+    seq.add(settlement); 
+    // initialize the simulation.
+    //TODO: a valconfig.
+    Simulation sim = new Simulation(seq, null, allTradeablesList, 1., new LinkedList<ITradeable>()); 
+    //TODO: Change setup
+    RunServer smraServer = new RunServer(2121, new SSSPSetup()); 
+    smraServer.runSimulation(sim, numSims, delayTime, lag); 
+  }
+}
