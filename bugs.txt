@@ -1,0 +1,8 @@
+bugs bugs bugs: 
+
+1. the spectrum valuation type/specval dilemma
+2. agent inheritance structure is not great/auction bid bundle is tied to the simple sealed agent.
+3. Specval generator is acting up.
+4. safecopy(): can we avoid this? 
+5. specval vcg doesn't really work yet. 
+6. sending the specval generator to agents?

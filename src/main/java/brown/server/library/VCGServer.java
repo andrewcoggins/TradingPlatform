@@ -5,14 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import brown.market.preset.AbsMarketPreset;
-import brown.market.preset.library.SSSPRules;
 import brown.market.preset.library.SimpleVCG;
-import brown.setup.library.SSSPSetup;
 import brown.setup.library.VCGSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.config.AdditiveUniformConfig;
 import brown.value.config.SpecVCGValConfig;
 
 public class VCGServer {

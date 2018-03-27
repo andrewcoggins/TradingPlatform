@@ -175,7 +175,6 @@ public abstract class AbsServer {
        for (Connection connection : this.connections.keySet()) {
          toSend.put(this.connections.get(connection),
              new ValuationInformationMessage(this.connections.get(connection), this.allTradeables, allSamplesList.get(i).safeCopy()));    
-         ValuationInformationMessage v = (ValuationInformationMessage) toSend.get(this.connections.get(connection)); 
          //give the server private valuation info.
          this.privateValuations.put(this.connections.get(connection), allSamplesList.get(i).safeCopy());         
          i++;

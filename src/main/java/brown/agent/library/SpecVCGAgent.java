@@ -1,14 +1,19 @@
 package brown.agent.library; 
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import brown.agent.AbsVCGAgent;
 import brown.agent.ISimpleSealedAgent;
+import brown.bid.interim.BidType;
+import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.GameReportMessage;
 import brown.setup.library.VCGSetup;
 import brown.tradeable.ITradeable;
+import brown.tradeable.library.ComplexTradeable;
 import brown.value.valuation.library.XORValuation;
 
 public class SpecVCGAgent extends AbsVCGAgent implements ISimpleSealedAgent {
@@ -26,8 +31,15 @@ public class SpecVCGAgent extends AbsVCGAgent implements ISimpleSealedAgent {
 
   @Override
   public void onSimpleSealed(AuctionChannel channel) {
-    List<ITradeable> allTradeables = this.tradeables; 
+    // bids valuation on every bundle.
     XORValuation valuation = (XORValuation) this.valuation; 
+    Map<ITradeable, BidType> bids = new HashMap<ITradeable, BidType>(); 
+    Set<ComplexTradeable> tradeables = valuation.getTradeables(); 
+    for (ComplexTradeable t : tradeables) { 
+      bids.put(t, new BidType(valuation.getValuation(t), 1));
+    }
+    AuctionBidBundle aBundle = new AuctionBidBundle(bids);
+    channel.bid(this, aBundle); 
   } 
   
   public static void main(String[] args) throws AgentCreationException {
@@ -35,6 +47,7 @@ public class SpecVCGAgent extends AbsVCGAgent implements ISimpleSealedAgent {
     new SpecVCGAgent("localhost", 2121); 
     while(true){}
   }
+
   
   
 }

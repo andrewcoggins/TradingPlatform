@@ -14,7 +14,7 @@ import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.library.XORValuation;
 
-public abstract class AbsVCGAgent extends AbsAgent  {
+public abstract class AbsVCGAgent extends AbsSimpleSealedAgent {
 
   protected List<ITradeable> tradeables;
   protected IValuation valuation; 
@@ -45,11 +45,4 @@ public abstract class AbsVCGAgent extends AbsAgent  {
       Logging.log("[x] AbsSSSPAgent: Wrong Kind of PrivateInformation Received");
     }
   }
-
-
-
-
-
-
-
 }

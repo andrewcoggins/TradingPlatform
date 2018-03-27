@@ -32,8 +32,6 @@ public abstract class AbsLab02Agent extends AbsSimpleSealedAgent {
 	    super(host, port, gameSetup,name);
 	  }
 	
-	public abstract void onSimpleSealed(AuctionChannel channel);
-	
 	@Override
 	public void onPrivateInformation(PrivateInformationMessage privateInfo) {  
 		super.onPrivateInformation(privateInfo);

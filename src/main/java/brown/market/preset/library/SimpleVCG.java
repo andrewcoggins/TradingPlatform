@@ -3,7 +3,7 @@ package brown.market.preset.library;
 import brown.market.preset.AbsMarketPreset;
 import brown.rules.library.NoRecordKeeping;
 import brown.rules.library.OneGrouping;
-import brown.rules.library.OneShotActivity;
+import brown.rules.library.OneShotComplexActivity;
 import brown.rules.library.OneShotTermination;
 import brown.rules.library.SSSPAnonymous;
 import brown.rules.library.SimpleSimultaneousQuery;
@@ -20,7 +20,7 @@ public class SimpleVCG extends AbsMarketPreset {
         new VCGPayment(),
         new SimpleSimultaneousQuery(),
         new OneGrouping(),
-        new OneShotActivity(),
+        new OneShotComplexActivity(),
         new SSSPAnonymous(),
         new OneShotTermination(),
         new XRoundTermination(numRuns),
