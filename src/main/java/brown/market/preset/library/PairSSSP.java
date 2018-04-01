@@ -6,7 +6,7 @@ import brown.rules.library.OneShotTermination;
 import brown.rules.library.PairGrouping;
 import brown.rules.library.OneShotActivity;
 import brown.rules.library.SSSPAnonymous;
-import brown.rules.library.SimpleSimultaneousQuery;
+import brown.rules.library.SimpleQuery;
 import brown.rules.library.HighestPriceAllocation;
 import brown.rules.library.SimpleSecondPricePayment;
 import brown.rules.library.XRoundTermination;
@@ -22,7 +22,7 @@ public class PairSSSP extends AbsMarketPreset {
   public PairSSSP(int numRuns) {
     super(new HighestPriceAllocation(),
         new SimpleSecondPricePayment(),
-        new SimpleSimultaneousQuery(), 
+        new SimpleQuery(), 
         new PairGrouping(),
         new OneShotActivity(),
         new SSSPAnonymous(),

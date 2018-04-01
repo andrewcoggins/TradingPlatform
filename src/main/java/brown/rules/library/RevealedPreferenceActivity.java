@@ -23,17 +23,15 @@ import brown.tradeable.ITradeable;
  */
 public class RevealedPreferenceActivity implements IActivityRule {
 
-  private Map <ITradeable, Double> base; 
-  private int time; 
+  private final Map <ITradeable, Double> base; 
+  private final Map <ITradeable, Double> increment; 
   // time series of demand sets.
   private Map<Integer, Map<Integer, Set<ITradeable>>> pastDemandSets; 
   
-  public RevealedPreferenceActivity(IMarketState state, Map<ITradeable, Double> base,
-      Map<ITradeable, Double> increment) {
-    // TODO: add base value to market internal state? 
-    this.base = base;  
-    state.setIncrement(increment); 
-    this.time = 0; 
+  public RevealedPreferenceActivity(Map<ITradeable, Double> aBase, Map<ITradeable, Double> anIncrement) {
+    // TODO: investigate a better way to deal with incrementing.
+    this.base = aBase;  
+    this.increment = anIncrement; 
   }
   
   
@@ -54,7 +52,7 @@ public class RevealedPreferenceActivity implements IActivityRule {
         acceptable = false;
       }
       // revealed preferences
-      for (int i = 0; i < this.time; i++) { 
+      for (int i = 0; i < state.getTicks(); i++) { 
         Map<ITradeable, Double> prevPrices = new HashMap<ITradeable, Double>(); 
         // get prices at some time s
         for (ITradeable t : allTradeables) {
@@ -98,6 +96,11 @@ public class RevealedPreferenceActivity implements IActivityRule {
 
   @Override
   public void setReserves(IMarketState state) {
+    // set the increment in the market state.
+    if (state.getIncrement().isEmpty()) {
+      state.setIncrement(this.increment);
+    }
+    // increments each of the prices for the tradeables. 
     IBidBundle aBundle = state.getReserve();  
     AuctionBid reserve = (AuctionBid) aBundle.getBids(); 
     Map<ITradeable, BidType> resMap = reserve.bids; 
@@ -110,8 +113,7 @@ public class RevealedPreferenceActivity implements IActivityRule {
 
   @Override
   public void reset() {
-    // TODO Auto-generated method stub
-    
+    this.pastDemandSets = new HashMap<Integer, Map<Integer, Set<ITradeable>>>(); 
   }
   
 }

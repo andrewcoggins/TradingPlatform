@@ -6,7 +6,7 @@ import brown.rules.library.OneGrouping;
 import brown.rules.library.OneShotComplexActivity;
 import brown.rules.library.OneShotTermination;
 import brown.rules.library.SSSPAnonymous;
-import brown.rules.library.SimpleSimultaneousQuery;
+import brown.rules.library.SimpleQuery;
 import brown.rules.library.VCGAllocation;
 import brown.rules.library.VCGPayment;
 import brown.rules.library.XRoundTermination;
@@ -18,7 +18,7 @@ public class SimpleVCG extends AbsMarketPreset {
   public SimpleVCG(int numRuns) {
     super(new VCGAllocation(),
         new VCGPayment(),
-        new SimpleSimultaneousQuery(),
+        new SimpleQuery(),
         new OneGrouping(),
         new OneShotComplexActivity(),
         new SSSPAnonymous(),

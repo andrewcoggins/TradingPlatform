@@ -9,12 +9,12 @@ import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeRequestMessage;
 import brown.rules.IQueryRule;
 
-public class SimpleSimultaneousQuery implements IQueryRule {
+public class SimpleQuery implements IQueryRule {
 
 	@Override
 	public void makeChannel(IMarketState state) {	  
     Map<Integer,Integer> idToGroup = new HashMap<Integer,Integer>();
-    for (List<Integer> agents : state.getGroups()){
+    for (List<Integer> agents : state.getGroups()) {
       for (Integer a : agents) {
         idToGroup.put(a, agents.size());
       }
@@ -23,6 +23,7 @@ public class SimpleSimultaneousQuery implements IQueryRule {
 	}
 
   @Override
-  public void reset() {    
+  public void reset() {
+    
   }	
 }

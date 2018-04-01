@@ -1,34 +1,46 @@
 package brown.market.preset.library; 
 
-import brown.market.preset.AbsMarketPreset;
-import brown.rules.IActivityRule;
-import brown.rules.IAllocationRule;
-import brown.rules.IGroupingRule;
-import brown.rules.IInformationRevelationPolicy;
-import brown.rules.IInnerTC;
-import brown.rules.IOuterTC;
-import brown.rules.IPaymentRule;
-import brown.rules.IQueryRule;
-import brown.rules.IRecordKeepingRule;
+import java.util.Map;
 
+import brown.market.preset.AbsMarketPreset;
+import brown.rules.library.NoAllocation;
+import brown.rules.library.NoPayment;
+import brown.rules.library.NoRecordKeeping;
+import brown.rules.library.OneGrouping;
+import brown.rules.library.RevealedPreferenceActivity;
+import brown.rules.library.SMRAPolicy;
+import brown.rules.library.SimpleQuery;
+import brown.rules.library.SomeBidsTermination;
+import brown.rules.library.XRoundTermination;
+import brown.tradeable.ITradeable;
+
+/**
+ * rules for an SMRA price discovery auction, where no allocations or payments are made.  
+ * @author acoggins
+ *
+ */
 public class SimpleSMRADiscovery extends AbsMarketPreset {
 
-  public SimpleSMRADiscovery() {
-    super(null, 
-        null, 
-        null, 
-        null, 
-        null, 
-        null, 
-        null,
-        null, 
-        null);
+  private Map<ITradeable, Double> base; 
+  private Map<ITradeable, Double> increment; 
+  
+  public SimpleSMRADiscovery(Map<ITradeable, Double> base, Map<ITradeable, Double> increment) {
+    super(new NoAllocation(), 
+        new NoPayment(), 
+        new SimpleQuery(), 
+        new OneGrouping(),
+        new RevealedPreferenceActivity(base, increment), 
+        new SMRAPolicy(), 
+        new SomeBidsTermination(),
+        new XRoundTermination(1), 
+        new NoRecordKeeping());
+    this.base = base; 
+    this.increment = increment; 
   }
 
   @Override
   public AbsMarketPreset copy() {
-    // TODO Auto-generated method stub
-    return null;
+    return new SimpleSMRADiscovery(this.base, this.increment);
   } 
    
 }

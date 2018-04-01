@@ -227,7 +227,7 @@ public class MarketState implements IMarketState {
     this.bids = new LinkedList<TradeMessage>();
     this.allocation = new HashMap<Integer, List<ITradeable>>();
     this.payments = new LinkedList<Order>();
-    this.increment = 0.0;
+    this.increment = new HashMap<ITradeable, Double>();
     this.ticks = 0; 
     this.innerTerminated = false;   
     }
