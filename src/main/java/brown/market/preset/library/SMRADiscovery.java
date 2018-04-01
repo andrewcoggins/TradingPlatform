@@ -9,7 +9,7 @@ import brown.rules.library.NoRecordKeeping;
 import brown.rules.library.OneGrouping;
 import brown.rules.library.RevealedPreferenceActivity;
 import brown.rules.library.SMRAPolicy;
-import brown.rules.library.SimpleQuery;
+import brown.rules.library.SMRAQuery;
 import brown.rules.library.SomeBidsTermination;
 import brown.rules.library.XRoundTermination;
 import brown.tradeable.ITradeable;
@@ -19,15 +19,15 @@ import brown.tradeable.ITradeable;
  * @author acoggins
  *
  */
-public class SimpleSMRADiscovery extends AbsMarketPreset {
+public class SMRADiscovery extends AbsMarketPreset {
 
   private Map<ITradeable, Double> base; 
   private Map<ITradeable, Double> increment; 
   
-  public SimpleSMRADiscovery(Map<ITradeable, Double> base, Map<ITradeable, Double> increment) {
+  public SMRADiscovery(Map<ITradeable, Double> base, Map<ITradeable, Double> increment) {
     super(new NoAllocation(), 
         new NoPayment(), 
-        new SimpleQuery(), 
+        new SMRAQuery(), 
         new OneGrouping(),
         new RevealedPreferenceActivity(base, increment), 
         new SMRAPolicy(), 
@@ -40,7 +40,7 @@ public class SimpleSMRADiscovery extends AbsMarketPreset {
 
   @Override
   public AbsMarketPreset copy() {
-    return new SimpleSMRADiscovery(this.base, this.increment);
+    return new SMRADiscovery(this.base, this.increment);
   } 
    
 }

@@ -7,7 +7,7 @@ import java.util.Set;
 
 import brown.market.preset.AbsMarketPreset;
 import brown.market.preset.library.SSSPRules;
-import brown.market.preset.library.SimpleSMRADiscovery;
+import brown.market.preset.library.SMRADiscovery;
 import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
@@ -32,7 +32,8 @@ public class SMRASecondPriceServer {
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();
     //construct price discovery rounds.
     List<AbsMarketPreset> discoveryMarkets = new LinkedList<AbsMarketPreset>(); 
-    discoveryMarkets.add(new SimpleSMRADiscovery()); 
+    // TODO: add base and increments.
+    discoveryMarkets.add(new SMRADiscovery()); 
     SimulMarkets discovery = new SimulMarkets(discoveryMarkets); 
     seq.add(discovery);
     //construct settlement round.

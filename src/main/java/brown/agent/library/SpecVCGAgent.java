@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.agent.AbsVCGAgent;
-import brown.agent.ISimpleSealedAgent;
+import brown.agent.IAuctionAgent;
 import brown.bid.interim.BidType;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.AuctionChannel;
@@ -16,7 +16,7 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.ComplexTradeable;
 import brown.value.valuation.library.XORValuation;
 
-public class SpecVCGAgent extends AbsVCGAgent implements ISimpleSealedAgent {
+public class SpecVCGAgent extends AbsVCGAgent implements IAuctionAgent {
 
   public SpecVCGAgent(String host, int port)
       throws AgentCreationException {

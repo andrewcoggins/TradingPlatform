@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import brown.agent.AbsAgent;
-import brown.agent.AbsSimpleSealedAgent;
+import brown.agent.AbsSMRAAgent;
+import brown.agent.AbsAuctionAgent;
 import brown.bid.interim.BidType;
 import brown.bid.library.AuctionBid;
 import brown.bidbundle.BundleType;
@@ -37,10 +38,11 @@ public class AuctionChannel extends AbsChannel {
     super(ID);
 	}
 
+	// this is not going to work out
 	@Override
 	public void dispatchMessage(AbsAgent agent) {
-		if (agent instanceof AbsSimpleSealedAgent) {
-        AbsSimpleSealedAgent simpleSealedBidAgent = (AbsSimpleSealedAgent) agent; 
+		if (agent instanceof AbsAuctionAgent) {
+        AbsAuctionAgent simpleSealedBidAgent = (AbsAuctionAgent) agent; 
         simpleSealedBidAgent.onSimpleSealed(this);
       }
 	}

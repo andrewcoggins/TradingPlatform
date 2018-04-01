@@ -14,7 +14,7 @@ import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.library.XORValuation;
 
-public abstract class AbsVCGAgent extends AbsSimpleSealedAgent {
+public abstract class AbsVCGAgent extends AbsAuctionAgent {
 
   protected List<ITradeable> tradeables;
   protected IValuation valuation; 
