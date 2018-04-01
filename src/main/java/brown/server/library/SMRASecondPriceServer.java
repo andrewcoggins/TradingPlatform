@@ -32,10 +32,7 @@ public class SMRASecondPriceServer {
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();
     //construct price discovery rounds.
     List<AbsMarketPreset> discoveryMarkets = new LinkedList<AbsMarketPreset>(); 
-    for (int i = 0; i < numTradeables; i++) {
-      //TODO: fill in rules.
-      discoveryMarkets.add(new SimpleSMRADiscovery()); 
-    }
+    discoveryMarkets.add(new SimpleSMRADiscovery()); 
     SimulMarkets discovery = new SimulMarkets(discoveryMarkets); 
     seq.add(discovery);
     //construct settlement round.

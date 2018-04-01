@@ -25,7 +25,7 @@ public class OneShotActivity implements IActivityRule {
     }
     
     IBid bids = aBid.Bundle.getBids();
-    if (!(bids instanceof AuctionBid)){
+    if (!(bids instanceof AuctionBid)) {
       acceptable = false;
     } else {
       for (ITradeable t: ((AuctionBid) bids).bids.keySet()){
@@ -38,7 +38,7 @@ public class OneShotActivity implements IActivityRule {
   }
 
   @Override
-  public void setReserves() {
+  public void setReserves(IMarketState state) {
     // TODO Auto-generated method stub
     
   }

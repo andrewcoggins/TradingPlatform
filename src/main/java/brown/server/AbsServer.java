@@ -246,7 +246,10 @@ public abstract class AbsServer {
   public void updateAllAuctions() {
     synchronized (this.manager) {
       for (Market auction : this.manager.getAuctions()) {
-        synchronized (auction) {          
+        synchronized (auction) { 
+          // sets reserve/round price.
+          auction.setReserves();
+          // indicates that the auction has incremented
           auction.tick();
           if (!auction.isInnerOver()) {
             for (Entry<Connection, Integer> id : this.connections.entrySet()) {

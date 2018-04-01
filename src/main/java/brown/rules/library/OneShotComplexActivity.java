@@ -39,7 +39,7 @@ public class OneShotComplexActivity implements IActivityRule {
   }
 
   @Override
-  public void setReserves() {
+  public void setReserves(IMarketState state) {
     // TODO Auto-generated method stub
     
   }

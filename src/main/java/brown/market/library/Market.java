@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import brown.bidbundle.IBidBundle;
 import brown.logging.Logging;
 import brown.market.IMarket;
 import brown.market.marketstate.IMarketState;
@@ -89,18 +90,26 @@ public class Market implements IMarket {
     return this.STATE.getReport();
   }
 
+  @Override
   public boolean isInnerOver() {
     ITCONDITION.innerTerminated(this.STATE);
     return this.STATE.getInnerOver();
   }
   
+  @Override
   public boolean isOverOuter() {
     OTCONDITION.outerTerminated(this.STATE);
     return this.STATE.getOuterOver();
   } 
 
+  @Override
   public void tick() {
     this.STATE.tick();
+  }
+  
+  @Override
+  public void setReserves() {
+    this.ACTRULE.setReserves(this.STATE); 
   }
   
   @Override
