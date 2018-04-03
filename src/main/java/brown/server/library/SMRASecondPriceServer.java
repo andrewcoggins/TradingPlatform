@@ -1,5 +1,6 @@
 package brown.server.library; 
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class SMRASecondPriceServer {
     //construct price discovery rounds.
     List<AbsMarketPreset> discoveryMarkets = new LinkedList<AbsMarketPreset>(); 
     // TODO: add base and increments.
-    discoveryMarkets.add(new SMRADiscovery()); 
+    discoveryMarkets.add(new SMRADiscovery(new HashMap<ITradeable, Double>(), new HashMap<ITradeable, Double>())); 
     SimulMarkets discovery = new SimulMarkets(discoveryMarkets); 
     seq.add(discovery);
     //construct settlement round.
