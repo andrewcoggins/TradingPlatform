@@ -5,7 +5,7 @@ import java.util.Map;
 
 import brown.messages.library.PrivateInformationMessage;
 
-public interface GameValuationConfig {
+public interface IValuationConfig {
 
   public void initialize();
   

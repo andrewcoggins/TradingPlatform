@@ -1,6 +1,6 @@
 package brown.market.library;
 
-import brown.value.config.GameValuationConfig;
+import brown.value.config.IValuationConfig;
 
 public abstract class PrevStateInfo {
   
@@ -8,7 +8,7 @@ public abstract class PrevStateInfo {
   public abstract void combine(PrevStateInfo prevState);
 
   // Initialize the report
-  public abstract void initialize(GameValuationConfig gconfig);
+  public abstract void initialize(IValuationConfig gconfig);
   
   public abstract PrevStateType getType();
 }

@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import brown.accounting.library.Ledger;
-import brown.logging.Logging;
 import brown.market.IMarketManager;
 import brown.market.marketstate.library.MarketState;
 import brown.market.preset.AbsMarketPreset;
@@ -136,7 +135,7 @@ public class MarketManager implements IMarketManager {
     this.index = -1;
     this.ledgers = new LinkedList<Map<Market, Ledger>>();
     this.markets = new LinkedList<Map<Integer, Market>>();  
-    this.information = new BlankStateInfo();;
+    this.information = new BlankStateInfo();
   }
 
   public void initializeInfo(PrevStateInfo info) {

@@ -36,7 +36,7 @@ import brown.setup.ISetup;
 import brown.setup.library.Startup;
 import brown.summary.AuctionSummarizer;
 import brown.tradeable.ITradeable;
-import brown.value.config.GameValuationConfig;
+import brown.value.config.IValuationConfig;
 import brown.value.config.ValConfig;
 import brown.value.distribution.library.SpecValDistribution;
 import brown.value.valuation.IValuation;
@@ -145,7 +145,7 @@ public abstract class AbsServer {
     ValConfig marketConfig = this.valueConfig;
     Map<Integer,PrivateInformationMessage> toSend = new HashMap<Integer,PrivateInformationMessage>();    
     if (marketConfig.type == ValuationType.Game){
-      GameValuationConfig gconfig = (GameValuationConfig) marketConfig;
+      IValuationConfig gconfig = (IValuationConfig) marketConfig;
       
       // flip the true coin, and pass this information to the manager
       gconfig.initialize();
@@ -247,10 +247,10 @@ public abstract class AbsServer {
     synchronized (this.manager) {
       for (Market auction : this.manager.getAuctions()) {
         synchronized (auction) { 
-          // sets reserve/round price.
-          auction.setReserves();
           // indicates that the auction has incremented
           auction.tick();
+          // sets reserve/round price.
+          auction.setReserves();
           if (!auction.isInnerOver()) {
             for (Entry<Connection, Integer> id : this.connections.entrySet()) {
               // maybe send message here? sanitized ledger.

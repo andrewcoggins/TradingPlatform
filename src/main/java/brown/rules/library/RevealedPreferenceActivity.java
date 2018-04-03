@@ -29,7 +29,6 @@ public class RevealedPreferenceActivity implements IActivityRule {
   private Map<Integer, Map<Integer, Set<ITradeable>>> pastDemandSets; 
   
   public RevealedPreferenceActivity(Map<ITradeable, Double> aBase, Map<ITradeable, Double> anIncrement) {
-    // TODO: investigate a better way to deal with incrementing.
     this.base = aBase;  
     this.increment = anIncrement; 
   }
@@ -93,21 +92,37 @@ public class RevealedPreferenceActivity implements IActivityRule {
     }
     state.setAcceptable(acceptable); 
   }
-
+  
+  // increments reserve prices at time t if goods are in the demand set at time t - 1
   @Override
   public void setReserves(IMarketState state) {
     // set the increment in the market state.
     if (state.getIncrement().isEmpty()) {
       state.setIncrement(this.increment);
     }
-    // increments each of the prices for the tradeables. 
+    // increments each of the prices for the tradeables if someone bid on them.
     IBidBundle aBundle = state.getReserve();  
     AuctionBid reserve = (AuctionBid) aBundle.getBids(); 
     Map<ITradeable, BidType> resMap = reserve.bids; 
+    // if the tradeables are in the demand set at the last increment, 
+    // increment their prices.
+    Map<Integer, Set<ITradeable>> lastDemanded = pastDemandSets.get(state.getTicks() - 1); 
+    // check of the tradeables are in the last demand set.
     for(ITradeable t : resMap.keySet()) {
-      double inc = this.base.get(t) + ((double) state.getTicks() * state.getIncrement().get(t)); 
-      resMap.put(t, new BidType(inc, 1)); 
-      state.setReserve(new AuctionBidBundle(resMap)); 
+      boolean found = false; 
+      for (Set<ITradeable> tSet : lastDemanded.values()) {
+        if (tSet.contains(t)) { 
+          found = true; 
+          break; 
+        }
+      }
+      // if so, increment their price.
+      if (found) { 
+        double inc = this.base.get(t) + ((double) state.getTicks() * state.getIncrement().get(t)); 
+        resMap.put(t, new BidType(inc, 1)); 
+        state.setReserve(new AuctionBidBundle(resMap)); 
+      }
+      // otherwise, the reserve price does not change. 
     }
    }
 

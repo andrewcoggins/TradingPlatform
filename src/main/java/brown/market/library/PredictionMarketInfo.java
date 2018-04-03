@@ -5,7 +5,7 @@ import java.util.List;
 
 import brown.accounting.library.Transaction;
 import brown.logging.Logging;
-import brown.value.config.GameValuationConfig;
+import brown.value.config.IValuationConfig;
 import brown.value.config.PredictionMarketDecoysConfig;
 
 public class PredictionMarketInfo extends PrevStateInfo{
@@ -45,7 +45,7 @@ public class PredictionMarketInfo extends PrevStateInfo{
   }
 
   @Override
-  public void initialize(GameValuationConfig gconfig) {
+  public void initialize(IValuationConfig gconfig) {
     this.trueCoin = ((PredictionMarketDecoysConfig) gconfig).getTrueCoin();
   }
 

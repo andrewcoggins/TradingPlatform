@@ -1,25 +1,39 @@
 package brown.market.library; 
 
-import brown.value.config.GameValuationConfig;
+import brown.bidbundle.IBidBundle;
+import brown.value.config.IValuationConfig;
 
+/**
+ * prev state info indicating the reserve prices of the previous auction.
+ * @author acoggins
+ *
+ */
 public class PriceDiscoveryInfo extends PrevStateInfo {
-
+  
+  public IBidBundle reservePrices; 
+  private PrevStateType type; 
+  
+  public PriceDiscoveryInfo(IBidBundle reservePrices) {
+    this.reservePrices = reservePrices; 
+    this.type = PrevStateType.DISCOVERY; 
+  }
+  
   @Override
   public void combine(PrevStateInfo prevState) {
-    // TODO Auto-generated method stub
-    
+    if (prevState.getType() == PrevStateType.DISCOVERY) {
+      this.reservePrices = ((PriceDiscoveryInfo) prevState).reservePrices; 
+    }
   }
 
+  
   @Override
-  public void initialize(GameValuationConfig gconfig) {
-    // TODO Auto-generated method stub
-    
+  public void initialize(IValuationConfig gconfig) {
+    // noop
   }
 
   @Override
   public PrevStateType getType() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.type; 
   }
   
 }
