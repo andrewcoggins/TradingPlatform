@@ -100,29 +100,31 @@ public class RevealedPreferenceActivity implements IActivityRule {
     if (state.getIncrement().isEmpty()) {
       state.setIncrement(this.increment);
     }
-    // increments each of the prices for the tradeables if someone bid on them.
-    IBidBundle aBundle = state.getReserve();  
-    AuctionBid reserve = (AuctionBid) aBundle.getBids(); 
-    Map<ITradeable, BidType> resMap = reserve.bids; 
-    // if the tradeables are in the demand set at the last increment, 
-    // increment their prices.
-    Map<Integer, Set<ITradeable>> lastDemanded = pastDemandSets.get(state.getTicks() - 1); 
-    // check of the tradeables are in the last demand set.
-    for(ITradeable t : resMap.keySet()) {
-      boolean found = false; 
-      for (Set<ITradeable> tSet : lastDemanded.values()) {
-        if (tSet.contains(t)) { 
-          found = true; 
-          break; 
+    if (state.getReserve() != null) {
+      // increments each of the prices for the tradeables if someone bid on them.
+      IBidBundle aBundle = state.getReserve();  
+      AuctionBid reserve = (AuctionBid) aBundle.getBids(); 
+      Map<ITradeable, BidType> resMap = reserve.bids; 
+      // if the tradeables are in the demand set at the last increment, 
+      // increment their prices.
+      Map<Integer, Set<ITradeable>> lastDemanded = pastDemandSets.get(state.getTicks() - 1); 
+      // check of the tradeables are in the last demand set.
+      for(ITradeable t : resMap.keySet()) {
+        boolean found = false; 
+        for (Set<ITradeable> tSet : lastDemanded.values()) {
+          if (tSet.contains(t)) { 
+            found = true; 
+            break; 
+          }
         }
+        // if so, increment their price.
+        if (found) { 
+          double inc = this.base.get(t) + ((double) state.getTicks() * state.getIncrement().get(t)); 
+          resMap.put(t, new BidType(inc, 1)); 
+          state.setReserve(new AuctionBidBundle(resMap)); 
+        }
+        // otherwise, the reserve price does not change. 
       }
-      // if so, increment their price.
-      if (found) { 
-        double inc = this.base.get(t) + ((double) state.getTicks() * state.getIncrement().get(t)); 
-        resMap.put(t, new BidType(inc, 1)); 
-        state.setReserve(new AuctionBidBundle(resMap)); 
-      }
-      // otherwise, the reserve price does not change. 
     }
    }
 

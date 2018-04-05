@@ -284,7 +284,7 @@ public abstract class AbsServer {
             // Send game report
             Map<Integer, List<GameReportMessage>> reports = auction.constructReport();
             for (Integer agent : reports.keySet()) {  
-              for (GameReportMessage report : reports.get(agent)){
+              for (GameReportMessage report : reports.get(agent)) {
                 this.theServer.sendToTCP(this.privateToConnection(agent).getID(), report.sanitize(agent,this.privateToPublic));                
               }
             }

@@ -12,12 +12,13 @@ import brown.market.preset.library.SMRADiscovery;
 import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
+import brown.value.config.AdditiveUniformConfig;
 
 public class SMRASecondPriceServer { 
   
   private static int numSims = 5;
   private static int numTradeables = 7;
-  private static int delayTime = 5; 
+  private static int delayTime = 3; 
   private static int lag = 300;
   
   public static void main(String[] args) throws InterruptedException { 
@@ -44,7 +45,8 @@ public class SMRASecondPriceServer {
     seq.add(settlement); 
     // initialize the simulation.
     //TODO: a valconfig.
-    Simulation sim = new Simulation(seq, null, allTradeablesList, 1., new LinkedList<ITradeable>()); 
+    Simulation sim = new Simulation(seq, new AdditiveUniformConfig(allTradeables),
+        allTradeablesList, 1., new LinkedList<ITradeable>()); 
     //TODO: Change setup
     RunServer smraServer = new RunServer(2121, new SSSPSetup()); 
     smraServer.runSimulation(sim, numSims, delayTime, lag); 

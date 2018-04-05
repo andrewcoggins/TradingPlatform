@@ -30,13 +30,14 @@ public class SMRAPolicy implements IInformationRevelationPolicy {
     // game reports for everyone.
     // give everyone the reserve prices for the goods.
     Map<Integer, List<GameReportMessage>> reports = new HashMap<Integer, List<GameReportMessage>>(); 
-    state.getReserve(); 
     for (List<Integer> group : state.getGroups()) {
       for (Integer agent : group) {
         List<GameReportMessage> currList = reports.getOrDefault(agent, new LinkedList<GameReportMessage>());
         currList.add(new SMRAReportMessage(state.getReserve()));
+        reports.put(agent, currList); 
       }
     }
+    state.setReport(reports); 
   }
 
   @Override
