@@ -9,7 +9,7 @@ import brown.market.preset.AbsMarketPreset;
 import brown.market.preset.library.NormalSSFP;
 import brown.market.preset.library.PairSSFP;
 import brown.market.preset.library.PairSSSP;
-import brown.market.preset.library.SSSPRules;
+import brown.market.preset.library.SSSPReserveRules;
 import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
