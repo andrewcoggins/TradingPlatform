@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import brown.market.library.PriceDiscoveryInfo;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.SMRAReportMessage;
@@ -45,7 +46,9 @@ public class SMRAPolicy implements IInformationRevelationPolicy {
 
   @Override
   public void constructSummaryState(IMarketState state) {
-    // TODO Auto-generated method stub
+    // construct the summary state. 
+    PriceDiscoveryInfo reserves = new PriceDiscoveryInfo(state.getReserve()); 
+    state.setSummaryState(reserves); 
     
   }
   
