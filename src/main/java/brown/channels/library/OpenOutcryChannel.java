@@ -37,7 +37,7 @@ public class OpenOutcryChannel extends AbsChannel implements IAgentChannel {
   @Override
   public void bid(AbsAgent agent, IBidBundle bid) {
     // TODO Auto-generated method stub
-    
+    System.out.println("bid trying to happen"); 
   }
 
   @Override

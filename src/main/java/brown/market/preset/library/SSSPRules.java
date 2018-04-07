@@ -30,6 +30,8 @@ public class SSSPRules extends AbsMarketPreset {
         new NoRecordKeeping());
     this.numRuns = numRuns;
   }
+  
+  
   @Override
   public AbsMarketPreset copy() {
     return new SSSPRules(this.numRuns);

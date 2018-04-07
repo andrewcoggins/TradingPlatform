@@ -20,7 +20,6 @@ public class SMRAQuery implements IQueryRule {
         idToGroup.put(a, agents.size());
       }
     }   
-    //TODO: complete open outcry channel.
     state.setTRequest(
         new TradeRequestMessage(0,
             new OpenOutcryChannel(
