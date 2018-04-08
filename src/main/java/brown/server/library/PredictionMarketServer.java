@@ -16,7 +16,7 @@ import brown.value.config.PredictionMarketDecoysConfig;
 public class PredictionMarketServer {
   private int seconds;
   private int numSims;
-  private int initDelay;; 
+  private int initDelay; 
   private int lag;
   
   private int port;
