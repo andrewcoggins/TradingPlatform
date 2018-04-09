@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedSet;
 
+import ch.uzh.ifi.ce.mweiss.specval.model.UnsupportedBiddingLanguageException;
 import ch.uzh.ifi.ce.mweiss.specvalopt.vcg.external.domain.AuctionResult;
 import brown.bid.interim.BidType;
 import brown.bidbundle.BundleType;
@@ -24,36 +25,60 @@ import brown.value.generator.library.SpecValGenerator;
 
 public class VCGAllocation implements IAllocationRule {
 
+  
   @Override
   public void setAllocation(IMarketState state) {
-    // convert all sent bids to vcg solver form
-    List<TradeMessage> bids = state.getBids(); 
+    
+    Map<Integer, Integer> specToPlatform = new HashMap<Integer, Integer>(); 
+    // agglomerate all trade messages.
+    Map<Integer, Map<ITradeable, BidType>> completes = new HashMap<Integer, Map<ITradeable, BidType>>(); 
+    List<TradeMessage> bids = state.getBids();
+    for (TradeMessage bid : bids) {
+      Integer ID = bid.AgentID; 
+      if(completes.get(ID) != null) { 
+        Map<ITradeable, BidType> existing = completes.get(ID); 
+        AuctionBidBundle auctionBundle = (AuctionBidBundle) bid.Bundle; 
+        Map<ITradeable, BidType> abMap = auctionBundle.getBids().bids; 
+        for (ITradeable tradeable : abMap.keySet()) { 
+          existing.put(tradeable, abMap.get(tradeable)); 
+        }
+        completes.put(ID, existing); 
+      }
+      else {
+        AuctionBidBundle auctionBundle = (AuctionBidBundle) bid.Bundle; 
+        Map<ITradeable, BidType> abMap = auctionBundle.getBids().bids; 
+        completes.put(ID, abMap);
+      }
+    }
+    // get into vcg solver form.
     Map<String, Map<Set<String>, Double>> vcgFormatted = new HashMap<String, Map<Set<String>, Double>>(); 
-    for (TradeMessage trade : bids) {
-      if (trade.Bundle.getType() != BundleType.AUCTION) {
-        continue; 
-      }
-      Map<Set<String>, Double> formattedCBid = new HashMap<Set<String>, Double>(); 
-      AuctionBidBundle tradeBundle = (AuctionBidBundle) trade.Bundle; 
-      Map<ITradeable, BidType> bidMap = tradeBundle.getBids().bids;
-      for(Entry<ITradeable, BidType> e : bidMap.entrySet()) {
-        if (e.getKey().getType() != TradeableType.Complex){ 
-          continue; 
+    int i = 0; 
+    for (Entry<Integer, Map<ITradeable, BidType>> agentBid : completes.entrySet()) {
+      Integer agentID = agentBid.getKey(); 
+      Integer vcgAgent = i; 
+      specToPlatform.put(vcgAgent, agentID); 
+      Map<ITradeable, BidType> aBid = agentBid.getValue(); 
+      Map<Set<String>, Double> specBid = new HashMap<Set<String>, Double>(); 
+      for(Entry<ITradeable, BidType> atom : aBid.entrySet()){ 
+        Set<String> specTradeables = new HashSet<String>(); 
+        ComplexTradeable cTradeable = (ComplexTradeable) atom.getKey(); 
+        for(SimpleTradeable t : cTradeable.flatten()) {
+          specTradeables.add(t.ID.toString());
         }
-        ComplexTradeable cTrade = (ComplexTradeable) e.getKey();
-        Double bidAmt = e.getValue().price;
-        // annoying conversion
-        List<SimpleTradeable> simples = cTrade.flatten();
-        Set<String> formattedTradeables = new HashSet<String>();
-        for(SimpleTradeable s : simples) {
-          formattedTradeables.add(s.ID.toString()); 
-        }
-        formattedCBid.put(formattedTradeables, bidAmt);
+        Double bidAmt = atom.getValue().price; 
+        specBid.put(specTradeables, bidAmt); 
       }
-      vcgFormatted.put(trade.AgentID.toString(), formattedCBid);
+      vcgFormatted.put(vcgAgent.toString(), specBid); 
+      i++;
     }
     // use vcg solver (specval initialization doesn't really matter)
-    SpecValGenerator svg = new SpecValGenerator(bids.size(), 1);
+    SpecValGenerator svg = new SpecValGenerator(vcgFormatted.size(), 1);
+    try {
+      svg.makeValuations();
+    } catch (UnsupportedBiddingLanguageException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } 
     AuctionResult solvedVCG = svg.runVCGWithGivenBids(vcgFormatted);
     //convert AuctionResult to usable form. 
     Map<String, SortedSet<String>> alloc = svg.getVcgAllocationSimpleBid(solvedVCG); 

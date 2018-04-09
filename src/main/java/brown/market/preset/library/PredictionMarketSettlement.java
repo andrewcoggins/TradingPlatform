@@ -1,8 +1,8 @@
 package brown.market.preset.library;
 
 import brown.market.preset.AbsMarketPreset;
-import brown.rules.library.BlankAllocation;
 import brown.rules.library.CallMarketQuery;
+import brown.rules.library.NoAllocation;
 import brown.rules.library.NoBiddingActivity;
 import brown.rules.library.NoBiddingTermination;
 import brown.rules.library.NoRecordKeeping;
@@ -18,7 +18,7 @@ public class PredictionMarketSettlement extends AbsMarketPreset {
    * or otherwise delete it from this constructor.
    */
   public PredictionMarketSettlement() {
-    super(new BlankAllocation(),
+    super(new NoAllocation(),
         new PredictionMarketPayment(),
         new CallMarketQuery(), 
         new OneGrouping(),

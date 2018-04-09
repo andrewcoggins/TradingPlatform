@@ -12,7 +12,7 @@ import brown.messages.library.PredictionMarketValuationMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.value.valuation.ValuationType;
 
-public class PredictionMarketDecoysConfig extends ValConfig implements GameValuationConfig {
+public class PredictionMarketDecoysConfig extends ValConfig implements IValuationConfig {
   Boolean coin;
     
   // for kryo

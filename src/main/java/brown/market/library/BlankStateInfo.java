@@ -1,6 +1,6 @@
 package brown.market.library;
 
-import brown.value.config.GameValuationConfig;
+import brown.value.config.IValuationConfig;
 
 public class BlankStateInfo extends PrevStateInfo{
   PrevStateType type;
@@ -19,7 +19,7 @@ public class BlankStateInfo extends PrevStateInfo{
   }
 
   @Override
-  public void initialize(GameValuationConfig gconfig) {    
+  public void initialize(IValuationConfig gconfig) {    
   }
 
   @Override

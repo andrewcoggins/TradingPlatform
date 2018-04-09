@@ -9,7 +9,7 @@ import brown.setup.ISetup;
  * @author andrew
  *
  */
-public abstract class AbsOpenOutcryAgent extends AbsAgent implements ISimpleOpenOutcry {
+public abstract class AbsOpenOutcryAgent extends AbsAuctionAgent implements IOpenOutcryAgent {
 
   public AbsOpenOutcryAgent(String host, int port, ISetup gameSetup)
       throws AgentCreationException {

@@ -13,8 +13,8 @@ import brown.tradeable.ITradeable;
 */
 public class ComplexTradeable extends AbsTradeable { 
   
+  public final int ID; 
   public final Set<ITradeable> GOODS;
-  
   /**
    * For Kryo
    * DO NOT USE
@@ -22,17 +22,19 @@ public class ComplexTradeable extends AbsTradeable {
   public ComplexTradeable() {
     super();
     this.GOODS = null;
+    this.ID = 0; 
   }
   
   public ComplexTradeable(Integer ID, Set<ITradeable> GOODS) {
     super(ID, 1, TradeableType.Complex);
     this.GOODS = GOODS;
+    this.ID = ID; 
   }
+  
 
   @Override
   public String toString() {
-    return "ComplexTradeable [GOODS=" + GOODS + ", ID=" + ID + ", COUNT="
-        + COUNT + "]";
+    return "ComplexTradeable [ID=" + ID + ", GOODS=" + GOODS + "]";
   }
 
   @Override
@@ -40,6 +42,7 @@ public class ComplexTradeable extends AbsTradeable {
     final int prime = 31;
     int result = super.hashCode();
     result = prime * result + ((GOODS == null) ? 0 : GOODS.hashCode());
+    result = prime * result + ID;
     return result;
   }
 
@@ -59,7 +62,7 @@ public class ComplexTradeable extends AbsTradeable {
       return false;
     }
   }
-  
+
   @Override
   public List<SimpleTradeable> flatten(){
     LinkedList<SimpleTradeable> toReturn = new LinkedList<SimpleTradeable>();

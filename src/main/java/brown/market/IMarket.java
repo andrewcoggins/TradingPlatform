@@ -72,6 +72,8 @@ public interface IMarket {
   
   public void tick();
   
+  public void setReserves(); 
+  
   public void resetInnerMarket();
 
   PrevStateInfo constructSummaryState();

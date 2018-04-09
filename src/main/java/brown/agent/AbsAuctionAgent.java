@@ -18,19 +18,19 @@ import brown.value.valuation.IValuation;
  * @author acoggins
  *
  */
-public abstract class AbsSimpleSealedAgent extends AbsAgent implements ISimpleSealedAgent {
+public abstract class AbsAuctionAgent extends AbsAgent implements IAuctionAgent {
   
   protected List<ITradeable> tradeables; 
   protected IValuation valuation;
   protected IValuationDistribution vDistribution; 
   
-  public AbsSimpleSealedAgent(String host, int port, ISetup gameSetup)
+  public AbsAuctionAgent(String host, int port, ISetup gameSetup)
       throws AgentCreationException {
     super(host, port, gameSetup);
     this.tradeables = new LinkedList<ITradeable>();
   }
   
-  public AbsSimpleSealedAgent(String host, int port, ISetup gameSetup, String name)
+  public AbsAuctionAgent(String host, int port, ISetup gameSetup, String name)
       throws AgentCreationException {
     super(host, port, gameSetup, name);
     this.tradeables = new LinkedList<ITradeable>();    

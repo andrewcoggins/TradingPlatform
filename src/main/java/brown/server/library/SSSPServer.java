@@ -21,7 +21,7 @@ public class SSSPServer {
   
   private static int numSims = 5;
   private static int numTradeables = 7;
-  private static int delayTime = 3; 
+  private static int delayTime = 5; 
   private static int lag = 300;
   
   public static void main(String[] args) throws InterruptedException {

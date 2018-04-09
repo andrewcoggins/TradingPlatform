@@ -65,9 +65,9 @@ public interface IMarketState {
     
     public void setTRequest(TradeRequestMessage t);
     
-    public Double getIncrement(); 
+    public Map<ITradeable, Double> getIncrement(); 
     
-    public void setIncrement(Double increment);
+    public void setIncrement(Map<ITradeable, Double> increment);
     
     
     //activity rules

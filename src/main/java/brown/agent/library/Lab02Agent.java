@@ -39,4 +39,5 @@ public class Lab02Agent extends AbsLab02Agent {
     new Lab02Agent("localhost", 2121);     
 		while (true) {}
 	}
+
 }

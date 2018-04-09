@@ -1,10 +1,10 @@
-package brown.server.library;
+package brown.server.library; // TODO: change this to your package
 
 public class PredictionMarketServerTemplate {
-	static private int seconds = 10;
-	static private int nSims = 100;
-	static private int init_delay = 5;
-	static private int lag = 25;
+	private static int seconds = 30; 	// number of seconds per round
+	private static int nSims = 100; 		// number of rounds to run
+	private static int init_delay = 5; 	// time to wait before beginning the simulation
+	private static int lag = 25;			// time between intervals in which bots can trade
   
 	public static void main(String[] args) throws InterruptedException {
 		PredictionMarketServer server = new PredictionMarketServer(seconds, nSims, init_delay, lag);

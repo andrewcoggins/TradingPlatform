@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -35,12 +36,13 @@ import brown.setup.ISetup;
 import brown.setup.library.Startup;
 import brown.summary.AuctionSummarizer;
 import brown.tradeable.ITradeable;
-import brown.value.config.GameValuationConfig;
+import brown.value.config.IValuationConfig;
 import brown.value.config.ValConfig;
 import brown.value.distribution.library.SpecValDistV2;
 import brown.value.distribution.library.SpecValDistribution;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.ValuationType;
+import brown.value.valuation.library.XORValuation;
 
 public abstract class AbsServer {
   
@@ -144,7 +146,7 @@ public abstract class AbsServer {
     ValConfig marketConfig = this.valueConfig;
     Map<Integer,PrivateInformationMessage> toSend = new HashMap<Integer,PrivateInformationMessage>();    
     if (marketConfig.type == ValuationType.Game){
-      GameValuationConfig gconfig = (GameValuationConfig) marketConfig;
+      IValuationConfig gconfig = (IValuationConfig) marketConfig;
       
       // flip the true coin, and pass this information to the manager
       gconfig.initialize();
@@ -157,13 +159,12 @@ public abstract class AbsServer {
        for (Connection connection : this.connections.keySet()){
          // make valuations one by one
          IValuation privateValuation = marketConfig.valueDistribution.sample();
-         toSend.put(this.connections.get(connection),new ValuationInformationMessage(this.connections.get(connection), this.allTradeables, privateValuation.safeCopy(), marketConfig.valueDistribution));                  
+         toSend.put(this.connections.get(connection), 
+             new ValuationInformationMessage(this.connections.get(connection), this.allTradeables, privateValuation.safeCopy(), marketConfig.valueDistribution));                  
          //give the server private valuation info.
          this.privateValuations.put(this.connections.get(connection), privateValuation.safeCopy());         
        }
      } else if (marketConfig.type == ValuationType.Spectrum) { 
-       // specval generator-generated valuations
-       // TODO: find a way to do this without using an enum. 
        SpecValDistV2 dist = (SpecValDistV2) marketConfig.valueDistribution;
        dist.setNumBidders(this.connections.keySet().size());
        Map<Integer, IValuation> vals = dist.sampleAll(new ArrayList<Integer>(this.connections.values()));
@@ -248,8 +249,11 @@ public abstract class AbsServer {
   public void updateAllAuctions() {
     synchronized (this.manager) {
       for (Market auction : this.manager.getAuctions()) {
-        synchronized (auction) {          
+        synchronized (auction) { 
+          // indicates that the auction has incremented
           auction.tick();
+          // sets reserve/round price.
+          auction.setReserves();
           if (!auction.isInnerOver()) {
             for (Entry<Connection, Integer> id : this.connections.entrySet()) {
               // maybe send message here? sanitized ledger.
@@ -283,7 +287,7 @@ public abstract class AbsServer {
             // Send game report
             Map<Integer, List<GameReportMessage>> reports = auction.constructReport();
             for (Integer agent : reports.keySet()) {  
-              for (GameReportMessage report : reports.get(agent)){
+              for (GameReportMessage report : reports.get(agent)) {
                 this.theServer.sendToTCP(this.privateToConnection(agent).getID(), report.sanitize(agent,this.privateToPublic));                
               }
             }

@@ -7,8 +7,8 @@ public interface IActivityRule {
 
   public void isAcceptable(IMarketState state, TradeMessage aBid);
  
-  // handle reserves with this
-  public void setReserves();
+  // handle reserve prices with this
+  public void setReserves(IMarketState state);
 
   public void reset();
   

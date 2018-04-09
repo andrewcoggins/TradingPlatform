@@ -1,11 +1,11 @@
 package brown.market.preset.library;
 
 import brown.market.preset.AbsMarketPreset;
-import brown.rules.library.BlankAllocation;
 import brown.rules.library.LemonadeGroupedPayment;
 import brown.rules.library.LemonadeNonAnonymous;
 import brown.rules.library.LemonadeQuery;
 import brown.rules.library.LemonadeActivity;
+import brown.rules.library.NoAllocation;
 import brown.rules.library.NoRecordKeeping;
 import brown.rules.library.ThreeFourFiveGrouping;
 import brown.rules.library.OneShotTermination;
@@ -21,7 +21,7 @@ public class LemonadeGroupedRulesNotAnon extends AbsMarketPreset {
    * or otherwise delete it from this constructor.
    */
   public LemonadeGroupedRulesNotAnon(int numSlots, int numRuns) {
-    super(new BlankAllocation(),
+    super(new NoAllocation(),
         new LemonadeGroupedPayment(numSlots), 
         new LemonadeQuery(),
         new ThreeFourFiveGrouping(),        

@@ -4,6 +4,7 @@ import brown.agent.AbsCallMarketAgent;
 import brown.bid.library.BidDirection;
 import brown.bid.library.TwoSidedBid;
 import brown.bidbundle.library.TwoSidedBidBundle;
+import brown.channels.library.AuctionChannel;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.CallMarketReportMessage;
@@ -44,5 +45,6 @@ public class CallMarketLagAgent extends AbsCallMarketAgent {
     new CallMarketLagAgent("localhost", 2121, "andrew", 3000);
     while(true){}
   }
+
   
 }

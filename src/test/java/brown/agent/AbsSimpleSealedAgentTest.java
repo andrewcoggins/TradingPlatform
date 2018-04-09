@@ -74,7 +74,7 @@ public class AbsSimpleSealedAgentTest {
       }
     }
 
-  private class TestSimpleSealedAgent extends AbsSimpleSealedAgent {
+  private class TestSimpleSealedAgent extends AbsAuctionAgent {
     public TestSimpleSealedAgent(String host, int port, ISetup gameSetup)
         throws AgentCreationException {
       super(host, port, gameSetup);

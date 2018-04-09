@@ -20,7 +20,7 @@ import brown.value.valuation.IValuation;
  * @author acoggins
  *
  */
-public abstract class AbsLab02Agent extends AbsSimpleSealedAgent {
+public abstract class AbsLab02Agent extends AbsAuctionAgent {
 	private double valuation;
 	private ITradeable tradeable;
 
@@ -31,8 +31,6 @@ public abstract class AbsLab02Agent extends AbsSimpleSealedAgent {
 	 public AbsLab02Agent(String host, int port, ISetup gameSetup, String name) throws AgentCreationException {
 	    super(host, port, gameSetup,name);
 	  }
-	
-	public abstract void onSimpleSealed(AuctionChannel channel);
 	
 	@Override
 	public void onPrivateInformation(PrivateInformationMessage privateInfo) {  

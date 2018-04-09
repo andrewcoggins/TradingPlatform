@@ -1,20 +1,19 @@
-package brown.rules.library;
+package brown.rules.library; 
 
 import brown.market.marketstate.IMarketState;
 import brown.rules.IAllocationRule;
 
-public class BlankAllocation implements IAllocationRule{
+public class NoAllocation implements IAllocationRule {
 
   @Override
   public void setAllocation(IMarketState state) {
-    // TODO Auto-generated method stub
+    //noop
     
   }
 
   @Override
   public void reset() {
-    // TODO Auto-generated method stub
-    
+    //noop
   }
-
+  
 }

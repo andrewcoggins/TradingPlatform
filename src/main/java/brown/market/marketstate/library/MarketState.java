@@ -30,7 +30,7 @@ public class MarketState implements IMarketState {
   private List<Order> payments; 
   //query rule
   private TradeRequestMessage tRequest;
-  private Double increment;
+  private Map<ITradeable, Double> increment;
   //activity rules
   private Boolean isAcceptable; 
   private IBidBundle reserve;
@@ -53,7 +53,7 @@ public class MarketState implements IMarketState {
     this.TRADEABLES = allGoods; 
     this.bids = new LinkedList<TradeMessage>();
     this.outerTerminated = false; 
-    this.increment = 0.0;
+    this.increment = new HashMap<ITradeable, Double>();
     this.ticks = 0; 
     this.outerRuns = 0; 
     this.innerTerminated = false;
@@ -132,12 +132,17 @@ public class MarketState implements IMarketState {
   }
   
   @Override
-  public Double getIncrement() {
+  public Map<ITradeable, Double> getIncrement() {
     return this.increment;
   }
 
   @Override
-  public void setIncrement(Double increment) {
+  public void setIncrement(Map<ITradeable, Double> increment) {
+   for (ITradeable t : this.TRADEABLES) {
+     if (!increment.containsKey(t)) {
+       increment.put(t, 0.0); 
+     }
+   }
    this.increment = increment;
   }
 
@@ -222,7 +227,7 @@ public class MarketState implements IMarketState {
     this.bids = new LinkedList<TradeMessage>();
     this.allocation = new HashMap<Integer, List<ITradeable>>();
     this.payments = new LinkedList<Order>();
-    this.increment = 0.0;
+    this.increment = new HashMap<ITradeable, Double>();
     this.ticks = 0; 
     this.innerTerminated = false;   
     }

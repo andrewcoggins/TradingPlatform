@@ -42,7 +42,7 @@ public class LemonadeActivity implements IActivityRule {
 
   @Override
   // Implement Later, not relevant to lemonade game
-  public void setReserves() {
+  public void setReserves(IMarketState state) {
   }
 
 

@@ -9,10 +9,12 @@ import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.ValuationInformationMessage;
 import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
+import brown.tradeable.library.ComplexTradeable;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.IValuation;
+import brown.value.valuation.library.XORValuation;
 
-public abstract class AbsVCGAgent extends AbsSimpleSealedAgent  {
+public abstract class AbsVCGAgent extends AbsAuctionAgent {
 
   protected List<ITradeable> tradeables;
   protected IValuation valuation; 
@@ -35,18 +37,12 @@ public abstract class AbsVCGAgent extends AbsSimpleSealedAgent  {
       this.valuation = ((ValuationInformationMessage) privateInfo).getPrivateValuation();
       this.vDistribution = ((ValuationInformationMessage) privateInfo).getAllValuations();
       
-      for (ITradeable t: this.tradeables){
-        Logging.log("Agent " + this.ID + ", Good: " + t.toString() + ", Value: " +this.valuation.getValuation(t));
-      }      
+      XORValuation x = (XORValuation) this.valuation; 
+      for(ComplexTradeable bundle : x.getTradeables()) { 
+        Logging.log("Agent " + this.ID + ", Bundle: " + bundle + ", Value: " + x.getValuation(bundle));
+      }
     } else {
       Logging.log("[x] AbsSSSPAgent: Wrong Kind of PrivateInformation Received");
     }
   }
-
-
-
-
-
-
-
 }

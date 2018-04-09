@@ -27,7 +27,7 @@ public class UpdateAgent extends AbsPredictionMarketAgent {
 		} else {
 			fair_value = (double) (decoys) / (double) (2 * decoys + 2) * 100;
 		}
-		
+
 		System.out.println("DECOYS: " + decoys + ", FAIR VALUE: " + fair_value);
 
 		switch (decoys) {
@@ -39,17 +39,17 @@ public class UpdateAgent extends AbsPredictionMarketAgent {
 		case 2:
 			update_epsilon = 1;
 			spread_epsilon = 6;
-	    risklimit = 6;
+			risklimit = 6;
 			break;
 		case 3:
 			update_epsilon = 2;
 			spread_epsilon = 8;
-	    risklimit = 5;			
+			risklimit = 5;
 			break;
 		default:
 			update_epsilon = 3;
 			spread_epsilon = 8;
-	    risklimit = 4;			
+			risklimit = 4;
 		}
 
 	}
@@ -80,27 +80,26 @@ public class UpdateAgent extends AbsPredictionMarketAgent {
 		if (price > 0) {
 			fair_value += update_epsilon;
 			fair_value = Math.min(fair_value, 94);
-			
+
 			exposure -= quantity;
 		} else {
 			fair_value -= update_epsilon;
 			fair_value = Math.max(fair_value, 6);
-			
+
 			exposure += quantity;
 		}
-		
+
 		if (price > 0) {
 			System.out.print("SOLD AT " + price);
 		} else {
 			System.out.print("BOUGHT AT " + price);
 		}
-		
+
 		System.out.println(" NEW FAIR VALUE: " + fair_value);
-		
-		
+
 		updated = true;
 	}
-	
+
 	@Override
 	public double getHighestBuy() {
 		return fair_value - spread_epsilon;

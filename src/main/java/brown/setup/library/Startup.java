@@ -31,9 +31,11 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.RegistrationMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.messages.library.ValuationInformationMessage;
+import brown.tradeable.library.ComplexTradeable;
 import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.tradeable.library.TradeableType;
+import brown.value.distribution.library.SpecValDistribution;
 import brown.value.generator.library.LabTwoValGenerator;
 import brown.value.generator.library.UniformValGenerator;
 
@@ -76,6 +78,7 @@ public final class Startup {
 		kryo.register(BidType.class);
 		kryo.register(BundleType.class);
 		kryo.register(MultiTradeable.class);
+		kryo.register(ComplexTradeable.class); 
 		kryo.register(Order.class);
 		kryo.register(Ledger.class);
 		kryo.register(HashMap.class);

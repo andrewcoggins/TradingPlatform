@@ -6,7 +6,7 @@ import brown.rules.library.OneGrouping;
 import brown.rules.library.OneShotTermination;
 import brown.rules.library.OneShotActivity;
 import brown.rules.library.SSSPAnonymous;
-import brown.rules.library.SimpleSimultaneousQuery;
+import brown.rules.library.SimpleQuery;
 import brown.rules.library.HighestPriceAllocation;
 import brown.rules.library.SimpleSecondPricePayment;
 import brown.rules.library.XRoundTermination;
@@ -21,7 +21,7 @@ public class SSSPRules extends AbsMarketPreset {
   public SSSPRules(int numRuns) {
     super(new HighestPriceAllocation(),
         new SimpleSecondPricePayment(),
-        new SimpleSimultaneousQuery(), 
+        new SimpleQuery(), 
         new OneGrouping(),
         new OneShotActivity(),
         new SSSPAnonymous(),
@@ -30,6 +30,8 @@ public class SSSPRules extends AbsMarketPreset {
         new NoRecordKeeping());
     this.numRuns = numRuns;
   }
+  
+  
   @Override
   public AbsMarketPreset copy() {
     return new SSSPRules(this.numRuns);
