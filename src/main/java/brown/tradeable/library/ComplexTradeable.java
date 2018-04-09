@@ -45,11 +45,19 @@ public class ComplexTradeable extends AbsTradeable {
 
   @Override
   public boolean equals(Object obj) {
-    return (obj instanceof ComplexTradeable &&
-            ((ComplexTradeable)obj).COUNT.equals(this.COUNT) &&
-            ((ComplexTradeable)obj).GOODS.equals(this.GOODS) &&
-            ((ComplexTradeable)obj).ID.equals(this.ID) &&
-            ((ComplexTradeable)obj).TYPE.equals(this.TYPE));
+    if (obj instanceof ITradeable && ((ITradeable) obj).getCount().equals(this.COUNT)){
+      List<SimpleTradeable> thisList = this.flatten();
+      List<SimpleTradeable> otherList = ((ITradeable) obj).flatten();
+      
+      for (SimpleTradeable t: thisList){
+        if (!otherList.remove(t)){
+          return false;
+        }
+      }
+      return true; 
+    } else {
+      return false;
+    }
   }
   
   @Override

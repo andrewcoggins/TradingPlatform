@@ -36,9 +36,9 @@ public class SellOrder implements Comparable<SellOrder>{
   }
   
  public SellOrder sanitize(Integer agent, Map<Integer, Integer> privateToPublic) { 
-   Integer id = privateToPublic.get(this.agent);
-   if (this.agent == agent){
-     id = this.agent;
+   Integer id = this.agent;
+   if (!this.agent.equals(agent)){
+     id = 0;
    }
    return new SellOrder(id, this.quantity, this.price);
  }
