@@ -25,18 +25,19 @@ public class SMRADemoAgent extends AbsSMRAAgent {
   @Override
   public void onOpenOutcry(OpenOutcryChannel channel) {
     // TODO decide how to bid in price discovery rounds.
-    System.out.println("trade request received"); 
+    System.out.println("OPEN OUTCRY TRADE REQUEST RECEIVED"); 
     Map<ITradeable, BidType> bMap = new HashMap<ITradeable, BidType>();
     for (ITradeable t : this.tradeables) {
       bMap.put(t, new BidType(1.0, 1)); 
     }
-    IBidBundle allGoods = new AuctionBidBundle(); 
+    System.out.println("BID MAP: " + bMap);
+    IBidBundle allGoods = new AuctionBidBundle(bMap); 
     channel.bid(this, allGoods);
   }
 
   @Override
   public void onSimpleSealed(AuctionChannel channel) {
-    System.out.println("This is received"); 
+    System.out.println("SIMPLE SEALED TRADE REQUEST RECEIVED"); 
  // something dumb
     Map<ITradeable, BidType> bMap = new HashMap<ITradeable, BidType>();
     for (ITradeable t : this.tradeables) {
@@ -49,7 +50,7 @@ public class SMRADemoAgent extends AbsSMRAAgent {
   @Override
   public void onGameReport(GameReportMessage gameReport) {
     // TODO decide what to do with information.
-    System.out.println("GameReport received");
+    System.out.println("GAMEREPORT RECEIVED");
   }
   
   public static void main(String[] args) throws AgentCreationException {

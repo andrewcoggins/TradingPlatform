@@ -8,7 +8,6 @@ import brown.setup.ISetup;
 import brown.value.distribution.library.AdditiveValuationDistribution;
 import brown.value.generator.library.NormalValGenerator;
 import brown.value.valuation.library.AdditiveValuation;
-import ch.uzh.ifi.ce.mweiss.specval.model.mrm.MRMGlobalBidder;
 
 import com.esotericsoftware.kryo.Kryo;
 

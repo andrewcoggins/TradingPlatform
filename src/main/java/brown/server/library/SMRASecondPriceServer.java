@@ -40,7 +40,11 @@ public class SMRASecondPriceServer {
     Map<ITradeable, Double> increments = new HashMap<ITradeable, Double>(); 
     for (int i = 0; i < numTradeables; i++) {
       baseVals.put(allTradeablesList.get(i), 0.0); 
-      increments.put(allTradeablesList.get(i), 0.0);
+      if (i == 4) {
+        increments.put(allTradeablesList.get(i), 0.1);
+      } else {
+        increments.put(allTradeablesList.get(i), 0.2);
+      }
     }
     discoveryMarkets.add(new SMRADiscovery(baseVals, increments)); 
     SimulMarkets discovery = new SimulMarkets(discoveryMarkets); 
