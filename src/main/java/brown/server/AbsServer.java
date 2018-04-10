@@ -168,21 +168,12 @@ public abstract class AbsServer {
        SpecValDistV2 dist = (SpecValDistV2) marketConfig.valueDistribution;
        dist.setNumBidders(this.connections.keySet().size());
        Map<Integer, IValuation> vals = dist.sampleAll(new ArrayList<Integer>(this.connections.values()));
-       
-       
-       
-//       int numConnections = this.connections.keySet().size(); 
-//       SpecValDistribution dist = (SpecValDistribution) marketConfig.valueDistribution;
-//       dist.giveNumBidders(numConnections);
-//       Set<IValuation> allSamples = dist.sampleAll(); 
-//       for (Connection connection : this.connections.keySet()) {
-//         for (IValuation val : allSamples) {
-//           toSend.put(this.connections.get(connection),new ValuationInformationMessage(this.connections.get(connection), this.allTradeables, val.safeCopy(), marketConfig.valueDistribution));                  
-//           //give the server private valuation info.
-//           this.privateValuations.put(this.connections.get(connection), val.safeCopy());         
-//         }
-//       }
-     }
+       for (Entry<Connection,Integer> entry : this.connections.entrySet()){
+         toSend.put(entry.getValue(), new ValuationInformationMessage(entry.getValue(),this.allTradeables,vals.get(entry.getValue()).safeCopy(), dist));
+         
+         this.privateValuations.put(entry.getValue(), vals.get(entry.getValue()).safeCopy());
+       }
+    }
     for (Connection connection : this.connections.keySet()){
       Integer agentID = this.connections.get(connection);               
       //set up agent account

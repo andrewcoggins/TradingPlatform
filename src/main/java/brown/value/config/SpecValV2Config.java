@@ -7,8 +7,8 @@ import brown.value.valuation.ValuationType;
 public class SpecValV2Config extends ValConfig {
 
   //problem: number of bidders.
-  public SpecValV2Config(int numBidders, int bundleSize, int bundleStdDev) {
-    super(new SpecValDistV2(numBidders, bundleSize, bundleStdDev), ValuationType.Spectrum);
+  public SpecValV2Config() {
+    super(new SpecValDistV2(), ValuationType.Spectrum);
   }
   
   @Override

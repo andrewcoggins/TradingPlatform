@@ -11,6 +11,7 @@ import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.GameReportMessage;
+import brown.setup.library.SpecValSetup;
 import brown.setup.library.VCGSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.ComplexTradeable;
@@ -20,7 +21,7 @@ public class SpecVCGAgent extends AbsVCGAgent implements IAuctionAgent {
 
   public SpecVCGAgent(String host, int port)
       throws AgentCreationException {
-    super(host, port, new VCGSetup());
+    super(host, port, new SpecValSetup());
   }
 
   @Override
@@ -32,11 +33,10 @@ public class SpecVCGAgent extends AbsVCGAgent implements IAuctionAgent {
   @Override
   public void onSimpleSealed(AuctionChannel channel) {
     // bids valuation on every bundle.
-    XORValuation valuation = (XORValuation) this.valuation; 
+    this.valuation.generateXORBids(5, 10, 3);
     Map<ITradeable, BidType> bids = new HashMap<ITradeable, BidType>(); 
-    Set<ComplexTradeable> tradeables = valuation.getTradeables(); 
-    for (ComplexTradeable t : tradeables) { 
-      bids.put(t, new BidType(valuation.getValuation(t), 1));
+    for (ComplexTradeable t : this.XORBids.keySet()) { 
+      bids.put(t, new BidType(this.XORBids.get(t), 1));
     }
     AuctionBidBundle aBundle = new AuctionBidBundle(bids);
     channel.bid(this, aBundle); 
