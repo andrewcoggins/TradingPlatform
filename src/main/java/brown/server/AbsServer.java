@@ -145,7 +145,7 @@ public abstract class AbsServer {
   protected void initializeAgents() {
     ValConfig marketConfig = this.valueConfig;
     Map<Integer,PrivateInformationMessage> toSend = new HashMap<Integer,PrivateInformationMessage>();    
-    if (marketConfig.type == ValuationType.Game){
+    if (marketConfig.type == ValuationType.Game) {
       IValuationConfig gconfig = (IValuationConfig) marketConfig;
       
       // flip the true coin, and pass this information to the manager
@@ -155,7 +155,8 @@ public abstract class AbsServer {
       // make valuations all at once            
       List<Integer> agents = new ArrayList<Integer>(this.connections.values());
       toSend = gconfig.generateReport(agents);
-     } else if (marketConfig.type == ValuationType.Auction) {       
+     } else if (marketConfig.type == ValuationType.Auction) { 
+       this.manager.initializeInfo(marketConfig.generateInfo());
        for (Connection connection : this.connections.keySet()){
          // make valuations one by one
          IValuation privateValuation = marketConfig.valueDistribution.sample();

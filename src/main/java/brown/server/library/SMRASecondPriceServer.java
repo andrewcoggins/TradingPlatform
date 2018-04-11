@@ -13,11 +13,11 @@ import brown.market.preset.library.SMRADiscovery;
 import brown.setup.library.SMRASetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.config.AdditiveUniformConfig;
+import brown.value.config.SMRAConfig;
 
 public class SMRASecondPriceServer { 
   
-  private static int numSims = 5;
+  private static int numSims = 1;
   private static int numTradeables = 7;
   private static int delayTime = 3; 
   private static int lag = 300;
@@ -41,7 +41,7 @@ public class SMRASecondPriceServer {
     for (int i = 0; i < numTradeables; i++) {
       baseVals.put(allTradeablesList.get(i), 0.0); 
       if (i == 4) {
-        increments.put(allTradeablesList.get(i), 0.1);
+        increments.put(allTradeablesList.get(i), 0.15);
       } else {
         increments.put(allTradeablesList.get(i), 0.2);
       }
@@ -55,7 +55,7 @@ public class SMRASecondPriceServer {
     SimulMarkets settlement = new SimulMarkets(settlementMarket); 
     seq.add(settlement); 
     // initialize the simulation.
-    Simulation sim = new Simulation(seq, new AdditiveUniformConfig(allTradeables),
+    Simulation sim = new Simulation(seq, new SMRAConfig(allTradeables),
         allTradeablesList, 1., new LinkedList<ITradeable>()); 
     RunServer smraServer = new RunServer(2121, new SMRASetup()); 
     smraServer.runSimulation(sim, numSims, delayTime, lag); 

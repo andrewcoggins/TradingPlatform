@@ -11,11 +11,9 @@ import brown.value.config.IValuationConfig;
 public class PriceDiscoveryInfo extends PrevStateInfo {
   
   public IBidBundle reservePrices; 
-  private PrevStateType type; 
   
   public PriceDiscoveryInfo(IBidBundle reservePrices) {
-    this.reservePrices = reservePrices; 
-    this.type = PrevStateType.DISCOVERY; 
+    this.reservePrices = reservePrices;  
   }
   
   @Override
@@ -33,7 +31,7 @@ public class PriceDiscoveryInfo extends PrevStateInfo {
 
   @Override
   public PrevStateType getType() {
-    return this.type; 
+    return PrevStateType.DISCOVERY;
   }
   
 }

@@ -5,9 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import brown.market.library.BlankStateInfo;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.GameReportMessage;
-import brown.messages.library.LemonadeReportMessage;
 import brown.messages.library.SimpleSealedReportMessage;
 import brown.rules.IInformationRevelationPolicy;
 
@@ -50,7 +50,7 @@ public class SSSPAnonymous implements IInformationRevelationPolicy {
   @Override
   public void constructSummaryState(IMarketState state) {
     // TODO Auto-generated method stub
-    
+    state.setSummaryState(new BlankStateInfo());
   }
 
 }

@@ -22,7 +22,6 @@ public class SMRAPolicy implements IInformationRevelationPolicy {
   @Override
   public void handleInfo() {
     // TODO Auto-generated method stub
-    
   }
 
   @Override
@@ -41,16 +40,16 @@ public class SMRAPolicy implements IInformationRevelationPolicy {
   }
 
   @Override
+  public void constructSummaryState(IMarketState state) {
+    // construct the summary state. 
+    PriceDiscoveryInfo reserves = new PriceDiscoveryInfo(state.getReserve()); 
+    state.setSummaryState(reserves);   
+  }
+  
+  @Override
   public void reset() {
     // TODO Auto-generated method stub
   }
 
-  @Override
-  public void constructSummaryState(IMarketState state) {
-    // construct the summary state. 
-    PriceDiscoveryInfo reserves = new PriceDiscoveryInfo(state.getReserve()); 
-    state.setSummaryState(reserves); 
-    
-  }
   
 }
