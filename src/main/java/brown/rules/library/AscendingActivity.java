@@ -15,35 +15,23 @@ import brown.messages.library.TradeMessage;
 import brown.rules.IActivityRule;
 import brown.tradeable.ITradeable;
 
-/**
- * activity rule for revealed preferences.
- * useful in SMRA
- * @author acoggins
- *
- */
-
-//TODO: issues with when the reserve price is incremented. 
-public class RevealedPreferenceActivity implements IActivityRule {
+public class AscendingActivity implements IActivityRule {
 
   private final Map <ITradeable, Double> base; 
   private final Map <ITradeable, Double> increment; 
-  // time series of demand sets.
-  private Map<Integer, Map<Integer, Set<ITradeable>>> pastDemandSets; 
+  private Map<Integer, Set<ITradeable>> pastDemand; 
   
-  public RevealedPreferenceActivity(Map<ITradeable, Double> aBase, Map<ITradeable, Double> anIncrement) {
+  public AscendingActivity(Map<ITradeable, Double> aBase, Map<ITradeable, Double> anIncrement) {
     this.base = aBase;  
     this.increment = anIncrement; 
-    this.pastDemandSets = new HashMap<Integer, Map<Integer, Set<ITradeable>>>(); 
-  }
-  
+    this.pastDemand = new HashMap<Integer, Set<ITradeable>>();
+  } 
   
   @Override
   public void isAcceptable(IMarketState state, TradeMessage aBid) {
     boolean acceptable = true; 
-    // check type is correct
     if (aBid.Bundle instanceof AuctionBidBundle) {
-      Integer agentId = aBid.AgentID; 
-      List<ITradeable> allTradeables = state.getTradeables();  
+      Integer agentId = aBid.AgentID;  
       AuctionBidBundle agentBundle = (AuctionBidBundle) aBid.Bundle; 
       Map<ITradeable, BidType> agentBids = agentBundle.getBids().bids; 
       System.out.println("AGENT BIDS: " + agentBids);
@@ -64,63 +52,14 @@ public class RevealedPreferenceActivity implements IActivityRule {
             currentDemandSet.add(t); 
           }
         }
-      }
-      // revealed preferences
-      // we want to 
-      for (int i = 1; i < state.getTicks(); i++) { 
-        Map<ITradeable, Double> prevPrices = new HashMap<ITradeable, Double>(); 
-        // get prices at some time s
-        for (ITradeable t : allTradeables) {
-          prevPrices.put(t, this.base.get(t) + (i * state.getIncrement().get(t))); 
-        }
-        // get demand set at some past time.
-        Set<ITradeable> pastDemandSet = pastDemandSets.get(i).get(agentId);
-        double total = 0.0;
-        for (ITradeable t : currentDemandSet) {
-          total += reserves.get(t).price; 
-          total -= prevPrices.get(t); 
-        }
-        for (ITradeable t : pastDemandSet) {
-          total += prevPrices.get(t); 
-          total -= reserves.get(t).price; 
-        }
-        if (total > 0.00001) {  
-          System.out.println(total);
-          acceptable = false; 
-          System.out.println("UNACCEPTABLE: REVEALED PREFERENCE RULE"); 
-        }
-      }
-      if (acceptable) {
-        // put in agents' active demand sets.
-        if (pastDemandSets.containsKey(state.getTicks())) {
-          Map<Integer, Set<ITradeable>> existing = pastDemandSets.get(state.getTicks()); 
-          existing.put(agentId, currentDemandSet); 
-          pastDemandSets.put(state.getTicks(), existing);
-        } else{ 
-          Map<Integer, Set<ITradeable>> agentDemand = new HashMap<Integer, Set<ITradeable>>();
-          agentDemand.put(agentId, currentDemandSet);
-          pastDemandSets.put(state.getTicks(), agentDemand); 
-        } 
-      } else {
-        // put empty demand sets for agents.
-        if (pastDemandSets.containsKey(state.getTicks())) {
-          Map<Integer, Set<ITradeable>> existing = pastDemandSets.get(state.getTicks()); 
-          existing.put(agentId, new HashSet<ITradeable>()); 
-          pastDemandSets.put(state.getTicks(), existing);
-        } else{ 
-          Map<Integer, Set<ITradeable>> agentDemand = new HashMap<Integer, Set<ITradeable>>();
-          agentDemand.put(agentId, new HashSet<ITradeable>());
-          pastDemandSets.put(state.getTicks(), agentDemand); 
-        } 
-      }
+      } 
+      this.pastDemand.put(agentId, currentDemandSet); 
     } else {
       acceptable = false; 
     }
-    System.out.println("ACCEPTABLE: " + acceptable); 
-    state.setAcceptable(acceptable); 
+    state.setAcceptable(acceptable);
   }
-  
-  // increments reserve prices at time t if goods are in the demand set at time t - 1
+
   @Override
   public void setReserves(IMarketState state) {
     // set the increment in the market state.
@@ -134,12 +73,11 @@ public class RevealedPreferenceActivity implements IActivityRule {
       Map<ITradeable, BidType> resMap = reserve.bids; 
       // if the tradeables are in the demand set at the last increment, 
       // increment their prices.
-      Map<Integer, Set<ITradeable>> lastDemanded = pastDemandSets.get(state.getTicks() - 1); 
-      System.out.println("LAST DEMANDED: " + lastDemanded);
+      System.out.println("LAST DEMANDED: " + pastDemand);
       // check of the tradeables are in the last demand set.
       for(ITradeable t : resMap.keySet()) {
         boolean found = false; 
-        for (Set<ITradeable> tSet : lastDemanded.values()) {
+        for (Set<ITradeable> tSet : pastDemand.values()) {
           if (tSet.contains(t)) { 
             found = true; 
             break; 
@@ -162,11 +100,12 @@ public class RevealedPreferenceActivity implements IActivityRule {
       IBidBundle init = new AuctionBidBundle(res); 
       state.setReserve(init);
     }
-   }
+    this.pastDemand.clear();
+  }
 
   @Override
   public void reset() {
-    this.pastDemandSets.clear();
-  }
+    this.pastDemand.clear();
+  } 
   
 }
