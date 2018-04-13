@@ -33,7 +33,6 @@ public class SpecVCGAgent extends AbsVCGAgent implements IAuctionAgent {
   @Override
   public void onSimpleSealed(AuctionChannel channel) {
     // bids valuation on every bundle.
-    this.valuation.generateXORBids(5, 10, 3);
     Map<ITradeable, BidType> bids = new HashMap<ITradeable, BidType>(); 
     for (ComplexTradeable t : this.XORBids.keySet()) { 
       bids.put(t, new BidType(this.XORBids.get(t), 1));
@@ -46,6 +45,10 @@ public class SpecVCGAgent extends AbsVCGAgent implements IAuctionAgent {
     new SpecVCGAgent("localhost", 2121); 
     new SpecVCGAgent("localhost", 2121); 
     while(true){}
+  }
+
+  @Override
+  public void onMarketStart() {
   }
 
   

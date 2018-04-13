@@ -37,11 +37,13 @@ import brown.setup.library.Startup;
 import brown.summary.AuctionSummarizer;
 import brown.tradeable.ITradeable;
 import brown.value.config.IValuationConfig;
+import brown.value.config.SpecValV2Config;
 import brown.value.config.ValConfig;
 import brown.value.distribution.library.SpecValDistV2;
 import brown.value.distribution.library.SpecValDistribution;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.ValuationType;
+import brown.value.valuation.library.SpecValValuation;
 import brown.value.valuation.library.XORValuation;
 
 public abstract class AbsServer {
@@ -165,13 +167,16 @@ public abstract class AbsServer {
          this.privateValuations.put(this.connections.get(connection), privateValuation.safeCopy());         
        }
      } else if (marketConfig.type == ValuationType.Spectrum) { 
-       SpecValDistV2 dist = (SpecValDistV2) marketConfig.valueDistribution;
+       SpecValV2Config svconfig = (SpecValV2Config) marketConfig;
+       SpecValDistV2 dist = (SpecValDistV2) svconfig.valueDistribution;
        dist.setNumBidders(this.connections.keySet().size());
        Map<Integer, IValuation> vals = dist.sampleAll(new ArrayList<Integer>(this.connections.values()));
        for (Entry<Connection,Integer> entry : this.connections.entrySet()){
-         toSend.put(entry.getValue(), new ValuationInformationMessage(entry.getValue(),this.allTradeables,vals.get(entry.getValue()).safeCopy(), dist));
-         
-         this.privateValuations.put(entry.getValue(), vals.get(entry.getValue()).safeCopy());
+         SpecValValuation v = (SpecValValuation) vals.get(entry.getValue());     
+
+         this.privateValuations.put(entry.getValue(), v);
+         toSend.put(entry.getValue(), new ValuationInformationMessage(entry.getValue(),this.allTradeables,
+             v.generateSubset(svconfig.nBundles, svconfig.meanSize, svconfig.stDev), null));         
        }
     }
     for (Connection connection : this.connections.keySet()){

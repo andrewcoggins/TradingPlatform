@@ -86,5 +86,9 @@ public class SpecValValuation implements ISpecValValuation{
       return toReturn;
     }
   }
+  
+  public IValuation generateSubset(int n, int mean, int stdev){
+    return new SpecValValuationSubset(generateXORBids(n,mean,stdev));    
+  }
 
 }

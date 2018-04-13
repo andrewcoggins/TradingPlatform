@@ -37,6 +37,6 @@ public class TestSpecVal {
     //TODO: make agent
     //TODO: debug
     gameServer.runSimpleSim(allTradeablesList, new SSFPNoRecord(3),
-        new SpecValV2Config(), 0.0, new LinkedList<ITradeable>(), delayTime, lag);
+        new SpecValV2Config(50,10,2), 0.0, new LinkedList<ITradeable>(), delayTime, lag);
   }
 }
