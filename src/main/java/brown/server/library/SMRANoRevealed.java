@@ -1,4 +1,4 @@
-package brown.server.library; 
+package brown.server.library;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,18 +8,18 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.market.preset.AbsMarketPreset;
+import brown.market.preset.library.SMRANoRevealedRules;
 import brown.market.preset.library.SSSPReserveRules;
-import brown.market.preset.library.SMRADiscovery;
 import brown.setup.library.SMRASetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.SMRAConfig;
 
-public class SMRASecondPriceServer { 
+public class SMRANoRevealed {
   
   private static int numSims = 1;
   private static int numTradeables = 7;
-  private static int delayTime = 3; 
+  private static int delayTime = 4; 
   private static int lag = 300;
   
   public static void main(String[] args) throws InterruptedException { 
@@ -46,7 +46,7 @@ public class SMRASecondPriceServer {
         increments.put(allTradeablesList.get(i), 0.2);
       }
     }
-    discoveryMarkets.add(new SMRADiscovery(baseVals, increments)); 
+    discoveryMarkets.add(new SMRANoRevealedRules(baseVals, increments)); 
     SimulMarkets discovery = new SimulMarkets(discoveryMarkets); 
     seq.add(discovery);
     //construct settlement round.

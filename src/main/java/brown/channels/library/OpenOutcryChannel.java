@@ -1,11 +1,19 @@
 package brown.channels.library; 
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import brown.agent.AbsAgent;
 import brown.agent.AbsOpenOutcryAgent;
+import brown.bid.interim.BidType;
+import brown.bid.library.AuctionBid;
 import brown.bidbundle.IBidBundle;
+import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.IAgentChannel;
+import brown.logging.Logging;
+import brown.messages.library.TradeMessage;
+import brown.tradeable.ITradeable;
 
 public class OpenOutcryChannel extends AbsChannel implements IAgentChannel {
 
@@ -36,8 +44,10 @@ public class OpenOutcryChannel extends AbsChannel implements IAgentChannel {
 
   @Override
   public void bid(AbsAgent agent, IBidBundle bid) {
-    // TODO Auto-generated method stub
-    System.out.println("bid trying to happen"); 
+    // is there a limit on how large these can be? 
+    // not very fault tolerant
+    Map<ITradeable, BidType> b = ((AuctionBid) bid.getBids()).bids;
+    agent.CLIENT.sendTCP(new TradeMessage(0,new AuctionBidBundle(b),this.ID,agent.ID));
   }
 
   @Override

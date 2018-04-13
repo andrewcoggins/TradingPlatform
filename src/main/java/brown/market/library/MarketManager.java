@@ -22,7 +22,6 @@ import brown.tradeable.ITradeable;
 //TODO: unique IDs for every market ever
 //TODO: make sure that if a bid is being sent to a market, that markets exists in the manager. 
 
-
 public class MarketManager implements IMarketManager {
   // stores all ledgers in a simulation
 	private List<Map<Market, Ledger>> ledgers;

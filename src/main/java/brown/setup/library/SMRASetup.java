@@ -3,6 +3,7 @@ package brown.setup.library;
 import brown.bid.library.AuctionBid;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.AuctionChannel;
+import brown.channels.library.OpenOutcryChannel;
 import brown.messages.library.SMRAReportMessage;
 import brown.messages.library.SimpleSealedReportMessage;
 import brown.setup.ISetup;
@@ -29,5 +30,6 @@ public class SMRASetup implements ISetup {
     kryo.register(AuctionChannel.class);
     kryo.register(SimpleSealedReportMessage.class);  
     kryo.register(SMRAReportMessage.class); 
+    kryo.register(OpenOutcryChannel.class); 
   }
 }

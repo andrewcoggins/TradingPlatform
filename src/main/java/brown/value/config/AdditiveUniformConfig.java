@@ -2,6 +2,7 @@ package brown.value.config;
 
 import java.util.Set;
 
+import brown.market.library.BlankStateInfo;
 import brown.market.library.PrevStateInfo;
 import brown.tradeable.ITradeable;
 import brown.value.distribution.library.AdditiveValuationDistribution;
@@ -20,7 +21,7 @@ public class AdditiveUniformConfig extends ValConfig {
   
   @Override
   public PrevStateInfo generateInfo() {
-    return null;
+    return new BlankStateInfo();
   }
 
 }

@@ -1,7 +1,18 @@
 package brown.rules.library; 
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import brown.bid.interim.BidType;
+import brown.bid.library.AuctionBid;
+import brown.bidbundle.IBidBundle;
 import brown.market.marketstate.IMarketState;
+import brown.messages.library.TradeMessage;
 import brown.rules.IInnerTC;
+import brown.tradeable.ITradeable;
 
 /**
  * Inner Termination condition- 
@@ -12,19 +23,55 @@ import brown.rules.IInnerTC;
  * @author acoggins
  *
  */
-public class SomeBidsTermination implements IInnerTC {
 
+//TODO: work with revealed pref edge case.
+// solution: only check bids from each round. 
+public class SomeBidsTermination implements IInnerTC {
+  
+  private List<TradeMessage> roundTrades; 
+  private int prevSize; 
+  
+  public SomeBidsTermination() {
+    this.roundTrades = new LinkedList<TradeMessage>(); 
+    this.prevSize = 0; 
+  }
+  
   @Override
   public void innerTerminated(IMarketState state) {
-    if (state.getBids().isEmpty()) {
-      state.setInnerOver(true);
+    if (!(state.getTicks() == 1)) {
+      boolean liveBids = false; 
+      // accepted bids
+      List<TradeMessage> accepted = state.getBids(); 
+      int currentSize = accepted.size(); 
+      for (int i = 0; i < currentSize - this.prevSize; i++) { 
+        roundTrades.add(accepted.get(prevSize + i)); 
+      }
+      IBidBundle reserve = state.getReserve(); 
+      Map<ITradeable, BidType> reserveMap = ((AuctionBid) reserve.getBids()).bids; 
+      // check trades in accepted
+      for (TradeMessage trade : roundTrades) {
+        Map<ITradeable, BidType> agentMap = ((AuctionBid) trade.Bundle.getBids()).bids; 
+        for (ITradeable t : (agentMap.keySet())) { 
+          if (reserveMap.containsKey(t)) {
+            if (reserveMap.get(t).price < agentMap.get(t).price) {
+              liveBids = true; 
+            }
+          }
+        }
+      }
+      if (!liveBids) {
+        System.out.println("INNER TERMINATED");
+        System.out.println("ENDING RESERVE:" + reserve);
+        state.setInnerOver(true);
+      }
     }
+    
   }
 
   @Override
   public void reset() {
-    // TODO Auto-generated method stub
-    
+    this.roundTrades.clear(); 
+    this.prevSize = 0; 
   }
   
 }
