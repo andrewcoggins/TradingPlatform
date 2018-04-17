@@ -83,7 +83,7 @@ public class CallMarketChannel extends AbsChannel{
 
   @Override
   public String toString() {
-    return "CallMarketChannel [book=" + book + "]";
+    return "CallMarketChannel [" + this.book.getBuys().size() + " buys, " + this.book.getSells().size() + "sells]";
   }
 
   @Override

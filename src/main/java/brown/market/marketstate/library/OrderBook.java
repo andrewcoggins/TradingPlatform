@@ -100,6 +100,13 @@ public class OrderBook implements IOrderBook {
       toReturn.addSell(this.sellOrders.poll().sanitize(agent, privateToPublic));
       count++;
     }
+    
+    for (BuyOrder buy: toReturn.buyOrders){
+      this.addBuy(buy);
+    }
+    for (SellOrder sell: toReturn.sellOrders){
+      this.addSell(sell);
+    }  
     return toReturn;
   }
 

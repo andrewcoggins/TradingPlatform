@@ -31,7 +31,7 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   public void onCallMarket(CallMarketChannel cmChannel) {
     
     
-    for (int i = 0; i <200; i++){
+    for (int i = 0; i <20; i++){
       cmChannel.bid(this, new TwoSidedBidBundle(new TwoSidedBid(this.direction, this.price, this.quantity)));      
     }
     
@@ -60,9 +60,9 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   
   public static void main(String[] args) throws AgentCreationException {
 
-    new TestCallMarketAgent("localhost", 2121,"buyer",BidDirection.BUY,20.,1);    
-    new TestCallMarketAgent("localhost", 2121,"seller",BidDirection.SELL,40.,1);        
-    
+    new FixedAgent("localhost", 2121,"Fixed1");    
+    new FixedAgent("localhost", 2121,"Fixed2");    
+    new TestCallMarketAgent("localhost",2121,"myAgent",BidDirection.BUY,30.,1);
       while(true){}      
   }  
 }
