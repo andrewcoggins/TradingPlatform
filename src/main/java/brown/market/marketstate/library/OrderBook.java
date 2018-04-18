@@ -90,21 +90,26 @@ public class OrderBook implements IOrderBook {
   
   public OrderBook sanitize(Integer n, Integer agent, Map<Integer, Integer> privateToPublic){
     OrderBook toReturn = new OrderBook();
+    OrderBook temp = new OrderBook();
     int count = 0;
     while (count < n && this.buyOrders.peek() != null){
-      toReturn.addBuy(this.buyOrders.poll().sanitize(agent, privateToPublic));
+      BuyOrder buy = this.buyOrders.poll();
+      temp.addBuy(buy);
+      toReturn.addBuy(buy.sanitize(agent, privateToPublic));
       count++;
     }
     count = 0;
     while (count < n && this.sellOrders.peek() != null){
-      toReturn.addSell(this.sellOrders.poll().sanitize(agent, privateToPublic));
+      SellOrder sell = this.sellOrders.poll();
+      temp.addSell(sell);
+      toReturn.addSell(sell.sanitize(agent, privateToPublic));
       count++;
     }
     
-    for (BuyOrder buy: toReturn.buyOrders){
+    for (BuyOrder buy: temp.buyOrders){
       this.addBuy(buy);
     }
-    for (SellOrder sell: toReturn.sellOrders){
+    for (SellOrder sell: temp.sellOrders){
       this.addSell(sell);
     }  
     return toReturn;

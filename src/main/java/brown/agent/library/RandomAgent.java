@@ -3,6 +3,7 @@ package brown.agent.library;
 import brown.agent.AbsPredictionMarketAgent;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
+import brown.logging.Logging;
 
 // This agent buys or sells randomly with uniform distribution
 public class RandomAgent extends AbsPredictionMarketAgent {
@@ -25,7 +26,9 @@ public class RandomAgent extends AbsPredictionMarketAgent {
 	}
 
 	@Override
-	public void onTransaction(int quantity, double price) {}
+	public void onTransaction(int quantity, double price) {
+	  Logging.log("Price: " + price);
+	}
 
 	@Override
 	public void onMarketStart() {}
@@ -42,10 +45,10 @@ public class RandomAgent extends AbsPredictionMarketAgent {
 
 	public static void main(String[] args) throws AgentCreationException {
 
-		new RandomAgent("localhost", 2121, "Random1");
-		new RandomAgent("localhost", 2121, "Random2");
-		new RandomAgent("localhost", 2121, "Random3");
-		new RandomAgent("localhost", 2121, "Random4");
+		new UpdateAgent("localhost", 2121, "Random1");
+		new UpdateAgent("localhost", 2121, "Random2");
+		new UpdateAgent("localhost", 2121, "Random3");
+		new UpdateAgent("localhost", 2121, "Random4");
 
 		while (true) {
 		}

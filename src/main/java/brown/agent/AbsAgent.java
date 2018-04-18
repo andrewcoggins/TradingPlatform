@@ -7,6 +7,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
 import brown.exceptions.AgentCreationException;
+import brown.logging.Logging;
 import brown.messages.library.AbsMessage;
 import brown.messages.library.AccountResetMessage;
 import brown.messages.library.BankUpdateMessage;
@@ -88,7 +89,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   
   public void onBankUpdate(BankUpdateMessage bankUpdate) {
     this.monies += bankUpdate.moniesChanged;
-    
+    Logging.log(bankUpdate.toString());
     // as long as u don't do weird shit with fractions this should work
     // maybe fix this later
     for (int i = 0; i < bankUpdate.quantity;i++){

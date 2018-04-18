@@ -27,6 +27,7 @@ public class CallMarketPayment  implements IPaymentRule {
     List<Order> orders = new LinkedList<Order>();
     
     OrderBook book = state.getOrderBook();
+    Logging.log("SIZE OF BOOK: " + book.getBuys().size());
     List <TradeMessage> bids = state.getBids();
     List<TradeMessage> tradeBids = new LinkedList<TradeMessage>();
     List<TradeMessage> cancelBids = new LinkedList<TradeMessage>();
@@ -114,6 +115,8 @@ public class CallMarketPayment  implements IPaymentRule {
     book.setSells(sells);
     
     state.setOrderBook(book);
+    Logging.log("ORDERS " + orders.toString());
+    Logging.log("ORDERS SIZE: " + orders.size());
     state.setPayments(orders);
   }
   
