@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 
 import brown.agent.AbsAgent;
 import brown.agent.AbsOpenOutcryAgent;
+import brown.agent.AbsSpecValAgent;
 import brown.bid.interim.BidType;
 import brown.bid.library.AuctionBid;
 import brown.bidbundle.IBidBundle;
@@ -16,8 +17,7 @@ import brown.messages.library.TradeMessage;
 import brown.tradeable.ITradeable;
 
 public class OpenOutcryChannel extends AbsChannel implements IAgentChannel {
-
-  private IBidBundle reserve; 
+  private Map<ITradeable, Double> reserve; 
 
   /**
    * for kryo do not use
@@ -29,9 +29,13 @@ public class OpenOutcryChannel extends AbsChannel implements IAgentChannel {
   /**
    * Constructor
    */
-  public OpenOutcryChannel(Integer ID, IBidBundle reserve) {
+  public OpenOutcryChannel(Integer ID, Map<ITradeable, Double> reserve) {
     super(ID); 
     this.reserve = reserve; 
+  }
+  
+  public Map<ITradeable, Double> getReserve(){
+    return this.reserve;
   }
   
   @Override
@@ -39,11 +43,13 @@ public class OpenOutcryChannel extends AbsChannel implements IAgentChannel {
     if (agent instanceof AbsOpenOutcryAgent) {
       AbsOpenOutcryAgent openOutcryAgent = (AbsOpenOutcryAgent) agent; 
       openOutcryAgent.onOpenOutcry(this); 
+    } else if (agent instanceof AbsSpecValAgent){
+      ((AbsSpecValAgent) agent).onClockMarket(this);
     }
   }
 
   @Override
-  public void bid(AbsAgent agent, IBidBundle bid) {
+  public void bid(AbsAgent agent, IBidBundle bid) {    
     // is there a limit on how large these can be? 
     // not very fault tolerant
     Map<ITradeable, BidType> b = ((AuctionBid) bid.getBids()).bids;

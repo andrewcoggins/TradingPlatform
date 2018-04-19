@@ -20,6 +20,7 @@ public class UpdateAgent extends AbsPredictionMarketAgent {
 
 	@Override
 	public void onMarketStart() {
+	  this.exposure = 0;
 		int decoys = this.getNumDecoys();
 
 		if (this.getCoin()) {

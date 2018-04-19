@@ -21,7 +21,7 @@ public class PredictionMarketDecoysConfig extends ValConfig implements IValuatio
     this.coin = null;
   }
     
-  public void initialize(){
+  public void initialize(List<Integer> bidders){
     this.coin = Math.random() > 0.5;
   }
   

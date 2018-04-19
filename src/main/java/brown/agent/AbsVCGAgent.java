@@ -7,6 +7,7 @@ import java.util.Map;
 import brown.exceptions.AgentCreationException;
 import brown.logging.Logging;
 import brown.messages.library.PrivateInformationMessage;
+import brown.messages.library.SpecValValuationMessage;
 import brown.messages.library.ValuationInformationMessage;
 import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
@@ -21,8 +22,7 @@ import brown.value.valuation.library.XORValuation;
 public abstract class AbsVCGAgent extends AbsAuctionAgent {
 
   protected List<ITradeable> tradeables;
-  protected SpecValValuationSubset valuation; 
-  protected Map<ComplexTradeable, Double> XORBids;
+  protected Map<ITradeable, Double> XORBids;
   
   
   public AbsVCGAgent(String host, int port, ISetup gameSetup)
@@ -35,18 +35,16 @@ public abstract class AbsVCGAgent extends AbsAuctionAgent {
   // stores agent tradeables, valuation and valuation distribution.
   @Override
   public void onPrivateInformation(PrivateInformationMessage privateInfo) {   
-    if (privateInfo instanceof ValuationInformationMessage) {
+    if (privateInfo instanceof SpecValValuationMessage) {
       Logging.log("[-] Valuation Info Received");
       // Is there even a point in having tradeables?
       // this.tradeables = ((ValuationInformationMessage) privateInfo).getTradeables();
-      this.valuation = (SpecValValuationSubset) ((ValuationInformationMessage) privateInfo).getPrivateValuation();
-      this.XORBids = this.valuation.getAllValuations();
-      
-      for(ComplexTradeable bundle : this.XORBids.keySet()) { 
+      this.XORBids = ((SpecValValuationMessage) privateInfo).getValuation();
+      for(ITradeable bundle : this.XORBids.keySet()) { 
         Logging.log("Agent " + this.ID + ", Bundle: " + bundle + ", Value: " + XORBids.get(bundle));
       }
     } else {
-      Logging.log("[x] AbsSSSPAgent: Wrong Kind of PrivateInformation Received");
+      Logging.log("[x] AbsVCG: Wrong Kind of PrivateInformation Received");
     }
     onMarketStart();
   }

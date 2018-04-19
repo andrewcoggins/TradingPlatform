@@ -60,10 +60,10 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   
   public static void main(String[] args) throws AgentCreationException {
 
-    new RandomAgent("localhost", 2121,"Rand1");    
-    new RandomAgent("localhost", 2121,"Rand2");    
-    new RandomAgent("localhost", 2121,"Rand3");    
-    new RandomAgent("localhost", 2121,"Rand4");        
+    new UpdateAgent("localhost", 2121,"Rand1");    
+    new UpdateAgent("localhost", 2121,"Rand2");    
+    new UpdateAgent("localhost", 2121,"Rand3");    
+    new UpdateAgent("localhost", 2121,"Rand4");        
       while(true){}      
   }  
 }

@@ -69,6 +69,9 @@ public interface IMarketState {
     
     public void setIncrement(Map<ITradeable, Double> increment);
     
+    public Double getFlatIncrement();
+    
+    public void setFlatIncrement(Double increment);    
     
     //activity rules
     
@@ -76,9 +79,13 @@ public interface IMarketState {
     
     public void setAcceptable(boolean b);
     
-    public IBidBundle getReserve();
+    public Map<ITradeable,Double> getReserve();
     
-    public void setReserve(IBidBundle o); 
+    public void setReserve(Map<ITradeable,Double> o); 
+    
+    public Map<ITradeable, List<Integer>> getAltAlloc();
+    
+    public void setAltAlloc(Map<ITradeable, List<Integer>> o);
     
     //tcondition things
     public boolean getInnerOver();

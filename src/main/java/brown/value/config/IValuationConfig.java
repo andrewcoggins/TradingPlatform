@@ -7,7 +7,7 @@ import brown.messages.library.PrivateInformationMessage;
 
 public interface IValuationConfig {
 
-  public void initialize();
+  public void initialize(List<Integer> bidders);
   
   public Map<Integer,PrivateInformationMessage> generateReport(List<Integer> collection);
 }

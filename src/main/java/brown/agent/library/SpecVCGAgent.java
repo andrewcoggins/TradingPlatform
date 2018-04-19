@@ -34,7 +34,7 @@ public class SpecVCGAgent extends AbsVCGAgent implements IAuctionAgent {
   public void onSimpleSealed(AuctionChannel channel) {
     // bids valuation on every bundle.
     Map<ITradeable, BidType> bids = new HashMap<ITradeable, BidType>(); 
-    for (ComplexTradeable t : this.XORBids.keySet()) { 
+    for (ITradeable t : this.XORBids.keySet()) { 
       bids.put(t, new BidType(this.XORBids.get(t), 1));
     }
     AuctionBidBundle aBundle = new AuctionBidBundle(bids);

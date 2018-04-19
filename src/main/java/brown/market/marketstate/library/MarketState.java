@@ -31,9 +31,11 @@ public class MarketState implements IMarketState {
   //query rule
   private TradeRequestMessage tRequest;
   private Map<ITradeable, Double> increment;
+  private double flatIncrement;
   //activity rules
   private Boolean isAcceptable; 
-  private IBidBundle reserve;
+  private Map<ITradeable, Double> reserve;
+  private Map<ITradeable, List<Integer>> altAlloc;
   //IRPolicy
   private Map<Integer,List<GameReportMessage>> gameReports; 
   //termination condition
@@ -58,12 +60,18 @@ public class MarketState implements IMarketState {
     this.outerRuns = 0; 
     this.innerTerminated = false;
     this.allocation = new HashMap<Integer, List<ITradeable>>();
+    this.altAlloc = new HashMap<ITradeable, List<Integer>>();
     this.payments = new LinkedList<Order>();
     this.prevState = prevState;
     this.groups = new LinkedList<List<Integer>>();
     this.orderbook = new OrderBook();
     this.time = System.currentTimeMillis();
     this.isOpen = true; 
+    this.reserve = new HashMap<ITradeable, Double>();
+    for (ITradeable t : this.TRADEABLES){
+      this.reserve.put(t,0.);
+      this.altAlloc.put(t,  new LinkedList<Integer>());
+    }
   }
   
   @Override
@@ -145,6 +153,14 @@ public class MarketState implements IMarketState {
    }
    this.increment = increment;
   }
+  
+  public Double getFlatIncrement(){
+    return this.flatIncrement;
+  }
+  
+  public void setFlatIncrement(Double increment){
+    this.flatIncrement = increment;
+  }
 
   @Override
   public boolean getAcceptable() {
@@ -157,13 +173,23 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public IBidBundle getReserve() {
+  public Map<ITradeable,Double> getReserve() {
     return this.reserve;
   }
 
   @Override
-  public void setReserve(IBidBundle reserve) {
+  public void setReserve(Map<ITradeable,Double> reserve) {
      this.reserve = reserve;
+  }
+  
+  @Override 
+  public Map<ITradeable, List<Integer>> getAltAlloc(){
+    return this.altAlloc;
+  }
+  
+  @Override
+  public void setAltAlloc(Map<ITradeable, List<Integer>> altAlloc){
+    this.altAlloc = altAlloc;
   }
 
   @Override
@@ -228,7 +254,6 @@ public class MarketState implements IMarketState {
     this.allocation = new HashMap<Integer, List<ITradeable>>();
     this.payments = new LinkedList<Order>();
     this.increment = new HashMap<ITradeable, Double>();
-    this.ticks = 0; 
     this.innerTerminated = false;   
     }
 

@@ -4,6 +4,7 @@ package brown.setup.library;
 import brown.bid.library.AuctionBid;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.AuctionChannel;
+import brown.messages.library.SpecValValuationMessage;
 import brown.setup.ISetup;
 
 import com.esotericsoftware.kryo.Kryo;
@@ -14,8 +15,14 @@ public class SpecValSetup implements ISetup{
     Startup.start(kryo);
     kryo.register(AuctionBidBundle.class);
     kryo.register(AuctionBid.class);    
-    kryo.register(brown.value.valuation.library.SpecValValuationSubset.class);
     kryo.register(AuctionChannel.class);
+    kryo.register(SpecValValuationMessage.class);
+    kryo.register(brown.channels.library.QueryChannel.class);
+    kryo.register(brown.bidbundle.library.QueryBundle.class);
+    kryo.register(brown.bid.library.QueryBid.class);  
+    kryo.register(brown.messages.library.SpecValValuationReport.class); 
+    kryo.register(brown.channels.library.OpenOutcryChannel.class);
+    kryo.register(brown.messages.library.CombinatorialClockReport.class);    
     
 //    kryo.register(SpecValDistV2.class);
 //    kryo.register(SpecValGenV2.class);    

@@ -1,9 +1,12 @@
 package brown.tradeable.library;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import brown.logging.Logging;
 import brown.tradeable.ITradeable;
 
 /**
@@ -34,7 +37,12 @@ public class ComplexTradeable extends AbsTradeable {
 
   @Override
   public String toString() {
-    return "ComplexTradeable [ID=" + ID + ", GOODS=" + GOODS + "]";
+    List<SimpleTradeable> simples = this.flatten();
+    int[] goods_as_ints = new int[(simples.size())];
+    for (int i = 0; i < simples.size(); i++){
+      goods_as_ints[i] = simples.get(i).getID();
+    }
+    return "ComplexTradeable [GOODS=" + Arrays.toString(goods_as_ints) + "]";
   }
 
   @Override
@@ -70,5 +78,17 @@ public class ComplexTradeable extends AbsTradeable {
       toReturn.addAll(t.flatten());
     }
     return toReturn;
+  }
+  
+  public static void main(String[] args) throws InterruptedException {
+    Set<ITradeable> tset = new HashSet<ITradeable>();
+    tset.add(new SimpleTradeable(1));
+    tset.add(new SimpleTradeable(2));
+    tset.add(new SimpleTradeable(3));
+    tset.add(new SimpleTradeable(4));    
+    tset.add(new SimpleTradeable(10));    
+    tset.add(new SimpleTradeable(25));    
+    ComplexTradeable tcompl = new ComplexTradeable(0, tset);
+    Logging.log(tcompl.toString());
   }
 }

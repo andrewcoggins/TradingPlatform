@@ -1,0 +1,50 @@
+package brown.rules.library;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import brown.market.marketstate.IMarketState;
+import brown.market.marketstate.library.Order;
+import brown.rules.IPaymentRule;
+import brown.tradeable.ITradeable;
+import brown.tradeable.library.ComplexTradeable;
+
+public class MixedQueryClockPayment implements IPaymentRule {
+
+  @Override
+  public void setOrders(IMarketState state) {
+    if (state.getTicks() %2 == 0){
+      List<Order> orders = new LinkedList<Order>();
+      boolean over = true;
+      Map<ITradeable,List<Integer>> altAlloc = state.getAltAlloc();
+      for (ITradeable t : altAlloc.keySet()){
+        if (altAlloc.get(t).size() > 1){        
+          over = false;
+        }
+      }
+      
+      // basically replicate the outerTC
+      if (over){
+        Map<Integer, List<ITradeable>> alloc = state.getAllocation();
+        Map<ITradeable, Double> reserves = state.getReserve();
+        for (Entry<Integer, List<ITradeable>> entry: alloc.entrySet()){
+          ComplexTradeable good = new ComplexTradeable(0,new HashSet<ITradeable>(entry.getValue()));
+          Double price  = 0.;
+              for (ITradeable t : entry.getValue()){
+                price = price + reserves.get(t);
+              }
+          orders.add(new Order(entry.getKey(),null, price, 1, good));
+        }
+      }
+      state.setPayments(orders);
+    }
+  }
+
+  @Override
+  public void reset() {
+  }
+
+}

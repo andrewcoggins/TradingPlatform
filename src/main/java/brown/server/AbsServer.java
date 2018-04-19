@@ -149,13 +149,13 @@ public abstract class AbsServer {
     Map<Integer,PrivateInformationMessage> toSend = new HashMap<Integer,PrivateInformationMessage>();    
     if (marketConfig.type == ValuationType.Game) {
       IValuationConfig gconfig = (IValuationConfig) marketConfig;
+      List<Integer> agents = new ArrayList<Integer>(this.connections.values());
       
       // flip the true coin, and pass this information to the manager
-      gconfig.initialize();
+      gconfig.initialize(agents);
       this.manager.initializeInfo(((ValConfig) gconfig).generateInfo());
       
       // make valuations all at once            
-      List<Integer> agents = new ArrayList<Integer>(this.connections.values());
       toSend = gconfig.generateReport(agents);
      } else if (marketConfig.type == ValuationType.Auction) { 
        this.manager.initializeInfo(marketConfig.generateInfo());
@@ -169,16 +169,15 @@ public abstract class AbsServer {
        }
      } else if (marketConfig.type == ValuationType.Spectrum) { 
        SpecValV2Config svconfig = (SpecValV2Config) marketConfig;
-       SpecValDistV2 dist = (SpecValDistV2) svconfig.valueDistribution;
-       dist.setNumBidders(this.connections.keySet().size());
-       Map<Integer, IValuation> vals = dist.sampleAll(new ArrayList<Integer>(this.connections.values()));
-       for (Entry<Connection,Integer> entry : this.connections.entrySet()){
-         SpecValValuation v = (SpecValValuation) vals.get(entry.getValue());     
+       List<Integer> agents = new ArrayList<Integer>(this.connections.values());
+       
+       // Initialize the model
+       svconfig.initialize(agents);
+       // Set the information so market has valuations
+       this.manager.initializeInfo(svconfig.generateInfo());
+       // Generate initial reports
+       toSend = svconfig.generateReport(agents);       
 
-         this.privateValuations.put(entry.getValue(), v);
-         toSend.put(entry.getValue(), new ValuationInformationMessage(entry.getValue(),this.allTradeables,
-             v.generateSubset(svconfig.nBundles, svconfig.meanSize, svconfig.stDev), null));         
-       }
     }
     for (Connection connection : this.connections.keySet()){
       Integer agentID = this.connections.get(connection);               
@@ -247,11 +246,11 @@ public abstract class AbsServer {
     synchronized (this.manager) {
       for (Market auction : this.manager.getAuctions()) {
         synchronized (auction) { 
-          // indicates that the auction has incremented
-          auction.tick();
-          // sets reserve/round price.
-          auction.setReserves();
           if (!auction.isInnerOver()) {
+            // indicates that the auction has incremented
+            auction.tick();
+            // sets reserve/round price.
+            auction.setReserves();            
             for (Entry<Connection, Integer> id : this.connections.entrySet()) {
               // maybe send message here? sanitized ledger.
               TradeRequestMessage tr = auction.constructTradeRequest(id.getValue());

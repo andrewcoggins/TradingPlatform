@@ -1,5 +1,5 @@
 package brown.market.library;
 
 public enum PrevStateType {
-  PREDICTION,BLANK,DISCOVERY
+  PREDICTION,BLANK,DISCOVERY,SPECTRUM
 }
