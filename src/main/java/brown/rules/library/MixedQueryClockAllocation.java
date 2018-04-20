@@ -44,6 +44,10 @@ public class MixedQueryClockAllocation implements IAllocationRule {
           }
         }
       }
+      // This needs to revert reserves back
+      Map<ITradeable, Double> reserves = state.getReserve();
+      
+      
       // Check things in oldAlloc that nobody wants any more in newAlloc
       for (ITradeable good : oldAlloc.keySet()){
         if (!newAlloc.containsKey(good)){
@@ -53,11 +57,13 @@ public class MixedQueryClockAllocation implements IAllocationRule {
             List<Integer> newList = new LinkedList<Integer>();
             newList.add(agents.get(0));
             newAlloc.put(good, newList);
+            reserves.put(good, reserves.get(good)-state.getFlatIncrement());
            } else {
             newAlloc.put(good, new LinkedList<Integer>());
           }
         }
       }
+      state.setReserve(reserves);
       state.setAltAlloc(newAlloc); 
       state.setAllocation(altAllocToAlloc(newAlloc));
     }
