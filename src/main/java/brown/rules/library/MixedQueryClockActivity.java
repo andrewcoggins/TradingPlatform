@@ -7,12 +7,15 @@ import java.util.Map.Entry;
 
 import brown.bid.interim.BidType;
 import brown.bid.library.AuctionBid;
+import brown.bid.library.QueryBid;
 import brown.bidbundle.BundleType;
 import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IActivityRule;
 import brown.tradeable.ITradeable;
+import brown.tradeable.library.ComplexTradeable;
+import brown.tradeable.library.SimpleTradeable;
 
 public class MixedQueryClockActivity implements IActivityRule {
   private final Double increment; 
@@ -24,8 +27,23 @@ public class MixedQueryClockActivity implements IActivityRule {
   @Override
   public void isAcceptable(IMarketState state, TradeMessage aBid) {
     if (state.getTicks() % 2 == 1){
-      // do clock
-      state.setAcceptable(aBid.Bundle.getType() == BundleType.QUERY);
+      boolean acceptable = true;
+      if (aBid.Bundle.getType() == BundleType.QUERY){
+        QueryBid bid = (QueryBid) aBid.Bundle.getBids();
+        for (ComplexTradeable ct: bid.bundles){
+          for (SimpleTradeable st : ct.flatten()){
+            if (st.ID<0 || st.ID>99){
+              acceptable = false;
+            }
+          }
+        }
+
+      } else {
+        acceptable = false;
+      }
+      // do clock  
+            
+      state.setAcceptable(acceptable);
     } else {
       if (aBid.Bundle.getType() == BundleType.AUCTION){
         AuctionBid bid = (AuctionBid) aBid.Bundle.getBids();
@@ -35,9 +53,15 @@ public class MixedQueryClockActivity implements IActivityRule {
         boolean acceptable = true; 
         
         for (Entry<ITradeable,BidType> entry: bid.bids.entrySet()){
-          if (entry.getKey().flatten().size() > 1){
+          List<SimpleTradeable> stList = entry.getKey().flatten();
+          if (stList.size() > 1){            
             acceptable = false; 
             break;
+          }
+          for (SimpleTradeable st: stList){
+            if (st.ID<0 || st.ID>99){
+              acceptable = false;
+            }
           }
           sumOfBids = sumOfBids + entry.getValue().price;
           sumOfReserves = sumOfReserves + state.getReserve().get(entry.getKey());

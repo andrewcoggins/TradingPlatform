@@ -3,7 +3,7 @@ package brown.server.library; // TODO: change this to your package
 public class FinalProjectServerTemplate {
   private static int initDelay = 5;  // time to wait before beginning the simulation
   private static int lag = 50;      // time between intervals in which bots can trade
-  private static int nSims = 5;
+  private static int nSims = 1;
   private static int nQueryRounds = 30;
   private static double increment = 5.;
   private static int initBundles = 30;

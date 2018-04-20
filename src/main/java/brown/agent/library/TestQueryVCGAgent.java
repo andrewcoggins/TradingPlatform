@@ -76,11 +76,13 @@ public class TestQueryVCGAgent extends AbsSpecValAgent {
 
   public static void main(String[] args) throws AgentCreationException {
 
-    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test1",9,20);        
-    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test2",10,21);    
-    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test3",15,35);        
-    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test4",1,11);            
-    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test4",95,100);                
+    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test1",1,10);
+    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test2",10,20);
+    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test3",20,30);
+    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test4",1,30);
+//    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test3",15,35);
+//    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test4",1,11);            
+//    new TestQueryVCGAgent("localhost", 2121,new SpecValSetup(),"test4",95,100);                
       while(true){}      
   }  
 }
