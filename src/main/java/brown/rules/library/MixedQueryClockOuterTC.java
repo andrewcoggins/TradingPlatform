@@ -27,7 +27,6 @@ public class MixedQueryClockOuterTC implements IOuterTC{
         over = false;
       }
     }
-    Logging.log("MixedQueryClockOuterTC: " + over +", ticks: " + state.getTicks());
     state.setOuterOver(over);
   }
 }

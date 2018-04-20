@@ -55,7 +55,6 @@ public class MixedQueryClockActivity implements IActivityRule {
 
   @Override
   public void setReserves(IMarketState state) {
-    Logging.log("Gets here!!!");
     if (state.getFlatIncrement()==0) {
       state.setFlatIncrement(this.increment);
     } else {      
@@ -67,8 +66,6 @@ public class MixedQueryClockActivity implements IActivityRule {
         for (ITradeable t : state.getTradeables()){
           Double currPrice = currReserve.get(t);
           Double newPrice = currPrice;
-          Logging.log("Tradeable :" + t);
-          Logging.log("Contained? : " + alloc.containsKey(t));
           if (alloc.containsKey(t)){
             if (alloc.get(t).size() > 1){
               newPrice = newPrice + this.increment;

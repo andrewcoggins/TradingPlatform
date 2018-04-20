@@ -175,9 +175,13 @@ public abstract class AbsServer {
        svconfig.initialize(agents);
        // Set the information so market has valuations
        this.manager.initializeInfo(svconfig.generateInfo());
+       
+       for (Integer agent: svconfig.agentToValue.keySet()){
+         this.privateValuations.put(agent,new SpecValValuation(svconfig.agentToValue.get(agent)));
+       }
+         
        // Generate initial reports
-       toSend = svconfig.generateReport(agents);       
-
+       toSend = svconfig.generateReport(agents);              
     }
     for (Connection connection : this.connections.keySet()){
       Integer agentID = this.connections.get(connection);               
@@ -340,6 +344,11 @@ public abstract class AbsServer {
       // for lemonade game right now
       for (Integer agent: this.connections.values()){
         toPrint.put(agent,this.acctManager.getAccount(agent).getMonies());
+      }   
+    } else if (this.valueConfig.type == ValuationType.Spectrum){
+      Map<Integer, Double> totalUtil = this.summarizer.getTotalUtility();
+      for (Entry<Integer, Double> util : totalUtil.entrySet()) {
+        toPrint.put(util.getKey(), util.getValue());
       }      
     }
     Logging.log("RESULTS (agent ID -> Utility):");

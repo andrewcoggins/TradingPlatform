@@ -1,13 +1,18 @@
 package brown.summary;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import brown.accounting.library.Account;
+import brown.logging.Logging;
 import brown.tradeable.ITradeable;
+import brown.tradeable.library.ComplexTradeable;
 import brown.value.valuation.IValuation;
+import brown.value.valuation.library.SpecValValuation;
 
 public class AuctionSummarizer implements IAuctionSummarizer { 
   
@@ -65,11 +70,21 @@ public class AuctionSummarizer implements IAuctionSummarizer {
       // calculate utility for each agent (with valuations).
       for (Integer anID : roundTradeables.keySet()) {
         List<ITradeable> someTradeables = roundTradeables.get(anID);
-        double tradeableValue = 0.0; 
-        for (ITradeable t : someTradeables) {
-          IValuation agentValuation = privateValuations.get(anID);
-          tradeableValue += agentValuation.getValuation(t);
-        }
+        double tradeableValue = 0.0;         
+        if (privateValuations.get(anID) instanceof SpecValValuation){
+          List<ITradeable> flattened_t = new LinkedList<ITradeable>();
+          for (ITradeable t : someTradeables) {
+            flattened_t.addAll(t.flatten());
+          }
+          Set<ITradeable> tSet = new HashSet<ITradeable>(flattened_t);
+          SpecValValuation svVal = (SpecValValuation) privateValuations.get(anID);
+          tradeableValue += svVal.queryValue(new ComplexTradeable(0,tSet));
+        } else {
+          for (ITradeable t : someTradeables) {
+            IValuation agentValuation = privateValuations.get(anID);
+            tradeableValue += agentValuation.getValuation(t);
+          }        
+        }                
         roundUtilities.put(anID, tradeableValue + roundMonies.get(anID));
       }
     }
@@ -85,6 +100,7 @@ public class AuctionSummarizer implements IAuctionSummarizer {
         averageUtility.put(anID, avg);
       }
     }
+    Logging.log("Total:" + this.totalUtility);
     this.numSimulations++; 
   }
 }

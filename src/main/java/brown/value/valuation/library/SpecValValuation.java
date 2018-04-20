@@ -25,7 +25,8 @@ public class SpecValValuation implements ISpecValValuation{
 
   private final MRVMBidder valuation; 
   private Map<Integer, MRVMLicense> idToLicense;
-  
+  public final Double valueScale = 1E-6;
+
   public SpecValValuation(){
     this.valuation = null;
     this.idToLicense = null;
@@ -57,7 +58,7 @@ public class SpecValValuation implements ISpecValValuation{
     for (SimpleTradeable t : tradeables){
       mrvmBundle.add(this.idToLicense.get(t.ID));
     }
-    return this.valuation.calculateValue(new Bundle<MRVMLicense>(mrvmBundle)).doubleValue();
+    return this.valueScale * this.valuation.calculateValue(new Bundle<MRVMLicense>(mrvmBundle)).doubleValue();
   }
 
   @Override
@@ -78,7 +79,7 @@ public class SpecValValuation implements ISpecValValuation{
             tradeables.add(new SimpleTradeable((int) license.getId()));
           }        
           // Always just make ID 0?
-          toReturn.put(new ComplexTradeable(0,tradeables), this.valuation.calculateValue(licenses).doubleValue());
+          toReturn.put(new ComplexTradeable(0,tradeables), this.valueScale * this.valuation.calculateValue(licenses).doubleValue());
       }
       return toReturn;
     } catch (UnsupportedBiddingLanguageException e) {

@@ -40,7 +40,7 @@ public class MixedQueryClockAllocation implements IAllocationRule {
           currList.add(bid.AgentID);
           newAlloc.put(st, currList);
           if (!oldAlloc.containsKey(st)){
-            Logging.log("MixedQueryClockAlloc Error: Tradaeble type doesn't match up");
+            Logging.log("MixedQueryClockAlloc Error: Tradeable type doesn't match up");
           }
         }
       }
