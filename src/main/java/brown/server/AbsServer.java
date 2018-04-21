@@ -1,6 +1,9 @@
 package brown.server;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -325,7 +328,7 @@ public abstract class AbsServer {
     this.manager.reset();
   }
   
-  public void printUtilities() {
+  public void printUtilities(String outputFile) {
     Map<Integer,Double> toPrint = new HashMap<Integer,Double>();
     if (this.valueConfig.type == ValuationType.Auction) {
       // do something
@@ -359,6 +362,25 @@ public abstract class AbsServer {
       Logging.log(i + ". " + this.IDToName.getOrDefault(a.getKey(), "") +", ID: " + a.getKey()+ ", Utility: " + a.getValue());
       this.theServer.sendToTCP(this.privateToConnection(a.getKey()).getID(), new ErrorMessage(0, "Placed: " + Integer.toString(i)));
       i++;
+    }
+    
+    if (outputFile != null){
+      try {
+        PrintWriter writer = new PrintWriter(outputFile, "UTF-8");
+        writer.write("RESULTS (agent ID -> Utility): \n");
+        i = 1;
+        for (Map.Entry<Integer,Double> a :sortedByValue){
+          writer.write(i + ". " + this.IDToName.getOrDefault(a.getKey(), "") +", ID: " + a.getKey()+ ", Utility: " + a.getValue()+"\n");
+          i++;
+        }
+        writer.close();        
+      } catch (FileNotFoundException e) {
+        // TODO Auto-generated catch block
+        Logging.log("File not Found");
+      } catch (UnsupportedEncodingException e) {
+        // TODO Auto-generated catch block
+        Logging.log("Unsupported Coding Exception");
+      }
     }
   }
 

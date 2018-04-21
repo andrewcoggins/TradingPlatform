@@ -27,9 +27,10 @@ public class CombAuctionWithQueryServer {
   private int initBundles;
   private int initMean;
   private int initStd;
+  private String outFile;
   
   public CombAuctionWithQueryServer(int initDelay, int lag, int port, int nSims, int nQueryRounds, double increment,
-      int initBundles, int initMean, int initStd) {
+      int initBundles, int initMean, int initStd, String outFile) {
     this.initDelay = initDelay;
     this.lag = lag;
     this.port = port;
@@ -39,11 +40,12 @@ public class CombAuctionWithQueryServer {
     this.initBundles = initBundles;
     this.initMean = initMean;
     this.initStd = initStd;
+    this.outFile = outFile;
   }
   
   public CombAuctionWithQueryServer(int initDelay, int lag, int nSims, int nQueryRounds, double increment,
-      int initBundles, int initMean, int initStd){
-    this(initDelay, lag, 2121, nSims, nQueryRounds, increment, initBundles, initMean, initStd);
+      int initBundles, int initMean, int initStd, String outFile){
+    this(initDelay, lag, 2121, nSims, nQueryRounds, increment, initBundles, initMean, initStd, outFile);
   }
 
   public void runAll() throws InterruptedException {                
@@ -72,7 +74,7 @@ public class CombAuctionWithQueryServer {
         allTradeablesList,0.0,new LinkedList<ITradeable>());    
     RunServer testServer = new RunServer(port, new SpecValSetup());
     
-    testServer.runSimulation(testSim, this.nSims, this.initDelay, this.lag);           
+    testServer.runSimulation(testSim, this.nSims, this.initDelay, this.lag, this.outFile);           
   }
   
   

@@ -12,7 +12,7 @@ public class FinalProjectServerTemplate {
 
   public static void main(String[] args) throws InterruptedException {
     CombAuctionWithQueryServer server = new CombAuctionWithQueryServer(initDelay, lag, nSims, 
-        nQueryRounds, increment, initBundles, initMean, initStd);
+        nQueryRounds, increment, initBundles, initMean, initStd, "/Users/Kerry/Documents/Brown/HTA_1951k/testfile");
     server.runAll();
   }
 }

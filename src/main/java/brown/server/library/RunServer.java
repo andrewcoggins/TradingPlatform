@@ -49,7 +49,7 @@ public class RunServer extends AbsServer {
    * @throws InterruptedException
    */
   public void runSimpleSim(List<ITradeable> allGoods, AbsMarketPreset rules,
-      ValConfig valInfo, double initialMonies, List<ITradeable> initialGoods, int delay, int lag) throws InterruptedException {
+      ValConfig valInfo, double initialMonies, List<ITradeable> initialGoods, int delay, int lag, String outputFile) throws InterruptedException {
     this.valueConfig = valInfo;
     this.allTradeables = allGoods;
     this.initialMonies = initialMonies;
@@ -63,7 +63,7 @@ public class RunServer extends AbsServer {
     this.summarizer = new AuctionSummarizer(this.privateToPublic.keySet());
     this.completeAuctions(lag);
     this.summarizer.collectInformation(this.acctManager.getAccounts(), this.privateValuations);
-    printUtilities();
+    printUtilities(outputFile);
   }
   
   /**
@@ -78,7 +78,7 @@ public class RunServer extends AbsServer {
    * lag time for registration phase.
    * @throws InterruptedException
    */
-  public void runSimulation(Simulation sim, int numRuns, int delay,int lag) throws InterruptedException {
+  public void runSimulation(Simulation sim, int numRuns, int delay,int lag, String outputFile) throws InterruptedException {
     this.valueConfig = sim.getValInfo();         
     this.allTradeables = sim.getTradeables();
     this.initialMonies = sim.getInitialMonies(); 
@@ -96,6 +96,6 @@ public class RunServer extends AbsServer {
       resetSim();
       count++;
     }
-    printUtilities();
+    printUtilities(outputFile);
   } 
 }
