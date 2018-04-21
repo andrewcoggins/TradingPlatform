@@ -23,11 +23,12 @@ public class PredictionMarketSimulation {
 	private static int numBots = 5;
 	private static String host = "localhost";
 	private static int port = 2121;
-	
+	private String outFile;	
 	private String agentClass;
 	
-	public PredictionMarketSimulation(String agentClass) {
+	public PredictionMarketSimulation(String agentClass, String outFile) {
 		this.agentClass = agentClass;
+		this.outFile = outFile;
 	}
 
 	public void run() {
@@ -52,14 +53,14 @@ public class PredictionMarketSimulation {
 		}
 	}
 	
-	public static class ServerRunnable implements Runnable {
+	public class ServerRunnable implements Runnable {
 		
 		private int tier;
 		
 		@Override
 		public void run() {
 			DateFormat df = new SimpleDateFormat("MM.dd.yyyy '-' HH:mm:ss");
-			String outfile = "/Users/eddie/Documents/" + botClasses[tier] + tier + "-" + df.format(new Date());
+			String outfile = outFile + agentClass + tier + "-" + df.format(new Date());
 			
 			PredictionMarketServer server = 
 					new PredictionMarketServer(marketLength, numSims, delayTime, lag, port + tier, outfile);
