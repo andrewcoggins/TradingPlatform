@@ -38,7 +38,6 @@ public abstract class AbsSpecValAgent extends AbsAgent implements ISpecValAgent 
   @Override
   public synchronized void onBankUpdate(BankUpdateMessage update) {
     super.onBankUpdate(update);
-    Logging.log("Bank Update: monies: " + update.moniesChanged + "goods: " +update.tradeableAdded);
   }
   
   @Override

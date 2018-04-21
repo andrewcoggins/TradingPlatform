@@ -9,6 +9,7 @@ import java.util.Set;
 import brown.market.preset.AbsMarketPreset;
 import brown.market.preset.library.CallMarket;
 import brown.market.preset.library.PredictionMarketSettlement;
+import brown.server.library.CallMarketServer;
 import brown.server.library.RunServer;
 import brown.server.library.SimulMarkets;
 import brown.server.library.Simulation;
@@ -21,19 +22,25 @@ public class PredictionMarketSimulation {
 	private static int numSims = 100;
 	private static int delayTime = 5; 
 	private static int lag = 50;
-	private static double marketLength = 30;
+	private static int marketLength = 30;
 	
-	private static String botClass = "brown.agent.library.RandomAgent";
+	private static String[] botClasses = new String[] {
+			"brown.agent.library.RandomAgent",
+			"brown.agent.library.FixedAgent",
+			"brown.agent.library.UpdateAgent",
+			"brown.agent.library.IEBot"
+	};
+	
 	private static int numBots = 5;
 	private static String host = "localhost";
 	private static int port = 2121;
-	private static String botName = "bot";
 	
 	private static String agentClass;
 
 	public static void main(String[] args) {
-		if (args.length > 0) {
-			
+		
+		for (int t = 0; t < 4; t++) {
+			ServerRunnable sr
 		}
 		
 		Thread serverThread = new Thread(new ServerRunnable());
@@ -44,49 +51,36 @@ public class PredictionMarketSimulation {
 	}
 	
 	public static class ServerRunnable implements Runnable {
+		
+		private int tier;
+		
 		@Override
 		public void run() {
-			// Create _ tradeables
-			Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
-			List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
-
-			// only 1 tradeable
-			allTradeables.add(new SimpleTradeable(0));
-			allTradeablesList.add(new SimpleTradeable(0));
-			
-			List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();          
-			oneMarket.add(new CallMarket(marketLength));        
-			SimulMarkets phase_one = new SimulMarkets(oneMarket);
-			
-			List<AbsMarketPreset> twoMarket = new LinkedList<AbsMarketPreset>();
-			twoMarket.add(new PredictionMarketSettlement());    
-			SimulMarkets phase_two = new SimulMarkets(twoMarket);
-			
-			List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
-			seq.add(phase_one);
-			seq.add(phase_two);
-			
-			Simulation testSim = new Simulation(seq,new PredictionMarketDecoysConfig(),
-				allTradeablesList,0.0,new LinkedList<ITradeable>());    
-			RunServer testServer = new RunServer(port, new CallMarketSetup());
-			
+			CallMarketServer server = new CallMarketServer(marketLength, numSims, delayTime, lag, port + tier);
 			try {
-				testServer.runSimulation(testSim, numSims, delayTime, lag);
+				server.runAll();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
+		
+		public void setTier(int tier) {
+			this.tier = tier;
+		}
 	}
 	
 	public static class BotsRunnable implements Runnable {
+		private int tier;
+		
 		@Override
 		public void run() {
 			try {
+				String botClass = botClasses[tier];
 				Class<?> cl = Class.forName(botClass);
 				Constructor<?> cons = cl.getConstructor(String.class, Integer.class, String.class);
 				
 				for (int i = 0; i < numBots; i++) {
-					cons.newInstance(host, port, botName + i);
+					cons.newInstance(host, port + tier, botClass + i);
 				}
 				
 				while (true) {}
@@ -94,20 +88,31 @@ public class PredictionMarketSimulation {
 				e.printStackTrace();
 			}
 		}
+		
+		public void setTier(int tier) {
+			this.tier = tier;
+		}
 	}
 	
 	public static class AgentRunnable implements Runnable {
+		
+		private int tier;
+		
 		@Override
 		public void run() {
 			try {
 				Class<?> cl = Class.forName(agentClass);
 				Constructor<?> cons = cl.getConstructor(String.class, Integer.class);
-				cons.newInstance(host, port);
+				cons.newInstance(host, port + tier);
 				
 				while (true) {}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		
+		public void setTier(int tier) {
+			this.tier = tier;
 		}
 	}
 }
