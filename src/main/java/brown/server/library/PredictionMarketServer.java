@@ -20,17 +20,19 @@ public class PredictionMarketServer {
   private int lag;
   
   private int port;
+  private String outFile;
   
-  public PredictionMarketServer(int seconds, int numSims, int initDelay, int lag, int port) {
+  public PredictionMarketServer(int seconds, int numSims, int initDelay, int lag, int port, String outFile) {
 	  this.seconds = seconds;
 	  this.numSims = numSims;
 	  this.initDelay = initDelay;
 	  this.lag = lag;
 	  this.port = port;
+	  this.outFile = outFile;
   }
   
-  public PredictionMarketServer(int seconds, int numSims, int initDelay, int lag){
-	  this(seconds, numSims, initDelay, lag, 2121);
+  public PredictionMarketServer(int seconds, int numSims, int initDelay, int lag, String outFile){
+	  this(seconds, numSims, initDelay, lag, 2121, outFile);
   }
 
   public void runAll() throws InterruptedException {                
@@ -58,12 +60,12 @@ public class PredictionMarketServer {
         allTradeablesList,0.0,new LinkedList<ITradeable>());    
     RunServer testServer = new RunServer(port, new CallMarketSetup());
     
-    testServer.runSimulation(testSim, this.numSims, this.initDelay, this.lag);           
+    testServer.runSimulation(testSim, this.numSims, this.initDelay, this.lag, this.outFile);           
   }
   
   
   public static void main(String[] args) throws InterruptedException {
-    PredictionMarketServer server = new PredictionMarketServer(10,20,5,50);
+    PredictionMarketServer server = new PredictionMarketServer(10,20,5,50,"testFile");
     server.runAll();
   }
 }

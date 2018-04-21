@@ -79,7 +79,7 @@ public class CombAuctionWithQueryServer {
   
   
   public static void main(String[] args) throws InterruptedException {
-    PredictionMarketServer server = new PredictionMarketServer(10,20,5,50);
+    PredictionMarketServer server = new PredictionMarketServer(10,20,5,50, "test file");
     server.runAll();
   }
 }
