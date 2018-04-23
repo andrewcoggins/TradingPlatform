@@ -57,7 +57,8 @@ public class MixedQueryClockAllocation implements IAllocationRule {
             List<Integer> newList = new LinkedList<Integer>();
             newList.add(agents.get(0));
             newAlloc.put(good, newList);
-            reserves.put(good, reserves.get(good)-state.getFlatIncrement());            
+            // dont reduce the price
+            // reserves.put(good, reserves.get(good)-state.getFlatIncrement());            
            } else {
             newAlloc.put(good, new LinkedList<Integer>());
           }

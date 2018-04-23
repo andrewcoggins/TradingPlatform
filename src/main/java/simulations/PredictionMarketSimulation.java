@@ -110,7 +110,7 @@ public class PredictionMarketSimulation {
 			try {
 				Class<?> cl = Class.forName(agentClass);
 				Constructor<?> cons = cl.getConstructor(String.class, Integer.TYPE, String.class);
-				cons.newInstance(host, port + tier);
+				cons.newInstance(host, port + tier, agentClass);
 				
 				while (true) {}
 			} catch (Exception e) {
