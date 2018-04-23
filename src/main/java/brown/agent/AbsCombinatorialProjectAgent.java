@@ -28,9 +28,11 @@ import brown.tradeable.library.SimpleTradeable;
 
 public abstract class AbsCombinatorialProjectAgent extends AbsSpecValAgent {
 	
-	private double[] prices;
-	private double[] allocations;
-	private Map<Set<Integer>, Double> myValuation;
+	private static final int NUM_GOODS = 100;
+	
+	private final double[] prices = new double[NUM_GOODS];
+	private final double[] allocations = new double[NUM_GOODS];
+	private final Map<Set<Integer>, Double> myValuation = new HashMap<>();
 
 	public AbsCombinatorialProjectAgent(String host, int port, String name) throws AgentCreationException {
 		super(host, port, new SpecValSetup(), name);
@@ -39,7 +41,10 @@ public abstract class AbsCombinatorialProjectAgent extends AbsSpecValAgent {
 	@Override
 	public void onQueryMarket(QueryChannel channel) {
 		// set queries
-		List<Set<Integer>> queries = onQueryRound().subList(0, 10);
+		List<Set<Integer>> queries = onQueryRound();
+		if (queries.size() > 10) {
+			queries = queries.subList(0, 10);
+		}
 		
 		// parse queries into a list of complex tradeables
 		List<ComplexTradeable> ctList = new ArrayList<>();
@@ -107,13 +112,14 @@ public abstract class AbsCombinatorialProjectAgent extends AbsSpecValAgent {
 	
 	@Override
 	public void onPrivateInformation(PrivateInformationMessage privateInfo) {
-		// reset local copy of prices and local valuations
-		this.prices = new double[100];
-		this.allocations = new double[100];
-		this.myValuation = new HashMap<>();
+		// reset local copy of prices, allocations, and the valuations map
+		for (int i = 0; i < NUM_GOODS; i++) {
+			this.prices[i] = 0.0;
+			this.allocations[i] = 0.0;
+		}
+		this.myValuation.clear();
 		
 		// get our values for initial random bundles
-		
 		if (privateInfo instanceof SpecValValuationMessage) {
 			// cast PrivateInformation object to correct message
 			SpecValValuationMessage message = (SpecValValuationMessage) privateInfo;
