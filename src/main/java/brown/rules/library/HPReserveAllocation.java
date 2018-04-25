@@ -10,7 +10,6 @@ import java.util.Map.Entry;
 
 import brown.bid.interim.BidType;
 import brown.bidbundle.BundleType;
-import brown.bidbundle.IBidBundle;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.logging.Logging;
 import brown.market.library.PrevStateInfo;
@@ -36,12 +35,12 @@ public class HPReserveAllocation implements IAllocationRule {
     PrevStateInfo prev = state.getPrevState(); 
     if (prev.getType() == PrevStateType.DISCOVERY) {  
       PriceDiscoveryInfo pdInfo = (PriceDiscoveryInfo) prev;  
-      IBidBundle reserve = pdInfo.reservePrices; 
+      Map<ITradeable, Double> reserve = pdInfo.reservePrices; 
       state.setReserve(reserve); 
     }
     //
     
-    IBidBundle reserves = state.getReserve(); 
+    Map<ITradeable, Double> reserves = state.getReserve(); 
     AuctionBidBundle reservePrices = (AuctionBidBundle) reserves; 
     
     // a grouping is a list of lists of agent IDs.

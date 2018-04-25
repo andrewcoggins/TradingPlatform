@@ -22,8 +22,8 @@ public class SMRAConfig extends ValConfig {
   @Override
   public PrevStateInfo generateInfo() {
     // TODO Auto-generated method stub
-    Map<ITradeable, BidType> init = new HashMap<ITradeable, BidType>();
-    return new PriceDiscoveryInfo(new AuctionBidBundle(init));
+    Map<ITradeable, Double> init = new HashMap<ITradeable, Double>();
+    return new PriceDiscoveryInfo(init);
   }
   
 }
