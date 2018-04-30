@@ -16,36 +16,29 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.PredictionMarketDecoysConfig;
 import brown.value.config.SpecValV2Config;
+import brown.value.config.SpecValV3Config;
 
-public class CombAuctionWithQueryServer {
+public class TestServerSpecValV3 {
   private int initDelay; 
   private int lag;      
   private int port;
   private int nSims;
   private int nQueryRounds;
   private double increment;
-  private int initBundles;
-  private int initMean;
-  private int initStd;
   private String outFile;
   
-  public CombAuctionWithQueryServer(int initDelay, int lag, int port, int nSims, int nQueryRounds, double increment,
-      int initBundles, int initMean, int initStd, String outFile) {
+  public TestServerSpecValV3(int initDelay, int lag, int port, int nSims, int nQueryRounds, double increment, String outFile) {
     this.initDelay = initDelay;
     this.lag = lag;
     this.port = port;
     this.nSims = nSims;
     this.nQueryRounds = nQueryRounds;    
     this.increment = increment;
-    this.initBundles = initBundles;
-    this.initMean = initMean;
-    this.initStd = initStd;
     this.outFile = outFile;
   }
   
-  public CombAuctionWithQueryServer(int initDelay, int lag, int nSims, int nQueryRounds, double increment,
-      int initBundles, int initMean, int initStd, String outFile){
-    this(initDelay, lag, 2121, nSims, nQueryRounds, increment, initBundles, initMean, initStd, outFile);
+  public TestServerSpecValV3(int initDelay, int lag, int nSims, int nQueryRounds, double increment, String outFile){
+    this(initDelay, lag, 2121, nSims, nQueryRounds, increment, outFile);
   }
 
   public void runAll() throws InterruptedException {                
@@ -70,7 +63,7 @@ public class CombAuctionWithQueryServer {
     seq.add(phase_one);
     seq.add(phase_two);
     
-    Simulation testSim = new Simulation(seq,new SpecValV2Config(this.initBundles,this.initMean,this.initStd),
+    Simulation testSim = new Simulation(seq,new SpecValV3Config(),
         allTradeablesList,0.0,new LinkedList<ITradeable>());    
     RunServer testServer = new RunServer(port, new SpecValSetup());
     
@@ -79,7 +72,7 @@ public class CombAuctionWithQueryServer {
   
   
   public static void main(String[] args) throws InterruptedException {
-    PredictionMarketServer server = new PredictionMarketServer(10,20,5,50, "test file");
+    TestServerSpecValV3 server = new TestServerSpecValV3(5,50,1,10,5., null);
     server.runAll();
   }
 }

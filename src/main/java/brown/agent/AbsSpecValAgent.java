@@ -1,8 +1,17 @@
 package brown.agent;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.spectrumauctions.sats.core.model.Bundle;
+import org.spectrumauctions.sats.core.model.mrvm.MRVMBidder;
+import org.spectrumauctions.sats.core.model.mrvm.MRVMLicense;
+import org.spectrumauctions.sats.core.model.mrvm.MRVMWorld;
+import org.spectrumauctions.sats.core.model.mrvm.MultiRegionModel;
+import org.spectrumauctions.sats.core.util.random.JavaUtilRNGSupplier;
+import org.spectrumauctions.sats.core.util.random.RNGSupplier;
 
 import brown.channels.library.AuctionChannel;
 import brown.channels.library.OpenOutcryChannel;
@@ -15,6 +24,7 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.SpecValValuationMessage;
 import brown.messages.library.SpecValValuationReport;
+import brown.messages.library.SpecValWrapperMessage;
 import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.ComplexTradeable;
@@ -71,7 +81,22 @@ public abstract class AbsSpecValAgent extends AbsAgent implements ISpecValAgent 
       SpecValValuationMessage svMessage = (SpecValValuationMessage) privateInfo;
       this.valuation.putAll(svMessage.getValuation());
       Logging.log("Initial Valuation received: " + svMessage.getValuation().toString());
-    }    
+    } else if (privateInfo instanceof SpecValWrapperMessage){    
+      SpecValWrapperMessage svMessage = (SpecValWrapperMessage) privateInfo;
+      MultiRegionModel multiRegionModel = new MultiRegionModel();
+      multiRegionModel.setNumberOfNationalBidders(svMessage.getnBidders());        
+      multiRegionModel.setNumberOfRegionalBidders(0);        
+      multiRegionModel.setNumberOfLocalBidders(0);                
+      long seed = svMessage.getSeed();
+      RNGSupplier rngSupplier = new JavaUtilRNGSupplier(seed);
+      MRVMWorld world = multiRegionModel.createWorld(rngSupplier);
+      System.out.println("THIS AGENT: " + this.ID + "," + seed);
+      List<MRVMBidder> bidders = multiRegionModel.createPopulation(world, rngSupplier);
+      for (MRVMBidder bidder : bidders){
+        System.out.println("THIS AGENT: " + this.ID + "," + "Bidder value full bundle: " + bidder.calculateValue(new Bundle<>(world.getLicenses())));
+        System.out.println("THIS AGENT: " + this.ID + "," + "Bidder alpha: " + bidder.getAlpha());
+      }            
+    }
   }
 
 }

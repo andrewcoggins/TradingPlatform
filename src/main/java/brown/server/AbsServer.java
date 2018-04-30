@@ -41,6 +41,7 @@ import brown.summary.AuctionSummarizer;
 import brown.tradeable.ITradeable;
 import brown.value.config.IValuationConfig;
 import brown.value.config.SpecValV2Config;
+import brown.value.config.SpecValV3Config;
 import brown.value.config.ValConfig;
 import brown.value.distribution.library.SpecValDistV2;
 import brown.value.distribution.library.SpecValDistribution;
@@ -185,6 +186,19 @@ public abstract class AbsServer {
          
        // Generate initial reports
        toSend = svconfig.generateReport(agents);              
+    } else if (marketConfig.type == ValuationType.Spectrum_v2) {
+      SpecValV3Config svconfig = (SpecValV3Config) marketConfig;
+      List<Integer> agents = new ArrayList<Integer>(this.connections.values());
+      
+      // Initialize the model
+      svconfig.initialize(agents);
+
+      for (Integer agent: svconfig.agentToValue.keySet()){
+        this.privateValuations.put(agent,new SpecValValuation(svconfig.agentToValue.get(agent)));
+      }
+      
+      // Generate initial reports
+      toSend = svconfig.generateReport(agents);     
     }
     for (Connection connection : this.connections.keySet()){
       Integer agentID = this.connections.get(connection);               
@@ -349,6 +363,11 @@ public abstract class AbsServer {
         toPrint.put(agent,this.acctManager.getAccount(agent).getMonies());
       }   
     } else if (this.valueConfig.type == ValuationType.Spectrum){
+      Map<Integer, Double> totalUtil = this.summarizer.getTotalUtility();
+      for (Entry<Integer, Double> util : totalUtil.entrySet()) {
+        toPrint.put(util.getKey(), util.getValue());
+      }      
+    } else if (this.valueConfig.type == ValuationType.Spectrum_v2){
       Map<Integer, Double> totalUtil = this.summarizer.getTotalUtility();
       for (Entry<Integer, Double> util : totalUtil.entrySet()) {
         toPrint.put(util.getKey(), util.getValue());

@@ -1,0 +1,71 @@
+package brown.agent.library;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import brown.agent.AbsCombinatorialProjectAgentV2;
+import brown.exceptions.AgentCreationException;
+import brown.logging.Logging;
+
+public class CombAgentTestV2 extends AbsCombinatorialProjectAgentV2 {
+  private int low; 
+  private int high;
+  
+  
+  public CombAgentTestV2(String host, int port, String name, int low, int high)
+      throws AgentCreationException {
+    super(host, port, name);
+    this.low = low;
+    this.high = high;
+  }
+
+  @Override
+  public Set<Integer> onBidRound() {
+    Logging.log("Prices: " + Arrays.toString(getPrices()));
+    Set<Integer> toBid = new HashSet<Integer>();
+    for (int i = low; i <= high; i++){
+      toBid.add(i);
+    }            
+    if (getBundlePrice(toBid) < queryValue(toBid)){
+      Logging.log("Bidding on " + toBid + " for price " + getBundlePrice(toBid));
+      Logging.log("Value for bundle: " + queryValue(toBid));      
+      Logging.log("Sample for bundle: " + sampleValue(toBid));
+      return toBid;      
+    } else {
+      return new HashSet<Integer>();
+    }
+  }
+
+  @Override
+  public void onBidResults(double[] allocations) {
+    Set<Integer> winning = new HashSet<Integer>();
+    Set<Integer> pwinning = new HashSet<Integer>();
+    
+    for (int i = 0; i< this.allocations.length; i++){      
+      if (allocations[i] == 1){
+        winning.add(i);
+      } else if (allocations[i] > 0){
+        pwinning.add(i);
+      }      
+    }
+    Logging.log("Winning: " + winning);
+    Logging.log("Partially winning: " + pwinning);    
+  }
+
+  @Override
+  public void onAuctionStart() {
+    Logging.log("Agent "  +this.ID + " with Alpha: " + this.valuation.getAlpha());
+  }
+
+  @Override
+  public void onAuctionEnd(Set<Integer> finalBundle) {
+    Logging.log("Value final bundle at " + queryValue(finalBundle));
+  }
+
+  public static void main(String[] args) throws AgentCreationException {
+    new CombAgentTestV2("localhost", 2121, "agent1",15,20);
+    new CombAgentTestV2("localhost", 2121, "agent2", 16,21);
+    while (true) {}
+  }
+}

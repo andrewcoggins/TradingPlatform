@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import brown.agent.AbsAgent;
 import brown.agent.AbsOpenOutcryAgent;
 import brown.agent.AbsSpecValAgent;
+import brown.agent.AbsSpecValV2Agent;
 import brown.bid.interim.BidType;
 import brown.bid.library.AuctionBid;
 import brown.bidbundle.IBidBundle;
@@ -45,6 +46,8 @@ public class OpenOutcryChannel extends AbsChannel implements IAgentChannel {
       openOutcryAgent.onOpenOutcry(this); 
     } else if (agent instanceof AbsSpecValAgent){
       ((AbsSpecValAgent) agent).onClockMarket(this);
+    } else if (agent instanceof AbsSpecValV2Agent){
+      ((AbsSpecValV2Agent) agent).onClockMarket(this);      
     }
   }
 

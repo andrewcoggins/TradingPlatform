@@ -4,14 +4,15 @@ import java.lang.reflect.Constructor;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import brown.server.library.PredictionMarketServer;
 
 public class PredictionMarketSimulation {
-	private static int numSims = 1;
+	private static int numSims = 100;
 	private static int delayTime = 2; 
 	private static int lag = 50;
-	private static int marketLength = 5;
+	private static int marketLength = 20;
 	
 	private static String[] botClasses = new String[] {
 			"brown.agent.library.RandomAgent",
@@ -30,8 +31,15 @@ public class PredictionMarketSimulation {
 		this.agentClass = agentClass;
 		this.outFile = outFile;
 	}
+	
+	 public PredictionMarketSimulation(String agentClass, String outFile, int nSims, int marketTime) {
+	    this.agentClass = agentClass;
+	    this.outFile = outFile;
+	    numSims = nSims;
+	    marketLength = marketTime;
+	  }
 
-	public void run() {
+	public void run() throws InterruptedException {
 		for (int t = 0; t < 4; t++) {
 			ServerRunnable sr = new ServerRunnable();
 			BotsRunnable br = new BotsRunnable();
@@ -50,6 +58,13 @@ public class PredictionMarketSimulation {
 			if (agentClass != null) {
 				at.start();
 			}
+			
+			TimeUnit.SECONDS.sleep(numSims * marketLength + 60);
+			st.interrupt();
+			bt.interrupt();
+	    if (agentClass != null) {
+	      at.interrupt();
+	    }			
 		}
 	}
 	

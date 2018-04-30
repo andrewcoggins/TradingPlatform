@@ -23,6 +23,7 @@ public class SpecValSetup implements ISetup{
     kryo.register(brown.messages.library.SpecValValuationReport.class); 
     kryo.register(brown.channels.library.OpenOutcryChannel.class);
     kryo.register(brown.messages.library.CombinatorialClockReport.class);    
+    kryo.register(brown.messages.library.SpecValWrapperMessage.class);    
     
 //    kryo.register(SpecValDistV2.class);
 //    kryo.register(SpecValGenV2.class);    

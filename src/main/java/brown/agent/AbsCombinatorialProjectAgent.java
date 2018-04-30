@@ -28,7 +28,7 @@ import brown.tradeable.library.SimpleTradeable;
 
 public abstract class AbsCombinatorialProjectAgent extends AbsSpecValAgent {
 	
-	private static final int NUM_GOODS = 100;
+	private static final int NUM_GOODS = 98;
 	
 	private final double[] prices = new double[NUM_GOODS];
 	private final double[] allocations = new double[NUM_GOODS];
@@ -51,7 +51,7 @@ public abstract class AbsCombinatorialProjectAgent extends AbsSpecValAgent {
 		for (Set<Integer> bundle : queries) {
 			Set<ITradeable> tradeableSet = new HashSet<>();
 			for (Integer i : bundle) {
-				int good = Math.max(0, Math.min(99, zeroIfNull(i)));
+				int good = Math.max(0, Math.min(NUM_GOODS-1, zeroIfNull(i)));
 				tradeableSet.add(new SimpleTradeable(good));
 			}
 			
@@ -76,7 +76,7 @@ public abstract class AbsCombinatorialProjectAgent extends AbsSpecValAgent {
 		// submit bid to server
 		Map<ITradeable, BidType> bid = new HashMap<>();
 		for (Integer i : bundle) {
-			int good = Math.max(0, Math.min(99, zeroIfNull(i)));
+			int good = Math.max(0, Math.min(NUM_GOODS-1, zeroIfNull(i)));
 			SimpleTradeable st = new SimpleTradeable(good);
 			BidType bt = new BidType(prices[good], 1);
 			bid.put(st, bt);

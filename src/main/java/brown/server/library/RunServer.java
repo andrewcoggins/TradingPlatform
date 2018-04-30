@@ -90,12 +90,14 @@ public class RunServer extends AbsServer {
       initializeAgents();                   
       for (SimulMarkets s : sim.getSequence()) {
         this.manager.addSimulMarket(s, sim.getTradeables(), new LinkedList<Integer>(this.connections.values()));
-        this.completeAuctions(lag);            
+        this.completeAuctions(lag);    
       } 
       this.summarizer.collectInformation(this.acctManager.getAccounts(), this.privateValuations);
       resetSim();
       count++;
     }
     printUtilities(outputFile);
+    this.theServer.close();
+    this.theServer.stop();
   } 
 }

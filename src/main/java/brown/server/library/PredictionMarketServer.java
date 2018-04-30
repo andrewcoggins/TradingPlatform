@@ -65,7 +65,7 @@ public class PredictionMarketServer {
   
   
   public static void main(String[] args) throws InterruptedException {
-    PredictionMarketServer server = new PredictionMarketServer(10,20,5,50,"testFile");
+    PredictionMarketServer server = new PredictionMarketServer(10,1,5,50,"testFile");
     server.runAll();
   }
 }
