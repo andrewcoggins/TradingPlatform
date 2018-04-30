@@ -1,6 +1,9 @@
 package brown.market.library; 
 
+import java.util.Map;
+
 import brown.bidbundle.IBidBundle;
+import brown.tradeable.ITradeable;
 import brown.value.config.IValuationConfig;
 
 /**
@@ -10,9 +13,9 @@ import brown.value.config.IValuationConfig;
  */
 public class PriceDiscoveryInfo extends PrevStateInfo {
   
-  public IBidBundle reservePrices; 
+  public Map<ITradeable, Double> reservePrices; 
   
-  public PriceDiscoveryInfo(IBidBundle reservePrices) {
+  public PriceDiscoveryInfo(Map<ITradeable, Double> reservePrices) {
     this.reservePrices = reservePrices;  
   }
   

@@ -7,12 +7,8 @@ import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.AuctionChannel;
 import brown.messages.library.SimpleSealedReportMessage;
 import brown.setup.ISetup;
-import brown.value.distribution.library.SpecValDistribution;
 import brown.value.generator.library.SpecValGenerator;
 import brown.value.valuation.library.XORValuation;
-import ch.uzh.ifi.ce.mweiss.specval.bidlang.xor.XORBid;
-import ch.uzh.ifi.ce.mweiss.specval.model.mrm.MRMGlobalBidder;
-import ch.uzh.ifi.ce.mweiss.specvalopt.vcg.external.domain.Bids;
 
 import com.esotericsoftware.kryo.Kryo;
 
@@ -27,7 +23,6 @@ public class VCGSetup implements ISetup{
     Startup.start(kryo);
     kryo.register(AuctionBidBundle.class);
     kryo.register(AuctionBid.class);    
-    kryo.register(SpecValDistribution.class);
     kryo.register(XORValuation.class);        
     kryo.register(SpecValGenerator.class);    
     kryo.register(AuctionChannel.class);

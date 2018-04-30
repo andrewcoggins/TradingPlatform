@@ -3,10 +3,11 @@ package brown.messages.library;
 import java.util.Map;
 
 import brown.bidbundle.IBidBundle;
+import brown.tradeable.ITradeable;
 
 public class SMRAReportMessage extends GameReportMessage {
 
-  private IBidBundle reserve; 
+  private Map<ITradeable, Double> reserve; 
   
   /**
    * for kryo. 
@@ -15,11 +16,11 @@ public class SMRAReportMessage extends GameReportMessage {
     this.reserve = null; 
   }
 
-  public SMRAReportMessage(IBidBundle reserve) {
+  public SMRAReportMessage(Map<ITradeable, Double> reserve) {
     this.reserve = reserve; 
   }
   
-  public IBidBundle getReserve() {
+  public Map<ITradeable, Double> getReserve() {
     return this.reserve; 
   }
   

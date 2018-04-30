@@ -44,7 +44,6 @@ import brown.value.config.SpecValV2Config;
 import brown.value.config.SpecValV3Config;
 import brown.value.config.ValConfig;
 import brown.value.distribution.library.SpecValDistV2;
-import brown.value.distribution.library.SpecValDistribution;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.ValuationType;
 import brown.value.valuation.library.SpecValValuation;
@@ -200,7 +199,7 @@ public abstract class AbsServer {
       // Generate initial reports
       toSend = svconfig.generateReport(agents);     
     }
-    for (Connection connection : this.connections.keySet()){
+    for (Connection connection : this.connections.keySet()) {
       Integer agentID = this.connections.get(connection);               
       //set up agent account
       Account newAccount = new Account(agentID);

@@ -35,7 +35,6 @@ import brown.tradeable.library.ComplexTradeable;
 import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.tradeable.library.TradeableType;
-import brown.value.distribution.library.SpecValDistribution;
 import brown.value.generator.library.LabTwoValGenerator;
 import brown.value.generator.library.UniformValGenerator;
 

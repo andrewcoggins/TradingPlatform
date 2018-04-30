@@ -46,14 +46,13 @@ public class SomeBidsTermination implements IInnerTC {
       for (int i = 0; i < currentSize - this.prevSize; i++) { 
         roundTrades.add(accepted.get(prevSize + i)); 
       }
-      IBidBundle reserve = state.getReserve(); 
-      Map<ITradeable, BidType> reserveMap = ((AuctionBid) reserve.getBids()).bids; 
+      Map<ITradeable, Double> reserve = state.getReserve(); 
       // check trades in accepted
       for (TradeMessage trade : roundTrades) {
         Map<ITradeable, BidType> agentMap = ((AuctionBid) trade.Bundle.getBids()).bids; 
         for (ITradeable t : (agentMap.keySet())) { 
-          if (reserveMap.containsKey(t)) {
-            if (reserveMap.get(t).price < agentMap.get(t).price) {
+          if (reserve.containsKey(t)) {
+            if (reserve.get(t) < agentMap.get(t).price) {
               liveBids = true; 
             }
           }
