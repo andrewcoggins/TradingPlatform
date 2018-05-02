@@ -43,9 +43,7 @@ public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 		while (System.currentTimeMillis() - initTime < initialLag) {
 			valuation.putAll(queryXORs(10, 20, 4));
 		}
-		
-		System.out.println("size: " + valuation.size());
-		
+				
 		// find best bundle, relative to value per item
 		double maxValuePerItem = 0;
 		Set<Integer> maxBundle = new HashSet<>();

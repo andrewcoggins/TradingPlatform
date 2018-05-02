@@ -122,7 +122,7 @@ public abstract class AbsServer {
   }
 
 
-  protected void onRegistration(Connection connection, RegistrationMessage registration) { 
+  protected void onRegistration(Connection connection, RegistrationMessage registration) {
     if (registration.getID() == null) {
       Logging.log("[x] AbsServer-onRegistration: encountered null registration");
       return;
@@ -140,6 +140,8 @@ public abstract class AbsServer {
           this.IDToName.put(theID, registration.name);
       }
       Logging.log("[-] registered " + theID);
+      connection.sendTCP(15000);
+      connection.setTimeout(60000);
       this.theServer.sendToTCP(connection.getID(), new RegistrationMessage(theID));
     } else {
       Logging.log("[x] AbsServer-onRegistration: encountered registration from existing agent");
