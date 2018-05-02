@@ -336,6 +336,20 @@ public abstract class AbsServer {
     this.manager.updateAllInfo();    
   }
   
+  public synchronized void completeAuctions(int initLag, int lag) throws InterruptedException { 
+    //run every outer cycle of the auction until it is terminated per the outer termination condition.
+    if (this.manager.anyMarketsOpen()){
+      Thread.sleep(initLag);
+      this.updateAllAuctions();
+    }
+    while (this.manager.anyMarketsOpen()) {
+      Thread.sleep(lag);
+      this.updateAllAuctions();
+      Thread.sleep(lag);      
+    }
+    this.manager.updateAllInfo();    
+  }
+  
   public void resetSim() { 
     this.acctManager.reset();
     this.manager.reset();

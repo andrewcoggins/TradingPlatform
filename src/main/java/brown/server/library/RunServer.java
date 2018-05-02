@@ -78,7 +78,30 @@ public class RunServer extends AbsServer {
    * lag time for registration phase.
    * @throws InterruptedException
    */
-  public void runSimulation(Simulation sim, int numRuns, int delay,int lag, String outputFile) throws InterruptedException {
+  public void runSimulation(Simulation sim, int numRuns, int delay, int initLag, int lag, String outputFile) throws InterruptedException {
+    this.valueConfig = sim.getValInfo();         
+    this.allTradeables = sim.getTradeables();
+    this.initialMonies = sim.getInitialMonies(); 
+    this.initialGoods = sim.getInitialGoods(); 
+    delay(delay);       
+    this.summarizer = new AuctionSummarizer(this.privateToPublic.keySet());
+    int count = 0;
+    while (count < numRuns) {
+      initializeAgents();                   
+      for (SimulMarkets s : sim.getSequence()) {
+        this.manager.addSimulMarket(s, sim.getTradeables(), new LinkedList<Integer>(this.connections.values()));
+        this.completeAuctions(initLag, lag);    
+      } 
+      this.summarizer.collectInformation(this.acctManager.getAccounts(), this.privateValuations);
+      resetSim();
+      count++;
+    }
+    printUtilities(outputFile);
+    this.theServer.close();
+    this.theServer.stop();
+  } 
+  
+  public void runSimulation(Simulation sim, int numRuns, int delay, int lag, String outputFile) throws InterruptedException {
     this.valueConfig = sim.getValInfo();         
     this.allTradeables = sim.getTradeables();
     this.initialMonies = sim.getInitialMonies(); 

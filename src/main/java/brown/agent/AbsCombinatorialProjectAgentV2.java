@@ -3,6 +3,7 @@ package brown.agent;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -154,40 +155,37 @@ public abstract class AbsCombinatorialProjectAgentV2  extends AbsSpecValV2Agent{
   }
   
   public double sampleValue(Set<Integer> bundle){
-    MRVMBidder sampleValuation = this.model.createPopulation(this.model.createWorld()).get(0);    
+    // MRVMBidder sampleValuation = this.model.createPopulation(this.model.createWorld()).get(0);    
+    List<MRVMBidder> sampleValuations = this.model.createPopulation(this.model.createWorld());
+    double toReturn = 0;
     Set<MRVMLicense> mrvmBundle = new HashSet<MRVMLicense>();
     for (Integer good : bundle){      
       mrvmBundle.add(this.idToLicense.get(good));
+    }    
+    for (MRVMBidder val : sampleValuations){
+      toReturn=toReturn+this.valueScale * val.calculateValue(new Bundle<MRVMLicense>(mrvmBundle)).doubleValue();
     }
-    return (this.valueScale * sampleValuation.calculateValue(new Bundle<MRVMLicense>(mrvmBundle)).doubleValue());
+    return (toReturn / sampleValuations.size());
   }
   
-  public Map<Set<Integer>,Double> sampleXORs(Integer n, Integer mean, Integer stdev){
-    MRVMBidder sampleValuation = this.model.createPopulation(this.model.createWorld()).get(0);   
-    Map<Set<Integer>, Double> toReturn = new HashMap<Set<Integer>, Double>();    
-    SizeBasedUniqueRandomXOR<?> valueFunction;
-    try {
-      valueFunction = (SizeBasedUniqueRandomXOR) valuation.getValueFunction(SizeBasedUniqueRandomXOR.class);
-      valueFunction.setDistribution(mean, stdev, n);
-      // Do something with the generated bids
-      Iterator<? extends XORValue<?>> xorBidIterator = valueFunction.iterator();
-      while (xorBidIterator.hasNext()) {
-          XORValue bid = xorBidIterator.next();
-          Bundle<MRVMLicense> licenses = bid.getLicenses();
-          Set<Integer> goods = new HashSet<Integer>();
-          for (MRVMLicense license : licenses){
-            goods.add((int) license.getId());
-          }        
-          // Always just make ID 0?
-          toReturn.put(goods, this.valueScale * sampleValuation.calculateValue(licenses).doubleValue());
-      }
-      return toReturn;
-    } catch (UnsupportedBiddingLanguageException e) {
-      Logging.log("Unsupported Bidding Language Exception");
-      return toReturn;
+  public Map<Set<Integer>, Double> sampleValues(Set<Set<Integer>> bundles){
+    Map<Set<Integer>,Double> toReturn = new HashMap<Set<Integer>,Double>();    
+    List<MRVMBidder> sampleValuations = this.model.createPopulation(this.model.createWorld());   
+    
+    for (Set<Integer> bundle : bundles){
+      Set<MRVMLicense> mrvmBundle = new HashSet<MRVMLicense>();
+      for (Integer good : bundle){      
+        mrvmBundle.add(this.idToLicense.get(good));
+      }    
+      double sum = 0;
+      for (MRVMBidder val : sampleValuations){
+        sum = sum +this.valueScale * val.calculateValue(new Bundle<MRVMLicense>(mrvmBundle)).doubleValue();        
+      }      
+      toReturn.put(bundle, sum / sampleValuations.size());
     }
     
-  }
+    return toReturn;
+  } 
 
   private int zeroIfNull(Integer i) {
     return i == null ? 0 : i;

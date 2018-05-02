@@ -29,8 +29,22 @@ public class CombAgentTestV2 extends AbsCombinatorialProjectAgentV2 {
     }            
     if (getBundlePrice(toBid) < queryValue(toBid)){
       Logging.log("Bidding on " + toBid + " for price " + getBundlePrice(toBid));
-      Logging.log("Value for bundle: " + queryValue(toBid));      
-      Logging.log("Sample for bundle: " + sampleValue(toBid));
+      Logging.log("Value for bundle: " + queryValue(toBid));    
+      Long currtime = System.currentTimeMillis();
+      Set<Set<Integer>> bundles = new HashSet<Set<Integer>>();    
+      for (int j = low + 1; j <= high; j++){
+        Set<Integer> asd = new HashSet<Integer>();        
+        for (int i = low; i <= j; i++){
+          asd.add(i);
+        }           
+        bundles.add(asd);
+      }
+      int i =0;
+      while (System.currentTimeMillis() - currtime < 1000){
+        i++;
+        sampleValues(bundles);
+      }
+      Logging.log("Sampled " + i + " times");
       return toBid;      
     } else {
       return new HashSet<Integer>();
@@ -66,6 +80,10 @@ public class CombAgentTestV2 extends AbsCombinatorialProjectAgentV2 {
   public static void main(String[] args) throws AgentCreationException {
     new CombAgentTestV2("localhost", 2121, "agent1",15,20);
     new CombAgentTestV2("localhost", 2121, "agent2", 16,21);
+    new CombAgentTestV2("localhost", 2121, "agent1",15,20);
+    new CombAgentTestV2("localhost", 2121, "agent2", 16,21);
+    new CombAgentTestV2("localhost", 2121, "agent1",15,20);
+    new CombAgentTestV2("localhost", 2121, "agent2", 16,21);    
     while (true) {}
   }
 }

@@ -12,14 +12,27 @@ import brown.value.config.SpecValV3Config;
 
 public class CombAuctionServer {
   private int initDelay; 
+  private int initLag;
   private int lag;      
   private int port;
   private int nSims;
   private double increment;
   private String outFile;
   
+  public CombAuctionServer(int initDelay, int initLag, int lag, int port, int nSims, double increment, String outFile) {
+    this.initDelay = initDelay;
+    this.initLag = initLag;
+    this.lag = lag;
+    this.port = port;
+    this.nSims = nSims;
+    this.increment = increment;
+    this.outFile = outFile;
+  }
+  
+  
   public CombAuctionServer(int initDelay, int lag, int port, int nSims, double increment, String outFile) {
     this.initDelay = initDelay;
+    this.initLag = lag;
     this.lag = lag;
     this.port = port;
     this.nSims = nSims;
@@ -52,7 +65,7 @@ public class CombAuctionServer {
         allTradeablesList,0.0,new LinkedList<ITradeable>());    
     RunServer testServer = new RunServer(port, new SpecValSetup());
     
-    testServer.runSimulation(testSim, this.nSims, this.initDelay, this.lag, this.outFile);           
+    testServer.runSimulation(testSim, this.nSims, this.initDelay,this.initLag, this.lag, this.outFile);           
   }
   
   
