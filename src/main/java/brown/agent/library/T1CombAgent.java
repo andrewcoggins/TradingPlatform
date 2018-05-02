@@ -25,6 +25,11 @@ public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 	public Set<Integer> onBidRound() {
 		// bid for our bundle, if it's price isn't too high
 		if (getBundlePrice(bundle) < bundleValue) {
+		  for (Set<Integer> s : this.getFavoriteBundle().keySet()) { 
+		    System.out.println("BUNDLE:" + s);
+		    System.out.println("VALUE:" + this.getFavoriteBundle().get(s));
+		    return s; 
+		  }
 			return bundle;
 		} else {
 			return new HashSet<>();

@@ -51,7 +51,7 @@ public abstract class AbsSpecValV2Agent  extends AbsAgent implements ISpecValV2A
       SpecValWrapperMessage svMessage = (SpecValWrapperMessage) privateInfo;
       this.model.setNumberOfNationalBidders(svMessage.getnBidders());        
       this.model.setNumberOfRegionalBidders(0);        
-      this.model.setNumberOfLocalBidders(0);                
+      this.model.setNumberOfLocalBidders(0);       
       long seed = svMessage.getSeed();
       RNGSupplier rngSupplier = new JavaUtilRNGSupplier(seed);
       MRVMWorld world = this.model.createWorld(rngSupplier);
