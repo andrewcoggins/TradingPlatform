@@ -23,7 +23,6 @@ public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 
 	@Override
 	public Set<Integer> onBidRound() {
-		System.out.println("bidding");
 		// bid for our bundle, if it's price isn't too high
 		if (getBundlePrice(bundle) < bundleValue) {
 			return bundle;
@@ -38,7 +37,7 @@ public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 	}
 
 	@Override
-	public void onAuctionStart() {
+	public void onAuctionStart() {		
 		// query for random bundles for a second less than the initial lag
 		long initTime = System.currentTimeMillis();
 		while (System.currentTimeMillis() - initTime < initialLag) {
