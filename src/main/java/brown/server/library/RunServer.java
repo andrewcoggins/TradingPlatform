@@ -87,10 +87,11 @@ public class RunServer extends AbsServer {
     this.summarizer = new AuctionSummarizer(this.privateToPublic.keySet());
     int count = 0;
     while (count < numRuns) {
-      initializeAgents();                   
+      initializeAgents();   
+      Thread.sleep(initLag);
       for (SimulMarkets s : sim.getSequence()) {
         this.manager.addSimulMarket(s, sim.getTradeables(), new LinkedList<Integer>(this.connections.values()));
-        this.completeAuctions(initLag, lag);    
+        this.completeAuctions(lag);    
       } 
       this.summarizer.collectInformation(this.acctManager.getAccounts(), this.privateValuations);
       resetSim();
