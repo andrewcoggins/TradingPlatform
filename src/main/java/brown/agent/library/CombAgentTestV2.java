@@ -70,6 +70,9 @@ public class CombAgentTestV2 extends AbsCombinatorialProjectAgentV2 {
   @Override
   public void onAuctionStart() {
     Logging.log("Agent "  +this.ID + " with Alpha: " + this.valuation.getAlpha());
+    Long currtime = System.currentTimeMillis();
+    while (System.currentTimeMillis() - currtime < 10000){      
+    }
   }
 
   @Override
