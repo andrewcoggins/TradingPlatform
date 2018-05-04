@@ -3,8 +3,8 @@ package brown.server.library; // TODO: change this to your package
 public class CombAuctionServerTemplate {
   private static int initDelay = 5;  // time to wait before beginning the simulation
   private static int initLag = 1000;
-  private static int lag = 1000; // time between intervals in which bots can trade, should probably leave this high to be safe
-  private static int nSims = 1;  // number of simulations
+  private static int lag = 100; // time between intervals in which bots can trade, should probably leave this high to be safe
+  private static int nSims = 3;  // number of simulations
   private static double increment = 20.; // how much prices increment between rounds
   private static String file = null; //if you want to write results to somewhere
 
