@@ -11,7 +11,7 @@ import brown.exceptions.AgentCreationException;
 
 public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 	
-	private static long initialLag = 19000;
+	private static long initialLag = 1000;
 	
 	private Set<Integer> bundle = new HashSet<>();
 	private double bundleValue = 0;
@@ -26,11 +26,6 @@ public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
     long initTime = System.currentTimeMillis();	  
 		// bid for our bundle, if it's price isn't too high
 		if (getBundlePrice(bundle) < bundleValue) {
-		  for (Set<Integer> s : this.getFavoriteBundle().keySet()) { 
-		    System.out.println("BUNDLE:" + s);
-		    System.out.println("VALUE:" + this.getFavoriteBundle().get(s));
-		    return s; 
-		  }
 			return bundle;
 		} else {
 			return new HashSet<>();
@@ -60,7 +55,6 @@ public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 				maxBundle = entry.getKey();
 			}
 		}
-		
 		bundle = maxBundle;
 		bundleValue = queryValue(bundle);
 	}
