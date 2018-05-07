@@ -120,12 +120,6 @@
     <version>1.9.5</version>
   </dependency>
 
- <dependency>
-      <groupId>org.spectrumauctions</groupId>
-      <artifactId>sats</artifactId>
-      <version>0.6.0</version>
-    </dependency>
-
 
   </dependencies>
 </project>

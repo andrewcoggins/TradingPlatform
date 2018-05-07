@@ -12,7 +12,7 @@ import brown.logging.Logging;
 
 public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 	
-	private static long initialLag = 19000;
+	private static long initialLag = 1000;
 	
 	private Set<Integer> bundle = new HashSet<>();
 	private double bundleValue = 0;
@@ -54,7 +54,6 @@ public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 				maxBundle = entry.getKey();
 			}
 		}
-		
 		bundle = maxBundle;
 		bundleValue = queryValue(bundle);
 	}
