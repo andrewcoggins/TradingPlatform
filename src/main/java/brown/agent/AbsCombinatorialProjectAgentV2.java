@@ -179,8 +179,14 @@ public abstract class AbsCombinatorialProjectAgentV2  extends AbsSpecValV2Agent{
       }    
       double sum = 0;
       for (MRVMBidder val : sampleValuations){
+        //Logging.log("bundle" + mrvmBundle.size());
+        try{
         sum = sum +this.valueScale * val.calculateValue(new Bundle<MRVMLicense>(mrvmBundle)).doubleValue();        
-      }      
+        }catch(IllegalArgumentException e){
+          Logging.log("bundle" + mrvmBundle.size());
+          Logging.log("SUM" + sum);                
+        }
+      }    
       toReturn.put(bundle, sum / sampleValuations.size());
     }
     
