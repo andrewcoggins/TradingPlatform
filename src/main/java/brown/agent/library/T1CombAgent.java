@@ -8,11 +8,10 @@ import java.util.Set;
 
 import brown.agent.AbsCombinatorialProjectAgentV2;
 import brown.exceptions.AgentCreationException;
-import brown.logging.Logging;
 
 public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 	
-	private static long initialLag = 1000;
+	private static long initialLag = 20000;
 	
 	private Set<Integer> bundle = new HashSet<>();
 	private double bundleValue = 0;
@@ -40,14 +39,18 @@ public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 	public void onAuctionStart() {		
 		// query for random bundles for a second less than the initial lag
 		long initTime = System.currentTimeMillis();
-		while (System.currentTimeMillis() - initTime < initialLag) {
+		while (System.currentTimeMillis() - initTime < initialLag - 7000) {
 			valuation.putAll(queryXORs(10, 20, 4));		
 		}
 				
 		// find best bundle, relative to value per item
 		double maxValuePerItem = 0;
 		Set<Integer> maxBundle = new HashSet<>();
+		long start = System.currentTimeMillis();
 		for (Entry<Set<Integer>, Double> entry : valuation.entrySet()) {
+			if (System.currentTimeMillis() - start > 6500) {
+				break;
+			}
 			double numItems = (double) entry.getKey().size();
 			if (entry.getValue() / numItems > maxValuePerItem) {
 				maxValuePerItem = entry.getValue() / numItems;
