@@ -5,14 +5,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import brown.bidbundle.IBidBundle;
 import brown.market.library.PrevStateInfo;
 import brown.market.marketstate.IMarketState;
+import brown.market.twosided.IOrderBook;
+import brown.market.twosided.OrderBook;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.TradeRequestMessage;
 import brown.tradeable.ITradeable;
 
+/**
+ * Standard MarketState stores the internal information of a 
+ * market.
+ * @author acoggins
+ *
+ */
 public class MarketState implements IMarketState {
 
   private final Integer ID;  
@@ -48,7 +55,7 @@ public class MarketState implements IMarketState {
   private PrevStateInfo summaryState;
   
   // Orderbook for two sided markets
-  private OrderBook orderbook;
+  private IOrderBook orderbook;
   
   public MarketState(Integer ID, List<ITradeable> allGoods, PrevStateInfo prevState) {
     this.ID = ID; 
@@ -288,12 +295,12 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public OrderBook getOrderBook() {
+  public IOrderBook getOrderBook() {
     return this.orderbook;
   }
   
   @Override
-  public void setOrderBook(OrderBook book){
+  public void setOrderBook(IOrderBook book){
     this.orderbook = book;
   }
 }

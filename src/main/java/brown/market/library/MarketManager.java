@@ -5,9 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
 import brown.accounting.library.Ledger;
-import brown.logging.Logging;
 import brown.market.IMarketManager;
 import brown.market.marketstate.library.MarketState;
 import brown.market.preset.AbsMarketPreset;
@@ -16,13 +14,9 @@ import brown.tradeable.ITradeable;
 
 /**
  * Market manager stores and handles multiple markets 
- * @author lcamery
+ * @author acoggins
  *
  */
-
-//TODO: unique IDs for every market ever
-//TODO: make sure that if a bid is being sent to a market, that markets exists in the manager. 
-
 public class MarketManager implements IMarketManager {
   // stores all ledgers in a simulation
 	private List<Map<Market, Ledger>> ledgers;
@@ -32,7 +26,15 @@ public class MarketManager implements IMarketManager {
 	public Integer index; 
 	private Integer idCount; 
 	
-
+	/**
+	 * Constructor for a market manager initializes ledgers and markets.
+	 * ledgers tracks the ledgers for all markets at each time
+	 * markets maps each market at each time to a unique id
+	 * information is initially a blank prevstateinfo
+	 * index is initially set to -1
+	 * idCount keeps track of the number of markets in the MarketManager- 
+	 * initially, this is 0.
+	 */
 	public MarketManager() {
 		this.ledgers = new LinkedList<Map<Market, Ledger>>();
 		this.markets = new LinkedList<Map<Integer, Market>>();	
@@ -56,6 +58,7 @@ public class MarketManager implements IMarketManager {
 	 * @param market
 	 * @return
 	 */
+  @Override
 	public boolean open(AbsMarketPreset rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents) {
 	  Market market = new Market(rules.copy(), new MarketState(marketID,tradeables,this.information));
 	   if (ledgers.get(index).containsKey(market)) {
@@ -73,6 +76,7 @@ public class MarketManager implements IMarketManager {
    * @param ID
    * @param closingState
    */
+  @Override
   public void close(Integer ID) {
     Market toClose = this.markets.get(index).get(ID);
     toClose.close();
@@ -84,6 +88,7 @@ public class MarketManager implements IMarketManager {
 	 * @param ID
 	 * @return
 	 */
+  @Override
 	public Ledger getLedger(Integer ID) {
 		return ledgers.get(index).get(markets.get(index).get(ID));
 	}
@@ -93,6 +98,7 @@ public class MarketManager implements IMarketManager {
 	 * @param ID
 	 * @return
 	 */
+  @Override
 	public Market getMarket(Integer ID) {
 	    return markets.get(index).get(ID);	  
 	}
@@ -111,15 +117,17 @@ public class MarketManager implements IMarketManager {
 	 * Gets all of the auctions
 	 * @return
 	 */
+  @Override
 	public Collection<Market> getAuctions() {
 		return this.markets.get(index).values();
 	}
 
-	// update information from a market
+  @Override
   public void update(Integer marketID) {
    this.information.combine(this.markets.get(index).get(marketID).constructSummaryState());
   }
-
+  
+  @Override
   public boolean anyMarketsOpen() {
     boolean toReturn = false;
     for (Market m : this.getAuctions()) {
@@ -131,6 +139,7 @@ public class MarketManager implements IMarketManager {
     return toReturn;    
   }
 
+  @Override
   public void reset() {
     this.index = -1;
     this.ledgers = new LinkedList<Map<Market, Ledger>>();
@@ -138,6 +147,7 @@ public class MarketManager implements IMarketManager {
     this.information = new BlankStateInfo();
   }
 
+  
   public void initializeInfo(PrevStateInfo info) {
     this.information = info;
   }

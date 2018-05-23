@@ -2,7 +2,6 @@ package brown.market.library;
 
 import java.util.Map;
 
-import brown.bidbundle.IBidBundle;
 import brown.tradeable.ITradeable;
 import brown.value.config.IValuationConfig;
 

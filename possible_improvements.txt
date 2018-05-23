@@ -1,0 +1,13 @@
+-add MarketManager methods to IMarketManager interface
+-either make clear the purpose or delete the 'Query' series of classes
+-an interface for buy and sell orders. 
+-fix recurring sanitize hack, if possible
+-find a home for Order
+-differentiate between twosided orders and account orders
+-different market state for twosided auctions?
+-Interface for Order
+-remove copy hack within market preset.
+
+*DONE*
+-clean up OrderBook, remove unneccesary classes; abstract
+-find a new home for BuyOrder, SellOrder, OrderBook

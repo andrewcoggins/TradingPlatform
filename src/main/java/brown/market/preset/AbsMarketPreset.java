@@ -11,7 +11,10 @@ import brown.rules.IQueryRule;
 import brown.rules.IRecordKeepingRule;
 
 /**
- * provides a clean format for creating sets of rules for markets.
+ * Describes all the rules for a particular market.
+ * These rules fully describe the behavior of the auction.
+ * @author acoggins
+ *
  */
 public abstract class AbsMarketPreset {
   

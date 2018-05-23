@@ -10,7 +10,6 @@ import org.spectrumauctions.sats.core.model.Bundle;
 import org.spectrumauctions.sats.core.model.mrvm.MRVMBidder;
 import org.spectrumauctions.sats.core.model.mrvm.MRVMLicense;
 
-import brown.tradeable.ITradeable;
 import brown.tradeable.library.ComplexTradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.IValuationConfig;

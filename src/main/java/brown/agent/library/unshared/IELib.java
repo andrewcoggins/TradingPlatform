@@ -12,8 +12,8 @@ import com.google.common.collect.Table;
 
 import brown.accounting.library.Ledger;
 import brown.accounting.library.Transaction;
-import brown.market.marketstate.library.BuyOrder;
-import brown.market.marketstate.library.SellOrder;
+import brown.market.twosided.BuyOrder;
+import brown.market.twosided.SellOrder;
 
 /**
  * Library with static methods to support IEBot.s

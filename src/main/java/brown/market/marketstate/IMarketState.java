@@ -3,10 +3,9 @@ package brown.market.marketstate;
 import java.util.List;
 import java.util.Map;
 
-import brown.bidbundle.IBidBundle;
 import brown.market.library.PrevStateInfo;
 import brown.market.marketstate.library.Order;
-import brown.market.marketstate.library.OrderBook;
+import brown.market.twosided.IOrderBook;
 import brown.messages.library.TradeMessage;
 import brown.messages.library.GameReportMessage;
 import brown.messages.library.TradeRequestMessage;
@@ -14,7 +13,8 @@ import brown.tradeable.ITradeable;
 
 /**
  * stores the internal state of a market as 
- * bidding is occurring.
+ * bidding is occurring. Consists of a series of getters 
+ * and setters for fields of the market.
  * 
  * @author acoggins
  */
@@ -117,9 +117,9 @@ public interface IMarketState {
     
     public void setGroups(List<List<Integer>> groups);
 
-    public OrderBook getOrderBook();
+    public IOrderBook getOrderBook();
 
-    void setOrderBook(OrderBook book);
+    void setOrderBook(IOrderBook book);
     
     //TODO: market update. 
 

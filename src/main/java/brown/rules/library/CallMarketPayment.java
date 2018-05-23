@@ -10,13 +10,12 @@ import brown.bid.library.TwoSidedBid;
 import brown.bidbundle.BundleType;
 import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
-import brown.market.marketstate.library.BuyOrder;
 import brown.market.marketstate.library.Order;
-import brown.market.marketstate.library.OrderBook;
-import brown.market.marketstate.library.SellOrder;
+import brown.market.twosided.BuyOrder;
+import brown.market.twosided.OrderBook;
+import brown.market.twosided.SellOrder;
 import brown.messages.library.TradeMessage;
 import brown.rules.IPaymentRule;
-import brown.tradeable.library.MultiTradeable;
 import brown.tradeable.library.SimpleTradeable;
 
 public class CallMarketPayment  implements IPaymentRule {
@@ -26,7 +25,7 @@ public class CallMarketPayment  implements IPaymentRule {
     Integer tradeableID  = ((SimpleTradeable) state.getTradeables().get(0)).ID;
     List<Order> orders = new LinkedList<Order>();
     
-    OrderBook book = state.getOrderBook();
+    OrderBook book = (OrderBook) state.getOrderBook();
     Logging.log("SIZE OF BOOK: " + book.getBuys().size());
     List <TradeMessage> bids = state.getBids();
     List<TradeMessage> tradeBids = new LinkedList<TradeMessage>();

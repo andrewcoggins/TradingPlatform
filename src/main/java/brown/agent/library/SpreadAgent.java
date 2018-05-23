@@ -5,9 +5,10 @@ import java.util.PriorityQueue;
 import brown.agent.AbsLab06Agent;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
-import brown.market.marketstate.library.BuyOrder;
-import brown.market.marketstate.library.OrderBook;
-import brown.market.marketstate.library.SellOrder;
+import brown.market.twosided.BuyOrder;
+import brown.market.twosided.IOrderBook;
+import brown.market.twosided.OrderBook;
+import brown.market.twosided.SellOrder;
 
 /**
  * Agent randomly either buys or sells and the middle price of spread
@@ -37,7 +38,7 @@ public class SpreadAgent extends AbsLab06Agent {
   public void onMarketRequest(CallMarketChannel channel) {
 
     
-    OrderBook ob = channel.getOrderBook();
+    IOrderBook ob = channel.getOrderBook();
     PriorityQueue<BuyOrder> buys = ob.getBuys();
     PriorityQueue<SellOrder> sells = ob.getSells();
     

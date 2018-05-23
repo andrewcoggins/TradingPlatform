@@ -11,16 +11,15 @@ import brown.rules.library.OneGrouping;
 import brown.rules.library.OneShotTermination;
 import brown.rules.library.XRoundTermination;
 
+/**
+ * Lemonade game where bids are anonymous.
+ * @author acoggins
+ *
+ */
 public class LemonadeAnonRules extends AbsMarketPreset {
   private int numSlots;
   private int numRuns;
   
-  
-  /**
-   * some of these are guesses.
-   * need to pass in the market internal state, 
-   * or otherwise delete it from this constructor.
-   */
   public LemonadeAnonRules(int numSlots, int numRuns) {
     super(new NoAllocation(),
         new LemonadeGroupedPayment(numSlots), 
@@ -38,7 +37,6 @@ public class LemonadeAnonRules extends AbsMarketPreset {
 
   @Override
   public AbsMarketPreset copy() {
-    // TODO Auto-generated method stub
     return new LemonadeAnonRules(this.numSlots,this.numRuns);
   } 
 }

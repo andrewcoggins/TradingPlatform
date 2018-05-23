@@ -12,7 +12,8 @@ import brown.bidbundle.library.TwoSidedBidBundle;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
 import brown.logging.Logging;
-import brown.market.marketstate.library.OrderBook;
+import brown.market.twosided.IOrderBook;
+import brown.market.twosided.OrderBook;
 import brown.messages.library.BankUpdateMessage;
 import brown.messages.library.CallMarketReportMessage;
 import brown.messages.library.GameReportMessage;
@@ -27,7 +28,7 @@ import brown.setup.library.CallMarketSetup;
  */
 public abstract class AbsPredictionMarketAgent extends AbsCallMarketAgent {
 	private List<Transaction> ledger;
-	private OrderBook orderbook;
+	private IOrderBook orderbook;
 
 	public AbsPredictionMarketAgent(String host, int port) throws AgentCreationException {
 		super(host, port, new CallMarketSetup());
@@ -104,7 +105,7 @@ public abstract class AbsPredictionMarketAgent extends AbsCallMarketAgent {
 		return this.ledger;
 	}
 	
-	public OrderBook getOrderBook() {
+	public IOrderBook getOrderBook() {
 		return this.orderbook;
 	}
 	

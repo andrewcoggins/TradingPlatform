@@ -6,7 +6,8 @@ import brown.agent.AbsAgent;
 import brown.agent.AbsCallMarketAgent;
 import brown.bidbundle.IBidBundle;
 import brown.channels.IAgentChannel;
-import brown.market.marketstate.library.OrderBook;
+import brown.market.twosided.IOrderBook;
+import brown.market.twosided.OrderBook;
 import brown.messages.library.TradeMessage;
 
 /**
@@ -15,7 +16,7 @@ import brown.messages.library.TradeMessage;
  *
  */
 public class CallMarketChannel extends AbsChannel{
-  private OrderBook book;
+  private IOrderBook book;
   private Boolean isTest;
 
   
@@ -33,13 +34,13 @@ public class CallMarketChannel extends AbsChannel{
    * Constructor
    * @param ID
    */
-  public CallMarketChannel(Integer ID, OrderBook book, boolean isTest) {
+  public CallMarketChannel(Integer ID, IOrderBook book, boolean isTest) {
     super(ID);
     this.book = book;
     this.isTest = isTest;
   }
   
-  public OrderBook getOrderBook(){
+  public IOrderBook getOrderBook() {
     return this.book;
   }
   

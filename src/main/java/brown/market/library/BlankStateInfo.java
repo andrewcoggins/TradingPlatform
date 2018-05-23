@@ -2,7 +2,12 @@ package brown.market.library;
 
 import brown.value.config.IValuationConfig;
 
-public class BlankStateInfo extends PrevStateInfo{
+/**
+ * This is a PrevStateInfo for the cases where it is not needed.
+ * @author acoggins
+ *
+ */
+public class BlankStateInfo extends PrevStateInfo {
   PrevStateType type;
   
   public BlankStateInfo() {
@@ -24,7 +29,6 @@ public class BlankStateInfo extends PrevStateInfo{
 
   @Override
   public PrevStateType getType() {
-    // TODO Auto-generated method stub
     return this.type;
   }
 }

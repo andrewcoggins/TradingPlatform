@@ -11,14 +11,15 @@ import brown.rules.library.HighestPriceAllocation;
 import brown.rules.library.SimpleSecondPricePayment;
 import brown.rules.library.XRoundTermination;
 
+/**
+ * Simple Simultaneous Second price auction
+ * with pair grouping.
+ * @author acoggins
+ *
+ */
 public class PairSSSP extends AbsMarketPreset {
   private int numRuns;
 
-  /**
-   * some of these are guesses.
-   * need to pass in the market internal state, 
-   * or otherwise delete it from this constructor.
-   */
   public PairSSSP(int numRuns) {
     super(new HighestPriceAllocation(),
         new SimpleSecondPricePayment(),

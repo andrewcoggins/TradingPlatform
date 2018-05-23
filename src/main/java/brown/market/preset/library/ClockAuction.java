@@ -11,14 +11,14 @@ import brown.rules.library.NoRecordKeeping;
 import brown.rules.library.OneGrouping;
 import brown.rules.library.OneShotTermination;
 
+/**
+ * Implementation of a clock auction. 
+ * @author acoggins
+ *
+ */
 public class ClockAuction extends AbsMarketPreset {
   double increment;
   
-  /**
-   * some of these are guesses.
-   * need to pass in the market internal state, 
-   * or otherwise delete it from this constructor.
-   */
   public ClockAuction(double increment) {
     super(new ClockAllocation(),
         new ClockPayment(),

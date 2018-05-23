@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import brown.bidbundle.IBidBundle;
-import brown.logging.Logging;
 import brown.market.IMarket;
 import brown.market.marketstate.IMarketState;
 import brown.market.marketstate.library.Order;
@@ -24,6 +22,11 @@ import brown.rules.IQueryRule;
 import brown.rules.IRecordKeepingRule;
 import brown.value.valuation.IValuation;
 
+/**
+ * Common implementation of IMarket.
+ * @author acoggins
+ *
+ */
 public class Market implements IMarket {
 
   private final IPaymentRule PRULE;

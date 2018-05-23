@@ -1,4 +1,4 @@
-package brown.market.marketstate.library;
+package brown.market.twosided;
 
 import java.util.Map;
 
@@ -6,7 +6,12 @@ import brown.bid.library.BidDirection;
 import brown.bid.library.TwoSidedBid;
 import brown.logging.Logging;
 
-public class BuyOrder implements Comparable<BuyOrder>{
+/**
+ * a BuyOrder is a request to buy in a two-sided market.
+ * @author acoggins
+ *
+ */
+public class BuyOrder implements Comparable<BuyOrder> {
   public final Integer agent;
   public final Integer quantity;
   public final Double price;
@@ -20,12 +25,25 @@ public class BuyOrder implements Comparable<BuyOrder>{
     this.price = null;
   }
   
+  /**
+   * a BuyOrder can be represented as a quantity price, and 
+   * the private ID of an agent.
+   * @param agent
+   * @param quantity
+   * @param price
+   */
   public BuyOrder(Integer agent, Integer quantity, Double price) {
     this.agent = agent;
     this.quantity = quantity;
     this.price = price;
   }
   
+  /**
+   * a BuyOrder can be represented as a TwoSidedBid and the 
+   * private ID of an agent.
+   * @param bid
+   * @param agent
+   */
   public BuyOrder(TwoSidedBid bid, Integer agent) {
     if (bid.direction != BidDirection.BUY){
       Logging.log("Attempting to create sell order with wrong bid direction");

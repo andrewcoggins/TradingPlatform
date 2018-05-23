@@ -5,9 +5,9 @@ import java.util.PriorityQueue;
 import brown.agent.AbsPredictionMarketAgent;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
-import brown.market.marketstate.library.BuyOrder;
-import brown.market.marketstate.library.OrderBook;
-import brown.market.marketstate.library.SellOrder;
+import brown.market.twosided.BuyOrder;
+import brown.market.twosided.IOrderBook;
+import brown.market.twosided.SellOrder;
 
 public class SanitizeTest extends AbsPredictionMarketAgent {
   
@@ -39,7 +39,7 @@ public class SanitizeTest extends AbsPredictionMarketAgent {
     }
     
     if (print && round < 11) {
-      OrderBook book = getOrderBook();
+      IOrderBook book = getOrderBook();
       PriorityQueue<BuyOrder> buys =  book.getBuys();
       PriorityQueue<SellOrder> sells = book.getSells();
       

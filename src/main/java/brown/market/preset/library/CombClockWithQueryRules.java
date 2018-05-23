@@ -7,16 +7,15 @@ import brown.rules.library.MixedQueryClockInformation;
 import brown.rules.library.MixedQueryClockOuterTC;
 import brown.rules.library.MixedQueryClockPayment;
 import brown.rules.library.MixedQueryClockQuery;
-import brown.rules.library.NoAllocation;
-import brown.rules.library.NoPayment;
 import brown.rules.library.NoRecordKeeping;
 import brown.rules.library.OneGrouping;
 import brown.rules.library.OneShotTermination;
-import brown.rules.library.QueryRoundActivity;
-import brown.rules.library.QueryRoundInformation;
-import brown.rules.library.QueryRoundQuery;
-import brown.rules.library.XRoundTermination;
 
+/**
+ * clock auction with query rules.
+ * @author acoggins
+ *
+ */
 public class CombClockWithQueryRules extends AbsMarketPreset {
   double increment;
   

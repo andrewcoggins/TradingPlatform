@@ -11,14 +11,15 @@ import brown.rules.library.OneGrouping;
 import brown.rules.library.OneShotTermination;
 import brown.rules.library.XTimeTermination;
 
+/**
+ * A call market is a two-sided market where agents buy
+ * and sell securities.
+ * @author acoggins
+ *
+ */
 public class CallMarket extends AbsMarketPreset {
   private double seconds;
-  
-  /**
-   * some of these are guesses.
-   * need to pass in the market internal state, 
-   * or otherwise delete it from this constructor.
-   */
+
   public CallMarket(double seconds) {
     super(new NoAllocation(),
         new CallMarketPayment(),

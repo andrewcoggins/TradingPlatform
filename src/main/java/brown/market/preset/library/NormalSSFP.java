@@ -11,15 +11,15 @@ import brown.rules.library.SimpleQuery;
 import brown.rules.library.HighestPriceAllocation;
 import brown.rules.library.XRoundTermination;
 
+/**
+ * Simple Simultaneous first price auction. 
+ * @author acoggins
+ *
+ */
 public class NormalSSFP extends AbsMarketPreset {
   private int numRuns;
   private String filePath;
 
-  /**
-   * some of these are guesses.
-   * need to pass in the market internal state, 
-   * or otherwise delete it from this constructor.
-   */
   public NormalSSFP(int numRuns, String filePath) {
     super(new HighestPriceAllocation(),
         new SimpleFirstPricePayment(),

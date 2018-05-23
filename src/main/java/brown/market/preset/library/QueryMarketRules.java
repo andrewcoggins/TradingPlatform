@@ -11,14 +11,14 @@ import brown.rules.library.QueryRoundInformation;
 import brown.rules.library.QueryRoundQuery;
 import brown.rules.library.XRoundTermination;
 
+/**
+ * Query market rules.
+ * @author acoggins
+ *
+ */
 public class QueryMarketRules extends AbsMarketPreset {
   int nrounds;
   
-  /**
-   * some of these are guesses.
-   * need to pass in the market internal state, 
-   * or otherwise delete it from this constructor.
-   */
   public QueryMarketRules(int nrounds) {
     super(new NoAllocation(),
         new NoPayment(),

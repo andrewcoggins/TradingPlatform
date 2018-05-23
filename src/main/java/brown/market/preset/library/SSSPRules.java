@@ -11,13 +11,13 @@ import brown.rules.library.HighestPriceAllocation;
 import brown.rules.library.SimpleSecondPricePayment;
 import brown.rules.library.XRoundTermination;
 
+/**
+ * Simple simultaneous second price auction.
+ * @author acoggins
+ *
+ */
 public class SSSPRules extends AbsMarketPreset {
   private int numRuns;
-  /**
-   * some of these are guesses.
-   * need to pass in the market internal state, 
-   * or otherwise delete it from this constructor.
-   */
   public SSSPRules(int numRuns) {
     super(new HighestPriceAllocation(),
         new SimpleSecondPricePayment(),

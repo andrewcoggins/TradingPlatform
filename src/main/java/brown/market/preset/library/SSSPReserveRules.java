@@ -11,13 +11,13 @@ import brown.rules.library.SimpleQuery;
 import brown.rules.library.SimpleSecondPricePayment;
 import brown.rules.library.XRoundTermination;
 
+/**
+ * Simple simultaneous second price auction with reserve prices.
+ * @author acoggins
+ *
+ */
 public class SSSPReserveRules extends AbsMarketPreset {
   private int numRuns;
-  /**
-   * SSSP with reserve prices imposed within the allocation rule.
-   * need to pass in the market internal state, 
-   * or otherwise delete it from this constructor.
-   */
   public SSSPReserveRules(int numRuns) {
     super(new HPReserveAllocation(),
         new SimpleSecondPricePayment(),

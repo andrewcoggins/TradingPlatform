@@ -1,13 +1,17 @@
 package brown.market.library;
 
+import brown.market.IPrevStateInfo;
 import brown.value.config.IValuationConfig;
 
-public abstract class PrevStateInfo {
+/**
+ * Abstract class for prev state info (see IPrevStateInfo).
+ * @author acoggins
+ *
+ */
+public abstract class PrevStateInfo implements IPrevStateInfo {
   
-  // Combine this report with information from another report
   public abstract void combine(PrevStateInfo prevState);
 
-  // Initialize the report
   public abstract void initialize(IValuationConfig gconfig);
   
   public abstract PrevStateType getType();

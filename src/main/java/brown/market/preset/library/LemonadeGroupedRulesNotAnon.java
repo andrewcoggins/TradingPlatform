@@ -11,15 +11,15 @@ import brown.rules.library.ThreeFourFiveGrouping;
 import brown.rules.library.OneShotTermination;
 import brown.rules.library.XRoundTermination;
 
+/**
+ * Lemonade Rules with groupings, but bidding is not anonymous.
+ * @author acoggins
+ *
+ */
 public class LemonadeGroupedRulesNotAnon extends AbsMarketPreset {
   private int numSlots;
   private int numRuns;
 
-  /**
-   * some of these are guesses.
-   * need to pass in the market internal state, 
-   * or otherwise delete it from this constructor.
-   */
   public LemonadeGroupedRulesNotAnon(int numSlots, int numRuns) {
     super(new NoAllocation(),
         new LemonadeGroupedPayment(numSlots), 

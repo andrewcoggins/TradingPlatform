@@ -4,8 +4,12 @@ import brown.accounting.library.Transaction;
 import brown.tradeable.ITradeable;
 
 /**
-* An order is ...
-*/
+ * An order is produced by the payment rule, and 
+ * describes the changes that occur in agent accounts
+ * as result of an auction.
+ * @author acoggins
+ *
+ */
 public class Order {
   
 	public final Integer TO;
@@ -45,11 +49,6 @@ public class Order {
 		this.QUANTITY = quantity;
 	}
 
-	// ??? this is all about Transactions !! 
-	public Transaction toTransaction() {
-		return new Transaction(this.TO, this.FROM, this.PRICE, this.QUANTITY, this.GOOD);
-	}
-
 	public Order updatePrice(double price) {
 		return new Order(this.TO, this.FROM, price, this.QUANTITY, this.GOOD);
 	}
@@ -60,6 +59,14 @@ public class Order {
 	
 	public Order updateFromAgent(Integer newAgent) {
    return new Order(this.TO, newAgent, this.PRICE, this.QUANTITY, this.GOOD);
+  }
+	
+	/**
+	 * Produces a transaction from this order.
+	 * @return a Transaction with the information stored in this order.
+	 */
+  public Transaction toTransaction() {
+    return new Transaction(this.TO, this.FROM, this.PRICE, this.QUANTITY, this.GOOD);
   }
 	  
 	@Override

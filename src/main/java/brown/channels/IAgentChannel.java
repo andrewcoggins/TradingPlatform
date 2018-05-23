@@ -5,12 +5,11 @@ import java.util.Map;
 import brown.agent.AbsAgent;
 import brown.bidbundle.IBidBundle;
 
-/*
- * Agents are exposed to client-side versions of markets through IMarket:
- * e.g., a OneSidedMarket, a TwoSidedMarket, or a NegotiationMarket. These
- * wrappers expose the current state of a market, as well as bid, buy, and sell
- * functionality. Agents can then simply call bid, buy, or sell on a Wrapper,
- * and the Wrapper will handle all communication with the server
+/**
+ * Agent channel mediates communication between the agent and the server
+ * by processing sent and received messages. 
+ * @author acoggins
+ *
  */
 public interface IAgentChannel {
   

@@ -11,12 +11,13 @@ import brown.rules.library.PredictionMarketInformation;
 import brown.rules.library.PredictionMarketPayment;
 import brown.rules.library.XRoundTermination;
 
+/**
+ * Prediction market with a settlement round.
+ * @author acoggins
+ *
+ */
 public class PredictionMarketSettlement extends AbsMarketPreset {
-  /**
-   * some of these are guesses.
-   * need to pass in the market internal state, 
-   * or otherwise delete it from this constructor.
-   */
+
   public PredictionMarketSettlement() {
     super(new NoAllocation(),
         new PredictionMarketPayment(),
