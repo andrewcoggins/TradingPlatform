@@ -8,6 +8,10 @@ import brown.market.marketstate.IMarketState;
  */
 public interface IOuterTC {
   
+  /**
+   * determines when an outer auction (sequential auction) is over.
+   * @param state market internal state.
+   */
   public void outerTerminated(IMarketState state);
 
 }

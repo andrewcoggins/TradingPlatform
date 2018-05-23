@@ -8,7 +8,14 @@ import brown.market.marketstate.IMarketState;
  */
 public interface IAllocationRule {
 
+  /**
+   * Sets an allocation in the market internal state.
+   * @param state market state.
+   */
   public void setAllocation(IMarketState state);
 
+  /**
+   * resets all stored information.
+   */
   public void reset();  
 }

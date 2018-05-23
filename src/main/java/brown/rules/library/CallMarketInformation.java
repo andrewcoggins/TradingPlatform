@@ -7,7 +7,6 @@ import java.util.Map;
 
 import brown.accounting.library.Ledger;
 import brown.accounting.library.Transaction;
-import brown.logging.Logging;
 import brown.market.library.PredictionMarketInfo;
 import brown.market.library.PrevStateInfo;
 import brown.market.marketstate.IMarketState;
@@ -16,6 +15,11 @@ import brown.messages.library.CallMarketReportMessage;
 import brown.messages.library.GameReportMessage;
 import brown.rules.IInformationRevelationPolicy;
 
+/**
+ * IR policy for a two-sided call market.
+ * @author kerry
+ *
+ */
 public class CallMarketInformation implements IInformationRevelationPolicy{
   private Ledger ledger;
   private int limit = 100;
@@ -36,9 +40,7 @@ public class CallMarketInformation implements IInformationRevelationPolicy{
       Transaction trans = order.toTransaction();
       this.ledger.add(trans);            
     }       
-        
     List<Ledger> ledgerList = this.ledger.splitUnshared(limit);
-    
     for (Ledger l: ledgerList){
       for (List<Integer> group : state.getGroups()){
         for (Integer agent : group){   

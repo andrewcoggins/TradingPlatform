@@ -2,25 +2,33 @@ package brown.rules.library;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import brown.bid.interim.BidType;
-import brown.bid.library.AuctionBid;
-import brown.bidbundle.IBidBundle;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IActivityRule;
 import brown.tradeable.ITradeable;
 
+/**
+ * Activity rule for ascending auctions. Updates reserve prices. 
+ * Not currently in use.
+ * @author andrew
+ *
+ */
 public class AscendingActivity implements IActivityRule {
 
   private final Map <ITradeable, Double> base; 
   private final Map <ITradeable, Double> increment; 
   private Map<Integer, Set<ITradeable>> pastDemand; 
   
+  /**
+   * Base reserve prices and increment reserve prices are set in constructor.
+   * @param aBase
+   * @param anIncrement
+   */
   public AscendingActivity(Map<ITradeable, Double> aBase, Map<ITradeable, Double> anIncrement) {
     this.base = aBase;  
     this.increment = anIncrement; 

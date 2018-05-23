@@ -6,7 +6,14 @@ import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IActivityRule;
 
+/**
+ * Activity rule for call markets. Just assures that a twosided bid bundle
+ * is being sent. 
+ * @author andrew
+ *
+ */
 public class CallMarketActivity implements IActivityRule {
+  
   @Override
   // Checks if agent has already bid
   public void isAcceptable(IMarketState state, TradeMessage aBid) {
@@ -26,13 +33,11 @@ public class CallMarketActivity implements IActivityRule {
 
   @Override
   public void setReserves(IMarketState state) {
-    // TODO Auto-generated method stub
-    
+    //noop
   }
 
   @Override
   public void reset() {
-    // TODO Auto-generated method stub    
+    //noop  
   }
-
 }
