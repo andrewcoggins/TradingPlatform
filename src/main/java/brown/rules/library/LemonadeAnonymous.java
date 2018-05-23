@@ -20,9 +20,6 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
     this.numSlots = numSlots;
   }
 
-  @Override
-  public void handleInfo() {
-  }
 
   @Override
   public void setReport(IMarketState state) {

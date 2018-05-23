@@ -21,10 +21,6 @@ public class LemonadeNonAnonymous implements IInformationRevelationPolicy{
     this.numSlots = numSlots;
   }
 
-  @Override
-  public void handleInfo() {
-  }
-
   @SuppressWarnings("unchecked")
   @Override
   public void setReport(IMarketState state) {

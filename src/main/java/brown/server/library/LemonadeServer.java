@@ -3,15 +3,17 @@ package brown.server.library;
 import java.util.LinkedList;
 import java.util.List;
 
-import brown.market.preset.library.LemonadeAnonRules;
-import brown.market.preset.library.LemonadeGroupedRulesAnon;
 import brown.market.preset.library.LemonadeGroupedRulesNotAnon;
-import brown.market.preset.library.LemonadeNonAnonRules;
 import brown.setup.library.LemonadeSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 import brown.value.config.LemonadeConfig;
 
+/**
+ * Server main class for lemonade game.
+ * @author acoggins
+ *
+ */
 public class LemonadeServer {
   public static void main(String[] args) throws InterruptedException {
     // Make sure students know this before hand so they can change some constant in their agents or something

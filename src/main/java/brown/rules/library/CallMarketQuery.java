@@ -9,6 +9,12 @@ import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeRequestMessage;
 import brown.rules.IQueryRule;
 
+/**
+ * Query rule for a call market Simply constructs a traderequest
+ * with a call market channel with the most updated version of the orderbook.
+ * @author kerry
+ *
+ */
 public class CallMarketQuery implements IQueryRule {
   @Override
   public void makeChannel(IMarketState state) {           

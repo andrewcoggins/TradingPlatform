@@ -6,6 +6,13 @@ import brown.server.ISimulation;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;
 
+/**
+ * A simulation specifies a sequence of markets that will 
+ * be run by the server, as well as information about 
+ * valuations, tradeables, and initial endowments.
+ * @author acoggins
+ *
+ */
 public class Simulation implements ISimulation {
 
   private final List<SimulMarkets> sequence;

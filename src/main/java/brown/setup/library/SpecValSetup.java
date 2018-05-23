@@ -9,6 +9,11 @@ import brown.setup.ISetup;
 
 import com.esotericsoftware.kryo.Kryo;
 
+/**
+ * additional setup for specval auction.
+ * @author acoggins
+ *
+ */
 public class SpecValSetup implements ISetup{
 
   public void setup(Kryo kryo) {

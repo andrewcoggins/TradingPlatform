@@ -15,6 +15,12 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.SMRAConfig;
 
+/**
+ * a typical SMRA auction with a price discovery round
+ * followed by a settlement round.
+ * @author acoggins
+ *
+ */
 public class SMRASecondPriceServer { 
   
   private static int numSims = 1;

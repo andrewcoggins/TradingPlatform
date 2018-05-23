@@ -21,10 +21,6 @@ public class PredictionMarketInformation implements IInformationRevelationPolicy
   }
 
   @Override
-  public void handleInfo() {
-  }
-
-  @Override
   public void setReport(IMarketState state) {
     Map<Integer,List<GameReportMessage>> reports = new HashMap<Integer,List<GameReportMessage>>();        
     PrevStateInfo pstate = state.getPrevState();    

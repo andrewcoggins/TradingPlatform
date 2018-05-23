@@ -1,9 +1,7 @@
 package brown.server.library;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import brown.market.preset.library.CombClockWithQueryRules;
 import brown.setup.library.SpecValSetup;
@@ -11,6 +9,11 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.SpecValV2Config;
 
+/**
+ * test of a query auction run.
+ * @author kerry
+ *
+ */
 public class QueryClockTest {
   
   //private static int numSims = 1;

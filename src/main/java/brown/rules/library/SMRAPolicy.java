@@ -20,11 +20,6 @@ import brown.rules.IInformationRevelationPolicy;
 public class SMRAPolicy implements IInformationRevelationPolicy {
 
   @Override
-  public void handleInfo() {
-    // TODO Auto-generated method stub
-  }
-
-  @Override
   public void setReport(IMarketState state) {
     // game reports for everyone.
     // give everyone the reserve prices for the goods.

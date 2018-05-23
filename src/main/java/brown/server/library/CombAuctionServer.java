@@ -10,6 +10,11 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.SpecValV3Config;
 
+/**
+ * server main class for combinatorial auctions.
+ * @author kerry
+ *
+ */
 public class CombAuctionServer {
   private int initDelay; 
   private int initLag;

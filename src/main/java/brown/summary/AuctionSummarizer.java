@@ -14,6 +14,11 @@ import brown.tradeable.library.ComplexTradeable;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.library.SpecValValuation;
 
+/**
+ * Auction Summarizer calculcates total and average utility across rounds.
+ * @author acoggins
+ *
+ */
 public class AuctionSummarizer implements IAuctionSummarizer { 
   
   private Map<Integer, Double> totalUtility;

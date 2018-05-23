@@ -17,11 +17,6 @@ import brown.rules.IInformationRevelationPolicy;
 
 public class QueryRoundInformation implements IInformationRevelationPolicy {
 
-  @Override
-  public void handleInfo() {
-    // TODO Auto-generated method stub
-
-  }
 
   @Override
   public void setReport(IMarketState state) {

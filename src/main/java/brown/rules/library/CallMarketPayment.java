@@ -18,6 +18,13 @@ import brown.messages.library.TradeMessage;
 import brown.rules.IPaymentRule;
 import brown.tradeable.library.SimpleTradeable;
 
+/**
+ * Payment rule for call markets. updates the order book with any 
+ * new trade messages, and converts all matched buy and sell orders
+ * into 'orders' (confusing) that update agents' accounts.
+ * @author kerry
+ *
+ */
 public class CallMarketPayment  implements IPaymentRule {
 
   @Override
@@ -44,10 +51,10 @@ public class CallMarketPayment  implements IPaymentRule {
     PriorityQueue<BuyOrder> buys = book.getBuys();
     PriorityQueue<SellOrder> sells = book.getSells();
 
-    for (TradeMessage bid : cancelBids){
+    for (TradeMessage bid : cancelBids) {
       Integer agent = bid.AgentID;
       CancelBid cancel = (CancelBid)  bid.Bundle.getBids();
-      if (cancel.direction == BidDirection.BUY){
+      if (cancel.direction == BidDirection.BUY) {
         buys.removeIf(buy -> buy.agent.equals(agent) && buy.price >= cancel.price);
       } else if (cancel.direction == BidDirection.SELL){
         sells.removeIf(sell -> sell.agent.equals(agent) && sell.price <= cancel.price);          
@@ -56,7 +63,7 @@ public class CallMarketPayment  implements IPaymentRule {
       }
     }
     
-    for (TradeMessage bid : tradeBids){
+    for (TradeMessage bid : tradeBids) {
         TwoSidedBid tsbid = (TwoSidedBid) bid.Bundle.getBids();
         int numToFill = tsbid.quantity;
         if (tsbid.direction == BidDirection.BUY) {
@@ -75,11 +82,11 @@ public class CallMarketPayment  implements IPaymentRule {
               }
             } else {
               sells.add(bestSell);
-              crossed=false;
+              crossed = false;
             }
           }
           // if OrderBook couldn't completely fill order, add it to unfilled orders          
-          if (numToFill > 0 ){
+          if (numToFill > 0 ) {
             buys.add(new BuyOrder(bid.AgentID, numToFill, tsbid.price));
           }
         } else if (tsbid.direction == BidDirection.SELL) {
@@ -98,11 +105,11 @@ public class CallMarketPayment  implements IPaymentRule {
               }              
             } else {     
               buys.add(bestBuy);
-              crossed=false;
+              crossed = false;
             }            
           }
           // if OrderBook couldn't completely fill order, add it to unfilled orders          
-          if (numToFill > 0 ){   
+          if (numToFill > 0 ) {   
             sells.add(new SellOrder(bid.AgentID, numToFill, tsbid.price));
           }          
         } else {

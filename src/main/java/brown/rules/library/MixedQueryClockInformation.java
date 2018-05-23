@@ -18,11 +18,6 @@ import brown.tradeable.ITradeable;
 
 public class MixedQueryClockInformation implements IInformationRevelationPolicy {
 
-  @Override
-  public void handleInfo() {
-    // TODO Auto-generated method stub
-
-  }
 
   @Override
   public void setReport(IMarketState state) {

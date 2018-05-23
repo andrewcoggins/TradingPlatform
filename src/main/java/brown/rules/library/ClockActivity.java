@@ -7,16 +7,21 @@ import java.util.Map.Entry;
 
 import brown.bid.interim.BidType;
 import brown.bid.library.AuctionBid;
-import brown.bid.library.QueryBid;
 import brown.bidbundle.BundleType;
 import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IActivityRule;
 import brown.tradeable.ITradeable;
-import brown.tradeable.library.ComplexTradeable;
 import brown.tradeable.library.SimpleTradeable;
 
+/**
+ * Activity rule for a clock open outcry auction.
+ * determines conditions for acceptable bidding and
+ * increments the reserve prices.
+ * @author acoggins
+ *
+ */
 public class ClockActivity implements IActivityRule {
   private final Double increment; 
   
@@ -26,7 +31,7 @@ public class ClockActivity implements IActivityRule {
 
   @Override
   public void isAcceptable(IMarketState state, TradeMessage aBid) {
-      if (aBid.Bundle.getType() == BundleType.AUCTION){
+      if (aBid.Bundle.getType() == BundleType.AUCTION) {
         AuctionBid bid = (AuctionBid) aBid.Bundle.getBids();
         double sumOfBids = 0;
         double sumOfReserves = 0;
@@ -79,11 +84,11 @@ public class ClockActivity implements IActivityRule {
       Map<ITradeable, Double> currReserve = state.getReserve();
       Map<ITradeable, Double> newReserve = new HashMap<ITradeable, Double>();
       
-      for (ITradeable t : state.getTradeables()){
+      for (ITradeable t : state.getTradeables()) {
         Double currPrice = currReserve.get(t);
         Double newPrice = currPrice;
         if (alloc.containsKey(t)){
-          if (alloc.get(t).size() > 1){
+          if (alloc.get(t).size() > 1) {
             newPrice = newPrice + this.increment;
           }
         } else {
@@ -96,7 +101,6 @@ public class ClockActivity implements IActivityRule {
 
   @Override
   public void reset() {
-    // TODO Auto-generated method stub
-
+    //noop
   }
 }

@@ -13,6 +13,11 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.PredictionMarketDecoysConfig;
 
+/**
+ * Server main class for call markets.
+ * @author kerry
+ *
+ */
 public class CallMarketServer {
 	private int seconds;
 	private int numSims;

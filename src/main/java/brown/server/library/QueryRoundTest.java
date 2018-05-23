@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.Set;
 
 import brown.market.preset.library.QueryMarketRules;
-import brown.market.preset.library.SSFPNoRecord;
-import brown.market.preset.library.SSSPRules;
 import brown.setup.library.SpecValSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.SpecValV2Config;
 
+/**
+ * test of a query market auction.
+ * @author kerry
+ *
+ */
 public class QueryRoundTest {
   
   //private static int numSims = 1;

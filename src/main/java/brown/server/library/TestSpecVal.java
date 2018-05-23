@@ -11,6 +11,11 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.SpecValV2Config;
 
+/**
+ * test for a specval auction.
+ * @author acoggins
+ *
+ */
 public class TestSpecVal {
   
   //private static int numSims = 1;

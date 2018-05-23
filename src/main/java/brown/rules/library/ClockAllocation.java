@@ -16,6 +16,14 @@ import brown.rules.IAllocationRule;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 
+/**
+ * Allocation rule for a clock auction.
+ * keeps a history of old allocations and updates 
+ * new allocations accordingly. 
+ * I wonder if this could be done better.
+ * @author acoggins
+ *
+ */
 public class ClockAllocation implements IAllocationRule {
 
   @Override
@@ -68,7 +76,7 @@ public class ClockAllocation implements IAllocationRule {
     state.setAllocation(altAllocToAlloc(newAlloc));
   }
   
-  public Map<Integer, List<ITradeable>> altAllocToAlloc(Map<ITradeable, List<Integer>> altAlloc){
+  private Map<Integer, List<ITradeable>> altAllocToAlloc(Map<ITradeable, List<Integer>> altAlloc) {
     Map<Integer, List<ITradeable>> toReturn = new HashMap<Integer, List<ITradeable>>();
     for (Entry<ITradeable,List<Integer>> entry : altAlloc.entrySet()){
       for (Integer agent: entry.getValue()){
@@ -82,8 +90,7 @@ public class ClockAllocation implements IAllocationRule {
   
   @Override
   public void reset() {
-    // TODO Auto-generated method stub
-
+    // noop
   }
 
 }

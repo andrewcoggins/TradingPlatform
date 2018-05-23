@@ -15,6 +15,12 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.SMRAConfig;
 
+/**
+ * Main server for a SMRA auction with no revealed preference activity rule.
+ * not fully functional.
+ * @author acoggins
+ *
+ */
 public class SMRANoRevealed {
   
   private static int numSims = 1;

@@ -16,6 +16,11 @@ import brown.messages.library.PredictionMarketReport;
 import brown.messages.library.PredictionMarketValuationMessage;
 import brown.setup.ISetup;
 
+/**
+ * additional kryo setup for call market auction.
+ * @author acoggins
+ *
+ */
 public class CallMarketSetup implements ISetup {
 
   @Override

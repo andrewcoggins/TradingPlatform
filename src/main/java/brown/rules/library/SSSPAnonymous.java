@@ -14,12 +14,6 @@ import brown.rules.IInformationRevelationPolicy;
 public class SSSPAnonymous implements IInformationRevelationPolicy {
 
   @Override
-  public void handleInfo() {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
   public void setReport(IMarketState state) {
     Map<Integer,List<GameReportMessage>> reports = new HashMap<Integer,List<GameReportMessage>>();    
     

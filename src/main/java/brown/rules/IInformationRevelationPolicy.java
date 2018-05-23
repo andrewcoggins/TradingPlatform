@@ -3,17 +3,12 @@ package brown.rules;
 import brown.market.marketstate.IMarketState;
 
 /**
- * Determins what information is revealed to agent, and what information 
+ * Determines what information is revealed to agent, and what information 
  * is passed between auctions in a sequential simulation.
  * @author andrew
  *
  */
 public interface IInformationRevelationPolicy {
-  
-  /**
-   * handle information
-   */
-  public void handleInfo();
 
   /**
    * determines what the game report should be

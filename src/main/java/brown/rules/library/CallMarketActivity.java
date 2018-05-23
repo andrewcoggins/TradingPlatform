@@ -9,7 +9,7 @@ import brown.rules.IActivityRule;
 /**
  * Activity rule for call markets. Just assures that a twosided bid bundle
  * is being sent. 
- * @author andrew
+ * @author kerry
  *
  */
 public class CallMarketActivity implements IActivityRule {

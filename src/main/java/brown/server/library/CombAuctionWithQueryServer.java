@@ -1,22 +1,21 @@
 package brown.server.library;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import brown.market.preset.AbsMarketPreset;
-import brown.market.preset.library.CallMarket;
 import brown.market.preset.library.CombClockWithQueryRules;
-import brown.market.preset.library.PredictionMarketSettlement;
 import brown.market.preset.library.QueryMarketRules;
-import brown.setup.library.CallMarketSetup;
 import brown.setup.library.SpecValSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.config.PredictionMarketDecoysConfig;
 import brown.value.config.SpecValV2Config;
 
+/**
+ * Combinatorial auction server main class, with query.
+ * @author kerry
+ *
+ */
 public class CombAuctionWithQueryServer {
   private int initDelay; 
   private int lag;      

@@ -3,7 +3,6 @@ package brown.server.library;
 import java.util.LinkedList;
 import java.util.List;
 
-import brown.accounting.library.Account;
 import brown.logging.Logging;
 import brown.market.preset.AbsMarketPreset;
 import brown.server.AbsServer;
@@ -12,12 +11,28 @@ import brown.summary.AuctionSummarizer;
 import brown.tradeable.ITradeable;
 import brown.value.config.ValConfig;
 
+/**
+ * RunServer manages some of the dynamics of running a simulation, 
+ * including how many times a simulation will be run, the delay between auctions, 
+ * and the sequence of markets in a single simulation.
+ * @author acoggins
+ *
+ */
 public class RunServer extends AbsServer {
-
+  
+  /**
+   * runServer simple extends AbsServer
+   * @param port
+   * @param gameSetup
+   */
   public RunServer(int port, ISetup gameSetup) {
     super(port, gameSetup);
   }
   
+  /**
+   * creates a delay for agents to register at the beginning of a simulation.
+   * @param time
+   */
   private void delay(int time) {
     int i = 0;
     while (i < time) {
@@ -67,7 +82,7 @@ public class RunServer extends AbsServer {
   }
   
   /**
-   * Runs a series of simulations.=
+   * Runs a series of simulations.
    * @param sim
    * the simluation to be run.  
    * @param numRuns

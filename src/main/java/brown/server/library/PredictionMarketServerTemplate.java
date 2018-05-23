@@ -1,5 +1,11 @@
 package brown.server.library; // TODO: change this to your package
 
+/**
+ * template given to students for prediction market project.
+ * simplifies changing fields of the simulation.
+ * @author kerry
+ *
+ */
 public class PredictionMarketServerTemplate {
 	private static int seconds = 30; 	// number of seconds per round
 	private static int nSims = 1; 		// number of rounds to run

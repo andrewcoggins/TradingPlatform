@@ -13,6 +13,11 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.PredictionMarketDecoysConfig;
 
+/**
+ * Server main class for prediction market project.
+ * @author kerry
+ *
+ */
 public class PredictionMarketServer {
   private int seconds;
   private int numSims;

@@ -11,13 +11,14 @@ import brown.messages.library.GameReportMessage;
 import brown.rules.IInformationRevelationPolicy;
 import brown.tradeable.ITradeable;
 
+/**
+ * IR policy for a clock auction. Produces a series of combinatorial clock
+ * reports to go back to agents.
+ * @author kerry
+ *
+ */
 public class ClockInformation implements IInformationRevelationPolicy {
 
-  @Override
-  public void handleInfo() {
-    // TODO Auto-generated method stub
-
-  }
 
   @Override
   public void setReport(IMarketState state) {
@@ -28,7 +29,7 @@ public class ClockInformation implements IInformationRevelationPolicy {
     Map<Integer, List<ITradeable>> alloc = state.getAllocation();
     
     for (Integer agent : alloc.keySet()){
-      Map<ITradeable, Double > report = new HashMap<ITradeable,Double>();
+      Map<ITradeable, Double> report = new HashMap<ITradeable,Double>();
       for (ITradeable t: state.getTradeables()){
         if (alloc.get(agent).contains(t)){
           report.put(t,(Double) 1./altAlloc.get(t).size());
@@ -45,8 +46,7 @@ public class ClockInformation implements IInformationRevelationPolicy {
 
   @Override
   public void reset() {
-    // TODO Auto-generated method stub
-
+    // noop
   }
 
   @Override

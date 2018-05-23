@@ -29,10 +29,6 @@ public class CallMarketInformation implements IInformationRevelationPolicy{
   }
 
   @Override
-  public void handleInfo() {
-  }
-
-  @Override
   public void setReport(IMarketState state) {
     List<Order> orders = state.getPayments();
     Map<Integer,List<GameReportMessage>> reports = new HashMap<Integer,List<GameReportMessage>>();    

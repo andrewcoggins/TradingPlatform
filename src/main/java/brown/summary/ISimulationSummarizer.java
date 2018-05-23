@@ -13,5 +13,10 @@ import brown.value.valuation.IValuation;
  */
 public interface ISimulationSummarizer {
   
+  /**
+   * collects information for summary.
+   * @param agentAccounts all agent accounts. 
+   * @param privateValuations all agent private valuations.
+   */
   public void collectInformation(List<Account> agentAccounts, Map<Integer, IValuation> privateValuations);
 }

@@ -7,11 +7,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -43,12 +41,20 @@ import brown.value.config.IValuationConfig;
 import brown.value.config.SpecValV2Config;
 import brown.value.config.SpecValV3Config;
 import brown.value.config.ValConfig;
-import brown.value.distribution.library.SpecValDistV2;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.ValuationType;
 import brown.value.valuation.library.SpecValValuation;
-import brown.value.valuation.library.XORValuation;
 
+/**
+ * The core server for the Trading Platform. Integrates all parts of the platform- 
+ * manages server-side agent information including accounts and valuations,
+ * mediates message passing between agents and markets, controls the dymanics of 
+ * markets within a simulation, collects and summarizes information about 
+ * agent accounts and utility at the end of simulations. 
+ * 
+ * @author acoggins, kerry, lcamery
+ *
+ */
 public abstract class AbsServer {
   
   // Server stuff
@@ -74,6 +80,12 @@ public abstract class AbsServer {
   protected Double initialMonies;  
 
 
+  /**
+   * Constructor for the server. AbsServer is a kryo server so it is initialized
+   * with a port and a setup.
+   * @param port the port of the server. 
+   * @param gameSetup the setup of the server that registers relevant classes.
+   */
   public AbsServer(int port, ISetup gameSetup) {
     this.PORT = port;
     this.agentCount = 0;
@@ -122,6 +134,12 @@ public abstract class AbsServer {
   }
 
 
+  /**
+   * Method run when an agent registers with the server. Gives the agent a private ID and 
+   * tracks the agent in the server.
+   * @param connection a kryo connection
+   * @param registration a registration message received from an agent.
+   */
   protected void onRegistration(Connection connection, RegistrationMessage registration) {
     if (registration.getID() == null) {
       Logging.log("[x] AbsServer-onRegistration: encountered null registration");
@@ -148,7 +166,11 @@ public abstract class AbsServer {
     }
   }
   
-  // Give agents valuations and give them initial goods
+  /**
+   *  Give agents valuations and initial goods and sends the agents private information.
+   *  This depends on the type of auction being run.
+   *  
+   */
   protected void initializeAgents() {
     ValConfig marketConfig = this.valueConfig;
     Map<Integer,PrivateInformationMessage> toSend = new HashMap<Integer,PrivateInformationMessage>();    
@@ -328,6 +350,12 @@ public abstract class AbsServer {
     }
   }  
   
+  /**
+   * Completes all auctions within a simulation by updating all auctions until no 
+   * more markets are open
+   * @param lag a lagtime between auctions, provided by server-side user.
+   * @throws InterruptedException
+   */
   public synchronized void completeAuctions(int lag) throws InterruptedException { 
     //run every outer cycle of the auction until it is terminated per the outer termination condition.
     while (this.manager.anyMarketsOpen()) {
@@ -338,11 +366,21 @@ public abstract class AbsServer {
     this.manager.updateAllInfo();    
   }
   
+  /**
+   * Resets a simulation. This occurs between simulations, when multiple 
+   * simulations are being run.
+   */
   public void resetSim() { 
     this.acctManager.reset();
     this.manager.reset();
   }
   
+  /**
+   * Prints the utilities of agents, and how they placed in auction at the 
+   * end of all simulation.
+   * provides an option to print utilities to an output file.
+   * @param outputFile the name of the file to which output is written.
+   */
   public void printUtilities(String outputFile) {
     Map<Integer,Double> toPrint = new HashMap<Integer,Double>();
     if (this.valueConfig.type == ValuationType.Auction) {

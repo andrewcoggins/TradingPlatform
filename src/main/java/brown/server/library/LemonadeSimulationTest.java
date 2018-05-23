@@ -4,16 +4,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 import brown.market.preset.AbsMarketPreset;
-import brown.market.preset.library.LemonadeAnonRules;
 import brown.market.preset.library.LemonadeGroupedRulesAnon;
-import brown.market.preset.library.LemonadeGroupedRulesNotAnon;
-import brown.market.preset.library.LemonadeNonAnonRules;
 import brown.setup.library.LemonadeSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.MultiTradeable;
 import brown.value.config.LemonadeConfig;
-import brown.value.config.ValConfig;
 
+/**
+ * Test of a lemonade game run.
+ * @author kerry
+ *
+ */
 public class LemonadeSimulationTest {
   public static void main(String[] args) throws InterruptedException {
     // Make sure students know this before hand so they can change some constant in their agents or something

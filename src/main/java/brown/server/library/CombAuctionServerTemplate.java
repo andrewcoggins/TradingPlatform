@@ -1,5 +1,11 @@
 package brown.server.library; // TODO: change this to your package
 
+/**
+ * Server template for combinatorial auction. 
+ * simplifies changing fields for main class. 
+ * used in final project.
+ *
+ */
 public class CombAuctionServerTemplate {
   private static int initDelay = 5;  // time to wait before beginning the simulation
   private static int initLag = 20000;
