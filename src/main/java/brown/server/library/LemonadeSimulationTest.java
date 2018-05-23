@@ -46,6 +46,6 @@ public class LemonadeSimulationTest {
     Simulation testSim = new Simulation(seq,new LemonadeConfig(),allTradeables,0.,new LinkedList<ITradeable>());    
         
     RunServer testServer = new RunServer(2121, new LemonadeSetup());
-    testServer.runSimulation(testSim, numSims, delayTime, lag);
+    testServer.runSimulation(testSim, numSims, delayTime, lag, null);
   }
 }

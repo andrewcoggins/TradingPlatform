@@ -44,6 +44,6 @@ public class SSFPServer {
     // initialize the server.
     RunServer testServer = new RunServer(2121, new SSSPSetup());
     // run
-    testServer.runSimulation(testSim, numSims, delayTime, lag);
+    testServer.runSimulation(testSim, numSims, delayTime, lag, null);
   }
 }

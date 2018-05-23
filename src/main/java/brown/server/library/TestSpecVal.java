@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import brown.market.preset.library.SSFPNoRecord;
-import brown.market.preset.library.SSSPRules;
-import brown.market.preset.library.SimpleVCG;
 import brown.setup.library.SpecValSetup;
-import brown.setup.library.VCGSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.SpecValV2Config;
@@ -37,6 +34,6 @@ public class TestSpecVal {
     //TODO: make agent
     //TODO: debug
     gameServer.runSimpleSim(allTradeablesList, new SSFPNoRecord(3),
-        new SpecValV2Config(50,10,2), 0.0, new LinkedList<ITradeable>(), delayTime, lag);
+        new SpecValV2Config(50,10,2), 0.0, new LinkedList<ITradeable>(), delayTime, lag, null);
   }
 }

@@ -19,9 +19,9 @@ import brown.value.config.AdditiveUniformConfig;
  */
 public class SSSPServer {
   
-  private static int numSims = 5;
+  private static int numSims = 1;
   private static int numTradeables = 7;
-  private static int delayTime = 5; 
+  private static int delayTime = 7; 
   private static int lag = 300;
   
   public static void main(String[] args) throws InterruptedException {
@@ -45,6 +45,6 @@ public class SSSPServer {
     // initialize the server.
     RunServer testServer = new RunServer(2121, new SSSPSetup());
     // run
-    testServer.runSimulation(testSim, numSims, delayTime, lag);
+    testServer.runSimulation(testSim, numSims, delayTime, lag, null);
   }
 }

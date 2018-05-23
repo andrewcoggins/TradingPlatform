@@ -18,7 +18,7 @@ import brown.value.valuation.IValuation;
  * @author acoggins
  *
  */
-public abstract class AbsAuctionAgent extends AbsAgent implements IAuctionAgent {
+public abstract class AbsAuctionAgent extends AbsAgent implements ISimpleSealedAgent {
   
   protected List<ITradeable> tradeables; 
   protected IValuation valuation;

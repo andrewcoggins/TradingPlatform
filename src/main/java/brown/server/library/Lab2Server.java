@@ -53,6 +53,6 @@ public class Lab2Server {
 	    		allTradeablesList,1.,new LinkedList<ITradeable>());    
 	    RunServer testServer = new RunServer(2121, new SSSPSetup());
 	    
-	    testServer.runSimulation(testSim, numSims, delayTime, lag);
+	    testServer.runSimulation(testSim, numSims, delayTime, lag, null);
 	}
 }

@@ -58,6 +58,6 @@ public class SMRANoRevealed {
     Simulation sim = new Simulation(seq, new SMRAConfig(allTradeables),
         allTradeablesList, 1., new LinkedList<ITradeable>()); 
     RunServer smraServer = new RunServer(2121, new SMRASetup()); 
-    smraServer.runSimulation(sim, numSims, delayTime, lag); 
+    smraServer.runSimulation(sim, numSims, delayTime, lag, null); 
   }
 }

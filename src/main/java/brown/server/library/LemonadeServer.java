@@ -29,6 +29,6 @@ public class LemonadeServer {
        
     // LemonadeGroupedRulesAnon and LemonadeGroupedRulesNotAnon
     new RunServer(2121, new LemonadeSetup()).runSimpleSim(allTradeables, new LemonadeGroupedRulesNotAnon(numSlots,numRuns), 
-        new LemonadeConfig(), 0., new LinkedList<ITradeable>(), delayTime, lag);
+        new LemonadeConfig(), 0., new LinkedList<ITradeable>(), delayTime, lag, null);
   }
 }

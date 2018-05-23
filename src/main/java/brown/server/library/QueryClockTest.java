@@ -29,6 +29,6 @@ public class QueryClockTest {
     RunServer gameServer = new RunServer(2121, new SpecValSetup());
     // run
     gameServer.runSimpleSim(allTradeablesList, new CombClockWithQueryRules(5.),
-        new SpecValV2Config(50,10,2), 0.0, new LinkedList<ITradeable>(), delayTime, lag);
+        new SpecValV2Config(50,10,2), 0.0, new LinkedList<ITradeable>(), delayTime, lag, null);
   }
 }
