@@ -4,14 +4,26 @@ import java.util.Map;
 
 import brown.tradeable.ITradeable;
 
+/**
+ * A Combinatorial Clock Report provides a game report for a combinatorial clock auction.
+ * @author kerry
+ *
+ */
 public class CombinatorialClockReport  extends GameReportMessage {
   public Map<ITradeable, Double> winnings;
   
-  public CombinatorialClockReport(){
+  /**
+   * void kryo
+   */
+  public CombinatorialClockReport() {
     this.winnings = null;
   }
   
-  public CombinatorialClockReport(Map<ITradeable, Double> winnings){
+  /**
+   * A Combinatorial clock report is initialized with price paid per tradeable won.
+   * @param winnings: a map from won tradeables to the price paid per tradeable. 
+   */
+  public CombinatorialClockReport(Map<ITradeable, Double> winnings) {
     this.winnings = winnings;
   }  
 

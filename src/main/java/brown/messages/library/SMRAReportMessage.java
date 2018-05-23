@@ -2,24 +2,37 @@ package brown.messages.library;
 
 import java.util.Map;
 
-import brown.bidbundle.IBidBundle;
 import brown.tradeable.ITradeable;
 
+/**
+ * A Game report message for a SMRA auction. 
+ * Gives the reserve prices. 
+ * @author andrew
+ *
+ */
 public class SMRAReportMessage extends GameReportMessage {
 
   private Map<ITradeable, Double> reserve; 
   
   /**
-   * for kryo. 
+   * void kryo. 
    */
   public SMRAReportMessage() {
     this.reserve = null; 
   }
 
+  /**
+   * SMRA report message is initialized with reserve prices.
+   * @param reserve
+   */
   public SMRAReportMessage(Map<ITradeable, Double> reserve) {
     this.reserve = reserve; 
   }
   
+  /**
+   * Gets the reserve prices per good.
+   * @return
+   */
   public Map<ITradeable, Double> getReserve() {
     return this.reserve; 
   }

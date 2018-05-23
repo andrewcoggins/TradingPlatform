@@ -29,6 +29,11 @@ public class RegistrationMessage extends AbsMessage {
 		this.name = null;
 	}
 	
+	/**
+	 * Registration with name.
+	 * @param ID agent's ID
+	 * @param name: agent's name
+	 */
 	 public RegistrationMessage(Integer ID, String name) {
 	    super(ID);
 	    this.name = name;

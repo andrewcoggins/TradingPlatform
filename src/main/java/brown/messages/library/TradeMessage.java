@@ -3,12 +3,22 @@ package brown.messages.library;
 import brown.agent.AbsAgent;
 import brown.bidbundle.IBidBundle;
 
+/**
+ * Trade message is sent by the agent to the server
+ * specifying an action withing a trading environment
+ * This may be a bid or some other action. 
+ * @author andrew
+ *
+ */
 public class TradeMessage extends AbsMessage {
   
 	public final IBidBundle Bundle;
 	public final Integer AuctionID;
 	public final Integer AgentID;
 	
+	/**
+	 * void kryo
+	 */
 	public TradeMessage() {
 		super(null);
 		this.AgentID = null;

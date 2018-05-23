@@ -5,11 +5,18 @@ import java.util.Map;
 import brown.messages.library.GameReportMessage;
 import brown.tradeable.library.ComplexTradeable;
 
+/**
+ * Game report message for the spectrum auction, or really any complex auction. 
+ * @author kerrys
+ *
+ */
 public class SpecValValuationReport extends GameReportMessage {
   private Map<ComplexTradeable,Double> report;
   
-  // void kryo
-  public SpecValValuationReport(){
+  /**
+   * void kryo
+   */
+  public SpecValValuationReport() {
     this.report = null;
   }
   
@@ -21,7 +28,7 @@ public class SpecValValuationReport extends GameReportMessage {
     return this;
     }
 
-  public Map<ComplexTradeable,Double> getValuation(){
+  public Map<ComplexTradeable,Double> getValuation() {
     return(this.report);
   }
   

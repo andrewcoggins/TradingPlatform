@@ -7,6 +7,8 @@
 -different market state for twosided auctions?
 -Interface for Order
 -remove copy hack within market preset.
+-do messages need IDs? 
+-rename specval complex? 
 
 *DONE*
 -clean up OrderBook, remove unneccesary classes; abstract

@@ -8,27 +8,22 @@ import brown.bidbundle.IBidBundle;
 import brown.channels.IAgentChannel;
 
 /**
- * For each open market, the server then sends all agents a TradeRequest,
- * which describes the current market state: quotes for one-sided markets,
- * and orderBooks for two-sided markets. Whenever an agent wants, it can
- * respond to the TradeRequest by constructing and sending the server a
- * BidBundle (using the methods bid, buy, sell, etc.) for that market.
- * 
- * @author lcamery
+ * Trade request message is sent by an open market 
+ * to an agent to prompt bidding in that market. 
+ * An agent typically sends a trademessage in response
+ * to a TradeRequestMessage
+ * @author andrew
+ *
  */
 public class TradeRequestMessage extends AbsMessage {
-  
-	@Override
-  public String toString() {
-    return "TradeRequestMessage [MARKET=" + MARKET + ", reserve=" + reserve
-        + ", idToSize=" + idToSize + "]";
-  }
 
   public final IAgentChannel MARKET;
-	// not used right now
 	public final IBidBundle reserve;
 	public final Map<Integer,Integer> idToSize;
 	
+	/**
+	 * void kryo 
+	 */
 	public TradeRequestMessage() {
 		super(null);
 		MARKET = null;
@@ -68,4 +63,10 @@ public class TradeRequestMessage extends AbsMessage {
 	  }
 	  return new TradeRequestMessage(this.ID, this.MARKET.sanitize(agent, privateToPublic), sanitizedMap);
 	}	
+	
+	 @Override
+	  public String toString() {
+	    return "TradeRequestMessage [MARKET=" + MARKET + ", reserve=" + reserve
+	        + ", idToSize=" + idToSize + "]";
+	  }
 }

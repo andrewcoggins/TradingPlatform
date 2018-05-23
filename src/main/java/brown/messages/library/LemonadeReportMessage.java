@@ -8,22 +8,23 @@ import java.util.Map;
 import brown.logging.Logging;
 import brown.messages.library.GameReportMessage;
 
+/**
+ * A Lemonade Report Message gives a game report for the lemonade game.
+ * @author andrew
+ *
+ */
 public class LemonadeReportMessage extends GameReportMessage {
   private List<Integer>[] slots_ids;
   private final Integer[] slots_anon;
   private boolean isAnon;
   
-  // void kryo
+  /**
+   * void kryo
+   */
   public LemonadeReportMessage(){
     this.slots_anon = null;
     this.slots_ids = null;
     this.isAnon = true;
-  }
-  
-  @Override
-  public String toString() {
-    return "LemonadeReportMessage [Anon=" + Arrays.toString(slots_anon) + 
-        "\n" + "With IDs:" + Arrays.toString(slots_ids) + ", isAnon: " + isAnon + "]";
   }
   
   public LemonadeReportMessage(Integer[] slots, boolean isAnon) {
@@ -79,5 +80,11 @@ public class LemonadeReportMessage extends GameReportMessage {
   
   public boolean isAnon(){
     return this.isAnon;
+  }
+  
+  @Override
+  public String toString() {
+    return "LemonadeReportMessage [Anon=" + Arrays.toString(slots_anon) + 
+        "\n" + "With IDs:" + Arrays.toString(slots_ids) + ", isAnon: " + isAnon + "]";
   }
 }

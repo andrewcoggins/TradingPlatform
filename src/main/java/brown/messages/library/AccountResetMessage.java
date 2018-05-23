@@ -5,17 +5,34 @@ import java.util.List;
 import brown.agent.AbsAgent;
 import brown.tradeable.ITradeable;
 
-public class AccountResetMessage extends AbsMessage{
+/**
+ * Account reset message notifies an agent when their account has been reset at the 
+ * start of a new simulation. The message describes the tradeables and money that
+ * the agent ended the simulation with. 
+ * @author kerry
+ *
+ */
+public class AccountResetMessage extends AbsMessage {
 
   public final List<ITradeable> tradeables;
   public final Double monies; 
   
+  /**
+   * null kryo
+   */
   public AccountResetMessage() {
     super(null);
     this.tradeables = null; 
     this.monies = null;
   }
 
+  /**
+   * Account reset message initialized with an agent ID, and a list of tradeables
+   * and money in account before reset.
+   * @param ID agent ID
+   * @param tradeables tradeables in account
+   * @param monies money in account 
+   */
   public AccountResetMessage(int ID, List<ITradeable> tradeables, double monies) {
     super(ID);
     this.tradeables = tradeables;

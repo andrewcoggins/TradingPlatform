@@ -11,6 +11,9 @@ public class StringMessage extends AbsMessage {
   
   public final String message;
   
+  /**
+   * void kryo
+   */
   public StringMessage() {
     super(null);
     this.message= null;

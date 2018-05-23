@@ -11,6 +11,9 @@ public class ErrorMessage extends AbsMessage {
 	
 	public final String error;
   
+	/**
+	 * void kryo
+	 */
   public ErrorMessage() {
 		super(null);
 		error= null;

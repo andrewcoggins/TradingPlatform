@@ -4,19 +4,35 @@ import java.util.Map;
 
 import brown.messages.library.GameReportMessage;
 
+/**
+ * A Game Report Message for the prediction market game.
+ * @author kerry
+ *
+ */
 public class PredictionMarketReport extends GameReportMessage {
   private Boolean coin;
   
-  // void kryo
-  public PredictionMarketReport(){
+  /**
+   * void kryo
+   */
+  public PredictionMarketReport() {
     this.coin = null;
   }
   
+  /**
+   * Prediction market report simply displays the true coin
+   * with which the agent was endowed.
+   * @param coin: true if heads
+   */
   public PredictionMarketReport(Boolean coin){
     this.coin = coin;
   }  
 
-  public Boolean getCoin(){
+  /**
+   * Gets the true coin given to the agent.
+   * @return boolean giving whether the coin is heads or not
+   */
+  public Boolean getCoin() {
     return this.coin;
   }
 

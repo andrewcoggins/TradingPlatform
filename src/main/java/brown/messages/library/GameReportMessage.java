@@ -2,7 +2,6 @@ package brown.messages.library;
 
 import java.util.Map;
 
-import brown.accounting.library.Ledger;
 import brown.agent.AbsAgent;
 
 /**
@@ -15,6 +14,9 @@ import brown.agent.AbsAgent;
  */
 public abstract class GameReportMessage extends AbsMessage {
 	
+  /*
+   * void kryo
+   */
 	public GameReportMessage() {
 		super(null);
 	}

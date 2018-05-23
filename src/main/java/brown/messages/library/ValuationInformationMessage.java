@@ -6,6 +6,14 @@ import brown.tradeable.ITradeable;
 import brown.value.distribution.IValuationDistribution;
 import brown.value.valuation.IValuation;
 
+/**
+ * Valuation information message gives a typical valuation for a series
+ * of tradeables. It may include a private valuation over goods as well as 
+ * the distribution from which the agents' valuations are drawn, so the agent
+ * can perform monte carlo sampling. 
+ * @author andrew
+ *
+ */
 public class ValuationInformationMessage extends PrivateInformationMessage {
 
   private List<ITradeable> allTradeables; 
@@ -23,6 +31,12 @@ public class ValuationInformationMessage extends PrivateInformationMessage {
     this.allValuations = null;     
   }
   
+  /**
+   * A ValuationInformationMessage specifies tradeables and valuation. 
+   * @param ID message ID
+   * @param allTradeables all tradeables that are valued.
+   * @param privateValuation the private valuation over tradeables.
+   */
   public ValuationInformationMessage(Integer ID, List<ITradeable> allTradeables, IValuation privateValuation) {
     super(ID);
     this.allTradeables = allTradeables;
@@ -30,6 +44,13 @@ public class ValuationInformationMessage extends PrivateInformationMessage {
     this.allValuations = null;
   }
 
+  /**
+   * A ValuationInformationMessage specifies tradeables and valuation, and distribution. 
+   * @param ID message ID
+   * @param allTradeables all tradeables that are valued.
+   * @param privateValuation the private valuation over tradeables.
+   * @param allValuations the distribution from which agents' valuations are drawn.
+   */
   public ValuationInformationMessage(Integer ID, List<ITradeable> allTradeables, IValuation privateValuation, 
       IValuationDistribution allValuations) {
     super(ID);
@@ -38,14 +59,26 @@ public class ValuationInformationMessage extends PrivateInformationMessage {
     this.allValuations = allValuations;
   }
   
+  /**
+   * getter for tradeables
+   * @return all valued tradeables. 
+   */
   public List<ITradeable> getTradeables() {
     return this.allTradeables; 
   }
   
+  /**
+   * getter for valuation
+   * @return valuation over tradeables
+   */
   public IValuation getPrivateValuation() {
     return this.privateValuation; 
   }
   
+  /**
+   * getter for valuation distribution
+   * @return distribution from which valuations are drawn.
+   */
   public IValuationDistribution getAllValuations() {
     return this.allValuations; 
   }

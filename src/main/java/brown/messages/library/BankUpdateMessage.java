@@ -14,6 +14,9 @@ public class BankUpdateMessage extends AbsMessage {
 	public final Double moniesChanged; 
 	public final Double quantity;
 	
+	/*
+	 * null kryo
+	 */
 	public BankUpdateMessage() {
 		super(null);
 		this.tradeableAdded = null; 
@@ -58,16 +61,13 @@ public class BankUpdateMessage extends AbsMessage {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result =
-        prime * result
-            + ((moniesChanged == null) ? 0 : moniesChanged.hashCode());
+    result = prime * result
+        + ((moniesChanged == null) ? 0 : moniesChanged.hashCode());
     result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
-    result =
-        prime * result
-            + ((tradeableAdded == null) ? 0 : tradeableAdded.hashCode());
-    result =
-        prime * result
-            + ((tradeableLost == null) ? 0 : tradeableLost.hashCode());
+    result = prime * result
+        + ((tradeableAdded == null) ? 0 : tradeableAdded.hashCode());
+    result = prime * result
+        + ((tradeableLost == null) ? 0 : tradeableLost.hashCode());
     return result;
   }
 
@@ -102,4 +102,5 @@ public class BankUpdateMessage extends AbsMessage {
       return false;
     return true;
   }
+  
 }

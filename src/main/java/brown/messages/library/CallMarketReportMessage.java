@@ -7,18 +7,33 @@ import brown.accounting.library.Ledger;
 import brown.accounting.library.Transaction;
 import brown.messages.library.GameReportMessage;
 
+/**
+ * A Call Market report message provides a game report message
+ * for a call market auction.
+ * @author kerry
+ *
+ */
 public class CallMarketReportMessage extends GameReportMessage {
   private Ledger ledger;
   
-  // void kryo
-  public CallMarketReportMessage(){
+  /**
+   * void kryo
+   */
+  public CallMarketReportMessage() {
     this.ledger = null;
   }
   
-  public CallMarketReportMessage(Ledger ledger){
+  /**
+   * A Call market report message simply takes a ledger.
+   * @param ledger
+   */
+  public CallMarketReportMessage(Ledger ledger) {
     this.ledger = ledger;
   }  
 
+  /*
+   * simply returns transactions stored in ledger.
+   */
   public List<Transaction> getTransactions() {
     return this.ledger.getList();
   }
