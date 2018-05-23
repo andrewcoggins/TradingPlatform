@@ -13,7 +13,7 @@ import brown.setup.ISetup;
  * @author andrew
  *
  */
-public abstract class AbsLemonadeAgent extends AbsAgent implements ILemonadeAgent{
+public abstract class AbsLemonadeAgent extends AbsAgent implements ILemonadeAgent {
   
   protected LemonadeReportMessage latestGameReport;
   

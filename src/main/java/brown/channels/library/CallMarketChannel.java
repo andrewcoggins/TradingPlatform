@@ -6,10 +6,14 @@ import brown.agent.AbsAgent;
 import brown.agent.AbsCallMarketAgent;
 import brown.bidbundle.IBidBundle;
 import brown.channels.IAgentChannel;
-import brown.logging.Logging;
 import brown.market.marketstate.library.OrderBook;
 import brown.messages.library.TradeMessage;
 
+/**
+ * agent channel used in call market auctions.
+ * @author kerry
+ *
+ */
 public class CallMarketChannel extends AbsChannel{
   private OrderBook book;
   private Boolean isTest;

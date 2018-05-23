@@ -4,7 +4,11 @@ import brown.agent.AbsPredictionMarketAgent;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
 
-// Calculates fair value and then updates in direction of trades it does
+/**
+ * Calculates fair value and then updates in direction of trades it does
+ * @author kerry
+ *
+ */
 public class UpdateAgent extends AbsPredictionMarketAgent {
 
 	private double fair_value = 0;

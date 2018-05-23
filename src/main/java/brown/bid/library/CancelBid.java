@@ -2,7 +2,13 @@ package brown.bid.library;
 
 import brown.bid.IBid;
 
-public class CancelBid implements IBid{
+/**
+ * Bid that negates another bid that already exists in the
+ * orderbook in two-sided auctions.
+ * @author kerry
+ *
+ */
+public class CancelBid implements IBid {
   
   public BidDirection direction;
   public Double price; 

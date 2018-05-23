@@ -9,6 +9,11 @@ import java.util.Set;
 import brown.agent.AbsCombinatorialProjectAgentV2;
 import brown.exceptions.AgentCreationException;
 
+/**
+ * Final project cs1951k- tier 2 bot
+ * @author kerry
+ *
+ */
 public class T2CombAgent extends AbsCombinatorialProjectAgentV2 {
 
 	private static long initialLag = 20000;

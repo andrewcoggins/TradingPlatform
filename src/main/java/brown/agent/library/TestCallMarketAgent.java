@@ -13,6 +13,11 @@ import brown.messages.library.CallMarketReportMessage;
 import brown.messages.library.GameReportMessage;
 import brown.setup.library.CallMarketSetup;
 
+/**
+ * Test agent for call market agent. 
+ * @author kerry
+ *
+ */
 public class TestCallMarketAgent extends AbsCallMarketAgent {
    private BidDirection direction;
    private Double price;

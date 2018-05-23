@@ -92,7 +92,7 @@ public class AbsAgentTest {
     @Test
     public void onTradeRequest(BidRequestMessage bidRequest) {
       assertTrue(bidRequest instanceof BidRequestMessage); 
-      assertTrue(bidRequest.getID() == 0);
+      assertTrue(bidRequest.getMarketID() == 0);
       // TODO Auto-generated method stub
       this.myMessage = "Bid Request Received";
     }

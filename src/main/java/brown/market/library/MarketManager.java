@@ -62,8 +62,8 @@ public class MarketManager implements IMarketManager {
 	      return false;
 	   }
 	   market.setGroupings(agents);
-	   this.ledgers.get(index).put(market, new Ledger(market.getID()));
-	   this.markets.get(index).put(market.getID(), market);
+	   this.ledgers.get(index).put(market, new Ledger(market.getMarketID()));
+	   this.markets.get(index).put(market.getMarketID(), market);
 	   return true;
 	}
 	

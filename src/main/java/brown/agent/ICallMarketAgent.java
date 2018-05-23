@@ -2,6 +2,11 @@ package brown.agent;
 
 import brown.channels.library.CallMarketChannel;
 
+/**
+ * Interface for agent that bids in call markets.
+ * @author acoggins
+ *
+ */
 public interface ICallMarketAgent {
 
   /**

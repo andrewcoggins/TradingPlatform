@@ -14,6 +14,11 @@ import brown.messages.library.GameReportMessage;
 import brown.setup.library.SMRASetup;
 import brown.tradeable.ITradeable;
 
+/**
+ * Demo agent for SMRA auction- never went into use for cs1951k
+ * @author acoggins
+ *
+ */
 public class SMRADemoAgent extends AbsSMRAAgent {
 
   public SMRADemoAgent(String host, int port)

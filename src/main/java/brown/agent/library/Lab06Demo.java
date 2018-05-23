@@ -6,13 +6,18 @@ import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
 import brown.logging.Logging;
 
-public class SimpleTestingAgent extends AbsLab06Agent{
+/**
+ * Demo agent for lab06 for cs1951k.
+ * @author kerry
+ *
+ */
+public class Lab06Demo extends AbsLab06Agent{
   private BidDirection direction;
   private double price;
   private double increment;
   private int quantity;
   
-  public SimpleTestingAgent(String host, int port, String name, BidDirection direction, double price, double increment, int quantity)
+  public Lab06Demo(String host, int port, String name, BidDirection direction, double price, double increment, int quantity)
       throws AgentCreationException {
     super(host, port, name);
     this.direction = direction;
@@ -49,10 +54,10 @@ public class SimpleTestingAgent extends AbsLab06Agent{
   }
   
   public static void main(String[] args) throws AgentCreationException {
-    new SimpleTestingAgent("localhost", 2121,"buyer",BidDirection.BUY,50.,0,1);    
-    new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,50.,0,1);            
-    new SimpleTestingAgent("localhost", 2121,"buyer",BidDirection.BUY,49.,0,1);    
-    new SimpleTestingAgent("localhost", 2121,"seller",BidDirection.SELL,51.,0,1);         
+    new Lab06Demo("localhost", 2121,"buyer",BidDirection.BUY,50.,0,1);    
+    new Lab06Demo("localhost", 2121,"seller",BidDirection.SELL,50.,0,1);            
+    new Lab06Demo("localhost", 2121,"buyer",BidDirection.BUY,49.,0,1);    
+    new Lab06Demo("localhost", 2121,"seller",BidDirection.SELL,51.,0,1);         
     while(true){}      
   }  
 }

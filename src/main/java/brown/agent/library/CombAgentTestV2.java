@@ -8,6 +8,11 @@ import brown.agent.AbsCombinatorialProjectAgentV2;
 import brown.exceptions.AgentCreationException;
 import brown.logging.Logging;
 
+/**
+ * test agent for final combinatorial project.
+ * @author kerry
+ *
+ */
 public class CombAgentTestV2 extends AbsCombinatorialProjectAgentV2 {
   private int low; 
   private int high;

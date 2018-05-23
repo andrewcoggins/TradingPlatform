@@ -5,6 +5,10 @@ import java.util.List;
 import brown.bid.IBid;
 import brown.tradeable.library.ComplexTradeable;
 
+/** A bid that submits queries for complex tradeables.
+ * @author kerry
+ *
+ */
 public class QueryBid implements IBid {
   public final List<ComplexTradeable> bundles;
   

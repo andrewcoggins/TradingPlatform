@@ -9,19 +9,24 @@ import brown.market.marketstate.library.BuyOrder;
 import brown.market.marketstate.library.OrderBook;
 import brown.market.marketstate.library.SellOrder;
 
-public class Agent extends AbsPredictionMarketAgent {
+/**
+ * test prediction market agent.
+ * @author kerry
+ *
+ */
+public class TestPredictionMarketAgent extends AbsPredictionMarketAgent {
 	
 	boolean print;
 	double price;
 	int round = 0;
 
-	public Agent(String host, int port, double price, boolean print) throws AgentCreationException {
+	public TestPredictionMarketAgent(String host, int port, double price, boolean print) throws AgentCreationException {
 		super(host, port);
 		this.price = price;
 		this.print = print;
 	}
 	
-	public Agent(String host, int port, String name, double price, boolean print) throws AgentCreationException {
+	public TestPredictionMarketAgent(String host, int port, String name, double price, boolean print) throws AgentCreationException {
 		super(host, port, name);
 		this.price = price;
 		this.print = print;
@@ -75,10 +80,10 @@ public class Agent extends AbsPredictionMarketAgent {
 	}
 	
 	public static void main(String[] args) throws AgentCreationException {
-		new Agent("localhost", 2121, "buy1", 1, false);
-		new Agent("localhost", 2121, "buy20", 20, false);
-		new Agent("localhost", 2121, "buy40", 40, false);
-		new Agent("localhost", 2121, "buy60", 60, true);
+		new TestPredictionMarketAgent("localhost", 2121, "buy1", 1, false);
+		new TestPredictionMarketAgent("localhost", 2121, "buy20", 20, false);
+		new TestPredictionMarketAgent("localhost", 2121, "buy40", 40, false);
+		new TestPredictionMarketAgent("localhost", 2121, "buy60", 60, true);
 		
 		while (true) {}
 	}

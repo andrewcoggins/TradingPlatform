@@ -5,7 +5,13 @@ import brown.bid.library.CancelBid;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
 
-public class CancelBundle implements IBidBundle{
+/**
+ * for two sided markets- a bidbundle that cancels
+ * a previous order in the orderbook.
+ * @author kerry
+ *
+ */
+public class CancelBundle implements IBidBundle {
   private final CancelBid BID;
   private final BundleType BT;
   

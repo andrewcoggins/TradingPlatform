@@ -10,6 +10,11 @@ import java.util.Set;
 import brown.agent.AbsCombinatorialProjectAgent;
 import brown.exceptions.AgentCreationException;
 
+/**
+ * test agent for combinatorial final project, version 1.
+ * @author kerry
+ *
+ */
 public class CombAgentTest extends AbsCombinatorialProjectAgent {
 	
 	int round = 0;

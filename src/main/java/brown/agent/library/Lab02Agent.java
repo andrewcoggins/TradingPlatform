@@ -1,6 +1,6 @@
 package brown.agent.library;
 
-import brown.agent.AbsSimpleSealedAgent;
+import brown.agent.AbsLab02Agent;
 import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
 import brown.logging.Logging;
@@ -8,7 +8,7 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.SimpleSealedReportMessage;
 import brown.setup.library.SSSPSetup;
 
-public class Lab02Agent extends AbsSimpleSealedAgent {
+public class Lab02Agent extends AbsLab02Agent {
 
 	public Lab02Agent(String host, int port) throws AgentCreationException {
 		super(host, port, new SSSPSetup());

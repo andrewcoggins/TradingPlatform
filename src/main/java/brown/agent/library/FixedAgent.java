@@ -4,7 +4,12 @@ import brown.agent.AbsPredictionMarketAgent;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
 
-// Calculates fair value and never updates
+/**
+ * Prediction market project bot. 
+ * Calculates fair value and never updates
+ * @author kerry
+ *
+ */
 public class FixedAgent extends AbsPredictionMarketAgent {
 
 	private double fair_value = 0;

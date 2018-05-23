@@ -1,8 +1,6 @@
 package brown.channels.library; 
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import brown.agent.AbsAgent;
 import brown.agent.AbsOpenOutcryAgent;
@@ -13,10 +11,14 @@ import brown.bid.library.AuctionBid;
 import brown.bidbundle.IBidBundle;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.IAgentChannel;
-import brown.logging.Logging;
 import brown.messages.library.TradeMessage;
 import brown.tradeable.ITradeable;
 
+/**
+ * agent channel for all open outcry auctions and agents.
+ * @author kerry
+ *
+ */
 public class OpenOutcryChannel extends AbsChannel implements IAgentChannel {
   private Map<ITradeable, Double> reserve; 
 

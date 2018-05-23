@@ -32,7 +32,12 @@ import brown.setup.library.SpecValSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 
-// still work in progress
+/**
+ * Alternate version of the combinatorial project agent. Used in the final project for 
+ * cs1951k
+ * @author acoggins
+ *
+ */
 public abstract class AbsCombinatorialProjectAgentV2  extends AbsSpecValV2Agent{
   
   private static final int NUM_GOODS = 98;

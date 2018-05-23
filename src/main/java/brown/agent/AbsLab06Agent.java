@@ -19,6 +19,11 @@ import brown.messages.library.PredictionMarketReport;
 import brown.messages.library.PrivateInformationMessage;
 import brown.setup.library.CallMarketSetup;
 
+/**
+ * Abstract agent for lab 6-call market lab for cs1951k. 
+ * @author kerry
+ *
+ */
 public abstract class AbsLab06Agent extends AbsCallMarketAgent {
 	private List<Transaction> ledger;
 	private OrderBook orderbook;

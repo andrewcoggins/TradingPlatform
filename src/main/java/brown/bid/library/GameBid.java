@@ -2,6 +2,11 @@ package brown.bid.library;
 
 import brown.bid.IBid;
 
+/**
+ * A bid that is used in games like the lemonade game.
+ * @author acoggins
+ *
+ */
 public class GameBid implements IBid {
   
   public final Integer move; 

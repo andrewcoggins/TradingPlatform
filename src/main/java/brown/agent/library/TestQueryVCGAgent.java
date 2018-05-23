@@ -9,11 +9,9 @@ import java.util.Set;
 
 import brown.agent.AbsSpecValAgent;
 import brown.bid.interim.BidType;
-import brown.bid.library.AuctionBid;
 import brown.bid.library.QueryBid;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.bidbundle.library.QueryBundle;
-import brown.channels.library.AuctionChannel;
 import brown.channels.library.OpenOutcryChannel;
 import brown.channels.library.QueryChannel;
 import brown.exceptions.AgentCreationException;
@@ -24,6 +22,11 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.ComplexTradeable;
 import brown.tradeable.library.SimpleTradeable;
 
+/**
+ * test agent for two-round spectrum auction. 
+ * @author kerry
+ *
+ */
 public class TestQueryVCGAgent extends AbsSpecValAgent {
   int low;
   int high;

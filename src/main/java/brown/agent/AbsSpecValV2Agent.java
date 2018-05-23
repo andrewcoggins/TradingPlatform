@@ -17,6 +17,11 @@ import brown.messages.library.PrivateInformationMessage;
 import brown.messages.library.SpecValWrapperMessage;
 import brown.setup.ISetup;
 
+/**
+ * agent that bids in canadian spectrum auctions will extend this class.
+ * @author kerry
+ *
+ */
 public abstract class AbsSpecValV2Agent  extends AbsAgent implements ISpecValV2Agent{
   protected MRVMBidder valuation;
   public final Double valueScale = 1E-6;

@@ -1,11 +1,15 @@
 package brown.bidbundle.library;
 
 import brown.bid.IBid;
-import brown.bid.library.CancelBid;
 import brown.bid.library.QueryBid;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
 
+/**
+ * a bidbundle of query bids.
+ * @author kerry
+ *
+ */
 public class QueryBundle implements IBidBundle{
   private final QueryBid BID;
   private final BundleType BT;

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import brown.agent.AbsAgent;
-import brown.agent.AbsSMRAAgent;
 import brown.agent.AbsAuctionAgent;
 import brown.bid.interim.BidType;
 import brown.bid.library.AuctionBid;

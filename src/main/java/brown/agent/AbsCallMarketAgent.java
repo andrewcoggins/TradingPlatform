@@ -6,6 +6,11 @@ import brown.messages.library.PredictionMarketValuationMessage;
 import brown.messages.library.PrivateInformationMessage;
 import brown.setup.ISetup;
 
+/**
+ * All agents that bid in call markets will extend this class. 
+ * @author acoggins
+ *
+ */
 public abstract class AbsCallMarketAgent extends AbsAgent implements ICallMarketAgent {
 	protected Boolean coin;
 	protected Integer numDecoys;

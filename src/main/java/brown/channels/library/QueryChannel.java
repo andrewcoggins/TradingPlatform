@@ -8,7 +8,12 @@ import brown.bidbundle.IBidBundle;
 import brown.channels.IAgentChannel;
 import brown.messages.library.TradeMessage;
 
-public class QueryChannel extends AbsChannel{
+/**
+ * channel for query auctions.
+ * @author kerry
+ *
+ */
+public class QueryChannel extends AbsChannel {
 
   /**
    * For Kryo

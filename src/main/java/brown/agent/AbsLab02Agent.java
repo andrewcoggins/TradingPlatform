@@ -20,15 +20,15 @@ import brown.value.valuation.IValuation;
  * @author acoggins
  *
  */
-public abstract class AbsSimpleSealedAgent extends AbsAuctionAgent {
+public abstract class AbsLab02Agent extends AbsAuctionAgent {
 	private double valuation;
 	private ITradeable tradeable;
 
-	public AbsSimpleSealedAgent(String host, int port, ISetup gameSetup) throws AgentCreationException {
+	public AbsLab02Agent(String host, int port, ISetup gameSetup) throws AgentCreationException {
 		super(host, port, gameSetup);
 	}
 	
-	 public AbsSimpleSealedAgent(String host, int port, ISetup gameSetup, String name) throws AgentCreationException {
+	 public AbsLab02Agent(String host, int port, ISetup gameSetup, String name) throws AgentCreationException {
 	    super(host, port, gameSetup,name);
 	  }
 	

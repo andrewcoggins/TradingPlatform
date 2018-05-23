@@ -9,26 +9,26 @@ import brown.market.marketstate.library.BuyOrder;
 import brown.market.marketstate.library.OrderBook;
 import brown.market.marketstate.library.SellOrder;
 
-// Agent randomly either buys or sells and the middle price of spread
+/**
+ * Agent randomly either buys or sells and the middle price of spread
+ * @author kerry
+ *
+ */
 public class SpreadAgent extends AbsLab06Agent {
 
   public SpreadAgent(String host, int port, String name)
       throws AgentCreationException {
     super(host, port, name);
-    // TODO Auto-generated constructor stub
   }
 
   @Override
   public void onTransaction(int quantity, double price) {
-
-    // TODO Auto-generated method stub
     
   }
 
   @Override
   public void onMarketStart() {
 
-    // TODO Auto-generated method stub
     
     
   }
@@ -36,7 +36,6 @@ public class SpreadAgent extends AbsLab06Agent {
   @Override
   public void onMarketRequest(CallMarketChannel channel) {
 
-    // TODO Auto-generated method stub
     
     OrderBook ob = channel.getOrderBook();
     PriorityQueue<BuyOrder> buys = ob.getBuys();

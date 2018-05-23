@@ -7,13 +7,11 @@ import java.util.Map.Entry;
 
 import org.spectrumauctions.sats.core.model.Bundle;
 import org.spectrumauctions.sats.core.model.mrvm.MRVMBidder;
-import org.spectrumauctions.sats.core.model.mrvm.MRVMLicense;
 import org.spectrumauctions.sats.core.model.mrvm.MRVMWorld;
 import org.spectrumauctions.sats.core.model.mrvm.MultiRegionModel;
 import org.spectrumauctions.sats.core.util.random.JavaUtilRNGSupplier;
 import org.spectrumauctions.sats.core.util.random.RNGSupplier;
 
-import brown.channels.library.AuctionChannel;
 import brown.channels.library.OpenOutcryChannel;
 import brown.channels.library.QueryChannel;
 import brown.exceptions.AgentCreationException;
@@ -29,6 +27,11 @@ import brown.setup.ISetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.ComplexTradeable;
 
+/**
+ * agent that bids in canadian spectrum auctions will extend this class.
+ * @author kerry
+ *
+ */
 public abstract class AbsSpecValAgent extends AbsAgent implements ISpecValAgent {
   protected Map<ComplexTradeable, Double> valuation;
 

@@ -26,6 +26,12 @@ import brown.tradeable.ITradeable;
 import brown.tradeable.library.ComplexTradeable;
 import brown.tradeable.library.SimpleTradeable;
 
+/**
+ * All agents that bid in the combinatorial project extend this class. 
+ * Replaced by AbsCombinatorialProjectAgent for cs1951k project.
+ * @author kerry
+ *
+ */
 public abstract class AbsCombinatorialProjectAgent extends AbsSpecValAgent {
 	
 	private static final int NUM_GOODS = 98;

@@ -317,7 +317,7 @@ public abstract class AbsServer {
             }
             if (!auction.isOverOuter()) {
               Logging.log("[*] Auction has been reset");
-              auction.resetInnerMarket();              
+              auction.resetInternalState();              
             } else {
               // if over, close.
               auction.close();

@@ -4,14 +4,17 @@ import brown.agent.AbsCallMarketAgent;
 import brown.bid.library.BidDirection;
 import brown.bid.library.TwoSidedBid;
 import brown.bidbundle.library.TwoSidedBidBundle;
-import brown.channels.library.AuctionChannel;
 import brown.channels.library.CallMarketChannel;
 import brown.exceptions.AgentCreationException;
 import brown.messages.library.CallMarketReportMessage;
 import brown.messages.library.GameReportMessage;
 import brown.setup.library.CallMarketSetup;
 
-
+/**
+ * Bot for call market.
+ * @author kerry
+ *
+ */
 public class CallMarketLagAgent extends AbsCallMarketAgent {
   
   private int lagTime; 

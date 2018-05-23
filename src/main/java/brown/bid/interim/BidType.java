@@ -1,5 +1,10 @@
 package brown.bid.interim; 
 
+/**
+ * Specifies the price and quantity for a bid. 
+ * @author acoggins
+ *
+ */
 public class BidType implements IBidType { 
   
   public final Double price; 

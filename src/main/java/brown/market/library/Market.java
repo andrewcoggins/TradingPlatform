@@ -51,7 +51,7 @@ public class Market implements IMarket {
  }
   
   @Override
-  public Integer getID() {
+  public Integer getMarketID() {
     return this.STATE.getID();
   }
 
@@ -119,7 +119,7 @@ public class Market implements IMarket {
   }
   
   @Override
-  public void resetInnerMarket() {
+  public void resetInternalState() {
     this.ACTRULE.reset();
     this.ARULE.reset();
     this.IRPOLICY.reset();

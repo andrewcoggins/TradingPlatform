@@ -9,7 +9,8 @@ import brown.market.preset.AbsMarketPreset;
 import brown.tradeable.ITradeable;
 
 /**
- * market manager.
+ * market manager keeps track of all open and closed markets within
+ * a simulation. 
  * @author andrew
  *
  */
@@ -52,19 +53,21 @@ public interface IMarketManager {
   public Collection<Market> getAuctions();
 
   /**
-   * 
+   * updates a market with previous state information.
    * @param marketID
    */
   public void update(Integer marketID);
   
   /**
-   * 
+   * boolean for whether any markets are currently open
+   * within the simulation.
    * @return
    */
   public boolean anyMarketsOpen();
 
   /**
-   * 
+   * completely resets between simulation- 
+   * erases all markets stored within market manager. 
    */
   public void reset();
 }

@@ -2,8 +2,13 @@ package brown.agent;
 
 import brown.channels.library.OpenOutcryChannel;
 import brown.channels.library.QueryChannel;
-import brown.channels.library.AuctionChannel;
 
+/**
+ * Interface for an agent that bids in a spectrum auction
+ * with an ascending round followed by a sealed bid round.
+ * @author acoggins
+ *
+ */
 public interface ISpecValAgent {
 
   /**
@@ -12,6 +17,10 @@ public interface ISpecValAgent {
    */
   public void onQueryMarket(QueryChannel channel);
   
+  /**
+   * Provides agent response to clock auction.
+   * @param channel
+   */
   public void onClockMarket(OpenOutcryChannel channel);
   
 }

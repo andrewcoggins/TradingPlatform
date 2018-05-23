@@ -20,6 +20,11 @@ import brown.messages.library.PredictionMarketReport;
 import brown.messages.library.PrivateInformationMessage;
 import brown.setup.library.CallMarketSetup;
 
+/**
+ * abstract agent used in prediction market project for cs1951k.
+ * @author kerry
+ *
+ */
 public abstract class AbsPredictionMarketAgent extends AbsCallMarketAgent {
 	private List<Transaction> ledger;
 	private OrderBook orderbook;
