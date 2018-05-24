@@ -13,7 +13,7 @@ import brown.tradeable.ITradeable;
  * @editor kerry
  * 
  */
-public class Ledger implements ILedger{
+public class Ledger implements ILedger {
   
   protected final Integer marketId;
 	protected final List<Transaction> transactions;

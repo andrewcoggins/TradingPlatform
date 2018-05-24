@@ -12,7 +12,7 @@ import brown.rules.IPaymentRule;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.ComplexTradeable;
 
-public class ClockPayment implements IPaymentRule{
+public class ClockPayment implements IPaymentRule {
 
   @Override
   public void setOrders(IMarketState state) {

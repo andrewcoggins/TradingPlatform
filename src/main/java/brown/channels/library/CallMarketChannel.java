@@ -44,7 +44,7 @@ public class CallMarketChannel extends AbsChannel{
     return this.book;
   }
   
-  public boolean isTest(){
+  public boolean isTest() {
     return this.isTest;
   }
   

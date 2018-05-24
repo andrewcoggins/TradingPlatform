@@ -154,7 +154,7 @@ public abstract class AbsServer {
       }
       privateToPublic.put(theID, agentCount++);
       connections.put(connection, theID);
-      if (registration.name != null){
+      if (registration.name != null) {
           this.IDToName.put(theID, registration.name);
       }
       Logging.log("[-] registered " + theID);

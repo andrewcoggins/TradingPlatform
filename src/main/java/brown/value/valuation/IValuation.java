@@ -11,8 +11,18 @@ import brown.tradeable.ITradeable;
  */
 public interface IValuation {
   
+  /**
+   * This method returns a valuation for some ITradeable.
+   * @param tradeable an ITradeable. This may be a simple, 
+   * complex or a multitradeable
+   * @return the value the agent has for the input tradeable.
+   */
   public Double getValuation(ITradeable tradeable);
   
+  /**
+   * An unfortunate java hack that we'd like to get rid of if we can.
+   * @return a copy of this valuation.
+   */
   public IValuation safeCopy();
   
 }

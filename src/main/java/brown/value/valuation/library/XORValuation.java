@@ -8,6 +8,11 @@ import brown.tradeable.library.ComplexTradeable;
 import brown.value.valuation.IBundleValuation;
 import brown.value.valuation.IValuation;
 
+/**
+ * Gives an XOR valuation over bundles of goods.
+ * @author acoggins
+ *
+ */
 public class XORValuation implements IBundleValuation {
 
   private final Map<ComplexTradeable, Double> valueParams; 
@@ -19,13 +24,22 @@ public class XORValuation implements IBundleValuation {
     this.valueParams = null; 
   }
   
+  /**
+   * The value parameters for XOR valuation
+   * are a map from sets of simple tradeables to associated values.
+   * @param valueParams
+   */
   public XORValuation(Map<ComplexTradeable, Double> valueParams) {
     this.valueParams = valueParams; 
   }
   
   @Override
   public Double getValuation(ITradeable tradeable) {
-    return this.valueParams.get(tradeable);
+    if (this.valueParams.containsKey(tradeable)){
+      return this.valueParams.get(tradeable);
+    } else {
+      return -1.;
+    }
   }
   
   public Set<ComplexTradeable> getTradeables() { 
@@ -34,7 +48,6 @@ public class XORValuation implements IBundleValuation {
 
   @Override
   public IValuation safeCopy() {
-    // TODO Auto-generated method stub
     return new XORValuation(this.valueParams);
   }
 

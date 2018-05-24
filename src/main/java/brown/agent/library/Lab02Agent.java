@@ -15,9 +15,7 @@ public class Lab02Agent extends AbsLab02Agent {
 	}
 
 	@Override
-	public void onSimpleSealed(AuctionChannel channel) {
-		// TODO: decide how to bid
-		
+	public void onSimpleSealed(AuctionChannel channel) {		
 		// this just bids your valuation
 		this.submitBid(channel, this.getValuation());
 	}

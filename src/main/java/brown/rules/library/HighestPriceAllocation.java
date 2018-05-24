@@ -33,10 +33,10 @@ public class HighestPriceAllocation implements IAllocationRule {
     List<List<Integer>> grouping = state.getGroups();       
     Map<Integer,List<ITradeable>> alloc = new HashMap<Integer,List<ITradeable>>();
 
-    for (List<Integer> group : grouping){
+    for (List<Integer> group : grouping) {
       // What do you have to allocate
       List<SimpleTradeable> temp = new LinkedList<SimpleTradeable>();
-      for (ITradeable t : state.getTradeables()){
+      for (ITradeable t : state.getTradeables()) {
         temp.addAll(t.flatten());
       }
       // Check that this is a set (SSSP doesn't make sense with duplicates)

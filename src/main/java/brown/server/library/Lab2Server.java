@@ -45,8 +45,8 @@ public class Lab2Server {
 	    seq.add(markets);
 	    
 	    // AdditiveUniformConfig OR AdditiveLab2Config
-	    Simulation testSim = new Simulation(seq,new AdditiveLab2Config(allTradeables),
-	    		allTradeablesList,1.,new LinkedList<ITradeable>());    
+	    Simulation testSim = new Simulation(seq, new AdditiveLab2Config(allTradeables),
+	    		allTradeablesList, 1., new LinkedList<ITradeable>());    
 	    RunServer testServer = new RunServer(2121, new SSSPSetup());
 	    
 	    testServer.runSimulation(testSim, numSims, delayTime, lag, null);

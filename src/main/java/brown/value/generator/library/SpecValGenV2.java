@@ -51,11 +51,11 @@ public class SpecValGenV2 {
     this.world = multiRegionModel.createWorld(rng);
   }  
   
-  public Set<MRVMLicense> getLicenses(){
+  public Set<MRVMLicense> getLicenses() {
     return this.world.getLicenses();
   }
   
-  public List<MRVMBidder> generateBidders(){
+  public List<MRVMBidder> generateBidders() {
     return this.multiRegionModel.createPopulation(this.world);
   }
   

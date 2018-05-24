@@ -21,17 +21,29 @@ import brown.tradeable.library.SimpleTradeable;
 import brown.value.valuation.ISpecValValuation;
 import brown.value.valuation.IValuation;
 
-public class SpecValValuation implements ISpecValValuation{
+/**
+ * describes a valuation for spectrum auctions. Because of the size of 
+ * this valuation agents query values 
+ * @author kerry
+ *
+ */
+public class SpecValValuation implements ISpecValValuation {
 
   private final MRVMBidder valuation; 
   private Map<Integer, MRVMLicense> idToLicense;
   public final Double valueScale = 1E-6;
 
-  public SpecValValuation(){
+  public SpecValValuation() {
     this.valuation = null;
     this.idToLicense = null;
   }
   
+  /**
+   * The only parameter for specval valuation is an 
+   * MRVMBidder. This contains all the relevant information
+   * like the number of bidders and the seed value.
+   * @param bidder an MRVMBidder object.
+   */
   public SpecValValuation(MRVMBidder bidder) {
     this.valuation = bidder;
     this.idToLicense = new HashMap<Integer, MRVMLicense>();
