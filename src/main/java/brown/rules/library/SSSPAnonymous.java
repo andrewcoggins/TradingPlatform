@@ -11,22 +11,29 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.SimpleSealedReportMessage;
 import brown.rules.IInformationRevelationPolicy;
 
+/**
+ * Information revelation policy for SSSP auction.
+ * Constructs game report messages detailing the winners 
+ * of the auctions.
+ * @author acoggins
+ *
+ */
 public class SSSPAnonymous implements IInformationRevelationPolicy {
 
   @Override
   public void setReport(IMarketState state) {
     Map<Integer,List<GameReportMessage>> reports = new HashMap<Integer,List<GameReportMessage>>();    
     
-    for (List<Integer> group : state.getGroups()){      
+    for (List<Integer> group : state.getGroups()) {      
       int winner = group.get(0);
       // find the winner
-      for (Integer agent : state.getAllocation().keySet()){
-        if (group.contains(agent)){
+      for (Integer agent : state.getAllocation().keySet()) {
+        if (group.contains(agent)) {
           winner = agent;
         }
       }
       // report is winner for this group and the size of group
-      for (Integer agent : group){
+      for (Integer agent : group) {
         List<GameReportMessage> reportList = new LinkedList<GameReportMessage>();
         reportList.add(new SimpleSealedReportMessage(winner,group.size()));
         reports.put(agent,reportList);
@@ -37,13 +44,11 @@ public class SSSPAnonymous implements IInformationRevelationPolicy {
 
   @Override
   public void reset() {
-    // TODO Auto-generated method stub
     
   }
 
   @Override
   public void constructSummaryState(IMarketState state) {
-    // TODO Auto-generated method stub
     state.setSummaryState(new BlankStateInfo());
   }
 

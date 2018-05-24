@@ -12,6 +12,8 @@
 -somehow abstract agent initialization? 
 -abstract utility printing? 
 -abstract class for mainserver?
+-tradeable inheritance, count, etc.
+-BidType.
 
 *DONE*
 -clean up OrderBook, remove unneccesary classes; abstract

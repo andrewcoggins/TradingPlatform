@@ -11,7 +11,7 @@ import brown.server.ISimulMarkets;
  * @author acoggins
  *
  */
-public class SimulMarkets implements ISimulMarkets{
+public class SimulMarkets implements ISimulMarkets {
 
   private final List<AbsMarketPreset> markets;
   

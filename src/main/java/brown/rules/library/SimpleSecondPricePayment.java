@@ -16,7 +16,13 @@ import brown.messages.library.TradeMessage;
 import brown.rules.IPaymentRule;
 import brown.tradeable.ITradeable;
 
-
+/**
+ * Payment rule for a simple second price auction. The agent to which
+ * a good is allocated pays the second highest price (within their group)
+ * for that good.
+ * @author acoggins
+ *
+ */
 public class SimpleSecondPricePayment implements IPaymentRule {
 
   @Override
@@ -51,7 +57,7 @@ public class SimpleSecondPricePayment implements IPaymentRule {
         }
      }
       for (TradeMessage aMessage : allBids) {
-        if (group.contains(aMessage.AgentID)){        
+        if (group.contains(aMessage.AgentID)) {        
           AuctionBidBundle aBundle = (AuctionBidBundle) aMessage.Bundle; 
           Map<ITradeable, BidType> aBid = aBundle.getBids().bids; 
           for (ITradeable t : aBid.keySet()) {
@@ -72,7 +78,6 @@ public class SimpleSecondPricePayment implements IPaymentRule {
         }
       }      
     }
-    
     state.setPayments(allOrders);
   }
 

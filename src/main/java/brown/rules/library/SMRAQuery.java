@@ -9,6 +9,11 @@ import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeRequestMessage;
 import brown.rules.IQueryRule;
 
+/**
+ * Query rule for SMRA auction. Untested.
+ * @author acoggins
+ *
+ */
 public class SMRAQuery implements IQueryRule {
 
   @Override

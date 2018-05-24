@@ -2,6 +2,12 @@ package brown.tradeable.library;
 
 import brown.tradeable.ITradeable;
 
+/**
+ * Abstract tradeable type. All other tradeables
+ * extend this class.
+ * @author acoggins
+ *
+ */
 public abstract class AbsTradeable implements ITradeable { 
 
   public final Integer ID;
@@ -18,20 +24,35 @@ public abstract class AbsTradeable implements ITradeable {
     this.TYPE = null;
   }
   
+  /**
+   * An abstract tradeable has an ID, a count and a type.
+   * @param ID tradeable ID
+   * @param count count of tradeable. 
+   * @param type type of tradeable.
+   */
   public AbsTradeable(Integer ID, Integer count, TradeableType type) {
    this.ID = ID; 
    this.COUNT = count;
    this.TYPE = type;
   }
 
+  /**
+   * Gets the ID of the tradeable. 
+   */
   public Integer getID() {
     return this.ID;
   }
   
+  /**
+   * Gets the count of the tradeable
+   */
   public Integer getCount() {
     return this.COUNT;
   }
 
+  /**
+   * Gets the type of the tradeable.
+   */
   public TradeableType getType() {
     return this.TYPE;
   }

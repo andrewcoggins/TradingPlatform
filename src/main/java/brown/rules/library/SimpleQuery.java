@@ -9,6 +9,12 @@ import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeRequestMessage;
 import brown.rules.IQueryRule;
 
+/**
+ * Query rule for most simple sealed auctions. Simply constructs a channel
+ * for a SS auction.
+ * @author acoggins
+ *
+ */
 public class SimpleQuery implements IQueryRule {
 
 	@Override

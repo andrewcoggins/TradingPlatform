@@ -1,14 +1,11 @@
 package brown.rules.library; 
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import brown.bid.interim.BidType;
 import brown.bid.library.AuctionBid;
-import brown.bidbundle.IBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IInnerTC;

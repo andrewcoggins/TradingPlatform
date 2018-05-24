@@ -8,6 +8,12 @@ import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;
 import brown.rules.IGroupingRule;
 
+/**
+ * Grouping policy that groups agents in groups of three or four, 
+ * if possible.
+ * @author acoggins
+ *
+ */
 public class ThreeFourFiveGrouping implements IGroupingRule {
   
   @Override
