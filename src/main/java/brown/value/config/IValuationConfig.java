@@ -5,9 +5,24 @@ import java.util.Map;
 
 import brown.messages.library.PrivateInformationMessage;
 
+/**
+ * IValuationConfig specifies initial valuations and private information. 
+ * currently, some valuations do not implement IValuationConfig. 
+ * @author andrew
+ *
+ */
 public interface IValuationConfig {
 
-  public void initialize(List<Integer> bidders);
+  /**
+   * Initialize some private information.
+   * @param agents the IDs of all registered agents.
+   */
+  public void initialize(List<Integer> agents);
   
-  public Map<Integer,PrivateInformationMessage> generateReport(List<Integer> collection);
+  /**
+   * Generates a message to send to the agents about information.
+   * @param agents IDs of all registered agents
+   * @return map from agent IDs to private information messages. 
+   */
+  public Map<Integer,PrivateInformationMessage> generateReport(List<Integer> agents);
 }

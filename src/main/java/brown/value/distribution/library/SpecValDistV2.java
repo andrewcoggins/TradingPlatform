@@ -14,7 +14,12 @@ import brown.value.generator.library.SpecValGenV2;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.library.SpecValValuation;
 
-public class SpecValDistV2 implements IValuationDistribution{
+/**
+ * Distribution for spectrum auction valuations. 
+ * @author kerry
+ *
+ */
+public class SpecValDistV2 implements IValuationDistribution {
   SpecValGenV2 specValGenerator;
   
   public SpecValDistV2(){

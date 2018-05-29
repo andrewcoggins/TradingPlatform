@@ -7,6 +7,7 @@ import brown.value.valuation.library.DMValuation;
 
 /**
  * Distribution for generating diminishing marginal valuations.
+ * Like complementary distribution, specified by base and discount parameters.
  * @author andrew
  */
 public class DMValuationDistribution implements IValuationDistribution {

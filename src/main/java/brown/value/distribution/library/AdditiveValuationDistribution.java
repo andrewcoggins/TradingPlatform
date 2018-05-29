@@ -28,7 +28,7 @@ public class AdditiveValuationDistribution implements IValuationDistribution {
    * For kryo
    * DO NOT USE
    */
-  public AdditiveValuationDistribution(){
+  public AdditiveValuationDistribution() {
     this.generator = null;
     this.toValue = null;
     this.values = null;

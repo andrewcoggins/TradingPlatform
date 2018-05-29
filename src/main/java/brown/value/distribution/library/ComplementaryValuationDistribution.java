@@ -5,6 +5,12 @@ import brown.value.generator.IValuationGenerator;
 import brown.value.valuation.IValuation;
 import brown.value.valuation.library.DMValuation;
 
+/**
+ * Valuation distriubution for complememtary valuations. 
+ * Can be described by a base value and a delta value parameter.
+ * @author andrew
+ *
+ */
 public class ComplementaryValuationDistribution implements IValuationDistribution{
 
   private IValuationGenerator baseGenerator; 

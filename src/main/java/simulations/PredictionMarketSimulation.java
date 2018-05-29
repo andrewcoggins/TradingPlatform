@@ -8,6 +8,11 @@ import java.util.concurrent.TimeUnit;
 
 import brown.server.library.PredictionMarketServer;
 
+/**
+ * Script that runs prediction market simulation for grading 
+ * Prediction market project. 
+ *
+ */
 public class PredictionMarketSimulation {
 	private static int numSims = 100;
 	private static int delayTime = 2; 

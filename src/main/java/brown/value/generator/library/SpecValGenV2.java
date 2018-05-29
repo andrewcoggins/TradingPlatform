@@ -10,6 +10,11 @@ import org.spectrumauctions.sats.core.model.mrvm.MultiRegionModel;
 import org.spectrumauctions.sats.core.util.random.JavaUtilRNGSupplier;
 import org.spectrumauctions.sats.core.util.random.RNGSupplier;
 
+/**
+ * Specval valuation generator. 
+ * @author kerry
+ *
+ */
 public class SpecValGenV2 {
   public final Double valueScale = 1E-6;
   public final RNGSupplier rng = new JavaUtilRNGSupplier("MY SEED".hashCode());;
