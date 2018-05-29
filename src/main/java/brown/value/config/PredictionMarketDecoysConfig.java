@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import brown.logging.Logging;
 import brown.market.library.PredictionMarketInfo;
 import brown.market.library.PrevStateInfo;
 import brown.messages.library.PredictionMarketValuationMessage;
@@ -25,7 +24,7 @@ public class PredictionMarketDecoysConfig extends ValConfig implements IValuatio
     this.coin = Math.random() > 0.5;
   }
   
-  public Boolean getTrueCoin(){
+  public Boolean getTrueCoin() {
     return this.coin;
   }
   

@@ -9,7 +9,15 @@ import brown.market.marketstate.IMarketState;
  */
 public interface IPaymentRule {
 
+  /**
+   * Sets orders that will modify agent accounts 
+   * by adding/subtracting goods and money
+   * @param state market state
+   */
   public void setOrders(IMarketState state);
 
+  /**
+   * resets 
+   */
   public void reset();  
 }

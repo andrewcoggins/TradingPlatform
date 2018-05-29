@@ -22,7 +22,7 @@ public class MarketManager implements IMarketManager {
 	private List<Map<Market, Ledger>> ledgers;
 	// stores all markets in a simulation
 	public List<Map<Integer, Market>> markets;
-	public PrevStateInfo information;
+	private PrevStateInfo information;
 	public Integer index; 
 	private Integer idCount; 
 	

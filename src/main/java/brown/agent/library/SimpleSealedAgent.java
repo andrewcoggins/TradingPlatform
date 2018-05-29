@@ -43,7 +43,7 @@ public class SimpleSealedAgent extends AbsAuctionAgent {
   
   public static void main(String[] args) throws AgentCreationException {
     new SimpleSealedAgent("localhost", 2121);
-//    new SimpleSealedAgent("localhost", 2121);
+    new SimpleSealedAgent("localhost", 2121);
 //    new SimpleSealedAgent("localhost", 2121);
 //    new SimpleSealedAgent("localhost", 2121);
 //    new SimpleSealedAgent("localhost", 2121);

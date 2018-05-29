@@ -1,5 +1,6 @@
 package brown.value.config;
 
+import brown.market.library.BlankStateInfo;
 import brown.market.library.PrevStateInfo;
 import brown.value.valuation.ValuationType;
 
@@ -16,7 +17,7 @@ public class LemonadeConfig extends ValConfig {
 
   @Override
   public PrevStateInfo generateInfo() {
-    return null;
+    return new BlankStateInfo();
   }
   
 }

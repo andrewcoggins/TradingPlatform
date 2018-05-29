@@ -74,7 +74,6 @@ public abstract class AbsAgent extends TPClient implements IAgent {
         synchronized (agent) {
           if (message instanceof AbsMessage) {
             AbsMessage theMessage = (AbsMessage) message;
-            
             theMessage.dispatch(agent);
           }
         }
@@ -82,7 +81,6 @@ public abstract class AbsAgent extends TPClient implements IAgent {
     });
 
     CLIENT.sendTCP(new RegistrationMessage(-1,name));
-    
     this.monies = 0.0;
     this.goods = new LinkedList<ITradeable>();
   }
@@ -103,7 +101,6 @@ public abstract class AbsAgent extends TPClient implements IAgent {
     this.monies = accountResetMessage.monies;
     this.goods = accountResetMessage.tradeables;
   }
-  
 }
 
   
