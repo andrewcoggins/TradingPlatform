@@ -3,7 +3,7 @@
 O: Introduction
 ---------------
 
-### i. What is the trading platform? 
+### i. What is the Trading Platform? 
 
 The Trading Platform is a software platform designed to run trading enviroments. Within a trading environment, Trading Platform hosts any number of trading agents, that bid in markets and receive utility outcomes. The Trading Platform is extremely flexible; it was the designed with the goal of being able to run any game-theoretical scenario that can be specified as a sequence of markets, each formally described using only a small set of rules. In addition, Trading Platform was designed with real-time use in mind: when a trading environment is running, an arbitrary number of people on different computers can submit agents to trade in that environment. 
 
@@ -27,6 +27,8 @@ Hopefully, the Simulation and its contingent Agents correspond to a scenario of 
 
 II: Broad Structural Overview
 -----------------------------
+
+![alt text](https://github.com/andrewcoggins/TradingPlatform/images/platform_overview.jpg "Trading Platform Overview")
 
 The Platform uses a network Client/Server model, where one server supports any number of clients. Within the platform, this model is specialized to one market/auction supporting many participants/bidders. The server side of the platform runs the game, meaning it maintains information about the game's current state, sends agents relevant information, and prompts them to respond (e.g., to send their bids). The agent/client side of this platform is responsible for receiving the server’s messages and replying, just as a bidder would do in an auction. This general means of communication serves as the basis for Trading Platform Simulations. 
 
