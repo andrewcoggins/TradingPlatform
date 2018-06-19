@@ -1,7 +1,7 @@
 # TradingPlatform
 
 O: Introduction
-===============
+---------------
 
 i. What is the trading platform? 
 
