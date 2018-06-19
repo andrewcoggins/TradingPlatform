@@ -28,7 +28,7 @@ Hopefully, the Simulation and its contingent Agents correspond to a scenario of 
 II: Broad Structural Overview
 -----------------------------
 
-![alt text](https://github.com/andrewcoggins/TradingPlatform/tree/master/images/platform_overview.jpg "Trading Platform Overview")
+![alt text](https://github.com/andrewcoggins/TradingPlatform/blob/master/images/platform_overview.jpg "Trading Platform Overview")
 
 The Platform uses a network Client/Server model, where one server supports any number of clients. Within the platform, this model is specialized to one market/auction supporting many participants/bidders. The server side of the platform runs the game, meaning it maintains information about the game's current state, sends agents relevant information, and prompts them to respond (e.g., to send their bids). The agent/client side of this platform is responsible for receiving the server’s messages and replying, just as a bidder would do in an auction. This general means of communication serves as the basis for Trading Platform Simulations. 
 
