@@ -8,6 +8,11 @@ import brown.messages.library.GameReportMessage;
 import brown.messages.library.SimpleSealedReportMessage;
 import brown.setup.library.SSSPSetup;
 
+/**
+ * Agent that bids in the lab 2 game- just submits valuation.
+ * @author andrew
+ *
+ */
 public class Lab02Agent extends AbsLab02Agent {
 
 	public Lab02Agent(String host, int port) throws AgentCreationException {

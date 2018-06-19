@@ -18,6 +18,12 @@ public class BidType implements IBidType {
     this.quantity = null; 
   }
   
+  /**
+   * A BidType specifies price and quantity attached to a tradeable
+   * within a bid. 
+   * @param price price attached to ITradeable
+   * @param quantity quanity attached to ITradeable. 
+   */
   public BidType(Double price, Integer quantity) {
     this.price = price; 
     this.quantity = quantity; 

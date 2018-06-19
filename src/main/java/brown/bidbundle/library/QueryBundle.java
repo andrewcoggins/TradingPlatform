@@ -7,6 +7,7 @@ import brown.bidbundle.IBidBundle;
 
 /**
  * a bidbundle of query bids.
+ * Deprecated
  * @author kerry
  *
  */

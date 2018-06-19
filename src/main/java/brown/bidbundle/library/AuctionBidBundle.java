@@ -10,8 +10,8 @@ import brown.bidbundle.IBidBundle;
 import brown.tradeable.ITradeable;
 
 /**
-  * The built-in BidBundle is called AuctionBidBundle,
-  * and holds one double. 
+  * an AuctionBidBundle maps from ITradeables to price 
+  * and quantity, to specify a bid.
   */
 public class AuctionBidBundle implements IBidBundle {
   

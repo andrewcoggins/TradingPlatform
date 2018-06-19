@@ -14,6 +14,12 @@ import brown.messages.library.GameReportMessage;
 import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 
+/**
+ * Simple sealed agent bids in a simple sealed auction, 
+ * just bids valuation. 
+ * @author andrew
+ *
+ */
 public class SimpleSealedAgent extends AbsAuctionAgent {
   
   public SimpleSealedAgent(String host, int port)
