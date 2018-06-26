@@ -39,7 +39,7 @@ IV: Assembly
 2.     In eclipse: file->import->Existing projects into workspace-> Import the TradingPlatform project into eclipse.
 3.     Build path->configure build path->source->add folder: src/main/java, src/test/java, remove old source folder
 4.     In this window, navigate to the libraries tab->import external JAR, import kryo jar
-5.     Click on an @Test flag in a test, import Junit 4 library
-6.     Right click project->maven->update project
+5.     make sure Junit 4 library is imported
+6.     project->maven->update project
 7.     Use platform
 
