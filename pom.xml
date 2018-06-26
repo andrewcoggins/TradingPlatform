@@ -129,6 +129,21 @@
     <version>2.22.0-RC1</version>
 </dependency>
 
+<!-- https://mvnrepository.com/artifact/junit/junit -->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+    <scope>test</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.spectrumauctions</groupId>
+    <artifactId>sats</artifactId>
+    <version>0.6.0</version>
+</dependency>
+
+
 
   </dependencies>
 </project>
