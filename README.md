@@ -35,13 +35,13 @@ The Platform uses a network Client/Server model, where one server supports any n
 IV: Assembly
 ------------
 
-1.     Enter Eclipse workspace directory in Terminal and clone the git repository:
+i.     Enter Eclipse workspace directory in Terminal and clone the git repository:
 git clone https://github.com/andrewcoggins/TradingPlatform
-2.     In eclipse: file->import->Existing projects into workspace->
+ii.     In eclipse: file->import->Existing projects into workspace->
 Import the TradingPlatform project into eclipse.
-3.     Build path->configure build path->source->add folder: src/main/java, src/test/java, remove old source folder
-4.     In this window, navigate to the libraries tab->import external JAR, import kryo jar
-5.     Click on an @Test flag in a test, import Junit 4 library
-6.     Right click project->maven->update project
-7.     Use platform
+iii.     Build path->configure build path->source->add folder: src/main/java, src/test/java, remove old source folder
+iv.     In this window, navigate to the libraries tab->import external JAR, import kryo jar
+v.     Click on an @Test flag in a test, import Junit 4 library
+vi.     Right click project->maven->update project
+vii.     Use platform
 
