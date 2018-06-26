@@ -38,8 +38,7 @@ IV: Assembly
 1.     Enter Eclipse workspace directory in Terminal and clone the git repository: git clone https://github.com/andrewcoggins/TradingPlatform
 2.     In eclipse: file->import->Existing projects into workspace-> Import the TradingPlatform project into eclipse.
 3.     Build path->configure build path->source->add folder: src/main/java, src/test/java, remove old source folder
-4.     In this window, navigate to the libraries tab->import external JAR, import kryo jar
-5.     make sure Junit 4 library is imported
-6.     enable maven nature if not already done. Then, select project->maven->update project
-7.     Use platform
+4.     make sure Junit 4 library is imported
+5.     enable maven nature if not already done. You may need to select maven->update project
+6.     Use platform
 
