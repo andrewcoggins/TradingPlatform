@@ -38,7 +38,6 @@ IV: Assembly
 1.     Enter Eclipse workspace directory in Terminal and clone the git repository: git clone https://github.com/andrewcoggins/TradingPlatform
 2.     In eclipse: file->import->Existing projects into workspace-> Import the TradingPlatform project into eclipse.
 3.     Build path->configure build path->source->add folder: src/main/java, src/test/java, remove old source folder
-4.     make sure Junit 4 library is imported
-5.     enable maven nature if not already done. You may need to select maven->update project
-6.     Use platform
+4.     enable maven nature if not already done. You may need to select maven->update project for eclipse to recognize some libraries
+5.     Use platform
 
