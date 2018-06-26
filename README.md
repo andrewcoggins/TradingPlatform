@@ -40,6 +40,6 @@ IV: Assembly
 3.     Build path->configure build path->source->add folder: src/main/java, src/test/java, remove old source folder
 4.     In this window, navigate to the libraries tab->import external JAR, import kryo jar
 5.     make sure Junit 4 library is imported
-6.     project->maven->update project
+6.     enable maven nature if not already done. Then, select project->maven->update project
 7.     Use platform
 
