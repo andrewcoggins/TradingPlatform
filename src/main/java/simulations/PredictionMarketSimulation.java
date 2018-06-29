@@ -100,7 +100,7 @@ public class PredictionMarketSimulation {
 		private int tier;
 		
 		@Override
-		public void run() {
+		public void run() { 
 			try {
 				String botClass = botClasses[tier];
 				Class<?> cl = Class.forName(botClass);

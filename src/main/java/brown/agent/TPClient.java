@@ -38,7 +38,7 @@ public abstract class TPClient implements IClient {
     this.ID = null;
 
     CLIENT.start();
-    Log.TRACE();
+    //Log.TRACE();
     Kryo agentKryo = CLIENT.getKryo();
     Startup.start(agentKryo);
     if (gameSetup != null) {
