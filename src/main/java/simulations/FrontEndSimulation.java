@@ -1,6 +1,9 @@
 package simulations;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -78,15 +81,14 @@ public class FrontEndSimulation {
       Integer lag = Integer.valueOf(inputFields.value("lag"));
       String config = inputFields.value("valConfig");
       String agentType = inputFields.value("agent");
-      Map<String, Object> result = runThreads(rules, sims, numTradeables, lag, config, agentType); 
-      
+      String result = runThreads(rules, sims, numTradeables, lag, config, agentType);
       //capture the input fields, make sure they are well-formed, and then run threads. s
-      Map<String, Object> vars = ImmutableMap.of("title", "Trading Platform Results");
-      return new ModelAndView(vars, "tradingplatform.ftl");
+      Map<String, Object> vars = ImmutableMap.of("title", "Trading Platform Results", "result", result);
+      return new ModelAndView(vars, "results.ftl");
     }
   }
   
-  private static Map<String, Object> runThreads(String rules, int numSims, int numTradeables, int lag, String config, String agentType) {
+  private static String runThreads(String rules, int numSims, int numTradeables, int lag, String config, String agentType) {
     ServerRunnable server = new ServerRunnable(rules, numSims, numTradeables, lag, config); 
     AgentRunnable agent = new AgentRunnable(agentType); 
     Thread serverThread = new Thread(server);
@@ -101,8 +103,34 @@ public class FrontEndSimulation {
     }
     agentThread.start(); 
     agentThreadTwo.start(); 
+    //TODO: do this better
+    try {
+      Thread.sleep(10000);
+    } catch (InterruptedException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }
     // any interrupts?
-    return null; 
+    BufferedReader reader;
+    try {
+      reader = new BufferedReader(new FileReader("loggedResults.txt"));
+      String read = "";
+      String newRead = reader.readLine(); 
+      //System.out.println("READ" + newRead);
+      while(newRead != null) { 
+        read += newRead + "\n"; 
+        newRead = reader.readLine();
+      }
+      reader.close();
+      return read;
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }  
+    return ""; 
   }
   
   
@@ -149,8 +177,9 @@ public class FrontEndSimulation {
       RunServer testServer = new RunServer(2121, new SSSPSetup());
       // run
       try {
-        testServer.runSimulation(testSim, numSims, this.DELAYTIME, lag, null);
+        testServer.runSimulation(testSim, numSims, this.DELAYTIME, lag, "loggedResults.txt");
       } catch (InterruptedException e) {
+        System.out.println("ERROR: Interrupted Exception");
         e.printStackTrace();
       }
     }

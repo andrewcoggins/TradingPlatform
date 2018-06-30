@@ -27,7 +27,7 @@ public class RecordBids implements IRecordKeepingRule {
   public void record(IMarketState state, Map<Integer,IValuation> privateVals) throws IOException {
     Logging.log("Record: " + this.path);
     PrintWriter out = new PrintWriter(new FileWriter(this.path, true));
-    for (TradeMessage tm : state.getBids()){
+    for (TradeMessage tm : state.getBids()) {
       AuctionBidBundle auctionBid = (AuctionBidBundle) tm.Bundle;
       for (Entry<ITradeable,BidType> bid: auctionBid.getBids().bids.entrySet())
         out.println(tm.AgentID + ", " + bid.getValue().price + ", " + privateVals.get(tm.AgentID).getValuation(bid.getKey()));            
