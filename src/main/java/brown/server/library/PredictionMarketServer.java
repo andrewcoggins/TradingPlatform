@@ -36,7 +36,7 @@ public class PredictionMarketServer {
 	  this.outFile = outFile;
   }
   
-  public PredictionMarketServer(int seconds, int numSims, int initDelay, int lag, String outFile){
+  public PredictionMarketServer(int seconds, int numSims, int initDelay, int lag, String outFile) {
 	  this(seconds, numSims, initDelay, lag, 2121, outFile);
   }
 

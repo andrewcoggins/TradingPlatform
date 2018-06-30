@@ -12,9 +12,9 @@ import brown.messages.library.PrivateInformationMessage;
 import brown.value.valuation.ValuationType;
 
 public class PredictionMarketDecoysConfig extends ValConfig implements IValuationConfig {
+  
   Boolean coin;
     
-  // for kryo
   public PredictionMarketDecoysConfig(){
     super(ValuationType.Game);
     this.coin = null;

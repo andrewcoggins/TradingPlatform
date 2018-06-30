@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.reflect.Constructor;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +27,7 @@ import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
 import brown.value.config.AdditiveUniformConfig;
+import brown.value.config.ValConfig;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import spark.Request;
@@ -154,34 +156,34 @@ public class FrontEndSimulation {
     
     @Override
     public void run() {
-      //not specifying a server in particular; specifying the FIELDS. 
       Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
       List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
-      // add tradeables.
       for (int i = 0; i < numTradeables; i++) {
         allTradeables.add(new SimpleTradeable(i));
         allTradeablesList.add(new SimpleTradeable(i));
       }
-      // one market in this game.
       List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
-      //modify to vary with input rules
-      oneMarket.add(new SSSPRules(1));
-      SimulMarkets markets = new SimulMarkets(oneMarket);
-      List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
-      seq.add(markets);
-      // modify to vary with input
-      Simulation testSim = new Simulation(seq,new AdditiveUniformConfig(allTradeables),
-          allTradeablesList,1.,new LinkedList<ITradeable>());    
-      // initialize the server.
-      // modify to vary with input
-      RunServer testServer = new RunServer(2121, new SSSPSetup());
-      // run
       try {
+        System.out.println("RULES: " + this.rules);
+        Thread.sleep(100);
+        
+        Class<?> rulesClass = Class.forName("brown.market.preset.library." + this.rules);
+        Constructor<?> rulesConstructor = rulesClass.getConstructor(Integer.TYPE); 
+        oneMarket.add((AbsMarketPreset) rulesConstructor.newInstance(1)); 
+        
+        Class<?> configClass = Class.forName("brown.value.config." + this.config);
+        Constructor<?> configConstructor = configClass.getConstructor(Set.class);
+        
+        SimulMarkets markets = new SimulMarkets(oneMarket);
+        List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
+        seq.add(markets);
+        Simulation testSim = new Simulation(seq, (ValConfig) configConstructor.newInstance(allTradeables),
+            allTradeablesList,1.,new LinkedList<ITradeable>());    
+        RunServer testServer = new RunServer(2121, new SSSPSetup());
         testServer.runSimulation(testSim, numSims, this.DELAYTIME, lag, "loggedResults.txt");
-      } catch (InterruptedException e) {
-        System.out.println("ERROR: Interrupted Exception");
-        e.printStackTrace();
-      }
+      } catch (Exception e1) {
+        e1.printStackTrace();
+      } 
     }
   }
   
@@ -195,9 +197,10 @@ public class FrontEndSimulation {
     @Override
     public void run() {
       try {
-        //enumerate these
-        new Lab02Agent("localhost", 2121);
-      } catch (AgentCreationException e) {
+        Class<?> agentClass = Class.forName("brown.agent.library." + this.agentType); 
+        Constructor<?> configConstructor = agentClass.getConstructor(String.class, Integer.TYPE);     
+        configConstructor.newInstance("localhost", 2121);
+      } catch (Exception e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
