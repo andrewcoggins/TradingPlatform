@@ -16,17 +16,13 @@ import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
 
-import brown.agent.library.Lab02Agent;
-import brown.exceptions.AgentCreationException;
 import brown.market.preset.AbsMarketPreset;
-import brown.market.preset.library.SSSPRules;
 import brown.server.library.RunServer;
 import brown.server.library.SimulMarkets;
 import brown.server.library.Simulation;
 import brown.setup.library.SSSPSetup;
 import brown.tradeable.ITradeable;
 import brown.tradeable.library.SimpleTradeable;
-import brown.value.config.AdditiveUniformConfig;
 import brown.value.config.ValConfig;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
@@ -107,7 +103,7 @@ public class FrontEndSimulation {
     agentThreadTwo.start(); 
     //TODO: do this better
     try {
-      Thread.sleep(10000);
+      Thread.sleep(7000);
     } catch (InterruptedException e1) {
       // TODO Auto-generated catch block
       e1.printStackTrace();
@@ -201,7 +197,6 @@ public class FrontEndSimulation {
         Constructor<?> configConstructor = agentClass.getConstructor(String.class, Integer.TYPE);     
         configConstructor.newInstance("localhost", 2121);
       } catch (Exception e) {
-        // TODO Auto-generated catch block
         e.printStackTrace();
       }
       while (true){} 

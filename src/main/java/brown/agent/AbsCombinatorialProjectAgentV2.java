@@ -130,7 +130,7 @@ public abstract class AbsCombinatorialProjectAgentV2  extends AbsSpecValV2Agent{
   }
   
 
-  public double queryValue(Set<Integer> bundle){
+  public double queryValue(Set<Integer> bundle) {
     Set<MRVMLicense> mrvmBundle = new HashSet<MRVMLicense>();
     for (Integer good : bundle){      
       mrvmBundle.add(this.idToLicense.get(good));
@@ -138,11 +138,11 @@ public abstract class AbsCombinatorialProjectAgentV2  extends AbsSpecValV2Agent{
     return (this.valueScale * this.valuation.calculateValue(new Bundle<MRVMLicense>(mrvmBundle)).doubleValue());
   }
   
-  public Map<Set<Integer>,Double> queryXORs(Integer n, Integer mean, Integer stdev){
+  public Map<Set<Integer>,Double> queryXORs(Integer n, Integer mean, Integer stdev) {
     Map<Set<Integer>, Double> toReturn = new HashMap<Set<Integer>, Double>();    
     SizeBasedUniqueRandomXOR<?> valueFunction;
     try {
-      valueFunction = (SizeBasedUniqueRandomXOR) valuation.getValueFunction(SizeBasedUniqueRandomXOR.class);
+      valueFunction = (SizeBasedUniqueRandomXOR<?>) valuation.getValueFunction(SizeBasedUniqueRandomXOR.class);
       valueFunction.setDistribution(mean, stdev, n);
       // Do something with the generated bids
       Iterator<? extends XORValue<?>> xorBidIterator = valueFunction.iterator();
@@ -163,7 +163,7 @@ public abstract class AbsCombinatorialProjectAgentV2  extends AbsSpecValV2Agent{
     }
   }
   
-  public double sampleValue(Set<Integer> bundle){
+  public double sampleValue(Set<Integer> bundle) {
     // MRVMBidder sampleValuation = this.model.createPopulation(this.model.createWorld()).get(0);    
     List<MRVMBidder> sampleValuations = this.model.createPopulation(this.model.createWorld());
     double toReturn = 0;
@@ -177,7 +177,7 @@ public abstract class AbsCombinatorialProjectAgentV2  extends AbsSpecValV2Agent{
     return (toReturn / sampleValuations.size());
   }
   
-  public Map<Set<Integer>, Double> sampleValues(Set<Set<Integer>> bundles){
+  public Map<Set<Integer>, Double> sampleValues(Set<Set<Integer>> bundles) {
     Map<Set<Integer>,Double> toReturn = new HashMap<Set<Integer>,Double>();    
     List<MRVMBidder> sampleValuations = this.model.createPopulation(this.model.createWorld());   
     

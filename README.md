@@ -32,6 +32,13 @@ II: Broad Structural Overview
 
 The Platform uses a network Client/Server model, where one server supports any number of clients. Within the platform, this model is specialized to one market/auction supporting many participants/bidders. The server side of the platform runs the game, meaning it maintains information about the game's current state, sends agents relevant information, and prompts them to respond (e.g., to send their bids). The agent/client side of this platform is responsible for receiving the server’s messages and replying, just as a bidder would do in an auction. This general means of communication serves as the basis for Trading Platform Simulations. 
 
+III: Structure of Markets within a Simulation
+---------------------------------------------
+
+The description above implies that in a simulation run on the Platform, an agent may bid in only one Market. However, there are many cases of interest where a simulation may involve agents bidding in multiple markets, often simultaneously. Trading Platform is structured to support these simulations. 
+
+![alt text](https://github.com/andrewcoggins/TradingPlatform/blob/master/images/SingleSimulation.jpg "Trading Platform Simulation")
+
 IV: Assembly
 ------------
 
