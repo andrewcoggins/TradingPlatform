@@ -43,7 +43,7 @@ The sequence of markets to be run in a Simulation is specified by the user and i
 
 As in the above example, it is oftentimes the case that the Market(s) at some time slot t are dependent on some information from Market(s) at time slot t - 1. The Platform's MarketManager handles this by opening markets at time t with some PrevStateInfo gathered from markets at time t - 1 or with some initial condition if t = 0. This allows for the state of a Market to be dependent on a history of previous Markets. Note that the content of PrevStateInfo is flexible- the information that is transferred from one Market timeslot to another is up to the Market designer. 
 
-![alt text](https://github.com/andrewcoggins/TradingPlatform/blob/master/images/SingleSimulation.jpg "Multiple Simulations")
+![alt text](https://github.com/andrewcoggins/TradingPlatform/blob/master/images/simulation.jpg "Multiple Simulations")
 
 Once a sequence is specified within a Simulation, the Simulation may be run repeatedly. This may be useful for capturing averaged performance measures of agents participating in the Simulation. 
 
