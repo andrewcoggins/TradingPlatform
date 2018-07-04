@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import brown.bid.interim.BidType;
 import brown.bid.library.AuctionBid;
+import brown.bid.library.BidType;
 import brown.bidbundle.IBidBundle;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.IMarketState;

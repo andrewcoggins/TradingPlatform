@@ -6,8 +6,8 @@ import java.util.Map.Entry;
 
 import brown.agent.AbsAgent;
 import brown.agent.AbsAuctionAgent;
-import brown.bid.interim.BidType;
 import brown.bid.library.AuctionBid;
+import brown.bid.library.BidType;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.IBidBundle;
 import brown.bidbundle.library.AuctionBidBundle;

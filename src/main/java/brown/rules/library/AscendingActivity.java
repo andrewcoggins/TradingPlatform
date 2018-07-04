@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import brown.bid.interim.BidType;
+import brown.bid.library.BidType;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;

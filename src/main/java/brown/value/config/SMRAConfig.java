@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import brown.bid.interim.BidType;
+import brown.bid.library.BidType;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.market.library.PrevStateInfo;
 import brown.market.library.PriceDiscoveryInfo;

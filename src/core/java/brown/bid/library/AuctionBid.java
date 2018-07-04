@@ -3,7 +3,6 @@ package brown.bid.library;
 import java.util.Map;
 
 import brown.bid.IBid;
-import brown.bid.interim.BidType;
 import brown.tradeable.ITradeable;
 
 /**

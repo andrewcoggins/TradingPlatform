@@ -1,4 +1,4 @@
-package simulations;
+package brown.simulations;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -205,7 +205,7 @@ public class FrontEndSimulation {
   
   private static FreeMarkerEngine createEngine() {
     Configuration config = new Configuration(new Version(2,3,23));
-    File templates = new File("src/main/resources/spark/template/freemarker");
+    File templates = new File("src/core/resources/spark/template/freemarker");
     try {
       config.setDirectoryForTemplateLoading(templates);
     } catch (IOException ioe) {

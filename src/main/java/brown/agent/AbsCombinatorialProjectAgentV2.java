@@ -19,7 +19,7 @@ import org.spectrumauctions.sats.core.model.mrvm.MRVMLicense;
 import org.spectrumauctions.sats.opt.model.mrvm.demandquery.MRVMDemandQueryMipResult;
 import org.spectrumauctions.sats.opt.model.mrvm.demandquery.MRVM_DemandQueryMIP;
 
-import brown.bid.interim.BidType;
+import brown.bid.library.BidType;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.OpenOutcryChannel;
 import brown.exceptions.AgentCreationException;

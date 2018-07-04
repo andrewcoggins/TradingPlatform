@@ -1,4 +1,4 @@
-package brown.bid.interim; 
+package brown.bid; 
 
 /**
  * Specifies price and quantity for a bid. 

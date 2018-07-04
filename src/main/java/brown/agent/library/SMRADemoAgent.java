@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import brown.agent.AbsSMRAAgent;
-import brown.bid.interim.BidType;
+import brown.bid.library.BidType;
 import brown.bidbundle.IBidBundle;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.AuctionChannel;

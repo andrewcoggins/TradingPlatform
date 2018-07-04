@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import brown.bid.interim.BidType;
 import brown.bid.library.AuctionBid;
+import brown.bid.library.BidType;
 import brown.market.marketstate.IMarketState;
 import brown.messages.library.TradeMessage;
 import brown.rules.IInnerTC;

@@ -1,4 +1,6 @@
-package brown.bid.interim; 
+package brown.bid.library;
+
+import brown.bid.IBidType;
 
 /**
  * Specifies the price and quantity for a bid. 

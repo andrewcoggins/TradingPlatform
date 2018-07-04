@@ -3,7 +3,7 @@ package brown.agent;
 import java.util.HashMap;
 import java.util.Map;
 
-import brown.bid.interim.BidType;
+import brown.bid.library.BidType;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;

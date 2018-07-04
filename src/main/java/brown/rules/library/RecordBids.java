@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import brown.bid.interim.BidType;
+import brown.bid.library.BidType;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.logging.Logging;
 import brown.market.marketstate.IMarketState;

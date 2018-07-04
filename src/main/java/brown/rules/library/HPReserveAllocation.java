@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import brown.bid.interim.BidType;
+import brown.bid.library.BidType;
 import brown.bidbundle.BundleType;
 import brown.bidbundle.library.AuctionBidBundle;
 import brown.logging.Logging;

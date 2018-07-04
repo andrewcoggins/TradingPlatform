@@ -1,4 +1,4 @@
-package simulations;
+package brown.simulations;
 
 import java.lang.reflect.Constructor;
 import java.text.DateFormat;
