@@ -45,7 +45,7 @@ As in the above example, it is oftentimes the case that the Market(s) at some ti
 
 ![alt text](https://github.com/andrewcoggins/TradingPlatform/blob/master/images/simulation.jpg "Multiple Simulations")
 
-Once a sequence is specified within a Simulation, the Simulation may be run repeatedly. This may be useful for capturing averaged performance measures of agents participating in the Simulation. 
+Once a sequence is specified within a Simulation, the Simulation may be run repeatedly. This may be useful for capturing averaged performance measures of Agents participating in the Simulation. 
 
 
 
