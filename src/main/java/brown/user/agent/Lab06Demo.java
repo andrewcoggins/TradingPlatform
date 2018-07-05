@@ -1,6 +1,6 @@
 package brown.user.agent;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bid.BidDirection;
 import brown.mechanism.channel.CallMarketChannel;
 

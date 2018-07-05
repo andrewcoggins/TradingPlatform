@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IRecordKeepingRule;
 import brown.auction.value.valuation.IValuation;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bid.BidType;
 import brown.mechanism.bidbundle.AuctionBidBundle;
 import brown.mechanism.tradeable.ITradeable;

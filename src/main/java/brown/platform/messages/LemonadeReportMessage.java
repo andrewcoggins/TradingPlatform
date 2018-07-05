@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.platform.messages.GameReportMessage;
 
 /**

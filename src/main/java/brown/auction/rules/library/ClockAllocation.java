@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IAllocationRule;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bid.AuctionBid;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.SimpleTradeable;

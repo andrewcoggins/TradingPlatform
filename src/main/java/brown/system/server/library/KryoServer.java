@@ -1,4 +1,4 @@
-package brown.system.server;
+package brown.system.server.library;
 
 import java.io.IOException;
 
@@ -9,11 +9,12 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Server;
 
-import brown.logging.Logging;
+import brown.logging.library.SystemLogging;
+import brown.system.server.IKryoServer;
 import brown.system.setup.ISetup;
-import brown.system.setup.Startup;
+import brown.system.setup.library.Startup;
 
-public abstract class KryoServer {
+public abstract class KryoServer implements IKryoServer {
   
   // Server stuff
   private final int PORT;
@@ -32,12 +33,11 @@ public abstract class KryoServer {
     if (gameSetup != null) {
       gameSetup.setup(serverKryo);
     }
-    
     // Set up Server
     try {
       theServer.bind(PORT, PORT);
     } catch (IOException e) {
-      Logging.log(e + " [X] Server failed to start due to port conflict");
+      SystemLogging.log(e + " [X] Server failed to start due to port conflict");
       return;
     }
   }

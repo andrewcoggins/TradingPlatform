@@ -6,7 +6,7 @@ import java.util.List;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IPaymentRule;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bidbundle.BundleType;
 import brown.mechanism.bidbundle.GameBidBundle;
 import brown.mechanism.tradeable.ITradeable;

@@ -6,7 +6,7 @@ import brown.mechanism.bidbundle.TwoSidedBidBundle;
 import brown.mechanism.channel.CallMarketChannel;
 import brown.platform.messages.CallMarketReportMessage;
 import brown.platform.messages.GameReportMessage;
-import brown.system.setup.CallMarketSetup;
+import brown.system.setup.library.CallMarketSetup;
 
 /**
  * Bot for call market.

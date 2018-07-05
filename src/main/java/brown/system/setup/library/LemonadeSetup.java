@@ -1,4 +1,4 @@
-package brown.system.setup;
+package brown.system.setup.library;
 
 import com.esotericsoftware.kryo.Kryo;
 
@@ -6,6 +6,7 @@ import brown.mechanism.bid.GameBid;
 import brown.mechanism.bidbundle.GameBidBundle;
 import brown.mechanism.channel.GameChannel;
 import brown.platform.messages.LemonadeReportMessage;
+import brown.system.setup.ISetup;
 
 /**
  * Additional setup for the Lemonade game.

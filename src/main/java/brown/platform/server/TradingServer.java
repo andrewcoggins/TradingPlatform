@@ -24,7 +24,7 @@ import brown.auction.value.config.ValConfig;
 import brown.auction.value.valuation.IValuation;
 import brown.auction.value.valuation.SpecValValuation;
 import brown.auction.value.valuation.ValuationType;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.Account;
 import brown.platform.accounting.AccountManager;
@@ -41,7 +41,7 @@ import brown.platform.messages.TradeMessage;
 import brown.platform.messages.TradeRequestMessage;
 import brown.platform.messages.ValuationInformationMessage;
 import brown.platform.summary.AuctionSummarizer;
-import brown.system.server.KryoServer;
+import brown.system.server.library.KryoServer;
 import brown.system.setup.ISetup;
 
 /**

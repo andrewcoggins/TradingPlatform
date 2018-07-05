@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import brown.system.setup.SMRASetup;
 import brown.auction.preset.AbsMarketPreset;
 import brown.auction.preset.SMRADiscovery;
 import brown.auction.preset.SSSPReserveRules;
@@ -17,6 +16,7 @@ import brown.mechanism.tradeable.SimpleTradeable;
 import brown.platform.server.RunServer;
 import brown.platform.server.SimulMarkets;
 import brown.platform.server.Simulation;
+import brown.system.setup.library.SMRASetup;
 
 /**
  * a typical SMRA auction with a price discovery round

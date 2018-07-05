@@ -1,10 +1,11 @@
-package brown.system.setup;
+package brown.system.setup.library;
 
 
 import brown.mechanism.bid.AuctionBid;
 import brown.mechanism.bidbundle.AuctionBidBundle;
 import brown.mechanism.channel.SealedBidChannel;
 import brown.platform.messages.SpecValValuationMessage;
+import brown.system.setup.ISetup;
 
 import com.esotericsoftware.kryo.Kryo;
 

@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IPaymentRule;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bid.BidDirection;
 import brown.mechanism.bid.CancelBid;
 import brown.mechanism.bid.TwoSidedBid;

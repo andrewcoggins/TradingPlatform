@@ -7,7 +7,7 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IInformationRevelationPolicy;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bidbundle.BundleType;
 import brown.mechanism.bidbundle.GameBidBundle;
 import brown.platform.messages.GameReportMessage;

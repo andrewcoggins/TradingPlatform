@@ -1,6 +1,6 @@
 package brown.user.agent;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.platform.messages.PredictionMarketValuationMessage;
 import brown.platform.messages.PrivateInformationMessage;
 import brown.system.setup.ISetup;

@@ -3,7 +3,7 @@ package brown.user.agent;
 import java.util.ArrayList;
 import java.util.List;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bid.BidDirection;
 import brown.mechanism.bid.CancelBid;
 import brown.mechanism.bid.TwoSidedBid;
@@ -18,7 +18,7 @@ import brown.platform.messages.PredictionMarketReport;
 import brown.platform.messages.PrivateInformationMessage;
 import brown.platform.twosided.IOrderBook;
 import brown.platform.twosided.OrderBook;
-import brown.system.setup.CallMarketSetup;
+import brown.system.setup.library.CallMarketSetup;
 
 /**
  * abstract agent used in prediction market project for cs1951k.

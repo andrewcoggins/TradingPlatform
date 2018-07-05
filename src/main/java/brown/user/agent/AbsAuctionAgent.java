@@ -5,7 +5,7 @@ import java.util.List;
 
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.valuation.IValuation;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.messages.PrivateInformationMessage;
 import brown.platform.messages.ValuationInformationMessage;

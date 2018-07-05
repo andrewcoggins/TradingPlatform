@@ -13,7 +13,7 @@ import brown.auction.prevstate.PrevStateInfo;
 import brown.auction.prevstate.PrevStateType;
 import brown.auction.prevstate.PriceDiscoveryInfo;
 import brown.auction.rules.IAllocationRule;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bid.BidType;
 import brown.mechanism.bidbundle.AuctionBidBundle;
 import brown.mechanism.bidbundle.BundleType;

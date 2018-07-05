@@ -10,7 +10,7 @@ import org.spectrumauctions.sats.core.model.mrvm.MRVMBidder;
 import brown.auction.value.generator.SpecValGenV2;
 import brown.auction.value.valuation.IValuation;
 import brown.auction.value.valuation.SpecValValuation;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ComplexTradeable;
 
 /**

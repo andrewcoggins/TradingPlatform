@@ -13,7 +13,7 @@ import org.spectrumauctions.sats.core.util.random.RNGSupplier;
 
 import brown.auction.prevstate.PrevStateInfo;
 import brown.auction.value.valuation.ValuationType;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.platform.messages.PrivateInformationMessage;
 import brown.platform.messages.SpecValWrapperMessage;
 

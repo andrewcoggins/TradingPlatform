@@ -5,7 +5,7 @@ import java.util.List;
 
 import brown.auction.value.config.IValuationConfig;
 import brown.auction.value.config.PredictionMarketDecoysConfig;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.platform.accounting.Transaction;
 
 /**

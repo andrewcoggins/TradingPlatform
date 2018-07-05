@@ -11,7 +11,7 @@ import brown.mechanism.tradeable.SimpleTradeable;
 import brown.platform.server.RunServer;
 import brown.platform.server.SimulMarkets;
 import brown.platform.server.Simulation;
-import brown.system.setup.SpecValSetup;
+import brown.system.setup.library.SpecValSetup;
 
 /**
  * server main class for combinatorial auctions.

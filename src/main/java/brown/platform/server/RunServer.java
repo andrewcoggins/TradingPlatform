@@ -5,7 +5,7 @@ import java.util.List;
 
 import brown.auction.preset.AbsMarketPreset;
 import brown.auction.value.config.ValConfig;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.summary.AuctionSummarizer;
 import brown.system.setup.ISetup;

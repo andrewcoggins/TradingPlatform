@@ -24,8 +24,8 @@ import brown.platform.messages.BankUpdateMessage;
 import brown.platform.messages.GameReportMessage;
 import brown.platform.messages.TradeRequestMessage;
 import brown.system.setup.ISetup;
-import brown.system.setup.LemonadeSetup;
-import brown.system.setup.Startup;
+import brown.system.setup.library.LemonadeSetup;
+import brown.system.setup.library.Startup;
 import brown.user.agent.AbsLemonadeAgent;
 
 /*

@@ -11,7 +11,7 @@ import brown.mechanism.tradeable.MultiTradeable;
 import brown.platform.server.RunServer;
 import brown.platform.server.SimulMarkets;
 import brown.platform.server.Simulation;
-import brown.system.setup.LemonadeSetup;
+import brown.system.setup.library.LemonadeSetup;
 
 /**
  * Test of a lemonade game run.

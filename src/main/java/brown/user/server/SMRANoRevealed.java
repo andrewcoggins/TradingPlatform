@@ -16,7 +16,7 @@ import brown.mechanism.tradeable.SimpleTradeable;
 import brown.platform.server.RunServer;
 import brown.platform.server.SimulMarkets;
 import brown.platform.server.Simulation;
-import brown.system.setup.SMRASetup;
+import brown.system.setup.library.SMRASetup;
 
 /**
  * Main server for a SMRA auction with no revealed preference activity rule.

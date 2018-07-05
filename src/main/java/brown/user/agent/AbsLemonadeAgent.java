@@ -1,6 +1,6 @@
 package brown.user.agent;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.platform.messages.BankUpdateMessage;
 import brown.platform.messages.GameReportMessage;
 import brown.platform.messages.LemonadeReportMessage;

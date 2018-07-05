@@ -19,7 +19,7 @@ import org.spectrumauctions.sats.core.model.mrvm.MRVMLicense;
 import org.spectrumauctions.sats.opt.model.mrvm.demandquery.MRVMDemandQueryMipResult;
 import org.spectrumauctions.sats.opt.model.mrvm.demandquery.MRVM_DemandQueryMIP;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bid.BidType;
 import brown.mechanism.bidbundle.AuctionBidBundle;
 import brown.mechanism.channel.OpenOutcryChannel;
@@ -29,7 +29,7 @@ import brown.platform.messages.BankUpdateMessage;
 import brown.platform.messages.CombinatorialClockReport;
 import brown.platform.messages.GameReportMessage;
 import brown.platform.messages.PrivateInformationMessage;
-import brown.system.setup.SpecValSetup;
+import brown.system.setup.library.SpecValSetup;
 
 /**
  * Alternate version of the combinatorial project agent. Used in the final project for 

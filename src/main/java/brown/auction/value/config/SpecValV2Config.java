@@ -20,7 +20,7 @@ import org.spectrumauctions.sats.core.model.mrvm.MultiRegionModel;
 import brown.auction.prevstate.PrevStateInfo;
 import brown.auction.prevstate.SpecValInfo;
 import brown.auction.value.valuation.ValuationType;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ComplexTradeable;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.SimpleTradeable;

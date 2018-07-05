@@ -6,7 +6,7 @@ import java.util.List;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IGroupingRule;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 
 /**
  * Grouping policy that groups agents in groups of three or four, 

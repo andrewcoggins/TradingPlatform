@@ -3,14 +3,14 @@ package brown.user.agent;
 import java.util.HashMap;
 import java.util.Map;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bid.BidType;
 import brown.mechanism.bidbundle.AuctionBidBundle;
 import brown.mechanism.channel.SealedBidChannel;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.messages.BankUpdateMessage;
 import brown.platform.messages.GameReportMessage;
-import brown.system.setup.SSSPSetup;
+import brown.system.setup.library.SSSPSetup;
 
 /**
  * Simple sealed agent bids in a simple sealed auction, 

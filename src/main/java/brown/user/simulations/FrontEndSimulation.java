@@ -23,7 +23,7 @@ import brown.mechanism.tradeable.SimpleTradeable;
 import brown.platform.server.RunServer;
 import brown.platform.server.SimulMarkets;
 import brown.platform.server.Simulation;
-import brown.system.setup.SSSPSetup;
+import brown.system.setup.library.SSSPSetup;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import spark.Request;

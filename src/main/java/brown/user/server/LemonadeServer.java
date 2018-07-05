@@ -8,7 +8,7 @@ import brown.auction.value.config.LemonadeConfig;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.MultiTradeable;
 import brown.platform.server.RunServer;
-import brown.system.setup.LemonadeSetup;
+import brown.system.setup.library.LemonadeSetup;
 
 /**
  * Server main class for lemonade game.

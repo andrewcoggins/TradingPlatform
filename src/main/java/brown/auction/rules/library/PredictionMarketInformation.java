@@ -11,7 +11,7 @@ import brown.auction.prevstate.PredictionMarketInfo;
 import brown.auction.prevstate.PrevStateInfo;
 import brown.auction.prevstate.PrevStateType;
 import brown.auction.rules.IInformationRevelationPolicy;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.platform.messages.GameReportMessage;
 import brown.platform.messages.PredictionMarketReport;
 

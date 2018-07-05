@@ -3,7 +3,7 @@ package brown.platform.accounting;
 import java.util.LinkedList;
 import java.util.List;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ITradeable;
 
 /**

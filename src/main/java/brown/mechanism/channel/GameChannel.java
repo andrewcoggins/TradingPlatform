@@ -2,7 +2,7 @@ package brown.mechanism.channel;
 
 import java.util.Map;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bidbundle.BundleType;
 import brown.mechanism.bidbundle.IBidBundle;
 import brown.platform.messages.TradeMessage;

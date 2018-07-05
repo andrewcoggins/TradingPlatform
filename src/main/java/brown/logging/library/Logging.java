@@ -1,4 +1,6 @@
-package brown.logging;
+package brown.logging.library;
+
+import brown.logging.ILogging;
 
 /**
  * Wraps printed messages, so logging can be enabled or disabled.

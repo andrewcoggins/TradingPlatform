@@ -1,16 +1,18 @@
-package brown.system.client;
+package brown.system.client.library;
 
 import java.io.IOException;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
+import brown.logging.library.SystemLogging;
 import brown.platform.messages.ErrorMessage;
 import brown.platform.messages.RegistrationMessage;
 import brown.platform.messages.StringMessage;
+import brown.system.client.IClient;
 import brown.system.setup.ISetup;
-import brown.system.setup.Startup;
+import brown.system.setup.library.Startup;
 
 /**
  * abstract client starts an agent with kryo. 
@@ -45,25 +47,25 @@ public abstract class TPClient implements IClient {
     try {
       CLIENT.connect(5000, host, port, port);
     } catch (IOException e) {
-      Logging.log("Failed to Connect to Server");
-      System.out.println(e); 
+      SystemLogging.log("[x] Failed to Connect to Server");
+      SystemLogging.log(e.toString());
     }
   }  
   
   @Override
   public void onRegistration(RegistrationMessage registration) {
-    Logging.log("[-] Registered To Server");
+    SystemLogging.log("[-] Registered To Server");
     this.ID = registration.getID();    
-    Logging.log("ID: " + this.ID);
+    SystemLogging.log("ID: " + this.ID);
   }
   
   @Override
   public void onErrorMessage(ErrorMessage message) {
-    Logging.log("[x] rej: " + message.error + ", agent ID: " +this.ID);
+    SystemLogging.log("[x] rej: " + message.error + ", agent ID: " +this.ID);
   }
 
   @Override
   public void onStringMessage(StringMessage message) {
-    Logging.log("[-] Message Received: " + message.message + ", agent ID: " +this.ID);
+    SystemLogging.log("[-] Message Received: " + message.message + ", agent ID: " +this.ID);
   }  
 }

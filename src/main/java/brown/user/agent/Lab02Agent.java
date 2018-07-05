@@ -1,10 +1,10 @@
 package brown.user.agent;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.channel.SealedBidChannel;
 import brown.platform.messages.GameReportMessage;
 import brown.platform.messages.SimpleSealedReportMessage;
-import brown.system.setup.SSSPSetup;
+import brown.system.setup.library.SSSPSetup;
 
 /**
  * Agent that bids in the lab 2 game- just submits valuation.

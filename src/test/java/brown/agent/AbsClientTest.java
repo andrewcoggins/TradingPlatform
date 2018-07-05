@@ -11,9 +11,9 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
 import brown.exceptions.AgentCreationException;
-import brown.system.client.TPClient;
+import brown.system.client.library.TPClient;
 import brown.system.setup.ISetup;
-import brown.system.setup.LemonadeSetup;
+import brown.system.setup.library.LemonadeSetup;
 
 /**
  * test the ability of the system to send messages. This is all that AbsClient

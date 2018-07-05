@@ -14,7 +14,7 @@ import org.spectrumauctions.sats.core.model.UnsupportedBiddingLanguageException;
 import org.spectrumauctions.sats.core.model.mrvm.MRVMBidder;
 import org.spectrumauctions.sats.core.model.mrvm.MRVMLicense;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ComplexTradeable;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.SimpleTradeable;

@@ -17,7 +17,7 @@ import brown.platform.messages.PredictionMarketReport;
 import brown.platform.messages.PrivateInformationMessage;
 import brown.platform.twosided.IOrderBook;
 import brown.platform.twosided.OrderBook;
-import brown.system.setup.CallMarketSetup;
+import brown.system.setup.library.CallMarketSetup;
 
 /**
  * Abstract agent for lab 6-call market lab for cs1951k. 

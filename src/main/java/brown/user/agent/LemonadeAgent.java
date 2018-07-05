@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bidbundle.GameBidBundle;
 import brown.mechanism.channel.GameChannel;
 import brown.platform.messages.GameReportMessage;
 import brown.platform.messages.LemonadeReportMessage;
 import brown.platform.messages.PrivateInformationMessage;
-import brown.system.setup.LemonadeSetup;
+import brown.system.setup.library.LemonadeSetup;
 
 /**
  * Agent for the lemonade game.

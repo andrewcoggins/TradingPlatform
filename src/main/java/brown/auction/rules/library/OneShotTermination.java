@@ -2,7 +2,7 @@ package brown.auction.rules.library;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IInnerTC;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 
 public class OneShotTermination implements IInnerTC {
 

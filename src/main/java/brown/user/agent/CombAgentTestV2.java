@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 
 /**
  * test agent for final combinatorial project.

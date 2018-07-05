@@ -9,7 +9,7 @@ import java.util.Set;
 
 import brown.auction.value.valuation.IValuation;
 import brown.auction.value.valuation.SpecValValuation;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ComplexTradeable;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.Account;

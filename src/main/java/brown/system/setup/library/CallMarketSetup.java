@@ -1,4 +1,4 @@
-package brown.system.setup;
+package brown.system.setup.library;
 
 import com.esotericsoftware.kryo.Kryo;
 
@@ -14,6 +14,7 @@ import brown.platform.messages.PredictionMarketValuationMessage;
 import brown.platform.twosided.BuyOrder;
 import brown.platform.twosided.OrderBook;
 import brown.platform.twosided.SellOrder;
+import brown.system.setup.ISetup;
 
 /**
  * additional kryo setup for call market auction.

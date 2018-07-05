@@ -10,7 +10,7 @@ import brown.mechanism.channel.OpenOutcryChannel;
 import brown.mechanism.channel.SealedBidChannel;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.messages.GameReportMessage;
-import brown.system.setup.SMRASetup;
+import brown.system.setup.library.SMRASetup;
 
 /**
  * Demo agent for SMRA auction- never went into use for cs1951k

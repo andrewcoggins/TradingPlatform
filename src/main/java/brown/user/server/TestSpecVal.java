@@ -10,7 +10,7 @@ import brown.auction.value.config.SpecValV2Config;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.SimpleTradeable;
 import brown.platform.server.RunServer;
-import brown.system.setup.SpecValSetup;
+import brown.system.setup.library.SpecValSetup;
 
 /**
  * test for a specval auction.

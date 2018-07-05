@@ -2,7 +2,7 @@ package brown.platform.twosided;
 
 import java.util.Map;
 
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bid.BidDirection;
 import brown.mechanism.bid.TwoSidedBid;
 

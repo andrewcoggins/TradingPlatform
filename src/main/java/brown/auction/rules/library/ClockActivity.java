@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bid.AuctionBid;
 import brown.mechanism.bid.BidType;
 import brown.mechanism.bidbundle.BundleType;

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import brown.auction.value.valuation.IValuation;
-import brown.logging.Logging;
+import brown.logging.library.Logging;
 import brown.mechanism.bid.BidType;
 import brown.mechanism.bidbundle.AuctionBidBundle;
 import brown.mechanism.channel.SealedBidChannel;
