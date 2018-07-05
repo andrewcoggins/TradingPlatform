@@ -10,11 +10,10 @@ import java.util.Set;
 import org.junit.Test;
 
 import brown.accounting.MarketState;
-import brown.bidbundle.library.AuctionBidBundle;
-import brown.market.marketstate.library.MarketState;
-import brown.messages.library.TradeMessage;
-import brown.rules.library.LemonadeActivity;
-import brown.tradeable.library.MultiTradeable;
+import brown.auction.rules.library.LemonadeActivity;
+import brown.mechanism.bidbundle.AuctionBidBundle;
+import brown.mechanism.tradeable.MultiTradeable;
+import brown.platform.messages.TradeMessage;
 
 /**
  * tests the one shot activity rule. 

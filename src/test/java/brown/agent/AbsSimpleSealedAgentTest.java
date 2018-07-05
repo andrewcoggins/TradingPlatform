@@ -14,22 +14,23 @@ import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
 import brown.accounting.MarketState;
-import brown.accounting.library.Account;
-import brown.accounting.library.Ledger;
-import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
-import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.BankUpdateMessage;
-import brown.messages.library.GameReportMessage;
-import brown.messages.library.RegistrationMessage;
-import brown.messages.library.TradeRequestMessage;
+import brown.mechanism.bidbundle.AuctionBidBundle;
+import brown.mechanism.channel.SealedBidChannel;
+import brown.mechanism.tradeable.MultiTradeable;
 import brown.messages.library.ValuationRegistrationMessage;
-import brown.setup.ISetup;
-import brown.setup.library.LemonadeSetup;
-import brown.setup.library.Startup;
+import brown.platform.accounting.Account;
+import brown.platform.accounting.Ledger;
+import brown.platform.messages.BankUpdateMessage;
+import brown.platform.messages.GameReportMessage;
+import brown.platform.messages.RegistrationMessage;
+import brown.platform.messages.TradeRequestMessage;
+import brown.system.setup.ISetup;
+import brown.system.setup.LemonadeSetup;
+import brown.system.setup.Startup;
 import brown.todeprecate.PaymentType;
-import brown.tradeable.library.MultiTradeable;
+import brown.user.agent.AbsAuctionAgent;
 import brown.value.valuable.library.Value;
 import brown.value.valuationrepresentation.library.SimpleValuation;
 
@@ -60,7 +61,7 @@ public class AbsSimpleSealedAgentTest {
               connection.sendTCP(b);
             } else if (object.equals("send me a SimpleAgentChannel")) {
               Map<MultiTradeable, MarketState> junk = new HashMap<MultiTradeable, MarketState>();
-              AuctionChannel sa = new AuctionChannel(0, new Ledger(0),
+              SealedBidChannel sa = new SealedBidChannel(0, new Ledger(0),
                   PaymentType.FirstPrice, MechanismType.SealedBid, new AuctionBidBundle(junk), 0); 
               connection.sendTCP(new TradeRequestMessage(0, sa, MechanismType.SealedBid));
             } else if (object.equals("send me a Registration")) {
@@ -97,7 +98,7 @@ public class AbsSimpleSealedAgentTest {
       }
     }
     @Override
-    public void onSimpleSealed(AuctionChannel simpleWrapper) {
+    public void onSimpleSealed(SealedBidChannel simpleWrapper) {
      this.myMessage = "SimpleAgentChannel Received";
     }
     public String confirm() {

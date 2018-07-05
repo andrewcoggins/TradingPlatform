@@ -12,11 +12,11 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.accounting.library.Ledger;
-import brown.accounting.library.Transaction;
-import brown.bid.library.AuctionBid;
 import brown.market.marketstate.library.Allocation;
-import brown.tradeable.library.MultiTradeable;
+import brown.mechanism.bid.AuctionBid;
+import brown.mechanism.tradeable.MultiTradeable;
+import brown.platform.accounting.Ledger;
+import brown.platform.accounting.Transaction;
 
 /**
  * Test for the Ledger class. 

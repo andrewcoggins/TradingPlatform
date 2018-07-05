@@ -12,20 +12,21 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
-import brown.accounting.library.Account;
-import brown.accounting.library.Ledger;
 import brown.channels.agent.library.CDAAgentChannel;
-import brown.channels.library.AuctionChannel;
-import brown.channels.library.GameChannel;
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.BankUpdateMessage;
+import brown.mechanism.channel.GameChannel;
+import brown.mechanism.channel.SealedBidChannel;
 import brown.messages.library.BidRequestMessage;
-import brown.messages.library.GameReportMessage;
 import brown.messages.library.NegotiateRequestMessage;
-import brown.messages.library.TradeRequestMessage;
-import brown.setup.ISetup;
-import brown.setup.library.LemonadeSetup;
-import brown.setup.library.Startup;
+import brown.platform.accounting.Account;
+import brown.platform.accounting.Ledger;
+import brown.platform.messages.BankUpdateMessage;
+import brown.platform.messages.GameReportMessage;
+import brown.platform.messages.TradeRequestMessage;
+import brown.system.setup.ISetup;
+import brown.system.setup.LemonadeSetup;
+import brown.system.setup.Startup;
+import brown.user.agent.AbsLemonadeAgent;
 
 /*
  * Tests the Abstract Lemonade Agent as a listener for the datatypes it will 

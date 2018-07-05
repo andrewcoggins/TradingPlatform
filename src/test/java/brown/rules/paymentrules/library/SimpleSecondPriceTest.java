@@ -6,10 +6,9 @@ import java.util.Map;
 import org.junit.Test;
 
 import brown.accounting.MarketState;
-import brown.bidbundle.library.AuctionBidBundle;
-import brown.market.marketstate.library.MarketState;
-import brown.rules.library.SimpleSecondPricePayment;
-import brown.tradeable.library.MultiTradeable;
+import brown.auction.rules.library.SimpleSecondPricePayment;
+import brown.mechanism.bidbundle.AuctionBidBundle;
+import brown.mechanism.tradeable.MultiTradeable;
 
 /**
  * simple second price payment rule test.

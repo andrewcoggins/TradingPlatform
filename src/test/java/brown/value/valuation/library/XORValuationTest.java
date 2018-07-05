@@ -10,9 +10,10 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.tradeable.ITradeable;
-import brown.tradeable.library.ComplexTradeable;
-import brown.tradeable.library.SimpleTradeable;
+import brown.auction.value.valuation.XORValuation;
+import brown.mechanism.tradeable.ComplexTradeable;
+import brown.mechanism.tradeable.ITradeable;
+import brown.mechanism.tradeable.SimpleTradeable;
 
 /**
  * check that an XORValuation corrctly stores its parameters.

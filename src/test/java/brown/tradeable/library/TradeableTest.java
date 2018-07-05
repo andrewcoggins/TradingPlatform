@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import brown.tradeable.library.MultiTradeable;
+import brown.mechanism.tradeable.MultiTradeable;
 
 
 /**

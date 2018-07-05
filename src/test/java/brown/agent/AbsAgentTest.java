@@ -12,18 +12,19 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
 
-import brown.accounting.library.Account;
-import brown.accounting.library.Ledger;
 import brown.channels.agent.library.CDAAgentChannel;
-import brown.channels.library.AuctionChannel;
 import brown.exceptions.AgentCreationException;
-import brown.messages.library.BankUpdateMessage;
+import brown.mechanism.channel.SealedBidChannel;
 import brown.messages.library.BidRequestMessage;
-import brown.messages.library.GameReportMessage;
 import brown.messages.library.NegotiateRequestMessage;
-import brown.setup.ISetup;
-import brown.setup.library.LemonadeSetup;
-import brown.setup.library.Startup;
+import brown.platform.accounting.Account;
+import brown.platform.accounting.Ledger;
+import brown.platform.messages.BankUpdateMessage;
+import brown.platform.messages.GameReportMessage;
+import brown.system.setup.ISetup;
+import brown.system.setup.LemonadeSetup;
+import brown.system.setup.Startup;
+import brown.user.agent.AbsAgent;
 
 /*
  * The AbsAgent serves as a listener.
@@ -55,7 +56,7 @@ public class AbsAgentTest {
             NegotiateRequestMessage nr = new NegotiateRequestMessage(1, 0, 100, null, 50, null);
             connection.sendTCP(nr);
           } else if (object.equals("send me a SimpleAgentChannel")) {
-            AuctionChannel sa = new AuctionChannel(0, new Ledger(0), null, null, null, 0); 
+            SealedBidChannel sa = new SealedBidChannel(0, new Ledger(0), null, null, null, 0); 
             connection.sendTCP(sa);
           } else if (object.equals("send me a CDAAgentChannel")) {
             CDAAgentChannel cd = new CDAAgentChannel(null, new Ledger(0));
@@ -108,13 +109,13 @@ public class AbsAgentTest {
     
     //perhaps later.
     @Test
-    public void onSimpleSealed(AuctionChannel simpleWrapper) {
+    public void onSimpleSealed(SealedBidChannel simpleWrapper) {
       // TODO Auto-generated method stub
       System.out.println("SimpleAuctionChannel Received: SS");
     }
 
     @Test
-    public void onSimpleOpenOutcry(AuctionChannel simpleWrapper) {
+    public void onSimpleOpenOutcry(SealedBidChannel simpleWrapper) {
       // TODO Auto-generated method stub
       System.out.println("SimpleAuctionChannel Received: OO");
     }

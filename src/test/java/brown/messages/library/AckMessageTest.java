@@ -4,7 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import brown.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.AuctionBidBundle;
+import brown.platform.messages.ErrorMessage;
+import brown.platform.messages.RegistrationMessage;
+import brown.platform.messages.TradeMessage;
 
 /**
  * tests the ack message. 

@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import brown.auction.value.generator.LabTwoValGenerator;
+
 /**
  * tests the lab two value generator, and that it fits the specification of 
  * the CDF F(X) = 2x - x^2 over [0, 1],

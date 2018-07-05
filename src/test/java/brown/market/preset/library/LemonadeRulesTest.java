@@ -4,13 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import brown.rules.library.LemonadeAllocation;
-import brown.rules.library.LemonadeAnonymous;
-import brown.rules.library.LemonadePayment;
-import brown.rules.library.LemonadeQuery;
-import brown.rules.library.LemonadeActivity;
-import brown.rules.library.OneShotTermination;
-import brown.rules.library.XRoundTermination;
+import brown.auction.preset.LemonadeAnonRules;
+import brown.auction.rules.library.LemonadeActivity;
+import brown.auction.rules.library.LemonadeAllocation;
+import brown.auction.rules.library.LemonadeAnonymous;
+import brown.auction.rules.library.LemonadePayment;
+import brown.auction.rules.library.LemonadeQuery;
+import brown.auction.rules.library.OneShotTermination;
+import brown.auction.rules.library.XRoundTermination;
 
 /**
  * test the lemonade rules. 

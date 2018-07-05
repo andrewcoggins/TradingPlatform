@@ -6,8 +6,8 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.value.valuation.IValuation;
-import brown.value.valuation.library.XORValuation;
+import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.XORValuation;
 
 public class SpecValDistributionTest {
   

@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import brown.accounting.library.Transaction;
-import brown.market.marketstate.library.Order;
-import brown.tradeable.library.MultiTradeable;
+import brown.mechanism.tradeable.MultiTradeable;
+import brown.platform.accounting.Order;
+import brown.platform.accounting.Transaction;
 
 /**
  * tests the Order class. 

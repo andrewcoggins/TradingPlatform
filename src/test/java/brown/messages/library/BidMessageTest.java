@@ -12,9 +12,10 @@ import org.junit.Test;
 import brown.accounting.MarketState;
 import brown.accounting.bid.ComplexBid;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
-import brown.bid.library.AuctionBid;
-import brown.bidbundle.library.AuctionBidBundle;
-import brown.tradeable.library.MultiTradeable;
+import brown.mechanism.bid.AuctionBid;
+import brown.mechanism.bidbundle.AuctionBidBundle;
+import brown.mechanism.tradeable.MultiTradeable;
+import brown.platform.messages.TradeMessage;
 
 /**
  * test for the bid message. 

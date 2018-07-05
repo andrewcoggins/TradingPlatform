@@ -6,8 +6,9 @@ import java.util.LinkedList;
 
 import org.junit.Test;
 
-import brown.accounting.library.Account;
-import brown.tradeable.library.MultiTradeable;
+import brown.mechanism.tradeable.MultiTradeable;
+import brown.platform.accounting.Account;
+import brown.platform.messages.BankUpdateMessage;
 
 /**
  * test for the bank update message class. 

@@ -8,12 +8,13 @@ import java.util.Map;
 import org.junit.Test;
 
 import brown.accounting.MarketState;
-import brown.accounting.library.Ledger;
-import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
-import brown.channels.library.AuctionChannel;
+import brown.mechanism.bidbundle.AuctionBidBundle;
+import brown.mechanism.channel.SealedBidChannel;
+import brown.mechanism.tradeable.MultiTradeable;
+import brown.platform.accounting.Ledger;
+import brown.platform.messages.TradeRequestMessage;
 import brown.todeprecate.PaymentType;
-import brown.tradeable.library.MultiTradeable;
 
 /**
  * tests the trade request message class. 
@@ -31,13 +32,13 @@ public class TradeRequestMessageTest {
     bids.put(new MultiTradeable(0), new MarketState(0, 1.0));
     AuctionBidBundle sb = new AuctionBidBundle(bids);
     TradeRequestMessage trm = new TradeRequestMessage(0, 
-        new AuctionChannel(new Integer(0), new Ledger(0), PaymentType.SecondPrice,
+        new SealedBidChannel(new Integer(0), new Ledger(0), PaymentType.SecondPrice,
             MechanismType.SealedBid, sb, 0),
         MechanismType.SealedBid); 
     
     assertEquals(MechanismType.SealedBid, trm.MECHANISM); 
     assertEquals(trm.MARKET,
-        new AuctionChannel(new Integer(0), new Ledger(0), PaymentType.SecondPrice,
+        new SealedBidChannel(new Integer(0), new Ledger(0), PaymentType.SecondPrice,
             MechanismType.SealedBid, sb, 0)); 
   }
 }

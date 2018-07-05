@@ -14,18 +14,19 @@ import org.junit.Test;
 
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
-import brown.accounting.library.Ledger;
-import brown.bid.library.AuctionBid;
-import brown.bidbundle.BundleType;
-import brown.bidbundle.library.AuctionBidBundle;
 import brown.channels.MechanismType;
-import brown.channels.library.GameChannel;
-import brown.messages.library.TradeMessage;
+import brown.mechanism.bid.AuctionBid;
+import brown.mechanism.bidbundle.AuctionBidBundle;
+import brown.mechanism.bidbundle.BundleType;
+import brown.mechanism.channel.GameChannel;
+import brown.mechanism.tradeable.MultiTradeable;
 import brown.messages.library.BidRequestMessage;
-import brown.messages.library.GameReportMessage;
-import brown.messages.library.TradeRequestMessage;
+import brown.platform.accounting.Ledger;
+import brown.platform.accounting.Order;
+import brown.platform.messages.GameReportMessage;
+import brown.platform.messages.TradeMessage;
+import brown.platform.messages.TradeRequestMessage;
 import brown.todeprecate.PaymentType;
-import brown.tradeable.library.MultiTradeable;
 
 /**
  * tests the internal state class. 

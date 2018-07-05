@@ -14,12 +14,11 @@ import org.junit.Test;
 
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
-import brown.bidbundle.library.AuctionBidBundle;
+import brown.auction.rules.library.HighestPriceAllocation;
 import brown.market.marketstate.library.Allocation;
-import brown.market.marketstate.library.MarketState;
-import brown.messages.library.TradeMessage;
-import brown.rules.library.HighestPriceAllocation;
-import brown.tradeable.library.MultiTradeable;
+import brown.mechanism.bidbundle.AuctionBidBundle;
+import brown.mechanism.tradeable.MultiTradeable;
+import brown.platform.messages.TradeMessage;
 
 /**
  * test for simple highest bidder allocation rule. 
