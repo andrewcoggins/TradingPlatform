@@ -5,9 +5,9 @@
   <version>0.0.1-SNAPSHOT</version>
   <build>
     <sources>
-      <sourceDirectory>src/main/java</sourceDirectory>
-      <sourceDirectory>src/test/java</sourceDirectory>
-      <sourceDirectory>src/core/resources</sourceDirectory>
+      <source>src/main/java</source>
+      <source>src/test/java</source>
+      <source>src/core/resources</source>
     </sources>
     <plugins>
       <plugin>
