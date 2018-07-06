@@ -8,7 +8,6 @@ import brown.auction.rules.library.OneShotTermination;
 import brown.auction.rules.library.SSSPAnonymous;
 import brown.auction.rules.library.SimpleQuery;
 import brown.auction.rules.library.SimpleSecondPricePayment;
-import brown.auction.rules.library.XRoundTermination;
 
 /**
  * Simple simultaneous second price auction with reserve prices.
@@ -16,8 +15,7 @@ import brown.auction.rules.library.XRoundTermination;
  *
  */
 public class SSSPReserveRules extends AbsMarketPreset {
-  private int numRuns;
-  public SSSPReserveRules(int numRuns) {
+  public SSSPReserveRules() {
     super(new HPReserveAllocation(),
         new SimpleSecondPricePayment(),
         new SimpleQuery(), 
@@ -25,13 +23,11 @@ public class SSSPReserveRules extends AbsMarketPreset {
         new OneShotActivity(),
         new SSSPAnonymous(),
         new OneShotTermination(), 
-        new XRoundTermination(numRuns),
         new NoRecordKeeping());
-    this.numRuns = numRuns;
   }
   
   @Override
   public AbsMarketPreset copy() {
-    return new SSSPReserveRules(this.numRuns);
+    return new SSSPReserveRules();
   }
 }

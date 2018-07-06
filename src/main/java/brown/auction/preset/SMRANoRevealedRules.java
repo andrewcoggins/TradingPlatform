@@ -7,11 +7,9 @@ import brown.auction.rules.library.NoAllocation;
 import brown.auction.rules.library.NoPayment;
 import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneGrouping;
-import brown.auction.rules.library.RevealedPreferenceActivity;
 import brown.auction.rules.library.SMRAPolicy;
 import brown.auction.rules.library.SMRAQuery;
 import brown.auction.rules.library.SomeBidsTermination;
-import brown.auction.rules.library.XRoundTermination;
 import brown.mechanism.tradeable.ITradeable;
 
 /**
@@ -32,7 +30,6 @@ public class SMRANoRevealedRules extends AbsMarketPreset {
         new AscendingActivity(base, increment), 
         new SMRAPolicy(), 
         new SomeBidsTermination(),
-        new XRoundTermination(1), 
         new NoRecordKeeping());
     this.base = base; 
     this.increment = increment; 

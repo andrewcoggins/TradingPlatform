@@ -12,7 +12,6 @@ import brown.auction.rules.IAllocationRule;
 import brown.auction.rules.IGroupingRule;
 import brown.auction.rules.IInformationRevelationPolicy;
 import brown.auction.rules.IInnerTC;
-import brown.auction.rules.IOuterTC;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.IRecordKeepingRule;
@@ -37,7 +36,6 @@ public class Market implements IMarket {
   private final IActivityRule ACTRULE;
   private final IInformationRevelationPolicy IRPOLICY;
   private final IInnerTC ITCONDITION;
-  private final IOuterTC OTCONDITION; 
   private final IMarketState STATE;
   private final IRecordKeepingRule rRule;
   
@@ -49,7 +47,6 @@ public class Market implements IMarket {
     this.ACTRULE = rules.actRule;
     this.IRPOLICY = rules.infoPolicy;
     this.ITCONDITION = rules.innerTCondition;
-    this.OTCONDITION = rules.outerTCondition;
     this.STATE = state;
     this.rRule = rules.rRule;
  }
@@ -102,7 +99,6 @@ public class Market implements IMarket {
   
   @Override
   public boolean isOverOuter() {
-    OTCONDITION.outerTerminated(this.STATE);
     return this.STATE.getOuterOver();
   } 
 

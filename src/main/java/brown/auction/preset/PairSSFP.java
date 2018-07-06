@@ -8,7 +8,6 @@ import brown.auction.rules.library.RecordBids;
 import brown.auction.rules.library.SSSPAnonymous;
 import brown.auction.rules.library.SimpleFirstPricePayment;
 import brown.auction.rules.library.SimpleQuery;
-import brown.auction.rules.library.XRoundTermination;
 
 /**
  * Simple Simultaneous first price auction with 
@@ -17,10 +16,9 @@ import brown.auction.rules.library.XRoundTermination;
  *
  */
 public class PairSSFP extends AbsMarketPreset {
-  private int numRuns;
   private String filePath;
   
-  public PairSSFP(int numRuns, String filePath) {
+  public PairSSFP(String filePath) {
     super(new HighestPriceAllocation(),
         new SimpleFirstPricePayment(),
         new SimpleQuery(), 
@@ -28,15 +26,13 @@ public class PairSSFP extends AbsMarketPreset {
         new OneShotActivity(),
         new SSSPAnonymous(),
         new OneShotTermination(), 
-        new XRoundTermination(numRuns),
         new RecordBids(filePath));
-    this.numRuns = numRuns;
     this.filePath = filePath;
   }
 
   @Override
   public AbsMarketPreset copy() {
-    return new PairSSFP(this.numRuns, this.filePath);
+    return new PairSSFP(this.filePath);
   }
   
   

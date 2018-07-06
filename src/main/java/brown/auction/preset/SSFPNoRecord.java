@@ -8,7 +8,6 @@ import brown.auction.rules.library.OneShotTermination;
 import brown.auction.rules.library.SSSPAnonymous;
 import brown.auction.rules.library.SimpleFirstPricePayment;
 import brown.auction.rules.library.SimpleQuery;
-import brown.auction.rules.library.XRoundTermination;
 
 /**
  * rules for a SSFP Server.
@@ -16,9 +15,8 @@ import brown.auction.rules.library.XRoundTermination;
  *
  */
 public class SSFPNoRecord extends AbsMarketPreset {
-  private int numRuns;
 
-  public SSFPNoRecord(int numRuns) {
+  public SSFPNoRecord() {
     super(new HighestPriceAllocation(),
         new SimpleFirstPricePayment(),
         new SimpleQuery(), 
@@ -26,14 +24,12 @@ public class SSFPNoRecord extends AbsMarketPreset {
         new OneShotActivity(),
         new SSSPAnonymous(),
         new OneShotTermination(), 
-        new XRoundTermination(numRuns),
         new NoRecordKeeping());
-    this.numRuns = numRuns; 
   }
 
   @Override
   public AbsMarketPreset copy() {
-    return new SSFPNoRecord(this.numRuns);
+    return new SSFPNoRecord();
   }
   
 }

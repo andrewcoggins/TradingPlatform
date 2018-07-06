@@ -38,7 +38,7 @@ public class SSFPServer {
     }
     // one market in this game.
     List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
-    oneMarket.add(new SSFPNoRecord(1));
+    oneMarket.add(new SSFPNoRecord());
     SimulMarkets markets = new SimulMarkets(oneMarket);
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
     seq.add(markets);

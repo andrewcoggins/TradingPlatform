@@ -8,7 +8,6 @@ import brown.auction.rules.library.NoAllocation;
 import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneShotTermination;
 import brown.auction.rules.library.ThreeFourFiveGrouping;
-import brown.auction.rules.library.XRoundTermination;
 
 /**
  * Lemonade game with groupings.
@@ -17,9 +16,8 @@ import brown.auction.rules.library.XRoundTermination;
  */
 public class LemonadeGroupedRulesAnon extends AbsMarketPreset {
   private int numSlots;
-  private int numRuns;
   
-  public LemonadeGroupedRulesAnon(int numSlots, int numRuns) {
+  public LemonadeGroupedRulesAnon(int numSlots) {
     super(new NoAllocation(),
         new LemonadeGroupedPayment(numSlots), 
         new LemonadeQuery(),
@@ -27,15 +25,13 @@ public class LemonadeGroupedRulesAnon extends AbsMarketPreset {
         new LemonadeActivity(numSlots),
         new LemonadeAnonymous(numSlots), 
         new OneShotTermination(),
-        new XRoundTermination(numRuns),
         new NoRecordKeeping());
-    this.numSlots = numSlots;
-    this.numRuns = numRuns;          
+    this.numSlots = numSlots;         
   }
 
   @Override
   public AbsMarketPreset copy() {
-    return new LemonadeGroupedRulesAnon(this.numSlots,this.numRuns);
+    return new LemonadeGroupedRulesAnon(this.numSlots);
   } 
   
   

@@ -60,7 +60,7 @@ public class SMRASecondPriceServer {
     seq.add(discovery);
     //construct settlement round.
     List<AbsMarketPreset> settlementMarket = new LinkedList<AbsMarketPreset>(); 
-    settlementMarket.add(new SSSPReserveRules(1)); 
+    settlementMarket.add(new SSSPReserveRules()); 
     SimulMarkets settlement = new SimulMarkets(settlementMarket); 
     seq.add(settlement); 
     // initialize the simulation.

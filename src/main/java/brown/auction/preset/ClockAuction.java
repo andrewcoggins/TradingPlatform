@@ -3,7 +3,6 @@ package brown.auction.preset;
 import brown.auction.rules.library.ClockActivity;
 import brown.auction.rules.library.ClockAllocation;
 import brown.auction.rules.library.ClockInformation;
-import brown.auction.rules.library.ClockOuterTC;
 import brown.auction.rules.library.ClockPayment;
 import brown.auction.rules.library.ClockQuery;
 import brown.auction.rules.library.NoRecordKeeping;
@@ -26,7 +25,7 @@ public class ClockAuction extends AbsMarketPreset {
         new ClockActivity(increment),
         new ClockInformation(),
         new OneShotTermination(), 
-        new ClockOuterTC(),
+        //new ClockOuterTC(),
         new NoRecordKeeping());
     this.increment = increment;
   }

@@ -8,7 +8,6 @@ import brown.auction.rules.library.PairGrouping;
 import brown.auction.rules.library.SSSPAnonymous;
 import brown.auction.rules.library.SimpleQuery;
 import brown.auction.rules.library.SimpleSecondPricePayment;
-import brown.auction.rules.library.XRoundTermination;
 
 /**
  * Simple Simultaneous Second price auction
@@ -17,9 +16,8 @@ import brown.auction.rules.library.XRoundTermination;
  *
  */
 public class PairSSSP extends AbsMarketPreset {
-  private int numRuns;
 
-  public PairSSSP(int numRuns) {
+  public PairSSSP() {
     super(new HighestPriceAllocation(),
         new SimpleSecondPricePayment(),
         new SimpleQuery(), 
@@ -27,14 +25,12 @@ public class PairSSSP extends AbsMarketPreset {
         new OneShotActivity(),
         new SSSPAnonymous(),
         new OneShotTermination(), 
-        new XRoundTermination(numRuns),
         new NoRecordKeeping());
-    this.numRuns = numRuns;
   }
 
   @Override
   public AbsMarketPreset copy() {
-    return new PairSSSP(this.numRuns);
+    return new PairSSSP();
   }
   
 }

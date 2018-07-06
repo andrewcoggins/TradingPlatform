@@ -28,19 +28,18 @@ public class LemonadeSimulationTest {
     // simulation variables
     int delayTime = 5;
     int lag = 150; // speed at which rounds run - at lag=100, 100 trials takes 50s-60s
-    int numRuns = 2;
     int numSims = 4;
     
     List<ITradeable> allTradeables = new LinkedList<ITradeable>(); 
     allTradeables.add(new MultiTradeable(1, totalTradeables));
        
     List<AbsMarketPreset> firstmarket_seq = new LinkedList<AbsMarketPreset>();
-    firstmarket_seq.add(new LemonadeGroupedRulesAnon(12,10));
-    firstmarket_seq.add(new LemonadeGroupedRulesAnon(50,20));    
+    firstmarket_seq.add(new LemonadeGroupedRulesAnon(12));
+    firstmarket_seq.add(new LemonadeGroupedRulesAnon(50));    
     SimulMarkets firstMarket = new SimulMarkets(firstmarket_seq);
 
     List<AbsMarketPreset> secondmarket_seq = new LinkedList<AbsMarketPreset>();
-    secondmarket_seq.add(new LemonadeGroupedRulesAnon(12,3));    
+    secondmarket_seq.add(new LemonadeGroupedRulesAnon(12));    
     SimulMarkets secondMarket = new SimulMarkets(secondmarket_seq);
     
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  

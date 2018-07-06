@@ -10,7 +10,6 @@ import brown.auction.rules.library.RevealedPreferenceActivity;
 import brown.auction.rules.library.SMRAPolicy;
 import brown.auction.rules.library.SMRAQuery;
 import brown.auction.rules.library.SomeBidsTermination;
-import brown.auction.rules.library.XRoundTermination;
 import brown.mechanism.tradeable.ITradeable;
 
 /**
@@ -31,7 +30,6 @@ public class SMRADiscovery extends AbsMarketPreset {
         new RevealedPreferenceActivity(base, increment), 
         new SMRAPolicy(), 
         new SomeBidsTermination(),
-        new XRoundTermination(1), 
         new NoRecordKeeping());
     this.base = base; 
     this.increment = increment; 

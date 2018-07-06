@@ -8,7 +8,6 @@ import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneGrouping;
 import brown.auction.rules.library.PredictionMarketInformation;
 import brown.auction.rules.library.PredictionMarketPayment;
-import brown.auction.rules.library.XRoundTermination;
 
 /**
  * Prediction market with a settlement round.
@@ -25,7 +24,6 @@ public class PredictionMarketSettlement extends AbsMarketPreset {
         new NoBiddingActivity(),
         new PredictionMarketInformation(),
         new NoBiddingTermination(), 
-        new XRoundTermination(1),
         new NoRecordKeeping());
   }
 

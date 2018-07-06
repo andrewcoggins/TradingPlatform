@@ -316,13 +316,7 @@ public class TradingServer extends KryoServer {
             } catch (IOException e) {
               Logging.log("IOException in record method");
             }
-            if (!auction.isOverOuter()) {
-              Logging.log("[*] Auction has been reset");
-              auction.resetInternalState();              
-            } else {
-              // if over, close.
-              auction.close();
-            }
+            auction.close();
           }
         }
       }

@@ -27,7 +27,7 @@ public class CallMarket extends AbsMarketPreset {
         new CallMarketActivity(),
         new CallMarketInformation(),
         new OneShotTermination(), 
-        new XTimeTermination(seconds),
+        //new XTimeTermination(seconds),
         new NoRecordKeeping());
     this.seconds = seconds;
   }

@@ -25,13 +25,12 @@ public class LemonadeServer {
     // simulation variables
     int delayTime = 5;
     int lag = 50; // speed at which rounds run - at lag=100, 100 trials takes 50s-60s
-    int numRuns = 5;
     
     List<ITradeable> allTradeables = new LinkedList<ITradeable>(); 
     allTradeables.add(new MultiTradeable(1, totalTradeables));
        
     // LemonadeGroupedRulesAnon and LemonadeGroupedRulesNotAnon
-    new RunServer(2121, new LemonadeSetup()).runSimpleSim(allTradeables, new LemonadeGroupedRulesNotAnon(numSlots,numRuns), 
+    new RunServer(2121, new LemonadeSetup()).runSimpleSim(allTradeables, new LemonadeGroupedRulesNotAnon(numSlots), 
         new LemonadeConfig(), 0., new LinkedList<ITradeable>(), delayTime, lag, null);
   }
 }

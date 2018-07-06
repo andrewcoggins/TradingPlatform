@@ -8,7 +8,6 @@ import brown.auction.rules.library.NoAllocation;
 import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneGrouping;
 import brown.auction.rules.library.OneShotTermination;
-import brown.auction.rules.library.XRoundTermination;
 
 /**
  * Lemonade game where bids are anonymous.
@@ -17,9 +16,8 @@ import brown.auction.rules.library.XRoundTermination;
  */
 public class LemonadeAnonRules extends AbsMarketPreset {
   private int numSlots;
-  private int numRuns;
   
-  public LemonadeAnonRules(int numSlots, int numRuns) {
+  public LemonadeAnonRules(int numSlots) {
     super(new NoAllocation(),
         new LemonadeGroupedPayment(numSlots), 
         new LemonadeQuery(),
@@ -27,15 +25,13 @@ public class LemonadeAnonRules extends AbsMarketPreset {
         new LemonadeActivity(numSlots),
         new LemonadeAnonymous(numSlots), 
         new OneShotTermination(),
-        new XRoundTermination(numRuns),
         new NoRecordKeeping());
     this.numSlots = numSlots;
-    this.numRuns = numRuns;
   }
 
 
   @Override
   public AbsMarketPreset copy() {
-    return new LemonadeAnonRules(this.numSlots,this.numRuns);
+    return new LemonadeAnonRules(this.numSlots);
   } 
 }
