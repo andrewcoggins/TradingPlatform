@@ -4,12 +4,28 @@
   <artifactId>TradingPlatform-lite</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
-    <sources>
-      <source>src/main/java</source>
-      <source>src/test/java</source>
-      <source>src/core/resources</source>
-    </sources>
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/main/java</source>
+                <source>src/test/java</source>
+                <source>src/core/resources</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.5.1</version>
