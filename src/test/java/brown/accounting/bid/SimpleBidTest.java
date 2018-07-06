@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import brown.mechanism.bid.AuctionBid;
-import brown.mechanism.tradeable.MultiTradeable;
+import brown.mechanism.bid.library.AuctionBid;
+import brown.mechanism.tradeable.library.MultiTradeable;
 
 /**
  * tests the simple bid class. 

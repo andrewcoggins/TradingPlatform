@@ -2,7 +2,7 @@ package brown.auction.value.valuation;
 
 import java.util.Map;
 
-import brown.mechanism.tradeable.ComplexTradeable;
+import brown.mechanism.tradeable.library.ComplexTradeable;
 
 /**
  * Extends the IValuation interface for spectrum auction

@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import brown.mechanism.tradeable.SimpleTradeable;
-import brown.platform.accounting.Account;
-import brown.platform.accounting.AccountManager;
+import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.accounting.library.Account;
+import brown.platform.accounting.library.AccountManager;
 
 public class AccountManagerTest {
   // not much to this one. Just test the getter and setter.

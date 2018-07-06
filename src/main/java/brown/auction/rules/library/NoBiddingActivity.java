@@ -2,7 +2,7 @@ package brown.auction.rules.library;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
-import brown.platform.messages.TradeMessage;
+import brown.platform.messages.library.TradeMessage;
 
 public class NoBiddingActivity implements IActivityRule {
   @Override

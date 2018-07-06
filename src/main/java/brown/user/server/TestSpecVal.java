@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Set;
 
 import brown.auction.preset.SSFPNoRecord;
-import brown.auction.value.config.SpecValV2Config;
+import brown.auction.value.config.library.SpecValV2Config;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.SimpleTradeable;
-import brown.platform.server.RunServer;
+import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.server.library.RunServer;
 import brown.system.setup.library.SpecValSetup;
 
 /**

@@ -1,14 +1,14 @@
 package brown.system.setup.library;
 
-import brown.auction.value.distribution.AdditiveValuationDistribution;
-import brown.auction.value.generator.NormalValGenerator;
-import brown.auction.value.valuation.AdditiveValuation;
-import brown.mechanism.bid.AuctionBid;
-import brown.mechanism.bidbundle.AuctionBidBundle;
-import brown.mechanism.channel.OpenOutcryChannel;
-import brown.mechanism.channel.SealedBidChannel;
-import brown.platform.messages.SMRAReportMessage;
-import brown.platform.messages.SimpleSealedReportMessage;
+import brown.auction.value.distribution.library.AdditiveValuationDistribution;
+import brown.auction.value.generator.library.NormalValGenerator;
+import brown.auction.value.valuation.library.AdditiveValuation;
+import brown.mechanism.bid.library.AuctionBid;
+import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.channel.library.OpenOutcryChannel;
+import brown.mechanism.channel.library.SealedBidChannel;
+import brown.platform.messages.library.SMRAReportMessage;
+import brown.platform.messages.library.SimpleSealedReportMessage;
 import brown.system.setup.ISetup;
 
 import com.esotericsoftware.kryo.Kryo;

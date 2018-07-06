@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.prevstate.BlankStateInfo;
-import brown.auction.prevstate.PredictionMarketInfo;
-import brown.auction.prevstate.PrevStateInfo;
 import brown.auction.prevstate.PrevStateType;
+import brown.auction.prevstate.library.BlankStateInfo;
+import brown.auction.prevstate.library.PredictionMarketInfo;
+import brown.auction.prevstate.library.PrevStateInfo;
 import brown.auction.rules.IInformationRevelationPolicy;
 import brown.logging.library.Logging;
-import brown.platform.messages.GameReportMessage;
-import brown.platform.messages.PredictionMarketReport;
+import brown.platform.messages.library.GameReportMessage;
+import brown.platform.messages.library.PredictionMarketReport;
 
 public class PredictionMarketInformation implements IInformationRevelationPolicy{
   

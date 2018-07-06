@@ -8,11 +8,11 @@ import java.util.Map;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IInformationRevelationPolicy;
 import brown.logging.library.Logging;
-import brown.mechanism.bidbundle.BundleType;
-import brown.mechanism.bidbundle.GameBidBundle;
-import brown.platform.messages.GameReportMessage;
-import brown.platform.messages.LemonadeReportMessage;
-import brown.platform.messages.TradeMessage;
+import brown.mechanism.bidbundle.library.BundleType;
+import brown.mechanism.bidbundle.library.GameBidBundle;
+import brown.platform.messages.library.GameReportMessage;
+import brown.platform.messages.library.LemonadeReportMessage;
+import brown.platform.messages.library.TradeMessage;
 
 public class LemonadeNonAnonymous implements IInformationRevelationPolicy{
   private int numSlots;

@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.prevstate.PredictionMarketInfo;
-import brown.auction.prevstate.PrevStateInfo;
+import brown.auction.prevstate.library.PredictionMarketInfo;
+import brown.auction.prevstate.library.PrevStateInfo;
 import brown.auction.rules.IInformationRevelationPolicy;
-import brown.platform.accounting.Ledger;
-import brown.platform.accounting.Order;
-import brown.platform.accounting.Transaction;
-import brown.platform.messages.CallMarketReportMessage;
-import brown.platform.messages.GameReportMessage;
+import brown.platform.accounting.library.Ledger;
+import brown.platform.accounting.library.Order;
+import brown.platform.accounting.library.Transaction;
+import brown.platform.messages.library.CallMarketReportMessage;
+import brown.platform.messages.library.GameReportMessage;
 
 /**
  * IR policy for a two-sided call market.

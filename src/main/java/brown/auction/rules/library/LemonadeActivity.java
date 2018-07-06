@@ -4,9 +4,9 @@ import java.util.List;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
-import brown.mechanism.bidbundle.BundleType;
-import brown.mechanism.bidbundle.GameBidBundle;
-import brown.platform.messages.TradeMessage;
+import brown.mechanism.bidbundle.library.BundleType;
+import brown.mechanism.bidbundle.library.GameBidBundle;
+import brown.platform.messages.library.TradeMessage;
 
 public class LemonadeActivity implements IActivityRule {
   private int numSlots;

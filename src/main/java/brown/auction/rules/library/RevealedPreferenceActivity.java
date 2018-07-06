@@ -8,12 +8,12 @@ import java.util.Set;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
-import brown.mechanism.bid.AuctionBid;
-import brown.mechanism.bid.BidType;
-import brown.mechanism.bidbundle.AuctionBidBundle;
+import brown.mechanism.bid.library.AuctionBid;
+import brown.mechanism.bid.library.BidType;
 import brown.mechanism.bidbundle.IBidBundle;
+import brown.mechanism.bidbundle.library.AuctionBidBundle;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.messages.TradeMessage;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * activity rule for revealed preferences.

@@ -5,12 +5,12 @@ import java.util.List;
 
 import brown.auction.preset.AbsMarketPreset;
 import brown.auction.preset.LemonadeGroupedRulesAnon;
-import brown.auction.value.config.LemonadeConfig;
+import brown.auction.value.config.library.LemonadeConfig;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.MultiTradeable;
-import brown.platform.server.RunServer;
-import brown.platform.server.SimulMarkets;
-import brown.platform.server.Simulation;
+import brown.mechanism.tradeable.library.MultiTradeable;
+import brown.platform.server.library.RunServer;
+import brown.platform.server.library.SimulMarkets;
+import brown.platform.server.library.Simulation;
 import brown.system.setup.library.LemonadeSetup;
 
 /**

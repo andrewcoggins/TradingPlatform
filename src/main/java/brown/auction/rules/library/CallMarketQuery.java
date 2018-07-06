@@ -6,8 +6,8 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IQueryRule;
-import brown.mechanism.channel.CallMarketChannel;
-import brown.platform.messages.TradeRequestMessage;
+import brown.mechanism.channel.library.CallMarketChannel;
+import brown.platform.messages.library.TradeRequestMessage;
 
 /**
  * Query rule for a call market Simply constructs a traderequest

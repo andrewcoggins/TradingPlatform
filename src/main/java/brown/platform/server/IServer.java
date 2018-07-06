@@ -3,8 +3,9 @@ package brown.platform.server;
 import java.util.List;
 
 import brown.auction.preset.AbsMarketPreset;
-import brown.auction.value.config.ValConfig;
+import brown.auction.value.config.library.ValConfig;
 import brown.mechanism.tradeable.ITradeable;
+import brown.platform.server.library.Simulation;
 
 public interface IServer {
   

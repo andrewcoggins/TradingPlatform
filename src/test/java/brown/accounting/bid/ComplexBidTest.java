@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.mechanism.tradeable.MultiTradeable;
+import brown.mechanism.tradeable.library.MultiTradeable;
 
 /**
  * tests the complex bid class. 

@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.prevstate.PredictionMarketInfo;
-import brown.auction.prevstate.PrevStateInfo;
 import brown.auction.prevstate.PrevStateType;
+import brown.auction.prevstate.library.PredictionMarketInfo;
+import brown.auction.prevstate.library.PrevStateInfo;
 import brown.auction.rules.IPaymentRule;
 import brown.logging.library.Logging;
-import brown.platform.accounting.Order;
-import brown.platform.accounting.Transaction;
+import brown.platform.accounting.library.Order;
+import brown.platform.accounting.library.Transaction;
 
 public class PredictionMarketPayment implements IPaymentRule {
 

@@ -11,9 +11,9 @@ import org.junit.Test;
 
 import brown.accounting.MarketState;
 import brown.auction.rules.library.LemonadeActivity;
-import brown.mechanism.bidbundle.AuctionBidBundle;
-import brown.mechanism.tradeable.MultiTradeable;
-import brown.platform.messages.TradeMessage;
+import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.tradeable.library.MultiTradeable;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * tests the one shot activity rule. 

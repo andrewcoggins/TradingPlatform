@@ -8,11 +8,11 @@ import java.util.Map.Entry;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IPaymentRule;
-import brown.mechanism.bid.BidType;
-import brown.mechanism.bidbundle.AuctionBidBundle;
+import brown.mechanism.bid.library.BidType;
+import brown.mechanism.bidbundle.library.AuctionBidBundle;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.accounting.Order;
-import brown.platform.messages.TradeMessage;
+import brown.platform.accounting.library.Order;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * Simple simultaneous first price auction.

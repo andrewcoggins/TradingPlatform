@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.prevstate.PriceDiscoveryInfo;
+import brown.auction.prevstate.library.PriceDiscoveryInfo;
 import brown.auction.rules.IInformationRevelationPolicy;
-import brown.platform.messages.GameReportMessage;
-import brown.platform.messages.SMRAReportMessage;
+import brown.platform.messages.library.GameReportMessage;
+import brown.platform.messages.library.SMRAReportMessage;
 
 /**
  * IR policy for SMRA auctions. Generates game report messages with the reserve prices for 

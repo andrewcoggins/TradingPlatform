@@ -17,12 +17,12 @@ import java.util.Set;
 import com.google.common.collect.ImmutableMap;
 
 import brown.auction.preset.AbsMarketPreset;
-import brown.auction.value.config.ValConfig;
+import brown.auction.value.config.library.ValConfig;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.SimpleTradeable;
-import brown.platform.server.RunServer;
-import brown.platform.server.SimulMarkets;
-import brown.platform.server.Simulation;
+import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.server.library.RunServer;
+import brown.platform.server.library.SimulMarkets;
+import brown.platform.server.library.Simulation;
 import brown.system.setup.library.SSSPSetup;
 import freemarker.template.Configuration;
 import freemarker.template.Version;

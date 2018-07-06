@@ -3,7 +3,7 @@ package brown.platform.twosided;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-import brown.platform.messages.TradeMessage;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * The order book for two-sided auctions tracks the 

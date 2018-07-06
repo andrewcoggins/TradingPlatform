@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.value.valuation.IValuation;
-import brown.platform.accounting.Account;
+import brown.platform.accounting.library.Account;
 
 /**
  * ISimulation summary collects information across simulations.

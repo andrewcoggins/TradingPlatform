@@ -1,5 +1,6 @@
 package brown.auction.prevstate; 
 
+import brown.auction.prevstate.library.PrevStateInfo;
 import brown.auction.value.config.IValuationConfig;
 
 /**

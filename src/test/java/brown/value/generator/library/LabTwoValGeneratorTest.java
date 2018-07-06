@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import brown.auction.value.generator.LabTwoValGenerator;
+import brown.auction.value.generator.library.LabTwoValGenerator;
 
 /**
  * tests the lab two value generator, and that it fits the specification of 

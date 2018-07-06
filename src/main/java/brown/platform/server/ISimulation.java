@@ -2,8 +2,9 @@ package brown.platform.server;
 
 import java.util.List;
 
-import brown.auction.value.config.ValConfig;
+import brown.auction.value.config.library.ValConfig;
 import brown.mechanism.tradeable.ITradeable;
+import brown.platform.server.library.SimulMarkets;
 
 /**
  * Interface for a simulation, which runs a sequence of 

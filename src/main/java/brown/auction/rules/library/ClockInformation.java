@@ -8,8 +8,8 @@ import java.util.Map;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IInformationRevelationPolicy;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.messages.CombinatorialClockReport;
-import brown.platform.messages.GameReportMessage;
+import brown.platform.messages.library.CombinatorialClockReport;
+import brown.platform.messages.library.GameReportMessage;
 
 /**
  * IR policy for a clock auction. Produces a series of combinatorial clock

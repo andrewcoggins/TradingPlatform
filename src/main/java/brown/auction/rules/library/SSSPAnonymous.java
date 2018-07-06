@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.prevstate.BlankStateInfo;
+import brown.auction.prevstate.library.BlankStateInfo;
 import brown.auction.rules.IInformationRevelationPolicy;
-import brown.platform.messages.GameReportMessage;
-import brown.platform.messages.SimpleSealedReportMessage;
+import brown.platform.messages.library.GameReportMessage;
+import brown.platform.messages.library.SimpleSealedReportMessage;
 
 /**
  * Information revelation policy for SSSP auction.

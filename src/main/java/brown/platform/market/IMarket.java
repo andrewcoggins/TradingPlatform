@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import brown.auction.prevstate.PrevStateInfo;
+import brown.auction.prevstate.library.PrevStateInfo;
 import brown.auction.value.valuation.IValuation;
-import brown.platform.accounting.Order;
-import brown.platform.messages.GameReportMessage;
-import brown.platform.messages.TradeMessage;
-import brown.platform.messages.TradeRequestMessage;
+import brown.platform.accounting.library.Order;
+import brown.platform.messages.library.GameReportMessage;
+import brown.platform.messages.library.TradeMessage;
+import brown.platform.messages.library.TradeRequestMessage;
 
 /**
  * The market receives bids from the agents via the server

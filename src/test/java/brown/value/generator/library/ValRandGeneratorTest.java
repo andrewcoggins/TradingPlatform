@@ -4,8 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import brown.auction.value.generator.UniformValGenerator;
-import brown.mechanism.tradeable.MultiTradeable;
+import brown.auction.value.generator.library.UniformValGenerator;
+import brown.mechanism.tradeable.library.MultiTradeable;
 
 /**
  * test the valrand Generator

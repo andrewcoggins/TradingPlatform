@@ -8,8 +8,8 @@ import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IPaymentRule;
 import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.TradeableType;
-import brown.platform.accounting.Order;
+import brown.mechanism.tradeable.library.TradeableType;
+import brown.platform.accounting.library.Order;
 
 public class LemonadePayment implements IPaymentRule {
 

@@ -16,9 +16,9 @@ import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.auction.rules.library.HighestPriceAllocation;
 import brown.market.marketstate.library.Allocation;
-import brown.mechanism.bidbundle.AuctionBidBundle;
-import brown.mechanism.tradeable.MultiTradeable;
-import brown.platform.messages.TradeMessage;
+import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.tradeable.library.MultiTradeable;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * test for simple highest bidder allocation rule. 

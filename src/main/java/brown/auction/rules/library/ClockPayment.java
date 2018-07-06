@@ -8,9 +8,9 @@ import java.util.Map.Entry;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IPaymentRule;
-import brown.mechanism.tradeable.ComplexTradeable;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.accounting.Order;
+import brown.mechanism.tradeable.library.ComplexTradeable;
+import brown.platform.accounting.library.Order;
 
 public class ClockPayment implements IPaymentRule {
 

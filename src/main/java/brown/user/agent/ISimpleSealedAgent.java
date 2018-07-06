@@ -1,6 +1,6 @@
 package brown.user.agent;
 
-import brown.mechanism.channel.SealedBidChannel;
+import brown.mechanism.channel.library.SealedBidChannel;
 
 public interface ISimpleSealedAgent {
 

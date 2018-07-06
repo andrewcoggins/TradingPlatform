@@ -6,8 +6,8 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IQueryRule;
-import brown.mechanism.channel.GameChannel;
-import brown.platform.messages.TradeRequestMessage;
+import brown.mechanism.channel.library.GameChannel;
+import brown.platform.messages.library.TradeRequestMessage;
 
 public class LemonadeQuery implements IQueryRule {
 

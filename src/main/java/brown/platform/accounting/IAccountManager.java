@@ -2,6 +2,8 @@ package brown.platform.accounting;
 
 import java.util.List;
 
+import brown.platform.accounting.library.Account;
+
 /**
  * account manager stores agent accounts.
  * @author andrew

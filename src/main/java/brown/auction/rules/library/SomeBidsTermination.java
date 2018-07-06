@@ -6,10 +6,10 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IInnerTC;
-import brown.mechanism.bid.AuctionBid;
-import brown.mechanism.bid.BidType;
+import brown.mechanism.bid.library.AuctionBid;
+import brown.mechanism.bid.library.BidType;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.messages.TradeMessage;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * Inner Termination condition- 

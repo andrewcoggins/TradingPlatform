@@ -10,13 +10,13 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.auction.marketstate.MarketState;
+import brown.auction.marketstate.library.MarketState;
 import brown.auction.rules.library.LemonadeAllocation;
-import brown.mechanism.bidbundle.GameBidBundle;
-import brown.mechanism.tradeable.MultiTradeable;
-import brown.platform.accounting.Account;
-import brown.platform.accounting.Order;
-import brown.platform.messages.TradeMessage;
+import brown.mechanism.bidbundle.library.GameBidBundle;
+import brown.mechanism.tradeable.library.MultiTradeable;
+import brown.platform.accounting.library.Account;
+import brown.platform.accounting.library.Order;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * test the lemonade allocation 

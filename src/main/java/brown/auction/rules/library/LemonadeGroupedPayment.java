@@ -8,12 +8,12 @@ import java.util.List;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IPaymentRule;
 import brown.logging.library.Logging;
-import brown.mechanism.bidbundle.BundleType;
-import brown.mechanism.bidbundle.GameBidBundle;
+import brown.mechanism.bidbundle.library.BundleType;
+import brown.mechanism.bidbundle.library.GameBidBundle;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.SimpleTradeable;
-import brown.platform.accounting.Order;
-import brown.platform.messages.TradeMessage;
+import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.accounting.library.Order;
+import brown.platform.messages.library.TradeMessage;
 
 public class LemonadeGroupedPayment implements IPaymentRule {  
   private int numSlots;

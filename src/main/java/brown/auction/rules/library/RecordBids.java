@@ -10,10 +10,10 @@ import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IRecordKeepingRule;
 import brown.auction.value.valuation.IValuation;
 import brown.logging.library.Logging;
-import brown.mechanism.bid.BidType;
-import brown.mechanism.bidbundle.AuctionBidBundle;
+import brown.mechanism.bid.library.BidType;
+import brown.mechanism.bidbundle.library.AuctionBidBundle;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.messages.TradeMessage;
+import brown.platform.messages.library.TradeMessage;
 
 public class RecordBids implements IRecordKeepingRule {
   private final String path;

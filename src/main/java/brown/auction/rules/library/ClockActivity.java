@@ -8,12 +8,12 @@ import java.util.Map.Entry;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
 import brown.logging.library.Logging;
-import brown.mechanism.bid.AuctionBid;
-import brown.mechanism.bid.BidType;
-import brown.mechanism.bidbundle.BundleType;
+import brown.mechanism.bid.library.AuctionBid;
+import brown.mechanism.bid.library.BidType;
+import brown.mechanism.bidbundle.library.BundleType;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.SimpleTradeable;
-import brown.platform.messages.TradeMessage;
+import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * Activity rule for a clock open outcry auction.

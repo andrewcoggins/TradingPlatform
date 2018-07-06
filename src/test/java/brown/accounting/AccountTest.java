@@ -10,11 +10,11 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.mechanism.tradeable.ComplexTradeable;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.MultiTradeable;
-import brown.mechanism.tradeable.SimpleTradeable;
-import brown.platform.accounting.Account;
+import brown.mechanism.tradeable.library.ComplexTradeable;
+import brown.mechanism.tradeable.library.MultiTradeable;
+import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.accounting.library.Account;
 
 
 public class AccountTest  {

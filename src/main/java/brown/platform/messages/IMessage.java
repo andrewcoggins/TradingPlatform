@@ -1,6 +1,6 @@
 package brown.platform.messages;
 
-import brown.user.agent.AbsAgent;
+import brown.user.agent.library.AbsAgent;
 
 /**
  * a message is used to communicate between the agent and the server

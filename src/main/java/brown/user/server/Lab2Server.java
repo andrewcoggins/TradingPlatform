@@ -7,12 +7,12 @@ import java.util.Set;
 
 import brown.auction.preset.AbsMarketPreset;
 import brown.auction.preset.NormalSSFP;
-import brown.auction.value.config.AdditiveLab2Config;
+import brown.auction.value.config.library.AdditiveLab2Config;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.SimpleTradeable;
-import brown.platform.server.RunServer;
-import brown.platform.server.SimulMarkets;
-import brown.platform.server.Simulation;
+import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.server.library.RunServer;
+import brown.platform.server.library.SimulMarkets;
+import brown.platform.server.library.Simulation;
 import brown.system.setup.library.SSSPSetup;
 
 /**

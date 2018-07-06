@@ -1,6 +1,7 @@
 package brown.mechanism.bidbundle;
 
 import brown.mechanism.bid.IBid;
+import brown.mechanism.bidbundle.library.BundleType;
 
 /**
  * The IBidBundle interface permits the creation of arbitrary data structures

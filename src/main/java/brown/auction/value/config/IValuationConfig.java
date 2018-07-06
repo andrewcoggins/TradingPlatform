@@ -3,7 +3,7 @@ package brown.auction.value.config;
 import java.util.List;
 import java.util.Map;
 
-import brown.platform.messages.PrivateInformationMessage;
+import brown.platform.messages.library.PrivateInformationMessage;
 
 /**
  * IValuationConfig specifies initial valuations and private information. 

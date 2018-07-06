@@ -5,7 +5,8 @@ import java.util.List;
 
 import brown.auction.preset.AbsMarketPreset;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.accounting.Ledger;
+import brown.platform.accounting.library.Ledger;
+import brown.platform.market.library.Market;
 
 /**
  * market manager keeps track of all open and closed markets within

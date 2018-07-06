@@ -3,7 +3,7 @@ package brown.mechanism.channel;
 import java.util.Map;
 
 import brown.mechanism.bidbundle.IBidBundle;
-import brown.user.agent.AbsAgent;
+import brown.user.agent.library.AbsAgent;
 
 /**
  * Agent channel mediates communication between the agent and the server

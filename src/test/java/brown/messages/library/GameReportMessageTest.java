@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import brown.platform.accounting.Ledger;
-import brown.platform.messages.GameReportMessage;
+import brown.platform.accounting.library.Ledger;
+import brown.platform.messages.library.GameReportMessage;
 
 /**
  * test for the game report message class. 

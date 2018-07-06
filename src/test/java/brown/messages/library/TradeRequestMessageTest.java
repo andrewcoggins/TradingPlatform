@@ -9,11 +9,11 @@ import org.junit.Test;
 
 import brown.accounting.MarketState;
 import brown.channels.MechanismType;
-import brown.mechanism.bidbundle.AuctionBidBundle;
-import brown.mechanism.channel.SealedBidChannel;
-import brown.mechanism.tradeable.MultiTradeable;
-import brown.platform.accounting.Ledger;
-import brown.platform.messages.TradeRequestMessage;
+import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.channel.library.SealedBidChannel;
+import brown.mechanism.tradeable.library.MultiTradeable;
+import brown.platform.accounting.library.Ledger;
+import brown.platform.messages.library.TradeRequestMessage;
 import brown.todeprecate.PaymentType;
 
 /**

@@ -15,17 +15,17 @@ import org.junit.Test;
 import brown.accounting.MarketState;
 import brown.accounting.bidbundle.library.ComplexBidBundle;
 import brown.channels.MechanismType;
-import brown.mechanism.bid.AuctionBid;
-import brown.mechanism.bidbundle.AuctionBidBundle;
-import brown.mechanism.bidbundle.BundleType;
-import brown.mechanism.channel.GameChannel;
-import brown.mechanism.tradeable.MultiTradeable;
+import brown.mechanism.bid.library.AuctionBid;
+import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.BundleType;
+import brown.mechanism.channel.library.GameChannel;
+import brown.mechanism.tradeable.library.MultiTradeable;
 import brown.messages.library.BidRequestMessage;
-import brown.platform.accounting.Ledger;
-import brown.platform.accounting.Order;
-import brown.platform.messages.GameReportMessage;
-import brown.platform.messages.TradeMessage;
-import brown.platform.messages.TradeRequestMessage;
+import brown.platform.accounting.library.Ledger;
+import brown.platform.accounting.library.Order;
+import brown.platform.messages.library.GameReportMessage;
+import brown.platform.messages.library.TradeMessage;
+import brown.platform.messages.library.TradeRequestMessage;
 import brown.todeprecate.PaymentType;
 
 /**

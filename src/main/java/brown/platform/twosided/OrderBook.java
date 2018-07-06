@@ -3,10 +3,10 @@ package brown.platform.twosided;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-import brown.mechanism.bid.BidDirection;
-import brown.mechanism.bid.TwoSidedBid;
-import brown.mechanism.bidbundle.BundleType;
-import brown.platform.messages.TradeMessage;
+import brown.mechanism.bid.library.BidDirection;
+import brown.mechanism.bid.library.TwoSidedBid;
+import brown.mechanism.bidbundle.library.BundleType;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * The OrderBook tracks buys and sells in a two-sided market.

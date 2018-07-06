@@ -6,8 +6,8 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IQueryRule;
-import brown.mechanism.channel.OpenOutcryChannel;
-import brown.platform.messages.TradeRequestMessage;
+import brown.mechanism.channel.library.OpenOutcryChannel;
+import brown.platform.messages.library.TradeRequestMessage;
 
 public class ClockQuery implements IQueryRule {
 

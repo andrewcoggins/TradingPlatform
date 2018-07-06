@@ -9,9 +9,9 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.auction.value.valuation.AdditiveValuation;
-import brown.auction.value.valuation.XORValuation;
-import brown.mechanism.tradeable.MultiTradeable;
+import brown.auction.value.valuation.library.AdditiveValuation;
+import brown.auction.value.valuation.library.XORValuation;
+import brown.mechanism.tradeable.library.MultiTradeable;
 import brown.value.valuable.library.Value;
 import brown.value.valuationrepresentation.library.ComplexValuation;
 import brown.value.valuationrepresentation.library.SimpleValuation;

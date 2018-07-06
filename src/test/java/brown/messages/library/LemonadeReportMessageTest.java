@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import brown.platform.messages.LemonadeReportMessage;
+import brown.platform.messages.library.LemonadeReportMessage;
 
 /**
  * test for the lemonade report class. 

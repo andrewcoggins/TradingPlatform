@@ -42,5 +42,9 @@ public abstract class AbsMarketPreset {
     this.rRule = rRule;
   }
   
+  /**
+   * Why does this have to exist? 
+   * @return
+   */
   public abstract AbsMarketPreset copy();
 }

@@ -1,7 +1,7 @@
 package brown.auction.rules;
 
 import brown.auction.marketstate.IMarketState;
-import brown.platform.messages.TradeMessage;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * The activity rule determines what bids and what kinds of 

@@ -6,7 +6,7 @@ import java.util.Map;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IOuterTC;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.accounting.Order;
+import brown.platform.accounting.library.Order;
 
 /**
  * Outer termination for a clock auction. 

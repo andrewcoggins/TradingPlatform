@@ -11,9 +11,9 @@ import java.util.Set;
 import org.junit.Test;
 
 import brown.accounting.MarketState;
-import brown.mechanism.bidbundle.AuctionBidBundle;
-import brown.mechanism.bidbundle.BundleType;
-import brown.mechanism.tradeable.MultiTradeable;
+import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.BundleType;
+import brown.mechanism.tradeable.library.MultiTradeable;
 
 /**
  * test for the bid request message. 

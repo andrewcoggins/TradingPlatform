@@ -2,9 +2,9 @@ package brown.auction.rules.library;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
-import brown.mechanism.bid.TwoSidedBid;
-import brown.mechanism.bidbundle.BundleType;
-import brown.platform.messages.TradeMessage;
+import brown.mechanism.bid.library.TwoSidedBid;
+import brown.mechanism.bidbundle.library.BundleType;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * Activity rule for call markets. Just assures that a twosided bid bundle

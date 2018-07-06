@@ -2,6 +2,9 @@ package brown.mechanism.tradeable;
 
 import java.util.List;
 
+import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.mechanism.tradeable.library.TradeableType;
+
 /**
  * Interface for items that are bid on and won in auctions.
  * @author acoggins

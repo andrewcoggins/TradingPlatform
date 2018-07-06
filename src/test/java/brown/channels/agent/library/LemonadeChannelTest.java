@@ -13,15 +13,15 @@ import com.esotericsoftware.kryonet.Server;
 
 import brown.channels.MechanismType;
 import brown.exceptions.AgentCreationException;
-import brown.mechanism.channel.GameChannel;
-import brown.platform.accounting.Ledger;
-import brown.platform.messages.BankUpdateMessage;
-import brown.platform.messages.TradeMessage;
-import brown.platform.messages.TradeRequestMessage;
+import brown.mechanism.channel.library.GameChannel;
+import brown.platform.accounting.library.Ledger;
+import brown.platform.messages.library.BankUpdateMessage;
+import brown.platform.messages.library.TradeMessage;
+import brown.platform.messages.library.TradeRequestMessage;
 import brown.system.setup.ISetup;
 import brown.system.setup.library.LemonadeSetup;
 import brown.system.setup.library.Startup;
-import brown.user.agent.AbsLemonadeAgent;
+import brown.user.agent.library.AbsLemonadeAgent;
 
 //this test assures that the lemonade channel both sends messages to the server and 
 //interacts appropriately with a lemonade agent. It will impersonate a server and a lemonade agent. 

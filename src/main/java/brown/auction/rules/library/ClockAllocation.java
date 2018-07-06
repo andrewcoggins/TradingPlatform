@@ -11,10 +11,10 @@ import java.util.Map.Entry;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IAllocationRule;
 import brown.logging.library.Logging;
-import brown.mechanism.bid.AuctionBid;
+import brown.mechanism.bid.library.AuctionBid;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.SimpleTradeable;
-import brown.platform.messages.TradeMessage;
+import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * Allocation rule for a clock auction.

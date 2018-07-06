@@ -2,15 +2,15 @@ package brown.system.setup.library;
 
 import com.esotericsoftware.kryo.Kryo;
 
-import brown.mechanism.bid.BidDirection;
-import brown.mechanism.bid.CancelBid;
-import brown.mechanism.bid.TwoSidedBid;
-import brown.mechanism.bidbundle.CancelBundle;
-import brown.mechanism.bidbundle.TwoSidedBidBundle;
-import brown.mechanism.channel.CallMarketChannel;
-import brown.platform.messages.CallMarketReportMessage;
-import brown.platform.messages.PredictionMarketReport;
-import brown.platform.messages.PredictionMarketValuationMessage;
+import brown.mechanism.bid.library.BidDirection;
+import brown.mechanism.bid.library.CancelBid;
+import brown.mechanism.bid.library.TwoSidedBid;
+import brown.mechanism.bidbundle.library.CancelBundle;
+import brown.mechanism.bidbundle.library.TwoSidedBidBundle;
+import brown.mechanism.channel.library.CallMarketChannel;
+import brown.platform.messages.library.CallMarketReportMessage;
+import brown.platform.messages.library.PredictionMarketReport;
+import brown.platform.messages.library.PredictionMarketValuationMessage;
 import brown.platform.twosided.BuyOrder;
 import brown.platform.twosided.OrderBook;
 import brown.platform.twosided.SellOrder;

@@ -14,17 +14,17 @@ import com.esotericsoftware.kryonet.Server;
 
 import brown.channels.agent.library.CDAAgentChannel;
 import brown.exceptions.AgentCreationException;
-import brown.mechanism.channel.SealedBidChannel;
+import brown.mechanism.channel.library.SealedBidChannel;
 import brown.messages.library.BidRequestMessage;
 import brown.messages.library.NegotiateRequestMessage;
-import brown.platform.accounting.Account;
-import brown.platform.accounting.Ledger;
-import brown.platform.messages.BankUpdateMessage;
-import brown.platform.messages.GameReportMessage;
+import brown.platform.accounting.library.Account;
+import brown.platform.accounting.library.Ledger;
+import brown.platform.messages.library.BankUpdateMessage;
+import brown.platform.messages.library.GameReportMessage;
 import brown.system.setup.ISetup;
 import brown.system.setup.library.LemonadeSetup;
 import brown.system.setup.library.Startup;
-import brown.user.agent.AbsAgent;
+import brown.user.agent.library.AbsAgent;
 
 /*
  * The AbsAgent serves as a listener.

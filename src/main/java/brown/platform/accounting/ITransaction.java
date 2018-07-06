@@ -1,5 +1,7 @@
 package brown.platform.accounting;
 
+import brown.platform.accounting.library.Transaction;
+
 /**
  * ITransaction describes a change to an agent account. 
  * @author andrew

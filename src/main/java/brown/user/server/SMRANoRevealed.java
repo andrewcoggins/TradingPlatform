@@ -10,12 +10,12 @@ import java.util.Set;
 import brown.auction.preset.AbsMarketPreset;
 import brown.auction.preset.SMRANoRevealedRules;
 import brown.auction.preset.SSSPReserveRules;
-import brown.auction.value.config.SMRAConfig;
+import brown.auction.value.config.library.SMRAConfig;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.SimpleTradeable;
-import brown.platform.server.RunServer;
-import brown.platform.server.SimulMarkets;
-import brown.platform.server.Simulation;
+import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.server.library.RunServer;
+import brown.platform.server.library.SimulMarkets;
+import brown.platform.server.library.Simulation;
 import brown.system.setup.library.SMRASetup;
 
 /**

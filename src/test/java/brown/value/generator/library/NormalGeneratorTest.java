@@ -8,9 +8,9 @@ import org.apache.commons.math3.distribution.NormalDistribution;
 import org.apache.commons.math3.random.ISAACRandom;
 import org.junit.Test;
 
-import brown.auction.value.generator.NormalValGenerator;
-import brown.auction.value.generator.UniformValGenerator;
-import brown.mechanism.tradeable.MultiTradeable;
+import brown.auction.value.generator.library.NormalValGenerator;
+import brown.auction.value.generator.library.UniformValGenerator;
+import brown.mechanism.tradeable.library.MultiTradeable;
 
 /**
  * tests the normal generator by constructing histograms of samples 

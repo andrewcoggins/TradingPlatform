@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import brown.accounting.MarketState;
 import brown.auction.rules.library.SimpleSecondPricePayment;
-import brown.mechanism.bidbundle.AuctionBidBundle;
-import brown.mechanism.tradeable.MultiTradeable;
+import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.tradeable.library.MultiTradeable;
 
 /**
  * simple second price payment rule test.

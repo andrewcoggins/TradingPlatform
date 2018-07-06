@@ -12,12 +12,12 @@ import java.util.Set;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IAllocationRule;
 import brown.logging.library.Logging;
-import brown.mechanism.bidbundle.AuctionBidBundle;
-import brown.mechanism.bidbundle.BundleType;
+import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.BundleType;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.SimpleTradeable;
-import brown.mechanism.tradeable.TradeableType;
-import brown.platform.messages.TradeMessage;
+import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.mechanism.tradeable.library.TradeableType;
+import brown.platform.messages.library.TradeMessage;
 
 /**
  * implements an allocation rule where the highest bidder is allocated the good(?)

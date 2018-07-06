@@ -3,6 +3,8 @@ package brown.platform.accounting;
 import java.util.List;
 
 import brown.mechanism.tradeable.ITradeable;
+import brown.platform.accounting.library.Ledger;
+import brown.platform.accounting.library.Transaction;
 
 /**
  * A ledger tracks all trades within a Market. 

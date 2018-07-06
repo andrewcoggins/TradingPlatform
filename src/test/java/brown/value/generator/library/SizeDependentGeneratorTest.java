@@ -9,8 +9,8 @@ import java.util.function.Function;
 
 import org.junit.Test;
 
-import brown.auction.value.generator.SizeDepValGenerator;
-import brown.mechanism.tradeable.MultiTradeable;
+import brown.auction.value.generator.library.SizeDepValGenerator;
+import brown.mechanism.tradeable.library.MultiTradeable;
 import brown.value.valuable.library.Value;
 
 

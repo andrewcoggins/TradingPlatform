@@ -3,8 +3,8 @@ package brown.platform.twosided;
 import java.util.Map;
 
 import brown.logging.library.Logging;
-import brown.mechanism.bid.BidDirection;
-import brown.mechanism.bid.TwoSidedBid;
+import brown.mechanism.bid.library.BidDirection;
+import brown.mechanism.bid.library.TwoSidedBid;
 
 /**
  * a SellOrder is a request to sell in a two-sided market.

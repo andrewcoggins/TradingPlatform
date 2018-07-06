@@ -1,6 +1,6 @@
 package brown.user.agent;
 
-import brown.mechanism.channel.OpenOutcryChannel;
+import brown.mechanism.channel.library.OpenOutcryChannel;
 
 /**
  * Specval agent for single ascending round without a sealed bid round.

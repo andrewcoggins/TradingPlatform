@@ -1,6 +1,6 @@
 package brown.user.agent;
 
-import brown.mechanism.channel.GameChannel;
+import brown.mechanism.channel.library.GameChannel;
 
 public interface ILemonadeAgent {
 
