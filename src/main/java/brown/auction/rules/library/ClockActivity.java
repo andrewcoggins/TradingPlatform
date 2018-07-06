@@ -39,6 +39,8 @@ public class ClockActivity implements IActivityRule {
         boolean acceptable = true; 
         
         // can only have 1 bid each round
+        // not true anymore. Now for each auction an agent can have many bids. But only one per 
+        // tick. Hmm... 
         for (TradeMessage b : state.getBids()) {
           if (b.AgentID.equals(aBid.AgentID)) {
             acceptable = false;

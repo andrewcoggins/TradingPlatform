@@ -52,9 +52,8 @@ Once a sequence is specified within a Simulation, the Simulation may be run repe
 IV: Assembly
 ------------
 
-1.     Enter Eclipse workspace directory in Terminal and clone the git repository: git clone https://github.com/andrewcoggins/TradingPlatform
-2.     In eclipse: file->import->Existing projects into workspace-> Import the TradingPlatform project into eclipse.
-3.     Build path->configure build path->source->add folder: src/main/java, src/test/java, remove old source folder
-4.     enable maven nature if not already done. You may need to select maven->update project for eclipse to recognize some libraries
-5.     Use platform
+1.     clone the git repository: git clone https://github.com/andrewcoggins/TradingPlatform
+2.     In Eclipse: file->Import->Maven->Existing Maven Projects. Import the pom.xml from the cloned Trading Platform directory. 
+3. 	   Maven may require download of build helper plugin. If so, proceed with download of this plugin.
+3.     Use platform
 
