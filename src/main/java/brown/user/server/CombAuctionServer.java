@@ -48,7 +48,7 @@ public class CombAuctionServer {
     this.outFile = outFile;
   }
   
-  public CombAuctionServer(int initDelay, int lag, int nSims, double increment, String outFile){
+  public CombAuctionServer(int initDelay, int lag, int nSims, double increment, String outFile) {
     this(initDelay, lag, 2121, nSims, increment, outFile);
   }
 
@@ -60,7 +60,6 @@ public class CombAuctionServer {
     for (int i = 0; i < 98; i++) {
       allTradeablesList.add(new SimpleTradeable(i));
     } 
-    
     
     List<AbsMarketPreset> market = new LinkedList<AbsMarketPreset>();
     market.add(new ClockAuction(this.increment));
@@ -75,10 +74,9 @@ public class CombAuctionServer {
     
     testServer.runSimulation(testSim, this.nSims, this.initDelay,this.initLag, this.lag, this.outFile);           
   }
-  
-  
+
   public static void main(String[] args) throws InterruptedException {
-    CombAuctionServer server = new CombAuctionServer(5,1000,1,10., null);
+    CombAuctionServer server = new CombAuctionServer(5,100,1,10., null);
     server.runAll();
   }
 }

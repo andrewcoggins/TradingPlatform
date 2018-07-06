@@ -4,7 +4,11 @@
   <artifactId>TradingPlatform-lite</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
-    <sourceDirectory>edu</sourceDirectory>
+    <sources>
+      <sourceDirectory>src/main/java</sourceDirectory>
+      <sourceDirectory>src/test/java</sourceDirectory>
+      <sourceDirectory>src/core/resources</sourceDirectory>
+    </sources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -15,14 +19,14 @@
         </configuration>
       </plugin>
       <plugin>
-      	<groupId>org.apache.maven.plugins</groupId>
-      	<artifactId>maven-surefire-plugin</artifactId>
-      	<version>2.18.1</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.18.1</version>
       </plugin>
       <plugin>
-      	<groupId>org.apache.maven.plugins</groupId>
-      	<artifactId>maven-surefire-plugin</artifactId>
-      	<version>2.18.1</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.18.1</version>
       </plugin>
     </plugins>
   </build>

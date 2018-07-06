@@ -39,34 +39,35 @@ public class ClockActivity implements IActivityRule {
         boolean acceptable = true; 
         
         // can only have 1 bid each round
-        for (TradeMessage b : state.getBids()){
-          if (b.AgentID.equals(aBid.AgentID)){
-            acceptable =false;
+        for (TradeMessage b : state.getBids()) {
+          if (b.AgentID.equals(aBid.AgentID)) {
+            acceptable = false;
             state.setAcceptable(false);
             return;
           }
         }
         
         // For every bid
-        for (Entry<ITradeable,BidType> entry: bid.bids.entrySet()){
+        for (Entry<ITradeable,BidType> entry: bid.bids.entrySet()) { 
           List<SimpleTradeable> stList = entry.getKey().flatten();
           // Check if bid maps a single tradeable
-          if (stList.size() > 1){            
+          if (stList.size() > 1) {            
             acceptable = false; 
             state.setAcceptable(false);
             return;
           }
           // That tradeable must have valid ID
-          for (SimpleTradeable st: stList){
-            if (st.ID<0 || st.ID>97){
+          for (SimpleTradeable st : stList) {
+            if (st.ID < 0 || st.ID > 97) {
               acceptable = false;
               state.setAcceptable(false);
-              return;            }
+              return;            
+              }
           }          
           sumOfBids = sumOfBids + entry.getValue().price;
           sumOfReserves = sumOfReserves + state.getReserve().get(entry.getKey());
         }      
-        if (sumOfBids < sumOfReserves){
+        if (sumOfBids < sumOfReserves) {
           acceptable = false;
           state.setAcceptable(false);
           return;          

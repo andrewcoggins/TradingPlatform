@@ -19,8 +19,8 @@ public class ClockPayment implements IPaymentRule {
     List<Order> orders = new LinkedList<Order>();
     boolean over = true;
     Map<ITradeable,List<Integer>> altAlloc = state.getAltAlloc();
-    for (ITradeable t : altAlloc.keySet()){
-      if (altAlloc.get(t).size() > 1){        
+    for (ITradeable t : altAlloc.keySet()) {
+      if (altAlloc.get(t).size() > 1) {        
         over = false;
       }
     }
@@ -38,6 +38,7 @@ public class ClockPayment implements IPaymentRule {
         orders.add(new Order(entry.getKey(),null, price, 1, good));
       }
     }
+    System.out.println("ORDERS" + orders);
     state.setPayments(orders);
   }
 

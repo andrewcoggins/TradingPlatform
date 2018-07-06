@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 	
-	private static long initialLag = 20000;
+	private static long initialLag = 0;
 	
 	private Set<Integer> bundle = new HashSet<>();
 	private double bundleValue = 0;
@@ -74,12 +74,12 @@ public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 	public static void main(String[] args)  {
 		new T1CombAgent("localhost", 2121, "agent1");
 		new T1CombAgent("localhost", 2121, "agent2");
-		new T1CombAgent("localhost", 2121, "agent3");
-		new T1CombAgent("localhost", 2121, "agent4");
-		new T1CombAgent("localhost", 2121, "agent5");
-		new T1CombAgent("localhost", 2121, "agent6");
-		new T1CombAgent("localhost", 2121, "agent7");
-		new T1CombAgent("localhost", 2121, "agent8");
+//		new T1CombAgent("localhost", 2121, "agent3");
+//		new T1CombAgent("localhost", 2121, "agent4");
+//		new T1CombAgent("localhost", 2121, "agent5");
+//		new T1CombAgent("localhost", 2121, "agent6");
+//		new T1CombAgent("localhost", 2121, "agent7");
+//		new T1CombAgent("localhost", 2121, "agent8");
 		
 		while (true) {}
 	}

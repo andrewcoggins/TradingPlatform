@@ -5,9 +5,9 @@ import brown.auction.rules.library.ClockAllocation;
 import brown.auction.rules.library.ClockInformation;
 import brown.auction.rules.library.ClockPayment;
 import brown.auction.rules.library.ClockQuery;
+import brown.auction.rules.library.ClockTC;
 import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneGrouping;
-import brown.auction.rules.library.OneShotTermination;
 
 /**
  * Implementation of a clock auction. 
@@ -24,8 +24,7 @@ public class ClockAuction extends AbsMarketPreset {
         new OneGrouping(),
         new ClockActivity(increment),
         new ClockInformation(),
-        new OneShotTermination(), 
-        //new ClockOuterTC(),
+        new ClockTC(),
         new NoRecordKeeping());
     this.increment = increment;
   }
