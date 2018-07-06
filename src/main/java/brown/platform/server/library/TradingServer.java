@@ -265,7 +265,7 @@ public class TradingServer extends KryoServer {
     synchronized (this.manager) {
       for (Market auction : this.manager.getAuctions()) {
         synchronized (auction) { 
-          if (!auction.isInnerOver()) {
+          if (!auction.isOver()) {
             // indicates that the auction has incremented
             auction.tick();
             // sets reserve/round price.

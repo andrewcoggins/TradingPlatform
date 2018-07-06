@@ -1,7 +1,7 @@
 package brown.auction.rules.library;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.rules.IInnerTC;
+import brown.auction.rules.ITerminationCondition;
 
 /**
  * Outer termination condition that is dependent on time. 
@@ -9,7 +9,7 @@ import brown.auction.rules.IInnerTC;
  * @author acoggins
  *
  */
-public class XTimeTermination implements IInnerTC {
+public class XTimeTermination implements ITerminationCondition {
   private final long mill;
   
   /**
@@ -22,9 +22,9 @@ public class XTimeTermination implements IInnerTC {
 
   
 @Override
-  public void innerTerminated(IMarketState state) {
+  public void isTerminated(IMarketState state) {
     boolean over = (System.currentTimeMillis() - state.getTime()) > mill;
-    state.setInnerOver(over);
+    state.setOver(over);
   }
 
 

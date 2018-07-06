@@ -135,7 +135,7 @@ public class MarketManager implements IMarketManager {
   public boolean anyMarketsOpen() {
     boolean toReturn = false;
     for (Market m : this.getAuctions()) {
-      if (!m.isInnerOver()) {
+      if (!m.isOver()) {
         toReturn = true;
         break;
       }

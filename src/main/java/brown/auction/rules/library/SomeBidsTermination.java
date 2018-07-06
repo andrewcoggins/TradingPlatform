@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.rules.IInnerTC;
+import brown.auction.rules.ITerminationCondition;
 import brown.mechanism.bid.library.AuctionBid;
 import brown.mechanism.bid.library.BidType;
 import brown.mechanism.tradeable.ITradeable;
@@ -23,7 +23,7 @@ import brown.platform.messages.library.TradeMessage;
 
 //TODO: work with revealed pref edge case.
 // solution: only check bids from each round. 
-public class SomeBidsTermination implements IInnerTC {
+public class SomeBidsTermination implements ITerminationCondition {
   
   private List<TradeMessage> roundTrades; 
   private int prevSize; 
@@ -34,7 +34,7 @@ public class SomeBidsTermination implements IInnerTC {
   }
   
   @Override
-  public void innerTerminated(IMarketState state) {
+  public void isTerminated(IMarketState state) {
     if (!(state.getTicks() == 1)) {
       boolean liveBids = false; 
       // accepted bids
@@ -58,7 +58,7 @@ public class SomeBidsTermination implements IInnerTC {
       if (!liveBids) {
         System.out.println("INNER TERMINATED");
         System.out.println("ENDING RESERVE:" + reserve);
-        state.setInnerOver(true);
+        state.setOver(true);
       }
     }
     

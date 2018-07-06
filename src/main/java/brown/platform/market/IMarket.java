@@ -66,7 +66,7 @@ public interface IMarket {
    * determines whether or not the inner market is over.
    * @return a boolean indicating whether or not the inner market is over.
    */
-  public boolean isInnerOver();
+  public boolean isOver();
   
   /**
    * increments the time of the market.

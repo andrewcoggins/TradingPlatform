@@ -1,14 +1,14 @@
 package brown.auction.rules.library; 
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.rules.IInnerTC;
+import brown.auction.rules.ITerminationCondition;
 
-public class NoBiddingTermination implements IInnerTC {
+public class NoBiddingTermination implements ITerminationCondition {
 
   // If there are bids then a round has happened
   @Override
-  public void innerTerminated(IMarketState state) {
-    state.setInnerOver(true);
+  public void isTerminated(IMarketState state) {
+    state.setOver(true);
   }
 
   @Override

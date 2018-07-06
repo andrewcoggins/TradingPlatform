@@ -88,9 +88,9 @@ public interface IMarketState {
     public void setAltAlloc(Map<ITradeable, List<Integer>> o);
     
     //tcondition things
-    public boolean getInnerOver();
+    public boolean getOver();
     
-    public void setInnerOver(boolean b); 
+    public void setOver(boolean b); 
     
     // Previous states
     public PrevStateInfo getPrevState();

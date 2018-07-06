@@ -11,7 +11,7 @@ import brown.auction.rules.IActivityRule;
 import brown.auction.rules.IAllocationRule;
 import brown.auction.rules.IGroupingRule;
 import brown.auction.rules.IInformationRevelationPolicy;
-import brown.auction.rules.IInnerTC;
+import brown.auction.rules.ITerminationCondition;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.IRecordKeepingRule;
@@ -35,7 +35,7 @@ public class Market implements IMarket {
   private final IGroupingRule GRULE;
   private final IActivityRule ACTRULE;
   private final IInformationRevelationPolicy IRPOLICY;
-  private final IInnerTC ITCONDITION;
+  private final ITerminationCondition ITCONDITION;
   private final IMarketState STATE;
   private final IRecordKeepingRule rRule;
   
@@ -92,9 +92,9 @@ public class Market implements IMarket {
   }
 
   @Override
-  public boolean isInnerOver() {
-    ITCONDITION.innerTerminated(this.STATE);
-    return this.STATE.getInnerOver();
+  public boolean isOver() {
+    ITCONDITION.isTerminated(this.STATE);
+    return this.STATE.getOver();
   }
 
   @Override
