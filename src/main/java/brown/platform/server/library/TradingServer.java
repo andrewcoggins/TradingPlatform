@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import com.esotericsoftware.kryonet.Server;
 
 import brown.auction.value.config.IValuationConfig;
 import brown.auction.value.config.library.SpecValV2Config;
@@ -55,9 +54,6 @@ import brown.system.setup.ISetup;
  *
  */
 public class TradingServer extends KryoServer {
-  
-  // Server stuff
-  protected Server theServer;
 
   //keeps track of all tradeables
   protected List<ITradeable> allTradeables; 
@@ -93,7 +89,7 @@ public class TradingServer extends KryoServer {
     this.manager = new MarketManager();
 
     final TradingServer aServer = this;
-    theServer.addListener(new Listener() {
+    kryoServer.addListener(new Listener() {
       public void received(Connection connection, Object message) {
         if (connections.containsKey(connection)) {
           // If the connection is already contained, check if message is a trade
@@ -139,7 +135,7 @@ public class TradingServer extends KryoServer {
       Logging.log("[-] registered " + theID);
       connection.sendTCP(15000);
       connection.setTimeout(60000);
-      this.theServer.sendToTCP(connection.getID(), new RegistrationMessage(theID));
+      this.kryoServer.sendToTCP(connection.getID(), new RegistrationMessage(theID));
     } else {
       Logging.log("[x] AbsServer-onRegistration: encountered registration from existing agent");
     }
@@ -211,11 +207,11 @@ public class TradingServer extends KryoServer {
         newAccount.add(0.0, t);
       this.acctManager.setAccount(agentID, newAccount);
            
-      theServer.sendToTCP(connection.getID(), new AccountResetMessage(agentID,this.initialGoods,this.initialMonies));      
+      kryoServer.sendToTCP(connection.getID(), new AccountResetMessage(agentID,this.initialGoods,this.initialMonies));      
       
       // send out the valuations
       if (marketConfig.type != ValuationType.Blank){
-        theServer.sendToTCP(connection.getID(),toSend.get(agentID));
+        kryoServer.sendToTCP(connection.getID(),toSend.get(agentID));
       }
     }
   }
@@ -230,14 +226,14 @@ public class TradingServer extends KryoServer {
         synchronized (auction) {
           // Handle bid through handleBid method
           if (!auction.handleBid(bid.safeCopy(privateID))) {
-            this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid rejected by Activity Rule"));
+            this.kryoServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid rejected by Activity Rule"));
           }
         }
       }
       else {
        
         Logging.log("[x] AbsServer onBid: Bid encountered with unknown auction ID");
-        this.theServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid send to unknown auction"));
+        this.kryoServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid send to unknown auction"));
       }
     }
   
@@ -253,11 +249,11 @@ public class TradingServer extends KryoServer {
     if (to) {
       // agent is receiving a good and losing money.
       bu = new BankUpdateMessage(anOrder.TO, anOrder.GOOD, null, -1 * anOrder.PRICE, anOrder.QUANTITY);
-      theServer.sendToTCP(this.privateToConnection(anOrder.TO).getID(), bu);
+      kryoServer.sendToTCP(this.privateToConnection(anOrder.TO).getID(), bu);
     } else {
       // agent is losing a good and receiving money.
       bu = new BankUpdateMessage(anOrder.FROM, null, anOrder.GOOD, anOrder.PRICE, anOrder.QUANTITY);
-      theServer.sendToTCP(this.privateToConnection(anOrder.FROM).getID(), bu);
+      kryoServer.sendToTCP(this.privateToConnection(anOrder.FROM).getID(), bu);
     }
   }
   
@@ -278,7 +274,7 @@ public class TradingServer extends KryoServer {
               // maybe send message here? sanitized ledger.
               TradeRequestMessage tr = auction.constructTradeRequest(id.getValue());
               tr = tr.sanitize(id.getValue(),this.privateToPublic);
-              this.theServer.sendToTCP(id.getKey().getID(), tr);
+              this.kryoServer.sendToTCP(id.getKey().getID(), tr);
             }
           } else {
             List<Order> winners = auction.constructOrders();
@@ -307,7 +303,7 @@ public class TradingServer extends KryoServer {
             Map<Integer, List<GameReportMessage>> reports = auction.constructReport();
             for (Integer agent : reports.keySet()) {  
               for (GameReportMessage report : reports.get(agent)) {
-                this.theServer.sendToTCP(this.privateToConnection(agent).getID(), report.sanitize(agent,this.privateToPublic));                
+                this.kryoServer.sendToTCP(this.privateToConnection(agent).getID(), report.sanitize(agent,this.privateToPublic));                
               }
             }
             // record
@@ -391,7 +387,7 @@ public class TradingServer extends KryoServer {
     int i = 1;
     for (Map.Entry<Integer,Double> a :sortedByValue){
       Logging.log(i + ". " + this.IDToName.getOrDefault(a.getKey(), "") +", ID: " + a.getKey()+ ", Utility: " + a.getValue());
-      this.theServer.sendToTCP(this.privateToConnection(a.getKey()).getID(), new ErrorMessage(0, "Placed: " + Integer.toString(i)));
+      this.kryoServer.sendToTCP(this.privateToConnection(a.getKey()).getID(), new ErrorMessage(0, "Placed: " + Integer.toString(i)));
       i++;
     }
     if (outputFile != null) {

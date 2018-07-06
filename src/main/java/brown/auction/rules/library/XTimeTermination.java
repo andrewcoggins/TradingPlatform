@@ -24,7 +24,7 @@ public class XTimeTermination implements IInnerTC {
 @Override
   public void innerTerminated(IMarketState state) {
     boolean over = (System.currentTimeMillis() - state.getTime()) > mill;
-    state.setOuterOver(over);
+    state.setInnerOver(over);
   }
 
 

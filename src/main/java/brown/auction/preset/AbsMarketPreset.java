@@ -16,7 +16,7 @@ import brown.auction.rules.IRecordKeepingRule;
  *
  */
 public abstract class AbsMarketPreset {
-  
+
   public IAllocationRule aRule; 
   public IPaymentRule pRule; 
   public IQueryRule qRule;
@@ -43,4 +43,12 @@ public abstract class AbsMarketPreset {
    * @return
    */
   public abstract AbsMarketPreset copy();
+  
+  @Override
+  public String toString() {
+    return "AbsMarketPreset [aRule=" + aRule + ", pRule=" + pRule + ", qRule="
+        + qRule + ", actRule=" + actRule + ", infoPolicy=" + infoPolicy
+        + ", innerTCondition=" + innerTCondition + ", gRule=" + gRule
+        + ", rRule=" + rRule + "]";
+  }
 }

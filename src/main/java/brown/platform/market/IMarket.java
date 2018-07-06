@@ -69,13 +69,6 @@ public interface IMarket {
   public boolean isInnerOver();
   
   /**
-   * Per the (outer) termination condition, 
-   * determines whether or not the outer market is over.
-   * @return a boolean indicating whether or not the outer market is over.
-   */
-  public boolean isOverOuter();
-  
-  /**
    * increments the time of the market.
    */
   public void tick();

@@ -33,10 +33,9 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   public void onCallMarket(CallMarketChannel cmChannel) {
     
     
-    for (int i = 0; i <20; i++){
+    for (int i = 0; i <20; i++) {
       cmChannel.bid(this, new TwoSidedBidBundle(new TwoSidedBid(this.direction, this.price, this.quantity)));      
     }
-    
     Logging.log("Orderbook SIZE: " + (cmChannel.getOrderBook().getBuys().size() + cmChannel.getOrderBook().getSells().size()));
     if (this.direction == BidDirection.SELL){
       Logging.log("AGENT " + this.ID + "selling at " + this.price);      
@@ -61,7 +60,6 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   } 
   
   public static void main(String[] args) {
-
     new UpdateAgent("localhost", 2121,"update");    
     new FixedAgent("localhost", 2121,"f1");    
     new FixedAgent("localhost", 2121,"f2");    

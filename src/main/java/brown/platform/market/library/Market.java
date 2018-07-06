@@ -96,11 +96,6 @@ public class Market implements IMarket {
     ITCONDITION.innerTerminated(this.STATE);
     return this.STATE.getInnerOver();
   }
-  
-  @Override
-  public boolean isOverOuter() {
-    return this.STATE.getOuterOver();
-  } 
 
   @Override
   public void tick() {
@@ -128,7 +123,6 @@ public class Market implements IMarket {
     this.QRULE.reset();
     this.GRULE.reset();
     this.STATE.reset();
-    this.STATE.incrementOuter();
   }
   
   @Override

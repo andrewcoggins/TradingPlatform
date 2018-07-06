@@ -70,6 +70,7 @@ public class MarketManager implements IMarketManager {
 	   market.setGroupings(agents);
 	   this.ledgers.get(index).put(market, new Ledger(market.getMarketID()));
 	   this.markets.get(index).put(market.getMarketID(), market);
+	   System.out.println("market opened "  + rules.toString());
 	   return true;
 	}
 	
@@ -134,7 +135,7 @@ public class MarketManager implements IMarketManager {
   public boolean anyMarketsOpen() {
     boolean toReturn = false;
     for (Market m : this.getAuctions()) {
-      if (!m.isOverOuter()) {
+      if (!m.isInnerOver()) {
         toReturn = true;
         break;
       }

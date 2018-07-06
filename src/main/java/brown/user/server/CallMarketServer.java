@@ -76,7 +76,7 @@ public class CallMarketServer {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		CallMarketServer server = new CallMarketServer(8, 2, 10, 25, "Testfile");
+		CallMarketServer server = new CallMarketServer(8, 1, 5, 25, "Testfile");
 		server.runAll();
 	}
 }

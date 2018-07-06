@@ -92,14 +92,6 @@ public interface IMarketState {
     
     public void setInnerOver(boolean b); 
     
-    public boolean getOuterOver();
-    
-    public void setOuterOver(boolean b); 
-    
-    public void incrementOuter();
-    
-    public Integer getOuterRuns();
-    
     // Previous states
     public PrevStateInfo getPrevState();
     

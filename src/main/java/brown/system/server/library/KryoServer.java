@@ -14,11 +14,11 @@ import brown.system.server.IKryoServer;
 import brown.system.setup.ISetup;
 import brown.system.setup.library.Startup;
 
-public abstract class KryoServer implements IKryoServer {
+public class KryoServer implements IKryoServer {
   
   // Server stuff
-  private final int PORT;
-  protected Server theServer;
+  protected final int PORT;
+  protected Server kryoServer;
   protected Map<Connection, Integer> connections;
   
   public KryoServer(int port, ISetup gameSetup) {
@@ -26,16 +26,16 @@ public abstract class KryoServer implements IKryoServer {
     this.connections = new ConcurrentHashMap<Connection, Integer>();
 
     // Kryo Stuff
-    theServer = new Server(16384, 8192);
-    theServer.start();    
-    Kryo serverKryo = theServer.getKryo();
+    kryoServer = new Server(16384, 8192);
+    kryoServer.start();    
+    Kryo serverKryo = kryoServer.getKryo();
     Startup.start(serverKryo);
     if (gameSetup != null) {
       gameSetup.setup(serverKryo);
     }
     // Set up Server
     try {
-      theServer.bind(PORT, PORT);
+      kryoServer.bind(PORT, PORT);
     } catch (IOException e) {
       SystemLogging.log(e + " [X] Server failed to start due to port conflict");
       return;

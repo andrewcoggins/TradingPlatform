@@ -7,7 +7,6 @@ import brown.auction.rules.library.CallMarketQuery;
 import brown.auction.rules.library.NoAllocation;
 import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneGrouping;
-import brown.auction.rules.library.OneShotTermination;
 import brown.auction.rules.library.XTimeTermination;
 
 /**
@@ -26,8 +25,7 @@ public class CallMarket extends AbsMarketPreset {
         new OneGrouping(),
         new CallMarketActivity(),
         new CallMarketInformation(),
-        new OneShotTermination(), 
-        //new XTimeTermination(seconds),
+        new XTimeTermination(seconds),
         new NoRecordKeeping());
     this.seconds = seconds;
   }

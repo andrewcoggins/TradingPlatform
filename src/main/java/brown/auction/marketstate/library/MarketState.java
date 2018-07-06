@@ -48,8 +48,6 @@ public class MarketState implements IMarketState {
   private Map<Integer,List<GameReportMessage>> gameReports; 
   //termination condition
   private Boolean innerTerminated; 
-  private Boolean outerTerminated; 
-  private Integer outerRuns; 
   
   // carry over information?
   private PrevStateInfo prevState;
@@ -62,10 +60,8 @@ public class MarketState implements IMarketState {
     this.ID = ID; 
     this.TRADEABLES = allGoods; 
     this.bids = new LinkedList<TradeMessage>();
-    this.outerTerminated = false; 
     this.increment = new HashMap<ITradeable, Double>();
     this.ticks = 0; 
-    this.outerRuns = 0; 
     this.innerTerminated = false;
     this.allocation = new HashMap<Integer, List<ITradeable>>();
     this.altAlloc = new HashMap<ITradeable, List<Integer>>();
@@ -208,26 +204,6 @@ public class MarketState implements IMarketState {
   @Override
   public void setInnerOver(boolean over) {
     this.innerTerminated = over; 
-  }
-
-  @Override
-  public boolean getOuterOver() {
-    return this.outerTerminated; 
-  }
-
-  @Override
-  public void setOuterOver(boolean over) {
-    this.outerTerminated = over;
-  }
-
-  @Override
-  public void incrementOuter() {
-    this.outerRuns++;
-  }
-
-  @Override
-  public Integer getOuterRuns() {
-    return this.outerRuns;
   }
   
   @Override

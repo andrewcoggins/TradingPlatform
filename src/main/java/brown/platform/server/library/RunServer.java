@@ -115,8 +115,8 @@ public class RunServer extends TradingServer implements IServer {
       count++;
     }
     printUtilities(outputFile);
-    this.theServer.close();
-    this.theServer.stop();
+    this.kryoServer.close();
+    this.kryoServer.stop();
   } 
   
   public void runSimulation(Simulation sim, int numRuns, int delay, int lag, String outputFile) throws InterruptedException {
@@ -138,7 +138,7 @@ public class RunServer extends TradingServer implements IServer {
       count++;
     }
     printUtilities(outputFile);
-    this.theServer.close();
-    this.theServer.stop();
+    this.kryoServer.close();
+    this.kryoServer.stop();
   } 
 }
