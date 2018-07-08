@@ -226,7 +226,7 @@ public class TradingServer extends KryoServer {
         synchronized (auction) {
           // Handle bid through handleBid method
           if (!auction.handleBid(bid.safeCopy(privateID))) {
-            this.kryoServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "Bid rejected by Activity Rule"));
+            this.kryoServer.sendToTCP(connection.getID(), new ErrorMessage(privateID, "[x] Bid rejected by Activity Rule"));
           }
         }
       }

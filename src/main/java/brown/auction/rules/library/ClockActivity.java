@@ -24,9 +24,12 @@ import brown.platform.messages.library.TradeMessage;
  */
 public class ClockActivity implements IActivityRule {
   private final Double increment; 
+  private Map<Integer, Integer> agentToTick; 
   
   public ClockActivity(Double anIncrement) {
     this.increment = anIncrement; 
+    // a map of the 'round' that each agent has most recently bid in. 
+    this.agentToTick = new HashMap<Integer, Integer>(); 
   }
 
   @Override
@@ -35,20 +38,18 @@ public class ClockActivity implements IActivityRule {
         AuctionBid bid = (AuctionBid) aBid.Bundle.getBids();
         double sumOfBids = 0;
         double sumOfReserves = 0;
-        
+        int currentTick = state.getTicks(); 
         boolean acceptable = true; 
         
-        // can only have 1 bid each round
-        // not true anymore. Now for each auction an agent can have many bids. But only one per 
-        // tick. Hmm... 
-        for (TradeMessage b : state.getBids()) {
-          if (b.AgentID.equals(aBid.AgentID)) {
-            acceptable = false;
+        // make sure the agent hasn't already submitted a bid on the current tick.
+        if (!this.agentToTick.containsKey(aBid.AgentID)) {
+          this.agentToTick.put(aBid.AgentID, currentTick); 
+        } else { 
+          if (agentToTick.get(aBid.AgentID) == currentTick) {
             state.setAcceptable(false);
             return;
           }
         }
-        
         // For every bid
         for (Entry<ITradeable,BidType> entry: bid.bids.entrySet()) { 
           List<SimpleTradeable> stList = entry.getKey().flatten();
@@ -65,9 +66,9 @@ public class ClockActivity implements IActivityRule {
               state.setAcceptable(false);
               return;            
               }
-          }          
-          sumOfBids = sumOfBids + entry.getValue().price;
-          sumOfReserves = sumOfReserves + state.getReserve().get(entry.getKey());
+          }    
+          sumOfBids += entry.getValue().price;
+          sumOfReserves += state.getReserve().get(entry.getKey());
         }      
         if (sumOfBids < sumOfReserves) {
           acceptable = false;
