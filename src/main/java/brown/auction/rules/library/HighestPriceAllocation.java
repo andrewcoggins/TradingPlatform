@@ -51,9 +51,8 @@ public class HighestPriceAllocation implements IAllocationRule {
       
       Map<SimpleTradeable, Double> highestPrice = new HashMap<SimpleTradeable, Double>();
       Map<SimpleTradeable, Integer> highestAgent = new HashMap<SimpleTradeable, Integer>();
-      
       List<TradeMessage> allBids = state.getBids();             
-      for(TradeMessage bid : allBids) {      
+      for(TradeMessage bid : allBids) {
         // Bid must be of right type
         if(bid.Bundle.getType().equals(BundleType.AUCTION) &&
            group.contains(bid.AgentID)) {
@@ -64,11 +63,11 @@ public class HighestPriceAllocation implements IAllocationRule {
               Logging.log("[x] SSSP Allocation: Bid on non-Simple Tradeable");
             }
             // If either there are no bids for this yet or this bid is higher than those
-            if(highestPrice.get(t) == null || highestPrice.get(t) < bundle.getBids().bids.get(t).price) {             
+            if(highestPrice.get(t) == null || highestPrice.get(t) < bundle.getBids().bids.get(t).price) {  
               // Store the highest price and the corresponding agent
               highestPrice.put((SimpleTradeable) t, bundle.getBids().bids.get(t).price);
               highestAgent.put((SimpleTradeable) t, bid.AgentID);
-            } else if (highestPrice.get(t) == bundle.getBids().bids.get(t).price && Math.random() > 0.5){
+            } else if ((double) highestPrice.get(t) == (double) bundle.getBids().bids.get(t).price && Math.random() > 0.5){
               highestPrice.put((SimpleTradeable) t, bundle.getBids().bids.get(t).price);
               highestAgent.put((SimpleTradeable) t, bid.AgentID);              
             }
