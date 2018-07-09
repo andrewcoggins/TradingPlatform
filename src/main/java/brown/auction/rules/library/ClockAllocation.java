@@ -33,12 +33,12 @@ public class ClockAllocation implements IAllocationRule {
     Map<ITradeable, List<Integer>> newAlloc = new HashMap<ITradeable, List<Integer>>();
     
     List<TradeMessage> bids = state.getBids();
-    for (TradeMessage bid: bids){
+    for (TradeMessage bid: bids) {
       
       // Break this bid down into individual tradeables
       Set<ITradeable> tradeables = ((AuctionBid)  bid.Bundle.getBids()).bids.keySet();
       List<SimpleTradeable> stradeables = new LinkedList<SimpleTradeable>();
-      for (ITradeable t: tradeables){
+      for (ITradeable t: tradeables) {
         stradeables.addAll(t.flatten());
       }        
       // For each tradeable, add this agent to the list in newAlloc
@@ -46,7 +46,7 @@ public class ClockAllocation implements IAllocationRule {
         List<Integer> currList = newAlloc.getOrDefault(st, new LinkedList<Integer>());
         currList.add(bid.AgentID);
         newAlloc.put(st, currList);
-        if (!oldAlloc.containsKey(st)){
+        if (!oldAlloc.containsKey(st)) {
           Logging.log("MixedQueryClockAlloc Error: Tradeable type doesn't match up");
         }
       }

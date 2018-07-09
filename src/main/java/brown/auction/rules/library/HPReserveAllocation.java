@@ -107,7 +107,7 @@ public class HPReserveAllocation implements IAllocationRule {
         }
       }
       
-      for (Entry<SimpleTradeable,Integer> item : highestAgent.entrySet()){
+      for (Entry<SimpleTradeable,Integer> item : highestAgent.entrySet()) {
         Integer agentID = item.getValue();
         List<ITradeable> toAdd = new LinkedList<ITradeable>();
         // Check that we are not double allocating stuff

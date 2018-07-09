@@ -59,17 +59,18 @@ public class HighestPriceAllocation implements IAllocationRule {
           AuctionBidBundle bundle = (AuctionBidBundle) bid.Bundle; 
           for (ITradeable t : bundle.getBids().bids.keySet()) {
             // This only works with SIMPLE Tradeables          
-            if (t.getType() != TradeableType.Simple){
+            if (t.getType() != TradeableType.Simple) {
               Logging.log("[x] SSSP Allocation: Bid on non-Simple Tradeable");
-            }
-            // If either there are no bids for this yet or this bid is higher than those
-            if(highestPrice.get(t) == null || highestPrice.get(t) < bundle.getBids().bids.get(t).price) {  
-              // Store the highest price and the corresponding agent
-              highestPrice.put((SimpleTradeable) t, bundle.getBids().bids.get(t).price);
-              highestAgent.put((SimpleTradeable) t, bid.AgentID);
-            } else if ((double) highestPrice.get(t) == (double) bundle.getBids().bids.get(t).price && Math.random() > 0.5){
-              highestPrice.put((SimpleTradeable) t, bundle.getBids().bids.get(t).price);
-              highestAgent.put((SimpleTradeable) t, bid.AgentID);              
+            } else {
+              // If either there are no bids for this yet or this bid is higher than those
+              if(highestPrice.get(t) == null || highestPrice.get(t) < bundle.getBids().bids.get(t).price) {  
+                // Store the highest price and the corresponding agent
+                highestPrice.put((SimpleTradeable) t, bundle.getBids().bids.get(t).price);
+                highestAgent.put((SimpleTradeable) t, bid.AgentID);
+              } else if ((double) highestPrice.get(t) == (double) bundle.getBids().bids.get(t).price && Math.random() > 0.5){
+                highestPrice.put((SimpleTradeable) t, bundle.getBids().bids.get(t).price);
+                highestAgent.put((SimpleTradeable) t, bid.AgentID);              
+              }
             }
           }
         }

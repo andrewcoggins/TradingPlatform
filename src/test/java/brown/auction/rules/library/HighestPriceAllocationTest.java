@@ -1,6 +1,7 @@
 package brown.auction.rules.library;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import brown.mechanism.bid.library.BidType;
 import brown.mechanism.bidbundle.IBidBundle;
 import brown.mechanism.bidbundle.library.AuctionBidBundle;
 import brown.mechanism.tradeable.ITradeable;
+import brown.mechanism.tradeable.library.ComplexTradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.messages.library.TradeMessage;
 
@@ -83,9 +85,6 @@ public class HighestPriceAllocationTest {
     assertEquals(testState.getAllocation(), expectedAllocation); 
   }
   
-  //multiple groups
-  //agents submit negative value bids
-  //agents submit incorrectly formatted bids.
   //other things to test: what about ties? 
   @Test
   public void testHighestPriceAllocationThree() {
@@ -131,10 +130,57 @@ public class HighestPriceAllocationTest {
     
   }
   
+  //agents submit incorrectly formatted bids.
+  @Test
+  public void testHighestPriceAllocationFour() {
+    // make sure allocation is correct.
+    //System.out.println(testState.getAllocation());
+    HighestPriceAllocation testRule = new HighestPriceAllocation(); 
+    // generate a market state. 
+    ITradeable t = new SimpleTradeable(0);  
+    List<ITradeable> tradeableList = new LinkedList<ITradeable>(); 
+    ITradeable com = new ComplexTradeable(0, new HashSet<ITradeable>(tradeableList));
+    List<ITradeable> tradeableListTwo = new LinkedList<ITradeable>(); 
+    tradeableListTwo.add(com); 
+    tradeableList.add(t); 
+    MarketState testState = new MarketState(0, tradeableListTwo, null);
+    List<TradeMessage> allBids = new LinkedList<TradeMessage>(); 
+    List<List<Integer>> allGroups = new LinkedList<List<Integer>>(); 
+    List<Integer> singleGroup = new LinkedList<Integer>(); 
+    // generate some trade messages. These represent bids sent by agents.
+    for(int i = 0; i < 2; i++) {
+      Map<ITradeable, BidType> bidMap = new HashMap<ITradeable, BidType>(); 
+      bidMap.put(com, new BidType(1.0 , 1)); 
+      IBidBundle bidBundle = new AuctionBidBundle(bidMap);
+      TradeMessage trade = new TradeMessage(i, bidBundle, i, i); 
+      testState.addBid(trade);
+      allBids.add(trade); 
+      singleGroup.add(i); 
+    }
+    allGroups.add(singleGroup); 
+    testState.setGroups(allGroups);
+    // test that allocation rule allocates to correct agent. 
+    testRule.setAllocation(testState);
+    Map<Integer, List<ITradeable>> expectedAllocation = 
+        new HashMap<Integer, List<ITradeable>>();
+    assertEquals(testState.getAllocation(), expectedAllocation); 
+  }
+  
+  //agents submit negative value bids
+  public void testHighestPriceAllocationFive() {
+    
+  }
+  
+  //multiple groups
+  public void testHighestPriceAllocationSix() {
+    
+  }
+  
   public static void main(String[] args) {
     HighestPriceAllocationTest t = new HighestPriceAllocationTest();
     t.testHighestPriceAllocation(); 
     t.testHighestPriceAllocationTwo(); 
     t.testHighestPriceAllocationThree();
+    t.testHighestPriceAllocationFour(); 
   }
 }

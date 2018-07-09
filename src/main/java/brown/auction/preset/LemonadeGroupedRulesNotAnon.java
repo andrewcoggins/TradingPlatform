@@ -16,7 +16,6 @@ import brown.auction.rules.library.ThreeFourFiveGrouping;
  */
 public class LemonadeGroupedRulesNotAnon extends AbsMarketPreset {
   private int numSlots;
-  private int numRuns;
 
   public LemonadeGroupedRulesNotAnon(int numSlots) {
     super(new NoAllocation(),

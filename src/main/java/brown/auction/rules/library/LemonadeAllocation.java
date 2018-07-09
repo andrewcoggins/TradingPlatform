@@ -36,7 +36,7 @@ public class LemonadeAllocation implements IAllocationRule {
     // Find the number of glasses per slot
     List<ITradeable> tradeables = state.getTradeables();
     List<SimpleTradeable> singleTradeables = new LinkedList<SimpleTradeable>();
-    for (ITradeable t : tradeables){
+    for (ITradeable t : tradeables) {
       singleTradeables.addAll(t.flatten());
     }
     

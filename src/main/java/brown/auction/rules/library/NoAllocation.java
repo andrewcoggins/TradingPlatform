@@ -8,7 +8,6 @@ public class NoAllocation implements IAllocationRule {
   @Override
   public void setAllocation(IMarketState state) {
     //noop
-    
   }
 
   @Override

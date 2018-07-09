@@ -160,14 +160,12 @@ public class FrontEndSimulation {
       }
       List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
       try {
-        System.out.println("RULES: " + this.rules);
         Thread.sleep(100);
+        Class<?> rulesClass = Class.forName("brown.auction.preset." + this.rules);
+        Constructor<?> rulesConstructor = rulesClass.getConstructor(); 
+        oneMarket.add((AbsMarketPreset) rulesConstructor.newInstance()); 
         
-        Class<?> rulesClass = Class.forName("brown.market.preset.library." + this.rules);
-        Constructor<?> rulesConstructor = rulesClass.getConstructor(Integer.TYPE); 
-        oneMarket.add((AbsMarketPreset) rulesConstructor.newInstance(1)); 
-        
-        Class<?> configClass = Class.forName("brown.value.config." + this.config);
+        Class<?> configClass = Class.forName("brown.auction.value.config.library." + this.config);
         Constructor<?> configConstructor = configClass.getConstructor(Set.class);
         
         SimulMarkets markets = new SimulMarkets(oneMarket);
@@ -193,7 +191,7 @@ public class FrontEndSimulation {
     @Override
     public void run() {
       try {
-        Class<?> agentClass = Class.forName("brown.agent.library." + this.agentType); 
+        Class<?> agentClass = Class.forName("brown.user.agent.library." + this.agentType); 
         Constructor<?> configConstructor = agentClass.getConstructor(String.class, Integer.TYPE);     
         configConstructor.newInstance("localhost", 2121);
       } catch (Exception e) {

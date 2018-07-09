@@ -15,7 +15,7 @@ import brown.auction.rules.library.OneGrouping;
  *
  */
 public class ClockAuction extends AbsMarketPreset {
-  double increment;
+  private double increment;
   
   public ClockAuction(double increment) {
     super(new ClockAllocation(),
