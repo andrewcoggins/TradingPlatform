@@ -25,6 +25,15 @@ public class XORValuationDistribution implements IValuationDistribution {
   private Set<ITradeable> goods; 
   private Map<ComplexTradeable, Double> values; 
   
+  /**
+   * for overlord kryo.
+   */
+  public XORValuationDistribution() {
+    this.generator = null; 
+    this.goods = null; 
+    this.values = null; 
+  }
+  
   public XORValuationDistribution(IValuationGenerator generator, Set<ITradeable> goods) { 
     this.generator = generator; 
     this.goods = goods; 

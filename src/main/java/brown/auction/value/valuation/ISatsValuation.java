@@ -10,7 +10,7 @@ import brown.mechanism.tradeable.library.ComplexTradeable;
  * @author acoggins
  *
  */
-public interface ISpecValValuation extends IValuation {
+public interface ISatsValuation extends IValuation {
   
   /**
    * Queries the value for some bundle.

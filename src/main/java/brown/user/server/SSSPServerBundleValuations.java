@@ -24,7 +24,7 @@ import brown.system.setup.library.SSSPSetup;
 public class SSSPServerBundleValuations {
   
   private static int numSims = 1;
-  private static int numTradeables = 1;
+  private static int numTradeables = 2;
   private static int delayTime = 5; 
   private static int lag = 2000;
   

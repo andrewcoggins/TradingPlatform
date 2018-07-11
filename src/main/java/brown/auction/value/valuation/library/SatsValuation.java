@@ -14,7 +14,7 @@ import org.spectrumauctions.sats.core.model.UnsupportedBiddingLanguageException;
 import org.spectrumauctions.sats.core.model.mrvm.MRVMBidder;
 import org.spectrumauctions.sats.core.model.mrvm.MRVMLicense;
 
-import brown.auction.value.valuation.ISpecValValuation;
+import brown.auction.value.valuation.ISatsValuation;
 import brown.auction.value.valuation.IValuation;
 import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ITradeable;
@@ -27,7 +27,7 @@ import brown.mechanism.tradeable.library.SimpleTradeable;
  * @author kerry
  *
  */
-public class SatsValuation implements ISpecValValuation {
+public class SatsValuation implements ISatsValuation {
 
   private final MRVMBidder valuation; 
   private Map<Integer, MRVMLicense> idToLicense;

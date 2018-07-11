@@ -1,4 +1,8 @@
-package brown.auction.value.valuation; 
+package brown.auction.value.valuation;
+
+import java.util.Map;
+
+import brown.mechanism.tradeable.library.ComplexTradeable;
 
 /**
  * An IBundleValuation specifies a valuation over ComplexValuations
@@ -7,4 +11,5 @@ package brown.auction.value.valuation;
  */
 public interface IBundleValuation extends IMonotonicValuation {
    
+  public Map<ComplexTradeable, Double> getAllValuations(); 
 }

@@ -42,8 +42,8 @@ public class XORValuation implements IBundleValuation {
     }
   }
   
-  public Set<ComplexTradeable> getTradeables() { 
-    return this.valueParams.keySet();
+  public Map<ComplexTradeable, Double> getAllValuations() { 
+    return this.valueParams;
   }
 
   @Override
