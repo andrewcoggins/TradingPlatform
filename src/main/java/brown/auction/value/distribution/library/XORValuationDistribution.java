@@ -31,6 +31,7 @@ public class XORValuationDistribution implements IValuationDistribution {
     this.values = new HashMap<ComplexTradeable, Double>(); 
   }
   
+  // from an algorithm I wrote last year- monotonically values all bundles. 
   @Override
   public IValuation sample() {
     // generate one valuation per each bundle of goods.
