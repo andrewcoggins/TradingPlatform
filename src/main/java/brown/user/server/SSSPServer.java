@@ -23,9 +23,9 @@ import brown.system.setup.library.SSSPSetup;
 public class SSSPServer {
   
   private static int numSims = 1;
-  private static int numTradeables = 7;
-  private static int delayTime = 7; 
-  private static int lag = 300;
+  private static int numTradeables = 1;
+  private static int delayTime = 5; 
+  private static int lag = 2000;
   
   public static void main(String[] args) throws InterruptedException {
     // Create tradeables

@@ -20,7 +20,7 @@ import brown.mechanism.tradeable.library.TradeableType;
 import brown.platform.messages.library.TradeMessage;
 
 /**
- * implements an allocation rule where the highest bidder is allocated the good(?)
+ * implements an allocation rule where the highest bidder is allocated the good
  * @author andrew
  *
  */

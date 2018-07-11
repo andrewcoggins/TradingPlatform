@@ -21,7 +21,7 @@ import brown.auction.value.config.library.SpecValV2Config;
 import brown.auction.value.config.library.SpecValV3Config;
 import brown.auction.value.config.library.ValConfig;
 import brown.auction.value.valuation.IValuation;
-import brown.auction.value.valuation.library.SpecValValuation;
+import brown.auction.value.valuation.library.SatsValuation;
 import brown.auction.value.valuation.library.ValuationType;
 import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ITradeable;
@@ -179,7 +179,7 @@ public class TradingServer extends KryoServer {
        this.manager.initializeInfo(svconfig.generateInfo());
        
        for (Integer agent: svconfig.agentToValue.keySet()){
-         this.privateValuations.put(agent,new SpecValValuation(svconfig.agentToValue.get(agent)));
+         this.privateValuations.put(agent,new SatsValuation(svconfig.agentToValue.get(agent)));
        }
          
        // Generate initial reports
@@ -192,7 +192,7 @@ public class TradingServer extends KryoServer {
       svconfig.initialize(agents);
 
       for (Integer agent: svconfig.agentToValue.keySet()){
-        this.privateValuations.put(agent,new SpecValValuation(svconfig.agentToValue.get(agent)));
+        this.privateValuations.put(agent,new SatsValuation(svconfig.agentToValue.get(agent)));
       }
       
       // Generate initial reports

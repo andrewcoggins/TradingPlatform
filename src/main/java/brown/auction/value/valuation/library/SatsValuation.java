@@ -27,13 +27,13 @@ import brown.mechanism.tradeable.library.SimpleTradeable;
  * @author kerry
  *
  */
-public class SpecValValuation implements ISpecValValuation {
+public class SatsValuation implements ISpecValValuation {
 
   private final MRVMBidder valuation; 
   private Map<Integer, MRVMLicense> idToLicense;
   public final Double valueScale = 1E-6;
 
-  public SpecValValuation() {
+  public SatsValuation() {
     this.valuation = null;
     this.idToLicense = null;
   }
@@ -44,7 +44,7 @@ public class SpecValValuation implements ISpecValValuation {
    * like the number of bidders and the seed value.
    * @param bidder an MRVMBidder object.
    */
-  public SpecValValuation(MRVMBidder bidder) {
+  public SatsValuation(MRVMBidder bidder) {
     this.valuation = bidder;
     this.idToLicense = new HashMap<Integer, MRVMLicense>();
     for (MRVMLicense l : bidder.getWorld().getLicenses()){
@@ -60,7 +60,7 @@ public class SpecValValuation implements ISpecValValuation {
 
   @Override
   public IValuation safeCopy() {
-    return new SpecValValuation(this.valuation);
+    return new SatsValuation(this.valuation);
   }
 
   @Override
@@ -101,7 +101,7 @@ public class SpecValValuation implements ISpecValValuation {
   }
   
   public IValuation generateSubset(int n, int mean, int stdev){
-    return new SpecValValuationSubset(generateXORBids(n,mean,stdev));    
+    return new SatsValuationSubset(generateXORBids(n,mean,stdev));    
   }
 
 }

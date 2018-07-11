@@ -14,15 +14,15 @@ import brown.mechanism.tradeable.library.ComplexTradeable;
  * @author acoggins
  *
  */
-public class SpecValValuationSubset implements IBundleValuation {
+public class SatsValuationSubset implements IBundleValuation {
   private final Map<ComplexTradeable, Double> valuation;
   
   // for kryo
-  public SpecValValuationSubset() {
+  public SatsValuationSubset() {
     this.valuation = null;
   }
   
-  public SpecValValuationSubset(Map<ComplexTradeable, Double> valuation) {
+  public SatsValuationSubset(Map<ComplexTradeable, Double> valuation) {
     this.valuation = valuation; 
   }
     
@@ -49,7 +49,7 @@ public class SpecValValuationSubset implements IBundleValuation {
     for (ComplexTradeable t: this.valuation.keySet()){
       newVal.put(t, this.valuation.get(t));
     }
-    return new SpecValValuationSubset(newVal);
+    return new SatsValuationSubset(newVal);
   }
 
 }

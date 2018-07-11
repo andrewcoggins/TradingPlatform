@@ -6,7 +6,7 @@ import brown.auction.value.valuation.IValuation;
 import brown.auction.value.valuation.library.DMValuation;
 
 /**
- * Valuation distriubution for complememtary valuations. 
+ * Valuation distriubution for complementary valuations. 
  * Can be described by a base value and a delta value parameter.
  * @author andrew
  *

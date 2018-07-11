@@ -16,7 +16,7 @@ public interface IAccount {
   /**
    * @return ID of agent owning the account
    */
-  public double getID();
+  public int getID();
 
   /**
    * @return double representing amount of money in account

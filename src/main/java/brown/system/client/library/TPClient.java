@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 
-import brown.logging.library.Logging;
 import brown.logging.library.SystemLogging;
 import brown.platform.messages.library.ErrorMessage;
 import brown.platform.messages.library.RegistrationMessage;
@@ -36,7 +35,6 @@ public abstract class TPClient implements IClient {
   public TPClient(String host, int port, ISetup gameSetup) {
     this.CLIENT = new Client(16384, 8192);
     this.ID = null;
-
     CLIENT.start();
     //Log.TRACE();
     Kryo agentKryo = CLIENT.getKryo();

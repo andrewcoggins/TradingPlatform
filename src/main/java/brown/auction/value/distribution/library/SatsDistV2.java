@@ -8,9 +8,9 @@ import java.util.Map;
 import org.spectrumauctions.sats.core.model.mrvm.MRVMBidder;
 
 import brown.auction.value.distribution.IValuationDistribution;
-import brown.auction.value.generator.library.SpecValGenV2;
+import brown.auction.value.generator.library.SatsGenV2;
 import brown.auction.value.valuation.IValuation;
-import brown.auction.value.valuation.library.SpecValValuation;
+import brown.auction.value.valuation.library.SatsValuation;
 import brown.logging.library.Logging;
 import brown.mechanism.tradeable.library.ComplexTradeable;
 
@@ -19,23 +19,23 @@ import brown.mechanism.tradeable.library.ComplexTradeable;
  * @author kerry
  *
  */
-public class SpecValDistV2 implements IValuationDistribution {
-  SpecValGenV2 specValGenerator;
+public class SatsDistV2 implements IValuationDistribution {
+  SatsGenV2 specValGenerator;
   
-  public SpecValDistV2(){
+  public SatsDistV2(){
     this.specValGenerator = null;
   }
   
-  public SpecValDistV2(int numberOfBidders) {
-    this.specValGenerator = new SpecValGenV2(numberOfBidders);  
+  public SatsDistV2(int numberOfBidders) {
+    this.specValGenerator = new SatsGenV2(numberOfBidders);  
     }
 
-  public SpecValDistV2(int numberGlobalBidders,int numberRegionalBidders,int numberLocalBidders) {
-    this.specValGenerator = new SpecValGenV2(numberGlobalBidders,numberRegionalBidders,numberLocalBidders);
+  public SatsDistV2(int numberGlobalBidders,int numberRegionalBidders,int numberLocalBidders) {
+    this.specValGenerator = new SatsGenV2(numberGlobalBidders,numberRegionalBidders,numberLocalBidders);
   }
   
   public void setNumBidders(int numberOfBidders) {
-    this.specValGenerator = new SpecValGenV2(numberOfBidders);  
+    this.specValGenerator = new SatsGenV2(numberOfBidders);  
     }
   
   public Map<Integer,IValuation> sampleAll(List<Integer> agents){
@@ -45,7 +45,7 @@ public class SpecValDistV2 implements IValuationDistribution {
     if (agents.size() == bidders.size()){
       Collections.shuffle(agents);
       for (int i = 0; i < agents.size(); i++){
-        toReturn.put(agents.get(i), new SpecValValuation(bidders.get(i)));
+        toReturn.put(agents.get(i), new SatsValuation(bidders.get(i)));
       }
     } else {
       Logging.log("sampleAll in SpecValDist: Created distribution with wrong number of players");
@@ -56,7 +56,7 @@ public class SpecValDistV2 implements IValuationDistribution {
   public Double sampleBundle(ComplexTradeable t){
     List<MRVMBidder> bidders = this.specValGenerator.generateBidders();
     Collections.shuffle(bidders);
-    SpecValValuation val = new SpecValValuation(bidders.get(0));
+    SatsValuation val = new SatsValuation(bidders.get(0));
     return val.queryValue(t);
   }
 
@@ -64,6 +64,6 @@ public class SpecValDistV2 implements IValuationDistribution {
   public IValuation sample() {
     List<MRVMBidder> bidders = this.specValGenerator.generateBidders();
     Collections.shuffle(bidders);    
-    return new SpecValValuation(bidders.get(0));
+    return new SatsValuation(bidders.get(0));
   }  
 }

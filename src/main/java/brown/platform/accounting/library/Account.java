@@ -64,7 +64,7 @@ public class Account implements IAccount {
 		this.tradeables = goods;
 	}
 	
-	public double getID() {
+	public int getID() {
     return this.ID;
   }
 	

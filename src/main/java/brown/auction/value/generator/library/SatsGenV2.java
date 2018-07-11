@@ -15,7 +15,7 @@ import org.spectrumauctions.sats.core.util.random.RNGSupplier;
  * @author kerry
  *
  */
-public class SpecValGenV2 {
+public class SatsGenV2 {
   public final Double valueScale = 1E-6;
   public final RNGSupplier rng = new JavaUtilRNGSupplier("MY SEED".hashCode());;
   
@@ -26,7 +26,7 @@ public class SpecValGenV2 {
   public MultiRegionModel multiRegionModel;
   public MRVMWorld world;
   
-  public SpecValGenV2(){
+  public SatsGenV2(){
     this.numberOfGlobalBidders = null;
     this.numberOfLocalBidders = null;
     this.numberOfRegionalBidders = null;
@@ -34,11 +34,11 @@ public class SpecValGenV2 {
     this.world = null;
   }
   
-  public SpecValGenV2(int numberOfBidders) {
+  public SatsGenV2(int numberOfBidders) {
     finishConstructor(numberOfBidders,0,0);  
     }
   
-  public SpecValGenV2(int numberGlobalBidders,int numberRegionalBidders,int numberLocalBidders) {
+  public SatsGenV2(int numberGlobalBidders,int numberRegionalBidders,int numberLocalBidders) {
     finishConstructor(numberGlobalBidders,numberRegionalBidders,numberLocalBidders);
   }
   

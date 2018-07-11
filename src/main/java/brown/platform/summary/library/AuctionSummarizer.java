@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.auction.value.valuation.IValuation;
-import brown.auction.value.valuation.library.SpecValValuation;
+import brown.auction.value.valuation.library.SatsValuation;
 import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.ComplexTradeable;
@@ -77,13 +77,13 @@ public class AuctionSummarizer implements IAuctionSummarizer {
       for (Integer anID : roundTradeables.keySet()) {
         List<ITradeable> someTradeables = roundTradeables.get(anID);
         double tradeableValue = 0.0;         
-        if (privateValuations.get(anID) instanceof SpecValValuation){
+        if (privateValuations.get(anID) instanceof SatsValuation){
           List<ITradeable> flattened_t = new LinkedList<ITradeable>();
           for (ITradeable t : someTradeables) {
             flattened_t.addAll(t.flatten());
           }
           Set<ITradeable> tSet = new HashSet<ITradeable>(flattened_t);
-          SpecValValuation svVal = (SpecValValuation) privateValuations.get(anID);
+          SatsValuation svVal = (SatsValuation) privateValuations.get(anID);
           tradeableValue += svVal.queryValue(new ComplexTradeable(0,tSet));
         } else {
           for (ITradeable t : someTradeables) {
