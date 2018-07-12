@@ -10,11 +10,16 @@ import brown.mechanism.tradeable.ITradeable;
  *
  */
 public class Order {
-  
+
+  // recipient of the order
 	public final Integer TO;
+	// tradeable to be put in agent account
 	public final ITradeable GOOD;
+	// benefactor of order (usually not important)
 	public final Integer FROM;
+	// money to be removed from agent account
 	public final double PRICE;
+	// number of tradeables to be put in agent account.
 	public double QUANTITY;
 	
 	/**

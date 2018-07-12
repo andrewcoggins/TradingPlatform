@@ -26,19 +26,18 @@ public class ClockPayment implements IPaymentRule {
     }
     
     // basically replicate the outerTC
-    if (over){
+    if (over) {
       Map<Integer, List<ITradeable>> alloc = state.getAllocation();
       Map<ITradeable, Double> reserves = state.getReserve();
-      for (Entry<Integer, List<ITradeable>> entry: alloc.entrySet()){
+      for (Entry<Integer, List<ITradeable>> entry: alloc.entrySet()) {
         ComplexTradeable good = new ComplexTradeable(0,new HashSet<ITradeable>(entry.getValue()));
         Double price  = 0.;
-            for (ITradeable t : entry.getValue()){
+            for (ITradeable t : entry.getValue()) {
               price = price + reserves.get(t);
             }
         orders.add(new Order(entry.getKey(),null, price, 1, good));
       }
     }
-    System.out.println("ORDERS" + orders);
     state.setPayments(orders);
   }
 

@@ -187,7 +187,7 @@ public class MarketState implements IMarketState {
   }
   
   @Override 
-  public Map<ITradeable, List<Integer>> getAltAlloc(){
+  public Map<ITradeable, List<Integer>> getAltAlloc() { 
     return this.altAlloc;
   }
   
