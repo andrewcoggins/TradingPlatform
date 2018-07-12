@@ -326,7 +326,8 @@ public class TradingServer extends KryoServer {
    * @throws InterruptedException 
    */
   protected synchronized void completeAuctions(int lag) throws InterruptedException { 
-    //run every outer cycle of the auction until it is terminated per the outer termination condition.
+    //run every cycle of the auction until it is terminated per the outer termination condition.
+    this.updateAllAuctions();
     while (this.manager.anyMarketsOpen()) {
       Thread.sleep(lag);
       this.updateAllAuctions();

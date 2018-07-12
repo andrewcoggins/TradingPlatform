@@ -6,14 +6,18 @@ import java.util.List;
 import java.util.Set;
 
 import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.CallMarket;
+import brown.auction.preset.PredictionMarketSettlement;
 import brown.auction.preset.SSSPRules;
 import brown.auction.value.config.library.AdditiveUniformConfig;
 import brown.auction.value.config.library.ComplexValConfig;
+import brown.auction.value.config.library.PredictionMarketDecoysConfig;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.server.library.RunServer;
 import brown.platform.server.library.SimulMarkets;
 import brown.platform.server.library.Simulation;
+import brown.system.setup.library.CallMarketSetup;
 import brown.system.setup.library.SSSPSetup;
 
 /**
@@ -28,7 +32,8 @@ public class SSSPServerBundleValuations {
   private static int delayTime = 5; 
   private static int lag = 2000;
   
-  public static void main(String[] args) throws InterruptedException {
+  
+  public void runAll() throws InterruptedException {                
     // Create tradeables
     // TODO: only one collection of tradeables is needed.
     Set<ITradeable> allTradeables = new HashSet<ITradeable>(); 
@@ -50,5 +55,10 @@ public class SSSPServerBundleValuations {
     RunServer testServer = new RunServer(2121, new SSSPSetup());
     // run
     testServer.runSimulation(testSim, numSims, delayTime, lag, null);
+  }
+  
+  public static void main(String[] args) throws InterruptedException {
+    SSSPServerBundleValuations server = new SSSPServerBundleValuations();
+    server.runAll();
   }
 }

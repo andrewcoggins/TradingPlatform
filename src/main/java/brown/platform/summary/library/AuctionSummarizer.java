@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import brown.auction.value.valuation.IBundleValuation;
 import brown.auction.value.valuation.IValuation;
 import brown.auction.value.valuation.library.SatsValuation;
 import brown.logging.library.Logging;
@@ -77,7 +78,7 @@ public class AuctionSummarizer implements IAuctionSummarizer {
       for (Integer anID : roundTradeables.keySet()) {
         List<ITradeable> someTradeables = roundTradeables.get(anID);
         double tradeableValue = 0.0;         
-        if (privateValuations.get(anID) instanceof SatsValuation){
+        if (privateValuations.get(anID) instanceof SatsValuation) {
           List<ITradeable> flattened_t = new LinkedList<ITradeable>();
           for (ITradeable t : someTradeables) {
             flattened_t.addAll(t.flatten());
@@ -86,10 +87,24 @@ public class AuctionSummarizer implements IAuctionSummarizer {
           SatsValuation svVal = (SatsValuation) privateValuations.get(anID);
           tradeableValue += svVal.queryValue(new ComplexTradeable(0,tSet));
         } else {
-          for (ITradeable t : someTradeables) {
-            IValuation agentValuation = privateValuations.get(anID);
-            tradeableValue += agentValuation.getValuation(t);
-          }        
+          // for complete bundle valuations.
+          if (privateValuations.get(anID) instanceof IBundleValuation) {
+            // if values are stored over bundles, must do valuations by bundle. 
+            IBundleValuation bv = (IBundleValuation) privateValuations.get(anID); 
+            Set<ITradeable> tList = new HashSet<ITradeable>(); 
+            for (ITradeable t : someTradeables) { 
+              tList.add(t); 
+            }
+            System.out.println(tList);
+            ComplexTradeable ct = new ComplexTradeable(0, tList); 
+            tradeableValue = bv.getValuation(ct); 
+            System.out.println("Tradeable Value: " + tradeableValue);
+          } else {
+            for (ITradeable t : someTradeables) {
+              IValuation agentValuation = privateValuations.get(anID);
+              tradeableValue += agentValuation.getValuation(t);
+            }   
+          }     
         }                
         roundUtilities.put(anID, tradeableValue + roundMonies.get(anID));
       }
