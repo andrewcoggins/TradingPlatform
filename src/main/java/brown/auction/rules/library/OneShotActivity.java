@@ -10,6 +10,11 @@ import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.TradeableType;
 import brown.platform.messages.library.TradeMessage;
 
+/**
+ * One Shot activity allows each agent to bid only once.
+ * @author andrew
+ *
+ */
 public class OneShotActivity implements IActivityRule {
   @Override
   // Checks if agent has already bid
@@ -17,8 +22,8 @@ public class OneShotActivity implements IActivityRule {
     Integer agent = aBid.AgentID;    
     List<TradeMessage> currBids = state.getBids();
     boolean acceptable = true;
-    for (TradeMessage bid : currBids){
-      if (bid.AgentID == agent){
+    for (TradeMessage bid : currBids) {
+      if (bid.AgentID == agent) {
         acceptable = false;
         break;
       }

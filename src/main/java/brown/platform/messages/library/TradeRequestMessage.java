@@ -62,11 +62,49 @@ public class TradeRequestMessage extends AbsMessage {
 	    }
 	  }
 	  return new TradeRequestMessage(this.ID, this.MARKET.sanitize(agent, privateToPublic), sanitizedMap);
-	}	
-	
-	 @Override
-	  public String toString() {
-	    return "TradeRequestMessage [MARKET=" + MARKET + ", reserve=" + reserve
-	        + ", idToSize=" + idToSize + "]";
-	  }
+	}
+
+  @Override
+  public String toString() {
+    return "TradeRequestMessage [MARKET=" + MARKET + ", reserve=" + reserve
+        + ", idToSize=" + idToSize + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((MARKET == null) ? 0 : MARKET.hashCode());
+    result = prime * result + ((idToSize == null) ? 0 : idToSize.hashCode());
+    result = prime * result + ((reserve == null) ? 0 : reserve.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    TradeRequestMessage other = (TradeRequestMessage) obj;
+    if (MARKET == null) {
+      if (other.MARKET != null)
+        return false;
+    } else if (!MARKET.equals(other.MARKET))
+      return false;
+    if (idToSize == null) {
+      if (other.idToSize != null)
+        return false;
+    } else if (!idToSize.equals(other.idToSize))
+      return false;
+    if (reserve == null) {
+      if (other.reserve != null)
+        return false;
+    } else if (!reserve.equals(other.reserve))
+      return false;
+    return true;
+  }	
+  
 }
