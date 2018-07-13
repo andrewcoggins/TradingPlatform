@@ -82,7 +82,7 @@ public interface IMarket {
    * clears all information stored in market state
    * and rules.
    */
-  public void resetInternalState();
+  public void clearBidCache();
 
   /**
    * Constructs a summary state that can be used in markets opened 

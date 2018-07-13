@@ -110,7 +110,7 @@ public class MarketState implements IMarketState {
 
   @Override
   public void clearBids() {
-   this.bids = new LinkedList<TradeMessage>();
+   this.bids.clear(); 
   }
   
   @Override
@@ -231,16 +231,6 @@ public class MarketState implements IMarketState {
     this.gameReports = gameReport;
   }
 
-  // resets everything EXCEPT outer terminated condition and outer runs and groups
-  @Override
-  public void reset() {
-    this.bids = new LinkedList<TradeMessage>();
-    this.allocation = new HashMap<Integer, List<ITradeable>>();
-    this.payments = new LinkedList<Order>();
-    this.increment = new HashMap<ITradeable, Double>();
-    this.terminated = false;   
-    }
-
   @Override
   public Map<Integer,List<ITradeable>> getAllocation() {
     return this.allocation;
@@ -280,4 +270,6 @@ public class MarketState implements IMarketState {
   public void setOrderBook(IOrderBook book){
     this.orderbook = book;
   }
+
+
 }

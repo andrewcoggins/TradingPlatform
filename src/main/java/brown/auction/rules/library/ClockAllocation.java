@@ -42,7 +42,7 @@ public class ClockAllocation implements IAllocationRule {
         stradeables.addAll(t.flatten());
       }        
       // For each tradeable, add this agent to the list in newAlloc
-      for (SimpleTradeable st : stradeables){
+      for (SimpleTradeable st : stradeables) {
         List<Integer> currList = newAlloc.getOrDefault(st, new LinkedList<Integer>());
         currList.add(bid.AgentID);
         newAlloc.put(st, currList);
@@ -56,10 +56,10 @@ public class ClockAllocation implements IAllocationRule {
     
     
     // Check things in oldAlloc that nobody wants any more in newAlloc
-    for (ITradeable good : oldAlloc.keySet()){
-      if (!newAlloc.containsKey(good)){
+    for (ITradeable good : oldAlloc.keySet()) {
+      if (!newAlloc.containsKey(good)) { 
         List<Integer> agents = oldAlloc.get(good);
-        if (agents.size() > 0){
+        if (agents.size() > 0) {
           Collections.shuffle(agents);
           List<Integer> newList = new LinkedList<Integer>();
           newList.add(agents.get(0));

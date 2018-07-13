@@ -257,6 +257,27 @@ public class TradingServer extends KryoServer {
     }
   }
   
+  private void sendTradeRequests() {
+    synchronized (this.manager) {
+      for (Market auction : this.manager.getAuctions()) {
+        synchronized (auction) { 
+            // clear most recent cache of bids.
+            auction.clearBidCache();
+            // indicates that the auction has incremented
+            auction.tick();
+            // sets reserve/round price.
+            auction.setReserves();    
+            for (Entry<Connection, Integer> id : this.connections.entrySet()) {
+              // maybe send message here? sanitized ledger.
+              TradeRequestMessage tr = auction.constructTradeRequest(id.getValue());
+              tr = tr.sanitize(id.getValue(),this.privateToPublic);
+              this.kryoServer.sendToTCP(id.getKey().getID(), tr);
+            }
+          }
+        }
+      }
+    }
+  
   /**
    * Sends a auction update to every agent or closes out any finished
    * auctions about the state of all the public auctions
@@ -265,18 +286,6 @@ public class TradingServer extends KryoServer {
     synchronized (this.manager) {
       for (Market auction : this.manager.getAuctions()) {
         synchronized (auction) { 
-          if (!auction.isOver()) {
-            // indicates that the auction has incremented
-            auction.tick();
-            // sets reserve/round price.
-            auction.setReserves();            
-            for (Entry<Connection, Integer> id : this.connections.entrySet()) {
-              // maybe send message here? sanitized ledger.
-              TradeRequestMessage tr = auction.constructTradeRequest(id.getValue());
-              tr = tr.sanitize(id.getValue(),this.privateToPublic);
-              this.kryoServer.sendToTCP(id.getKey().getID(), tr);
-            }
-          } else {
             List<Order> winners = auction.constructOrders();
             // Go through winners and execute orders
             for (Order winner : winners) {                      
@@ -312,12 +321,12 @@ public class TradingServer extends KryoServer {
             } catch (IOException e) {
               Logging.log("IOException in record method");
             }
-            auction.close();
+            if (auction.isOver())
+              auction.close();
           }
         }
       }
     }
-  }  
   
   /**
    * Completes all auctions within a simulation by updating all auctions until no 
@@ -327,8 +336,8 @@ public class TradingServer extends KryoServer {
    */
   protected synchronized void completeAuctions(int lag) throws InterruptedException { 
     //run every cycle of the auction until it is terminated per the outer termination condition.
-    this.updateAllAuctions();
     while (this.manager.anyMarketsOpen()) {
+      this.sendTradeRequests();
       Thread.sleep(lag);
       this.updateAllAuctions();
       Thread.sleep(lag);      

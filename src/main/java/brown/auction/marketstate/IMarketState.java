@@ -24,8 +24,6 @@ public interface IMarketState {
   
     public List<ITradeable> getTradeables();
     
-    public void reset();
-    
     public void tick(); 
     
     public int getTicks();  

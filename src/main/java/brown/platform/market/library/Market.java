@@ -114,15 +114,8 @@ public class Market implements IMarket {
   }
   
   @Override
-  public void resetInternalState() {
-    this.ACTRULE.reset();
-    this.ARULE.reset();
-    this.IRPOLICY.reset();
-    this.ITCONDITION.reset();
-    this.PRULE.reset();
-    this.QRULE.reset();
-    this.GRULE.reset();
-    this.STATE.reset();
+  public void clearBidCache() {
+    this.STATE.clearBids();
   }
   
   @Override
