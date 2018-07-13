@@ -36,8 +36,4 @@ public class CallMarketActivity implements IActivityRule {
     //noop
   }
 
-  @Override
-  public void reset() {
-    //noop  
-  }
 }

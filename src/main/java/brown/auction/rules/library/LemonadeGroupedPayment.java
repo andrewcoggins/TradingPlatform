@@ -97,9 +97,5 @@ public class LemonadeGroupedPayment implements IPaymentRule {
     }
     state.setPayments(orders);          
   }
-
-  @Override
-  public void reset() {
-  }
   
 }

@@ -27,10 +27,4 @@ public class XTimeTermination implements ITerminationCondition {
     state.setOver(over);
   }
 
-
-@Override
-public void reset() {
-  // TODO Auto-generated method stub
-}
-
 }

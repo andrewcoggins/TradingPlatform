@@ -45,8 +45,4 @@ public class LemonadeActivity implements IActivityRule {
   public void setReserves(IMarketState state) {
   }
 
-
-  @Override
-  public void reset() {
-  }
 }

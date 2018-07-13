@@ -40,11 +40,5 @@ public class SMRAPolicy implements IInformationRevelationPolicy {
     PriceDiscoveryInfo reserves = new PriceDiscoveryInfo(state.getReserve()); 
     state.setSummaryState(reserves);   
   }
-  
-  @Override
-  public void reset() {
-    // TODO Auto-generated method stub
-  }
 
-  
 }

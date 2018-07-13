@@ -32,7 +32,4 @@ public class LemonadePayment implements IPaymentRule {
     state.setPayments(orders);
   }
 
-  @Override
-  public void reset() {
-  }  
 }

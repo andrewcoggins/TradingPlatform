@@ -95,10 +95,6 @@ public class HighestPriceAllocation implements IAllocationRule {
     }
     state.setAllocation(alloc);
   }
-
-
-  @Override
-  public void reset() {
-  }   
+  
 }
 

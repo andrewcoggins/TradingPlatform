@@ -81,8 +81,4 @@ public class SimpleSecondPricePayment implements IPaymentRule {
     state.setPayments(allOrders);
   }
 
-  @Override
-  public void reset() {
-    // TODO Auto-generated method stub    
-  }
 }

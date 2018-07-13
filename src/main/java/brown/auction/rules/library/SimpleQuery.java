@@ -28,8 +28,4 @@ public class SimpleQuery implements IQueryRule {
 			state.setTRequest(new TradeRequestMessage(0, new SealedBidChannel(state.getID()),idToGroup));
 	}
 
-  @Override
-  public void reset() {
-    
-  }	
 }

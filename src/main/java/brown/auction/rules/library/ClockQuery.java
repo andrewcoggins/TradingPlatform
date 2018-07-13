@@ -22,10 +22,4 @@ public class ClockQuery implements IQueryRule {
     state.setTRequest(new TradeRequestMessage(0,new OpenOutcryChannel(state.getID(),state.getReserve()),idToGroup)); 
   }
 
-  @Override
-  public void reset() {
-    // TODO Auto-generated method stub
-
-  }
-
 }

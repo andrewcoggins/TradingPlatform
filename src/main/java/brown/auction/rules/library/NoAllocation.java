@@ -9,10 +9,5 @@ public class NoAllocation implements IAllocationRule {
   public void setAllocation(IMarketState state) {
     //noop
   }
-
-  @Override
-  public void reset() {
-    //noop
-  }
   
 }

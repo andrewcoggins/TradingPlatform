@@ -9,10 +9,5 @@ public class NoPayment implements IPaymentRule {
   public void setOrders(IMarketState state) {
     // noop
   }
-
-  @Override
-  public void reset() {
-    // noop
-  }
   
 }

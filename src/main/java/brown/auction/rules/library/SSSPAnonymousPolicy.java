@@ -18,8 +18,22 @@ import brown.platform.messages.library.SimpleSealedReportMessage;
  * @author acoggins
  *
  */
-public class SSSPAnonymous implements IInformationRevelationPolicy {
+public class SSSPAnonymousPolicy implements IInformationRevelationPolicy {
 
+  /**
+   * go through information being sent to agents, and sanitize it. 
+   * meaning, do agents receive a ledger? Do they know who they're bidding against? 
+   * Do they know how many they're bidding against? 
+   * 
+   * Do they see the orderbook? 
+   * etc. etc. 
+   */
+  public void handleInfo() {
+    
+  }
+  
+  
+  //nothing right now about the game report that couldn't be conveyed in a trade request. 
   @Override
   public void setReport(IMarketState state) {
     Map<Integer,List<GameReportMessage>> reports = new HashMap<Integer,List<GameReportMessage>>();    
@@ -42,10 +56,6 @@ public class SSSPAnonymous implements IInformationRevelationPolicy {
     state.setReport(reports);
   }
 
-  @Override
-  public void reset() {
-    
-  }
 
   @Override
   public void constructSummaryState(IMarketState state) {

@@ -161,9 +161,5 @@ public class RevealedPreferenceActivity implements IActivityRule {
     }
    }
 
-  @Override
-  public void reset() {
-    this.pastDemandSets.clear();
-  }
   
 }

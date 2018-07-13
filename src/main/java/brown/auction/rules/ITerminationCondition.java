@@ -14,9 +14,4 @@ public interface ITerminationCondition {
    */
   public void isTerminated(IMarketState state);
 
-  /**
-   * resets all stored information. 
-   */
-  public void reset();
-
 }

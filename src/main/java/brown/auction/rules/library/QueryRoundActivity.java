@@ -16,8 +16,4 @@ public class QueryRoundActivity implements IActivityRule {
   public void setReserves(IMarketState state) {
   }
 
-  @Override
-  public void reset() {
-  }
-
 }

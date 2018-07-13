@@ -5,7 +5,7 @@ import brown.auction.rules.library.OneShotActivity;
 import brown.auction.rules.library.OneShotTermination;
 import brown.auction.rules.library.PairGrouping;
 import brown.auction.rules.library.RecordBids;
-import brown.auction.rules.library.SSSPAnonymous;
+import brown.auction.rules.library.SSSPAnonymousPolicy;
 import brown.auction.rules.library.SimpleFirstPricePayment;
 import brown.auction.rules.library.SimpleQuery;
 
@@ -24,7 +24,7 @@ public class PairSSFP extends AbsMarketPreset {
         new SimpleQuery(), 
         new PairGrouping(),
         new OneShotActivity(),
-        new SSSPAnonymous(),
+        new SSSPAnonymousPolicy(),
         new OneShotTermination(), 
         new RecordBids(filePath));
     this.filePath = filePath;

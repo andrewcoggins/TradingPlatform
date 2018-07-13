@@ -48,9 +48,4 @@ public class OneShotActivity implements IActivityRule {
     
   }
 
-  @Override
-  public void reset() {
-    // TODO Auto-generated method stub    
-  }
-
 }

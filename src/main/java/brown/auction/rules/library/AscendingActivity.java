@@ -107,10 +107,5 @@ public class AscendingActivity implements IActivityRule {
     }
     this.pastDemand.clear();
   }
-
-  @Override
-  public void reset() {
-    this.pastDemand.clear();
-  } 
   
 }

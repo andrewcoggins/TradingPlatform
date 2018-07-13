@@ -41,10 +41,5 @@ public class ClockPayment implements IPaymentRule {
     state.setPayments(orders);
   }
 
-  @Override
-  public void reset() {
-    // TODO Auto-generated method stub
-    
-  }
 
 }

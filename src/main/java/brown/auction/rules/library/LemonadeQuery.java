@@ -21,8 +21,4 @@ public class LemonadeQuery implements IQueryRule {
     }    
     state.setTRequest(new TradeRequestMessage(0,new GameChannel(state.getID()), idToGroup));      
   }
-
-  @Override
-  public void reset() {
-  }  
 }

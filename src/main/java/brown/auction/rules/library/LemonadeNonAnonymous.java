@@ -53,10 +53,6 @@ public class LemonadeNonAnonymous implements IInformationRevelationPolicy{
   }
 
   @Override
-  public void reset() {
-  }
-
-  @Override
   public void constructSummaryState(IMarketState state) {    
   }  
 }

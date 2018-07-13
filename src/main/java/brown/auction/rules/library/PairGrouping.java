@@ -41,8 +41,4 @@ public class PairGrouping implements IGroupingRule{
     Logging.log("GROUPS: " + groups.toString());    
   }
 
-  // Do this if you want to change groups on inner markets
-  @Override
-  public void reset() {    
-  }
 }

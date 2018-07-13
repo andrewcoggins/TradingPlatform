@@ -17,9 +17,5 @@ public interface IQueryRule {
    */
   public void makeChannel(IMarketState state);
 
-  /**
-   * resets all stored info.
-   */
-  public void reset();
   
 }

@@ -28,7 +28,4 @@ public class CallMarketQuery implements IQueryRule {
     state.setTRequest(tr);
   }
 
-  @Override
-  public void reset() {    
-  } 
 }

@@ -1,7 +1,7 @@
 package brown.auction.preset;
 
 import brown.auction.rules.library.LemonadeActivity;
-import brown.auction.rules.library.LemonadeAnonymous;
+import brown.auction.rules.library.LemonadeAnonymousPolicy;
 import brown.auction.rules.library.LemonadeGroupedPayment;
 import brown.auction.rules.library.LemonadeQuery;
 import brown.auction.rules.library.NoAllocation;
@@ -23,7 +23,7 @@ public class LemonadeGroupedRulesAnon extends AbsMarketPreset {
         new LemonadeQuery(),
         new ThreeFourFiveGrouping(),        
         new LemonadeActivity(numSlots),
-        new LemonadeAnonymous(numSlots), 
+        new LemonadeAnonymousPolicy(numSlots), 
         new OneShotTermination(),
         new NoRecordKeeping());
     this.numSlots = numSlots;         

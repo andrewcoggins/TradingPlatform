@@ -16,10 +16,6 @@ public interface IInformationRevelationPolicy {
    */
   public void setReport(IMarketState state);
 
-  /**
-   * resets all stored information. 
-   */
-  public void reset();
 
   /**
    * construct some summary state for use in a future auction. 

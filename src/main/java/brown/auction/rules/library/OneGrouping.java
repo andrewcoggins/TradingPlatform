@@ -15,9 +15,4 @@ public class OneGrouping implements IGroupingRule {
     state.setGroups(groups);   
   }
 
-  // Do this if you want to change groups on inner markets
-  @Override
-  public void reset() { 
-    
-  }
 }

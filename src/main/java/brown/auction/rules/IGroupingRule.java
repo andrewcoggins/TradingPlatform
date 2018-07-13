@@ -20,9 +20,5 @@ public interface IGroupingRule {
    * @param agents private IDs of all agents.
    */
   public void setGrouping(IMarketState state, List<Integer> agents);
-  
-  /**
-   * resets all stored information.
-   */
-  public void reset();    
+     
 }

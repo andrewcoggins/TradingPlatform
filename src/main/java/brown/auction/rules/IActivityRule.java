@@ -24,9 +24,4 @@ public interface IActivityRule {
    */
   public void setReserves(IMarketState state);
 
-  /**
-   * resets all stored information.
-   */
-  public void reset();
-  
 }

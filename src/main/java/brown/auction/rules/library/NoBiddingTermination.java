@@ -10,8 +10,4 @@ public class NoBiddingTermination implements ITerminationCondition {
   public void isTerminated(IMarketState state) {
     state.setOver(true);
   }
-
-  @Override
-  public void reset() {
-  }  
 }

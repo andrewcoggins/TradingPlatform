@@ -55,9 +55,5 @@ public class PredictionMarketPayment implements IPaymentRule {
       state.setPayments(orders);      
     }
   }
-  
-  @Override
-  public void reset() {
-  }
 
 }

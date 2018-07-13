@@ -54,5 +54,44 @@ public class SimpleSealedReportMessage extends GameReportMessage {
    */
   public Integer getNumPlayers() {
     return this.numPlayers;
+  }
+
+  @Override
+  public String toString() {
+    return "SimpleSealedReportMessage [winner=" + winner + ", numPlayers="
+        + numPlayers + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result =
+        prime * result + ((numPlayers == null) ? 0 : numPlayers.hashCode());
+    result = prime * result + ((winner == null) ? 0 : winner.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    SimpleSealedReportMessage other = (SimpleSealedReportMessage) obj;
+    if (numPlayers == null) {
+      if (other.numPlayers != null)
+        return false;
+    } else if (!numPlayers.equals(other.numPlayers))
+      return false;
+    if (winner == null) {
+      if (other.winner != null)
+        return false;
+    } else if (!winner.equals(other.winner))
+      return false;
+    return true;
   }  
+  
 }

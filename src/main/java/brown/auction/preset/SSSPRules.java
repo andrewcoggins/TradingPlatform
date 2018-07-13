@@ -5,7 +5,7 @@ import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneGrouping;
 import brown.auction.rules.library.OneShotActivity;
 import brown.auction.rules.library.OneShotTermination;
-import brown.auction.rules.library.SSSPAnonymous;
+import brown.auction.rules.library.SSSPAnonymousPolicy;
 import brown.auction.rules.library.SimpleQuery;
 import brown.auction.rules.library.SimpleSecondPricePayment;
 
@@ -21,7 +21,7 @@ public class SSSPRules extends AbsMarketPreset {
         new SimpleQuery(), 
         new OneGrouping(),
         new OneShotActivity(),
-        new SSSPAnonymous(),
+        new SSSPAnonymousPolicy(),
         new OneShotTermination(), 
         new NoRecordKeeping());
   }

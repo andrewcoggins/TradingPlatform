@@ -53,8 +53,5 @@ public class ThreeFourFiveGrouping implements IGroupingRule {
     }      
     state.setGroups(groups);
   }    
-  
-  @Override
-  public void reset() {
-  }    
+ 
 }

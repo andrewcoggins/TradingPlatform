@@ -28,10 +28,10 @@ public class ClockInformation implements IInformationRevelationPolicy {
     Map<ITradeable, List<Integer>> altAlloc = state.getAltAlloc();
     Map<Integer, List<ITradeable>> alloc = state.getAllocation();
     
-    for (Integer agent : alloc.keySet()){
+    for (Integer agent : alloc.keySet()) {
       Map<ITradeable, Double> report = new HashMap<ITradeable,Double>();
-      for (ITradeable t: state.getTradeables()){
-        if (alloc.get(agent).contains(t)){
+      for (ITradeable t: state.getTradeables()) {
+        if (alloc.get(agent).contains(t)) {
           report.put(t,(Double) 1./altAlloc.get(t).size());
         } else {
           report.put(t,0.);
@@ -44,10 +44,6 @@ public class ClockInformation implements IInformationRevelationPolicy {
     }      
   }
 
-  @Override
-  public void reset() {
-    // noop
-  }
 
   @Override
   public void constructSummaryState(IMarketState state) {

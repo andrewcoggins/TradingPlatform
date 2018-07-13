@@ -100,14 +100,4 @@ public class LemonadeAllocation implements IAllocationRule {
       state.setAllocation(alloc);
     } 
   }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public void reset() {
-    Logging.log("GOT HERE");
-    this.slots = (List<Integer>[]) new List[this.numSlots];
-    for(int i = 0; i < this.numSlots; i++) {
-      slots[i] = new LinkedList<Integer>();
-    }
-  }
 }

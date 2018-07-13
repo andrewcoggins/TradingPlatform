@@ -64,10 +64,5 @@ public class SomeBidsTermination implements ITerminationCondition {
     
   }
 
-  @Override
-  public void reset() {
-    this.roundTrades.clear(); 
-    this.prevSize = 0; 
-  }
   
 }

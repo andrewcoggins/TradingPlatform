@@ -126,12 +126,5 @@ public class HPReserveAllocation implements IAllocationRule {
     }
     state.setAllocation(alloc);
   }
-
-  @Override
-  public void reset() {
-    // TODO Auto-generated method stub
-    
-  }
-  
   
 }

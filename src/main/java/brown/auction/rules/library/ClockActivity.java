@@ -103,8 +103,4 @@ public class ClockActivity implements IActivityRule {
       state.setReserve(newReserve);
     }
 
-  @Override
-  public void reset() {
-    //noop
-  }
 }

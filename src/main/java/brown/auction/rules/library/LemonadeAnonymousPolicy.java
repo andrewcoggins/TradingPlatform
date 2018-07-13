@@ -13,10 +13,10 @@ import brown.platform.messages.library.GameReportMessage;
 import brown.platform.messages.library.LemonadeReportMessage;
 import brown.platform.messages.library.TradeMessage;
 
-public class LemonadeAnonymous implements IInformationRevelationPolicy{
+public class LemonadeAnonymousPolicy implements IInformationRevelationPolicy{
   private int numSlots;
   
-  public LemonadeAnonymous(int numSlots) {
+  public LemonadeAnonymousPolicy(int numSlots) {
     this.numSlots = numSlots;
   }
 
@@ -45,10 +45,6 @@ public class LemonadeAnonymous implements IInformationRevelationPolicy{
       }
     }
     state.setReport(reports);
-  }
-
-  @Override
-  public void reset() {
   }
 
   @Override

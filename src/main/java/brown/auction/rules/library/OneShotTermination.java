@@ -12,8 +12,4 @@ public class OneShotTermination implements ITerminationCondition {
     state.setOver(over);
   }
 
-  @Override
-  public void reset() {
-  }  
-  
 }

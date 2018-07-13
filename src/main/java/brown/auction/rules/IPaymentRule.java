@@ -16,8 +16,4 @@ public interface IPaymentRule {
    */
   public void setOrders(IMarketState state);
 
-  /**
-   * resets 
-   */
-  public void reset();  
 }

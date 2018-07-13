@@ -257,6 +257,9 @@ public class TradingServer extends KryoServer {
     }
   }
   
+  /**
+   * TODO: I think this is the best design. make sure this works. 
+   */
   private void sendTradeRequests() {
     synchronized (this.manager) {
       for (Market auction : this.manager.getAuctions()) {
@@ -307,22 +310,33 @@ public class TradingServer extends KryoServer {
                   this.sendBankUpdate(winner, false);
                 }
               }
-            }            
-            // Send game report
-            Map<Integer, List<GameReportMessage>> reports = auction.constructReport();
-            for (Integer agent : reports.keySet()) {  
-              for (GameReportMessage report : reports.get(agent)) {
-                this.kryoServer.sendToTCP(this.privateToConnection(agent).getID(), report.sanitize(agent,this.privateToPublic));                
-              }
-            }
+            }           
             // record
             try {
               auction.record(this.privateValuations);
             } catch (IOException e) {
               Logging.log("IOException in record method");
             }
-            if (auction.isOver())
+            if (auction.isOver()) {
+              //TODO: figure out what is the 'identity' of a game report. 
+              // answer: a game report is sent after an auction is over, exclusively. 
+              // It is dictated by the IR policy. The QueryRule controls information 
+              
+              //what are the places where an agent receives information? 
+              //initial private information- this is implicit to the agent, not related to auction
+              //information in trade request (query rule)
+              //information in bank update (always)
+              //information in game report (IR policy)
+              //perhaps have the IR policy 'sanitize' trade requests before they go out? 
+              // Send game report
+              Map<Integer, List<GameReportMessage>> reports = auction.constructReport();
+              for (Integer agent : reports.keySet()) {  
+                for (GameReportMessage report : reports.get(agent)) {
+                  this.kryoServer.sendToTCP(this.privateToConnection(agent).getID(), report.sanitize(agent,this.privateToPublic));                
+                }
+              }
               auction.close();
+            }
           }
         }
       }

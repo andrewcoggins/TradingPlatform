@@ -22,7 +22,7 @@ public class PredictionMarketReport extends GameReportMessage {
    * with which the agent was endowed.
    * @param coin: true if heads
    */
-  public PredictionMarketReport(Boolean coin){
+  public PredictionMarketReport(Boolean coin) {
     this.coin = coin;
   }  
 

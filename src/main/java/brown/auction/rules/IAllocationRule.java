@@ -14,8 +14,4 @@ public interface IAllocationRule {
    */
   public void setAllocation(IMarketState state);
 
-  /**
-   * resets all stored information.
-   */
-  public void reset();  
 }

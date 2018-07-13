@@ -88,9 +88,5 @@ public class ClockAllocation implements IAllocationRule {
     return(toReturn);
   }
   
-  @Override
-  public void reset() {
-    // noop
-  }
 
 }

@@ -87,9 +87,5 @@ public class LemonadePaymentFloat implements IPaymentRule {
       }             
       state.setPayments(orders);      
     } 
-  }
-
-  @Override
-  public void reset() {
-  }  
+  } 
 }

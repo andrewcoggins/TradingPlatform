@@ -39,9 +39,6 @@ public class PredictionMarketInformation implements IInformationRevelationPolicy
     state.setReport(reports);
   }
 
-  @Override
-  public void reset() {
-  }
 
   @Override
   public void constructSummaryState(IMarketState state) {  

@@ -57,10 +57,5 @@ public class SimpleFirstPricePayment implements IPaymentRule {
     state.setPayments(allOrders);
   }
 
-  @Override
-  public void reset() {
-    // TODO Auto-generated method stub
-    
-  }
   
 }

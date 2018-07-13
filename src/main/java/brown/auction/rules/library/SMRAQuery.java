@@ -33,9 +33,5 @@ public class SMRAQuery implements IQueryRule {
                 idToGroup)); 
   }
 
-  @Override
-  public void reset() {
-    //noop
-  }
   
 }

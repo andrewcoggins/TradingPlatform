@@ -17,9 +17,4 @@ public class NoBiddingActivity implements IActivityRule {
     
   }
 
-  @Override
-  public void reset() {
-    // TODO Auto-generated method stub    
-  }
-
 }
