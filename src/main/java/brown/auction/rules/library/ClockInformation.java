@@ -27,7 +27,6 @@ public class ClockInformation implements IInformationRevelationPolicy {
 
     Map<ITradeable, List<Integer>> altAlloc = state.getAltAlloc();
     Map<Integer, List<ITradeable>> alloc = state.getAllocation();
-    
     for (Integer agent : alloc.keySet()) {
       Map<ITradeable, Double> report = new HashMap<ITradeable,Double>();
       for (ITradeable t: state.getTradeables()) {
@@ -39,9 +38,9 @@ public class ClockInformation implements IInformationRevelationPolicy {
       }
       List<GameReportMessage> currList = reports.getOrDefault(agent, new LinkedList<GameReportMessage>());
       currList.add(new CombinatorialClockReport(report));
-      reports.put(agent, currList);
-      state.setReport(reports);              
+      reports.put(agent, currList);               
     }      
+    state.setReport(reports);
   }
 
 

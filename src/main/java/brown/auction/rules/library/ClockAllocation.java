@@ -71,6 +71,7 @@ public class ClockAllocation implements IAllocationRule {
         }
       }
     }
+    
     state.setReserve(reserves);
     state.setAltAlloc(newAlloc); 
     state.setAllocation(altAllocToAlloc(newAlloc));

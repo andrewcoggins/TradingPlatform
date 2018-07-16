@@ -76,6 +76,7 @@ public abstract class AbsCombinatorialProjectAgentV2  extends AbsSpecValV2Agent 
   
   @Override
   public void onGameReport(GameReportMessage gameReport) {
+    System.out.println("Game report received");
     if (gameReport instanceof CombinatorialClockReport) {
       // cast to CombinatorialClockReport
       CombinatorialClockReport report = (CombinatorialClockReport) gameReport;

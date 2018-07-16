@@ -13,7 +13,7 @@ import java.util.Set;
  */
 public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 	
-	private static long initialLag = 0;
+	private static long initialLag = 10000;
 	
 	private Set<Integer> bundle = new HashSet<>();
 	private double bundleValue = 0;
@@ -34,6 +34,7 @@ public class T1CombAgent extends AbsCombinatorialProjectAgentV2 {
 
 	@Override
 	public void onBidResults(double[] allocations) {
+	  System.out.println(allocations);
 		// do nothing
 	}
 
