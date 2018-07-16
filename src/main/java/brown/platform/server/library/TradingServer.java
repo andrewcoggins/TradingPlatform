@@ -310,7 +310,14 @@ public class TradingServer extends KryoServer {
                   this.sendBankUpdate(winner, false);
                 }
               }
-            }           
+            }
+            // send game reports.
+            Map<Integer, List<GameReportMessage>> reports = auction.constructReport();
+            for (Integer agent : reports.keySet()) {  
+              for (GameReportMessage report : reports.get(agent)) {
+                this.kryoServer.sendToTCP(this.privateToConnection(agent).getID(), report.sanitize(agent,this.privateToPublic));                
+              }
+            }
             // record
             try {
               auction.record(this.privateValuations);
@@ -328,13 +335,8 @@ public class TradingServer extends KryoServer {
               //information in bank update (always)
               //information in game report (IR policy)
               //perhaps have the IR policy 'sanitize' trade requests before they go out? 
+              //
               // Send game report
-              Map<Integer, List<GameReportMessage>> reports = auction.constructReport();
-              for (Integer agent : reports.keySet()) {  
-                for (GameReportMessage report : reports.get(agent)) {
-                  this.kryoServer.sendToTCP(this.privateToConnection(agent).getID(), report.sanitize(agent,this.privateToPublic));                
-                }
-              }
               auction.close();
             }
           }
