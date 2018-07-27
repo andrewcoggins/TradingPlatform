@@ -19,6 +19,10 @@ public class AccountManagerTest {
       Account newAccount = new Account(i); 
       manager.setAccount(i, newAccount); 
       accountList.add(newAccount); 
+
+
+
+      
     }
     for (int i = 0; i < 5; i++) {
       assertTrue(manager.containsAcct(i)); 
