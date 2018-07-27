@@ -25,8 +25,8 @@ public class Ledger implements ILedger {
 	 */
 	public Ledger() {
 	  this.marketId = null;
-		this.transactions = new LinkedList<Transaction>();
-		this.unshared = new LinkedList<Transaction>();
+		this.transactions = null; 
+		this.unshared = null;
 	}
 	
 	public Ledger(Integer marketId) {
