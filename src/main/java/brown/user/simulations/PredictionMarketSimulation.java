@@ -14,16 +14,13 @@ import brown.user.server.PredictionMarketServer;
  *
  */
 public class PredictionMarketSimulation {
-	private static int numSims = 100;
+	private static int numSims = 1;
 	private static int delayTime = 2; 
 	private static int lag = 50;
 	private static int marketLength = 20;
 	
 	private static String[] botClasses = new String[] {
-			"brown.agent.library.RandomAgent",
-			"brown.agent.library.FixedAgent",
-			"brown.agent.library.UpdateAgent",
-			"brown.agent.library.unshared.IEBot"
+			"brown.user.agent.library.RandomAgent"
 	};
 	
 	private static int numBots = 5;
@@ -45,7 +42,7 @@ public class PredictionMarketSimulation {
 	  }
 
 	public void run() throws InterruptedException {
-		for (int t = 0; t < 4; t++) {
+		for (int t = 0; t < numBots - 1; t++) {
 			ServerRunnable sr = new ServerRunnable();
 			BotsRunnable br = new BotsRunnable();
 			AgentRunnable ar = new AgentRunnable();
