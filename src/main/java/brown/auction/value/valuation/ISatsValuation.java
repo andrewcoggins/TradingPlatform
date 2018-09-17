@@ -20,7 +20,7 @@ public interface ISatsValuation extends IValuation {
   public Double queryValue(ComplexTradeable t);
   
   /**
-   * generates some XOR bids per the specval generator.
+   * generates some XOR bids per the specific valuation generator.
    * @param nBids the number of bids to be generated
    * @param meanSize the mean size of the bundles generated.
    * @param stdev the standard deviation size of the bundles generated.

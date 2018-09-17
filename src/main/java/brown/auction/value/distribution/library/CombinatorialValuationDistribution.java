@@ -11,7 +11,7 @@ import brown.auction.value.valuation.library.DMValuation;
  * @author andrew
  *
  */
-public class ComplementaryValuationDistribution implements IValuationDistribution{
+public class CombinatorialValuationDistribution implements IValuationDistribution{
 
   private IValuationGenerator baseGenerator; 
   private IValuationGenerator deltaGenerator; 
@@ -26,7 +26,7 @@ public class ComplementaryValuationDistribution implements IValuationDistributio
    * @param deltaGenerator
    * generator for delta value.
    */
-  public ComplementaryValuationDistribution(IValuationGenerator baseGenerator, IValuationGenerator deltaGenerator) {
+  public CombinatorialValuationDistribution(IValuationGenerator baseGenerator, IValuationGenerator deltaGenerator) {
     this.baseGenerator = baseGenerator; 
     this.deltaGenerator = deltaGenerator; 
     this.minBase = 0.0; 
@@ -50,7 +50,7 @@ public class ComplementaryValuationDistribution implements IValuationDistributio
    * @param maxDelta
    * maximum delta value
    */
-  public ComplementaryValuationDistribution(IValuationGenerator baseGenerator, IValuationGenerator deltaGenerator, 
+  public CombinatorialValuationDistribution(IValuationGenerator baseGenerator, IValuationGenerator deltaGenerator, 
       Double minBase, Double maxBase, 
       Double minDelta, Double maxDelta) {
     this.baseGenerator = baseGenerator; 
@@ -66,10 +66,10 @@ public class ComplementaryValuationDistribution implements IValuationDistributio
     double tentativeBase = -999.0;
     double tentativeDelta = -999.0;
     while (tentativeBase < minBase || tentativeBase > maxBase) {
-      tentativeBase = baseGenerator.makeValuation();
+      tentativeBase = this.baseGenerator.makeValuation();
     }
     while(tentativeDelta < minDelta || tentativeDelta > maxDelta) {
-      tentativeDelta = deltaGenerator.makeValuation();
+      tentativeDelta = this.deltaGenerator.makeValuation();
     }
     return new DMValuation(tentativeBase, tentativeDelta);
   }
@@ -110,8 +110,8 @@ public class ComplementaryValuationDistribution implements IValuationDistributio
       return false;
     if (getClass() != obj.getClass())
       return false;
-    ComplementaryValuationDistribution other =
-        (ComplementaryValuationDistribution) obj;
+    CombinatorialValuationDistribution other =
+        (CombinatorialValuationDistribution) obj;
     if (deltaGenerator == null) {
       if (other.deltaGenerator != null)
         return false;

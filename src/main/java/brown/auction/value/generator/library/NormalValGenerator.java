@@ -26,6 +26,7 @@ public class NormalValGenerator implements IValuationGenerator {
     this.mean = mean; 
     this.variance = variance; 
   }
+  
  
   @Override
   public Double makeValuation() {

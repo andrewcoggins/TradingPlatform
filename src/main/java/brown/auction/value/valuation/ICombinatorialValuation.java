@@ -2,10 +2,10 @@ package brown.auction.value.valuation;
 
 /**
  * IComplementaryValuation specifies a valuation for bundles
- * of complementary goods.
+ * of combinatorial goods.
  * @author andrew
  *
  */
-public interface IComplementaryValuation extends IMonotonicValuation {
+public interface ICombinatorialValuation extends IMonotonicValuation {
   
 }
