@@ -8,6 +8,11 @@ A complete developer guide may be found [here](https://github.com/andrewcoggins/
 
 ## Assembly
 
+1. In a directory of your choice, clone the project. 
+'''
+git clone https://github.com/andrewcoggins/TradingPlatform 
+'''
+or clone using the *clone or download* button 
 ## To Use
 
 You can track bugs [here](https://github.com/andrewcoggins/TradingPlatform/issues). For general inquiries about TP, please reach out to <acoggins38@gmail.com>.
