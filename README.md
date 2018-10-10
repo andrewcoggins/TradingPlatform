@@ -12,7 +12,14 @@ A complete developer guide may be found [here](https://github.com/andrewcoggins/
 ```
 git clone https://github.com/andrewcoggins/TradingPlatform 
 ```
-or clone using the *clone or download* button 
+or clone using the *clone or download* button above. 
+2. Open the project in the java IDE of your choice. Be sure to enable maven nature upon creation of your project.
+3. The project should be ready to use. Direct any enduring issues to this project's [here](https://github.com/andrewcoggins/TradingPlatform/issues) issue page. 
+
+## Requirements
+
+Java 8 and Java SDK are necessary to run TP. All further requirements are described in *pom.xml* and will be added upon enabling maven nature. 
+
 ## To Use
 
 You can track bugs [here](https://github.com/andrewcoggins/TradingPlatform/issues). For general inquiries about TP, please reach out to <acoggins38@gmail.com>.
