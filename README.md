@@ -6,10 +6,8 @@ Presently, TP provides a robust array of low-level trading scenarios in which us
 
 A complete developer guide may be found here. A user guide is provided at the bottom of this page.
 
-### i. 
-Assembly-
+## Assembly
 
-### ii. 
-To Use-
+## To Use
 
 for general inquiries about TP, please contact me.
