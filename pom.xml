@@ -20,7 +20,6 @@
               <sources>
                 <source>src/main/java</source>
                 <source>src/test/java</source>
-                <source>src/core/resources</source>
               </sources>
             </configuration>
           </execution>
@@ -161,19 +160,6 @@
     <groupId>org.spectrumauctions</groupId>
     <artifactId>sats</artifactId>
     <version>0.6.0</version>
-</dependency>
-
-<dependency>
-    <groupId>com.sparkjava</groupId>
-    <artifactId>spark-core</artifactId>
-    <version>2.7.1</version>
-</dependency>
-
-
-<dependency>
-    <groupId>com.sparkjava</groupId>
-    <artifactId>spark-template-freemarker</artifactId>
-    <version>2.7.1</version>
 </dependency>
 
     <dependency>
