@@ -20,7 +20,7 @@ or clone using the *clone or download* button above.
 
 ## Requirements
 
-Java 8 and Java SDK are necessary to run TP. All further requirements are described in *pom.xml* and will be added upon enabling maven nature. 
+Java 8 and Java SDK are necessary to run TP. All further requirements are specified in *pom.xml* and will be added upon enabling maven nature. 
 
 ## To Use
 
