@@ -10,4 +10,4 @@ A complete developer guide may be found [here](https://github.com/andrewcoggins/
 
 ## To Use
 
-for general inquiries about TP, please [contact me]<acoggins38@gmail.com>.
+for general inquiries about TP, please [contact me](acoggins38@gmail.com).
