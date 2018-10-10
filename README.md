@@ -10,4 +10,6 @@ A complete developer guide may be found [here](https://github.com/andrewcoggins/
 
 ## To Use
 
-for general inquiries about TP, please <acoggins38@gmail.com>.
+You can track bugs [here](https://github.com/andrewcoggins/TradingPlatform/issues). For general inquiries about TP, please reach out to <acoggins38@gmail.com>.
+
+Thanks, and happy trading! 
