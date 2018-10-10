@@ -16,7 +16,7 @@ or clone using the *clone or download* button above.
 
 2. Open the project in the java IDE of your choice. Be sure to enable maven nature upon creation of your project.
  
-3. The project should be ready to use. Direct any enduring issues to this project's [issue page](https://github.com/andrewcoggins/TradingPlatform/issues).
+3. The project should be ready to use. Note that assembly has been tested in only Eclipse and Intellij IDEA. Please direct any enduring issues to this project's [issue page](https://github.com/andrewcoggins/TradingPlatform/issues).
 
 ## Requirements
 
