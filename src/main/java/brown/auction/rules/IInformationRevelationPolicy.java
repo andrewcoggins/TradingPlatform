@@ -14,12 +14,12 @@ public interface IInformationRevelationPolicy {
    * determines what the game report should be
    * @param state market internal state. 
    */
-  public void setReport(IMarketState state);
+  void setReport(IMarketState state);
 
 
   /**
    * construct some summary state for use in a future auction. 
    * @param state market internal state.
    */
-  public void constructSummaryState(IMarketState state);
+  void constructSummaryState(IMarketState state);
 }
