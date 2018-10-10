@@ -24,6 +24,8 @@ Java 8 and Java SDK are necessary to run TP. All further requirements are specif
 
 ## To Use
 
+User guide coming soon. 
+
 You can track bugs [here](https://github.com/andrewcoggins/TradingPlatform/issues). For general inquiries about TP, please reach out to <acoggins38@gmail.com>.
 
 Thanks, and happy trading! 
