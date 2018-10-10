@@ -14,7 +14,7 @@ git clone https://github.com/andrewcoggins/TradingPlatform
 ```
 or clone using the *clone or download* button above. 
 2. Open the project in the java IDE of your choice. Be sure to enable maven nature upon creation of your project.
-3. The project should be ready to use. Direct any enduring issues to this project's [here](https://github.com/andrewcoggins/TradingPlatform/issues) issue page. 
+3. The project should be ready to use. Direct any enduring issues to this project's [issue page](https://github.com/andrewcoggins/TradingPlatform/issues).
 
 ## Requirements
 
