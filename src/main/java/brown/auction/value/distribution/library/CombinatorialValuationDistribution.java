@@ -59,6 +59,7 @@ public class CombinatorialValuationDistribution implements IValuationDistributio
     this.maxBase = maxBase; 
     this.minDelta = minDelta; 
     this.maxDelta = maxDelta;
+    throw new Error("Min Delta");
   }
   
   @Override
