@@ -159,7 +159,7 @@
 <dependency>
     <groupId>org.spectrumauctions</groupId>
     <artifactId>sats</artifactId>
-    <version>0.6.0</version>
+    <version>0.6.1</version>
 </dependency>
 
     <dependency>
