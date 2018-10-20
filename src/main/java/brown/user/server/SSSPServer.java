@@ -34,8 +34,8 @@ public class SSSPServer {
     List<ITradeable> allTradeablesList = new LinkedList<ITradeable>();
     // add tradeables.
     for (int i = 0; i < numTradeables; i++) {
-      allTradeables.add(new SimpleTradeable(i));
-      allTradeablesList.add(new SimpleTradeable(i));
+      allTradeables.add(new SimpleTradeable(new Integer(i)));
+      allTradeablesList.add(new SimpleTradeable(new Integer(i)));
     }
     // one market in this game.
     List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();

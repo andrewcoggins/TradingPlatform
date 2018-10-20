@@ -14,6 +14,6 @@ public interface IPaymentRule {
    * by adding/subtracting goods and money
    * @param state market state
    */
-  public void setOrders(IMarketState state);
+  void setOrders(IMarketState state);
 
 }

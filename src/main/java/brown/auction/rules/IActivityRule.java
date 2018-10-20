@@ -16,12 +16,12 @@ public interface IActivityRule {
    * @param state market internal state. 
    * @param aBid some TradeMessage
    */
-  public void isAcceptable(IMarketState state, TradeMessage aBid);
+  void isAcceptable(IMarketState state, TradeMessage aBid);
  
   /**
    * Handle reserve prices, which may change in some auctions.
    * @param state
    */
-  public void setReserves(IMarketState state);
+  void setReserves(IMarketState state);
 
 }

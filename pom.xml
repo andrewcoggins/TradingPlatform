@@ -20,7 +20,6 @@
               <sources>
                 <source>src/main/java</source>
                 <source>src/test/java</source>
-                <source>src/core/resources</source>
               </sources>
             </configuration>
           </execution>
@@ -160,20 +159,7 @@
 <dependency>
     <groupId>org.spectrumauctions</groupId>
     <artifactId>sats</artifactId>
-    <version>0.6.0</version>
-</dependency>
-
-<dependency>
-    <groupId>com.sparkjava</groupId>
-    <artifactId>spark-core</artifactId>
-    <version>2.7.1</version>
-</dependency>
-
-
-<dependency>
-    <groupId>com.sparkjava</groupId>
-    <artifactId>spark-template-freemarker</artifactId>
-    <version>2.7.1</version>
+    <version>0.6.1</version>
 </dependency>
 
     <dependency>
@@ -181,11 +167,17 @@
       <artifactId>slf4j-jdk14</artifactId>
       <version>1.7.22</version>
     </dependency>
-    <dependency>
-    	<groupId>org.assertj</groupId>
-    	<artifactId>assertj-core</artifactId>
-    	<version>3.11.1</version>
-    	<scope>test</scope>
-    </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>RELEASE</version>
+        <scope>compile</scope>
+      </dependency>
     </dependencies>
 </project>
