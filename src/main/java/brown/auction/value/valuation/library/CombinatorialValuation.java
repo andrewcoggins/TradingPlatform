@@ -2,18 +2,18 @@ package brown.auction.value.valuation.library;
 
 import java.util.List;
 
-import brown.auction.value.valuation.IComplementaryValuation;
+import brown.auction.value.valuation.ICombinatorialValuation;
 import brown.auction.value.valuation.IValuation;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 
 /**
- * a complementary valuation produces a valuation of goods, where 
+ * a combinatorial valuation produces a valuation of goods, where 
  * bundles are preferred to individual goods.
  * @author andrew
  *
  */
-public class ComplementaryValuation implements IComplementaryValuation {
+public class CombinatorialValuation implements ICombinatorialValuation {
   
   private final Double baseValue; 
   private final Double delta; 
@@ -25,7 +25,7 @@ public class ComplementaryValuation implements IComplementaryValuation {
    * @param delta
    * the factor by which a bundle value is better than a individual values.
    */
-  public ComplementaryValuation(Double baseValue, Double delta) {
+  public CombinatorialValuation(Double baseValue, Double delta) {
     this.baseValue = baseValue; 
     this.delta = delta; 
   }
@@ -58,7 +58,7 @@ public class ComplementaryValuation implements IComplementaryValuation {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    ComplementaryValuation other = (ComplementaryValuation) obj;
+    CombinatorialValuation other = (CombinatorialValuation) obj;
     if (baseValue == null) {
       if (other.baseValue != null)
         return false;
@@ -74,13 +74,13 @@ public class ComplementaryValuation implements IComplementaryValuation {
 
   @Override
   public String toString() {
-    return "ComplementaryValuation [baseValue=" + baseValue + ", delta=" + delta
+    return "CombinatorialValuation [baseValue=" + baseValue + ", delta=" + delta
         + "]";
   }
 
   @Override
   public IValuation safeCopy() {
-    return new ComplementaryValuation(this.baseValue, this.delta);
+    return new CombinatorialValuation(this.baseValue, this.delta);
   }
   
   

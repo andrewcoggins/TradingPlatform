@@ -7,13 +7,11 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import brown.user.server.PredictionMarketServer;
+import brown.user.simulations.PredictionMarketSimulation.AgentRunnable;
+import brown.user.simulations.PredictionMarketSimulation.BotsRunnable;
+import brown.user.simulations.PredictionMarketSimulation.ServerRunnable;
 
-/**
- * Script that runs prediction market simulation for grading 
- * Prediction market project. 
- *
- */
-public class PredictionMarketSimulation {
+public class SSSPMarketSimulation {
 	private static int numSims = 1;
 	private static int delayTime = 2; 
 	private static int lag = 50;
@@ -29,12 +27,12 @@ public class PredictionMarketSimulation {
 	private String outFile;	
 	private String agentClass;
 	
-	public PredictionMarketSimulation(String agentClass, String outFile) {
+	public SSSPMarketSimulation(String agentClass, String outFile) {
 		this.agentClass = agentClass;
 		this.outFile = outFile;
 	}
 	
-	 public PredictionMarketSimulation(String agentClass, String outFile, int nSims, int marketTime) {
+	 public SSSPMarketSimulation(String agentClass, String outFile, int nSims, int marketTime) {
 	    this.agentClass = agentClass;
 	    this.outFile = outFile;
 	    numSims = nSims;

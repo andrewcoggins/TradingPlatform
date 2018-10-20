@@ -8,7 +8,7 @@ package brown.auction.value.generator;
 public interface IValuationGenerator {
   
   /**
-   * makes a valuation according to some specifed distribution.
+   * makes a valuation according to some specified distribution.
    * @return a valuation, represented as a double. 
    */
   public abstract Double makeValuation();
