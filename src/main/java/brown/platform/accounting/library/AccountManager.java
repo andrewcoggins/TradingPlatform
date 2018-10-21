@@ -17,14 +17,18 @@ public class AccountManager implements IAccountManager {
 	private Map<Integer, Account> accounts;
 
 	/**
-	 * @param accounts - maps agent IDs to accounts
+	 * @param intialEndowments - maps agent IDs to accounts
 	 */
-	public AccountManager() {
-		this.accounts = new ConcurrentHashMap<Integer, Account>();
+	public AccountManager(Map<Integer, InitialEndowment> intialEndowments) {
+		this.accounts = new ConcurrentHashMap<>();
+		for (Map.Entry<Integer, InitialEndowment> endowment : intialEndowments.entrySet()) {
+		    accounts.put(endowment.getKey(),
+                    new Account(endowment.getKey(), endowment.getValue().money, endowment.getValue().goods));
+        }
 	}
 
   public List<Account> getAccounts() {
-    return new ArrayList<Account>(accounts.values());
+    return new ArrayList<>(accounts.values());
   }
   
 	public void setAccount(Integer ID, Account account) {
@@ -36,13 +40,21 @@ public class AccountManager implements IAccountManager {
   public Account getAccount(Integer ID) {
 		return accounts.get(ID);
 	}
-	
+
 	public Boolean containsAcct(Integer ID) {
 		return accounts.containsKey(ID);
 	}
 
   public void reset() {
     this.accounts.clear();
+  }
+
+  public void reendow(Map<Integer, InitialEndowment> intialEndowments) {
+	    this.reset();
+	    for (Map.Entry<Integer, InitialEndowment> endowment : intialEndowments.entrySet()) {
+	        accounts.put(endowment.getKey(),
+                    new Account(endowment.getKey(), endowment.getValue().money, endowment.getValue().goods));
+      }
   }
 
   @Override
