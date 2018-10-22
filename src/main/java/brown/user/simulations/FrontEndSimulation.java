@@ -16,8 +16,8 @@ import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
 
-import brown.auction.preset.AbsMarketPreset;
-import brown.auction.value.config.library.ValConfig;
+import brown.auction.preset.AbsMarketRules;
+import brown.auction.value.manager.library.ValuationManager;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.server.library.RunServer;
@@ -158,20 +158,20 @@ public class FrontEndSimulation {
         allTradeables.add(new SimpleTradeable(i));
         allTradeablesList.add(new SimpleTradeable(i));
       }
-      List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
+      List<AbsMarketRules> oneMarket = new LinkedList<AbsMarketRules>();
       try {
         Thread.sleep(100);
         Class<?> rulesClass = Class.forName("brown.auction.preset." + this.rules);
         Constructor<?> rulesConstructor = rulesClass.getConstructor(); 
-        oneMarket.add((AbsMarketPreset) rulesConstructor.newInstance()); 
+        oneMarket.add((AbsMarketRules) rulesConstructor.newInstance());
         
-        Class<?> configClass = Class.forName("brown.auction.value.config.library." + this.config);
+        Class<?> configClass = Class.forName("brown.auction.value.manager.library." + this.config);
         Constructor<?> configConstructor = configClass.getConstructor(Set.class);
         
         SimulMarkets markets = new SimulMarkets(oneMarket);
         List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  
         seq.add(markets);
-        Simulation testSim = new Simulation(seq, (ValConfig) configConstructor.newInstance(allTradeables),
+        Simulation testSim = new Simulation(seq, (ValuationManager) configConstructor.newInstance(allTradeables),
             allTradeablesList,1.,new LinkedList<ITradeable>());    
         RunServer testServer = new RunServer(2121, new SSSPSetup());
         testServer.runSimulation(testSim, numSims, this.DELAYTIME, lag, "loggedResults.txt");

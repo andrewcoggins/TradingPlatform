@@ -1,4 +1,4 @@
-package brown.auction.value.config.library;
+package brown.auction.value.manager.library;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,11 +9,9 @@ import brown.auction.prevstate.library.PriceDiscoveryInfo;
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.library.UniformValGenerator;
 import brown.auction.value.valuation.library.ValuationType;
-import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
 import brown.mechanism.tradeable.ITradeable;
 
-public class SMRAConfig extends ValConfig {
+public class SMRAConfig extends ValuationManager {
 
   public SMRAConfig(Set<ITradeable> allGoods) {
     super(new AdditiveValuationDistribution(new UniformValGenerator(), allGoods), ValuationType.Auction);

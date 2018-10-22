@@ -1,7 +1,7 @@
 package brown.platform.world.library;
 
-import brown.auction.value.distribution.IValuationDistribution;
-import brown.mechanism.tradeable.ITradeable;
+import brown.auction.value.manager.IValuationManager;
+import brown.mechanism.tradeable.ITradeableManager;
 import brown.platform.accounting.IAccountManager;
 import brown.platform.world.IDomain;
 
@@ -12,12 +12,12 @@ import java.util.List;
  */
 public class Domain implements IDomain {
 
-    public final List<ITradeable> tradeables;
-    public final  IValuationDistribution valuation;
+    public final ITradeableManager tManager;
+    public final  IValuationManager valuation;
     public final IAccountManager acctManager;
 
-    public Domain (List<ITradeable> tradeables, IValuationDistribution valuation, IAccountManager acctManager) {
-        this.tradeables = tradeables;
+    public Domain (ITradeableManager tManager, IValuationManager valuation, IAccountManager acctManager) {
+        this.tManager = tManager;
         this.valuation = valuation;
         this.acctManager = acctManager;
     }

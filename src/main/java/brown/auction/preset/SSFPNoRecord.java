@@ -14,7 +14,7 @@ import brown.auction.rules.library.SimpleQuery;
  * @author acoggins
  *
  */
-public class SSFPNoRecord extends AbsMarketPreset {
+public class SSFPNoRecord extends AbsMarketRules {
 
   public SSFPNoRecord() {
     super(new HighestPriceAllocation(),
@@ -28,7 +28,7 @@ public class SSFPNoRecord extends AbsMarketPreset {
   }
 
   @Override
-  public AbsMarketPreset copy() {
+  public AbsMarketRules copy() {
     return new SSFPNoRecord();
   }
   

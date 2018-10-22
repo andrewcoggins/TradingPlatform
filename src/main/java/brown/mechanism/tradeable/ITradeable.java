@@ -35,6 +35,7 @@ public interface ITradeable {
    * flattens the ITradeable into a list of 
    * simple, atomic tradeables.=
    * @return a list of simple tradeables.
+   * //TODO: make private. remove form interface.
    */
   public List<SimpleTradeable> flatten();
 }

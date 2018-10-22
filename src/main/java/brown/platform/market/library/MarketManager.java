@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import brown.auction.marketstate.library.MarketState;
-import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.AbsMarketRules;
 import brown.auction.prevstate.library.BlankStateInfo;
 import brown.auction.prevstate.library.PrevStateInfo;
 import brown.mechanism.tradeable.ITradeable;
@@ -50,7 +50,7 @@ public class MarketManager implements IMarketManager {
     this.index++;
 	  this.ledgers.add(new ConcurrentHashMap<Market, Ledger>());
 	  this.markets.add(new ConcurrentHashMap<Integer, Market>());
-	  for (AbsMarketPreset preset : s.getMarkets()) {
+	  for (AbsMarketRules preset : s.getMarkets()) {
 	    this.open(preset, idCount, tradeables, agents);
 	    idCount++;
 	  } 
@@ -62,7 +62,7 @@ public class MarketManager implements IMarketManager {
 	 * @return
 	 */
   @Override
-	public boolean open(AbsMarketPreset rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents) {
+	public boolean open(AbsMarketRules rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents) {
 	  Market market = new Market(rules.copy(), new MarketState(marketID,tradeables,this.information));
 	   if (ledgers.get(index).containsKey(market)) {
 	      return false;

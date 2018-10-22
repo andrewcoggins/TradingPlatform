@@ -14,7 +14,7 @@ import brown.auction.rules.library.ThreeFourFiveGrouping;
  * @author acoggins
  *
  */
-public class LemonadeGroupedRulesNotAnon extends AbsMarketPreset {
+public class LemonadeGroupedRulesNotAnon extends AbsMarketRules {
   private int numSlots;
 
   public LemonadeGroupedRulesNotAnon(int numSlots) {
@@ -30,7 +30,7 @@ public class LemonadeGroupedRulesNotAnon extends AbsMarketPreset {
   }
 
   @Override
-  public AbsMarketPreset copy() {
+  public AbsMarketRules copy() {
     return new LemonadeGroupedRulesNotAnon(this.numSlots);
   } 
 }

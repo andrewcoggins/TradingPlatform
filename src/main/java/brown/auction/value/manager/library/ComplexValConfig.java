@@ -1,4 +1,4 @@
-package brown.auction.value.config.library;
+package brown.auction.value.manager.library;
 
 
 import java.util.Set;
@@ -17,7 +17,7 @@ import brown.mechanism.tradeable.ITradeable;
  * @author andrew
  *
  */
-public class ComplexValConfig extends ValConfig {
+public class ComplexValConfig extends ValuationManager {
 
   public ComplexValConfig(Set<ITradeable> allGoods) {
     super(new XORValuationDistribution(new UniformValGenerator(), allGoods), ValuationType.Auction);

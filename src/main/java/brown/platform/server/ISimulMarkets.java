@@ -2,7 +2,7 @@ package brown.platform.server;
 
 import java.util.List;
 
-import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.AbsMarketRules;
 
 /**
  * Interface for Simulmarkets, which are markets that are open simultaneously in
@@ -17,5 +17,5 @@ public interface ISimulMarkets {
    * @return A list of AbsMarketPresets, which specify the rules for
    * all the markets.
    */
-  List<AbsMarketPreset> getMarkets();
+  List<AbsMarketRules> getMarkets();
 }

@@ -2,7 +2,7 @@ package brown.platform.server;
 
 import java.util.List;
 
-import brown.auction.value.config.library.ValConfig;
+import brown.auction.value.manager.library.ValuationManager;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.server.library.SimulMarkets;
 
@@ -23,9 +23,9 @@ public interface ISimulation {
 
   /**
    * Gets valuation configuration info. 
-   * @return a ValConfig.
+   * @return a ValuationManager.
    */
-  ValConfig getValInfo();
+  ValuationManager getValInfo();
 
   /**
    * Gets all tradeables being used in the auction.

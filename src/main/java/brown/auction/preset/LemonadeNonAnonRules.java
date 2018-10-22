@@ -14,7 +14,7 @@ import brown.auction.rules.library.OneShotTermination;
  * @author acoggins
  *
  */
-public class LemonadeNonAnonRules extends AbsMarketPreset {
+public class LemonadeNonAnonRules extends AbsMarketRules {
   private int numSlots;
   
   public LemonadeNonAnonRules(int numSlots) {
@@ -30,7 +30,7 @@ public class LemonadeNonAnonRules extends AbsMarketPreset {
   }
 
   @Override
-  public AbsMarketPreset copy() {
+  public AbsMarketRules copy() {
     return new LemonadeNonAnonRules(this.numSlots);
   } 
 }

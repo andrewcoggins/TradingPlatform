@@ -1,4 +1,4 @@
-package brown.auction.value.config.library; 
+package brown.auction.value.manager.library;
 
 import java.util.Set;
 
@@ -13,7 +13,7 @@ import brown.mechanism.tradeable.ITradeable;
  * Configuration for simple valuations over a uniform distribution.
  * @author acoggins
  */
-public class AdditiveUniformConfig extends ValConfig {
+public class AdditiveUniformConfig extends ValuationManager {
   
   public AdditiveUniformConfig(Set<ITradeable> allGoods) {
     super(new AdditiveValuationDistribution(new UniformValGenerator(), allGoods), ValuationType.Auction);

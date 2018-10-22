@@ -15,7 +15,7 @@ import brown.auction.rules.library.SimpleSecondPricePayment;
  * @author acoggins
  *
  */
-public class PairSSSP extends AbsMarketPreset {
+public class PairSSSP extends AbsMarketRules {
 
   public PairSSSP() {
     super(new HighestPriceAllocation(),
@@ -29,7 +29,7 @@ public class PairSSSP extends AbsMarketPreset {
   }
 
   @Override
-  public AbsMarketPreset copy() {
+  public AbsMarketRules copy() {
     return new PairSSSP();
   }
   

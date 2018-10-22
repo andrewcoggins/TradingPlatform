@@ -14,7 +14,7 @@ import brown.auction.rules.library.PredictionMarketPayment;
  * @author acoggins
  *
  */
-public class PredictionMarketSettlement extends AbsMarketPreset {
+public class PredictionMarketSettlement extends AbsMarketRules {
 
   public PredictionMarketSettlement() {
     super(new NoAllocation(),
@@ -28,7 +28,7 @@ public class PredictionMarketSettlement extends AbsMarketPreset {
   }
 
   @Override
-  public AbsMarketPreset copy() {
+  public AbsMarketRules copy() {
     return new PredictionMarketSettlement();
   }
 }

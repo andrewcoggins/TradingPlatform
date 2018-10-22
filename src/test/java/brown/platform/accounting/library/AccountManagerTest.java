@@ -25,13 +25,13 @@ public class AccountManagerTest {
       
     }
     for (int i = 0; i < 5; i++) {
-      assertTrue(manager.containsAcct(i)); 
+      assertTrue(manager.containsAccount(i));
       assertEquals(manager.getAccount(i), accountList.get(i)); 
     }
     assertEquals(manager.getAccounts(), accountList); 
     
     for (int i = 5; i < 10; i++) {
-      assertTrue(!manager.containsAcct(i)); 
+      assertTrue(!manager.containsAccount(i));
     }
     manager.reset();
     accountList.clear();

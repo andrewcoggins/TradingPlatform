@@ -1,4 +1,4 @@
-package brown.auction.value.config.library; 
+package brown.auction.value.manager.library;
 
 import brown.auction.prevstate.library.PrevStateInfo;
 import brown.auction.value.distribution.IValuationDistribution;
@@ -10,7 +10,7 @@ import brown.auction.value.valuation.library.ValuationType;
  * @author acoggins
  *
  */
-public abstract class ValConfig {
+public abstract class ValuationManager {
   
   public final IValuationDistribution valueDistribution;
   public final ValuationType type; 
@@ -19,17 +19,17 @@ public abstract class ValConfig {
    * For kryo
    * DO NOT USE
    */
-  public ValConfig() { 
+  public ValuationManager() {
     this.valueDistribution = null;
     this.type = null;
   }
   
-  public ValConfig(ValuationType type) { 
+  public ValuationManager(ValuationType type) {
     this.valueDistribution = null;
     this.type = type; 
   }
   
-  public ValConfig(IValuationDistribution valueDistribution, ValuationType type) { 
+  public ValuationManager(IValuationDistribution valueDistribution, ValuationType type) {
     this.valueDistribution = valueDistribution;
     this.type = type; 
   }

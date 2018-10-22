@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.AbsMarketRules;
 import brown.auction.preset.CallMarket;
 import brown.auction.preset.PredictionMarketSettlement;
-import brown.auction.value.config.library.PredictionMarketDecoysConfig;
+import brown.auction.value.manager.library.PredictionMarketDecoysConfig;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.server.library.RunServer;
@@ -52,11 +52,11 @@ public class PredictionMarketServer {
     allTradeables.add(new SimpleTradeable(0));
     allTradeablesList.add(new SimpleTradeable(0));
     
-    List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();          
+    List<AbsMarketRules> oneMarket = new LinkedList<AbsMarketRules>();
     oneMarket.add(new CallMarket(this.seconds));        
     SimulMarkets phase_one = new SimulMarkets(oneMarket);
     
-    List<AbsMarketPreset> twoMarket = new LinkedList<AbsMarketPreset>();
+    List<AbsMarketRules> twoMarket = new LinkedList<AbsMarketRules>();
     twoMarket.add(new PredictionMarketSettlement());    
     SimulMarkets phase_two = new SimulMarkets(twoMarket);
     

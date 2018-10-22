@@ -15,7 +15,7 @@ import brown.auction.rules.IRecordKeepingRule;
  * @author acoggins
  *
  */
-public abstract class AbsMarketPreset {
+public abstract class AbsMarketRules {
 
   public IAllocationRule aRule; 
   public IPaymentRule pRule; 
@@ -26,8 +26,8 @@ public abstract class AbsMarketPreset {
   public IGroupingRule gRule; 
   public IRecordKeepingRule rRule;
   
-  public AbsMarketPreset(IAllocationRule aRule, IPaymentRule pRule, IQueryRule qRule, IGroupingRule gRule,
-      IActivityRule oneShotActivity, IInformationRevelationPolicy infoPolicy, ITerminationCondition innerTCondition, IRecordKeepingRule rRule) {
+  public AbsMarketRules(IAllocationRule aRule, IPaymentRule pRule, IQueryRule qRule, IGroupingRule gRule,
+                        IActivityRule oneShotActivity, IInformationRevelationPolicy infoPolicy, ITerminationCondition innerTCondition, IRecordKeepingRule rRule) {
     this.aRule = aRule; 
     this.pRule = pRule; 
     this.qRule = qRule; 
@@ -42,11 +42,11 @@ public abstract class AbsMarketPreset {
    * Why does this have to exist? 
    * @return
    */
-  public abstract AbsMarketPreset copy();
+  public abstract AbsMarketRules copy();
   
   @Override
   public String toString() {
-    return "AbsMarketPreset [aRule=" + aRule + ", pRule=" + pRule + ", qRule="
+    return "AbsMarketRules [aRule=" + aRule + ", pRule=" + pRule + ", qRule="
         + qRule + ", actRule=" + actRule + ", infoPolicy=" + infoPolicy
         + ", innerTCondition=" + innerTCondition + ", gRule=" + gRule
         + ", rRule=" + rRule + "]";

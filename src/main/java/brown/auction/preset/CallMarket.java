@@ -15,7 +15,7 @@ import brown.auction.rules.library.XTimeTermination;
  * @author acoggins
  *
  */
-public class CallMarket extends AbsMarketPreset {
+public class CallMarket extends AbsMarketRules {
   private double seconds;
 
   public CallMarket(double seconds) {
@@ -31,7 +31,7 @@ public class CallMarket extends AbsMarketPreset {
   }
 
   @Override
-  public AbsMarketPreset copy() {
+  public AbsMarketRules copy() {
     return new CallMarket(this.seconds);
   }
 }

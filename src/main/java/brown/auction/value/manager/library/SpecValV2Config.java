@@ -1,4 +1,4 @@
-package brown.auction.value.config.library;
+package brown.auction.value.manager.library;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import org.spectrumauctions.sats.core.model.mrvm.MultiRegionModel;
 
 import brown.auction.prevstate.library.PrevStateInfo;
 import brown.auction.prevstate.library.SpecValInfo;
-import brown.auction.value.config.IValuationConfig;
+import brown.auction.value.manager.IValuationManager;
 import brown.auction.value.valuation.library.ValuationType;
 import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ITradeable;
@@ -28,7 +28,7 @@ import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.messages.library.PrivateInformationMessage;
 import brown.platform.messages.library.SpecValValuationMessage;
 
-public class SpecValV2Config extends ValConfig implements IValuationConfig {
+public class SpecValV2Config extends ValuationManager implements IValuationManager {
   public Map<Integer,MRVMBidder> agentToValue;
   private Map<Integer, MRVMLicense> idToLicense;
   public final Double valueScale = 1E-6;
@@ -60,7 +60,7 @@ public class SpecValV2Config extends ValConfig implements IValuationConfig {
     List<MRVMBidder> vals = model.createPopulation(world);
     Collections.shuffle(bidders);
     if (vals.size() != bidders.size()){
-      Logging.log("Error in val config - sizes don't match");
+      Logging.log("Error in val manager - sizes don't match");
     }
     for (int i = 0; i < bidders.size(); i++){
       this.agentToValue.put(bidders.get(i),vals.get(i));

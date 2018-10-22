@@ -1,4 +1,4 @@
-package brown.auction.value.config.library;
+package brown.auction.value.manager.library;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,13 +12,13 @@ import org.spectrumauctions.sats.core.util.random.JavaUtilRNGSupplier;
 import org.spectrumauctions.sats.core.util.random.RNGSupplier;
 
 import brown.auction.prevstate.library.PrevStateInfo;
-import brown.auction.value.config.IValuationConfig;
+import brown.auction.value.manager.IValuationManager;
 import brown.auction.value.valuation.library.ValuationType;
 import brown.logging.library.Logging;
 import brown.platform.messages.library.PrivateInformationMessage;
 import brown.platform.messages.library.SpecValWrapperMessage;
 
-public class SpecValV3Config extends ValConfig implements IValuationConfig {
+public class SpecValV3Config extends ValuationManager implements IValuationManager {
   Long seed;
   public Map<Integer,MRVMBidder> agentToValue;
   public final Double valueScale = 1E-6;
@@ -51,7 +51,7 @@ public class SpecValV3Config extends ValConfig implements IValuationConfig {
     List<MRVMBidder> vals = model.createPopulation(world, rng);
     
     if (vals.size() != bidders.size()){
-      Logging.log("Error in val config - sizes don't match");
+      Logging.log("Error in val manager - sizes don't match");
     }
     for (int i = 0; i < bidders.size(); i++){
       this.agentToValue.put(bidders.get(i),vals.get(i));

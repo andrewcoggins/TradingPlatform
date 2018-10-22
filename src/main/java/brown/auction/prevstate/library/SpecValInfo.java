@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import brown.auction.value.manager.IValuationManager;
 import org.spectrumauctions.sats.core.model.Bundle;
 import org.spectrumauctions.sats.core.model.mrvm.MRVMBidder;
 import org.spectrumauctions.sats.core.model.mrvm.MRVMLicense;
 
 import brown.auction.prevstate.PrevStateType;
-import brown.auction.value.config.IValuationConfig;
-import brown.auction.value.config.library.SpecValV2Config;
+import brown.auction.value.manager.library.SpecValV2Config;
 import brown.mechanism.tradeable.library.ComplexTradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 
@@ -57,7 +57,7 @@ public class SpecValInfo extends PrevStateInfo {
   }
 
   @Override
-  public void initialize(IValuationConfig gconfig) {
+  public void initialize(IValuationManager gconfig) {
    this.vals = ((SpecValV2Config) gconfig).agentToValue;
   }
 

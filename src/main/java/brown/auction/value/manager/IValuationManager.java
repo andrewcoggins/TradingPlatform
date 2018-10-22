@@ -1,4 +1,4 @@
-package brown.auction.value.config;
+package brown.auction.value.manager;
 
 import java.util.List;
 import java.util.Map;
@@ -6,13 +6,14 @@ import java.util.Map;
 import brown.platform.messages.library.PrivateInformationMessage;
 
 /**
- * IValuationConfig specifies initial valuations and private information. 
- * currently, some valuations do not implement IValuationConfig. 
+ * IValuationManager specifies initial valuations and private information.
+ * currently, some valuations do not implement IValuationManager.
  * @author andrew
  *
  */
-public interface IValuationConfig {
+public interface IValuationManager {
 
+  //TODO: Bulldoze
   /**
    * Initialize some private information.
    * @param agents the IDs of all registered agents.

@@ -1,4 +1,4 @@
-package brown.auction.value.config.library; 
+package brown.auction.value.manager.library;
 
 import java.util.Set;
 
@@ -13,7 +13,7 @@ import brown.mechanism.tradeable.ITradeable;
  * Configuration for simple valuations over distribution used in lab two. 
  * @author acoggins
  */
-public class AdditiveLab2Config extends ValConfig {
+public class AdditiveLab2Config extends ValuationManager {
   
   public AdditiveLab2Config(Set<ITradeable> allGoods) {
     super(new AdditiveValuationDistribution(new LabTwoValGenerator(), allGoods), ValuationType.Auction);
