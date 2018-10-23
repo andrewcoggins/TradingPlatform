@@ -19,6 +19,6 @@ public interface IGroupingRule {
    * @param state market state
    * @param agents private IDs of all agents.
    */
-  public void setGrouping(IMarketState state, List<Integer> agents);
+   void setGrouping(IMarketState state, List<Integer> agents);
      
 }

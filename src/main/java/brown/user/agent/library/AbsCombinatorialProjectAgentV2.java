@@ -208,34 +208,34 @@ public abstract class AbsCombinatorialProjectAgentV2  extends AbsSpecValV2Agent 
    * @author andrew
    */
   public Map<Set<Integer>, Double> getFavoriteBundle() {
-    Map<Set<Integer>, Double> returnMap = new HashMap<Set<Integer>, Double>(); 
-    Set<Integer> returnSet = new HashSet<Integer>(); 
-    // create the map. 
+    Map<Set<Integer>, Double> returnMap = new HashMap<Set<Integer>, Double>();
+    Set<Integer> returnSet = new HashSet<Integer>();
+    // create the map.
     Map<MRVMGenericDefinition, BigDecimal> em = new HashMap<MRVMGenericDefinition, BigDecimal>();
-    double[] p = this.prices; 
-    // from our prices, create a set of MRMGenericDefinition associated with the prices. 
+    double[] p = this.prices;
+    // from our prices, create a set of MRMGenericDefinition associated with the prices.
     // map of liecenses to IDs. Assuming an injective mapping.
-    Map<MRVMLicense, Integer> licenseToId = new HashMap<MRVMLicense, Integer>(); 
-    for (int i= 0; i < p.length; i++) { 
+    Map<MRVMLicense, Integer> licenseToId = new HashMap<MRVMLicense, Integer>();
+    for (int i= 0; i < p.length; i++) {
       licenseToId.put(this.idToLicense.get(i), i);
-      MRVMGenericDefinition genericDef = new MRVMGenericDefinition(this.idToLicense.get(i).getBand(), this.idToLicense.get(i).getRegion()); 
+      MRVMGenericDefinition genericDef = new MRVMGenericDefinition(this.idToLicense.get(i).getBand(), this.idToLicense.get(i).getRegion());
       em.put(genericDef, new BigDecimal(p[i]));
     }
-    // create and solve. 
-    MRVM_DemandQueryMIP mip = new MRVM_DemandQueryMIP(this.valuation, em); 
+    // create and solve.
+    MRVM_DemandQueryMIP mip = new MRVM_DemandQueryMIP(this.valuation, em);
     MRVMDemandQueryMipResult result = mip.getResult();
-    Map<MRVMGenericDefinition, Integer> quant = result.getResultingBundle().getQuantities(); 
-    BigDecimal price = result.getResultingBundle().getValue(); 
+    Map<MRVMGenericDefinition, Integer> quant = result.getResultingBundle().getQuantities();
+    BigDecimal price = result.getResultingBundle().getValue();
     //convert back into usable form.
     for (MRVMGenericDefinition def : quant.keySet()) {
        for (MRVMLicense l: this.idToLicense.values()) {
          if (l.getBand().equals(def.getBand()) && l.getRegion().equals(def.getRegion())) {
-           returnSet.add(licenseToId.get(l)); 
+           returnSet.add(licenseToId.get(l));
          }
        }
     }
     returnMap.put(returnSet, price.doubleValue());
-    return returnMap; 
+    return returnMap;
   }
 
   private int zeroIfNull(Integer i) {

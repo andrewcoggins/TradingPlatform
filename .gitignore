@@ -2,8 +2,10 @@
 /target/
 .classpath
 /bin/
+.project
 .idea/*
 *.iml
+.checkstyle
 *.DS_Store
 loggedResults.txt
 /sats_output/
