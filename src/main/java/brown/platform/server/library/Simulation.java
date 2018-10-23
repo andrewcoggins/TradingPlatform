@@ -25,7 +25,7 @@ public class Simulation implements ISimulation {
       Double initialMonies, List<ITradeable> initialGoods){
     this.sequence = sequence;
     this.valInfo = valInfo;
-    this.allTradeables = tradeables;     
+    this.allTradeables = tradeables;
     this.initialMonies = initialMonies;
     this.initialGoods = initialGoods;
   } 

@@ -16,18 +16,18 @@ import brown.mechanism.tradeable.library.SimpleTradeable;
 public class CombinatorialValuation implements ICombinatorialValuation {
   
   private final Double baseValue; 
-  private final Double delta; 
+  private final Double discountFactor; 
   
   /**
    * 
    * @param baseValue
    * the base value of an individual good.
-   * @param delta
+   * @param discountFactor
    * the factor by which a bundle value is better than a individual values.
    */
-  public CombinatorialValuation(Double baseValue, Double delta) {
+  public CombinatorialValuation(Double baseValue, Double discountFactor) {
     this.baseValue = baseValue; 
-    this.delta = delta; 
+    this.discountFactor = discountFactor; 
   }
 
   @Override
@@ -36,7 +36,7 @@ public class CombinatorialValuation implements ICombinatorialValuation {
     int size = allTradeables.size(); 
     double value = 0.0; 
     for (int i = 0; i < size; i++) {
-      value = value + this.baseValue * Math.pow(this.delta, i);
+      value = value + this.baseValue * Math.pow(this.discountFactor, i);
     }
     return value;
   }
@@ -46,7 +46,7 @@ public class CombinatorialValuation implements ICombinatorialValuation {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((baseValue == null) ? 0 : baseValue.hashCode());
-    result = prime * result + ((delta == null) ? 0 : delta.hashCode());
+    result = prime * result + ((discountFactor == null) ? 0 : discountFactor.hashCode());
     return result;
   }
 
@@ -64,23 +64,23 @@ public class CombinatorialValuation implements ICombinatorialValuation {
         return false;
     } else if (!baseValue.equals(other.baseValue))
       return false;
-    if (delta == null) {
-      if (other.delta != null)
+    if (discountFactor == null) {
+      if (other.discountFactor != null)
         return false;
-    } else if (!delta.equals(other.delta))
+    } else if (!discountFactor.equals(other.discountFactor))
       return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "CombinatorialValuation [baseValue=" + baseValue + ", delta=" + delta
+    return "CombinatorialValuation [baseValue=" + baseValue + ", discountFactor=" + discountFactor
         + "]";
   }
 
   @Override
   public IValuation safeCopy() {
-    return new CombinatorialValuation(this.baseValue, this.delta);
+    return new CombinatorialValuation(this.baseValue, this.discountFactor);
   }
   
   
