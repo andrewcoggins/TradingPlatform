@@ -3,9 +3,9 @@ package brown.user.server;
 import java.util.LinkedList;
 import java.util.List;
 
-import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.AbsMarketRules;
 import brown.auction.preset.LemonadeGroupedRulesAnon;
-import brown.auction.value.config.library.LemonadeConfig;
+import brown.auction.value.manager.library.LemonadeConfig;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.MultiTradeable;
 import brown.platform.server.library.RunServer;
@@ -33,12 +33,12 @@ public class LemonadeSimulationTest {
     List<ITradeable> allTradeables = new LinkedList<ITradeable>(); 
     allTradeables.add(new MultiTradeable(1, totalTradeables));
        
-    List<AbsMarketPreset> firstmarket_seq = new LinkedList<AbsMarketPreset>();
+    List<AbsMarketRules> firstmarket_seq = new LinkedList<AbsMarketRules>();
     firstmarket_seq.add(new LemonadeGroupedRulesAnon(12));
     firstmarket_seq.add(new LemonadeGroupedRulesAnon(50));    
     SimulMarkets firstMarket = new SimulMarkets(firstmarket_seq);
 
-    List<AbsMarketPreset> secondmarket_seq = new LinkedList<AbsMarketPreset>();
+    List<AbsMarketRules> secondmarket_seq = new LinkedList<AbsMarketRules>();
     secondmarket_seq.add(new LemonadeGroupedRulesAnon(12));    
     SimulMarkets secondMarket = new SimulMarkets(secondmarket_seq);
     

@@ -13,13 +13,13 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+import brown.auction.value.manager.library.ValuationManager;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
-import brown.auction.value.config.IValuationConfig;
-import brown.auction.value.config.library.SpecValV2Config;
-import brown.auction.value.config.library.SpecValV3Config;
-import brown.auction.value.config.library.ValConfig;
+import brown.auction.value.manager.IValuationManager;
+import brown.auction.value.manager.library.SpecValV2Config;
+import brown.auction.value.manager.library.SpecValV3Config;
 import brown.auction.value.valuation.IValuation;
 import brown.auction.value.valuation.library.SatsValuation;
 import brown.auction.value.valuation.library.ValuationType;
@@ -66,9 +66,9 @@ public class TradingServer extends KryoServer {
   protected AccountManager acctManager;
   protected AuctionSummarizer summarizer; 
 
-  // Track Markets / market config stuff
+  // Track Markets / market manager stuff
   protected MarketManager manager;
-  protected ValConfig valueConfig; 
+  protected ValuationManager valueConfig;
   protected List<ITradeable> initialGoods;
   protected Double initialMonies;  
 
@@ -147,15 +147,15 @@ public class TradingServer extends KryoServer {
    *  
    */
   protected void initializeAgents() {
-    ValConfig marketConfig = this.valueConfig;
+    ValuationManager marketConfig = this.valueConfig;
     Map<Integer,PrivateInformationMessage> toSend = new HashMap<Integer,PrivateInformationMessage>();    
     if (marketConfig.type == ValuationType.Game) {
-      IValuationConfig gconfig = (IValuationConfig) marketConfig;
+      IValuationManager gconfig = (IValuationManager) marketConfig;
       List<Integer> agents = new ArrayList<Integer>(this.connections.values());
       
       // flip the true coin, and pass this information to the manager
       gconfig.initialize(agents);
-      this.manager.initializeInfo(((ValConfig) gconfig).generateInfo());
+      this.manager.initializeInfo(((ValuationManager) gconfig).generateInfo());
       
       // make valuations all at once            
       toSend = gconfig.generateReport(agents);
@@ -237,13 +237,7 @@ public class TradingServer extends KryoServer {
       }
     }
   
-  /**
-   * Singular bank update
-   * 
-   * @param ID
-   * @param oldA
-   * @param newA
-   */
+
   private void sendBankUpdate(Order anOrder, boolean to) {
     BankUpdateMessage bu;
     if (to) {
@@ -292,7 +286,7 @@ public class TradingServer extends KryoServer {
             List<Order> winners = auction.constructOrders();
             // Go through winners and execute orders
             for (Order winner : winners) {                      
-              if (this.acctManager.containsAcct(winner.TO)) {
+              if (this.acctManager.containsAccount(winner.TO)) {
                 Account accountTo = this.acctManager.getAccount(winner.TO);
                 synchronized (accountTo.ID) {                  
                   // new account
@@ -301,7 +295,7 @@ public class TradingServer extends KryoServer {
                   this.sendBankUpdate(winner, true);
                 }
               }
-              if (winner.FROM != null && this.acctManager.containsAcct(winner.FROM)) {
+              if (winner.FROM != null && this.acctManager.containsAccount(winner.FROM)) {
                 Account accountFrom = this.acctManager.getAccount(winner.FROM);
                 synchronized (accountFrom.ID) {   
                   // new account

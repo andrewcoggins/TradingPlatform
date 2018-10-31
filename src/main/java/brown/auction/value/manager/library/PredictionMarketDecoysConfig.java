@@ -1,4 +1,4 @@
- package brown.auction.value.config.library;
+ package brown.auction.value.manager.library;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,12 +7,12 @@ import java.util.Map;
 
 import brown.auction.prevstate.library.PredictionMarketInfo;
 import brown.auction.prevstate.library.PrevStateInfo;
-import brown.auction.value.config.IValuationConfig;
+import brown.auction.value.manager.IValuationManager;
 import brown.auction.value.valuation.library.ValuationType;
 import brown.platform.messages.library.PredictionMarketValuationMessage;
 import brown.platform.messages.library.PrivateInformationMessage;
 
-public class PredictionMarketDecoysConfig extends ValConfig implements IValuationConfig {
+public class PredictionMarketDecoysConfig extends ValuationManager implements IValuationManager {
   
   Boolean coin;
     

@@ -14,7 +14,7 @@ import brown.auction.rules.library.OneGrouping;
  * @author acoggins
  *
  */
-public class ClockAuction extends AbsMarketPreset {
+public class ClockAuction extends AbsMarketRules {
   private double increment;
   
   public ClockAuction(double increment) {
@@ -30,7 +30,7 @@ public class ClockAuction extends AbsMarketPreset {
   }
 
   @Override
-  public AbsMarketPreset copy() {
+  public AbsMarketRules copy() {
     return new ClockAuction(this.increment);
   }
 

@@ -1,7 +1,7 @@
 package brown.auction.prevstate.library;
 
 import brown.auction.prevstate.PrevStateType;
-import brown.auction.value.config.IValuationConfig;
+import brown.auction.value.manager.IValuationManager;
 
 /**
  * This is a PrevStateInfo for the cases where it is not needed.
@@ -25,7 +25,7 @@ public class BlankStateInfo extends PrevStateInfo {
   }
 
   @Override
-  public void initialize(IValuationConfig gconfig) {    
+  public void initialize(IValuationManager gconfig) {
   }
 
   @Override

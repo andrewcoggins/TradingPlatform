@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import brown.auction.prevstate.PrevStateType;
-import brown.auction.value.config.IValuationConfig;
-import brown.auction.value.config.library.PredictionMarketDecoysConfig;
+import brown.auction.value.manager.IValuationManager;
+import brown.auction.value.manager.library.PredictionMarketDecoysConfig;
 import brown.logging.library.Logging;
 import brown.platform.accounting.library.Transaction;
 
@@ -52,7 +52,7 @@ public class PredictionMarketInfo extends PrevStateInfo {
   }
 
   @Override
-  public void initialize(IValuationConfig gconfig) {
+  public void initialize(IValuationManager gconfig) {
     this.trueCoin = ((PredictionMarketDecoysConfig) gconfig).getTrueCoin();
   }
 

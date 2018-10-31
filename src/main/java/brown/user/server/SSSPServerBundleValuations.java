@@ -5,11 +5,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.AbsMarketRules;
 
 import brown.auction.preset.SSSPRules;
 
-import brown.auction.value.config.library.ComplexValConfig;
+import brown.auction.value.manager.library.ComplexValConfig;
 
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
@@ -42,7 +42,7 @@ public class SSSPServerBundleValuations {
       allTradeablesList.add(new SimpleTradeable(i));
     }
     // one market in this game.
-    List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
+    List<AbsMarketRules> oneMarket = new LinkedList<AbsMarketRules>();
     oneMarket.add(new SSSPRules());
     SimulMarkets markets = new SimulMarkets(oneMarket);
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();  

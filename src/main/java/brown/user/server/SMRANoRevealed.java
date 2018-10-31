@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.AbsMarketRules;
 import brown.auction.preset.SMRANoRevealedRules;
 import brown.auction.preset.SSSPReserveRules;
-import brown.auction.value.config.library.SMRAConfig;
+import brown.auction.value.manager.library.SMRAConfig;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.server.library.RunServer;
@@ -43,7 +43,7 @@ public class SMRANoRevealed {
     // construct sequence.
     List<SimulMarkets> seq = new LinkedList<SimulMarkets>();
     //construct price discovery rounds.
-    List<AbsMarketPreset> discoveryMarkets = new LinkedList<AbsMarketPreset>(); 
+    List<AbsMarketRules> discoveryMarkets = new LinkedList<AbsMarketRules>();
     // TODO: add base and increments.
     Map<ITradeable, Double> baseVals = new HashMap<ITradeable, Double>(); 
     Map<ITradeable, Double> increments = new HashMap<ITradeable, Double>(); 
@@ -59,7 +59,7 @@ public class SMRANoRevealed {
     SimulMarkets discovery = new SimulMarkets(discoveryMarkets); 
     seq.add(discovery);
     //construct settlement round.
-    List<AbsMarketPreset> settlementMarket = new LinkedList<AbsMarketPreset>(); 
+    List<AbsMarketRules> settlementMarket = new LinkedList<AbsMarketRules>();
     settlementMarket.add(new SSSPReserveRules()); 
     SimulMarkets settlement = new SimulMarkets(settlementMarket); 
     seq.add(settlement); 

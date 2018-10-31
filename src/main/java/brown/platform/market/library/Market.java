@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.AbsMarketRules;
 import brown.auction.prevstate.library.PrevStateInfo;
 import brown.auction.rules.IActivityRule;
 import brown.auction.rules.IAllocationRule;
@@ -21,6 +21,7 @@ import brown.platform.market.IMarket;
 import brown.platform.messages.library.GameReportMessage;
 import brown.platform.messages.library.TradeMessage;
 import brown.platform.messages.library.TradeRequestMessage;
+import brown.platform.market.IHistory;
 
 /**
  * Common implementation of IMarket.
@@ -38,8 +39,14 @@ public class Market implements IMarket {
   private final ITerminationCondition ITCONDITION;
   private final IMarketState STATE;
   private final IRecordKeepingRule rRule;
-  
-  public Market(AbsMarketPreset rules, IMarketState state) {
+
+
+    /**
+     * TODO: history
+     * @param rules
+     * @param state
+     */
+  public Market(AbsMarketRules rules, IMarketState state, IHistory history) {
     this.PRULE = rules.pRule;
     this.ARULE = rules.aRule;
     this.QRULE = rules.qRule;

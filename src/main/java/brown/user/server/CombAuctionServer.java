@@ -3,9 +3,9 @@ package brown.user.server;
 import java.util.LinkedList;
 import java.util.List;
 
-import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.AbsMarketRules;
 import brown.auction.preset.ClockAuction;
-import brown.auction.value.config.library.SpecValV3Config;
+import brown.auction.value.manager.library.SpecValV3Config;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.server.library.RunServer;
@@ -61,7 +61,7 @@ public class CombAuctionServer {
       allTradeablesList.add(new SimpleTradeable(i));
     } 
     
-    List<AbsMarketPreset> market = new LinkedList<AbsMarketPreset>();
+    List<AbsMarketRules> market = new LinkedList<AbsMarketRules>();
     market.add(new ClockAuction(this.increment));
     SimulMarkets wrapper = new SimulMarkets(market);
     

@@ -17,7 +17,7 @@ import brown.mechanism.tradeable.ITradeable;
  * @author acoggins
  *
  */
-public class SMRANoRevealedRules extends AbsMarketPreset {
+public class SMRANoRevealedRules extends AbsMarketRules {
 
   private Map<ITradeable, Double> base; 
   private Map<ITradeable, Double> increment; 
@@ -36,7 +36,7 @@ public class SMRANoRevealedRules extends AbsMarketPreset {
   }
 
   @Override
-  public AbsMarketPreset copy() {
+  public AbsMarketRules copy() {
     return new SMRANoRevealedRules(this.base, this.increment);
   } 
    

@@ -3,10 +3,9 @@ package brown.platform.server.library;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.omg.CORBA.SystemException;
+import brown.auction.preset.AbsMarketRules;
 
-import brown.auction.preset.AbsMarketPreset;
-import brown.auction.value.config.library.ValConfig;
+import brown.auction.value.manager.library.ValuationManager;
 import brown.logging.library.Logging;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.server.IServer;
@@ -65,15 +64,15 @@ public class RunServer extends TradingServer implements IServer {
    * lag time for registration phase.
    * @throws InterruptedException
    */
-  public void runSimpleSim(List<ITradeable> allGoods, AbsMarketPreset rules,
-      ValConfig valInfo, double initialMonies, List<ITradeable> initialGoods, int delay, int lag, String outputFile) throws InterruptedException {
+  public void runSimpleSim(List<ITradeable> allGoods, AbsMarketRules rules,
+                           ValuationManager valInfo, double initialMonies, List<ITradeable> initialGoods, int delay, int lag, String outputFile) throws InterruptedException {
     this.valueConfig = valInfo;
     this.allTradeables = allGoods;
     this.initialMonies = initialMonies;
     this.initialGoods = initialGoods;   
     delay(delay);
     initializeAgents();  
-    List<AbsMarketPreset> amp = new LinkedList<AbsMarketPreset>();
+    List<AbsMarketRules> amp = new LinkedList<AbsMarketRules>();
     amp.add(rules);
     SimulMarkets s = new SimulMarkets(amp);
     this.manager.addSimulMarket(s, allGoods, new LinkedList<Integer>(this.connections.values())); 

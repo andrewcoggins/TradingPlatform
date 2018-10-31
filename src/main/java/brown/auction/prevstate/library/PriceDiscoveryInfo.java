@@ -3,7 +3,7 @@ package brown.auction.prevstate.library;
 import java.util.Map;
 
 import brown.auction.prevstate.PrevStateType;
-import brown.auction.value.config.IValuationConfig;
+import brown.auction.value.manager.IValuationManager;
 import brown.mechanism.tradeable.ITradeable;
 
 /**
@@ -28,7 +28,7 @@ public class PriceDiscoveryInfo extends PrevStateInfo {
 
   
   @Override
-  public void initialize(IValuationConfig gconfig) {
+  public void initialize(IValuationManager gconfig) {
     // noop
   }
 

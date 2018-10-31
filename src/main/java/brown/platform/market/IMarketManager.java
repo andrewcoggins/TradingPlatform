@@ -3,7 +3,7 @@ package brown.platform.market;
 import java.util.Collection;
 import java.util.List;
 
-import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.AbsMarketRules;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.library.Ledger;
 import brown.platform.market.library.Market;
@@ -29,7 +29,7 @@ public interface IMarketManager {
    * @param market
    * @return
    */
-  public boolean open(AbsMarketPreset rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents);
+  public boolean open(AbsMarketRules rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents);
 
 
   /**

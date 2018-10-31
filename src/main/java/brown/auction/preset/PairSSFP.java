@@ -15,7 +15,7 @@ import brown.auction.rules.library.SimpleQuery;
  * @author acoggins
  *
  */
-public class PairSSFP extends AbsMarketPreset {
+public class PairSSFP extends AbsMarketRules {
   private String filePath;
   
   public PairSSFP(String filePath) {
@@ -31,7 +31,7 @@ public class PairSSFP extends AbsMarketPreset {
   }
 
   @Override
-  public AbsMarketPreset copy() {
+  public AbsMarketRules copy() {
     return new PairSSFP(this.filePath);
   }
   

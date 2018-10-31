@@ -1,7 +1,7 @@
 package brown.auction.prevstate; 
 
 import brown.auction.prevstate.library.PrevStateInfo;
-import brown.auction.value.config.IValuationConfig;
+import brown.auction.value.manager.IValuationManager;
 
 /**
  * PrevStateInfo is an object used to transmit information
@@ -21,7 +21,7 @@ public interface IPrevStateInfo {
    * simulation's valuation configuation.
    * @param gconfig
    */
-  public void initialize(IValuationConfig gconfig);
+  public void initialize(IValuationManager gconfig);
   
   /**
    * Gets the type of the prev state info.

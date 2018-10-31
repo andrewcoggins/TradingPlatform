@@ -5,9 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.AbsMarketRules;
 import brown.auction.preset.NormalSSFP;
-import brown.auction.value.config.library.AdditiveLab2Config;
+import brown.auction.value.manager.library.AdditiveLab2Config;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.server.library.RunServer;
@@ -37,7 +37,7 @@ public class Lab2Server {
 	    allTradeables.add(new SimpleTradeable(0));
 	    allTradeablesList.add(new SimpleTradeable(0));
 	    
-	    List<AbsMarketPreset> oneMarket = new LinkedList<AbsMarketPreset>();
+	    List<AbsMarketRules> oneMarket = new LinkedList<AbsMarketRules>();
 	    // PairSSSP for second price, SSFP for first price
 	    // Writes out agentID, bid, valuation
 	    oneMarket.add(new NormalSSFP("/Users/Kerry/Documents/Brown/HTA_1951K/testFile.csv"));   

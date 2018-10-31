@@ -2,7 +2,7 @@ package brown.platform.server.library;
 
 import java.util.List;
 
-import brown.auction.preset.AbsMarketPreset;
+import brown.auction.preset.AbsMarketRules;
 import brown.platform.server.ISimulMarkets;
 
 /**
@@ -13,20 +13,20 @@ import brown.platform.server.ISimulMarkets;
  */
 public class SimulMarkets implements ISimulMarkets {
 
-  private final List<AbsMarketPreset> markets;
+  private final List<AbsMarketRules> markets;
   
   /**
    * specifies markets to be run simultaneously.
    * @param markets
    */
-  public SimulMarkets(List<AbsMarketPreset> markets){
+  public SimulMarkets(List<AbsMarketRules> markets){
     this.markets = markets;
   }
   
   /**
    * getter for all markets in this simultaneous set of markets.
    */
-  public List<AbsMarketPreset> getMarkets() {
+  public List<AbsMarketRules> getMarkets() {
     return this.markets;
   }
 }

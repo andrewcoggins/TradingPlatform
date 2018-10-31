@@ -1,15 +1,15 @@
-package brown.auction.value.config.library;
+package brown.auction.value.manager.library;
 
 import brown.auction.prevstate.library.BlankStateInfo;
 import brown.auction.prevstate.library.PrevStateInfo;
 import brown.auction.value.valuation.library.ValuationType;
 
 /**
- * val config for lemonade game.
+ * val manager for lemonade game.
  * @author acoggins
  *
  */
-public class LemonadeConfig extends ValConfig {
+public class LemonadeConfig extends ValuationManager {
   
   public LemonadeConfig() { 
     super(null, ValuationType.Blank);

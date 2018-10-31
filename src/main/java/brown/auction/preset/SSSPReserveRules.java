@@ -14,7 +14,7 @@ import brown.auction.rules.library.SimpleSecondPricePayment;
  * @author acoggins
  *
  */
-public class SSSPReserveRules extends AbsMarketPreset {
+public class SSSPReserveRules extends AbsMarketRules {
   public SSSPReserveRules() {
     super(new HPReserveAllocation(),
         new SimpleSecondPricePayment(),
@@ -27,7 +27,7 @@ public class SSSPReserveRules extends AbsMarketPreset {
   }
   
   @Override
-  public AbsMarketPreset copy() {
+  public AbsMarketRules copy() {
     return new SSSPReserveRules();
   }
 }

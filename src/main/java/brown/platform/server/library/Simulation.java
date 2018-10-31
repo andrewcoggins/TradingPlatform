@@ -2,7 +2,7 @@ package brown.platform.server.library;
 
 import java.util.List;
 
-import brown.auction.value.config.library.ValConfig;
+import brown.auction.value.manager.library.ValuationManager;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.server.ISimulation;
 
@@ -16,13 +16,13 @@ import brown.platform.server.ISimulation;
 public class Simulation implements ISimulation {
 
   private final List<SimulMarkets> sequence;
-  private final ValConfig valInfo;
+  private final ValuationManager valInfo;
   private final List<ITradeable> allTradeables;
   private final Double initialMonies;
   private final List<ITradeable> initialGoods;
 
-  public Simulation(List<SimulMarkets> sequence, ValConfig valInfo, List<ITradeable> tradeables,
-      Double initialMonies, List<ITradeable> initialGoods){
+  public Simulation(List<SimulMarkets> sequence, ValuationManager valInfo, List<ITradeable> tradeables,
+                    Double initialMonies, List<ITradeable> initialGoods){
     this.sequence = sequence;
     this.valInfo = valInfo;
     this.allTradeables = tradeables;
@@ -36,7 +36,7 @@ public class Simulation implements ISimulation {
   }
   
   @Override
-  public ValConfig getValInfo() {
+  public ValuationManager getValInfo() {
     return this.valInfo;
   }
   
