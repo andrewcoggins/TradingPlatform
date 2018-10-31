@@ -67,3 +67,4 @@ public class SatsDistV2 implements IValuationDistribution {
     return new SatsValuation(bidders.get(0));
   }  
 }
+
