@@ -6,17 +6,15 @@ import java.util.List;
 import java.util.Set;
 
 import brown.auction.marketstate.library.MarketState;
-import brown.auction.preset.AbsMarketRules;
 import brown.auction.preset.FlexibleRules;
 import brown.auction.prevstate.library.BlankStateInfo;
-import brown.auction.prevstate.library.PrevStateInfo;
 import brown.auction.rules.*;
 import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneGrouping;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.manager.ValuationManager;
-import brown.auction.value.manager.IValuationManager
+import brown.auction.value.manager.IValuationManager;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.ITradeableManager;
 import brown.mechanism.tradeable.library.TradeableManager;
@@ -46,12 +44,7 @@ import brown.platform.whiteboard.library.Whiteboard;
  * @author acoggins
  *
  */
-public class SSFPServer { 
-  
-  private static int numSims = 5;
-  private static int numTradeables = 7;
-  private static int delayTime = 5; 
-  private static int lag = 300;
+public class SSFPServer {
 
   /**
    *
@@ -73,22 +66,23 @@ public class SSFPServer {
    * @throws InterruptedException
    */
 
-  public static void main(String[] args) throws InterruptedException, ClassNotFoundException, NoSuchMethodException,
+  public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException,
           InstantiationException, IllegalAccessException, InvocationTargetException {
     Integer numRuns = new Integer(args[0]);
-    String tTypeString = args[1];
-    Integer numTradeables = new Integer(args[2]);
-    String distributionString = args[3];
-    String generatorString = args[4];
-    String endowmenttTypeString = args[5];
-    Integer endowmentNumTradeables = new Integer(args[6]);
-    Integer endowmentMoney = new Integer(args[7]);
-    String aRuleString = args[8];
-    String pRuleString = args[9];
-    String qRuleString = args[10];
-    String actRuleString = args[11];
-    String irPolicyString = args[12];
-    String tConditionString = args[13];
+    Integer delayTime = new Integer(args[1]);
+    String tTypeString = args[2];
+    Integer numTradeables = new Integer(args[3]);
+    String distributionString = args[4];
+    String generatorString = args[5];
+    String endowmenttTypeString = args[6];
+    Integer endowmentNumTradeables = new Integer(args[7]);
+    Integer endowmentMoney = new Integer(args[8]);
+    String aRuleString = args[9];
+    String pRuleString = args[10];
+    String qRuleString = args[11];
+    String actRuleString = args[12];
+    String irPolicyString = args[13];
+    String tConditionString = args[14];
 
     Class<?> tTypeClass = Class.forName(tTypeString);
     Class<?> generatorClass = Class.forName(generatorString);
@@ -159,6 +153,8 @@ public class SSFPServer {
     valuationManager.lock();
     simulationManager.lock();
     marketManager.lock();
+
+    simulationManager.runSimulation(delayTime, numRuns);
   }
 
 }

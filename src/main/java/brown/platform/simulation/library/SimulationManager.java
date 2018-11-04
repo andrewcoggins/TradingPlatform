@@ -30,7 +30,7 @@ public class SimulationManager implements ISimulationManager {
         this.lock = true;
     }
 
-    public void runSimulation(int numRuns) {
+    public void runSimulation(int waitTime, int numRuns) {
 
     }
 }
