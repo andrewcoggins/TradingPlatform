@@ -15,21 +15,24 @@ import brown.platform.market.library.Market;
  *
  */
 public interface IMarketManager {
-  
+
+
+  void createSimultaneousMarket(List<AbsMarketRules> s);
+
   /**
    * Closes a market and tells it to convert if applicable
    * @param server
    * @param ID
    * @param closingState
    */
-  public void close(Integer ID);
+   void close(Integer ID);
 
   /**
    * Opens a market
    * @param market
    * @return
    */
-  public boolean open(AbsMarketRules rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents);
+   boolean open(AbsMarketRules rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents);
 
 
   /**

@@ -4,10 +4,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 
-import brown.auction.marketstate.library.MarketState;
+import brown.auction.preset.AbsMarketRules;
 import brown.auction.preset.FlexibleRules;
-import brown.auction.prevstate.library.BlankStateInfo;
 import brown.auction.rules.*;
 import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneGrouping;
@@ -24,12 +24,8 @@ import java.lang.reflect.Constructor;
 
 import brown.platform.accounting.library.EndowmentManager;
 import brown.platform.accounting.IEndowmentManager;
-import brown.platform.market.IMarket;
 import brown.platform.market.IMarketManager;
-import brown.platform.market.library.History;
-import brown.platform.market.library.Market;
 import brown.platform.market.library.MarketManager;
-import brown.platform.market.library.SimultaneousMarket;
 import brown.platform.simulation.ISimulationManager;
 import brown.platform.simulation.library.SimulationManager;
 import brown.platform.whiteboard.IWhiteboard;
@@ -50,20 +46,20 @@ public class SSFPServer {
    *
    * @param args
    * 0: numruns : int
-   * 1: tradeabletype : string
-   * 2: numtradeables : int
-   * 3: distribution
-   * 4: generator
-   * 5: endowment tradeable type
-   * 6: endowment num tradeables
-   * 7: endowment money
-   * 8: allocationrule
-   * 9: paymentrule
-   * 10: queryrule
-   * 11: activityrule
-   * 12: ir policy
-   * 13: termination condition
-   * @throws InterruptedException
+   * 1: delayTime: int
+   * 2: tradeabletype : string
+   * 3: numtradeables : int
+   * 4: distribution
+   * 5: generator
+   * 6: endowment tradeable type
+   * 7: endowment num tradeables
+   * 8: endowment money
+   * 9: allocationrule
+   * 10: paymentrule
+   * 11: queryrule
+   * 12: activityrule
+   * 13: ir policy
+   * 14: termination condition
    */
 
   public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException,
@@ -117,7 +113,8 @@ public class SSFPServer {
       endowTradeables.add((ITradeable) endowmentTypeCons.newInstance(i));
     }
     IValuationGenerator valGenerator = (IValuationGenerator) generatorCons.newInstance(1.0, 0.0);
-    IValuationDistribution valDistribution = (IValuationDistribution) distributionCons.newInstance(valGenerator, allTradeables);
+    IValuationDistribution valDistribution = (IValuationDistribution) distributionCons.newInstance(valGenerator,
+            new HashSet<>(allTradeables));
     IWorldManager worldManager = new WorldManager();
     IMarketManager marketManager = new MarketManager();
     IDomainManager domainManager = new DomainManager();
@@ -128,20 +125,17 @@ public class SSFPServer {
     ISimulationManager simulationManager = new SimulationManager();
     IWhiteboard whiteboard = new Whiteboard();
 
-    //TODO: clean market manager. This needs a little work.
-    IMarket market = new Market(new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
+    AbsMarketRules marketRule = new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
             (IPaymentRule) pRuleCons.newInstance(),
             (IQueryRule) qRuleCons.newInstance(),
             new OneGrouping(),
             (IActivityRule) actRuleCons.newInstance(),
             (IInformationRevelationPolicy) irPolicyCons.newInstance(),
             (ITerminationCondition) tConditionCons.newInstance(),
-            new NoRecordKeeping()),
-            new MarketState(0, allTradeables, new BlankStateInfo()), new History());
-    List<IMarket> marketList = new LinkedList<>();
-    marketList.add(market);
-    SimultaneousMarket sMarket = new SimultaneousMarket(marketList);
-    ((MarketManager) marketManager).addSimulMarket(sMarket, allTradeables, null);
+            new NoRecordKeeping());
+    List<AbsMarketRules> marketList = new LinkedList<>();
+    marketList.add(marketRule);
+    marketManager.createSimultaneousMarket(marketList);
     endowmentManager.createEndowment(endowmentMoney, endowTradeables);
     valuationManager.createValuation(0, valDistribution);
     tradeableManager.createSimpleTradeables(numTradeables);
@@ -156,5 +150,4 @@ public class SSFPServer {
 
     simulationManager.runSimulation(delayTime, numRuns);
   }
-
 }
