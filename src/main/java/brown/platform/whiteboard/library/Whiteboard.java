@@ -1,5 +1,7 @@
 package brown.platform.whiteboard.library;
 
-public class Whiteboard {
+import brown.platform.whiteboard.IWhiteboard;
+
+public class Whiteboard implements IWhiteboard {
 
 }

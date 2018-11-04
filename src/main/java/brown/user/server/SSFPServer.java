@@ -5,6 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import brown.auction.marketstate.library.MarketState;
+import brown.auction.preset.AbsMarketRules;
+import brown.auction.preset.FlexibleRules;
+import brown.auction.prevstate.library.BlankStateInfo;
+import brown.auction.prevstate.library.PrevStateInfo;
+import brown.auction.rules.*;
+import brown.auction.rules.library.NoRecordKeeping;
+import brown.auction.rules.library.OneGrouping;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.manager.ValuationManager;
@@ -18,12 +26,20 @@ import java.lang.reflect.Constructor;
 
 import brown.platform.accounting.library.EndowmentManager;
 import brown.platform.accounting.IEndowmentManager;
+import brown.platform.market.IMarket;
 import brown.platform.market.IMarketManager;
+import brown.platform.market.library.History;
+import brown.platform.market.library.Market;
 import brown.platform.market.library.MarketManager;
+import brown.platform.market.library.SimultaneousMarket;
+import brown.platform.simulation.ISimulationManager;
+import brown.platform.simulation.library.SimulationManager;
+import brown.platform.whiteboard.IWhiteboard;
 import brown.platform.world.IDomainManager;
 import brown.platform.world.IWorldManager;
 import brown.platform.world.library.DomainManager;
 import brown.platform.world.library.WorldManager;
+import brown.platform.whiteboard.library.Whiteboard;
 
 /**
  * runs a simple simultaneous first price auction.
@@ -115,6 +131,34 @@ public class SSFPServer {
     IAccountManager accountManager = new AccountManager();
     IValuationManager valuationManager = new ValuationManager();
     ITradeableManager tradeableManager = new TradeableManager();
+    ISimulationManager simulationManager = new SimulationManager();
+    IWhiteboard whiteboard = new Whiteboard();
+
+    //TODO: clean market manager. This needs a little work.
+    IMarket market = new Market(new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
+            (IPaymentRule) pRuleCons.newInstance(),
+            (IQueryRule) qRuleCons.newInstance(),
+            new OneGrouping(),
+            (IActivityRule) actRuleCons.newInstance(),
+            (IInformationRevelationPolicy) irPolicyCons.newInstance(),
+            (ITerminationCondition) tConditionCons.newInstance(),
+            new NoRecordKeeping()),
+            new MarketState(0, allTradeables, new BlankStateInfo()), new History());
+    List<IMarket> marketList = new LinkedList<>();
+    marketList.add(market);
+    SimultaneousMarket sMarket = new SimultaneousMarket(marketList);
+    ((MarketManager) marketManager).addSimulMarket(sMarket, allTradeables, null);
+    endowmentManager.createEndowment(endowmentMoney, endowTradeables);
+    valuationManager.createValuation(0, valDistribution);
+    tradeableManager.createSimpleTradeables(numTradeables);
+    domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
+    worldManager.createWorld(domainManager, marketManager, whiteboard);
+    simulationManager.createSimulation(worldManager);
+
+    tradeableManager.lock();
+    valuationManager.lock();
+    simulationManager.lock();
+    marketManager.lock();
   }
 
 }

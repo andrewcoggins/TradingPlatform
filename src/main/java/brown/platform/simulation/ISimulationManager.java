@@ -1,8 +1,10 @@
 package brown.platform.simulation;
 
+import brown.platform.world.IWorldManager;
+
 public interface ISimulationManager {
 
-    void createSimulation (ISimulation simulation);
+    void createSimulation (IWorldManager worldManager);
 
     void lock();
 
