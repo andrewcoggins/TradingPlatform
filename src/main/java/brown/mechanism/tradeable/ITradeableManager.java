@@ -32,4 +32,6 @@ public interface ITradeableManager {
      * @return tradeables created in tradeableManager
      */
     List<ITradeable> getTradeables();
+
+    void lock();
 }

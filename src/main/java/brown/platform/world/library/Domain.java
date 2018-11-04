@@ -5,7 +5,6 @@ import brown.mechanism.tradeable.ITradeableManager;
 import brown.platform.accounting.IAccountManager;
 import brown.platform.world.IDomain;
 
-import java.util.List;
 
 /**
  * a domain consists of Tradeables, an IValuationGenerator, and an AccountManager.

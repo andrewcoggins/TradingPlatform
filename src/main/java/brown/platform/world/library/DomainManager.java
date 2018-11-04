@@ -1,30 +1,36 @@
 package brown.platform.world.library;
 
+import brown.logging.library.PlatformLogging;
 import brown.mechanism.tradeable.ITradeableManager;
 import brown.platform.accounting.IAccountManager;
 import brown.platform.world.IDomainManager;
+import brown.platform.world.IDomain;
 import brown.auction.value.manager.IValuationManager;
 
-import java.util.LinkedList;
-import java.util.List;
 
 public class DomainManager implements IDomainManager {
 
-    private List<Domain> allDomains;
+    private IDomain domain;
+    private boolean lock;
 
     /**
-     * domainManager constructor instantializes  and stores all Domains
+     * domainManager constructor instantiates and stores Domain
      */
     public DomainManager() {
-        this.allDomains = new LinkedList<>();
+        this.lock = false;
     }
 
     public void createDomain(ITradeableManager manager, IValuationManager valuation, IAccountManager acctManager) {
-        this.allDomains.add(new Domain(manager, valuation, acctManager));
+        if (!this.lock){
+            this.domain = new Domain(manager, valuation, acctManager);
+            this.lock = true;
+        } else {
+            PlatformLogging.log("Creation denied: domain manager locked.");
+        }
     }
 
-    public List<Domain> getAllDomains() {
-        return this.allDomains;
+    public IDomain getDomain() {
+        return this.domain;
     }
 
 }

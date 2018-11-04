@@ -51,5 +51,6 @@ public interface IAccountManager {
    * resets accounts to their initial endowments, ostensibly as defined in the constructor.
    */
   void reendow(Map<Integer, InitialEndowment> intialEndowments);
-  
+
+  void lock();
 }

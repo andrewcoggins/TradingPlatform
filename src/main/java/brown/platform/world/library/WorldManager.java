@@ -1,30 +1,38 @@
 package brown.platform.world.library;
 
+import brown.logging.library.PlatformLogging;
+import brown.platform.market.IMarketManager;
 import brown.platform.world.IDomain;
 import brown.platform.whiteboard.IWhiteboard;
 import brown.platform.market.IMarketBlock;
+import brown.platform.world.IDomainManager;
 import brown.platform.world.IWorld;
 import brown.platform.world.IWorldManager;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class WorldManager implements IWorldManager {
 
-    private List<IWorld> worlds;
+    private IWorld world;
+    private boolean lock;
 
     /**
-     * worldManager constructor instantializes  and stores all Domains
+     * worldManager constructor instantiates world
      */
     public WorldManager() {
-        this.worlds = new LinkedList<>();
+        this.lock = false;
     }
 
-    public void createWorld(IDomain domain, List<IMarketBlock> markets, IWhiteboard whiteboard) {
-        this.worlds.add(new World(domain, markets, whiteboard));
+    public void createWorld(IDomainManager domain, IMarketManager markets, IWhiteboard whiteboard) {
+        if (!this.lock) {
+            this.world = new World(domain, markets, whiteboard);
+            this.lock = true;
+        } else {
+            PlatformLogging.log("Creation denied: world manager locked.");
+        }
     }
 
-    public List<IWorld> getWorlds() {
-        return this.worlds;
+    public IWorld getWorld() {
+        return this.world;
     }
 }

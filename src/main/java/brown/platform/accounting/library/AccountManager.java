@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountManager;
 
 /**
@@ -12,17 +13,22 @@ import brown.platform.accounting.IAccountManager;
  * @author acoggins, modified by kerry
  */
 public class AccountManager implements IAccountManager {
-  
-  // maps agent ID to Account
+
 	private Map<Integer, Account> accounts;
+	private boolean lock;
 
 	public AccountManager() {
 		this.accounts = new ConcurrentHashMap<>();
+		this.lock = false;
 	}
 
 	public void createAccount(Integer agentID, InitialEndowment endowment) {
-	    synchronized (agentID) {
-            this.accounts.put(agentID, new Account(agentID, endowment.money, endowment.goods));
+	    if (!this.lock) {
+            synchronized (agentID) {
+                this.accounts.put(agentID, new Account(agentID, endowment.money, endowment.goods));
+            }
+        } else {
+            PlatformLogging.log("Creation denied: account manager locked.");
         }
     }
 
@@ -44,6 +50,7 @@ public class AccountManager implements IAccountManager {
 
   public void reset() {
     this.accounts.clear();
+    this.lock = false;
   }
 
     public Boolean containsAccount(Integer ID) {
@@ -56,6 +63,10 @@ public class AccountManager implements IAccountManager {
 	        accounts.put(endowment.getKey(),
                     new Account(endowment.getKey(), endowment.getValue().money, endowment.getValue().goods));
       }
+  }
+
+  public void lock() {
+    this.lock = true;
   }
 
   @Override
