@@ -1,11 +1,9 @@
 package brown.platform.world;
 
-import brown.auction.value.distribution.IValuationDistribution;
 import brown.mechanism.tradeable.ITradeableManager;
 import brown.platform.accounting.IAccountManager;
-import brown.platform.world.library.Domain;
 import brown.auction.value.manager.IValuationManager;
-import java.util.List;
+import brown.platform.accounting.IEndowmentManager;
 
 /**
  * A domain manager creates domains.
@@ -18,8 +16,9 @@ public interface IDomainManager {
      * @param valuation domain valuation distribution
      * @param acctManager domain accountManager
      */
-    void createDomain(ITradeableManager manager, IValuationManager valuation, IAccountManager acctManager);
+    void createDomain(ITradeableManager manager, IValuationManager valuation, IAccountManager acctManager,
+                      IEndowmentManager endowmentManager);
 
-    List<Domain> getAllDomains();
+    IDomain getDomain();
 
 }

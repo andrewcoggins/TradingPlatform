@@ -15,21 +15,24 @@ import brown.platform.market.library.Market;
  *
  */
 public interface IMarketManager {
-  
+
+
+  void createSimultaneousMarket(List<AbsMarketRules> s);
+
   /**
    * Closes a market and tells it to convert if applicable
    * @param server
    * @param ID
    * @param closingState
    */
-  public void close(Integer ID);
+   void close(Integer ID);
 
   /**
    * Opens a market
    * @param market
    * @return
    */
-  public boolean open(AbsMarketRules rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents);
+   boolean open(AbsMarketRules rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents);
 
 
   /**
@@ -37,37 +40,40 @@ public interface IMarketManager {
    * @param ID
    * @return
    */
-  public Ledger getLedger(Integer ID);
+  Ledger getLedger(Integer ID);
 
   /**
    * Gets the market for this ID
    * @param ID
    * @return
    */
-  public Market getMarket(Integer ID);
+  Market getMarket(Integer ID);
 
   /**
    * Gets all of the auctions
    * @return
    */
-  public Collection<Market> getAuctions();
+  Collection<Market> getAuctions();
 
   /**
    * updates a market with previous state information.
    * @param marketID
    */
-  public void update(Integer marketID);
+  void update(Integer marketID);
   
   /**
    * boolean for whether any markets are currently open
    * within the simulation.
    * @return
    */
-  public boolean anyMarketsOpen();
+  boolean anyMarketsOpen();
 
   /**
    * completely resets between simulation- 
    * erases all markets stored within market manager. 
    */
-  public void reset();
+  void reset();
+
+  void lock();
+
 }

@@ -1,13 +1,13 @@
 package brown.platform.accounting.library;
 
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.accounting.IInitialEndownment;
+import brown.platform.accounting.IInitialEndowment;
 import java.util.List;
 
 /**
  * Initial Endowment specifies what an agent has at the beginning of a game.
  */
-public class InitialEndowment implements IInitialEndownment {
+public class InitialEndowment implements IInitialEndowment {
 
     public final double money;
     public final List<ITradeable> goods;

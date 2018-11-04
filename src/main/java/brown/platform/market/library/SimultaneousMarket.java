@@ -1,14 +1,14 @@
 package brown.platform.market.library;
 
+import brown.auction.preset.AbsMarketRules;
 import brown.platform.market.IMarketBlock;
-import brown.platform.market.IMarket;
 import java.util.List;
 
 public class SimultaneousMarket implements IMarketBlock {
 
-    public final List<IMarket> markets;
+    public final List<AbsMarketRules> markets;
 
-    public SimultaneousMarket(List<IMarket> markets) {
+    public SimultaneousMarket(List<AbsMarketRules> markets) {
         this.markets = markets;
     }
 }

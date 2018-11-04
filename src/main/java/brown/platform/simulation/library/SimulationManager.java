@@ -1,17 +1,36 @@
 package brown.platform.simulation.library;
 
+import brown.logging.library.PlatformLogging;
 import brown.platform.simulation.ISimulation;
 import brown.platform.simulation.ISimulationManager;
+import brown.platform.world.IWorldManager;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class SimulationManager implements ISimulationManager {
 
-    private final ISimulation simulation;
+    private List<ISimulation> simulations;
+    private boolean lock;
 
-    public SimulationManager(ISimulation simulation) {
-        this.simulation = simulation;
+    public SimulationManager() {
+        this.simulations = new LinkedList<>();
+        this.lock = false;
     }
 
-    public void runSimulation(int numRuns) {
+    public void createSimulation(IWorldManager worldManager) {
+        if (!this.lock) {
+            this.simulations.add(new Simulation(worldManager));
+        } else {
+            PlatformLogging.log("Creation denied: simulation manager locked.");
+        }
+    }
+
+    public void lock() {
+        this.lock = true;
+    }
+
+    public void runSimulation(int waitTime, int numRuns) {
 
     }
 }

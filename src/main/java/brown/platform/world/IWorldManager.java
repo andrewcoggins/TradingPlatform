@@ -1,9 +1,12 @@
 package brown.platform.world;
 
-import java.util.List;
+import brown.platform.market.IMarketManager;
+import brown.platform.whiteboard.IWhiteboard;
 
 public interface IWorldManager {
 
-    List<IWorld> getWorlds();
+    void createWorld(IDomainManager domain, IMarketManager markets, IWhiteboard whiteboard);
+
+    IWorld getWorld();
 
 }
