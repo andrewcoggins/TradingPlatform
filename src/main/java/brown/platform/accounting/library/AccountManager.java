@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountManager;
+import brown.platform.accounting.IEndowmentManager;
 
 /**
  * Account manager stores and manages accounts for the server.
@@ -22,9 +23,10 @@ public class AccountManager implements IAccountManager {
 		this.lock = false;
 	}
 
-	public void createAccount(Integer agentID, InitialEndowment endowment) {
+	public void createAccount(Integer agentID, IEndowmentManager endowmentManager) {
 	    if (!this.lock) {
             synchronized (agentID) {
+                InitialEndowment endowment = (InitialEndowment) endowmentManager.getEndowment();
                 this.accounts.put(agentID, new Account(agentID, endowment.money, endowment.goods));
             }
         } else {

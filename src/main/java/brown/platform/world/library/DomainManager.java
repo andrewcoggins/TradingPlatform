@@ -3,6 +3,7 @@ package brown.platform.world.library;
 import brown.logging.library.PlatformLogging;
 import brown.mechanism.tradeable.ITradeableManager;
 import brown.platform.accounting.IAccountManager;
+import brown.platform.accounting.IEndowmentManager;
 import brown.platform.world.IDomainManager;
 import brown.platform.world.IDomain;
 import brown.auction.value.manager.IValuationManager;
@@ -20,9 +21,10 @@ public class DomainManager implements IDomainManager {
         this.lock = false;
     }
 
-    public void createDomain(ITradeableManager manager, IValuationManager valuation, IAccountManager acctManager) {
+    public void createDomain(ITradeableManager manager, IValuationManager valuation, IAccountManager acctManager,
+                             IEndowmentManager endowmentManager) {
         if (!this.lock){
-            this.domain = new Domain(manager, valuation, acctManager);
+            this.domain = new Domain(manager, valuation, acctManager, endowmentManager);
             this.lock = true;
         } else {
             PlatformLogging.log("Creation denied: domain manager locked.");

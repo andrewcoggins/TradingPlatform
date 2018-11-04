@@ -13,7 +13,7 @@ import brown.platform.accounting.library.InitialEndowment;
  */
 public interface IAccountManager {
 
-  void createAccount(Integer agentID, InitialEndowment endowment);
+  void createAccount(Integer agentID, IEndowmentManager endowment);
 
   /**
    * gets an account from an agent's private id, if it exists

@@ -7,7 +7,7 @@ public interface IEndowmentManager {
 
     void createEndowment(double money, List<ITradeable> tradeables);
 
-    IInitialEndownment getEndowment();
+    IInitialEndowment getEndowment();
 
 }
 

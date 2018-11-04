@@ -3,7 +3,7 @@ package brown.platform.accounting.library;
 import brown.logging.library.PlatformLogging;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.IEndowmentManager;
-import brown.platform.accounting.IInitialEndownment;
+import brown.platform.accounting.IInitialEndowment;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class EndowmentManager implements IEndowmentManager {
             PlatformLogging.log("Creation denied: endowment manager locked.");
         }
     }
-    public IInitialEndownment getEndowment() {
+    public IInitialEndowment getEndowment() {
         return new InitialEndowment(this.money, this.tradeables);
     }
 

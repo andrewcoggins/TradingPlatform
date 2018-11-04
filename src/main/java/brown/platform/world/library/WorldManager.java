@@ -2,14 +2,11 @@ package brown.platform.world.library;
 
 import brown.logging.library.PlatformLogging;
 import brown.platform.market.IMarketManager;
-import brown.platform.world.IDomain;
 import brown.platform.whiteboard.IWhiteboard;
-import brown.platform.market.IMarketBlock;
 import brown.platform.world.IDomainManager;
 import brown.platform.world.IWorld;
 import brown.platform.world.IWorldManager;
 
-import java.util.List;
 
 public class WorldManager implements IWorldManager {
 

@@ -1,37 +1,29 @@
 package brown.user.server; 
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import brown.auction.preset.AbsMarketRules;
-import brown.auction.preset.SSFPNoRecord;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.manager.ValuationManager;
 import brown.auction.value.manager.IValuationManager
-import brown.auction.value.manager.library.AdditiveUniformConfig;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.ITradeableManager;
-import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.mechanism.tradeable.library.TradeableManager;
 import brown.platform.accounting.library.AccountManager;
 import brown.platform.accounting.IAccountManager;
 import java.lang.reflect.Constructor;
-import java.util.Set;
 
 import brown.platform.accounting.library.EndowmentManager;
 import brown.platform.accounting.IEndowmentManager;
-import brown.platform.server.library.RunServer;
-import brown.platform.server.library.SimulMarkets;
-import brown.platform.server.library.Simulation;
+import brown.platform.market.IMarketManager;
+import brown.platform.market.library.MarketManager;
 import brown.platform.world.IDomainManager;
 import brown.platform.world.IWorldManager;
 import brown.platform.world.library.DomainManager;
 import brown.platform.world.library.WorldManager;
-import brown.system.setup.library.SSSPSetup;
 
 /**
  * runs a simple simultaneous first price auction.
@@ -116,8 +108,8 @@ public class SSFPServer {
     }
     IValuationGenerator valGenerator = (IValuationGenerator) generatorCons.newInstance(1.0, 0.0);
     IValuationDistribution valDistribution = (IValuationDistribution) distributionCons.newInstance(valGenerator, allTradeables);
-
     IWorldManager worldManager = new WorldManager();
+    IMarketManager marketManager = new MarketManager();
     IDomainManager domainManager = new DomainManager();
     IEndowmentManager endowmentManager = new EndowmentManager();
     IAccountManager accountManager = new AccountManager();

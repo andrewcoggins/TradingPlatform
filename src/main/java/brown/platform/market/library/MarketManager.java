@@ -10,6 +10,7 @@ import brown.auction.marketstate.library.MarketState;
 import brown.auction.preset.AbsMarketRules;
 import brown.auction.prevstate.library.BlankStateInfo;
 import brown.auction.prevstate.library.PrevStateInfo;
+import brown.logging.library.PlatformLogging;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.library.Ledger;
 import brown.platform.market.IMarketManager;
@@ -27,7 +28,8 @@ public class MarketManager implements IMarketManager {
 	public List<Map<Integer, Market>> markets;
 	private PrevStateInfo information;
 	public Integer index; 
-	private Integer idCount; 
+	private Integer idCount;
+	private boolean lock;
 	
 	/**
 	 * Constructor for a market manager initializes ledgers and markets.
@@ -43,17 +45,22 @@ public class MarketManager implements IMarketManager {
 		this.markets = new LinkedList<Map<Integer, Market>>();	
 		this.information = new BlankStateInfo();
 		this.index = -1; 
-		this.idCount = 0; 
+		this.idCount = 0;
+		this.lock = false;
 	}
 
-  public void addSimulMarket(SimulMarkets s, List<ITradeable> tradeables, List<Integer> agents) {
-    this.index++;
-	  this.ledgers.add(new ConcurrentHashMap<Market, Ledger>());
-	  this.markets.add(new ConcurrentHashMap<Integer, Market>());
-	  for (AbsMarketRules preset : s.getMarkets()) {
-	    this.open(preset, idCount, tradeables, agents);
-	    idCount++;
-	  } 
+  public void addSimulMarket(SimultaneousMarket s, List<ITradeable> tradeables, List<Integer> agents) {
+		if (!this.lock){
+			this.index++;
+			this.ledgers.add(new ConcurrentHashMap<Market, Ledger>());
+			this.markets.add(new ConcurrentHashMap<Integer, Market>());
+			for (AbsMarketRules preset : s.markets) {
+				this.open(preset, idCount, tradeables, agents);
+				idCount++;
+			}
+		} else {
+			PlatformLogging.log("Creation denied: market manager locked.");
+		}
 	}
 	  
 	/**
@@ -159,5 +166,10 @@ public class MarketManager implements IMarketManager {
     for (Market market: this.markets.get(index).values()) {
       this.information.combine(market.constructSummaryState());
     }
+  }
+
+
+  public void lock(){
+  	this.lock = true;
   }
 }
