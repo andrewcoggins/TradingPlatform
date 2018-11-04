@@ -32,7 +32,7 @@ public interface IMarketManager {
    * @param market
    * @return
    */
-   boolean open(AbsMarketRules rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents);
+   void openNewMarkets(AbsMarketRules rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents);
 
 
   /**
@@ -55,11 +55,6 @@ public interface IMarketManager {
    */
   Collection<Market> getAuctions();
 
-  /**
-   * updates a market with previous state information.
-   * @param marketID
-   */
-  void update(Integer marketID);
   
   /**
    * boolean for whether any markets are currently open

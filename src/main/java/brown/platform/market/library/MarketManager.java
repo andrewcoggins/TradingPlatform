@@ -13,6 +13,7 @@ import brown.auction.prevstate.library.PrevStateInfo;
 import brown.logging.library.PlatformLogging;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.library.Ledger;
+import brown.platform.market.IMarketBlock;
 import brown.platform.market.IMarketManager;
 import brown.platform.server.library.SimulMarkets;
 
@@ -23,12 +24,10 @@ import brown.platform.server.library.SimulMarkets;
  */
 public class MarketManager implements IMarketManager {
     // stores all ledgers in a simulation
-	private List<Map<Market, Ledger>> ledgers;
+	private Map<Market, Ledger> openLedgers;
 	// stores all markets in a simulation
-	public List<Map<Integer, Market>> markets;
-	private PrevStateInfo information;
-	public Integer index; 
-	private Integer idCount;
+	private Map<Integer, Market> openMarkets;
+	private List<IMarketBlock> allMarkets;
 	private boolean lock;
 	
 	/**
@@ -41,53 +40,37 @@ public class MarketManager implements IMarketManager {
 	 * initially, this is 0.
 	 */
 	public MarketManager() {
-		this.ledgers = new LinkedList<Map<Market, Ledger>>();
-		this.markets = new LinkedList<Map<Integer, Market>>();	
-		this.information = new BlankStateInfo();
-		this.index = -1; 
-		this.idCount = 0;
+		this.allMarkets = new LinkedList<IMarketBlock>();
 		this.lock = false;
 	}
 
 
    public void createSimultaneousMarket(List<AbsMarketRules> s) {
 		if (!this.lock) {
-			this.index++;
-			this.ledgers.add(new ConcurrentHashMap<Market, Ledger>());
-			this.markets.add(new ConcurrentHashMap<Integer, Market>());
+			this.allMarkets.add(new SimultaneousMarket(s));
 		} else {
 			PlatformLogging.log("Creation denied: market manager locked.");
 		}
 	}
 	  
 	/**
-	 * Opens a market
-	 * @param market
-	 * @return
+	 * closes current market, opens a new one.
 	 */
-  	@Override
-	public boolean open(AbsMarketRules rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents) {
-	  Market market = new Market(rules.copy(), new MarketState(marketID,tradeables,this.information), new History());
-	   if (ledgers.get(index).containsKey(market)) {
-	      return false;
-	   }
+	public void openNewMarkets(AbsMarketRules rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents) {
+	  Market market = new Market(rules.copy(), new MarketState(marketID,tradeables, null), new History());
 	   market.setGroupings(agents);
-	   this.ledgers.get(index).put(market, new Ledger(market.getMarketID()));
-	   this.markets.get(index).put(market.getMarketID(), market);
-	   return true;
+	   this.openMarkets.clear();
+	   this.openLedgers.clear();
+	   this.openLedgers.put(market, new Ledger(market.getMarketID()));
+	   this.openMarkets.put(market.getMarketID(), market);
 	}
 
-	/**
-   	* Closes a market
-   	* @param server
-   	* @param ID
-   	* @param closingState
-    */
+
 	@Override
   	public void close(Integer ID) {
-  	  Market toClose = this.markets.get(index).get(ID);
+  	  Market toClose = this.openMarkets.get(ID);
   	  toClose.close();
-  	  this.markets.get(index).put(ID, toClose);
+  	  this.openMarkets.put(ID, toClose);
   	}
 
 	/**
@@ -97,7 +80,7 @@ public class MarketManager implements IMarketManager {
 	 */
   	@Override
 	public Ledger getLedger(Integer ID) {
-		return ledgers.get(index).get(markets.get(index).get(ID));
+		return openLedgers.get(this.openMarkets.get(ID));
 	}
 
 	/**
@@ -107,12 +90,12 @@ public class MarketManager implements IMarketManager {
 	 */
   	@Override
 	public Market getMarket(Integer ID) {
-	    return markets.get(index).get(ID);	  
+	    return openMarkets.get(ID);
 	}
 
 	public boolean MarketOpen(Integer ID) {
-  	if (index == -1) return false;
-  	if (markets.get(index).containsKey(ID)) { return markets.get(index).get(ID).isOpen();
+  	if (openMarkets.containsKey(ID)) {
+  		return openMarkets.get(ID).isOpen();
   	}
   	return false;
   }
@@ -124,13 +107,9 @@ public class MarketManager implements IMarketManager {
 	 */
   	@Override
 	public Collection<Market> getAuctions() {
-		return this.markets.get(index).values();
+		return this.openMarkets.values();
 	}
 
-  	@Override
-  	public void update(Integer marketID) {
-  	 this.information.combine(this.markets.get(index).get(marketID).constructSummaryState());
-  	}
   
   	@Override
   	public boolean anyMarketsOpen() {
@@ -146,25 +125,14 @@ public class MarketManager implements IMarketManager {
 
   	@Override
   	public void reset() {
-  	  this.index = -1;
-  	  this.ledgers = new LinkedList<Map<Market, Ledger>>();
-  	  this.markets = new LinkedList<Map<Integer, Market>>();
-  	  this.information = new BlankStateInfo();
-  	}
-
-  
-  	public void initializeInfo(PrevStateInfo info) {
-  	  this.information = info;
-  	}
-
-  	public void updateAllInfo() {
-  	  for (Market market: this.markets.get(index).values()) {
-  	    this.information.combine(market.constructSummaryState());
-  	  }
+  	  this.openLedgers.clear();
+  	  this.openMarkets.clear();
+  	  this.allMarkets.clear();
+  	  this.lock = false;
   	}
 
 
-  	public void lock(){
+  	public void lock() {
   	this.lock = true;
   }
 }
