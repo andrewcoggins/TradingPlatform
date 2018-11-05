@@ -1,0 +1,70 @@
+{"name": {"type": "text"},
+ "simulation": {
+    "type": "nested",
+    "properties": [{
+      "tradeables": [{
+        "type": "nested",
+        "properties": {
+          "tradeableType": {"type": "text"},
+          "numTradeables": {"type": "integer"}
+        }
+      }],
+      "valuations": {
+        "type": "nested",
+        "properties": {
+          "distribution": {"type": "text"},
+          "generator": {"type": "text"}
+        }
+      },
+      "endowments": {
+        "type": "nested",
+        "properties": {
+          "tradeable": [{
+            "type": "nested",
+            "properties": {
+              "tradeableType": {"type": "text"},
+              "numTradeables": {"type": "integer"}
+            }
+          }],
+          "money": {"type": "float"}
+        }
+      },
+    "seqmarket": [{
+      "type": "nested",
+      "properties": {
+        "simmarket": [{
+          "type": "nested",
+          "properties": {
+            "marketrules": {
+              "type": "nested",
+              "properties": {
+                "allocationRule": {"type": "text"},
+                "paymentRule": {"type": "text"},
+                "queryRule": {"type": "text"},
+                "activityRule": {"type": "text"},
+                "informationRevelationPolicy": {"type": "text"},
+                "terminationCondition": {"type": "text"}
+              }
+            }
+          }
+        }]
+      }
+    }]
+    }],
+"startingDelay": {"type": "integer"}
+}
+}
+
+
+// Structure
+// -Name
+// -Simulation
+//   Type
+//   Properties
+//     Tradeables
+//     Valuations
+//     Endowments
+//     Seqmarket
+// -Properties
+// -startingDelay
+
