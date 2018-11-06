@@ -40,7 +40,7 @@ import brown.platform.whiteboard.library.Whiteboard;
  * @author acoggins
  *
  */
-public class SSFPServer {
+public class Main {
 
   /**
    *
