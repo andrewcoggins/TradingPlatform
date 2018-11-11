@@ -1,70 +1,137 @@
-{"name": {"type": "text"},
- "simulation": {
+{
+  "name": "text",
+  "simulation": {
     "type": "nested",
-    "properties": [{
-      "tradeables": [{
-        "type": "nested",
-        "properties": {
-          "tradeableType": {"type": "text"},
-          "numTradeables": {"type": "integer"}
-        }
-      }],
-      "valuations": {
-        "type": "nested",
-        "properties": {
-          "distribution": {"type": "text"},
-          "generator": {"type": "text"}
-        }
-      },
-      "endowments": {
-        "type": "nested",
-        "properties": {
-          "tradeable": [{
+    "properties": [
+      {
+        "tradeables": [
+          {
             "type": "nested",
             "properties": {
-              "tradeableType": {"type": "text"},
-              "numTradeables": {"type": "integer"}
-            }
-          }],
-          "money": {"type": "float"}
-        }
-      },
-    "seqmarket": [{
-      "type": "nested",
-      "properties": {
-        "simmarket": [{
-          "type": "nested",
-          "properties": {
-            "marketrules": {
-              "type": "nested",
-              "properties": {
-                "allocationRule": {"type": "text"},
-                "paymentRule": {"type": "text"},
-                "queryRule": {"type": "text"},
-                "activityRule": {"type": "text"},
-                "informationRevelationPolicy": {"type": "text"},
-                "terminationCondition": {"type": "text"}
-              }
+              "tradeableType":  "text",
+              "numTradeables": "integer"
             }
           }
-        }]
+        ],
+        "valuations": {
+          "type": "nested",
+          "properties": {
+            "distribution": "text",
+            "generator": "text",
+
+          }
+        },
+        "endowments": {
+          "type": "nested",
+          "properties": {
+            "tradeable": [
+              {
+                "type": "nested",
+                "properties": {
+                  "tradeableType": "text" ,
+                  "numTradeables": "integer"
+                }
+              }
+            ],
+            "money": "float"
+          }
+        },
+        "seqmarket": [
+          {
+            "type": "nested",
+            "properties": {
+              "simmarket": [
+                {
+                  "type": "nested",
+                  "properties": {
+                    "marketrules": {
+                      "type": "nested",
+                      "properties": {
+                        "allocationRule": "text",
+                        "paymentRule": "text" ,
+                        "queryRule": "text",
+                        "activityRule": "text",
+                        "informationRevelationPolicy": "text",
+                        "terminationCondition": "text"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
       }
-    }]
-    }],
-"startingDelay": {"type": "integer"}
+    ],
+    "startingDelay": "integer"
+  }
 }
-}
 
 
-// Structure
-// -Name
-// -Simulation
-//   Type
-//   Properties
-//     Tradeables
-//     Valuations
-//     Endowments
-//     Seqmarket
-// -Properties
-// -startingDelay
-
+// {
+//   "name": { "type": "text" },
+//   "simulation": {
+//     "type": "nested",
+//     "properties": [
+//       {
+//         "tradeables": [
+//           {
+//             "type": "nested",
+//             "properties": {
+//               "tradeableType": { "type": "text" },
+//               "numTradeables": { "type": "integer" }
+//             }
+//           }
+//         ],
+//         "valuations": {
+//           "type": "nested",
+//           "properties": {
+//             "distribution": { "type": "text" },
+//             "generator": { "type": "text" }
+//           }
+//         },
+//         "endowments": {
+//           "type": "nested",
+//           "properties": {
+//             "tradeable": [
+//               {
+//                 "type": "nested",
+//                 "properties": {
+//                   "tradeableType": { "type": "text" },
+//                   "numTradeables": { "type": "integer" }
+//                 }
+//               }
+//             ],
+//             "money": { "type": "float" }
+//           }
+//         },
+//         "seqmarket": [
+//           {
+//             "type": "nested",
+//             "properties": {
+//               "simmarket": [
+//                 {
+//                   "type": "nested",
+//                   "properties": {
+//                     "marketrules": {
+//                       "type": "nested",
+//                       "properties": {
+//                         "allocationRule": { "type": "text" },
+//                         "paymentRule": { "type": "text" },
+//                         "queryRule": { "type": "text" },
+//                         "activityRule": { "type": "text" },
+//                         "informationRevelationPolicy": { "type": "text" },
+//                         "terminationCondition": { "type": "text" }
+//                       }
+//                     }
+//                   }
+//                 }
+//               ]
+//             }
+//           }
+//         ]
+//       }
+//     ],
+//     "startingDelay": { "type": "integer" }
+//   }
+// }
