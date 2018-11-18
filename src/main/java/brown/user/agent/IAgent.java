@@ -35,8 +35,5 @@ public interface IAgent {
    * @param acctReset - contains acct initialization info
    */
   public void onAccountInitialization(AccountResetMessage accountResetMessage);
-}
 
-  public void onAccountResetMessage(AccountResetMessage accountResetMessage);
-  
-} 
+}

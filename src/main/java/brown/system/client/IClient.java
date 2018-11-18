@@ -16,15 +16,15 @@ public interface IClient {
    * Gets called when the server sends a registration method back to the agent (2nd part of handshake)
    * @param registration - includes the agent's new ID
    */
-  public void onRegistration(RegistrationMessage registration);
+  void onRegistration(RegistrationMessage registration);
  
   /**
    * Whenever a message is rejected, a rejection message is sent
    * @param message - includes a string about rejection
    */
-  public void onErrorMessage(ErrorMessage message);
+  void onErrorMessage(ErrorMessage message);
 
-  public void onStringMessage(StringMessage message);
+  void onStringMessage(StringMessage message);
 }
 
   
