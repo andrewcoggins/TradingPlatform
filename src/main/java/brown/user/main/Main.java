@@ -13,27 +13,11 @@ import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneGrouping;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
-import brown.auction.value.manager.ValuationManager;
-import brown.auction.value.manager.IValuationManager;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.ITradeableManager;
-import brown.mechanism.tradeable.library.TradeableManager;
-import brown.platform.accounting.library.AccountManager;
-import brown.platform.accounting.IAccountManager;
+
 import java.lang.reflect.Constructor;
 
-import brown.platform.accounting.library.EndowmentManager;
-import brown.platform.accounting.IEndowmentManager;
-import brown.platform.market.IMarketManager;
-import brown.platform.market.library.MarketManager;
-import brown.platform.simulation.ISimulationManager;
-import brown.platform.simulation.library.SimulationManager;
-import brown.platform.whiteboard.IWhiteboard;
-import brown.platform.world.IDomainManager;
-import brown.platform.world.IWorldManager;
-import brown.platform.world.library.DomainManager;
-import brown.platform.world.library.WorldManager;
-import brown.platform.whiteboard.library.Whiteboard;
+import brown.platform.market.library.SimultaneousMarket;
 
 /**
  * runs a simple simultaneous first price auction.
@@ -95,15 +79,6 @@ public class Main {
     String irPolicyString = args[13];
     String tConditionString = args[14];
 
-    System.out.println(numRuns);
-    System.out.println(delayTime);
-    System.out.println(tTypeString);
-    System.out.println(numTradeables);
-    System.out.println(distributionString);
-    System.out.println(generatorString);
-    System.out.println(endowmenttTypeString);
-    System.out.println(endowmentNumTradeables);
-    System.out.println(endowmentMoney);
     Class<?> tTypeClass = Class.forName("brown.mechanism.tradeable.library." + tTypeString);
     Class<?> generatorClass = Class.forName("brown.auction.value.generator.library." + generatorString);
     Class<?> distributionClass = Class.forName("brown.auction.value.distribution.library." + distributionString);
@@ -136,18 +111,6 @@ public class Main {
     for (int i = 0; i < endowmentNumTradeables; i++){
       endowTradeables.add((ITradeable) endowmentTypeCons.newInstance(i));
     }
-    IValuationGenerator valGenerator = (IValuationGenerator) generatorCons.newInstance(1.0, 0.0);
-    IValuationDistribution valDistribution = (IValuationDistribution) distributionCons.newInstance(valGenerator,
-            new HashSet<>(allTradeables));
-    IWorldManager worldManager = new WorldManager();
-    IMarketManager marketManager = new MarketManager();
-    IDomainManager domainManager = new DomainManager();
-    IEndowmentManager endowmentManager = new EndowmentManager();
-    IAccountManager accountManager = new AccountManager();
-    IValuationManager valuationManager = new ValuationManager();
-    ITradeableManager tradeableManager = new TradeableManager();
-    ISimulationManager simulationManager = new SimulationManager();
-    IWhiteboard whiteboard = new Whiteboard();
 
     AbsMarketRules marketRule = new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
             (IPaymentRule) pRuleCons.newInstance(),
@@ -157,21 +120,20 @@ public class Main {
             (IInformationRevelationPolicy) irPolicyCons.newInstance(),
             (ITerminationCondition) tConditionCons.newInstance(),
             new NoRecordKeeping());
-    List<AbsMarketRules> marketList = new LinkedList<>();
-    marketList.add(marketRule);
-    marketManager.createSimultaneousMarket(marketList);
-    endowmentManager.createEndowment(endowmentMoney, endowTradeables);
-    valuationManager.createValuation(0, valDistribution);
-    tradeableManager.createSimpleTradeables(numTradeables);
-    domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
-    worldManager.createWorld(domainManager, marketManager, whiteboard);
-    simulationManager.createSimulation(worldManager);
+    IValuationGenerator valGenerator = (IValuationGenerator) generatorCons.newInstance(1.0, 0.0);
+    IValuationDistribution valDistribution = (IValuationDistribution) distributionCons.newInstance(valGenerator,
+            new HashSet<>(allTradeables));
+    List<AbsMarketRules> rules = new LinkedList<>();
+    rules.add(marketRule);
+    List<SimultaneousMarket> blocks = new LinkedList<>();
+    SimultaneousMarket block = new SimultaneousMarket(rules);
+    blocks.add(block);
 
-    tradeableManager.lock();
-    valuationManager.lock();
-    simulationManager.lock();
-    marketManager.lock();
+    List<SimulationConfig> configs = new LinkedList<>();
 
-    simulationManager.runSimulation(delayTime, numRuns);
+    SimulationConfig config = new SimulationConfig(1, allTradeables, endowTradeables, endowmentMoney, blocks, valGenerator, valDistribution);
+    configs.add(config);
+    ConfigRun configRun = new ConfigRun(delayTime, configs);
+    configRun.run(numRuns);
   }
 }
