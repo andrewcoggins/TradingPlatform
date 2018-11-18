@@ -41,7 +41,7 @@ public class AccountResetMessage extends AbsMessage {
 
   @Override
   public void dispatch(AbsAgent agent) {
-    agent.onAccountResetMessage(this);    
+    agent.onAccountInitialization(this);
   }
 
   @Override
