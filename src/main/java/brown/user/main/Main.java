@@ -45,20 +45,35 @@ public class Main {
   /**
    *
    * @param args
+   * 1
    * 0: numruns : int
+   * 5
    * 1: delayTime: int
+   * SimpleTradeable
    * 2: tradeabletype : string
+   * 1
    * 3: numtradeables : int
+   * AdditiveValuationDistribution
    * 4: distribution
+   * NormalValGenerator
    * 5: generator
+   * SimpleTradeable
    * 6: endowment tradeable type
+   * 0
    * 7: endowment num tradeables
+   * 1000
    * 8: endowment money
+   * HighestPriceAllocation
    * 9: allocationrule
+   * SimpleSecondPricePayment
    * 10: paymentrule
+   * SimpleQuery
    * 11: queryrule
+   * OneShotActivity
    * 12: activityrule
+   * SSSPAnonymousPolicy
    * 13: ir policy
+   * OneShotTermination
    * 14: termination condition
    */
 
@@ -80,21 +95,30 @@ public class Main {
     String irPolicyString = args[13];
     String tConditionString = args[14];
 
-    Class<?> tTypeClass = Class.forName(tTypeString);
-    Class<?> generatorClass = Class.forName(generatorString);
-    Class<?> distributionClass = Class.forName(distributionString);
-    Class<?> endowmenttTypeClass = Class.forName(endowmenttTypeString);
-    Class<?> aRuleClass = Class.forName(aRuleString);
-    Class<?> pRuleClass = Class.forName(pRuleString);
-    Class<?> qRuleClass = Class.forName(qRuleString);
-    Class<?> actRuleClass = Class.forName(actRuleString);
-    Class<?> irPolicyClass = Class.forName(irPolicyString);
-    Class<?> tConditionClass = Class.forName(tConditionString);
+    System.out.println(numRuns);
+    System.out.println(delayTime);
+    System.out.println(tTypeString);
+    System.out.println(numTradeables);
+    System.out.println(distributionString);
+    System.out.println(generatorString);
+    System.out.println(endowmenttTypeString);
+    System.out.println(endowmentNumTradeables);
+    System.out.println(endowmentMoney);
+    Class<?> tTypeClass = Class.forName("brown.mechanism.tradeable.library." + tTypeString);
+    Class<?> generatorClass = Class.forName("brown.auction.value.generator.library." + generatorString);
+    Class<?> distributionClass = Class.forName("brown.auction.value.distribution.library." + distributionString);
+    Class<?> endowmenttTypeClass = Class.forName("brown.mechanism.tradeable.library." + endowmenttTypeString);
+    Class<?> aRuleClass = Class.forName("brown.auction.rules.library." + aRuleString);
+    Class<?> pRuleClass = Class.forName("brown.auction.rules.library." + pRuleString);
+    Class<?> qRuleClass = Class.forName("brown.auction.rules.library." + qRuleString);
+    Class<?> actRuleClass = Class.forName("brown.auction.rules.library." + actRuleString);
+    Class<?> irPolicyClass = Class.forName("brown.auction.rules.library." + irPolicyString);
+    Class<?> tConditionClass = Class.forName("brown.auction.rules.library." + tConditionString);
 
-    Constructor<?> tTypeCons = tTypeClass.getConstructor(Integer.TYPE);
-    Constructor<?> generatorCons = generatorClass.getConstructor(Double.TYPE, Double.TYPE);
+    Constructor<?> tTypeCons = tTypeClass.getConstructor(Integer.class);
+    Constructor<?> generatorCons = generatorClass.getConstructor(Double.class, Double.class);
     Constructor<?> distributionCons = distributionClass.getConstructor(IValuationGenerator.class, Set.class);
-    Constructor<?> endowmentTypeCons = endowmenttTypeClass.getConstructor(Integer.TYPE);
+    Constructor<?> endowmentTypeCons = endowmenttTypeClass.getConstructor(Integer.class);
     Constructor<?> aRuleCons = aRuleClass.getConstructor();
     Constructor<?> pRuleCons = pRuleClass.getConstructor();
     Constructor<?> qRuleCons = qRuleClass.getConstructor();
