@@ -96,7 +96,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   }
 
   @Override
-  public void onAccountResetMessage(AccountResetMessage accountResetMessage) {
+  public void onAccountInitialization(AccountResetMessage accountResetMessage) {
     this.monies = accountResetMessage.monies;
     this.goods = accountResetMessage.tradeables;
   }

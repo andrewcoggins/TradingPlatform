@@ -34,6 +34,9 @@ public interface IAgent {
    * Sent whenever an agent's account is reset
    * @param acctReset - contains acct initialization info
    */
+  public void onAccountInitialization(AccountResetMessage accountResetMessage);
+}
+
   public void onAccountResetMessage(AccountResetMessage accountResetMessage);
   
 } 
