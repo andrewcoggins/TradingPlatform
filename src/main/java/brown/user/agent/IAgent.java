@@ -9,7 +9,6 @@ import brown.platform.messages.library.PrivateInformationMessage;
  * Agents are responsible for receiving messages from the server,
  * constructing bids, and sending them back.
  * @author andrew
- *
  */
 public interface IAgent { 
 
@@ -20,14 +19,14 @@ public interface IAgent {
   public void onBankUpdate(BankUpdateMessage bankUpdate);
 
   /**
-   * Sent whenever you get a game report (at the end of each outer round)
-   * @param gamereport
+   * Sent whenever an agent gets a game report
+   * @param gamereport -- contains a report of recent activity
    */
   public void onGameReport(GameReportMessage gameReport);
 
   /**
-   * gives agent any private information they they may need.
-   * @param privateInfo
+   * Sends an agent their private information
+   * @param privateInfo -- agent's particular characteristics
    */
   public void onPrivateInformation(PrivateInformationMessage privateInfo);
   
@@ -38,5 +37,6 @@ public interface IAgent {
   public void onAccountInitialization(AccountResetMessage accountResetMessage);
 }
 
+  public void onAccountResetMessage(AccountResetMessage accountResetMessage);
   
- 
+} 
