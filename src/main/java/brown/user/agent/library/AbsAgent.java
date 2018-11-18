@@ -64,7 +64,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
    * @param gameSetup
    * @throws AgentCreationException
    */
-  public AbsAgent(String host, int port, ISetup gameSetup,String name) {
+  public AbsAgent(String host, int port, ISetup gameSetup, String name) {
     super(host, port, gameSetup);
     final AbsAgent agent = this;
     // All agents listen for messages.
@@ -96,11 +96,8 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   }
 
   @Override
-  public void onAccountResetMessage(AccountResetMessage accountResetMessage) {
+  public void onAccountInitialization(AccountResetMessage accountResetMessage) {
     this.monies = accountResetMessage.monies;
     this.goods = accountResetMessage.tradeables;
   }
 }
-
-  
- 

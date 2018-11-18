@@ -1,4 +1,4 @@
-package brown.user.server; 
+package brown.user.main;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
