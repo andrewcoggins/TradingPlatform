@@ -1,5 +1,6 @@
 {
   "name": "text",
+  "numRuns": "1",
   "simulation": {
     "type": "nested",
     "properties": [
@@ -7,131 +8,49 @@
         "tradeables": [
           {
             "type": "nested",
-            "properties": {
-              "tradeableType":  "text",
-              "numTradeables": "integer"
-            }
+            "tradeableType": "text",
+            "numTradeables": "10"
           }
         ],
         "valuations": {
           "type": "nested",
-          "properties": {
-            "distribution": "text",
-            "generator": "text",
-
-          }
+          "distribution": "text",
+          "generator": "text",
+          "max": "1.0",
+          "min": "0.0"
         },
         "endowments": {
           "type": "nested",
-          "properties": {
-            "tradeable": [
-              {
-                "type": "nested",
-                "properties": {
-                  "tradeableType": "text" ,
-                  "numTradeables": "integer"
-                }
-              }
-            ],
-            "money": "float"
-          }
+          "tradeable": [
+            {
+              "type": "nested",
+              "tradeableType": "text",
+              "numTradeables": "10"
+            }
+          ],
+          "money": "10.0"
         },
         "seqmarket": [
           {
             "type": "nested",
-            "properties": {
-              "simmarket": [
-                {
+            "simmarket": [
+              {
+                "type": "nested",
+                "marketrules": {
                   "type": "nested",
-                  "properties": {
-                    "marketrules": {
-                      "type": "nested",
-                      "properties": {
-                        "allocationRule": "text",
-                        "paymentRule": "text" ,
-                        "queryRule": "text",
-                        "activityRule": "text",
-                        "informationRevelationPolicy": "text",
-                        "terminationCondition": "text"
-                      }
-                    }
-                  }
+                  "allocationRule": "text",
+                  "paymentRule": "text",
+                  "queryRule": "text",
+                  "activityRule": "text",
+                  "informationRevelationPolicy": "text",
+                  "terminationCondition": "text"
                 }
-              ]
-            }
+              }
+            ]
           }
         ]
       }
     ],
-    "startingDelay": "integer"
+    "startingDelay": "10"
   }
 }
-
-
-// {
-//   "name": { "type": "text" },
-//   "simulation": {
-//     "type": "nested",
-//     "properties": [
-//       {
-//         "tradeables": [
-//           {
-//             "type": "nested",
-//             "properties": {
-//               "tradeableType": { "type": "text" },
-//               "numTradeables": { "type": "integer" }
-//             }
-//           }
-//         ],
-//         "valuations": {
-//           "type": "nested",
-//           "properties": {
-//             "distribution": { "type": "text" },
-//             "generator": { "type": "text" }
-//           }
-//         },
-//         "endowments": {
-//           "type": "nested",
-//           "properties": {
-//             "tradeable": [
-//               {
-//                 "type": "nested",
-//                 "properties": {
-//                   "tradeableType": { "type": "text" },
-//                   "numTradeables": { "type": "integer" }
-//                 }
-//               }
-//             ],
-//             "money": { "type": "float" }
-//           }
-//         },
-//         "seqmarket": [
-//           {
-//             "type": "nested",
-//             "properties": {
-//               "simmarket": [
-//                 {
-//                   "type": "nested",
-//                   "properties": {
-//                     "marketrules": {
-//                       "type": "nested",
-//                       "properties": {
-//                         "allocationRule": { "type": "text" },
-//                         "paymentRule": { "type": "text" },
-//                         "queryRule": { "type": "text" },
-//                         "activityRule": { "type": "text" },
-//                         "informationRevelationPolicy": { "type": "text" },
-//                         "terminationCondition": { "type": "text" }
-//                       }
-//                     }
-//                   }
-//                 }
-//               ]
-//             }
-//           }
-//         ]
-//       }
-//     ],
-//     "startingDelay": { "type": "integer" }
-//   }
-// }

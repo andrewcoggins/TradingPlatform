@@ -1,5 +1,6 @@
 package brown.user.simulations;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -12,6 +13,8 @@ import java.util.Set;
 import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import brown.auction.preset.AbsMarketRules;
 import brown.auction.preset.FlexibleRules;
@@ -69,111 +72,143 @@ public class JsonParse {
 	 * @throws IllegalAccessException 
 	 * @throws InvocationTargetException 
 	 * @throws NoSuchMethodException 
+	 * @throws FileNotFoundException 
+	 * @throws JsonIOException 
+	 * @throws JsonSyntaxException 
     */
-	public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+	public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException,
+    InstantiationException, IllegalAccessException, InvocationTargetException, JsonSyntaxException, JsonIOException, FileNotFoundException  {
 
 		JSONParser parser = new JSONParser();
-
-		JsonData data = new Gson().fromJson(new FileReader((JsonParse.class.getResource("testjson.json").getFile())),
-				JsonData.class);
-		System.out.println();
-
-	    Integer numRuns = new Integer(1);
-	    Integer delayTime = new Integer(data.getSimulation().getStartingDelay().getType());
-	    String tTypeString = data.getSimulation().getProperties().get(0).getTradeables().get(0).getProperties().getTradeableType().getType();
-	    Integer numTradeables = new Integer(data.getSimulation().getProperties().get(0).getTradeables().get(0).getProperties().getNumTradeables().getType());
-	    String distributionString = data.getSimulation().getProperties().get(0).getValutions().getProperties().getDistribution().getType();
-	    String generatorString = data.getSimulation().getProperties().get(0).getValutions().getProperties().getGenerator().getType();
-	    String endowmenttTypeString = data.getSimulation().getProperties().get(0).getEndowments().getType();
-	    Integer endowmentNumTradeables = new Integer(data.getSimulation().getProperties().get(0).getEndowments().getProperties().getTradeable().get(0).getProperties().getNumTradeables().getType());
-	    Integer endowmentMoney = new Integer(data.getSimulation().getProperties().get(0).getEndowments().getProperties().getMoney().getType());
-	    String aRuleString = data.getSimulation().getProperties().get(0).getSeqmarket().get(0).getProperties().getSimmarket().get(0).getProperties().getMarketrules().getProperties().getAllocationRule().getType();
-	    String pRuleString = data.getSimulation().getProperties().get(0).getSeqmarket().get(0).getProperties().getSimmarket().get(0).getProperties().getMarketrules().getProperties().getPaymentRule().getType();
-	    String qRuleString = data.getSimulation().getProperties().get(0).getSeqmarket().get(0).getProperties().getSimmarket().get(0).getProperties().getMarketrules().getProperties().getQueryRule().getType();
-	    String actRuleString = data.getSimulation().getProperties().get(0).getSeqmarket().get(0).getProperties().getSimmarket().get(0).getProperties().getMarketrules().getProperties().getActivityRule().getType();
-	    String irPolicyString =  data.getSimulation().getProperties().get(0).getSeqmarket().get(0).getProperties().getSimmarket().get(0).getProperties().getMarketrules().getProperties().getInformationRevelationPolicy().getType();
-	    String tConditionString =  data.getSimulation().getProperties().get(0).getSeqmarket().get(0).getProperties().getSimmarket().get(0).getProperties().getMarketrules().getProperties().getTerminationCondition().getType();
-	    
-		Class<?> tTypeClass = Class.forName(tTypeString);
-		Class<?> generatorClass = Class.forName(generatorString);
-		Class<?> distributionClass = Class.forName(distributionString);
-		Class<?> endowmenttTypeClass = Class.forName(endowmenttTypeString);
-		Class<?> aRuleClass = Class.forName(aRuleString);
-		Class<?> pRuleClass = Class.forName(pRuleString);
-		Class<?> qRuleClass = Class.forName(qRuleString);
-		Class<?> actRuleClass = Class.forName(actRuleString);
-		Class<?> irPolicyClass = Class.forName(irPolicyString);
-		Class<?> tConditionClass = Class.forName(tConditionString);
-
-		Constructor<?> tTypeCons = tTypeClass.getConstructor(Integer.TYPE);
-		Constructor<?> generatorCons = generatorClass.getConstructor(Double.TYPE, Double.TYPE);
-		Constructor<?> distributionCons = distributionClass.getConstructor(IValuationGenerator.class, Set.class);
-		Constructor<?> endowmentTypeCons = endowmenttTypeClass.getConstructor(Integer.TYPE);
-		Constructor<?> aRuleCons = aRuleClass.getConstructor();
-		Constructor<?> pRuleCons = pRuleClass.getConstructor();
-		Constructor<?> qRuleCons = qRuleClass.getConstructor();
-		Constructor<?> actRuleCons = actRuleClass.getConstructor();
-		Constructor<?> irPolicyCons = irPolicyClass.getConstructor();
-		Constructor<?> tConditionCons = tConditionClass.getConstructor();
-
-	    List<ITradeable> allTradeables = new LinkedList<>();
-	    for (int i = 0; i < numTradeables; i++){
-	      allTradeables.add((ITradeable) tTypeCons.newInstance(i));
-	    }
-	    List<ITradeable> endowTradeables = new LinkedList<>();
-	    for (int i = 0; i < endowmentNumTradeables; i++){
-	      endowTradeables.add((ITradeable) endowmentTypeCons.newInstance(i));
-	    }
-	    IValuationGenerator valGenerator = (IValuationGenerator) generatorCons.newInstance(1.0, 0.0);
-	    IValuationDistribution valDistribution = (IValuationDistribution) distributionCons.newInstance(valGenerator,
-	            new HashSet<>(allTradeables));
-	    IWorldManager worldManager = new WorldManager();
-	    IMarketManager marketManager = new MarketManager();
-	    IDomainManager domainManager = new DomainManager();
-	    IEndowmentManager endowmentManager = new EndowmentManager();
-	    IAccountManager accountManager = new AccountManager();
-	    IValuationManager valuationManager = new ValuationManager();
-	    ITradeableManager tradeableManager = new TradeableManager();
+		
+		JsonData data = new Gson().fromJson(new FileReader(JsonParse.class.getResource("testjson.json").getFile()), JsonData.class);
+	    Integer numRuns = new Integer(data.getNumRuns());
+	    Integer delayTime = new Integer(data.getSimulation().getStartingDelay());
 	    ISimulationManager simulationManager = new SimulationManager();
-	    IWhiteboard whiteboard = new Whiteboard();
 
-	    AbsMarketRules marketRule = new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
-	            (IPaymentRule) pRuleCons.newInstance(),
-	            (IQueryRule) qRuleCons.newInstance(),
-	            new OneGrouping(),
-	            (IActivityRule) actRuleCons.newInstance(),
-	            (IInformationRevelationPolicy) irPolicyCons.newInstance(),
-	            (ITerminationCondition) tConditionCons.newInstance(),
-	            new NoRecordKeeping());
-	    List<AbsMarketRules> marketList = new LinkedList<>();
-	    marketList.add(marketRule);
-	    marketManager.createSimultaneousMarket(marketList);
-	    endowmentManager.createEndowment(endowmentMoney, endowTradeables);
-	    valuationManager.createValuation(0, valDistribution);
-	    tradeableManager.createSimpleTradeables(numTradeables);
-	    domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
-	    worldManager.createWorld(domainManager, marketManager, whiteboard);
-	    simulationManager.createSimulation(worldManager);
+	    
+	    for (SimulationProperty s : data.getSimulation().getProperties()) {
+	    	
+	    	String tTypeString = s.getTradeables().get(0).getTradeableType();
+		    Integer numTradeables = new Integer(s.getTradeables().get(0).getNumTradeables());
+		    String distributionString = s.getValutions().getDistribution();
+		    Float distributionMax = s.getValutions().getMax();
+			Float distributionMin = s.getValutions().getMin();
+		    String generatorString = s.getValutions().getGenerator();
+		    String endowmenttTypeString = s.getEndowments().getType();
+		    Integer endowmentNumTradeables = new Integer(s.getEndowments().getTradeable().get(0).getNumTradeables());
+		    Integer endowmentMoney = new Integer(s.getEndowments().getMoney());
+		    
+			Class<?> tTypeClass = Class.forName(tTypeString);
+			Class<?> generatorClass = Class.forName(generatorString);
+			Class<?> distributionClass = Class.forName(distributionString);
+			Class<?> endowmenttTypeClass = Class.forName(endowmenttTypeString);
+  	
+			Constructor<?> tTypeCons = tTypeClass.getConstructor(Integer.TYPE);
+			Constructor<?> generatorCons = generatorClass.getConstructor(Double.TYPE, Double.TYPE);
+			Constructor<?> distributionCons = distributionClass.getConstructor(IValuationGenerator.class, Set.class);
+			Constructor<?> endowmentTypeCons = endowmenttTypeClass.getConstructor(Integer.TYPE);
+			
+		    List<ITradeable> allTradeables = new LinkedList<>();
+		    for (int i = 0; i < numTradeables; i++){
+		      allTradeables.add((ITradeable) tTypeCons.newInstance(i));
+		    }
+		    
+		    List<ITradeable> endowTradeables = new LinkedList<>();
+		    for (int i = 0; i < endowmentNumTradeables; i++){
+		      endowTradeables.add((ITradeable) endowmentTypeCons.newInstance(i));
+		    }
+		    
+		    IWorldManager worldManager = new WorldManager();
+		    IMarketManager marketManager = new MarketManager();
+		    IDomainManager domainManager = new DomainManager();
+		    IEndowmentManager endowmentManager = new EndowmentManager();
+		    IAccountManager accountManager = new AccountManager();
+		    IValuationManager valuationManager = new ValuationManager();
+		    ITradeableManager tradeableManager = new TradeableManager();
+		    IWhiteboard whiteboard = new Whiteboard();
 
-	    tradeableManager.lock();
-	    valuationManager.lock();
-	    simulationManager.lock();
-	    marketManager.lock();
+		    IValuationGenerator valGenerator = (IValuationGenerator) generatorCons.newInstance(distributionMax, distributionMin);
+		    IValuationDistribution valDistribution = (IValuationDistribution) distributionCons.newInstance(valGenerator,
+		            new HashSet<>(allTradeables));
 
+		    for (Seqmarket m : s.getSeqmarket()) {
+		    	List<AbsMarketRules> marketList = new LinkedList<>();
+		    	for (Simmarket i : m.getSimmarket()) {
+			    	String aRuleString = i.getMarketrules().getAllocationRule();
+				    String pRuleString = i.getMarketrules().getPaymentRule();
+				    String qRuleString = i.getMarketrules().getQueryRule();
+				    String actRuleString = i.getMarketrules().getActivityRule();
+				    String irPolicyString = i.getMarketrules().getInformationRevelationPolicy();
+				    String tConditionString = i.getMarketrules().getTerminationCondition();
+				    
+					Class<?> aRuleClass = Class.forName(aRuleString);
+					Class<?> pRuleClass = Class.forName(pRuleString);
+					Class<?> qRuleClass = Class.forName(qRuleString);
+					Class<?> actRuleClass = Class.forName(actRuleString);
+					Class<?> irPolicyClass = Class.forName(irPolicyString);
+					Class<?> tConditionClass = Class.forName(tConditionString);
+					
+					Constructor<?> aRuleCons = aRuleClass.getConstructor();
+					Constructor<?> pRuleCons = pRuleClass.getConstructor();
+					Constructor<?> qRuleCons = qRuleClass.getConstructor();
+					Constructor<?> actRuleCons = actRuleClass.getConstructor();
+					Constructor<?> irPolicyCons = irPolicyClass.getConstructor();
+					Constructor<?> tConditionCons = tConditionClass.getConstructor();   	
+					
+					 AbsMarketRules marketRule = new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
+					            (IPaymentRule) pRuleCons.newInstance(),
+					            (IQueryRule) qRuleCons.newInstance(),
+					            new OneGrouping(),
+					            (IActivityRule) actRuleCons.newInstance(),
+					            (IInformationRevelationPolicy) irPolicyCons.newInstance(),
+					            (ITerminationCondition) tConditionCons.newInstance(),
+					            new NoRecordKeeping());
+
+					    marketList.add(marketRule);
+		    	}
+			    marketManager.createSimultaneousMarket(marketList);
+
+		    }
+		   
+		    endowmentManager.createEndowment(endowmentMoney, endowTradeables);
+		    valuationManager.createValuation(0, valDistribution);
+		    tradeableManager.createSimpleTradeables(numTradeables);
+		    domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
+		    worldManager.createWorld(domainManager, marketManager, whiteboard);
+		    simulationManager.createSimulation(worldManager);
+
+		    tradeableManager.lock();
+		    valuationManager.lock();
+		    simulationManager.lock();
+		    marketManager.lock();
+
+	    }
+	    
 	    simulationManager.runSimulation(delayTime, numRuns);
+
 	}
 
 }
 
 class JsonData {
-	private Type name;
+	private String name;
+	private String numRuns;
 	private Simulation simulation;
+	
+	public String getNumRuns() {
+		return numRuns;
+	}
 
-	public Type getName() {
+	public void setNumRuns(String numRuns) {
+		this.numRuns = numRuns;
+	}
+
+	public String getName() {
 		return name;
 	}
 
-	public void setName(Type name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -187,23 +222,10 @@ class JsonData {
 
 }
 
-class Type {
-	private String type;
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-}
-
 class Simulation {
 	private String type;
 	private List<SimulationProperty> properties;
-	private Type startingDelay;
+	private String startingDelay;
 
 	public String getType() {
 		return type;
@@ -221,11 +243,11 @@ class Simulation {
 		this.properties = properties;
 	}
 
-	public Type getStartingDelay() {
+	public String getStartingDelay() {
 		return startingDelay;
 	}
 
-	public void setStartingDelay(Type startingDelay) {
+	public void setStartingDelay(String startingDelay) {
 		this.startingDelay = startingDelay;
 	}
 
@@ -233,7 +255,7 @@ class Simulation {
 
 class SimulationProperty {
 	private List<Tradeables> tradeables;
-	private Valuations valutions;
+	private Valuations valuations;
 	private Endowments endowments;
 	private List<Seqmarket> seqmarket;
 
@@ -246,11 +268,11 @@ class SimulationProperty {
 	}
 
 	public Valuations getValutions() {
-		return valutions;
+		return valuations;
 	}
 
 	public void setValutions(Valuations valutions) {
-		this.valutions = valutions;
+		this.valuations = valutions;
 	}
 
 	public Endowments getEndowments() {
@@ -273,87 +295,65 @@ class SimulationProperty {
 
 class Tradeables {
 	private String type;
-	private TradeableProperty properties;
-
+	private String tradeableType;
+	private String numTradeables;
+	
 	public String getType() {
 		return type;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	public TradeableProperty getProperties() {
-		return properties;
-	}
-
-	public void setProperties(TradeableProperty properties) {
-		this.properties = properties;
-	}
-
-}
-
-class TradeableProperty {
-	private Type tradeableType;
-	private Type numTradeables;
-
-	public Type getTradeableType() {
+	public String getTradeableType() {
 		return tradeableType;
 	}
-
-	public void setTradeableType(Type tradeableType) {
+	public void setTradeableType(String tradeableType) {
 		this.tradeableType = tradeableType;
 	}
-
-	public Type getNumTradeables() {
+	public String getNumTradeables() {
 		return numTradeables;
 	}
-
-	public void setNumTradeables(Type numTradeables) {
+	public void setNumTradeables(String numTradeables) {
 		this.numTradeables = numTradeables;
 	}
-
+	
 }
 
 class Valuations {
 	private String type;
-	private ValuationProperty properties;
-
+	private String distribution;
+	private String generator;
+	private Float min;
+	private Float max;
+	
+	public Float getMin() {
+		return min;
+	}
+	public void setMin(Float min) {
+		this.min = min;
+	}
+	public Float getMax() {
+		return max;
+	}
+	public void setMax(Float max) {
+		this.max = max;
+	}
 	public String getType() {
 		return type;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	public ValuationProperty getProperties() {
-		return properties;
-	}
-
-	public void setProperties(ValuationProperty properties) {
-		this.properties = properties;
-	}
-
-}
-
-class ValuationProperty {
-	private Type distribution;
-	private Type generator;
-
-	public Type getDistribution() {
+	public String getDistribution() {
 		return distribution;
 	}
-
-	public void setDistribution(Type distribution) {
+	public void setDistribution(String distribution) {
 		this.distribution = distribution;
 	}
-
-	public Type getGenerator() {
+	public String getGenerator() {
 		return generator;
 	}
-
-	public void setGenerator(Type generator) {
+	public void setGenerator(String generator) {
 		this.generator = generator;
 	}
 
@@ -361,75 +361,44 @@ class ValuationProperty {
 
 class Endowments {
 	private String type;
-	private EndowmentProperty properties;
+	private List<Tradeables> tradeable;
+	private String money;
 	
 	public String getType() {
 		return type;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	public EndowmentProperty getProperties() {
-		return properties;
-	}
-
-	public void setProperties(EndowmentProperty properties) {
-		this.properties = properties;
-	}
-
-}
-
-class EndowmentProperty {
-	private List<Tradeables> tradeable;
-	private Type money;
 	public List<Tradeables> getTradeable() {
 		return tradeable;
 	}
-
 	public void setTradeable(List<Tradeables> tradeable) {
 		this.tradeable = tradeable;
 	}
-	public Type getMoney() {
+	public String getMoney() {
 		return money;
 	}
-
-	public void setMoney(Type money) {
+	public void setMoney(String money) {
 		this.money = money;
 	}
-	
+
 }
 
 class Seqmarket {
 	private String type;
-	private SeqmarketProperty properties;
+	private List<Simmarket> simmarket;
 
 	public String getType() {
 		return type;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
 
-	public SeqmarketProperty getProperties() {
-		return properties;
-	}
-
-	public void setProperties(SeqmarketProperty properties) {
-		this.properties = properties;
-	}
-
-}
-
-class SeqmarketProperty {
-	private List<Simmarket> simmarket;
-
 	public List<Simmarket> getSimmarket() {
 		return simmarket;
 	}
-
 	public void setSimmarket(List<Simmarket> simmarket) {
 		this.simmarket = simmarket;
 	}
@@ -438,43 +407,32 @@ class SeqmarketProperty {
 
 class Simmarket {
 	private String type;
-	private SimmarketProperty properties;
-
+	private MarketRules marketrules;
+	
 	public String getType() {
 		return type;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	public SimmarketProperty getProperties() {
-		return properties;
-	}
-
-	public void setProperties(SimmarketProperty properties) {
-		this.properties = properties;
-	}
-
-}
-
-class SimmarketProperty {
-	private MarketRules marketrules;
-
 	public MarketRules getMarketrules() {
 		return marketrules;
 	}
-
 	public void setMarketrules(MarketRules marketrules) {
 		this.marketrules = marketrules;
 	}
-
+	
 }
 
 class MarketRules {
 	private String type;
-	private MarketRulesProperty properties;
-
+	private String allocationRule;
+	private String paymentRule;
+	private String queryRule;
+	private String activityRule;
+	private String informationRevelationPolicy;
+	private String terminationCondition;
+	
 	public String getType() {
 		return type;
 	}
@@ -483,69 +441,51 @@ class MarketRules {
 		this.type = type;
 	}
 
-	public MarketRulesProperty getProperties() {
-		return properties;
-	}
-
-	public void setProperties(MarketRulesProperty properties) {
-		this.properties = properties;
-	}
-
-}
-
-class MarketRulesProperty {
-	private Type allocationRule;
-	private Type paymentRule;
-	private Type queryRule;
-	private Type activityRule;
-	private Type informationRevelationPolicy;
-	private Type terminationCondition;
-
-	public Type getAllocationRule() {
+	public String getAllocationRule() {
 		return allocationRule;
 	}
 
-	public void setAllocationRule(Type allocationRule) {
+	public void setAllocationRule(String allocationRule) {
 		this.allocationRule = allocationRule;
 	}
 
-	public Type getPaymentRule() {
+	public String getPaymentRule() {
 		return paymentRule;
 	}
 
-	public void setPaymentRule(Type paymentRule) {
+	public void setPaymentRule(String paymentRule) {
 		this.paymentRule = paymentRule;
 	}
 
-	public Type getQueryRule() {
+	public String getQueryRule() {
 		return queryRule;
 	}
 
-	public void setQueryRule(Type queryRule) {
+	public void setQueryRule(String queryRule) {
 		this.queryRule = queryRule;
 	}
 
-	public Type getActivityRule() {
+	public String getActivityRule() {
 		return activityRule;
 	}
 
-	public void setActivityRule(Type activityRule) {
+	public void setActivityRule(String activityRule) {
 		this.activityRule = activityRule;
 	}
 
-	public Type getInformationRevelationPolicy() {
+	public String getInformationRevelationPolicy() {
 		return informationRevelationPolicy;
 	}
 
-	public void setInformationRevelationPolicy(Type informationRevelationPolicy) {
+	public void setInformationRevelationPolicy(String informationRevelationPolicy) {
 		this.informationRevelationPolicy = informationRevelationPolicy;
 	}
 
-	public Type getTerminationCondition() {
+	public String getTerminationCondition() {
 		return terminationCondition;
 	}
 
-	public void setTerminationCondition(Type terminationCondition) {
+	public void setTerminationCondition(String terminationCondition) {
 		this.terminationCondition = terminationCondition;
 	}
 
