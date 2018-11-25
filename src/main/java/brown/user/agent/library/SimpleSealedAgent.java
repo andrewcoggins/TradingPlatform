@@ -8,6 +8,7 @@ import brown.mechanism.bid.library.BidType;
 import brown.mechanism.bidbundle.library.AuctionBidBundle;
 import brown.mechanism.channel.library.SealedBidChannel;
 import brown.mechanism.tradeable.ITradeable;
+import brown.platform.messages.library.AccountResetMessage;
 import brown.platform.messages.library.BankUpdateMessage;
 import brown.platform.messages.library.GameReportMessage;
 import brown.system.setup.library.SSSPSetup;
@@ -43,8 +44,9 @@ public class SimpleSealedAgent extends AbsAuctionAgent {
   @Override
   public void onGameReport(GameReportMessage gameReport) {
     Logging.log("Game report received");
-  } 
-  
+  }
+
+
   public static void main(String[] args)  {
     new SimpleSealedAgent("localhost", 2121);
     new SimpleSealedAgent("localhost", 2121);

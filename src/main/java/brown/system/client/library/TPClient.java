@@ -30,7 +30,6 @@ public abstract class TPClient implements IClient {
   * @param host
   * @param port
   * @param gameSetup
-  * @throws AgentCreationException
   */
   public TPClient(String host, int port, ISetup gameSetup) {
     this.CLIENT = new Client(16384, 8192);
