@@ -7,5 +7,5 @@ package brown.mechanism.bid.library;
  *
  */
 public enum BidDirection {
-  BUY,SELL
+  BUY, SELL
 }
