@@ -9,7 +9,8 @@
           {
             "type": "nested",
             "tradeableType": "text",
-            "numTradeables": "10"
+            "numTradeables": "10",
+            TRADEABLE NAMES = A, B, C
           }
         ],
         "valuations": {
@@ -32,9 +33,11 @@
         },
         "seqmarket": [
           {
+            "name": A,
             "type": "nested",
             "simmarket": [
               {
+                name: B, C
                 "type": "nested",
                 "marketrules": {
                   "type": "nested",
