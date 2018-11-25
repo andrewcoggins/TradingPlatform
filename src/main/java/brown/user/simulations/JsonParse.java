@@ -85,18 +85,15 @@ public class JsonParse {
 	    Integer numRuns = new Integer(data.getNumRuns());
 	    Integer delayTime = new Integer(data.getSimulation().getStartingDelay());
 	    ISimulationManager simulationManager = new SimulationManager();
-
 	    
 	    for (SimulationProperty s : data.getSimulation().getProperties()) {
 	    	
 	    	String tTypeString = s.getTradeables().get(0).getTradeableType();
-		    Integer numTradeables = new Integer(s.getTradeables().get(0).getNumTradeables());
 		    String distributionString = s.getValutions().getDistribution();
 		    Float distributionMax = s.getValutions().getMax();
 			Float distributionMin = s.getValutions().getMin();
 		    String generatorString = s.getValutions().getGenerator();
 		    String endowmenttTypeString = s.getEndowments().getType();
-		    Integer endowmentNumTradeables = new Integer(s.getEndowments().getTradeable().get(0).getNumTradeables());
 		    Integer endowmentMoney = new Integer(s.getEndowments().getMoney());
 		    
 			Class<?> tTypeClass = Class.forName(tTypeString);
@@ -110,13 +107,20 @@ public class JsonParse {
 			Constructor<?> endowmentTypeCons = endowmenttTypeClass.getConstructor(Integer.TYPE);
 			
 		    List<ITradeable> allTradeables = new LinkedList<>();
-		    for (int i = 0; i < numTradeables; i++){
-		      allTradeables.add((ITradeable) tTypeCons.newInstance(i));
+		    for (Tradeables t : s.getTradeables()) {
+			    Integer numTradeables = new Integer(t.getNumTradeables());
+			    for (int i = 0; i < numTradeables; i++){
+				      allTradeables.add((ITradeable) tTypeCons.newInstance(i));
+				    }
+		    	
 		    }
 		    
 		    List<ITradeable> endowTradeables = new LinkedList<>();
-		    for (int i = 0; i < endowmentNumTradeables; i++){
-		      endowTradeables.add((ITradeable) endowmentTypeCons.newInstance(i));
+		    for (Tradeables t : s.getEndowments().getTradeable()) {
+			    Integer endowmentNumTradeables = new Integer(t.getNumTradeables());
+			    for (int i = 0; i < endowmentNumTradeables; i++){
+				      endowTradeables.add((ITradeable) endowmentTypeCons.newInstance(i));
+				    }
 		    }
 		    
 		    IWorldManager worldManager = new WorldManager();
