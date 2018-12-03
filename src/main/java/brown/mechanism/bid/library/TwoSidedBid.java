@@ -12,7 +12,7 @@ import brown.mechanism.tradeable.ITradeable;
  */
 public class TwoSidedBid implements IGameAction {
   
-public Map<ITradeable, Double> bids; 
+public final Map<ITradeable, Double> bids; 
 public final BidDirection direction; 
 
 public TwoSidedBid(Map<ITradeable, Double> bids, BidDirection direction) {
