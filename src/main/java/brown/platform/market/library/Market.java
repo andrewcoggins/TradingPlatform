@@ -32,12 +32,10 @@ public class Market implements IMarket {
   private final IPaymentRule PRULE;
   private final IAllocationRule ARULE;
   private final IQueryRule QRULE;
-  private final IGroupingRule GRULE;
   private final IActivityRule ACTRULE;
   private final IInformationRevelationPolicy IRPOLICY;
   private final ITerminationCondition ITCONDITION;
   private final IMarketState STATE;
-  private final IRecordKeepingRule rRule;
 
 
     /**
@@ -49,12 +47,10 @@ public class Market implements IMarket {
     this.PRULE = rules.pRule;
     this.ARULE = rules.aRule;
     this.QRULE = rules.qRule;
-    this.GRULE = rules.gRule;
     this.ACTRULE = rules.actRule;
     this.IRPOLICY = rules.infoPolicy;
-    this.ITCONDITION = rules.innerTCondition;
+    this.ITCONDITION = rules.tCondition; 
     this.STATE = state;
-    this.rRule = rules.rRule;
  }
   
   @Override
@@ -122,16 +118,6 @@ public class Market implements IMarket {
   @Override
   public void clearBidCache() {
     this.STATE.clearBids();
-  }
-  
-  @Override
-  public void setGroupings(List<Integer> agents) {
-    this.GRULE.setGrouping(this.STATE, agents);
-  }
-  
-  @Override
-  public void record(Map<Integer,IValuation> privateVals) throws IOException {    
-    this.rRule.record(this.STATE, privateVals);
   }
   
   @Override

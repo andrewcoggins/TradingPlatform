@@ -1,11 +1,9 @@
 package brown.platform.market;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import brown.auction.prevstate.library.PrevStateInfo;
-import brown.auction.value.valuation.IValuation;
 import brown.platform.accounting.library.Order;
 import brown.platform.messages.library.GameReportMessage;
 import brown.platform.messages.library.TradeMessage;
@@ -92,22 +90,6 @@ public interface IMarket {
    * from this market.
    */
   PrevStateInfo constructSummaryState();
-
-  /**
-   * Some auctions require that agents compete only in groups of a set 
-   * size. How groupings are determined in a market depends on the 
-   * grouping rule.
-   * @param the private IDs of all agents. 
-   */
-  public void setGroupings(List<Integer> allAgents);
-
-  /**
-   * records some information from this market by writing it to a file. 
-   * What information is recording depends 
-   * @param privateVals
-   * @throws IOException
-   */
-  public void record(Map<Integer,IValuation> privateVals) throws IOException;
   
   /**
    * Marks the market as closed so it can be closed in the MarketManager.

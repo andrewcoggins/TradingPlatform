@@ -5,15 +5,13 @@ package brown.platform.market.library;
     public FlexibleRules(IAllocationRule aRule, 
                          IPaymentRule pRule,  
                          IQueryRule qRule,  
-                         IGroupingRule gRule, 
                          IActivityRule actRule, 
                          IInformationRevelationPolicy irPolicy, 
-                         ITerminationCondition tCondition,  
-                         IRecordKeepingRule records 
+                         ITerminationCondition tCondition  
                          ) {  
-        super(aRule, pRule, qRule, gRule, actRule, irPolicy, tCondition, records);  
+        super(aRule, pRule, qRule, actRule, irPolicy, tCondition);  
     } 
      public AbsMarketRules copy() { 
-        return new FlexibleRules(aRule, pRule, qRule, gRule, actRule, infoPolicy, innerTCondition, rRule);  
+        return new FlexibleRules(aRule, pRule, qRule, actRule, infoPolicy, tCondition);  
     } 
 }

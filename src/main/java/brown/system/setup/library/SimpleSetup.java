@@ -8,6 +8,7 @@ import brown.auction.value.valuation.library.XORValuation;
 import brown.mechanism.bid.library.OneSidedBid;
 import brown.mechanism.channel.library.OneSidedChannel;
 import brown.platform.messages.library.SimpleSealedReportMessage;
+import brown.platform.messages.library.StringMessage;
 import brown.system.setup.ISetup;
 
 import com.esotericsoftware.kryo.Kryo;
@@ -29,5 +30,6 @@ public class SimpleSetup implements ISetup {
     kryo.register(SimpleSealedReportMessage.class);  
     kryo.register(XORValuationDistribution.class); 
     kryo.register(XORValuation.class); 
+    kryo.register(StringMessage.class); 
   }
 }

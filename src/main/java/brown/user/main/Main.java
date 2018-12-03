@@ -7,8 +7,6 @@ import java.util.Set;
 import java.util.HashSet;
 
 import brown.auction.rules.*;
-import brown.auction.rules.library.NoRecordKeeping;
-import brown.auction.rules.library.OneGrouping;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.mechanism.tradeable.ITradeable;
@@ -115,11 +113,9 @@ public class Main {
     AbsMarketRules marketRule = new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
             (IPaymentRule) pRuleCons.newInstance(),
             (IQueryRule) qRuleCons.newInstance(),
-            new OneGrouping(),
             (IActivityRule) actRuleCons.newInstance(),
             (IInformationRevelationPolicy) irPolicyCons.newInstance(),
-            (ITerminationCondition) tConditionCons.newInstance(),
-            new NoRecordKeeping());
+            (ITerminationCondition) tConditionCons.newInstance());
     IValuationGenerator valGenerator = (IValuationGenerator) generatorCons.newInstance(1.0, 0.0);
     IValuationDistribution valDistribution = (IValuationDistribution) distributionCons.newInstance(valGenerator,
             new HashSet<>(allTradeables));

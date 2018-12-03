@@ -52,7 +52,6 @@ public class MarketManager implements IMarketManager {
 	 */
 	public void openNewMarkets(AbsMarketRules rules, Integer marketID, List<ITradeable> tradeables, List<Integer> agents) {
 	  Market market = new Market(rules.copy(), new MarketState(marketID,tradeables, null), new History());
-	   market.setGroupings(agents);
 	   this.openMarkets.clear();
 	   this.openLedgers.clear();
 	   this.openLedgers.put(market, new Ledger(market.getMarketID()));
