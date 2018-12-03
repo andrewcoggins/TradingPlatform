@@ -12,8 +12,6 @@ import brown.platform.accounting.library.Order;
 import brown.platform.messages.library.GameReportMessage;
 import brown.platform.messages.library.TradeMessage;
 import brown.platform.messages.library.TradeRequestMessage;
-import brown.platform.twosided.IOrderBook;
-import brown.platform.twosided.OrderBook;
 
 /**
  * Standard MarketState stores the internal information of a 
@@ -53,8 +51,6 @@ public class MarketState implements IMarketState {
   private PrevStateInfo prevState;
   private PrevStateInfo summaryState;
   
-  // Orderbook for two sided markets
-  private IOrderBook orderbook;
   
   public MarketState(Integer ID, List<ITradeable> allGoods, PrevStateInfo prevState) {
     this.ID = ID; 
@@ -68,7 +64,6 @@ public class MarketState implements IMarketState {
     this.payments = new LinkedList<Order>();
     this.prevState = prevState;
     this.groups = new LinkedList<List<Integer>>();
-    this.orderbook = new OrderBook();
     this.time = System.currentTimeMillis();
     this.isOpen = true; 
     this.reserve = new HashMap<ITradeable, Double>();
@@ -261,15 +256,6 @@ public class MarketState implements IMarketState {
     this.groups = groups;    
   }
 
-  @Override
-  public IOrderBook getOrderBook() {
-    return this.orderbook;
-  }
-  
-  @Override
-  public void setOrderBook(IOrderBook book){
-    this.orderbook = book;
-  }
 
 
 }

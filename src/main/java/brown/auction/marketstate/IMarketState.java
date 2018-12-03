@@ -9,7 +9,6 @@ import brown.platform.accounting.library.Order;
 import brown.platform.messages.library.GameReportMessage;
 import brown.platform.messages.library.TradeMessage;
 import brown.platform.messages.library.TradeRequestMessage;
-import brown.platform.twosided.IOrderBook;
 
 /**
  * stores the internal state of a market as 
@@ -107,10 +106,5 @@ public interface IMarketState {
     
     public void setGroups(List<List<Integer>> groups);
 
-    public IOrderBook getOrderBook();
-
-    void setOrderBook(IOrderBook book);
-    
-    //TODO: market update. 
 
 }
