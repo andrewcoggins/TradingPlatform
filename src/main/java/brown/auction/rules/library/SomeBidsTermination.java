@@ -6,7 +6,7 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.ITerminationCondition;
-import brown.mechanism.bid.library.AuctionBid;
+import brown.mechanism.bid.library.OneSidedBid;
 import brown.mechanism.bid.library.BidType;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.messages.library.TradeMessage;
@@ -46,7 +46,7 @@ public class SomeBidsTermination implements ITerminationCondition {
       Map<ITradeable, Double> reserve = state.getReserve(); 
       // check trades in accepted
       for (TradeMessage trade : roundTrades) {
-        Map<ITradeable, BidType> agentMap = ((AuctionBid) trade.Bundle.getBids()).bids; 
+        Map<ITradeable, BidType> agentMap = ((OneSidedBid) trade.Bundle.getBids()).bids; 
         for (ITradeable t : (agentMap.keySet())) { 
           if (reserve.containsKey(t)) {
             if (reserve.get(t) < agentMap.get(t).price) {

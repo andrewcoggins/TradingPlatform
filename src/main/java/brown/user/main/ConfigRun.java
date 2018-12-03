@@ -49,7 +49,7 @@ public class ConfigRun {
             }
             endowmentManager.createEndowment(aConfig.endowMoney, aConfig.endowTradeables);
             valuationManager.createValuation(0, aConfig.distribution);
-            tradeableManager.createSimpleTradeables(aConfig.allTradeables.size());
+            tradeableManager.createTradeables(aConfig.allTradeables.size());
             domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
             worldManager.createWorld(domainManager, marketManager, whiteboard);
             simulationManager.createSimulation(worldManager);

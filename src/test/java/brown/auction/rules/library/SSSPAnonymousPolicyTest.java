@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import brown.auction.marketstate.library.MarketState;
 import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.messages.library.GameReportMessage;
@@ -33,7 +33,7 @@ public class SSSPAnonymousPolicyTest {
       oneGroup.add(i); 
       Map<ITradeable, BidType> bidMap = new HashMap<ITradeable, BidType>(); 
       bidMap.put(new SimpleTradeable(0), new BidType((double) i, 1)); 
-      TradeMessage t = new TradeMessage(0, new AuctionBidBundle(bidMap), 0, i); 
+      TradeMessage t = new TradeMessage(0, new OneSidedBidBundle(bidMap), 0, i); 
       state.addBid(t);
     }
     groups.add(oneGroup); 

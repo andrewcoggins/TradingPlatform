@@ -9,7 +9,7 @@ import brown.mechanism.bid.library.CancelBid;
 import brown.mechanism.bid.library.TwoSidedBid;
 import brown.mechanism.bidbundle.library.CancelBundle;
 import brown.mechanism.bidbundle.library.TwoSidedBidBundle;
-import brown.mechanism.channel.library.CallMarketChannel;
+import brown.mechanism.channel.library.TwoSidedChannel;
 import brown.platform.accounting.library.Transaction;
 import brown.platform.messages.library.BankUpdateMessage;
 import brown.platform.messages.library.CallMarketReportMessage;
@@ -42,7 +42,7 @@ public abstract class AbsPredictionMarketAgent extends AbsCallMarketAgent {
 	}
 	
 	@Override
-	public void onCallMarket(CallMarketChannel channel) {
+	public void onCallMarket(TwoSidedChannel channel) {
 		this.orderbook = channel.getOrderBook();
 		this.onMarketRequest(channel);
 		if (channel.isTest()){
@@ -77,17 +77,17 @@ public abstract class AbsPredictionMarketAgent extends AbsCallMarketAgent {
 		onMarketStart();
 	}
 	
-	public void buy(double price, int quantity, CallMarketChannel channel) {
+	public void buy(double price, int quantity, TwoSidedChannel channel) {
 		TwoSidedBid bid = new TwoSidedBid(BidDirection.BUY, price, quantity);
 		channel.bid(this, new TwoSidedBidBundle(bid));
 	}
 	
-	public void sell(double price, int quantity, CallMarketChannel channel) {
+	public void sell(double price, int quantity, TwoSidedChannel channel) {
 		TwoSidedBid bid = new TwoSidedBid(BidDirection.SELL, price, quantity);
 		channel.bid(this, new TwoSidedBidBundle(bid));
 	}
 	
-	public void cancel(double price, boolean buy, CallMarketChannel channel) {
+	public void cancel(double price, boolean buy, TwoSidedChannel channel) {
 		BidDirection dir = buy ? BidDirection.BUY : BidDirection.SELL;
 		channel.bid(this, new CancelBundle(new CancelBid(dir, price)));
 	}
@@ -109,7 +109,7 @@ public abstract class AbsPredictionMarketAgent extends AbsCallMarketAgent {
 	}
 	
 	public abstract void onMarketStart();
-	public abstract void onMarketRequest(CallMarketChannel channel);
+	public abstract void onMarketRequest(TwoSidedChannel channel);
 	public abstract void onTransaction(int quantity, double price);
 	public abstract double getHighestBuy();
 	public abstract double getLowestSell();

@@ -1,13 +1,13 @@
 package brown.mechanism.channel.library;
 
-import brown.mechanism.channel.IAgentChannel;
+import brown.mechanism.channel.IChannel;
 
 /**
  * abstract agent channel.
  * @author acoggins
  *
  */
-public abstract class AbsChannel implements IAgentChannel{
+public abstract class AbsChannel implements IChannel{
 
   public final Integer ID;
 

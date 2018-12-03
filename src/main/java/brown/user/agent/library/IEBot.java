@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import brown.mechanism.channel.library.CallMarketChannel;
+import brown.mechanism.channel.library.TwoSidedChannel;
 
 
 /**
@@ -63,7 +63,7 @@ public class IEBot extends AbsLab06Agent {
   }
 
   @Override
-  public void onMarketRequest(CallMarketChannel channel) {
+  public void onMarketRequest(TwoSidedChannel channel) {
 
     // TODO Auto-generated method stub
     

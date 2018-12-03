@@ -2,7 +2,7 @@ package brown.user.agent.library;
 
 import java.util.PriorityQueue;
 
-import brown.mechanism.channel.library.CallMarketChannel;
+import brown.mechanism.channel.library.TwoSidedChannel;
 import brown.platform.twosided.BuyOrder;
 import brown.platform.twosided.IOrderBook;
 import brown.platform.twosided.SellOrder;
@@ -36,7 +36,7 @@ public class TestPredictionMarketAgent extends AbsPredictionMarketAgent {
 	}
 
 	@Override
-	public void onMarketRequest(CallMarketChannel channel) {
+	public void onMarketRequest(TwoSidedChannel channel) {
 		if (round < 10) {
 			buy(price+round, 1, channel);
 		}

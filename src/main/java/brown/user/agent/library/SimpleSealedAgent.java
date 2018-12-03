@@ -5,13 +5,13 @@ import java.util.Map;
 
 import brown.logging.library.Logging;
 import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
-import brown.mechanism.channel.library.SealedBidChannel;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
+import brown.mechanism.channel.library.OneSidedChannel;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.messages.library.AccountResetMessage;
 import brown.platform.messages.library.BankUpdateMessage;
 import brown.platform.messages.library.GameReportMessage;
-import brown.system.setup.library.SSSPSetup;
+import brown.system.setup.library.SimpleSetup;
 
 /**
  * Simple sealed agent bids in a simple sealed auction, 
@@ -23,17 +23,17 @@ public class SimpleSealedAgent extends AbsAuctionAgent {
   
   public SimpleSealedAgent(String host, int port)
        {
-    super(host, port, new SSSPSetup());
+    super(host, port, new SimpleSetup());
   }
   
   @Override
-  public void onSimpleSealed(SealedBidChannel simpleChannel) {
+  public void onSimpleSealed(OneSidedChannel simpleChannel) {
     Map<ITradeable, BidType> initial = new HashMap<ITradeable, BidType>();
     for (ITradeable t: this.tradeables) {
       initial.put(t, new BidType(this.valuation.getValuation(t).doubleValue(), 1));
     }
     // just bid valuation 
-    simpleChannel.bid(this, new AuctionBidBundle(initial));
+    simpleChannel.bid(this, new OneSidedBidBundle(initial));
   }  
 
   @Override

@@ -3,7 +3,7 @@ package brown.user.agent.library;
 import brown.mechanism.bid.library.BidDirection;
 import brown.mechanism.bid.library.TwoSidedBid;
 import brown.mechanism.bidbundle.library.TwoSidedBidBundle;
-import brown.mechanism.channel.library.CallMarketChannel;
+import brown.mechanism.channel.library.TwoSidedChannel;
 import brown.platform.messages.library.CallMarketReportMessage;
 import brown.platform.messages.library.GameReportMessage;
 import brown.system.setup.library.CallMarketSetup;
@@ -23,7 +23,7 @@ public class CallMarketLagAgent extends AbsCallMarketAgent {
   }
 
   @Override
-  public void onCallMarket(CallMarketChannel channel) {
+  public void onCallMarket(TwoSidedChannel channel) {
     try {
       Thread.sleep(this.lagTime);
     } catch (InterruptedException e) {

@@ -1,7 +1,7 @@
 package brown.user.agent.library;
 
 import brown.logging.library.Logging;
-import brown.mechanism.channel.library.CallMarketChannel;
+import brown.mechanism.channel.library.TwoSidedChannel;
 
 // This agent buys or sells randomly with uniform distribution
 public class RandomAgent extends AbsPredictionMarketAgent {
@@ -15,7 +15,7 @@ public class RandomAgent extends AbsPredictionMarketAgent {
 	}
 
 	@Override
-	public void onMarketRequest(CallMarketChannel channel) {
+	public void onMarketRequest(TwoSidedChannel channel) {
 		if (Math.random() < .5) {
 			this.buy(Math.random() * 98 + 1, 1, channel);
 		} else {

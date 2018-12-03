@@ -15,7 +15,7 @@ import brown.auction.prevstate.library.PriceDiscoveryInfo;
 import brown.auction.rules.IAllocationRule;
 import brown.logging.library.Logging;
 import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.bidbundle.library.BundleType;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
@@ -41,7 +41,7 @@ public class HPReserveAllocation implements IAllocationRule {
     //
     
     Map<ITradeable, Double> reserves = state.getReserve(); 
-    AuctionBidBundle reservePrices = (AuctionBidBundle) reserves; 
+    OneSidedBidBundle reservePrices = (OneSidedBidBundle) reserves; 
     
     // a grouping is a list of lists of agent IDs.
     List<List<Integer>> grouping = state.getGroups();       
@@ -71,7 +71,7 @@ public class HPReserveAllocation implements IAllocationRule {
         // Bid must be of right type
         if(bid.Bundle.getType().equals(BundleType.AUCTION) &&
            group.contains(bid.AgentID)) {
-          AuctionBidBundle bundle = (AuctionBidBundle) bid.Bundle; 
+          OneSidedBidBundle bundle = (OneSidedBidBundle) bid.Bundle; 
           for (ITradeable t : bundle.getBids().bids.keySet()) {
             // This only works with SIMPLE Tradeables          
             if (t.getType() != TradeableType.Simple){

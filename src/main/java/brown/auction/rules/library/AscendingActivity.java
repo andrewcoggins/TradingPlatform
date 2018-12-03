@@ -8,7 +8,7 @@ import java.util.Set;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
 import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.messages.library.TradeMessage;
 
@@ -38,12 +38,12 @@ public class AscendingActivity implements IActivityRule {
   @Override
   public void isAcceptable(IMarketState state, TradeMessage aBid) {
     boolean acceptable = true; 
-    if (aBid.Bundle instanceof AuctionBidBundle) {
+    if (aBid.Bundle instanceof OneSidedBidBundle) {
       Integer agentId = aBid.AgentID;  
-      AuctionBidBundle agentBundle = (AuctionBidBundle) aBid.Bundle; 
+      OneSidedBidBundle agentBundle = (OneSidedBidBundle) aBid.Bundle; 
       Map<ITradeable, BidType> agentBids = agentBundle.getBids().bids; 
       System.out.println("AGENT BIDS: " + agentBids);
-      AuctionBidBundle reserveBundle = (AuctionBidBundle) state.getReserve();  
+      OneSidedBidBundle reserveBundle = (OneSidedBidBundle) state.getReserve();  
       Map<ITradeable, BidType> reserves = reserveBundle.getBids().bids; 
       System.out.println("RESERVE PRICES: " + reserves); 
       // make sure the agent bid is not empty. 

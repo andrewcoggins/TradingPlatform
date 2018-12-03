@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 import brown.auction.marketstate.library.MarketState;
 import brown.mechanism.bid.library.BidType;
 import brown.mechanism.bidbundle.IBidBundle;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.ComplexTradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
@@ -42,7 +42,7 @@ public class HighestPriceAllocationTest {
     for(int i = 0; i <= 5; i++) {
       Map<ITradeable, BidType> bidMap = new HashMap<ITradeable, BidType>(); 
       bidMap.put(t, new BidType((double) i , 1)); 
-      IBidBundle bidBundle = new AuctionBidBundle(bidMap);
+      IBidBundle bidBundle = new OneSidedBidBundle(bidMap);
       TradeMessage trade = new TradeMessage(i, bidBundle, i, i); 
       testState.addBid(trade);
       allBids.add(trade); 
@@ -103,7 +103,7 @@ public class HighestPriceAllocationTest {
     for(int i = 0; i < 2; i++) {
       Map<ITradeable, BidType> bidMap = new HashMap<ITradeable, BidType>(); 
       bidMap.put(t, new BidType(1.0 , 1)); 
-      IBidBundle bidBundle = new AuctionBidBundle(bidMap);
+      IBidBundle bidBundle = new OneSidedBidBundle(bidMap);
       TradeMessage trade = new TradeMessage(i, bidBundle, i, i); 
       testState.addBid(trade);
       allBids.add(trade); 
@@ -151,7 +151,7 @@ public class HighestPriceAllocationTest {
     for(int i = 0; i < 2; i++) {
       Map<ITradeable, BidType> bidMap = new HashMap<ITradeable, BidType>(); 
       bidMap.put(com, new BidType(1.0 , 1)); 
-      IBidBundle bidBundle = new AuctionBidBundle(bidMap);
+      IBidBundle bidBundle = new OneSidedBidBundle(bidMap);
       TradeMessage trade = new TradeMessage(i, bidBundle, i, i); 
       testState.addBid(trade);
       allBids.add(trade); 

@@ -1,6 +1,6 @@
 package brown.user.agent.library;
 
-import brown.mechanism.channel.library.CallMarketChannel;
+import brown.mechanism.channel.library.TwoSidedChannel;
 
 /**
  * Calculates fair value and then updates in direction of trades it does
@@ -58,7 +58,7 @@ public class UpdateAgent extends AbsPredictionMarketAgent {
 	}
 
 	@Override
-	public void onMarketRequest(CallMarketChannel channel) {
+	public void onMarketRequest(TwoSidedChannel channel) {
 		if (updated) {
 			this.cancel(1, true, channel);
 			this.cancel(100, false, channel);

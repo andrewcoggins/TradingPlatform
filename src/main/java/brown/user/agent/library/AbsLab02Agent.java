@@ -6,8 +6,8 @@ import java.util.Map;
 import brown.auction.value.valuation.IValuation;
 import brown.logging.library.Logging;
 import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
-import brown.mechanism.channel.library.SealedBidChannel;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
+import brown.mechanism.channel.library.OneSidedChannel;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.messages.library.BankUpdateMessage;
 import brown.platform.messages.library.GameReportMessage;
@@ -44,13 +44,13 @@ public abstract class AbsLab02Agent extends AbsAuctionAgent {
 	}
 	
 
-	public void submitBid(SealedBidChannel channel, double bid) {
+	public void submitBid(OneSidedChannel channel, double bid) {
 		Map<ITradeable, BidType> bidMap = new HashMap<ITradeable, BidType>();
 	    bidMap.put(tradeable, new BidType(bid, 1));
 	    
 	    // just bid valuation 
 	    System.out.println("BID: " + bid);
-	    channel.bid(this, new AuctionBidBundle(bidMap));
+	    channel.bid(this, new OneSidedBidBundle(bidMap));
 	}
 	
 	@Override

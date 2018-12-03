@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import brown.auction.marketstate.library.MarketState;
 import brown.mechanism.bid.library.BidType;
 import brown.mechanism.bidbundle.IBidBundle;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.messages.library.TradeMessage;
@@ -66,7 +66,7 @@ public class ClockAllocationTest {
     for(int i = 0; i <= 2; i++) {
       Map<ITradeable, BidType> bidMap = new HashMap<ITradeable, BidType>();
       bidMap.put(t, new BidType(0.0, 1));
-      IBidBundle bidBundle = new AuctionBidBundle(bidMap);
+      IBidBundle bidBundle = new OneSidedBidBundle(bidMap);
       TradeMessage trade = new TradeMessage(i, bidBundle, i, i);
       testState.addBid(trade);
       allBids.add(trade);

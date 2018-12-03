@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import brown.auction.marketstate.library.MarketState;
 import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.messages.library.TradeMessage;
@@ -30,7 +30,7 @@ public class OneShotActivityTest {
     Map<ITradeable, BidType> bidMap = new HashMap<ITradeable, BidType>(); 
     bidMap.put(new SimpleTradeable(0), new BidType(1.0, 1)); 
     bidMap.put(new SimpleTradeable(1), new BidType(1.0, 1));
-    TradeMessage message = new TradeMessage(0, new AuctionBidBundle(bidMap), 0, 0); 
+    TradeMessage message = new TradeMessage(0, new OneSidedBidBundle(bidMap), 0, 0); 
     
     OneShotActivity aRule = new OneShotActivity(); 
     aRule.isAcceptable(state, message);
@@ -39,7 +39,7 @@ public class OneShotActivityTest {
     state.addBid(message);
     bidMap.put(new SimpleTradeable(0), new BidType(0.0, 1)); 
     bidMap.put(new SimpleTradeable(1), new BidType(2.0, 1));
-    TradeMessage messageTwo = new TradeMessage(0, new AuctionBidBundle(bidMap), 0, 0);
+    TradeMessage messageTwo = new TradeMessage(0, new OneSidedBidBundle(bidMap), 0, 0);
     aRule.isAcceptable(state, messageTwo);
     assertEquals(state.getAcceptable(), false); 
   }

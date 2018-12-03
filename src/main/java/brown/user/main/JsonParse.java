@@ -1,4 +1,4 @@
-package brown.user.simulations;
+package brown.user.main;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -175,7 +175,7 @@ public class JsonParse {
 		   
 		    endowmentManager.createEndowment(endowmentMoney, endowTradeables);
 		    valuationManager.createValuation(0, valDistribution);
-		    tradeableManager.createSimpleTradeables(numTradeables);
+		    tradeableManager.createTradeables(numTradeables);
 		    domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
 		    worldManager.createWorld(domainManager, marketManager, whiteboard);
 		    simulationManager.createSimulation(worldManager);

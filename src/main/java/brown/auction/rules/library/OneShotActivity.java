@@ -4,8 +4,8 @@ import java.util.List;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
-import brown.mechanism.bid.IBid;
-import brown.mechanism.bid.library.AuctionBid;
+import brown.mechanism.bid.IGameAction;
+import brown.mechanism.bid.library.OneSidedBid;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.TradeableType;
 import brown.platform.messages.library.TradeMessage;
@@ -29,11 +29,11 @@ public class OneShotActivity implements IActivityRule {
       }
     }
     
-    IBid bids = aBid.Bundle.getBids();
-    if (!(bids instanceof AuctionBid)) {
+    IGameAction bids = aBid.Bundle.getBids();
+    if (!(bids instanceof OneSidedBid)) {
       acceptable = false;
     } else {
-      for (ITradeable t: ((AuctionBid) bids).bids.keySet()){
+      for (ITradeable t: ((OneSidedBid) bids).bids.keySet()){
         if (t.getType() != TradeableType.Simple){
           acceptable = false;
         }

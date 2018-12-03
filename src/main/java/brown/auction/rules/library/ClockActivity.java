@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
 import brown.logging.library.Logging;
-import brown.mechanism.bid.library.AuctionBid;
+import brown.mechanism.bid.library.OneSidedBid;
 import brown.mechanism.bid.library.BidType;
 import brown.mechanism.bidbundle.library.BundleType;
 import brown.mechanism.tradeable.ITradeable;
@@ -35,7 +35,7 @@ public class ClockActivity implements IActivityRule {
   @Override
   public void isAcceptable(IMarketState state, TradeMessage aBid) {
       if (aBid.Bundle.getType() == BundleType.AUCTION) {
-        AuctionBid bid = (AuctionBid) aBid.Bundle.getBids();
+        OneSidedBid bid = (OneSidedBid) aBid.Bundle.getBids();
         double sumOfBids = 0;
         double sumOfReserves = 0;
         int currentTick = state.getTicks(); 

@@ -1,6 +1,6 @@
 package brown.user.agent.library; // TODO: change this to your package
 
-import brown.mechanism.channel.library.CallMarketChannel;
+import brown.mechanism.channel.library.TwoSidedChannel;
 
 public class PredictionMarketAgentTemplate extends AbsPredictionMarketAgent {
 
@@ -14,7 +14,7 @@ public class PredictionMarketAgentTemplate extends AbsPredictionMarketAgent {
 	}
 
 	@Override
-	public void onMarketRequest(CallMarketChannel channel) {
+	public void onMarketRequest(TwoSidedChannel channel) {
 		// TODO decide if you want to bid/offer or not
 	}
 

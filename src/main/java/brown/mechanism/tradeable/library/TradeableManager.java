@@ -1,5 +1,6 @@
 package brown.mechanism.tradeable.library;
 
+import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.ITradeableManager;
@@ -27,7 +28,7 @@ public class TradeableManager implements ITradeableManager {
         this.lock = false;
     }
 
-    public void createSimpleTradeables(int numTradeables) {
+    public void createTradeables(int numTradeables) {
         try {
             if (!lock) {
                 List<ITradeable> tentative = new LinkedList<>();
@@ -35,33 +36,15 @@ public class TradeableManager implements ITradeableManager {
                     tentative.add(new SimpleTradeable(i));
                 }
                 if (this.tradeables.isEmpty()) {
-                    this.tradeables = tentative;
+                     this.tradeables = tentative;
                 } else {
-                    System.err.println("ERROR: tradeables already assigned.");
+                    ErrorLogging.log("ERROR: tradeables already assigned.");
                 }
             } else {
                 PlatformLogging.log("Creation denied: tradeable manager locked.");
             }
         } catch (NotStrictlyPositiveException e) {
-            System.err.println("NotStrictlyPositiveException: " + e);
-        }
-    }
-
-    public void createMultiTradeables(List<MultiTradeable> multiTradeables) {
-        if (this.tradeables.isEmpty()) {
-            List<ITradeable> converted = new LinkedList<>(multiTradeables);
-            this.tradeables = converted;
-        } else {
-            System.err.println("ERROR: tradeables already assigned.");
-        }
-    }
-
-    public void createComplexTradeables(List<ComplexTradeable> complexTradeables) {
-        if (this.tradeables.isEmpty()) {
-            List<ITradeable> converted = new LinkedList<>(complexTradeables);
-            this.tradeables = converted;
-        } else {
-            System.err.println("ERROR: tradeables already assigned.");
+            ErrorLogging.log("NotStrictlyPositiveException: " + e);
         }
     }
 
@@ -72,4 +55,5 @@ public class TradeableManager implements ITradeableManager {
     public void lock() {
         this.lock = true;
     }
+
 }

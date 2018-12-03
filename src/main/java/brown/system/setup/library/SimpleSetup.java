@@ -5,9 +5,8 @@ import brown.auction.value.distribution.library.XORValuationDistribution;
 import brown.auction.value.generator.library.NormalValGenerator;
 import brown.auction.value.valuation.library.AdditiveValuation;
 import brown.auction.value.valuation.library.XORValuation;
-import brown.mechanism.bid.library.AuctionBid;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
-import brown.mechanism.channel.library.SealedBidChannel;
+import brown.mechanism.bid.library.OneSidedBid;
+import brown.mechanism.channel.library.OneSidedChannel;
 import brown.platform.messages.library.SimpleSealedReportMessage;
 import brown.system.setup.ISetup;
 
@@ -17,17 +16,16 @@ import com.esotericsoftware.kryo.Kryo;
  * Additional setup for SSSP.
  * @author andrew
  */
-public class SSSPSetup implements ISetup {
+public class SimpleSetup implements ISetup {
 
   @Override
   public void setup(Kryo kryo) {
     Startup.start(kryo);
-    kryo.register(AuctionBidBundle.class);
-    kryo.register(AuctionBid.class);    
+    kryo.register(OneSidedBid.class);    
     kryo.register(AdditiveValuationDistribution.class);
     kryo.register(AdditiveValuation.class);        
     kryo.register(NormalValGenerator.class);    
-    kryo.register(SealedBidChannel.class);
+    kryo.register(OneSidedChannel.class);
     kryo.register(SimpleSealedReportMessage.class);  
     kryo.register(XORValuationDistribution.class); 
     kryo.register(XORValuation.class); 

@@ -1,71 +1,23 @@
 package brown.mechanism.bid.library;
 
-import brown.mechanism.bid.IBid;
+import java.util.Map;
+
+import brown.mechanism.bid.IGameAction;
+import brown.mechanism.tradeable.ITradeable;
 
 /**
  * A map from Tradeables to a Bids.
  * @author andrew, modified by kerry
  *
  */
-public class TwoSidedBid implements IBid {
+public class TwoSidedBid implements IGameAction {
   
-  public BidDirection direction;
-  public Integer quantity;  
-  public Double price; 
-  
-  /**
-   * For Kryo 
-   * DO NOT USE
-   */
-  public TwoSidedBid() {
-    this.direction = null;
-    this.quantity = null;
-    this.price = null;
-  }
-  
-  /**
-   * @param bids are represented as a map from ITradeables to doubles
-   */
-  public TwoSidedBid(BidDirection direction, double price, int quantity) {
-    this.direction = direction;
-    this.price = price;
-    this.quantity = quantity;
-    
+public Map<ITradeable, Double> bids; 
+public final BidDirection direction; 
 
-  }
-  
-  @Override
-  public String toString() {
-    return "Two Sided Bid: Direction: " + direction + ", Price: " + price + ", Quantity: " + quantity ;
-  }
+public TwoSidedBid(Map<ITradeable, Double> bids, BidDirection direction) {
+	this.bids = bids; 
+	this.direction = direction; 
+}
 
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((direction == null) ? 0 : direction.hashCode());
-    long temp;
-    temp = Double.doubleToLongBits(price);
-    result = prime * result + (int) (temp ^ (temp >>> 32));
-    result = prime * result + quantity;
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    TwoSidedBid other = (TwoSidedBid) obj;
-    if (direction != other.direction)
-      return false;
-    if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
-      return false;
-    if (quantity != other.quantity)
-      return false;
-    return true;
-  } 
 }

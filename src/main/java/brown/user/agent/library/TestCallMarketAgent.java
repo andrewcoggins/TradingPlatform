@@ -5,7 +5,7 @@ import brown.logging.library.Logging;
 import brown.mechanism.bid.library.BidDirection;
 import brown.mechanism.bid.library.TwoSidedBid;
 import brown.mechanism.bidbundle.library.TwoSidedBidBundle;
-import brown.mechanism.channel.library.CallMarketChannel;
+import brown.mechanism.channel.library.TwoSidedChannel;
 import brown.platform.messages.library.BankUpdateMessage;
 import brown.platform.messages.library.CallMarketReportMessage;
 import brown.platform.messages.library.GameReportMessage;
@@ -30,7 +30,7 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
   }
   
   @Override
-  public void onCallMarket(CallMarketChannel cmChannel) {
+  public void onCallMarket(TwoSidedChannel cmChannel) {
     
     
     for (int i = 0; i <20; i++) {

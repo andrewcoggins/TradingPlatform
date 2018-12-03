@@ -2,7 +2,7 @@ package brown.mechanism.channel;
 
 import java.util.Map;
 
-import brown.mechanism.bidbundle.IBidBundle;
+import brown.mechanism.bid.IGameAction;
 import brown.user.agent.library.AbsAgent;
 
 /**
@@ -11,7 +11,7 @@ import brown.user.agent.library.AbsAgent;
  * @author acoggins
  *
  */
-public interface IAgentChannel {
+public interface IChannel {
   
 	/**
 	 * Gets the ID of the auction
@@ -30,8 +30,6 @@ public interface IAgentChannel {
    * @param agent
    * @param bid
    */
-	public void bid(AbsAgent agent, IBidBundle bid);
-
-  public IAgentChannel sanitize(Integer agent, Map<Integer, Integer> privateToPublic);
+	public void bid(AbsAgent agent, IGameAction action);
 	
 }

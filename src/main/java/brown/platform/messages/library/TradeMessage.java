@@ -1,6 +1,6 @@
 package brown.platform.messages.library;
 
-import brown.mechanism.bidbundle.IBidBundle;
+import brown.mechanism.bid.IGameAction;
 import brown.user.agent.library.AbsAgent;
 
 /**
@@ -12,7 +12,7 @@ import brown.user.agent.library.AbsAgent;
  */
 public class TradeMessage extends AbsMessage {
   
-	public final IBidBundle Bundle;
+	public final IGameAction action;
 	public final Integer AuctionID;
 	public final Integer AgentID;
 	
@@ -23,7 +23,7 @@ public class TradeMessage extends AbsMessage {
 		super(null);
 		this.AgentID = null;
 		this.AuctionID = null;
-		this.Bundle = null;
+		this.action = null;
 	}
 
 	/**
@@ -33,39 +33,33 @@ public class TradeMessage extends AbsMessage {
 	 * @param auctionID : auction's ID
 	 * @param agentID : agent's ID; verified by server
 	 */
-	public TradeMessage(int ID, IBidBundle bundle, Integer auctionID, Integer agentID) {
+	public TradeMessage(int ID, IGameAction action, Integer auctionID, Integer agentID) {
 		super(ID);
-		this.Bundle = bundle;
+		this.action = action;
 		this.AuctionID = auctionID;
 		this.AgentID = agentID;
 	}
-	
-	/**
-	 * Safe copy for server during ID verification
-	 * @param agentID : truthful ID
-	 * @return Bid
-	 */
-	public TradeMessage safeCopy(Integer agentID) {
-		return new TradeMessage(this.ID, this.Bundle, this.AuctionID, agentID);
-	}
+
 
   @Override
   public void dispatch(AbsAgent agent) {
     // Noop
   }
 	
+
   @Override
   public String toString() {
-    return "[" + this.AuctionID + ":" + this.AgentID + "->" + this.Bundle + "]";
+    return "TradeMessage [action=" + action + ", AuctionID=" + AuctionID
+        + ", AgentID=" + AgentID + "]";
   }
-  
-	@Override
+
+  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((AgentID == null) ? 0 : AgentID.hashCode());
     result = prime * result + ((AuctionID == null) ? 0 : AuctionID.hashCode());
-    result = prime * result + ((Bundle == null) ? 0 : Bundle.hashCode());
+    result = prime * result + ((action == null) ? 0 : action.hashCode());
     return result;
   }
 
@@ -88,12 +82,13 @@ public class TradeMessage extends AbsMessage {
         return false;
     } else if (!AuctionID.equals(other.AuctionID))
       return false;
-    if (Bundle == null) {
-      if (other.Bundle != null)
+    if (action == null) {
+      if (other.action != null)
         return false;
-    } else if (!Bundle.equals(other.Bundle))
+    } else if (!action.equals(other.action))
       return false;
     return true;
   }
-	
+  
+  
 }

@@ -11,7 +11,7 @@ import brown.auction.rules.IRecordKeepingRule;
 import brown.auction.value.valuation.IValuation;
 import brown.logging.library.Logging;
 import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.messages.library.TradeMessage;
 
@@ -28,7 +28,7 @@ public class RecordBids implements IRecordKeepingRule {
     Logging.log("Record: " + this.path);
     PrintWriter out = new PrintWriter(new FileWriter(this.path, true));
     for (TradeMessage tm : state.getBids()) {
-      AuctionBidBundle auctionBid = (AuctionBidBundle) tm.Bundle;
+      OneSidedBidBundle auctionBid = (OneSidedBidBundle) tm.Bundle;
       for (Entry<ITradeable,BidType> bid: auctionBid.getBids().bids.entrySet())
         out.println(tm.AgentID + ", " + bid.getValue().price + ", " + privateVals.get(tm.AgentID).getValuation(bid.getKey()));            
     }

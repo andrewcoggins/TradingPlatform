@@ -1,10 +1,10 @@
 package brown.user.agent.library;
 
 import brown.logging.library.Logging;
-import brown.mechanism.channel.library.SealedBidChannel;
+import brown.mechanism.channel.library.OneSidedChannel;
 import brown.platform.messages.library.GameReportMessage;
 import brown.platform.messages.library.SimpleSealedReportMessage;
-import brown.system.setup.library.SSSPSetup;
+import brown.system.setup.library.SimpleSetup;
 
 /**
  * Agent that bids in the lab 2 game- just submits valuation.
@@ -14,11 +14,11 @@ import brown.system.setup.library.SSSPSetup;
 public class Lab02Agent extends AbsLab02Agent {
 
 	public Lab02Agent(String host, int port) {
-		super(host, port, new SSSPSetup());
+		super(host, port, new SimpleSetup());
 	}
 
 	@Override
-	public void onSimpleSealed(SealedBidChannel channel) {		
+	public void onSimpleSealed(OneSidedChannel channel) {		
 		// this just bids your valuation
 		this.submitBid(channel, this.getValuation());
 	}

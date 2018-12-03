@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import brown.auction.marketstate.library.MarketState;
 import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.accounting.library.Order;
@@ -65,7 +65,7 @@ public class SimpleSecondPricePaymentTest {
       bidMap.put(new SimpleTradeable(i), new BidType(1.0, 1)); 
       tList.add(new SimpleTradeable(i)); 
     }
-    AuctionBidBundle bundle = new AuctionBidBundle(bidMap); 
+    OneSidedBidBundle bundle = new OneSidedBidBundle(bidMap); 
     TradeMessage message = new TradeMessage(0, bundle, 0, 0); 
     // adding agents' bid to market state. 
     state.addBid(message);

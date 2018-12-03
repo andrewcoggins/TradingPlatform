@@ -6,7 +6,7 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IQueryRule;
-import brown.mechanism.channel.library.SealedBidChannel;
+import brown.mechanism.channel.library.OneSidedChannel;
 import brown.platform.messages.library.TradeRequestMessage;
 
 /**
@@ -25,7 +25,7 @@ public class SimpleQuery implements IQueryRule {
         idToGroup.put(a, agents.size());
       }
     }    	  
-			state.setTRequest(new TradeRequestMessage(0, new SealedBidChannel(state.getID()),idToGroup));
+			state.setTRequest(new TradeRequestMessage(0, new OneSidedChannel(state.getID()),idToGroup));
 	}
 
 }

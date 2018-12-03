@@ -2,7 +2,7 @@ package brown.user.agent.library;
 
 import brown.logging.library.Logging;
 import brown.mechanism.bid.library.BidDirection;
-import brown.mechanism.channel.library.CallMarketChannel;
+import brown.mechanism.channel.library.TwoSidedChannel;
 
 /**
  * Demo agent for lab06 for cs1951k.
@@ -31,7 +31,7 @@ public class Lab06Demo extends AbsLab06Agent{
   }
 
   @Override
-  public void onMarketRequest(CallMarketChannel channel) {
+  public void onMarketRequest(TwoSidedChannel channel) {
     if (this.direction == BidDirection.BUY){
       Logging.log(this.ID + " bidding for " + this.price);
       this.buy(price, quantity, channel);

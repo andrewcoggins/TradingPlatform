@@ -10,7 +10,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import brown.auction.marketstate.library.MarketState;
-import brown.mechanism.channel.library.SealedBidChannel;
+import brown.mechanism.channel.library.OneSidedChannel;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.messages.library.TradeRequestMessage;
@@ -42,7 +42,7 @@ public class SimpleQueryTest {
     //map for groups
     Map<Integer, Integer> idToGroup = new HashMap<Integer, Integer>(); 
     idToGroup.put(0, 1); 
-    TradeRequestMessage tr = new TradeRequestMessage(0, new SealedBidChannel(state.getID()), idToGroup);
+    TradeRequestMessage tr = new TradeRequestMessage(0, new OneSidedChannel(state.getID()), idToGroup);
     assertEquals(state.getTRequest(), tr); 
   }
   

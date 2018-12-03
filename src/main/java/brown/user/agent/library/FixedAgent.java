@@ -1,6 +1,6 @@
 package brown.user.agent.library;
 
-import brown.mechanism.channel.library.CallMarketChannel;
+import brown.mechanism.channel.library.TwoSidedChannel;
 
 /**
  * Prediction market project bot. 
@@ -45,7 +45,7 @@ public class FixedAgent extends AbsPredictionMarketAgent {
 	}
 
 	@Override
-	public void onMarketRequest(CallMarketChannel channel) {
+	public void onMarketRequest(TwoSidedChannel channel) {
 		if (exposure >= risklimit) {
 			this.cancel(1, true, channel);
 		} else {

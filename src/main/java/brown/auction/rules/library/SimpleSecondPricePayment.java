@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IPaymentRule;
 import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.library.Order;
 import brown.platform.messages.library.TradeMessage;
@@ -44,7 +44,7 @@ public class SimpleSecondPricePayment implements IPaymentRule {
       List<TradeMessage> allBids = state.getBids(); 
       for (TradeMessage aMessage : allBids) {
         if (group.contains(aMessage.AgentID)){
-          AuctionBidBundle aBundle = (AuctionBidBundle) aMessage.Bundle; 
+          OneSidedBidBundle aBundle = (OneSidedBidBundle) aMessage.Bundle; 
           Map<ITradeable, BidType> aBid = aBundle.getBids().bids; 
           for (ITradeable t : aBid.keySet()) {
             if (allTradeables.contains(t)) {
@@ -58,7 +58,7 @@ public class SimpleSecondPricePayment implements IPaymentRule {
      }
       for (TradeMessage aMessage : allBids) {
         if (group.contains(aMessage.AgentID)) {        
-          AuctionBidBundle aBundle = (AuctionBidBundle) aMessage.Bundle; 
+          OneSidedBidBundle aBundle = (OneSidedBidBundle) aMessage.Bundle; 
           Map<ITradeable, BidType> aBid = aBundle.getBids().bids; 
           for (ITradeable t : aBid.keySet()) {
             if (allTradeables.contains(t)) {

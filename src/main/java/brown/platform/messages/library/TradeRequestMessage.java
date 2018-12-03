@@ -3,8 +3,8 @@ package brown.platform.messages.library;
 import java.util.HashMap;
 import java.util.Map;
 
-import brown.mechanism.bidbundle.IBidBundle;
-import brown.mechanism.channel.IAgentChannel;
+import brown.mechanism.bid.IGameAction;
+import brown.mechanism.channel.IChannel;
 import brown.user.agent.library.AbsAgent;
 
 /**
@@ -17,8 +17,8 @@ import brown.user.agent.library.AbsAgent;
  */
 public class TradeRequestMessage extends AbsMessage {
 
-  public final IAgentChannel MARKET;
-	public final IBidBundle reserve;
+  public final IChannel MARKET;
+	public final IGameAction reserve;
 	public final Map<Integer,Integer> idToSize;
 	
 	/**
@@ -40,7 +40,7 @@ public class TradeRequestMessage extends AbsMessage {
 	 * @param idToSize
 	 * a map from agents' private IDs to the size of the auctions that they are bidding in. 
 	 */
-	public TradeRequestMessage(Integer ID, IAgentChannel market, Map<Integer, Integer> idToSize) {
+	public TradeRequestMessage(Integer ID, IChannel market, Map<Integer, Integer> idToSize) {
 		super(ID);
 		this.MARKET = market;
 		this.reserve = null;
@@ -61,7 +61,7 @@ public class TradeRequestMessage extends AbsMessage {
 	      sanitizedMap.put(privateToPublic.get(agent), idToSize.get(agent));
 	    }
 	  }
-	  return new TradeRequestMessage(this.ID, this.MARKET.sanitize(agent, privateToPublic), sanitizedMap);
+	  return new TradeRequestMessage(this.ID, this.MARKET, sanitizedMap);
 	}
 
   @Override

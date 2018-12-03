@@ -21,7 +21,7 @@ import org.spectrumauctions.sats.opt.model.mrvm.demandquery.MRVM_DemandQueryMIP;
 
 import brown.logging.library.Logging;
 import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.channel.library.OpenOutcryChannel;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
@@ -71,7 +71,7 @@ public abstract class AbsCombinatorialProjectAgentV2  extends AbsSpecValV2Agent 
       BidType bt = new BidType(prices[good], 1);
       bid.put(st, bt);
     }
-    channel.bid(this, new AuctionBidBundle(bid));
+    channel.bid(this, new OneSidedBidBundle(bid));
   }
   
   @Override

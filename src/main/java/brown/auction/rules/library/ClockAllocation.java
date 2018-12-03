@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IAllocationRule;
 import brown.logging.library.Logging;
-import brown.mechanism.bid.library.AuctionBid;
+import brown.mechanism.bid.library.OneSidedBid;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.messages.library.TradeMessage;
@@ -36,7 +36,7 @@ public class ClockAllocation implements IAllocationRule {
     for (TradeMessage bid: bids) {
       
       // Break this bid down into individual tradeables
-      Set<ITradeable> tradeables = ((AuctionBid)  bid.Bundle.getBids()).bids.keySet();
+      Set<ITradeable> tradeables = ((OneSidedBid)  bid.Bundle.getBids()).bids.keySet();
       List<SimpleTradeable> stradeables = new LinkedList<SimpleTradeable>();
       for (ITradeable t: tradeables) {
         stradeables.addAll(t.flatten());

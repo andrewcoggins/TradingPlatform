@@ -12,7 +12,7 @@ import java.util.Set;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IAllocationRule;
 import brown.logging.library.Logging;
-import brown.mechanism.bidbundle.library.AuctionBidBundle;
+import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.bidbundle.library.BundleType;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
@@ -56,7 +56,7 @@ public class HighestPriceAllocation implements IAllocationRule {
         // Bid must be of right type
         if(bid.Bundle.getType().equals(BundleType.AUCTION) &&
            group.contains(bid.AgentID)) {
-          AuctionBidBundle bundle = (AuctionBidBundle) bid.Bundle; 
+          OneSidedBidBundle bundle = (OneSidedBidBundle) bid.Bundle; 
           for (ITradeable t : bundle.getBids().bids.keySet()) {
             // This only works with SIMPLE Tradeables          
             if (t.getType() != TradeableType.Simple) {
