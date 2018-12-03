@@ -1,6 +1,5 @@
 package brown.platform.market.library;
 
-import brown.auction.preset.AbsMarketRules;
 import brown.platform.market.IMarketBlock;
 import java.util.List;
 

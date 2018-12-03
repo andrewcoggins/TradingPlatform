@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
-import brown.auction.preset.AbsMarketRules;
-import brown.auction.preset.FlexibleRules;
 import brown.auction.rules.*;
 import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneGrouping;
@@ -17,6 +15,8 @@ import brown.mechanism.tradeable.ITradeable;
 
 import java.lang.reflect.Constructor;
 
+import brown.platform.market.library.AbsMarketRules;
+import brown.platform.market.library.FlexibleRules;
 import brown.platform.market.library.SimultaneousMarket;
 
 /**

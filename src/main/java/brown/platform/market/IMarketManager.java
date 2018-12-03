@@ -3,9 +3,9 @@ package brown.platform.market;
 import java.util.Collection;
 import java.util.List;
 
-import brown.auction.preset.AbsMarketRules;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.library.Ledger;
+import brown.platform.market.library.AbsMarketRules;
 import brown.platform.market.library.Market;
 
 /**
