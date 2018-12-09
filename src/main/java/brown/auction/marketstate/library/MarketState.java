@@ -96,11 +96,13 @@ public class MarketState implements IMarketState {
     return this.time;
   }
 
+  // TODO: Move handling of bids to Market
   @Override
   public void addBid(TradeMessage bid) {
     bids.add(bid);
   }
 
+  // TODO: Move handling of bids to Market
   @Override
   public void clearBids() {
    this.bids.clear(); 
@@ -116,11 +118,14 @@ public class MarketState implements IMarketState {
     return this.isOpen; 
   }
     
+  // TODO: Move handling of bids to Market
   @Override
   public List<TradeMessage> getBids() {
     return this.bids; 
   }
 
+  // TODO: clearAllocation()
+  // Maybe rename this method clearPayments:
   @Override
   public void clearOrders() {
     this.setPayments(new LinkedList<Order>());
@@ -230,7 +235,5 @@ public class MarketState implements IMarketState {
   public void setPayments(List<Order> payments) {
     this.payments = payments;
   }
-
-
 
 }
