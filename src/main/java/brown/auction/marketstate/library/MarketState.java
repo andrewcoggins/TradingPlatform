@@ -14,10 +14,9 @@ import brown.platform.messages.library.TradeMessage;
 import brown.platform.messages.library.TradeRequestMessage;
 
 /**
- * Standard MarketState stores the internal information of a 
- * market.
+ * Standard MarketState stores the internal information of a market.
+ * 
  * @author acoggins
- *
  */
 public class MarketState implements IMarketState {
 
@@ -28,26 +27,32 @@ public class MarketState implements IMarketState {
   private int ticks;  
   private long time;
   
+  // Allocation rule
+  private Map<Integer, List<ITradeable>> allocation;
   
-  //allocation + payment rule
-  private Map<Integer, List<ITradeable>> allocation;   
-  private List<Order> payments; 
-  //query rule
+  // Payment rule
+  private List<Order> payments;
+  
+  // Query rule
   private TradeRequestMessage tRequest;
+  
+  // TODO: move to IMarket!
   private Map<ITradeable, Double> increment;
   private double flatIncrement;
-  //activity rules
+  
+  // Activity rule
   private Boolean isAcceptable; 
   private Map<ITradeable, Double> reserve;
+  // for Revealed Preference rule
   private Map<ITradeable, List<Integer>> altAlloc;
-  //IRPolicy
-  private Map<Integer,List<GameReportMessage>> gameReports; 
-  //termination condition
+  
+  // IR policy
+  private Map<Integer, List<GameReportMessage>> gameReports;
+  
+  // Termination condition
   private Boolean terminated; 
   
-  
-  
-  public MarketState(Integer ID, List<ITradeable> allGoods, PrevStateInfo prevState) {
+  public MarketState(Integer ID, List<ITradeable> allGoods) {
     this.ID = ID; 
     this.TRADEABLES = allGoods; 
     this.bids = new LinkedList<TradeMessage>();
@@ -60,7 +65,7 @@ public class MarketState implements IMarketState {
     this.time = System.currentTimeMillis();
     this.isOpen = true; 
     this.reserve = new HashMap<ITradeable, Double>();
-    for (ITradeable t : this.TRADEABLES){
+    for (ITradeable t : this.TRADEABLES) {
       this.reserve.put(t,0.);
       this.altAlloc.put(t,  new LinkedList<Integer>());
     }
@@ -136,6 +141,8 @@ public class MarketState implements IMarketState {
     return this.increment;
   }
 
+  // TODO: move increment to Market -- for OpenOutcry markets only
+  // it is not part of the state (since it is constant)
   @Override
   public void setIncrement(Map<ITradeable, Double> increment) {
    for (ITradeable t : this.TRADEABLES) {
@@ -146,11 +153,11 @@ public class MarketState implements IMarketState {
    this.increment = increment;
   }
   
-  public Double getFlatIncrement(){
+  public Double getFlatIncrement() {
     return this.flatIncrement;
   }
   
-  public void setFlatIncrement(Double increment){
+  public void setFlatIncrement(Double increment) {
     this.flatIncrement = increment;
   }
 
@@ -180,7 +187,7 @@ public class MarketState implements IMarketState {
   }
   
   @Override
-  public void setAltAlloc(Map<ITradeable, List<Integer>> altAlloc){
+  public void setAltAlloc(Map<ITradeable, List<Integer>> altAlloc) {
     this.altAlloc = altAlloc;
   }
 
@@ -194,19 +201,18 @@ public class MarketState implements IMarketState {
     this.terminated = over; 
   }
   
-
   @Override
-  public Map<Integer,List<GameReportMessage>>  getReport() {
+  public Map<Integer, List<GameReportMessage>>  getReport() {
     return this.gameReports; 
   }
 
   @Override
-  public void setReport(Map<Integer,List<GameReportMessage>> gameReport) {
+  public void setReport(Map<Integer, List<GameReportMessage>> gameReport) {
     this.gameReports = gameReport;
   }
 
   @Override
-  public Map<Integer,List<ITradeable>> getAllocation() {
+  public Map<Integer, List<ITradeable>> getAllocation() {
     return this.allocation;
   }
 
@@ -216,7 +222,7 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public void setAllocation(Map<Integer,List<ITradeable>> allocation) {
+  public void setAllocation(Map<Integer, List<ITradeable>> allocation) {
     this.allocation = allocation;
   }
 
