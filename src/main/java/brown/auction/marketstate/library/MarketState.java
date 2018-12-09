@@ -28,8 +28,6 @@ public class MarketState implements IMarketState {
   private int ticks;  
   private long time;
   
-  // grouping stuff
-  private List<List<Integer>> groups;
   
   //allocation + payment rule
   private Map<Integer, List<ITradeable>> allocation;   
@@ -47,9 +45,6 @@ public class MarketState implements IMarketState {
   //termination condition
   private Boolean terminated; 
   
-  // carry over information?
-  private PrevStateInfo prevState;
-  private PrevStateInfo summaryState;
   
   
   public MarketState(Integer ID, List<ITradeable> allGoods, PrevStateInfo prevState) {
@@ -62,8 +57,6 @@ public class MarketState implements IMarketState {
     this.allocation = new HashMap<Integer, List<ITradeable>>();
     this.altAlloc = new HashMap<ITradeable, List<Integer>>();
     this.payments = new LinkedList<Order>();
-    this.prevState = prevState;
-    this.groups = new LinkedList<List<Integer>>();
     this.time = System.currentTimeMillis();
     this.isOpen = true; 
     this.reserve = new HashMap<ITradeable, Double>();
@@ -201,20 +194,6 @@ public class MarketState implements IMarketState {
     this.terminated = over; 
   }
   
-  @Override
-  public PrevStateInfo getPrevState() {
-    return this.prevState;
-  }
-
-  @Override
-  public PrevStateInfo getSummaryState() {
-    return this.summaryState;
-  }
-  
-  @Override
-  public void setSummaryState(PrevStateInfo summary){
-    this.summaryState = summary;
-  }
 
   @Override
   public Map<Integer,List<GameReportMessage>>  getReport() {
@@ -244,16 +223,6 @@ public class MarketState implements IMarketState {
   @Override
   public void setPayments(List<Order> payments) {
     this.payments = payments;
-  }
-
-  @Override
-  public List<List<Integer>> getGroups() {
-    return this.groups;
-  }
-
-  @Override
-  public void setGroups(List<List<Integer>> groups) {
-    this.groups = groups;    
   }
 
 

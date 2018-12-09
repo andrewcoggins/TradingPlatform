@@ -88,23 +88,12 @@ public interface IMarketState {
     public boolean getOver();
     
     public void setOver(boolean b); 
-    
-    // Previous states
-    public PrevStateInfo getPrevState();
-    
-    PrevStateInfo getSummaryState();
-    
-    void setSummaryState(PrevStateInfo prevState);
+
     
     //IR policy 
     public Map<Integer, List<GameReportMessage>> getReport();
     
     public void setReport(Map<Integer,List<GameReportMessage>> gameReport);
-
-    // Groups
-    public List<List<Integer>> getGroups();
-    
-    public void setGroups(List<List<Integer>> groups);
 
 
 }
