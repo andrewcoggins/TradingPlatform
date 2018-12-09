@@ -3,7 +3,8 @@ package brown.platform.messages;
 import brown.user.agent.library.AbsAgent;
 
 /**
- * a message is used to communicate between the agent and the server
+ * A message is used to communicate between the agent and the server
+ *
  * @author lcamery
  */
 public interface IMessage {
