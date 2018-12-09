@@ -11,9 +11,9 @@ import brown.platform.messages.library.TradeMessage;
 import brown.platform.messages.library.TradeRequestMessage;
 
 /**
- * stores the internal state of a market as 
- * bidding is occurring. Consists of a series of getters 
- * and setters for fields of the market.
+ * Stores the internal state of a market as it runs. 
+ * Consists of a series of getters and setters 
+ * for the various fields of the market state.
  * 
  * @author acoggins
  */
