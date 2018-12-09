@@ -19,81 +19,63 @@ import brown.platform.messages.library.TradeRequestMessage;
  */
 public interface IMarketState {
 
+    // part of Market, not state!
     public Integer getID(); 
   
+    // part of Market, not state!
     public List<ITradeable> getTradeables();
     
-    public void tick(); 
-    
-    public int getTicks();  
-    
-    public long getTime();
-    
-    public void close(); 
-    
-    public boolean isOpen();
-
-    //bids
-    
+    // part of Market, not state!
     public void addBid(TradeMessage bid);
-    
     public void clearBids();
-    
     public List<TradeMessage> getBids(); 
     
-    // orders (this is from the payment rule)
-    
-    public void clearOrders();
-    
-    //allocation and payment rule
-    
-    public Map<Integer,List<ITradeable>> getAllocation();
-    
-    public List<Order> getPayments();
-    
-    public void setAllocation(Map<Integer,List<ITradeable>> allocation);
-    
-    public void setPayments(List<Order> payment);
-    
-    
-    //for Query Rules
-    
-    public TradeRequestMessage getTRequest(); 
-    
-    public void setTRequest(TradeRequestMessage t);
-    
+    // Move to Market -- b/c static across ALL Markets!
     public Map<ITradeable, Double> getIncrement(); 
-    
     public void setIncrement(Map<ITradeable, Double> increment);
-    
     public Double getFlatIncrement();
-    
     public void setFlatIncrement(Double increment);    
     
-    //activity rules
+    // Allocation rule
+    public Map<Integer,List<ITradeable>> getAllocation();
+    public void setAllocation(Map<Integer,List<ITradeable>> allocation);
     
+    // Payment rule
+    public void setPayments(List<Order> payment);
+    public List<Order> getPayments();
+    
+    // orders (this is from the payment rule)
+    // delete this !!! just use set Payments
+    public void clearOrders();
+    
+    // Query rule
+    public TradeRequestMessage getTRequest(); 
+    public void setTRequest(TradeRequestMessage t);
+    
+    // Activity rule
     public boolean getAcceptable();
-    
     public void setAcceptable(boolean b);
     
     public Map<ITradeable,Double> getReserve();
-    
     public void setReserve(Map<ITradeable,Double> o); 
     
     public Map<ITradeable, List<Integer>> getAltAlloc();
-    
     public void setAltAlloc(Map<ITradeable, List<Integer>> o);
     
-    //tcondition things
-    public boolean getOver();
-    
-    public void setOver(boolean b); 
-
-    
-    //IR policy 
+    // IR policy 
     public Map<Integer, List<GameReportMessage>> getReport();
-    
     public void setReport(Map<Integer,List<GameReportMessage>> gameReport);
 
-
+    // Termination condition
+    public long getTime();
+   
+    public void tick();
+    public int getTicks();  
+   
+    public boolean isOpen();
+    public void close(); 
+    
+    public boolean getOver();
+    public void setOver(boolean b);
+    
 }
