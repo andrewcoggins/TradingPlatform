@@ -8,8 +8,7 @@ import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 
 /**  
-* Describes all the rules for a particular market. 
-* These rules fully describe the behavior of the auction.  
+* Describes all the rules for a particular market.
 * 
 * @author acoggins 
 */
@@ -32,13 +31,7 @@ public abstract class AbsMarketRules {
     this.infoPolicy = infoPolicy;   
     this.tCondition = tCondition;   
   } 
-    
-  /** 
-   * Why does this have to exist?   
-   * @return  
-   */ 
-  public abstract AbsMarketRules copy();  
-    
+
   @Override 
   public String toString() {  
     return "AbsMarketRules [aRule=" + aRule + ", pRule=" + pRule + ", qRule=" 
