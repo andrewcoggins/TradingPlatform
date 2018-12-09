@@ -24,42 +24,51 @@ import brown.platform.market.IHistory;
 
 /**
  * Common implementation of IMarket.
- * @author acoggins
  *
+ * @author acoggins
  */
 public class Market implements IMarket {
 
+  // TODO: private final IFlexibleRules RULES;
+  // delete all of these individual rule variables
   private final IPaymentRule PRULE;
   private final IAllocationRule ARULE;
   private final IQueryRule QRULE;
   private final IActivityRule ACTRULE;
   private final IInformationRevelationPolicy IRPOLICY;
   private final ITerminationCondition ITCONDITION;
+  
   private final IMarketState STATE;
+  private final IMarketState HISTORY;
 
-
-    /**
-     * TODO: history
-     * @param rules
-     * @param state
-     */
+  /**
+   * @param rules
+   * @param state
+   * TODO: history
+   */
   public Market(AbsMarketRules rules, IMarketState state, IHistory history) {
+    // TODO: this.RULES = rules;
+    // delete all of these individual assignments of rules
     this.PRULE = rules.pRule;
     this.ARULE = rules.aRule;
     this.QRULE = rules.qRule;
     this.ACTRULE = rules.actRule;
     this.IRPOLICY = rules.infoPolicy;
     this.ITCONDITION = rules.tCondition; 
+    
     this.STATE = state;
- }
+    this.HISTORY = history;
+  }
   
+  // Make MarketID a field
   @Override
   public Integer getMarketID() {
     return this.STATE.getID();
   }
 
+  
   public TradeRequestMessage constructTradeRequest(Integer ID) {
-    //no idea why ledgers are part of the trade request -- they should be sent as market updates!
+    // no idea why ledgers are part of the trade request -- they should be sent as market updates!
     this.QRULE.makeChannel(STATE);
     TradeRequestMessage request = this.STATE.getTRequest();
     return request;
@@ -92,17 +101,6 @@ public class Market implements IMarket {
     this.IRPOLICY.setReport(this.STATE);
     return this.STATE.getReport();
   }
-
-  @Override
-  public boolean isOver() {
-    ITCONDITION.isTerminated(this.STATE);
-    return this.STATE.getOver();
-  }
-
-  @Override
-  public void tick() {
-    this.STATE.tick();
-  }
   
   @Override
   public void setReserves() {
@@ -110,22 +108,33 @@ public class Market implements IMarket {
   }
   
   @Override
-  public PrevStateInfo constructSummaryState() {
-    this.IRPOLICY.constructSummaryState(this.STATE);
-    return this.STATE.getSummaryState();
-  }
-  
-  @Override
   public void clearBidCache() {
     this.STATE.clearBids();
   }
+  
+  
+  
+  @Override
+  public void tick() {
+    this.STATE.tick();
+  }
+  
+  // do we really need isOver and isOpen?
+  @Override
+  public boolean isOver() {
+    ITCONDITION.isTerminated(this.STATE);
+    return this.STATE.getOver();
+  }
+  
+  @Override
+  public boolean isOpen() {
+    return this.STATE.isOpen(); 
+  }  
   
   @Override
   public void close() {
     this.STATE.close(); 
   }
   
-  public boolean isOpen() {
-    return this.STATE.isOpen(); 
-  }
+  
 }
