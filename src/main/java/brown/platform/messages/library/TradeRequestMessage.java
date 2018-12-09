@@ -3,7 +3,7 @@ package brown.platform.messages.library;
 import java.util.HashMap;
 import java.util.Map;
 
-import brown.mechanism.bid.IGameAction;
+import brown.mechanism.bid.IBid;
 import brown.mechanism.channel.IChannel;
 import brown.user.agent.library.AbsAgent;
 
@@ -18,7 +18,7 @@ import brown.user.agent.library.AbsAgent;
 public class TradeRequestMessage extends AbsMessage {
 
   public final IChannel MARKET;
-	public final IGameAction reserve;
+	public final IBid reserve;
 	public final Map<Integer,Integer> idToSize;
 	
 	/**

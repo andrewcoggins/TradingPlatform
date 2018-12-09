@@ -1,15 +1,14 @@
 package brown.mechanism.bid.library;
 
-import brown.mechanism.bid.IGameAction;
+import brown.mechanism.bid.IBid;
 
 /**
  * A bid that is used in games like the lemonade game.
  * @author acoggins
  *
  */
-public class DiscreetGameBid implements IGameAction {
+public class DiscreetGameBid implements IBid {
   
-	// integer or double? 
 	public final Integer action; 
 	
 	public DiscreetGameBid(Integer action) {

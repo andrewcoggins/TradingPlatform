@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import brown.logging.library.Logging;
-import brown.mechanism.bid.IGameAction;
+import brown.mechanism.bid.IBid;
 import brown.mechanism.bid.library.OneSidedBid;
 import brown.mechanism.channel.IChannel;
 import brown.mechanism.tradeable.ITradeable;
@@ -34,7 +34,6 @@ public class OneSidedChannel extends AbsChannel {
     super(ID);
 	}
 
-	// this is not going to work out
 	@Override
 	public void dispatchMessage(AbsAgent agent) {
 		if (agent instanceof AbsAuctionAgent) {
@@ -44,7 +43,7 @@ public class OneSidedChannel extends AbsChannel {
 	}
 
   @Override
-  public void bid(AbsAgent agent, IGameAction bid) {
+  public void bid(AbsAgent agent, IBid bid) {
     OneSidedBid c = (OneSidedBid) bid; 
     Map<ITradeable, Double> fixedBids = new HashMap<ITradeable,Double>();    
     for (Entry<ITradeable, Double> b : c.bids.entrySet() ) {

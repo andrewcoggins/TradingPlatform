@@ -8,5 +8,8 @@ package brown.mechanism.tradeable.library;
  *
  */
 public enum TradeableType {
-  Simple, Multi, Complex;
+  
+  // tradeable types: simple or security?
+  
+  Simple, Complex;
 }

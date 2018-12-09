@@ -1,6 +1,6 @@
 package brown.platform.messages.library;
 
-import brown.mechanism.bid.IGameAction;
+import brown.mechanism.bid.IBid;
 import brown.user.agent.library.AbsAgent;
 
 /**
@@ -12,7 +12,7 @@ import brown.user.agent.library.AbsAgent;
  */
 public class TradeMessage extends AbsMessage {
   
-	public final IGameAction action;
+	public final IBid action;
 	public final Integer AuctionID;
 	public final Integer AgentID;
 	
@@ -33,7 +33,7 @@ public class TradeMessage extends AbsMessage {
 	 * @param auctionID : auction's ID
 	 * @param agentID : agent's ID; verified by server
 	 */
-	public TradeMessage(int ID, IGameAction action, Integer auctionID, Integer agentID) {
+	public TradeMessage(int ID, IBid action, Integer auctionID, Integer agentID) {
 		super(ID);
 		this.action = action;
 		this.AuctionID = auctionID;

@@ -1,6 +1,6 @@
 package brown.mechanism.channel.library;
 
-import brown.mechanism.bid.IGameAction;
+import brown.mechanism.bid.IBid;
 import brown.user.agent.library.AbsAgent;
 
 /**
@@ -16,7 +16,7 @@ public class TwoSidedChannel extends AbsChannel{
     }
 
   @Override
-  public void bid(AbsAgent agent, IGameAction bid) {
+  public void bid(AbsAgent agent, IBid bid) {
     
   }
   

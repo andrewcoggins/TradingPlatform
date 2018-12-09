@@ -7,8 +7,6 @@ import java.util.List;
 * A simple tradeable is a single tradeable.
 * @author amy
 */
-//AMY: would prefer for Simple to extend Multi
-//Fix later, if TradeableTypes go away
 public class SimpleTradeable extends AbsTradeable {   
 
   /**

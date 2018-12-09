@@ -5,6 +5,6 @@ package brown.mechanism.bid;
  * 
  * @author andrew
  */
-public interface IGameAction {
+public interface IBid {
   
 }

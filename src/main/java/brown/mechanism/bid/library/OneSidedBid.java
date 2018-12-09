@@ -2,7 +2,7 @@ package brown.mechanism.bid.library;
 
 import java.util.Map;
 
-import brown.mechanism.bid.IGameAction;
+import brown.mechanism.bid.IBid;
 import brown.mechanism.tradeable.ITradeable;
 
 /**
@@ -10,7 +10,7 @@ import brown.mechanism.tradeable.ITradeable;
  * @author andrew, modified by kerry
  *
  */
-public class OneSidedBid implements IGameAction {
+public class OneSidedBid implements IBid {
    
 	public final Map<ITradeable, Double> bids;
 	
