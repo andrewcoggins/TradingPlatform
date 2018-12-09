@@ -8,11 +8,10 @@ import java.util.List;
 public interface ITradeableManager {
 
     /**
-     * createSimpleTradeables: creates simple tradeables.
+     * createTradeables: creates simple tradeables.
      * @param numTradeables number of tradeables to be created.
      */
     void createTradeables(int numTradeables);
-    
 
     /**
      * getter for itradeabes
