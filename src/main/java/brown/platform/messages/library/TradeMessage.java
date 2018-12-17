@@ -40,12 +40,10 @@ public class TradeMessage extends AbsMessage {
 		this.AgentID = agentID;
 	}
 
-
   @Override
   public void dispatch(AbsAgent agent) {
     // Noop
   }
-	
 
   @Override
   public String toString() {
@@ -89,6 +87,5 @@ public class TradeMessage extends AbsMessage {
       return false;
     return true;
   }
-  
   
 }
