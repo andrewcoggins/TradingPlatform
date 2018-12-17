@@ -17,13 +17,11 @@ public abstract class AbsBidBundle implements IBid {
   public AbsBidBundle(Map<ITradeable, Double> bids) {
     this.bids = bids; 
   }
-
   
   @Override
   public String toString() {
     return "AbsBidBundle [bids=" + bids + "]";
   }
-
 
   @Override
   public int hashCode() {
@@ -49,9 +47,5 @@ public abstract class AbsBidBundle implements IBid {
       return false;
     return true;
   }
-
-
-  
-
-  
+   
 }
