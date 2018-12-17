@@ -12,7 +12,7 @@ import java.util.TreeSet;
 
 import brown.auction.value.generator.library.LabTwoValGenerator;
 import brown.auction.value.generator.library.UniformValGenerator;
-import brown.mechanism.bid.library.OneSidedBid;
+import brown.mechanism.bid.library.OneSidedBidBundle;
 import brown.mechanism.channel.library.GameChannel;
 import brown.mechanism.tradeable.library.ComplexTradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
@@ -66,7 +66,7 @@ public final class Startup {
 		kryo.register(ErrorMessage.class);
 		kryo.register(Timestamp.class);
 		kryo.register(Date.class);
-		kryo.register(OneSidedBid.class);
+		kryo.register(OneSidedBidBundle.class);
 		kryo.register(ComplexTradeable.class); 
 		kryo.register(Order.class);
 		kryo.register(Ledger.class);

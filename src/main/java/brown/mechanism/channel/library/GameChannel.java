@@ -2,8 +2,7 @@ package brown.mechanism.channel.library;
 
 import brown.logging.library.ErrorLogging;
 import brown.mechanism.bid.IBid;
-import brown.mechanism.bid.library.ContinuousGameBid;
-import brown.mechanism.bid.library.DiscreetGameBid;
+import brown.mechanism.bid.library.GameBid;
 import brown.user.agent.library.AbsAgent;
 import brown.user.agent.library.AbsGameAgent;
 
@@ -39,10 +38,8 @@ public class GameChannel extends AbsChannel {
 
   @Override
   public void bid(AbsAgent agent, IBid action) {
-  	if (action instanceof ContinuousGameBid && this.continuous) {
-  	  
-  	} else if (action instanceof DiscreetGameBid && !this.continuous) {
-  	  
+    if (action instanceof GameBid) {
+  	  // TODO: do something here.
   	} else {
   	  ErrorLogging.log("ERROR: incorrect game bid type.");
   	}

@@ -3,7 +3,7 @@ package brown.user.agent.library;
 
 import brown.logging.library.Logging;
 import brown.mechanism.bid.library.BidDirection;
-import brown.mechanism.bid.library.TwoSidedBid;
+import brown.mechanism.bid.library.TwoSidedBidBundle;
 import brown.mechanism.bidbundle.library.TwoSidedBidBundle;
 import brown.mechanism.channel.library.TwoSidedChannel;
 import brown.platform.messages.library.BankUpdateMessage;
@@ -34,7 +34,7 @@ public class TestCallMarketAgent extends AbsCallMarketAgent {
     
     
     for (int i = 0; i <20; i++) {
-      cmChannel.bid(this, new TwoSidedBidBundle(new TwoSidedBid(this.direction, this.price, this.quantity)));      
+      cmChannel.bid(this, new TwoSidedBidBundle(new TwoSidedBidBundle(this.direction, this.price, this.quantity)));      
     }
     Logging.log("Orderbook SIZE: " + (cmChannel.getOrderBook().getBuys().size() + cmChannel.getOrderBook().getSells().size()));
     if (this.direction == BidDirection.SELL){

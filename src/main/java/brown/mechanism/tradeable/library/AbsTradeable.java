@@ -56,10 +56,11 @@ public abstract class AbsTradeable implements ITradeable {
   public TradeableType getType() {
     return this.TYPE;
   }
-  
+
   @Override
   public String toString() {
-    return "AbsTradeable [ID=" + ID + ", COUNT=" + COUNT + "]";
+    return "AbsTradeable [ID=" + ID + ", COUNT=" + COUNT + ", TYPE=" + TYPE
+        + "]";
   }
 
   @Override
@@ -71,7 +72,7 @@ public abstract class AbsTradeable implements ITradeable {
     result = prime * result + ((TYPE == null) ? 0 : TYPE.hashCode());
     return result;
   }
-  
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -94,5 +95,6 @@ public abstract class AbsTradeable implements ITradeable {
     if (TYPE != other.TYPE)
       return false;
     return true;
-  }  
+  }
+  
 }

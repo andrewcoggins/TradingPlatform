@@ -14,7 +14,6 @@ import java.util.LinkedList;
  *
  */
 
-//TODO: fix this.
 public class TradeableManager implements ITradeableManager {
 
     private List<ITradeable> tradeables;

@@ -6,7 +6,7 @@ import java.util.List;
 import brown.logging.library.Logging;
 import brown.mechanism.bid.library.BidDirection;
 import brown.mechanism.bid.library.CancelBid;
-import brown.mechanism.bid.library.TwoSidedBid;
+import brown.mechanism.bid.library.TwoSidedBidBundle;
 import brown.mechanism.bidbundle.library.CancelBundle;
 import brown.mechanism.bidbundle.library.TwoSidedBidBundle;
 import brown.mechanism.channel.library.TwoSidedChannel;
@@ -78,12 +78,12 @@ public abstract class AbsPredictionMarketAgent extends AbsCallMarketAgent {
 	}
 	
 	public void buy(double price, int quantity, TwoSidedChannel channel) {
-		TwoSidedBid bid = new TwoSidedBid(BidDirection.BUY, price, quantity);
+		TwoSidedBidBundle bid = new TwoSidedBidBundle(BidDirection.BUY, price, quantity);
 		channel.bid(this, new TwoSidedBidBundle(bid));
 	}
 	
 	public void sell(double price, int quantity, TwoSidedChannel channel) {
-		TwoSidedBid bid = new TwoSidedBid(BidDirection.SELL, price, quantity);
+		TwoSidedBidBundle bid = new TwoSidedBidBundle(BidDirection.SELL, price, quantity);
 		channel.bid(this, new TwoSidedBidBundle(bid));
 	}
 	

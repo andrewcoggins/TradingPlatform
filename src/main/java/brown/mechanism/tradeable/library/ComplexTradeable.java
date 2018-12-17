@@ -1,6 +1,5 @@
 package brown.mechanism.tradeable.library;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -41,39 +40,4 @@ public class ComplexTradeable extends AbsTradeable {
     return toReturn;
   }
   
-  @Override
-  public String toString() {
-    List<SimpleTradeable> simples = this.flatten();
-    int[] goods_as_ints = new int[(simples.size())];
-    for (int i = 0; i < simples.size(); i++){
-      goods_as_ints[i] = simples.get(i).getID();
-    }
-    return "ComplexTradeable [GOODS=" + Arrays.toString(goods_as_ints) + "]";
-  }
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = super.hashCode();
-    result = prime * result + ((GOODS == null) ? 0 : GOODS.hashCode());
-    result = prime * result + ID;
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof ITradeable && ((ITradeable) obj).getCount().equals(this.COUNT)){
-      List<SimpleTradeable> thisList = this.flatten();
-      List<SimpleTradeable> otherList = ((ITradeable) obj).flatten();
-      
-      for (SimpleTradeable t: thisList){
-        if (!otherList.remove(t)){
-          return false;
-        }
-      }
-      return true; 
-    } else {
-      return false;
-    }
-  }
 }

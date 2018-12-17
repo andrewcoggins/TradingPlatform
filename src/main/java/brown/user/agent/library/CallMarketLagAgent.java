@@ -1,7 +1,7 @@
 package brown.user.agent.library;
 
 import brown.mechanism.bid.library.BidDirection;
-import brown.mechanism.bid.library.TwoSidedBid;
+import brown.mechanism.bid.library.TwoSidedBidBundle;
 import brown.mechanism.bidbundle.library.TwoSidedBidBundle;
 import brown.mechanism.channel.library.TwoSidedChannel;
 import brown.platform.messages.library.CallMarketReportMessage;
@@ -30,7 +30,7 @@ public class CallMarketLagAgent extends AbsCallMarketAgent {
       e.printStackTrace();
     }
     System.out.println(channel.getOrderBook());
-    channel.bid(this, new TwoSidedBidBundle(new TwoSidedBid(BidDirection.BUY, 100, 1)));
+    channel.bid(this, new TwoSidedBidBundle(new TwoSidedBidBundle(BidDirection.BUY, 100, 1)));
   }
 
   @Override
