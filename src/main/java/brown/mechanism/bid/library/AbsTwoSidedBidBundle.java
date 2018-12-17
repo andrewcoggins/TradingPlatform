@@ -10,26 +10,25 @@ import brown.mechanism.tradeable.ITradeable;
  * @author andrew, modified by kerry
  *
  */
-public abstract class AbsBidBundle implements IBid {
+public abstract class AbsTwoSidedBidBundle extends AbsBidBundle implements IBid {
    
-  public final Map<ITradeable, Double> bids;
+  public final BidDirection direction; 
   
-  public AbsBidBundle(Map<ITradeable, Double> bids) {
-    this.bids = bids; 
+  public AbsTwoSidedBidBundle(Map<ITradeable, Double> bids, BidDirection direction) {
+    super(bids);
+    this.direction = direction; 
   }
 
-  
   @Override
   public String toString() {
-    return "AbsBidBundle [bids=" + bids + "]";
+    return "AbsTwoSidedBidBundle [direction=" + direction + "]";
   }
-
 
   @Override
   public int hashCode() {
     final int prime = 31;
-    int result = 1;
-    result = prime * result + ((bids == null) ? 0 : bids.hashCode());
+    int result = super.hashCode();
+    result = prime * result + ((direction == null) ? 0 : direction.hashCode());
     return result;
   }
 
@@ -37,21 +36,14 @@ public abstract class AbsBidBundle implements IBid {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (obj == null)
+    if (!super.equals(obj))
       return false;
     if (getClass() != obj.getClass())
       return false;
-    AbsBidBundle other = (AbsBidBundle) obj;
-    if (bids == null) {
-      if (other.bids != null)
-        return false;
-    } else if (!bids.equals(other.bids))
+    AbsTwoSidedBidBundle other = (AbsTwoSidedBidBundle) obj;
+    if (direction != other.direction)
       return false;
     return true;
   }
 
-
-  
-
-  
 }

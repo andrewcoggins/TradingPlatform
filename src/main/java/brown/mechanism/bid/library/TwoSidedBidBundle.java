@@ -10,7 +10,7 @@ import brown.mechanism.tradeable.ITradeable;
  * @author andrew, modified by kerry
  *
  */
-public class TwoSidedBidBundle extends AbsBidBundle implements IBid {
+public class TwoSidedBidBundle extends AbsTwoSidedBidBundle implements IBid {
   
     
   public TwoSidedBidBundle(Map<ITradeable, Double> bids, BidDirection direction) {
