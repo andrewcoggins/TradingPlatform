@@ -1,4 +1,4 @@
-package brown.system.server.library;
+package brown.system.kryoserver.library;
 
 import java.io.IOException;
 

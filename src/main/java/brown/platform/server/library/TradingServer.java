@@ -1,6 +1,6 @@
 package brown.platform.server.library;
 
-import brown.system.server.library.KryoServer;
+import brown.system.kryoserver.library.KryoServer;
 import brown.system.setup.ISetup;
 
 /**
