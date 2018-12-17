@@ -1,4 +1,4 @@
-package brown.platform.simulation;
+package brown.platform.simulator;
 
 import brown.platform.world.IWorldManager;
 

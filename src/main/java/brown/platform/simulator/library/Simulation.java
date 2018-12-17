@@ -1,6 +1,6 @@
-package brown.platform.simulation.library;
+package brown.platform.simulator.library;
 
-import brown.platform.simulation.ISimulation;
+import brown.platform.simulator.ISimulation;
 import brown.platform.world.IWorldManager;
 
 public class Simulation implements ISimulation {

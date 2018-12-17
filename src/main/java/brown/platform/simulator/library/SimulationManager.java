@@ -1,8 +1,8 @@
-package brown.platform.simulation.library;
+package brown.platform.simulator.library;
 
 import brown.logging.library.PlatformLogging;
-import brown.platform.simulation.ISimulation;
-import brown.platform.simulation.ISimulationManager;
+import brown.platform.simulator.ISimulation;
+import brown.platform.simulator.ISimulationManager;
 import brown.platform.world.IWorldManager;
 
 import java.util.LinkedList;
