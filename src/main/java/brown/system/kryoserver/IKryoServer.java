@@ -1,4 +1,4 @@
-package brown.system.server; 
+package brown.system.kryoserver; 
 
 public interface IKryoServer {
   

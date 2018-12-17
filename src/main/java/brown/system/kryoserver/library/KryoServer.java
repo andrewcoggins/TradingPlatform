@@ -10,7 +10,7 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Server;
 
 import brown.logging.library.SystemLogging;
-import brown.system.server.IKryoServer;
+import brown.system.kryoserver.IKryoServer;
 import brown.system.setup.ISetup;
 import brown.system.setup.library.Startup;
 
