@@ -18,7 +18,7 @@ public class ErrorLogging implements ILogging {
    */
   public static void log(String message) {
     if (ERRORLOGGING) {
-      System.out.println(message);
+      System.err.println(message);
     }
   }
 

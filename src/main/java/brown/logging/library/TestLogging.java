@@ -7,25 +7,25 @@ import brown.logging.ILogging;
  * logging.log(X) prints X to console.
  * @author lcamery
  */
-public class UserLogging implements ILogging {
+public class TestLogging implements ILogging {
   
   // Enable or disable logging here.
-  public final static boolean USERLOGGING = true;
+  public final static boolean TESTLOGGING = true;
   
   /**
    * Logs a message to the console, if logging is set to true.
    * @param message
    */
   public static void log(String message) {
-    if (USERLOGGING) {
+    if (TESTLOGGING) {
+      System.out.println("[x] TEST: " + message);
+    }
+  }
+
+  public static void log(Integer message) {
+    if (TESTLOGGING) {
       System.out.println(message);
     }
   }
   
-  public static void log(Integer message) {
-    if (USERLOGGING) {
-      System.out.println(message);
-    }
-  }
-
 }

@@ -1,4 +1,4 @@
-package brown.system.server.library;
+package brown.system.kryoserver.library;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;

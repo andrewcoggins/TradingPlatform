@@ -9,6 +9,7 @@ import java.util.HashSet;
 import brown.auction.rules.*;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
+import brown.logging.library.ErrorLogging;
 import brown.mechanism.tradeable.ITradeable;
 
 import java.lang.reflect.Constructor;
@@ -16,6 +17,7 @@ import java.lang.reflect.Constructor;
 import brown.platform.market.library.AbsMarketRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.platform.market.library.SimultaneousMarket;
+import brown.logging.library.TestLogging;
 
 /**
  * runs a simple simultaneous first price auction.
@@ -61,22 +63,97 @@ public class Main {
 
   public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException,
           InstantiationException, IllegalAccessException, InvocationTargetException {
-    Integer numRuns = new Integer(args[0]);
-    Integer delayTime = new Integer(args[1]);
-    String tTypeString = args[2];
-    Integer numTradeables = new Integer(args[3]);
-    String distributionString = args[4];
-    String generatorString = args[5];
-    String endowmenttTypeString = args[6];
-    Integer endowmentNumTradeables = new Integer(args[7]);
-    Integer endowmentMoney = new Integer(args[8]);
-    String aRuleString = args[9];
-    String pRuleString = args[10];
-    String qRuleString = args[11];
-    String actRuleString = args[12];
-    String irPolicyString = args[13];
-    String tConditionString = args[14];
+     
+    Integer numRuns;
+    Integer delayTime;
+    String tTypeString;
+    Integer numTradeables;
+    String distributionString;
+    String generatorString;
+    String endowmenttTypeString;
+    Integer endowmentNumTradeables;
+    Integer endowmentMoney;
+    String aRuleString; 
+    String pRuleString; 
+    String qRuleString;
+    String actRuleString; 
+    String irPolicyString; 
+    String tConditionString; 
 
+    
+    String inputType = args[0]; 
+    TestLogging.log(inputType); 
+    if (inputType.equals("args")) {
+      numRuns = new Integer(args[1]);
+      delayTime = new Integer(args[2]);
+      tTypeString = args[3];
+      numTradeables = new Integer(args[4]);
+      distributionString = args[5];
+      generatorString = args[6];
+      endowmenttTypeString = args[7];
+      endowmentNumTradeables = new Integer(args[8]);
+      endowmentMoney = new Integer(args[9]);
+      aRuleString = args[10];
+      pRuleString = args[11];
+      qRuleString = args[12];
+      actRuleString = args[13];
+      irPolicyString = args[14];
+      tConditionString = args[15];
+      
+      
+      TestLogging.log(numRuns); 
+      TestLogging.log(delayTime); 
+      TestLogging.log(tTypeString); 
+      TestLogging.log(numTradeables); 
+      TestLogging.log(distributionString); 
+      TestLogging.log(generatorString); 
+      TestLogging.log(endowmenttTypeString); 
+      TestLogging.log(endowmentNumTradeables); 
+      TestLogging.log(endowmentMoney); 
+      TestLogging.log(aRuleString); 
+      TestLogging.log(aRuleString); 
+      TestLogging.log(qRuleString); 
+      TestLogging.log(actRuleString); 
+      TestLogging.log(irPolicyString); 
+      TestLogging.log(tConditionString); 
+      
+
+    } else if (inputType == "json") {
+      numRuns = new Integer(args[0]);
+      delayTime = new Integer(args[1]);
+      tTypeString = args[2];
+      numTradeables = new Integer(args[3]);
+      distributionString = args[4];
+      generatorString = args[5];
+      endowmenttTypeString = args[6];
+      endowmentNumTradeables = new Integer(args[7]);
+      endowmentMoney = new Integer(args[8]);
+      aRuleString = args[9];
+      pRuleString = args[10];
+      qRuleString = args[11];
+      actRuleString = args[12];
+      irPolicyString = args[13];
+      tConditionString = args[14];
+    } else {
+      numRuns = 0;
+      delayTime = 0;
+      tTypeString = "";
+      numTradeables = 0;
+      distributionString = "";
+      generatorString = "";
+      endowmenttTypeString = "";
+      endowmentNumTradeables = 0;
+      endowmentMoney = 0;
+      aRuleString = "";
+      pRuleString = "";
+      qRuleString = "";
+      actRuleString = "";
+      irPolicyString = "";
+      tConditionString = "";
+      ErrorLogging.log("ERROR: no input specification given.");
+      System.exit(1);
+    } 
+    
     Class<?> tTypeClass = Class.forName("brown.mechanism.tradeable.library." + tTypeString);
     Class<?> generatorClass = Class.forName("brown.auction.value.generator.library." + generatorString);
     Class<?> distributionClass = Class.forName("brown.auction.value.distribution.library." + distributionString);
