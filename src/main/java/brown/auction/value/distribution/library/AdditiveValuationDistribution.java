@@ -62,6 +62,12 @@ public class AdditiveValuationDistribution implements IValuationDistribution {
   }
 
   @Override
+  public String toString() {
+    return "AdditiveValuationDistribution [generator=" + generator
+        + ", toValue=" + toValue + ", values=" + values + "]";
+  }
+
+  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -98,10 +104,4 @@ public class AdditiveValuationDistribution implements IValuationDistribution {
     return true;
   }
 
-  @Override
-  public String toString() {
-    return "AdditiveValuationDistribution [generator=" + generator
-        + ", toValue=" + toValue + ", values=" + values + "]";
-  }
-  
 }

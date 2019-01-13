@@ -21,11 +21,6 @@ public class UserLogging implements ILogging {
       System.out.println(message);
     }
   }
-  
-  public static void log(Integer message) {
-    if (USERLOGGING) {
-      System.out.println(message);
-    }
-  }
+ 
 
 }

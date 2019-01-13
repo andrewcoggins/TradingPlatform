@@ -11,5 +11,5 @@ public enum TradeableType {
   
   // tradeable types: simple or security?
   
-  Simple, Complex;
+  Simple, Complex, Security;
 }

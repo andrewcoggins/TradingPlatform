@@ -24,7 +24,7 @@ public class TestLogging implements ILogging {
 
   public static void log(Integer message) {
     if (TESTLOGGING) {
-      System.out.println(message);
+      System.out.println("[x] TEST: " + message);
     }
   }
   

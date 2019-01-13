@@ -18,6 +18,7 @@ import brown.platform.world.library.WorldManager;
 import brown.platform.world.library.DomainManager;
 import brown.platform.market.library.MarketManager;
 import brown.platform.accounting.library.EndowmentManager;
+import brown.platform.input.config.library.SimulationConfig;
 import brown.platform.accounting.library.AccountManager;
 import brown.mechanism.tradeable.library.TradeableManager;
 import brown.platform.whiteboard.library.Whiteboard;
