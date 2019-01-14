@@ -38,6 +38,7 @@ public class EndowmentConfigTest {
     
   }
   
+  
   @Test
   public void testEndowmentConfigThree() {
     Map<String, Integer> eMap = new HashMap<String, Integer>(); 
