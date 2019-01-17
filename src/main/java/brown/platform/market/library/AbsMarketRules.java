@@ -3,7 +3,8 @@ package brown.platform.market.library;
 import brown.auction.rules.IActivityRule;  
 import brown.auction.rules.IAllocationRule; 
 import brown.auction.rules.IInformationRevelationPolicy;  
-import brown.auction.rules.ITerminationCondition; 
+import brown.auction.rules.ITerminationCondition;
+import brown.platform.market.IMarketRules;
 import brown.auction.rules.IPaymentRule;  
 import brown.auction.rules.IQueryRule;
 
@@ -13,7 +14,7 @@ import brown.auction.rules.IQueryRule;
 * @author acoggins 
 */
 
-public abstract class AbsMarketRules {
+public abstract class AbsMarketRules implements IMarketRules {
  
   public IAllocationRule aRule;  
   public IPaymentRule pRule;  

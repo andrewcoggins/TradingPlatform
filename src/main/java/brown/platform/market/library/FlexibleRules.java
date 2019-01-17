@@ -1,7 +1,9 @@
 package brown.platform.market.library; 
 
- import brown.auction.rules.*;  
- public class FlexibleRules extends AbsMarketRules {  
+ import brown.auction.rules.*;
+import brown.platform.market.IMarketRules;  
+ 
+ public class FlexibleRules extends AbsMarketRules implements IMarketRules {  
     public FlexibleRules(IAllocationRule aRule, 
                          IPaymentRule pRule,  
                          IQueryRule qRule,  

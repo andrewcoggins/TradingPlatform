@@ -93,18 +93,17 @@ public class Main {
       numTradeables = new Integer(args[4]);
       distributionString = args[5];
       generatorString = args[6];
-      endowmenttTypeString = args[7];
-      endowmentNumTradeables = new Integer(args[8]);
-      endowmentMoney = new Integer(args[9]);
-      aRuleString = args[10];
-      pRuleString = args[11];
-      qRuleString = args[12];
-      actRuleString = args[13];
-      irPolicyString = args[14];
-      tConditionString = args[15];
+      endowmentNumTradeables = new Integer(args[7]);
+      endowmentMoney = new Integer(args[8]);
+      aRuleString = args[9];
+      pRuleString = args[10];
+      qRuleString = args[11];
+      actRuleString = args[12];
+      irPolicyString = args[13];
+      tConditionString = args[14];
 
       CommandLineParser parser = new CommandLineParser(); 
-      SimulationConfig runConfig = parser.parseCommandLine(numRuns, delayTime, tTypeString, numTradeables, distributionString, generatorString, endowmenttTypeString,
+      SimulationConfig runConfig = parser.parseCommandLine(numRuns, delayTime, tTypeString, numTradeables, distributionString, generatorString,
           endowmentNumTradeables, endowmentMoney, aRuleString, pRuleString, qRuleString, actRuleString, irPolicyString, tConditionString); 
       configs.add(runConfig); 
     } else if (inputType == "json") {

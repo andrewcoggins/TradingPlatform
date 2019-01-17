@@ -2,9 +2,11 @@ package brown.platform.input.parse.library;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import brown.auction.rules.IActivityRule;
@@ -17,7 +19,13 @@ import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.logging.library.TestLogging;
 import brown.mechanism.tradeable.ITradeable;
+import brown.platform.input.config.IEndowmentConfig;
+import brown.platform.input.config.IMarketConfig;
+import brown.platform.input.config.ITradeableConfig;
+import brown.platform.input.config.library.EndowmentConfig;
+import brown.platform.input.config.library.MarketConfig;
 import brown.platform.input.config.library.SimulationConfig;
+import brown.platform.input.config.library.TradeableConfig;
 import brown.platform.input.parse.ICommandLineParser;
 import brown.platform.market.library.AbsMarketRules;
 import brown.platform.market.library.FlexibleRules;
@@ -28,8 +36,8 @@ public class CommandLineParser implements ICommandLineParser {
   @Override
   public SimulationConfig parseCommandLine(int numRuns, int delayTime,
       String tTypeString, int numTradeables, String distributionString,
-      String generatorString, String endowmenttTypeString,
-      int endowmentNumTradeables, int endowmentMoney, String aRuleString,
+      String generatorString,
+      int endowmentNumTradeables, double endowmentMoney, String aRuleString,
       String pRuleString, String qRuleString, String actRuleString,
       String irPolicyString, String tConditionString) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
   InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
@@ -41,8 +49,7 @@ public class CommandLineParser implements ICommandLineParser {
     TestLogging.log(tTypeString); 
     TestLogging.log(numTradeables); 
     TestLogging.log(distributionString); 
-    TestLogging.log(generatorString); 
-    TestLogging.log(endowmenttTypeString); 
+    TestLogging.log(generatorString);  
     TestLogging.log(endowmentNumTradeables); 
     TestLogging.log(endowmentMoney); 
     TestLogging.log(aRuleString); 
@@ -55,7 +62,6 @@ public class CommandLineParser implements ICommandLineParser {
     Class<?> tTypeClass = Class.forName("brown.mechanism.tradeable.library." + tTypeString);
     Class<?> generatorClass = Class.forName("brown.auction.value.generator.library." + generatorString);
     Class<?> distributionClass = Class.forName("brown.auction.value.distribution.library." + distributionString);
-    Class<?> endowmenttTypeClass = Class.forName("brown.mechanism.tradeable.library." + endowmenttTypeString);
     Class<?> aRuleClass = Class.forName("brown.auction.rules.library." + aRuleString);
     Class<?> pRuleClass = Class.forName("brown.auction.rules.library." + pRuleString);
     Class<?> qRuleClass = Class.forName("brown.auction.rules.library." + qRuleString);
@@ -66,7 +72,6 @@ public class CommandLineParser implements ICommandLineParser {
     Constructor<?> tTypeCons = tTypeClass.getConstructor(Integer.class);
     Constructor<?> generatorCons = generatorClass.getConstructor(Double.class, Double.class);
     Constructor<?> distributionCons = distributionClass.getConstructor(IValuationGenerator.class, Set.class);
-    Constructor<?> endowmentTypeCons = endowmenttTypeClass.getConstructor(Integer.class);
     Constructor<?> aRuleCons = aRuleClass.getConstructor();
     Constructor<?> pRuleCons = pRuleClass.getConstructor();
     Constructor<?> qRuleCons = qRuleClass.getConstructor();
@@ -82,7 +87,7 @@ public class CommandLineParser implements ICommandLineParser {
     }
     List<ITradeable> endowTradeables = new LinkedList<>();
     for (int i = 0; i < endowmentNumTradeables; i++){
-      endowTradeables.add((ITradeable) endowmentTypeCons.newInstance(i));
+      endowTradeables.add((ITradeable) tTypeCons.newInstance(i));
     }
 
     AbsMarketRules marketRule = new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
@@ -100,10 +105,30 @@ public class CommandLineParser implements ICommandLineParser {
     SimultaneousMarket block = new SimultaneousMarket(rules);
     blocks.add(block);
 
-    SimulationConfig config = new SimulationConfig(1, allTradeables, endowTradeables, endowmentMoney, blocks, valGenerator, valDistribution);
     
+    // tradeableConfig
+    List <ITradeableConfig> tConfigList = new LinkedList<ITradeableConfig>(); 
+    ITradeableConfig tConfig = new TradeableConfig("default", allTradeables.get(0).getType(), allTradeables.size(), valDistribution); 
+    tConfigList.add(tConfig); 
+    
+    // endowmentConfig
+    List <IEndowmentConfig> eConfigList = new LinkedList<IEndowmentConfig>(); 
+    Map<String, Integer> tMap = new HashMap<String, Integer>(); 
+    tMap.put("default", endowTradeables.size()); 
+    IEndowmentConfig eConfig = new EndowmentConfig("default", tMap, endowmentMoney); 
+    eConfigList.add(eConfig);
+    
+    // marketConfig
+    List<List<IMarketConfig>> mConfigSquared = new LinkedList<List<IMarketConfig>>(); 
+    List<IMarketConfig> mConfigList = new LinkedList<IMarketConfig>(); 
+    IMarketConfig mConfig = new MarketConfig(marketRule, tMap);
+    mConfigList.add(mConfig); 
+    mConfigSquared.add(mConfigList); 
+    
+    // simulationConfig
+    SimulationConfig config = new SimulationConfig(numRuns, tConfigList, eConfigList, mConfigSquared);
     return config; 
+    
   }
-  
   
 }
