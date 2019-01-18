@@ -3,11 +3,13 @@ package brown.platform.input.config.library;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -18,8 +20,10 @@ import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
+import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.generator.library.NormalValGenerator;
 import brown.mechanism.tradeable.ITradeable;
+import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.mechanism.tradeable.library.TradeableType;
 import brown.platform.input.config.IEndowmentConfig;
 import brown.platform.input.config.IMarketConfig;
@@ -31,7 +35,7 @@ import brown.platform.market.library.FlexibleRules;
 public class SimulationConfigTest {
   
   @Test
-  public void testSimulationConfigOne() {
+  public void testSimulationConfigOne() throws NoSuchMethodException, SecurityException {
     
     List<ITradeableConfig> tConfigs = new LinkedList<ITradeableConfig>(); 
     List<IEndowmentConfig> eConfigs = new LinkedList<IEndowmentConfig>(); 
@@ -54,8 +58,16 @@ public class SimulationConfigTest {
     mConfigs.add(mConfig); 
     mConfigSquared.add(mConfigs); 
     
-    ITradeableConfig tConfig = new TradeableConfig("trade", TradeableType.Simple, 10, 
-        new AdditiveValuationDistribution(new NormalValGenerator(0.0, 1.0), new HashSet<ITradeable>()));
+    Constructor<?> distCons = AdditiveValuationDistribution.class.getConstructor(IValuationGenerator.class, Set.class);
+    Constructor<?> tTypeCons = SimpleTradeable.class.getConstructor(Integer.class); 
+    Constructor<?> gCons = NormalValGenerator.class.getConstructor(Double.class, Double.class); 
+    List<Double> params = new LinkedList<Double>(); 
+    params.add(0.0); 
+    params.add(1.0);  
+    Map<Constructor<?>, List<Double>> gMap = new HashMap<Constructor<?>, List<Double>>(); 
+    gMap.put(gCons, params); 
+    ITradeableConfig tConfig = new TradeableConfig("trade", tTypeCons, 10, 
+        distCons, gMap);
     tConfigs.add(tConfig);
     
     Map<String, Integer> eMap = new HashMap<String, Integer>(); 
@@ -72,7 +84,7 @@ public class SimulationConfigTest {
   }
   
   
-  public static void main(String[] args) {
+  public static void main(String[] args) throws NoSuchMethodException, SecurityException {
     SimulationConfigTest t = new SimulationConfigTest(); 
     t.testSimulationConfigOne(); 
   }

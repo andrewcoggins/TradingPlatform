@@ -71,5 +71,64 @@ public class EndowmentConfig implements IEndowmentConfig {
   public Integer getFrequency() {
     return this.frequency;
   }
+
+  @Override
+  public String toString() {
+    return "EndowmentConfig [name=" + name + ", endowmentMapping="
+        + endowmentMapping + ", includeMapping=" + includeMapping + ", money="
+        + money + ", frequency=" + frequency + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result
+        + ((endowmentMapping == null) ? 0 : endowmentMapping.hashCode());
+    result = prime * result + ((frequency == null) ? 0 : frequency.hashCode());
+    result = prime * result
+        + ((includeMapping == null) ? 0 : includeMapping.hashCode());
+    result = prime * result + ((money == null) ? 0 : money.hashCode());
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    EndowmentConfig other = (EndowmentConfig) obj;
+    if (endowmentMapping == null) {
+      if (other.endowmentMapping != null)
+        return false;
+    } else if (!endowmentMapping.equals(other.endowmentMapping))
+      return false;
+    if (frequency == null) {
+      if (other.frequency != null)
+        return false;
+    } else if (!frequency.equals(other.frequency))
+      return false;
+    if (includeMapping == null) {
+      if (other.includeMapping != null)
+        return false;
+    } else if (!includeMapping.equals(other.includeMapping))
+      return false;
+    if (money == null) {
+      if (other.money != null)
+        return false;
+    } else if (!money.equals(other.money))
+      return false;
+    if (name == null) {
+      if (other.name != null)
+        return false;
+    } else if (!name.equals(other.name))
+      return false;
+    return true;
+  }
+  
   
 }

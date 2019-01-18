@@ -1,7 +1,8 @@
 package brown.platform.input.config;
 
-import brown.auction.value.distribution.IValuationDistribution;
-import brown.mechanism.tradeable.library.TradeableType;
+import java.lang.reflect.Constructor;
+import java.util.List;
+import java.util.Map;
 
 /**
  * config for specifying tradeables from user-given input. See implementation for details. 
@@ -20,7 +21,7 @@ public interface ITradeableConfig extends IInputConfig {
    * get tradeable type. 
    * @return
    */
-  public TradeableType getTType(); 
+  public Constructor<?> getTType(); 
   
   /**
    * get number of tradeables. 
@@ -32,6 +33,13 @@ public interface ITradeableConfig extends IInputConfig {
    * get valuation distribution. 
    * @return
    */
-  public IValuationDistribution getValDistribution(); 
+  public Constructor<?> getValDistribution(); 
+  
+  
+  /**
+   * get generator config. 
+   * @return
+   */
+  public Map<Constructor<?>, List<Double>> getGenerator(); 
   
 }

@@ -41,4 +41,51 @@ public class MarketConfig implements IMarketConfig {
   public Map<String, List<String>> getMustInclude() {
     return this.mustInclude;
   }
+
+  @Override
+  public String toString() {
+    return "MarketConfig [rules=" + rules + ", numTradeablesMap="
+        + numTradeablesMap + ", mustInclude=" + mustInclude + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result =
+        prime * result + ((mustInclude == null) ? 0 : mustInclude.hashCode());
+    result = prime * result
+        + ((numTradeablesMap == null) ? 0 : numTradeablesMap.hashCode());
+    result = prime * result + ((rules == null) ? 0 : rules.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    MarketConfig other = (MarketConfig) obj;
+    if (mustInclude == null) {
+      if (other.mustInclude != null)
+        return false;
+    } else if (!mustInclude.equals(other.mustInclude))
+      return false;
+    if (numTradeablesMap == null) {
+      if (other.numTradeablesMap != null)
+        return false;
+    } else if (!numTradeablesMap.equals(other.numTradeablesMap))
+      return false;
+    if (rules == null) {
+      if (other.rules != null)
+        return false;
+    } else if (!rules.equals(other.rules))
+      return false;
+    return true;
+  }
+  
+  
 }
