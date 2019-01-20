@@ -18,7 +18,7 @@ import brown.mechanism.tradeable.library.SimpleTradeable;
  */
 public class AdditiveValuation implements IMonotonicValuation { 
 
-  private final Map<SimpleTradeable, Double> valueParams; 
+  private final Map<ITradeable, Double> valueParams; 
   
   
   // for kryo
@@ -31,7 +31,7 @@ public class AdditiveValuation implements IMonotonicValuation {
    * individual tradeables.
    * @param valueParams
    */
-  public AdditiveValuation(Map<SimpleTradeable, Double> valueParams) {
+  public AdditiveValuation(Map<ITradeable, Double> valueParams) {
     this.valueParams = valueParams; 
   }
   
@@ -78,8 +78,8 @@ public class AdditiveValuation implements IMonotonicValuation {
 
   @Override
   public IValuation safeCopy() {
-    Map<SimpleTradeable, Double> newValueParams = new HashMap<SimpleTradeable,Double>();
-    for (SimpleTradeable t: this.valueParams.keySet()){
+    Map<ITradeable, Double> newValueParams = new HashMap<ITradeable,Double>();
+    for (ITradeable t: this.valueParams.keySet()){
       newValueParams.put(t, this.valueParams.get(t));
     }
     return new AdditiveValuation(newValueParams);

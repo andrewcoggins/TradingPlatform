@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +14,7 @@ import org.junit.Test;
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.generator.library.NormalValGenerator;
-import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
-import brown.mechanism.tradeable.library.TradeableType;
 import brown.platform.input.config.ITradeableConfig;
 
 public class TradeableConfigTest {

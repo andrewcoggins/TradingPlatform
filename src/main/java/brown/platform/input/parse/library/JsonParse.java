@@ -27,7 +27,7 @@ import brown.auction.rules.library.OneGrouping;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.manager.IValuationManager;
-import brown.auction.value.manager.ValuationManager;
+import brown.auction.value.manager.library.ValuationManager;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.ITradeableManager;
 import brown.mechanism.tradeable.library.TradeableManager;
