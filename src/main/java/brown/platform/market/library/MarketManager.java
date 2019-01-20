@@ -20,7 +20,6 @@ import brown.platform.market.IMarketRules;
  */
 public class MarketManager implements IMarketManager {
   // stores all markets in a simulation
-  private Map<String, List<ITradeable>> allTradeables;
   private Map<Integer, IMarket> openMarkets;
   private List<IMarketBlock> allMarkets;
   private boolean lock;
@@ -32,15 +31,14 @@ public class MarketManager implements IMarketManager {
    * index is initially set to -1 idCount keeps track of the number of markets
    * in the MarketManager- initially, this is 0.
    */
-  public MarketManager(Map<String, List<ITradeable>> allTradeables) {
+  public MarketManager() {
     this.allMarkets = new LinkedList<IMarketBlock>();
     this.lock = false;
-    this.allTradeables = allTradeables;
   }
 
   @Override
   public void createSimultaneousMarket(List<IMarketRules> s,
-      List<Map<String, Integer>> marketTStrings) {
+      List<Map<String, Integer>> marketTStrings, Map<String, List<ITradeable>> allTradeables) {
     if (!this.lock) {
       List<Map<String, List<ITradeable>>> marketTradeables =
           new LinkedList<Map<String, List<ITradeable>>>();
@@ -66,5 +64,9 @@ public class MarketManager implements IMarketManager {
   public void lock() {
     this.lock = true;
   }
+  
+  // open markets. 
+  
+  // close markets. 
 
 }

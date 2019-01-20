@@ -52,6 +52,7 @@ public class ConfigRun {
             IAccountManager accountManager = new AccountManager();
             IValuationManager valuationManager = new ValuationManager();
             ITradeableManager tradeableManager = new TradeableManager();
+            IMarketManager marketManager = new MarketManager();
             IWhiteboard whiteboard = new Whiteboard();
            
             
@@ -82,7 +83,6 @@ public class ConfigRun {
             
             
             // for the market manager, gonna need the rules, map, and the mustInclude
-            IMarketManager marketManager = new MarketManager(allTradeables);
             for (List<IMarketConfig> mConfigList : aConfig.getMConfig()) {
                 List<IMarketRules> marketRules = new LinkedList<IMarketRules>(); 
                 List<Map<String, Integer>> marketTradeables = new LinkedList<Map<String, Integer>>(); 
@@ -90,8 +90,17 @@ public class ConfigRun {
                   marketRules.add(mConfig.getRules()); 
                   marketTradeables.add(mConfig.getNumTradeablesMap()); 
                 }
-                marketManager.createSimultaneousMarket(marketRules, marketTradeables);
+                marketManager.createSimultaneousMarket(marketRules, marketTradeables, allTradeables);
             }
+            
+            // todo: initialization for the whiteboard? 
+            
+            
+            // todo: history config? 
+            
+            
+            // todo: refactor account manager b/c endowments? 
+            
             
             domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
             worldManager.createWorld(domainManager, marketManager, whiteboard);

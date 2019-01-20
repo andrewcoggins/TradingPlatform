@@ -18,7 +18,7 @@ import brown.platform.market.library.Market;
 public interface IMarketManager {
 
 
-  void createSimultaneousMarket(List<IMarketRules> s, List<Map<String, Integer>> marketTradeables);
+  void createSimultaneousMarket(List<IMarketRules> s, List<Map<String, Integer>> marketTradeables, Map<String, List<ITradeable>> allTradeables);
 
 
   void lock();

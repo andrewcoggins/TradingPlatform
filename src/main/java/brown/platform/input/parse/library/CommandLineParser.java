@@ -26,7 +26,6 @@ import brown.platform.input.config.library.TradeableConfig;
 import brown.platform.input.parse.ICommandLineParser;
 import brown.platform.market.library.AbsMarketRules;
 import brown.platform.market.library.FlexibleRules;
-import brown.platform.market.library.SimultaneousMarket;
 
 public class CommandLineParser implements ICommandLineParser {
 
@@ -91,9 +90,6 @@ public class CommandLineParser implements ICommandLineParser {
     
     List<AbsMarketRules> rules = new LinkedList<>();
     rules.add(marketRule);
-    List<SimultaneousMarket> blocks = new LinkedList<>();
-    SimultaneousMarket block = new SimultaneousMarket(rules);
-    blocks.add(block);
 
     
     // tradeableConfig
