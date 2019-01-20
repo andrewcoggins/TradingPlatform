@@ -1,15 +1,20 @@
 package brown.user.main;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import brown.auction.value.manager.IValuationManager;
 import brown.auction.value.manager.library.ValuationManager;
+import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.ITradeableManager;
 import brown.mechanism.tradeable.library.TradeableManager;
 import brown.platform.accounting.IAccountManager;
 import brown.platform.accounting.IEndowmentManager;
 import brown.platform.accounting.library.AccountManager;
 import brown.platform.accounting.library.EndowmentManager;
+import brown.platform.input.config.IEndowmentConfig;
 import brown.platform.input.config.IMarketConfig;
 import brown.platform.input.config.ITradeableConfig;
 import brown.platform.input.config.library.SimulationConfig;
@@ -52,22 +57,29 @@ public class ConfigRun {
                 marketManager.createSimultaneousMarket(mConfig);
             }
             
-            // endowments also need a tradeable map, and a tradeable config. 
-            endowmentManager.createEndowment(aConfig.getEConfig().getEndowMoney(), aConfig.getEndowTradeables());
-            
-            // valuation manager is going to have to construct the distribution and the generators. 
-            // how are we tethering different valuations to different tradeables? This is a big problem. 
-            valuationManager.createValuation(0, aConfig.distribution);
-            
-            
-            // a domain is tradeables, endowments, accounts, and valuations. the tradeables and the valuations need to somehow be tied. 
-            // maybe in the tradeable manager, we have a map from the tradeable's alias
-            
             
             // tradeable manager should be easy so gonna start here. 
             List<ITradeableConfig> tradeableConfig = aConfig.getTConfig(); 
             for (ITradeableConfig tConfig : tradeableConfig) {
               tradeableManager.createTradeables(tConfig.getTradeableName(), tConfig.getTType(), tConfig.getNumTradeables()); 
+            }
+            
+            // valuation manager
+            for (ITradeableConfig tConfig : tradeableConfig) {
+              valuationManager.createValuation(tConfig.getTradeableName(), tConfig.getValDistribution(), tConfig.getGenerator(),
+                  new HashSet<ITradeable>(tradeableManager.getTradeables(tConfig.getTradeableName())));
+            }
+            
+            // endowments also need a tradeable map, and a tradeable config. 
+            Map<String, List<ITradeable>> allTradeables = new HashMap<String, List<ITradeable>>();  
+            for (ITradeableConfig tConfig : tradeableConfig) {
+              allTradeables.put(tConfig.getTradeableName(), tradeableManager.getTradeables(tConfig.getTradeableName())); 
+            }
+            
+            for (IEndowmentConfig eConfig: aConfig.getEConfig()) {
+              
+              endowmentManager.createEndowment(eConfig.getName(), eConfig.getEndowmentMapping(),
+                  eConfig.getIncludeMapping(), eConfig.getFrequency(), allTradeables);
             }
             
             
