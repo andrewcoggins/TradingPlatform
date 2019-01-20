@@ -1,7 +1,9 @@
 package brown.user.main;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +21,7 @@ import brown.platform.input.config.IMarketConfig;
 import brown.platform.input.config.ITradeableConfig;
 import brown.platform.input.config.library.SimulationConfig;
 import brown.platform.market.IMarketManager;
+import brown.platform.market.IMarketRules;
 import brown.platform.market.library.MarketManager;
 import brown.platform.simulator.ISimulationManager;
 import brown.platform.simulator.library.SimulationManager;
@@ -40,22 +43,17 @@ public class ConfigRun {
         this.config = config;
     }
 
-    public void run(Integer numSimulations) {
+    public void run(Integer numSimulations) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ISimulationManager simulationManager = new SimulationManager();
         for (SimulationConfig aConfig : this.config) {
             IWorldManager worldManager = new WorldManager();
-            IMarketManager marketManager = new MarketManager();
             IDomainManager domainManager = new DomainManager();
             IEndowmentManager endowmentManager = new EndowmentManager();
             IAccountManager accountManager = new AccountManager();
             IValuationManager valuationManager = new ValuationManager();
             ITradeableManager tradeableManager = new TradeableManager();
             IWhiteboard whiteboard = new Whiteboard();
-            
-            // for the market manager, gonna need the rules, map, and the mustInclude
-            for (List<IMarketConfig> mConfig : aConfig.getMConfig()) {
-                marketManager.createSimultaneousMarket(mConfig);
-            }
+           
             
             
             // tradeable manager should be easy so gonna start here. 
@@ -79,9 +77,21 @@ public class ConfigRun {
             for (IEndowmentConfig eConfig: aConfig.getEConfig()) {
               
               endowmentManager.createEndowment(eConfig.getName(), eConfig.getEndowmentMapping(),
-                  eConfig.getIncludeMapping(), eConfig.getFrequency(), allTradeables);
+                  eConfig.getIncludeMapping(), eConfig.getFrequency(), allTradeables, eConfig.getMoney());
             }
             
+            
+            // for the market manager, gonna need the rules, map, and the mustInclude
+            IMarketManager marketManager = new MarketManager(allTradeables);
+            for (List<IMarketConfig> mConfigList : aConfig.getMConfig()) {
+                List<IMarketRules> marketRules = new LinkedList<IMarketRules>(); 
+                List<Map<String, Integer>> marketTradeables = new LinkedList<Map<String, Integer>>(); 
+                for (IMarketConfig mConfig : mConfigList) {
+                  marketRules.add(mConfig.getRules()); 
+                  marketTradeables.add(mConfig.getNumTradeablesMap()); 
+                }
+                marketManager.createSimultaneousMarket(marketRules, marketTradeables);
+            }
             
             domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
             worldManager.createWorld(domainManager, marketManager, whiteboard);
