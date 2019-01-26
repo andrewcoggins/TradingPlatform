@@ -16,16 +16,11 @@ import brown.platform.accounting.IAccountManager;
 import brown.platform.accounting.IEndowmentManager;
 import brown.platform.accounting.library.AccountManager;
 import brown.platform.accounting.library.EndowmentManager;
-import brown.platform.input.config.IEndowmentConfig;
-import brown.platform.input.config.IMarketConfig;
-import brown.platform.input.config.ITradeableConfig;
-import brown.platform.input.config.library.SimulationConfig;
 import brown.platform.market.IMarketManager;
 import brown.platform.market.IMarketRules;
 import brown.platform.market.library.MarketManager;
 import brown.platform.simulator.ISimulationManager;
 import brown.platform.simulator.library.SimulationManager;
-import brown.platform.whiteboard.IWhiteboard;
 import brown.platform.whiteboard.library.Whiteboard;
 import brown.platform.world.IDomainManager;
 import brown.platform.world.IWorldManager;
@@ -35,15 +30,13 @@ import brown.platform.world.library.WorldManager;
 
 public class ConfigRun {
 
-    private Integer delayTime;
     private List<SimulationConfig> config;
 
-    public ConfigRun(Integer delayTime, List<SimulationConfig> config) {
-        this.delayTime = delayTime;
+    public ConfigRun(List<SimulationConfig> config) {
         this.config = config;
     }
 
-    public void run(Integer numSimulations) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public void run(Integer delayTime, Integer numSimulations) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         ISimulationManager simulationManager = new SimulationManager();
         for (SimulationConfig aConfig : this.config) {
             IWorldManager worldManager = new WorldManager();
@@ -53,7 +46,6 @@ public class ConfigRun {
             IValuationManager valuationManager = new ValuationManager();
             ITradeableManager tradeableManager = new TradeableManager();
             IMarketManager marketManager = new MarketManager();
-            IWhiteboard whiteboard = new Whiteboard();
            
             
             
@@ -103,7 +95,7 @@ public class ConfigRun {
             
             
             domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
-            worldManager.createWorld(domainManager, marketManager, whiteboard);
+            worldManager.createWorld(domainManager, marketManager);
             simulationManager.createSimulation(worldManager);
             tradeableManager.lock();
             valuationManager.lock();

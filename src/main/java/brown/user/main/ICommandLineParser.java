@@ -1,8 +1,6 @@
-package brown.platform.input.parse;
+package brown.user.main;
 
 import java.lang.reflect.InvocationTargetException;
-
-import brown.platform.input.config.library.SimulationConfig;
 
 public interface ICommandLineParser extends IInputParser {
   

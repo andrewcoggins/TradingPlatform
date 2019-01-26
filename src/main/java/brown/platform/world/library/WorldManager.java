@@ -20,9 +20,9 @@ public class WorldManager implements IWorldManager {
         this.lock = false;
     }
 
-    public void createWorld(IDomainManager domain, IMarketManager markets, IWhiteboard whiteboard) {
+    public void createWorld(IDomainManager domain, IMarketManager markets) {
         if (!this.lock) {
-            this.world = new World(domain, markets, whiteboard);
+            this.world = new World(domain, markets);
             this.lock = true;
         } else {
             PlatformLogging.log("Creation denied: world manager locked.");

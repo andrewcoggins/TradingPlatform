@@ -3,22 +3,8 @@ package brown.user.main;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
 
-import brown.auction.rules.*;
-import brown.auction.value.distribution.IValuationDistribution;
-import brown.auction.value.generator.IValuationGenerator;
 import brown.logging.library.ErrorLogging;
-import brown.mechanism.tradeable.ITradeable;
-
-import java.lang.reflect.Constructor;
-
-import brown.platform.input.config.library.SimulationConfig;
-import brown.platform.input.parse.library.CommandLineParser;
-import brown.platform.market.library.AbsMarketRules;
-import brown.platform.market.library.FlexibleRules;
-import brown.platform.market.library.SimultaneousMarket;
 import brown.logging.library.TestLogging;
 
 /**
@@ -142,7 +128,7 @@ public class Main {
       System.exit(1);
     } 
     
-    ConfigRun configRun = new ConfigRun(delayTime, configs);
-    configRun.run(numRuns);
+    ConfigRun configRun = new ConfigRun(configs);
+    configRun.run(delayTime, numRuns);
   }
 }

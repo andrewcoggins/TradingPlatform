@@ -1,4 +1,4 @@
-package brown.platform.input.parse.library;
+package brown.user.main;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

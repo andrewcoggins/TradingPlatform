@@ -1,10 +1,9 @@
-package brown.platform.input.config.library;
+package brown.user.main;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import brown.platform.input.config.IMarketConfig;
 import brown.platform.market.IMarketRules;
 
 public class MarketConfig implements IMarketConfig {

@@ -1,4 +1,4 @@
-package brown.platform.input.config;
+package brown.user.main;
 
 import java.lang.reflect.Constructor;
 import java.util.List;

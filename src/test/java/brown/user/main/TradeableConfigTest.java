@@ -1,4 +1,4 @@
-package brown.platform.input.config.library;
+package brown.user.main;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,7 +15,8 @@ import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.generator.library.NormalValGenerator;
 import brown.mechanism.tradeable.library.SimpleTradeable;
-import brown.platform.input.config.ITradeableConfig;
+import brown.user.main.ITradeableConfig;
+import brown.user.main.TradeableConfig;
 
 public class TradeableConfigTest {
   

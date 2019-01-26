@@ -11,6 +11,8 @@ import brown.platform.market.IMarket;
 import brown.platform.market.IMarketBlock;
 import brown.platform.market.IMarketManager;
 import brown.platform.market.IMarketRules;
+import brown.platform.whiteboard.IWhiteboard;
+import brown.platform.whiteboard.library.Whiteboard;
 
 /**
  * Market manager stores and handles multiple markets
@@ -22,6 +24,7 @@ public class MarketManager implements IMarketManager {
   // stores all markets in a simulation
   private Map<Integer, IMarket> openMarkets;
   private List<IMarketBlock> allMarkets;
+  private IWhiteboard whiteboard; 
   private boolean lock;
 
   /**
@@ -34,6 +37,7 @@ public class MarketManager implements IMarketManager {
   public MarketManager() {
     this.allMarkets = new LinkedList<IMarketBlock>();
     this.lock = false;
+    this.whiteboard = new Whiteboard(); 
   }
 
   @Override

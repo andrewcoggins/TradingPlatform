@@ -1,11 +1,6 @@
-package brown.platform.input.config.library;
+package brown.user.main;
 
 import java.util.List;
-
-import brown.platform.input.config.IEndowmentConfig;
-import brown.platform.input.config.IMarketConfig;
-import brown.platform.input.config.ISimulationConfig;
-import brown.platform.input.config.ITradeableConfig;
 
 public class SimulationConfig implements ISimulationConfig {
 

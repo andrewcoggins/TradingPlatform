@@ -1,4 +1,4 @@
-package brown.platform.input.parse.library;
+package brown.user.main;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -16,14 +16,6 @@ import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.logging.library.TestLogging;
-import brown.platform.input.config.IEndowmentConfig;
-import brown.platform.input.config.IMarketConfig;
-import brown.platform.input.config.ITradeableConfig;
-import brown.platform.input.config.library.EndowmentConfig;
-import brown.platform.input.config.library.MarketConfig;
-import brown.platform.input.config.library.SimulationConfig;
-import brown.platform.input.config.library.TradeableConfig;
-import brown.platform.input.parse.ICommandLineParser;
 import brown.platform.market.library.AbsMarketRules;
 import brown.platform.market.library.FlexibleRules;
 

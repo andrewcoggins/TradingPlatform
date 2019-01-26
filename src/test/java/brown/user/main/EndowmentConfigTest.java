@@ -1,4 +1,4 @@
-package brown.platform.input.config.library;
+package brown.user.main;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
+
+import brown.user.main.EndowmentConfig;
 
 public class EndowmentConfigTest {
   

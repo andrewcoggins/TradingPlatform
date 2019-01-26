@@ -1,4 +1,4 @@
-package brown.platform.input.config.library;
+package brown.user.main;
 
 import java.lang.reflect.Constructor;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.Map;
 
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.mechanism.tradeable.library.TradeableType;
-import brown.platform.input.config.ITradeableConfig;
 
 public class TradeableConfig implements ITradeableConfig {
   

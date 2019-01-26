@@ -1,4 +1,4 @@
-package brown.platform.input.parse; 
+package brown.user.main; 
 
 public interface IInputParser {
   

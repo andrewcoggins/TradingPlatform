@@ -1,4 +1,4 @@
-package brown.platform.input.config.library;
+package brown.user.main;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -16,9 +16,10 @@ import brown.auction.rules.IInformationRevelationPolicy;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
-import brown.platform.input.config.IMarketConfig;
 import brown.platform.market.IMarketRules;
-import brown.platform.market.library.FlexibleRules; 
+import brown.platform.market.library.FlexibleRules;
+import brown.user.main.IMarketConfig;
+import brown.user.main.MarketConfig; 
 
 public class MarketConfigTest {
   

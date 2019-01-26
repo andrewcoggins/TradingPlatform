@@ -1,8 +1,6 @@
-package brown.platform.input.parse;
+package brown.user.main;
 
 import java.util.List;
-
-import brown.platform.input.config.library.SimulationConfig;
 
 public interface IJsonParser extends IInputParser {
   

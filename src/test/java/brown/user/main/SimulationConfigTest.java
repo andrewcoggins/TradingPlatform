@@ -1,4 +1,4 @@
-package brown.platform.input.config.library;
+package brown.user.main;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -25,12 +25,16 @@ import brown.auction.value.generator.library.NormalValGenerator;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.mechanism.tradeable.library.TradeableType;
-import brown.platform.input.config.IEndowmentConfig;
-import brown.platform.input.config.IMarketConfig;
-import brown.platform.input.config.ISimulationConfig;
-import brown.platform.input.config.ITradeableConfig;
 import brown.platform.market.IMarketRules;
 import brown.platform.market.library.FlexibleRules;
+import brown.user.main.EndowmentConfig;
+import brown.user.main.IEndowmentConfig;
+import brown.user.main.IMarketConfig;
+import brown.user.main.ISimulationConfig;
+import brown.user.main.ITradeableConfig;
+import brown.user.main.MarketConfig;
+import brown.user.main.SimulationConfig;
+import brown.user.main.TradeableConfig;
 
 public class SimulationConfigTest {
   
