@@ -3,11 +3,13 @@ package brown.mechanism.tradeable.library;
 import java.util.LinkedList;
 import java.util.List;
 
+import brown.mechanism.tradeable.ITradeable;
+
 /**
 * A simple tradeable is a single tradeable.
 * @author amy
 */
-public class SimpleTradeable extends AbsTradeable {   
+public class SimpleTradeable extends AbsTradeable implements ITradeable {   
 
   /**
    * For Kryo

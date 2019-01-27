@@ -8,6 +8,6 @@ public interface ISimulationManager {
 
     void lock();
 
-    void runSimulation(int waitTime, int numRuns);
+    void runSimulation(int waitTime, int numRuns) throws InterruptedException;
 
 }

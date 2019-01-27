@@ -14,7 +14,6 @@ import brown.auction.value.generator.library.LabTwoValGenerator;
 import brown.auction.value.generator.library.UniformValGenerator;
 import brown.mechanism.bid.library.OneSidedBidBundle;
 import brown.mechanism.channel.library.GameChannel;
-import brown.mechanism.tradeable.library.ComplexTradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.mechanism.tradeable.library.TradeableType;
 import brown.platform.accounting.library.Account;
@@ -66,8 +65,7 @@ public final class Startup {
 		kryo.register(ErrorMessage.class);
 		kryo.register(Timestamp.class);
 		kryo.register(Date.class);
-		kryo.register(OneSidedBidBundle.class);
-		kryo.register(ComplexTradeable.class); 
+		kryo.register(OneSidedBidBundle.class); 
 		kryo.register(Order.class);
 		kryo.register(Ledger.class);
 		kryo.register(HashMap.class);

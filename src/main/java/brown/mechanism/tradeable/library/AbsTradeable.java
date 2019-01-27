@@ -11,7 +11,7 @@ import brown.mechanism.tradeable.ITradeable;
 public abstract class AbsTradeable implements ITradeable { 
 
   public final Integer ID;
-  public Integer COUNT; // Java flaw: final type cannot be inherited! UGH!
+  public final Integer COUNT; // Java flaw: final type cannot be inherited! UGH!
   public final TradeableType TYPE; 
   
   /**

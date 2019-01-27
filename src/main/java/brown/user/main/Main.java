@@ -47,10 +47,12 @@ public class Main {
    * 13: ir policy
    * OneShotTermination
    * 14: termination condition
+   * @throws InterruptedException 
+   * @throws IllegalArgumentException 
    */
 
   public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException,
-          InstantiationException, IllegalAccessException, InvocationTargetException {
+          InstantiationException, IllegalAccessException, InvocationTargetException, IllegalArgumentException, InterruptedException {
      
     Integer numRuns;
     Integer delayTime;
