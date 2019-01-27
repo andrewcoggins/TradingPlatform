@@ -3,9 +3,9 @@ package brown.system.kryoserver.library;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
-import brown.platform.messages.library.ErrorMessage;
-import brown.platform.messages.library.RegistrationMessage;
-import brown.platform.messages.library.StringMessage;
+import brown.mechanism.messages.library.ErrorMessage;
+import brown.mechanism.messages.library.RegistrationMessage;
+import brown.mechanism.messages.library.StringMessage;
 import brown.system.client.library.TPClient;
 import brown.system.kryoserver.library.KryoServer;
 import brown.system.setup.ISetup;

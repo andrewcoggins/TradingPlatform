@@ -1,4 +1,4 @@
-package brown.platform.messages.library;
+package brown.mechanism.messages.library;
 
 /**
  * Private information message giving coin information in 

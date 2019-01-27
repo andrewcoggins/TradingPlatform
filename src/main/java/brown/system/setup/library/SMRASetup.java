@@ -5,8 +5,8 @@ import brown.auction.value.generator.library.NormalValGenerator;
 import brown.auction.value.valuation.library.AdditiveValuation;
 import brown.mechanism.bid.library.OneSidedBidBundle;
 import brown.mechanism.channel.library.OneSidedChannel;
-import brown.platform.messages.library.SMRAReportMessage;
-import brown.platform.messages.library.SimpleSealedReportMessage;
+import brown.mechanism.messages.library.SMRAReportMessage;
+import brown.mechanism.messages.library.SimpleSealedReportMessage;
 import brown.system.setup.ISetup;
 
 import com.esotericsoftware.kryo.Kryo;

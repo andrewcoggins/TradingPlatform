@@ -11,9 +11,9 @@ import org.spectrumauctions.sats.core.util.random.JavaUtilRNGSupplier;
 import org.spectrumauctions.sats.core.util.random.RNGSupplier;
 
 import brown.mechanism.channel.library.OpenOutcryChannel;
-import brown.platform.messages.library.GameReportMessage;
-import brown.platform.messages.library.PrivateInformationMessage;
-import brown.platform.messages.library.SpecValWrapperMessage;
+import brown.mechanism.messages.library.GameReportMessage;
+import brown.mechanism.messages.library.PrivateInformationMessage;
+import brown.mechanism.messages.library.SpecValWrapperMessage;
 import brown.system.setup.ISetup;
 import brown.user.agent.ISpecValV2Agent;
 

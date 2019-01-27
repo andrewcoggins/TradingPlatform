@@ -1,6 +1,6 @@
-package brown.platform.messages.library;
+package brown.mechanism.messages.library; 
 
-import brown.platform.messages.IMessage;
+import brown.mechanism.messages.IMessage;
 import brown.user.agent.library.AbsAgent;
 
 /**

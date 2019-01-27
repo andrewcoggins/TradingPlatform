@@ -4,7 +4,7 @@ import com.esotericsoftware.kryo.Kryo;
 
 import brown.mechanism.bid.library.GameBid;
 import brown.mechanism.channel.library.GameChannel;
-import brown.platform.messages.library.LemonadeReportMessage;
+import brown.mechanism.messages.library.LemonadeReportMessage;
 import brown.system.setup.ISetup;
 
 /**

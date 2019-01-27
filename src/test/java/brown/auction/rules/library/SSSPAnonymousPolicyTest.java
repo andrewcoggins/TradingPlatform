@@ -12,11 +12,11 @@ import org.junit.Test;
 import brown.auction.marketstate.library.MarketState;
 import brown.mechanism.bid.library.BidType;
 import brown.mechanism.bidbundle.library.OneSidedBidBundle;
+import brown.mechanism.messages.library.GameReportMessage;
+import brown.mechanism.messages.library.SimpleSealedReportMessage;
+import brown.mechanism.messages.library.TradeMessage;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
-import brown.platform.messages.library.GameReportMessage;
-import brown.platform.messages.library.SimpleSealedReportMessage;
-import brown.platform.messages.library.TradeMessage;
 
 public class SSSPAnonymousPolicyTest {
   

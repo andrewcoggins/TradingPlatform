@@ -1,4 +1,4 @@
-package brown.platform.messages.library;
+package brown.mechanism.messages.library;
 
 /**
  * Gives information for the spectrum auction value generator, which

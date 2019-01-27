@@ -6,9 +6,9 @@ import java.util.List;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.valuation.IValuation;
 import brown.logging.library.Logging;
+import brown.mechanism.messages.library.PrivateInformationMessage;
+import brown.mechanism.messages.library.ValuationInformationMessage;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.messages.library.PrivateInformationMessage;
-import brown.platform.messages.library.ValuationInformationMessage;
 import brown.system.setup.ISetup;
 import brown.user.agent.ISimpleSealedAgent;
 

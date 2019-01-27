@@ -3,7 +3,7 @@ package brown.auction.rules.activity.onesided;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.AbsRule;
 import brown.auction.rules.IActivityRule;
-import brown.platform.messages.library.TradeMessage;
+import brown.mechanism.messages.library.TradeMessage;
 
 public class OneShotActivity extends AbsRule implements IActivityRule {
 

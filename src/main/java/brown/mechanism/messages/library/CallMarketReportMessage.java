@@ -1,11 +1,11 @@
-package brown.platform.messages.library;
+package brown.mechanism.messages.library;
 
 import java.util.List;
 import java.util.Map;
 
+import brown.mechanism.messages.library.GameReportMessage;
 import brown.platform.accounting.library.Ledger;
 import brown.platform.accounting.library.Transaction;
-import brown.platform.messages.library.GameReportMessage;
 
 /**
  * A Call Market report message provides a game report message

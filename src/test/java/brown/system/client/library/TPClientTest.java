@@ -1,13 +1,14 @@
 package brown.system.client.library;
 
 
-import brown.platform.messages.library.ErrorMessage;
-import brown.platform.messages.library.StringMessage;
 import brown.system.kryoserver.library.KryoServer;
 import brown.system.setup.ISetup;
 import brown.system.setup.library.SimpleSetup;
-import brown.platform.messages.library.RegistrationMessage;
 import brown.logging.library.SystemLogging;
+import brown.mechanism.messages.library.ErrorMessage;
+import brown.mechanism.messages.library.RegistrationMessage;
+import brown.mechanism.messages.library.StringMessage;
+
 import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Connection;

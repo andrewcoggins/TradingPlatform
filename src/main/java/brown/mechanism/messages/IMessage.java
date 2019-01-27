@@ -1,4 +1,4 @@
-package brown.platform.messages;
+package brown.mechanism.messages;
 
 import brown.user.agent.library.AbsAgent;
 

@@ -1,9 +1,9 @@
 package brown.user.agent.library;
 
 import brown.logging.library.Logging;
-import brown.platform.messages.library.BankUpdateMessage;
-import brown.platform.messages.library.GameReportMessage;
-import brown.platform.messages.library.LemonadeReportMessage;
+import brown.mechanism.messages.library.BankUpdateMessage;
+import brown.mechanism.messages.library.GameReportMessage;
+import brown.mechanism.messages.library.LemonadeReportMessage;
 import brown.system.setup.ISetup;
 import brown.user.agent.ILemonadeAgent;
 

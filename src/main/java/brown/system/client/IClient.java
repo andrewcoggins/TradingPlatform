@@ -1,8 +1,8 @@
 package brown.system.client;
 
-import brown.platform.messages.library.ErrorMessage;
-import brown.platform.messages.library.RegistrationMessage;
-import brown.platform.messages.library.StringMessage;
+import brown.mechanism.messages.library.ErrorMessage;
+import brown.mechanism.messages.library.RegistrationMessage;
+import brown.mechanism.messages.library.StringMessage;
 
 /**
  * Agents are responsible for receiving messages from the server,

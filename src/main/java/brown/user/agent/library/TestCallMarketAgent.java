@@ -6,9 +6,9 @@ import brown.mechanism.bid.library.BidDirection;
 import brown.mechanism.bid.library.TwoSidedBidBundle;
 import brown.mechanism.bidbundle.library.TwoSidedBidBundle;
 import brown.mechanism.channel.library.TwoSidedChannel;
-import brown.platform.messages.library.BankUpdateMessage;
-import brown.platform.messages.library.CallMarketReportMessage;
-import brown.platform.messages.library.GameReportMessage;
+import brown.mechanism.messages.library.BankUpdateMessage;
+import brown.mechanism.messages.library.CallMarketReportMessage;
+import brown.mechanism.messages.library.GameReportMessage;
 import brown.system.setup.library.CallMarketSetup;
 
 /**

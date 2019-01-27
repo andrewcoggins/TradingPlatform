@@ -1,9 +1,9 @@
 package brown.user.agent;
 
-import brown.platform.messages.library.AccountResetMessage;
-import brown.platform.messages.library.BankUpdateMessage;
-import brown.platform.messages.library.GameReportMessage;
-import brown.platform.messages.library.PrivateInformationMessage;
+import brown.mechanism.messages.library.AccountResetMessage;
+import brown.mechanism.messages.library.BankUpdateMessage;
+import brown.mechanism.messages.library.GameReportMessage;
+import brown.mechanism.messages.library.PrivateInformationMessage;
 
 /**
  * Agents are responsible for receiving messages from the server,

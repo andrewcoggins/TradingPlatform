@@ -11,9 +11,9 @@ import org.junit.Test;
 
 import brown.auction.marketstate.library.MarketState;
 import brown.mechanism.channel.library.OneSidedChannel;
+import brown.mechanism.messages.library.TradeRequestMessage;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
-import brown.platform.messages.library.TradeRequestMessage;
 
 /**
  * Test for query rule used in all sealed bid auctions. 

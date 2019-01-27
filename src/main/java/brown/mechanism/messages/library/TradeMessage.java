@@ -1,4 +1,4 @@
-package brown.platform.messages.library;
+package brown.mechanism.messages.library;
 
 import brown.mechanism.bid.IBid;
 import brown.user.agent.library.AbsAgent;

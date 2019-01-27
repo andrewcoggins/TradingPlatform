@@ -23,12 +23,12 @@ import brown.logging.library.Logging;
 import brown.mechanism.bid.library.BidType;
 import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.channel.library.OpenOutcryChannel;
+import brown.mechanism.messages.library.BankUpdateMessage;
+import brown.mechanism.messages.library.CombinatorialClockReport;
+import brown.mechanism.messages.library.GameReportMessage;
+import brown.mechanism.messages.library.PrivateInformationMessage;
 import brown.mechanism.tradeable.ITradeable;
 import brown.mechanism.tradeable.library.SimpleTradeable;
-import brown.platform.messages.library.BankUpdateMessage;
-import brown.platform.messages.library.CombinatorialClockReport;
-import brown.platform.messages.library.GameReportMessage;
-import brown.platform.messages.library.PrivateInformationMessage;
 import brown.system.setup.library.SpecValSetup;
 
 /**

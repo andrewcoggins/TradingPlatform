@@ -7,9 +7,9 @@ import java.util.List;
 import brown.logging.library.Logging;
 import brown.mechanism.bidbundle.library.GameBidBundle;
 import brown.mechanism.channel.library.GameChannel;
-import brown.platform.messages.library.GameReportMessage;
-import brown.platform.messages.library.LemonadeReportMessage;
-import brown.platform.messages.library.PrivateInformationMessage;
+import brown.mechanism.messages.library.GameReportMessage;
+import brown.mechanism.messages.library.LemonadeReportMessage;
+import brown.mechanism.messages.library.PrivateInformationMessage;
 import brown.system.setup.library.LemonadeSetup;
 
 /**

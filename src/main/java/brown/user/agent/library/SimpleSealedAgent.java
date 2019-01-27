@@ -7,10 +7,10 @@ import brown.logging.library.Logging;
 import brown.mechanism.bid.library.BidType;
 import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.channel.library.OneSidedChannel;
+import brown.mechanism.messages.library.AccountResetMessage;
+import brown.mechanism.messages.library.BankUpdateMessage;
+import brown.mechanism.messages.library.GameReportMessage;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.messages.library.AccountResetMessage;
-import brown.platform.messages.library.BankUpdateMessage;
-import brown.platform.messages.library.GameReportMessage;
 import brown.system.setup.library.SimpleSetup;
 
 /**

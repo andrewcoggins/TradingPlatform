@@ -1,6 +1,6 @@
 package brown.platform.server.library;
 
-import brown.platform.messages.IMessage;
+import brown.mechanism.messages.IMessage;
 import brown.system.kryoserver.library.KryoServer;
 import brown.system.setup.ISetup;
 
@@ -14,7 +14,7 @@ import brown.system.setup.ISetup;
  * @author acoggins, kerry, lcamery
  *
  */
-public class MessageServer extends KryoServer implements IMessageServer{
+public class MessageServer extends KryoServer implements IMessageServer {
   public MessageServer(int port, ISetup gameSetup) {
     super(port, gameSetup);
   }

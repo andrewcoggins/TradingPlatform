@@ -8,8 +8,8 @@ import brown.logging.library.Logging;
 import brown.mechanism.bid.IBid;
 import brown.mechanism.bid.library.OneSidedBidBundle;
 import brown.mechanism.channel.IChannel;
+import brown.mechanism.messages.library.TradeMessage;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.messages.library.TradeMessage;
 import brown.user.agent.library.AbsAgent;
 import brown.user.agent.library.AbsAuctionAgent;
 

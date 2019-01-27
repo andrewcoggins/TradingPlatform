@@ -7,11 +7,11 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
 import brown.logging.library.Logging;
+import brown.mechanism.messages.library.AbsMessage;
+import brown.mechanism.messages.library.AccountResetMessage;
+import brown.mechanism.messages.library.BankUpdateMessage;
+import brown.mechanism.messages.library.RegistrationMessage;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.messages.library.AbsMessage;
-import brown.platform.messages.library.AccountResetMessage;
-import brown.platform.messages.library.BankUpdateMessage;
-import brown.platform.messages.library.RegistrationMessage;
 import brown.system.client.library.TPClient;
 import brown.system.setup.ISetup;
 import brown.user.agent.IAgent;

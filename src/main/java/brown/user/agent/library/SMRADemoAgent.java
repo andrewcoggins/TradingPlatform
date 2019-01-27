@@ -7,9 +7,9 @@ import brown.mechanism.bid.library.BidType;
 import brown.mechanism.bidbundle.IBidBundle;
 import brown.mechanism.bidbundle.library.OneSidedBidBundle;
 import brown.mechanism.channel.library.OpenOutcryChannel;
+import brown.mechanism.messages.library.GameReportMessage;
 import brown.mechanism.channel.library.OneSidedChannel;
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.messages.library.GameReportMessage;
 import brown.system.setup.library.SMRASetup;
 
 /**

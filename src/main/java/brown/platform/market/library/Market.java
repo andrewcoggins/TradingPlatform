@@ -13,11 +13,11 @@ import brown.auction.rules.ITerminationCondition;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.value.valuation.IValuation;
+import brown.mechanism.messages.library.GameReportMessage;
+import brown.mechanism.messages.library.TradeMessage;
+import brown.mechanism.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.Order;
 import brown.platform.market.IMarket;
-import brown.platform.messages.library.GameReportMessage;
-import brown.platform.messages.library.TradeMessage;
-import brown.platform.messages.library.TradeRequestMessage;
 import brown.platform.market.IHistory;
 
 /**

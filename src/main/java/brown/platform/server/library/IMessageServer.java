@@ -1,6 +1,6 @@
   package brown.platform.server.library;
 
-import brown.platform.messages.IMessage;
+import brown.mechanism.messages.IMessage;
 
 public interface IMessageServer {
   

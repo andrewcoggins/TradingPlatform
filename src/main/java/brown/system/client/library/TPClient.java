@@ -6,9 +6,9 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 
 import brown.logging.library.SystemLogging;
-import brown.platform.messages.library.ErrorMessage;
-import brown.platform.messages.library.RegistrationMessage;
-import brown.platform.messages.library.StringMessage;
+import brown.mechanism.messages.library.ErrorMessage;
+import brown.mechanism.messages.library.RegistrationMessage;
+import brown.mechanism.messages.library.StringMessage;
 import brown.system.client.IClient;
 import brown.system.setup.ISetup;
 import brown.system.setup.library.Startup;
