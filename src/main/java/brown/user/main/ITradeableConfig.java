@@ -1,8 +1,6 @@
 package brown.user.main;
 
 import java.lang.reflect.Constructor;
-import java.util.List;
-import java.util.Map;
 
 /**
  * config for specifying tradeables from user-given input. See implementation for details. 
@@ -29,17 +27,5 @@ public interface ITradeableConfig extends IInputConfig {
    */
   public Integer getNumTradeables();
   
-  /**
-   * get valuation distribution. 
-   * @return
-   */
-  public Constructor<?> getValDistribution(); 
-  
-  
-  /**
-   * get generator config. 
-   * @return
-   */
-  public Map<Constructor<?>, List<Double>> getGenerator(); 
   
 }

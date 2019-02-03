@@ -15,16 +15,16 @@ import brown.mechanism.tradeable.ITradeable;
 
 public class ValuationManager implements IValuationManager {
 
-    private Map<String, IValuationDistribution> distributions;
+    private Map<List<String>, IValuationDistribution> distributions;
     private boolean lock;
 
     public ValuationManager() {
-        this.distributions = new HashMap<String, IValuationDistribution>();
+        this.distributions = new HashMap<List<String>, IValuationDistribution>();
         this.lock = false;
     }
 
-    public void createValuation(String tradeableName, Constructor<?> distCons, Map<Constructor<?>, List<Double>> generators,
-        Set<ITradeable> tradeables) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public void createValuation(Constructor<?> distCons, Map<Constructor<?>, List<Double>> generators,
+        Map<String, List<ITradeable>> tradeables) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         if (!this.lock) {
           List<IValuationGenerator> generatorList = new LinkedList<IValuationGenerator>(); 
             for (Constructor<?> generator : generators.keySet()) {
@@ -32,7 +32,7 @@ public class ValuationManager implements IValuationManager {
               generatorList.add(newGen); 
             }
             IValuationDistribution distribution = (IValuationDistribution) distCons.newInstance(generatorList, tradeables); 
-            this.distributions.put(tradeableName, distribution);
+            this.distributions.put(new LinkedList<String>(tradeables.keySet()), distribution);
         } else {
             PlatformLogging.log("Creation denied: valuation manager locked.");
         }

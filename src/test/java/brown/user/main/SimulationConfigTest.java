@@ -42,6 +42,7 @@ public class SimulationConfigTest {
   public void testSimulationConfigOne() throws NoSuchMethodException, SecurityException {
     
     List<ITradeableConfig> tConfigs = new LinkedList<ITradeableConfig>(); 
+    List<IValuationConfig> vConfigs = new LinkedList<IValuationConfig>(); 
     List<IEndowmentConfig> eConfigs = new LinkedList<IEndowmentConfig>(); 
     List<List<IMarketConfig>> mConfigSquared = new LinkedList<List<IMarketConfig>>(); 
     
@@ -70,20 +71,25 @@ public class SimulationConfigTest {
     params.add(1.0);  
     Map<Constructor<?>, List<Double>> gMap = new HashMap<Constructor<?>, List<Double>>(); 
     gMap.put(gCons, params); 
-    ITradeableConfig tConfig = new TradeableConfig("trade", tTypeCons, 10, 
-        distCons, gMap);
+    ITradeableConfig tConfig = new TradeableConfig("trade", tTypeCons, 10);
     tConfigs.add(tConfig);
+    
+    List<String> tNameList = new LinkedList<String>(); 
+    tNameList.add("trade"); 
+    IValuationConfig vConfig = new ValuationConfig(tNameList, distCons, gMap); 
+    vConfigs.add(vConfig); 
     
     Map<String, Integer> eMap = new HashMap<String, Integer>(); 
     eMap.put("a", 1); 
     EndowmentConfig eConfig = new EndowmentConfig("trade", eMap, 100.0); 
     eConfigs.add(eConfig); 
     
-    ISimulationConfig sConfig = new SimulationConfig(1, tConfigs, eConfigs, mConfigSquared); 
+    ISimulationConfig sConfig = new SimulationConfig(1, tConfigs, vConfigs, eConfigs, mConfigSquared); 
     
     assertEquals(sConfig.getSimulationRuns(), new Integer(1)); 
     assertEquals(sConfig.getEConfig(), eConfigs); 
     assertEquals(sConfig.getTConfig(), tConfigs); 
+    assertEquals(sConfig.getVConfig(), vConfigs); 
     assertEquals(sConfig.getMConfig(), mConfigSquared); 
   }
   

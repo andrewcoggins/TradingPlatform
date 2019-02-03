@@ -20,6 +20,12 @@ public interface ISimulationConfig extends IInputConfig {
    * @return
    */
   public  List<ITradeableConfig> getTConfig(); 
+   
+  /**
+   * get valuation config
+   * @return
+   */
+  public List<IValuationConfig> getVConfig(); 
   
   /**
    * get endowment config. 

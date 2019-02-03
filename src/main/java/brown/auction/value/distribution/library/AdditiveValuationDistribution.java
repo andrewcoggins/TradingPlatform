@@ -36,19 +36,20 @@ public class AdditiveValuationDistribution extends AbsValuationDistribution impl
    * all tradeables to be valued. These can be input as any type but will be 
    * valued based on the simple tradeables they contain.
    */
-  public AdditiveValuationDistribution(List<IValuationGenerator> generators, Set<ITradeable> goods) {
-    super(generators, goods); 
+  public AdditiveValuationDistribution(Map<String, List<ITradeable>> goods, List<IValuationGenerator> generators) {
+    super(goods, generators); 
     this.values = new HashMap<ITradeable, Double>(); 
   }
   
   @Override
   public IValuation sample() {
-    for (ITradeable atom : this.tradeables){ 
-      Double aValue = this.generators.get(0).makeValuation(); 
-      this.values.put(atom, aValue);
+    for (String s : this.tradeables.keySet()) {
+      for (ITradeable atom : this.tradeables.get(s)){ 
+        Double aValue = this.generators.get(0).makeValuation(); 
+        this.values.put(atom, aValue);
+      }
     }
     return new AdditiveValuation(this.values);
   }
-
 
 }

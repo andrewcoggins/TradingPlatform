@@ -2,7 +2,6 @@ package brown.user.main;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,6 @@ import brown.platform.market.IMarketRules;
 import brown.platform.market.library.MarketManager;
 import brown.platform.simulator.ISimulationManager;
 import brown.platform.simulator.library.SimulationManager;
-import brown.platform.whiteboard.library.Whiteboard;
 import brown.platform.world.IDomainManager;
 import brown.platform.world.IWorldManager;
 import brown.platform.world.library.DomainManager;
@@ -48,17 +46,23 @@ public class ConfigRun {
             IMarketManager marketManager = new MarketManager();
            
             
-            
             // tradeable manager should be easy so gonna start here. 
+            
             List<ITradeableConfig> tradeableConfig = aConfig.getTConfig(); 
             for (ITradeableConfig tConfig : tradeableConfig) {
               tradeableManager.createTradeables(tConfig.getTradeableName(), tConfig.getTType(), tConfig.getNumTradeables()); 
             }
             
-            // valuation manager
-            for (ITradeableConfig tConfig : tradeableConfig) {
-              valuationManager.createValuation(tConfig.getTradeableName(), tConfig.getValDistribution(), tConfig.getGenerator(),
-                  new HashSet<ITradeable>(tradeableManager.getTradeables(tConfig.getTradeableName())));
+            // valuation manager. 
+            
+            List<IValuationConfig> vConfigs = aConfig.getVConfig(); 
+            for (IValuationConfig vConfig : vConfigs) {
+              List<String> tradeableNames = vConfig.getTradeableNames();
+              Map<String, List<ITradeable>> valuationTradeables = new HashMap<String, List<ITradeable>>(); 
+              for (String s : tradeableNames) {
+                valuationTradeables.put(s, tradeableManager.getTradeables(s)); 
+              }
+              valuationManager.createValuation(vConfig.getValDistribution(), vConfig.getGenerators(), valuationTradeables);
             }
             
             // endowments also need a tradeable map, and a tradeable config. 
@@ -84,12 +88,6 @@ public class ConfigRun {
                 }
                 marketManager.createSimultaneousMarket(marketRules, marketTradeables, allTradeables);
             }
-            
-            // todo: initialization for the whiteboard? 
-            
-            
-            // todo: history config? 
-            
             
             // todo: refactor account manager b/c endowments? 
             

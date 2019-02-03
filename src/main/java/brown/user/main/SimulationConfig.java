@@ -7,16 +7,18 @@ public class SimulationConfig implements ISimulationConfig {
   
     private Integer simulationRuns;
     private List<ITradeableConfig> tConfig; 
+    private List<IValuationConfig> vConfig; 
     private List<IEndowmentConfig> eConfig; 
     private List<List<IMarketConfig>> mConfig; 
     
-    public SimulationConfig(Integer simulationRuns, List<ITradeableConfig> tConfig, List<IEndowmentConfig> eConfig,
-                            List<List<IMarketConfig>> mConfig) {
+    public SimulationConfig(Integer simulationRuns, List<ITradeableConfig> tConfig, List<IValuationConfig> vConfig, 
+        List<IEndowmentConfig> eConfig, List<List<IMarketConfig>> mConfig) {
 
         this.simulationRuns = simulationRuns;
         this.tConfig = tConfig; 
         this.eConfig = eConfig; 
         this.mConfig = mConfig; 
+        this.vConfig = vConfig; 
     }
 
     @Override
@@ -30,7 +32,13 @@ public class SimulationConfig implements ISimulationConfig {
       
       return this.tConfig;
     }
-
+    
+    @Override
+    public List<IValuationConfig> getVConfig() {
+      
+      return this.vConfig; 
+    }
+    
     @Override
     public List<IEndowmentConfig> getEConfig() {
       
@@ -46,7 +54,8 @@ public class SimulationConfig implements ISimulationConfig {
     @Override
     public String toString() {
       return "SimulationConfig [simulationRuns=" + simulationRuns + ", tConfig="
-          + tConfig + ", eConfig=" + eConfig + ", mConfig=" + mConfig + "]";
+          + tConfig + ", vConfig=" + vConfig + ", eConfig=" + eConfig
+          + ", mConfig=" + mConfig + "]";
     }
 
     @Override
@@ -58,6 +67,7 @@ public class SimulationConfig implements ISimulationConfig {
       result = prime * result
           + ((simulationRuns == null) ? 0 : simulationRuns.hashCode());
       result = prime * result + ((tConfig == null) ? 0 : tConfig.hashCode());
+      result = prime * result + ((vConfig == null) ? 0 : vConfig.hashCode());
       return result;
     }
 
@@ -90,8 +100,12 @@ public class SimulationConfig implements ISimulationConfig {
           return false;
       } else if (!tConfig.equals(other.tConfig))
         return false;
+      if (vConfig == null) {
+        if (other.vConfig != null)
+          return false;
+      } else if (!vConfig.equals(other.vConfig))
+        return false;
       return true;
     }
-    
     
 }

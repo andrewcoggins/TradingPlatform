@@ -1,18 +1,19 @@
 package brown.auction.value.distribution.library;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.valuation.IValuation;
 import brown.mechanism.tradeable.ITradeable;
 
 public abstract class AbsValuationDistribution {
-  
+
   protected List<IValuationGenerator> generators; 
-  protected Set<ITradeable> tradeables; 
+  protected Map<String, List<ITradeable>> tradeables; 
   
-  public AbsValuationDistribution(List<IValuationGenerator> generators, Set<ITradeable> tradeables) {
+  public AbsValuationDistribution(Map<String, List<ITradeable>> tradeables,
+      List<IValuationGenerator> generators) {
     this.generators = generators; 
     this.tradeables = tradeables; 
   }
@@ -56,7 +57,9 @@ public abstract class AbsValuationDistribution {
     } else if (!tradeables.equals(other.tradeables))
       return false;
     return true;
-  } 
+  }
+  
+  
   
   
 }

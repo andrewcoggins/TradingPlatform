@@ -84,11 +84,18 @@ public class CommandLineParser implements ICommandLineParser {
     rules.add(marketRule);
 
     
-    // tradeableConfig
+    // new: valuation config. 
+    List<IValuationConfig> vConfigList = new LinkedList<IValuationConfig>(); 
+    List<String> nameList = new LinkedList<String>(); 
+    nameList.add("default"); 
     Map<Constructor<?>, List<Double>> generators = new HashMap<Constructor<?>, List<Double>>(); 
     generators.put(generatorCons, generatorArgs); 
+    IValuationConfig valConfig = new ValuationConfig(nameList, distributionCons, generators); 
+    vConfigList.add(valConfig); 
+  
+    // tradeableConfig 
     List <ITradeableConfig> tConfigList = new LinkedList<ITradeableConfig>(); 
-    ITradeableConfig tConfig = new TradeableConfig("default", tTypeCons, numTradeables, distributionCons, generators); 
+    ITradeableConfig tConfig = new TradeableConfig("default", tTypeCons, numTradeables); 
     tConfigList.add(tConfig); 
     
     // endowmentConfig
@@ -108,7 +115,7 @@ public class CommandLineParser implements ICommandLineParser {
     mConfigSquared.add(mConfigList); 
     
     // simulationConfig
-    SimulationConfig config = new SimulationConfig(numRuns, tConfigList, eConfigList, mConfigSquared);
+    SimulationConfig config = new SimulationConfig(numRuns, tConfigList, vConfigList, eConfigList, mConfigSquared);
     return config; 
     
   }
