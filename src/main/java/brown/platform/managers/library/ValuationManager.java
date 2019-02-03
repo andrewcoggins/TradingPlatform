@@ -9,6 +9,8 @@ import java.util.Set;
 
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
+import brown.auction.value.valuation.IValuation;
+import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.mechanism.tradeable.ITradeable;
 import brown.platform.managers.IValuationManager;
@@ -16,6 +18,7 @@ import brown.platform.managers.IValuationManager;
 public class ValuationManager implements IValuationManager {
 
     private Map<List<String>, IValuationDistribution> distributions;
+    private Map<Integer, Map<List<String>, IValuation>> agentValuations; 
     private boolean lock;
 
     public ValuationManager() {
@@ -37,12 +40,35 @@ public class ValuationManager implements IValuationManager {
             PlatformLogging.log("Creation denied: valuation manager locked.");
         }
     }
-
-    public IValuationDistribution getDistribution(String tradeableName) {
-        return this.distributions.get(tradeableName);
+    
+    public void addAgentValuation(Integer agentID, List<String> tradeableNames, IValuation valuation) {
+      if (!this.agentValuations.keySet().contains(agentID)) {
+        Map<List<String>, IValuation> initialValuation = new HashMap<List<String>, IValuation>(); 
+        initialValuation.put(tradeableNames, valuation); 
+      } else {
+        Map<List<String>, IValuation> existingValuation = this.agentValuations.get(agentID); 
+        existingValuation.put(tradeableNames, valuation); 
+        this.agentValuations.put(agentID, existingValuation); 
+      }
+    }
+    
+    public Map<List<String>, IValuation> getAgentValuation(Integer agentID) {
+      try  {
+        Map<List<String>, IValuation> agentValuation = this.agentValuations.get(agentID);
+        Set<List<String>> keys = agentValuation.keySet(); 
+        return agentValuation; 
+      } catch(NullPointerException n) {
+        ErrorLogging.log("ERROR: Valuation Manager: no such agent exists: " + agentID.toString());
+        throw n; 
+      } 
+    }
+    
+    public IValuationDistribution getDistribution(List<String> tradeableNames) {
+      return this.distributions.get(tradeableNames);
     }
 
     public void lock() {
         this.lock = true;
     }
+    
 }

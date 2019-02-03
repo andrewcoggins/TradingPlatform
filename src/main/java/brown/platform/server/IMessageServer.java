@@ -1,4 +1,4 @@
-  package brown.platform.server.library;
+  package brown.platform.server;
 
 import brown.mechanism.messages.IMessage;
 

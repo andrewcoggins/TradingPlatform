@@ -4,7 +4,6 @@ import brown.logging.library.PlatformLogging;
 import brown.platform.managers.IDomainManager;
 import brown.platform.managers.IMarketManager;
 import brown.platform.managers.IWorldManager;
-import brown.platform.whiteboard.IWhiteboard;
 import brown.platform.world.IWorld;
 import brown.platform.world.library.World;
 

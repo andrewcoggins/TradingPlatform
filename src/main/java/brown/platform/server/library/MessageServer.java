@@ -1,6 +1,7 @@
 package brown.platform.server.library;
 
 import brown.mechanism.messages.IMessage;
+import brown.platform.server.IMessageServer;
 import brown.system.kryoserver.library.KryoServer;
 import brown.system.setup.ISetup;
 
