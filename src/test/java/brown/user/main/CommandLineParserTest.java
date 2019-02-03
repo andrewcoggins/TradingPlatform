@@ -1,11 +1,13 @@
 package brown.user.main;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -69,16 +71,34 @@ public class CommandLineParserTest {
     List<IEndowmentConfig> eConfigList = new LinkedList<IEndowmentConfig>(); 
     eConfigList.add(eConfig); 
     
-    // tradeableConfig
+    // tradeableConfigs
     List<ITradeable> allTradeables = new LinkedList<ITradeable>();
     for (int i = 0; i < numTradeables; i++) {
       allTradeables.add(new SimpleTradeable(i)); 
     }
-    IValuationGenerator valGenerator = new NormalValGenerator(0.0, 1.0); 
-    IValuationDistribution dist = new AdditiveValuationDistribution(valGenerator, new HashSet<ITradeable>(allTradeables)); 
+    
+    // tradeable config
+    Class<?> tTypeClass = Class.forName("brown.mechanism.tradeable.library." + tTypeString);
+    Constructor<?> tTypeCons = tTypeClass.getConstructor(Integer.class);
     List <ITradeableConfig> tConfigList = new LinkedList<ITradeableConfig>(); 
-    ITradeableConfig tConfig = new TradeableConfig("default", allTradeables.get(0).getType(), allTradeables.size(), dist); 
+    ITradeableConfig tConfig = new TradeableConfig("default", tTypeCons, allTradeables.size()); 
     tConfigList.add(tConfig); 
+    
+    // valconfig
+    Class<?> generatorClass = Class.forName("brown.auction.value.generator.library." + generatorString);
+    Class<?> distributionClass = Class.forName("brown.auction.value.distribution.library." + distributionString);
+    Constructor<?> generatorCons = generatorClass.getConstructor(Double.class, Double.class);
+    Constructor<?> distributionCons = distributionClass.getConstructor(Map.class, List.class);
+    Map<Constructor<?>, List<Double>> generators = new HashMap<Constructor<?>, List<Double>>(); 
+    List<Double> params = new LinkedList<Double>(); 
+    params.add(0.0); 
+    params.add(1.0); 
+    generators.put(generatorCons, params); 
+    
+    List<IValuationConfig> vConfigList = new LinkedList<IValuationConfig>();
+    List<String> goods = new LinkedList<String>(); 
+    goods.add("default"); 
+    vConfigList.add(new ValuationConfig(goods, distributionCons, generators));
     
     
     // marketConfig
@@ -97,12 +117,14 @@ public class CommandLineParserTest {
     mConfigList.add(mConfig); 
     mConfigSquared.add(mConfigList); 
     
-    ISimulationConfig testConfig = new SimulationConfig(numRuns, tConfigList, eConfigList, mConfigSquared); 
+    ISimulationConfig testConfig = new SimulationConfig(numRuns, tConfigList, vConfigList, eConfigList, mConfigSquared); 
     
     assertEquals(sConfig, testConfig); 
   }
   
-  public static void main(String[] args) {
-    
+  public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
+  InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    CommandLineParserTest t = new CommandLineParserTest(); 
+    t.testCommandLineParser();
   }
 }

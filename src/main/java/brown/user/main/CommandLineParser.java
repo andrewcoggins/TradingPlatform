@@ -59,7 +59,7 @@ public class CommandLineParser implements ICommandLineParser {
 
     Constructor<?> tTypeCons = tTypeClass.getConstructor(Integer.class);
     Constructor<?> generatorCons = generatorClass.getConstructor(Double.class, Double.class);
-    Constructor<?> distributionCons = distributionClass.getConstructor(IValuationGenerator.class, Set.class);
+    Constructor<?> distributionCons = distributionClass.getConstructor(Map.class, List.class);
     Constructor<?> aRuleCons = aRuleClass.getConstructor();
     Constructor<?> pRuleCons = pRuleClass.getConstructor();
     Constructor<?> qRuleCons = qRuleClass.getConstructor();

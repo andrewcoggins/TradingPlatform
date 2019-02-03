@@ -94,7 +94,7 @@ public class ConfigRun {
             
             domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
             worldManager.createWorld(domainManager, marketManager);
-            simulationManager.createSimulation(worldManager);
+            simulationManager.createSimulation(aConfig.getSimulationRuns(), worldManager);
             tradeableManager.lock();
             valuationManager.lock();
             simulationManager.lock();

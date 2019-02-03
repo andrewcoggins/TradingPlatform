@@ -11,16 +11,19 @@ import brown.platform.world.IWorldManager;
 public class SimulationManager implements ISimulationManager {
 
     private List<ISimulation> simulations;
+    private List<Integer> numSimulationRuns;  
     private boolean lock;
 
     public SimulationManager() {
         this.simulations = new LinkedList<>();
         this.lock = false;
+        this.numSimulationRuns = new LinkedList<Integer>(); 
     }
 
-    public void createSimulation(IWorldManager worldManager) {
+    public void createSimulation(int numSimulationRuns, IWorldManager worldManager) {
         if (!this.lock) {
             this.simulations.add(new Simulation(worldManager));
+            this.numSimulationRuns.add(numSimulationRuns); 
         } else {
             PlatformLogging.log("Creation denied: simulation manager locked.");
         }
