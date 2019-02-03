@@ -24,6 +24,7 @@ public class ValuationManager implements IValuationManager {
     public ValuationManager() {
         this.distributions = new HashMap<List<String>, IValuationDistribution>();
         this.lock = false;
+        this.agentValuations = new HashMap<Integer, Map<List<String>, IValuation>>();       
     }
 
     public void createValuation(Constructor<?> distCons, Map<Constructor<?>, List<Double>> generators,
@@ -34,7 +35,7 @@ public class ValuationManager implements IValuationManager {
               IValuationGenerator newGen = (IValuationGenerator) generator.newInstance(generators.get(generator)); 
               generatorList.add(newGen); 
             }
-            IValuationDistribution distribution = (IValuationDistribution) distCons.newInstance(generatorList, tradeables); 
+            IValuationDistribution distribution = (IValuationDistribution) distCons.newInstance(tradeables, generatorList); 
             this.distributions.put(new LinkedList<String>(tradeables.keySet()), distribution);
         } else {
             PlatformLogging.log("Creation denied: valuation manager locked.");
@@ -45,6 +46,7 @@ public class ValuationManager implements IValuationManager {
       if (!this.agentValuations.keySet().contains(agentID)) {
         Map<List<String>, IValuation> initialValuation = new HashMap<List<String>, IValuation>(); 
         initialValuation.put(tradeableNames, valuation); 
+        this.agentValuations.put(agentID, initialValuation);
       } else {
         Map<List<String>, IValuation> existingValuation = this.agentValuations.get(agentID); 
         existingValuation.put(tradeableNames, valuation); 
@@ -55,6 +57,7 @@ public class ValuationManager implements IValuationManager {
     public Map<List<String>, IValuation> getAgentValuation(Integer agentID) {
       try  {
         Map<List<String>, IValuation> agentValuation = this.agentValuations.get(agentID);
+        // a hacky way to induce a NullPointerException
         Set<List<String>> keys = agentValuation.keySet(); 
         return agentValuation; 
       } catch(NullPointerException n) {
