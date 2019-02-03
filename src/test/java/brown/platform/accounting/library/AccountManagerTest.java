@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import brown.platform.managers.library.AccountManager;
+
 public class AccountManagerTest {
   
   @Test

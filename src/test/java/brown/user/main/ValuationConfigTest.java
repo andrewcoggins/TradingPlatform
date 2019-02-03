@@ -14,6 +14,7 @@ import org.junit.Test;
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.generator.library.NormalValGenerator;
+import brown.user.main.library.ValuationConfig;
 
 public class ValuationConfigTest {
   

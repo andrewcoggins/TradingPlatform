@@ -27,14 +27,15 @@ import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.mechanism.tradeable.library.TradeableType;
 import brown.platform.market.IMarketRules;
 import brown.platform.market.library.FlexibleRules;
-import brown.user.main.EndowmentConfig;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
 import brown.user.main.ITradeableConfig;
-import brown.user.main.MarketConfig;
-import brown.user.main.SimulationConfig;
-import brown.user.main.TradeableConfig;
+import brown.user.main.library.EndowmentConfig;
+import brown.user.main.library.MarketConfig;
+import brown.user.main.library.SimulationConfig;
+import brown.user.main.library.TradeableConfig;
+import brown.user.main.library.ValuationConfig;
 
 public class SimulationConfigTest {
   

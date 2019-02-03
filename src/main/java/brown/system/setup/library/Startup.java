@@ -10,8 +10,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import brown.auction.value.generator.library.LabTwoValGenerator;
-import brown.auction.value.generator.library.UniformValGenerator;
 import brown.mechanism.bid.library.OneSidedBidBundle;
 import brown.mechanism.channel.library.GameChannel;
 import brown.mechanism.messages.library.AbsMessage;
@@ -76,8 +74,6 @@ public final class Startup {
     kryo.register(PrivateInformationMessage.class);		
     kryo.register(List.class);
     kryo.register(AccountResetMessage.class);
-    kryo.register(LabTwoValGenerator.class);
-    kryo.register(UniformValGenerator.class);
 		return true;
 	}
 

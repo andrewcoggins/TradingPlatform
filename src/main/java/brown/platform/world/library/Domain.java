@@ -1,9 +1,9 @@
 package brown.platform.world.library;
 
-import brown.auction.value.manager.IValuationManager;
-import brown.mechanism.tradeable.ITradeableManager;
-import brown.platform.accounting.IAccountManager;
-import brown.platform.accounting.IEndowmentManager;
+import brown.platform.managers.IAccountManager;
+import brown.platform.managers.IEndowmentManager;
+import brown.platform.managers.ITradeableManager;
+import brown.platform.managers.IValuationManager;
 import brown.platform.world.IDomain;
 
 

@@ -19,7 +19,7 @@ import brown.auction.rules.ITerminationCondition;
 import brown.platform.market.IMarketRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.user.main.IMarketConfig;
-import brown.user.main.MarketConfig; 
+import brown.user.main.library.MarketConfig; 
 
 public class MarketConfigTest {
   

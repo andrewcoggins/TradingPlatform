@@ -2,7 +2,7 @@ package brown.auction.prevstate.library;
 
 import brown.auction.prevstate.IPrevStateInfo;
 import brown.auction.prevstate.PrevStateType;
-import brown.auction.value.manager.IValuationManager;
+import brown.platform.managers.IValuationManager;
 
 /**
  * Abstract class for prev state info (see IPrevStateInfo).

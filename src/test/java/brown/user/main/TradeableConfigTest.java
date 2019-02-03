@@ -5,7 +5,7 @@ import java.lang.reflect.Constructor;
 import org.junit.Test;
 import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.user.main.ITradeableConfig;
-import brown.user.main.TradeableConfig;
+import brown.user.main.library.TradeableConfig;
 
 public class TradeableConfigTest {
   

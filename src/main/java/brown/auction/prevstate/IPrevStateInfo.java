@@ -1,7 +1,7 @@
 package brown.auction.prevstate; 
 
 import brown.auction.prevstate.library.PrevStateInfo;
-import brown.auction.value.manager.IValuationManager;
+import brown.platform.managers.IValuationManager;
 
 /**
  * PrevStateInfo is an object used to transmit information

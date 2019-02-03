@@ -1,7 +1,7 @@
 package brown.platform.world.library;
 
-import brown.platform.market.IMarketManager;
-import brown.platform.world.IDomainManager;
+import brown.platform.managers.IDomainManager;
+import brown.platform.managers.IMarketManager;
 import brown.platform.world.IWorld;
 
 

@@ -2,6 +2,8 @@ package brown.user.main;
 
 import java.lang.reflect.InvocationTargetException;
 
+import brown.user.main.library.SimulationConfig;
+
 public interface ICommandLineParser extends IInputParser {
   
   public SimulationConfig parseCommandLine(int numRuns, int delayTime, String tTypeString, int numTradeables, 

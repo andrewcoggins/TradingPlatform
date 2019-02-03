@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import brown.user.main.EndowmentConfig;
+import brown.user.main.library.EndowmentConfig;
 
 public class EndowmentConfigTest {
   
