@@ -1,4 +1,4 @@
-package brown.platform.accounting.library;
+package brown.platform.managers.library;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import brown.platform.accounting.library.Account;
 import brown.platform.managers.library.AccountManager;
 
 public class AccountManagerTest {

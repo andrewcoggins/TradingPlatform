@@ -1,10 +1,9 @@
 package brown.platform.accounting;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import brown.mechanism.tradeable.ITradeable;
-import brown.platform.accounting.library.Account;
 
 /**
  * Accounts store agent monies and tradeables.
@@ -13,63 +12,22 @@ import brown.platform.accounting.library.Account;
  */
 public interface IAccount {
   
-  /**
-   * @return ID of agent owning the account
-   */
   public int getID();
-
-  /**
-   * @return double representing amount of money in account
-   */
-  public double getMonies();
   
-  /**
-   * @return List of ITtradeables representing goods in account
-   */  
-  public List<ITradeable> getGoods();
+  public double getMoney(); 
   
-  /**
-   * Add money to an account
-   * @param newMonies - money to be added
-   */
-  public void add(double newMonies);
+  public List<ITradeable> getGoods(String name); 
   
-  /**
-   * @param newMonies : add money
-   * @param newGoods : add goods 
-   */
-  public void add(double newMonies, List<ITradeable> newGoods);
+  public Map<String, List<ITradeable>> getAllGoods(); 
   
-  public void add(double newMonies, Set<ITradeable> newGoods);
+  public void addTradeables(String name, List<ITradeable> tradeables); 
   
-  public void add(double newMonies, ITradeable newGood);
+  public void removeTradeables(String name, List<ITradeable> tradeables); 
   
-   /**
-   * Remove money from an account
-   * @param newMonies - money to be removed
-   */
-  public void remove(double newMonies);
-
-  /**
-   * Removes monies and goods
-   * @param removeMonies - money to remove
-   * @param removeGoods - goods to remove 
-   */
-  public void remove(double removeMonies, List<ITradeable> removeGoods);
+  public void addMoney(double money); 
   
-  public void remove(double removeMonies, Set<ITradeable> removeGoods);
-   
-  public void remove(double removeMonies, ITradeable removeGood);
-
-  /** 
-   * clears an account
-   */
-  public void clear();
+  public void removeMoney(double newMoney); 
   
-  /**
-   * copies an account
-   * @return copied account
-   */
-  public Account copyAccount();
+  public void clear(); 
   
 }

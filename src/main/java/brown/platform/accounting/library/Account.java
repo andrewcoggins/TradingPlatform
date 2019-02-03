@@ -1,25 +1,21 @@
 package brown.platform.accounting.library; 
 
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
+import brown.logging.library.ErrorLogging;
 import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.library.SimpleTradeable;
 import brown.platform.accounting.IAccount;
 
 /**
  * an account belongs to an agent and stores money and goods for that agent
  * 
- * @author lcamery
- * @editor amy
  */
 public class Account implements IAccount {
   
-	public final Integer ID;
-	private double monies;
-	private List<ITradeable> tradeables;
+	private Integer ID;
+	private double money;
+	private Map<String, List<ITradeable>> tradeables;
 	
 	/**
 	 * For Kryo
@@ -27,30 +23,9 @@ public class Account implements IAccount {
 	 */
 	public Account() {
 		this.ID = null;
-		this.monies = 0.0;
+		this.money = 0.0;
 		this.tradeables = null;
 	}
-	
-	/**
-	 * Constructor with only agent ID; no money; no goods
-	 * @param ID - agent ID
-	 */
-	public Account(Integer ID) {
-		this.ID = ID;
-		this.monies = 0.0;
-		this.tradeables = new LinkedList<ITradeable>();
-	}
-	
-	/**
-   * Constructor with only agent ID and initial balance; no goods
-   * @param ID - agent ID
-   * @param monies - initial monies
-   */
-  public Account(Integer ID, double monies) {
-    this.ID = ID;
-    this.monies = monies;
-    this.tradeables = new LinkedList<ITradeable>();
-  }
 	
 	/**
 	 * Constructor with agent ID, initial balance, and goods
@@ -58,9 +33,9 @@ public class Account implements IAccount {
 	 * @param monies - initial monies
 	 * @param goods - initial goods
 	 */
-	public Account(Integer ID, double monies, List<ITradeable> goods) {
+	public Account(Integer ID, double monies, Map<String, List<ITradeable>> goods) {
 		this.ID = ID;
-		this.monies = monies;
+		this.money = monies;
 		this.tradeables = goods;
 	}
 	
@@ -68,96 +43,54 @@ public class Account implements IAccount {
     return this.ID;
   }
 	
-	public double getMonies() {
-	  return this.monies;
+	public double getMoney() {
+	  return this.money;
 	}
 	
-	public List<ITradeable> getGoods() {
-	  return this.tradeables;
+	public List<ITradeable> getGoods(String name) {
+	  return this.tradeables.get(name);
 	}
 	
-  public void add(double newMonies) {
-    this.monies += newMonies;
-  }
-  
-  public void add(double newMonies, List<ITradeable> newGoods) {
-    this.tradeables.addAll(newGoods);
-    this.monies += newMonies;    
-  }
-  
-  public void add(double newMonies, Set<ITradeable> newGoods) {
-    this.tradeables.addAll(newGoods);
-    this.monies += newMonies;
-  }
-  
-  public void add(double newMonies, ITradeable newGood) {    
-    this.tradeables.add(newGood);
-    this.monies += newMonies;
-  }
-	
-  public void remove(double newMonies) {
-    this.monies -= newMonies;
-  }
-  
-  /**
-   * Flattens collections of ITradeables to lists of SimpleTradeables
-   * @param goods - Collection of ITradeables
-   * @return "Flattened" collection - the goods represented as a list of SimpleTradeables
-   */
-  private List<SimpleTradeable> flattenHelper(Collection<ITradeable> goods) {
-    List<SimpleTradeable>toReturn = new LinkedList<SimpleTradeable>();    
-    for (ITradeable good : goods){
-      toReturn.addAll(good.flatten());
-    }
-    return toReturn;
-  }
-	
-	public void remove(double removeMonies, List<ITradeable> removeGoods) {
-	  this.monies -= removeMonies;
-
-	  // Need to flatten tradeables so they can be compared
-	  List<SimpleTradeable> myGoods = flattenHelper(this.tradeables);	  
-    List<SimpleTradeable> toRemove = flattenHelper(removeGoods);
-
-    myGoods.removeAll(toRemove);    
-    this.tradeables = new LinkedList<ITradeable>(myGoods);
+	public Map<String, List<ITradeable>> getAllGoods() {
+	  return this.tradeables; 
 	}
 	
-	 public void remove(double removeMonies, Set<ITradeable> removeGoods) {
-	    this.monies -= removeMonies;
-
-	    List<SimpleTradeable> myGoods = flattenHelper(this.tradeables);   
-	    List<SimpleTradeable> toRemove = flattenHelper(removeGoods);
-
-	    myGoods.removeAll(toRemove);    
-	    this.tradeables = new LinkedList<ITradeable>(myGoods);
+	public void addTradeables(String name, List<ITradeable> tradeables) {
+	  if (this.tradeables.keySet().contains(name)) {
+	    List<ITradeable> tList = this.tradeables.get(name); 
+	    tList.addAll(tradeables);
+	    this.tradeables.put(name, tList); 
+	  } else {
+	    this.tradeables.put(name, tradeables); 
 	  }
-
-	public void remove(double removeMonies, ITradeable removeGood) {
-	   this.monies -= removeMonies;
-
-	  List<SimpleTradeable> myGoods = flattenHelper(this.tradeables);   
-	  
-	  myGoods.remove(removeGood);
-    this.tradeables = new LinkedList<ITradeable>(myGoods);    
 	}
+
+	public void removeTradeables(String name, List<ITradeable> tradeables) {
+	  if (this.tradeables.keySet().contains(name)) {
+	    List<ITradeable> existing = this.tradeables.get(name);
+	    existing.removeAll(tradeables); 
+	    this.tradeables.put(name, existing); 
+	  } else {
+	    ErrorLogging.log("ERROR: Account " + this.ID.toString() + ": tradeable name " + name +  "not in account so can't be removed." );
+	  }
+	}
+	
+	public void addMoney(double money) {
+	    this.money += money; 
+	}
+	 
+  public void removeMoney(double newMoney) {
+    this.money -= newMoney;
+  }
 
 	public void clear() {
-	  this.monies = 0.0;
-	  this.tradeables = new LinkedList<ITradeable>();
-	}
-	
-	public Account copyAccount() {
-		List<ITradeable> copyTradeables = new LinkedList<ITradeable>();
-		for (ITradeable t : this.tradeables) {
-			copyTradeables.add(t);
-		}		
-		return new Account(this.ID, this.monies, copyTradeables);
+	  this.money = 0.0;
+	  this.tradeables.clear(); 
 	}
 
   @Override
   public String toString() {
-    return "Account [ID=" + ID + ", monies=" + monies + ", tradeables="
+    return "Account [ID=" + ID + ", money=" + money + ", tradeables="
         + tradeables + "]";
   }
 
@@ -167,7 +100,7 @@ public class Account implements IAccount {
     int result = 1;
     result = prime * result + ((ID == null) ? 0 : ID.hashCode());
     long temp;
-    temp = Double.doubleToLongBits(monies);
+    temp = Double.doubleToLongBits(money);
     result = prime * result + (int) (temp ^ (temp >>> 32));
     result =
         prime * result + ((tradeables == null) ? 0 : tradeables.hashCode());
@@ -188,8 +121,7 @@ public class Account implements IAccount {
         return false;
     } else if (!ID.equals(other.ID))
       return false;
-    if (Double.doubleToLongBits(monies) != Double
-        .doubleToLongBits(other.monies))
+    if (Double.doubleToLongBits(money) != Double.doubleToLongBits(other.money))
       return false;
     if (tradeables == null) {
       if (other.tradeables != null)
