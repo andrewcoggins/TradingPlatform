@@ -3,9 +3,9 @@ package brown.platform.market.library;
 import java.util.List;
 import java.util.Map;
 
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.market.IMarketBlock;
 import brown.platform.market.IMarketRules;
+import brown.platform.tradeable.ITradeable;
 
 public class SimultaneousMarket implements IMarketBlock {
 

@@ -1,6 +1,6 @@
 package brown.user.agent;
 
-import brown.mechanism.channel.library.TwoSidedChannel;
+import brown.communication.channel.library.TwoSidedChannel;
 
 /**
  * Interface for agent that bids in call markets.

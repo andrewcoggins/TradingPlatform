@@ -3,8 +3,8 @@ package brown.platform.managers;
 import java.util.List;
 import java.util.Map;
 
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.IInitialEndowment;
+import brown.platform.tradeable.ITradeable;
 
 public interface IEndowmentManager {
 

@@ -1,6 +1,6 @@
 package brown.user.agent;
 
-import brown.mechanism.channel.library.OneSidedChannel;
+import brown.communication.channel.library.OneSidedChannel;
 
 public interface ISimpleSealedAgent {
 

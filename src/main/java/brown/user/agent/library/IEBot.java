@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import brown.mechanism.channel.library.TwoSidedChannel;
+import brown.communication.channel.library.TwoSidedChannel;
 
 
 /**

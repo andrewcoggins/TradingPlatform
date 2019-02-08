@@ -5,10 +5,10 @@ import java.io.IOException;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 
+import brown.communication.messages.library.ErrorMessage;
+import brown.communication.messages.library.RegistrationMessage;
+import brown.communication.messages.library.StringMessage;
 import brown.logging.library.SystemLogging;
-import brown.mechanism.messages.library.ErrorMessage;
-import brown.mechanism.messages.library.RegistrationMessage;
-import brown.mechanism.messages.library.StringMessage;
 import brown.system.client.IClient;
 import brown.system.setup.ISetup;
 import brown.system.setup.library.Startup;

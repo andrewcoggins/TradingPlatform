@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import brown.logging.library.ErrorLogging;
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.IAccount;
+import brown.platform.tradeable.ITradeable;
 
 /**
  * an account belongs to an agent and stores money and goods for that agent

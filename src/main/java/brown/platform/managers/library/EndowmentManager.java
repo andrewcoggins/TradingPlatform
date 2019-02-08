@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import brown.logging.library.PlatformLogging;
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.IInitialEndowment;
 import brown.platform.accounting.library.InitialEndowment;
 import brown.platform.managers.IEndowmentManager;
+import brown.platform.tradeable.ITradeable;
 
 import java.util.concurrent.ThreadLocalRandom;
 

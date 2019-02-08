@@ -1,7 +1,8 @@
 package brown.platform.accounting.library;
 
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.IInitialEndowment;
+import brown.platform.tradeable.ITradeable;
+
 import java.util.List;
 import java.util.Map;
 

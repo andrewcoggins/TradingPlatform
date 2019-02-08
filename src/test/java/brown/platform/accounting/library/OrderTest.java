@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.SimpleTradeable;
 
 public class OrderTest {
   

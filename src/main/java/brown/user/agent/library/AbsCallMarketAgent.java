@@ -1,8 +1,8 @@
 package brown.user.agent.library;
 
+import brown.communication.messages.library.PredictionMarketValuationMessage;
+import brown.communication.messages.library.PrivateInformationMessage;
 import brown.logging.library.Logging;
-import brown.mechanism.messages.library.PredictionMarketValuationMessage;
-import brown.mechanism.messages.library.PrivateInformationMessage;
 import brown.system.setup.ISetup;
 import brown.user.agent.ICallMarketAgent;
 

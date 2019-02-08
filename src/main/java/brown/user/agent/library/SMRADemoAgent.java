@@ -3,13 +3,13 @@ package brown.user.agent.library;
 import java.util.HashMap;
 import java.util.Map;
 
-import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.IBidBundle;
-import brown.mechanism.bidbundle.library.OneSidedBidBundle;
-import brown.mechanism.channel.library.OpenOutcryChannel;
-import brown.mechanism.messages.library.GameReportMessage;
-import brown.mechanism.channel.library.OneSidedChannel;
-import brown.mechanism.tradeable.ITradeable;
+import brown.communication.bid.library.BidType;
+import brown.communication.bidbundle.IBidBundle;
+import brown.communication.bidbundle.library.OneSidedBidBundle;
+import brown.communication.channel.library.OneSidedChannel;
+import brown.communication.channel.library.OpenOutcryChannel;
+import brown.communication.messages.library.GameReportMessage;
+import brown.platform.tradeable.ITradeable;
 import brown.system.setup.library.SMRASetup;
 
 /**

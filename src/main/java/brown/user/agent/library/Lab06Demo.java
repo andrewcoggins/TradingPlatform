@@ -1,8 +1,8 @@
 package brown.user.agent.library;
 
+import brown.communication.bid.library.BidDirection;
+import brown.communication.channel.library.TwoSidedChannel;
 import brown.logging.library.Logging;
-import brown.mechanism.bid.library.BidDirection;
-import brown.mechanism.channel.library.TwoSidedChannel;
 
 /**
  * Demo agent for lab06 for cs1951k.

@@ -1,7 +1,7 @@
 package brown.user.agent.library;
 
+import brown.communication.channel.library.TwoSidedChannel;
 import brown.logging.library.Logging;
-import brown.mechanism.channel.library.TwoSidedChannel;
 
 // This agent buys or sells randomly with uniform distribution
 public class RandomAgent extends AbsPredictionMarketAgent {

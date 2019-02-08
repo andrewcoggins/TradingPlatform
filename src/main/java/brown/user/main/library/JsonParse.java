@@ -26,7 +26,6 @@ import brown.auction.rules.library.NoRecordKeeping;
 import brown.auction.rules.library.OneGrouping;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IDomainManager;
 import brown.platform.managers.IEndowmentManager;
@@ -43,6 +42,7 @@ import brown.platform.managers.library.SimulationManager;
 import brown.platform.managers.library.TradeableManager;
 import brown.platform.managers.library.ValuationManager;
 import brown.platform.managers.library.WorldManager;
+import brown.platform.tradeable.ITradeable;
 import brown.platform.whiteboard.IWhiteboard;
 import brown.platform.whiteboard.library.Whiteboard;
 

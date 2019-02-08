@@ -1,9 +1,9 @@
 package brown.user.agent.library;
 
+import brown.communication.channel.library.OneSidedChannel;
+import brown.communication.messages.library.GameReportMessage;
+import brown.communication.messages.library.SimpleSealedReportMessage;
 import brown.logging.library.Logging;
-import brown.mechanism.channel.library.OneSidedChannel;
-import brown.mechanism.messages.library.GameReportMessage;
-import brown.mechanism.messages.library.SimpleSealedReportMessage;
 import brown.system.setup.library.SimpleSetup;
 
 /**

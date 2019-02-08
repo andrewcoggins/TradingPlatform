@@ -1,6 +1,6 @@
 package brown.user.agent.library; // TODO: change this to your package
 
-import brown.mechanism.channel.library.TwoSidedChannel;
+import brown.communication.channel.library.TwoSidedChannel;
 
 public class PredictionMarketAgentTemplate extends AbsPredictionMarketAgent {
 

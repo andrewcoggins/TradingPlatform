@@ -1,6 +1,6 @@
 package brown.auction.value.valuation;
 
-import brown.mechanism.tradeable.ITradeable;
+import brown.platform.tradeable.ITradeable;
 
 
 /**

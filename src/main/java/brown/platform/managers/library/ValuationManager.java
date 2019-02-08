@@ -12,8 +12,8 @@ import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.valuation.IValuation;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.managers.IValuationManager;
+import brown.platform.tradeable.ITradeable;
 
 public class ValuationManager implements IValuationManager {
 

@@ -1,6 +1,6 @@
 package brown.user.agent.library; // TODO: change this to your package
 
-import brown.mechanism.channel.library.TwoSidedChannel;
+import brown.communication.channel.library.TwoSidedChannel;
 
 /**
  * template agent for lab06- prediction markets for cs1951k

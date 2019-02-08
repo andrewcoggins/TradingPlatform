@@ -3,7 +3,8 @@ package brown.user.main;
 import static org.junit.Assert.assertEquals;
 import java.lang.reflect.Constructor;
 import org.junit.Test;
-import brown.mechanism.tradeable.library.SimpleTradeable;
+
+import brown.platform.tradeable.library.SimpleTradeable;
 import brown.user.main.ITradeableConfig;
 import brown.user.main.library.TradeableConfig;
 

@@ -2,7 +2,7 @@ package brown.user.agent.library;
 
 import java.util.PriorityQueue;
 
-import brown.mechanism.channel.library.TwoSidedChannel;
+import brown.communication.channel.library.TwoSidedChannel;
 import brown.platform.twosided.BuyOrder;
 import brown.platform.twosided.IOrderBook;
 import brown.platform.twosided.SellOrder;

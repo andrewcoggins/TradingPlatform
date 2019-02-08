@@ -3,7 +3,7 @@ package brown.platform.accounting;
 import java.util.List;
 import java.util.Map;
 
-import brown.mechanism.tradeable.ITradeable;
+import brown.platform.tradeable.ITradeable;
 
 /**
  * Accounts store agent monies and tradeables.

@@ -10,10 +10,10 @@ import org.spectrumauctions.sats.core.model.mrvm.MultiRegionModel;
 import org.spectrumauctions.sats.core.util.random.JavaUtilRNGSupplier;
 import org.spectrumauctions.sats.core.util.random.RNGSupplier;
 
-import brown.mechanism.channel.library.OpenOutcryChannel;
-import brown.mechanism.messages.library.GameReportMessage;
-import brown.mechanism.messages.library.PrivateInformationMessage;
-import brown.mechanism.messages.library.SpecValWrapperMessage;
+import brown.communication.channel.library.OpenOutcryChannel;
+import brown.communication.messages.library.GameReportMessage;
+import brown.communication.messages.library.PrivateInformationMessage;
+import brown.communication.messages.library.SpecValWrapperMessage;
 import brown.system.setup.ISetup;
 import brown.user.agent.ISpecValV2Agent;
 

@@ -6,12 +6,12 @@ import java.util.List;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
+import brown.communication.messages.library.AbsMessage;
+import brown.communication.messages.library.AccountResetMessage;
+import brown.communication.messages.library.BankUpdateMessage;
+import brown.communication.messages.library.RegistrationMessage;
 import brown.logging.library.Logging;
-import brown.mechanism.messages.library.AbsMessage;
-import brown.mechanism.messages.library.AccountResetMessage;
-import brown.mechanism.messages.library.BankUpdateMessage;
-import brown.mechanism.messages.library.RegistrationMessage;
-import brown.mechanism.tradeable.ITradeable;
+import brown.platform.tradeable.ITradeable;
 import brown.system.client.library.TPClient;
 import brown.system.setup.ISetup;
 import brown.user.agent.IAgent;

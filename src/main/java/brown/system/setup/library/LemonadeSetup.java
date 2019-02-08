@@ -2,9 +2,9 @@ package brown.system.setup.library;
 
 import com.esotericsoftware.kryo.Kryo;
 
-import brown.mechanism.bid.library.GameBid;
-import brown.mechanism.channel.library.GameChannel;
-import brown.mechanism.messages.library.LemonadeReportMessage;
+import brown.communication.bid.library.GameBid;
+import brown.communication.channel.library.GameChannel;
+import brown.communication.messages.library.LemonadeReportMessage;
 import brown.system.setup.ISetup;
 
 /**

@@ -7,11 +7,11 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.prevstate.library.PrevStateInfo;
-import brown.mechanism.messages.library.GameReportMessage;
-import brown.mechanism.messages.library.TradeMessage;
-import brown.mechanism.messages.library.TradeRequestMessage;
-import brown.mechanism.tradeable.ITradeable;
+import brown.communication.messages.library.GameReportMessage;
+import brown.communication.messages.library.TradeMessage;
+import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.Order;
+import brown.platform.tradeable.ITradeable;
 
 /**
  * Standard MarketState stores the internal information of a market.

@@ -1,7 +1,7 @@
 package brown.platform.accounting.library;
 
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.ITransaction;
+import brown.platform.tradeable.ITradeable;
 
 /**
  * A transaction is a trade that transpired.

@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.ITradeable;
+import brown.platform.tradeable.library.SimpleTradeable;
 
 public class AdditiveValuationTest {
   

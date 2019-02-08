@@ -5,7 +5,7 @@ import java.util.Map;
 
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.valuation.IValuation;
-import brown.mechanism.tradeable.ITradeable;
+import brown.platform.tradeable.ITradeable;
 
 public abstract class AbsValuationDistribution {
 

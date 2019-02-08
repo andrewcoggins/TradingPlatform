@@ -3,8 +3,8 @@ package brown.auction.prevstate.library;
 import java.util.Map;
 
 import brown.auction.prevstate.PrevStateType;
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.managers.IValuationManager;
+import brown.platform.tradeable.ITradeable;
 
 /**
  * prev state info indicating the reserve prices of the previous auction.

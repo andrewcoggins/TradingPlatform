@@ -19,16 +19,16 @@ import org.spectrumauctions.sats.core.model.mrvm.MRVMLicense;
 import org.spectrumauctions.sats.opt.model.mrvm.demandquery.MRVMDemandQueryMipResult;
 import org.spectrumauctions.sats.opt.model.mrvm.demandquery.MRVM_DemandQueryMIP;
 
+import brown.communication.bid.library.BidType;
+import brown.communication.bidbundle.library.OneSidedBidBundle;
+import brown.communication.channel.library.OpenOutcryChannel;
+import brown.communication.messages.library.BankUpdateMessage;
+import brown.communication.messages.library.CombinatorialClockReport;
+import brown.communication.messages.library.GameReportMessage;
+import brown.communication.messages.library.PrivateInformationMessage;
 import brown.logging.library.Logging;
-import brown.mechanism.bid.library.BidType;
-import brown.mechanism.bidbundle.library.OneSidedBidBundle;
-import brown.mechanism.channel.library.OpenOutcryChannel;
-import brown.mechanism.messages.library.BankUpdateMessage;
-import brown.mechanism.messages.library.CombinatorialClockReport;
-import brown.mechanism.messages.library.GameReportMessage;
-import brown.mechanism.messages.library.PrivateInformationMessage;
-import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.ITradeable;
+import brown.platform.tradeable.library.SimpleTradeable;
 import brown.system.setup.library.SpecValSetup;
 
 /**

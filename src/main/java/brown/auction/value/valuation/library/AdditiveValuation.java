@@ -7,8 +7,8 @@ import java.util.Map;
 
 import brown.auction.value.valuation.IMonotonicValuation;
 import brown.auction.value.valuation.IValuation;
-import brown.mechanism.tradeable.ITradeable;
-import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.ITradeable;
+import brown.platform.tradeable.library.SimpleTradeable;
 
 /**
  * additive valuation specifies a valuation over goods, 

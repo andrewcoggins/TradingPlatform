@@ -11,8 +11,8 @@ import org.apache.commons.math3.exception.NotStrictlyPositiveException;
 
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.managers.ITradeableManager;
+import brown.platform.tradeable.ITradeable;
 
 /**
  * A TradeableManager is an entity that creates tradeables for an auction.

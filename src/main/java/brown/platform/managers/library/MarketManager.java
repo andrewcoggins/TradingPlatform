@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import brown.logging.library.PlatformLogging;
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.managers.IMarketManager;
 import brown.platform.market.IMarket;
 import brown.platform.market.IMarketBlock;
 import brown.platform.market.IMarketRules;
 import brown.platform.market.library.SimultaneousMarket;
+import brown.platform.tradeable.ITradeable;
 import brown.platform.whiteboard.IWhiteboard;
 import brown.platform.whiteboard.library.Whiteboard;
 

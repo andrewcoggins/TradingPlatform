@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IDomainManager;
 import brown.platform.managers.IEndowmentManager;
@@ -24,6 +23,7 @@ import brown.platform.managers.library.TradeableManager;
 import brown.platform.managers.library.ValuationManager;
 import brown.platform.managers.library.WorldManager;
 import brown.platform.market.IMarketRules;
+import brown.platform.tradeable.ITradeable;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ITradeableConfig;

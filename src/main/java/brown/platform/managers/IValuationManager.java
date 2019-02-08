@@ -8,7 +8,7 @@ import java.util.Map;
 
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.valuation.IValuation;
-import brown.mechanism.tradeable.ITradeable;
+import brown.platform.tradeable.ITradeable;
 
 public interface IValuationManager {
 

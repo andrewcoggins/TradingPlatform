@@ -1,6 +1,6 @@
 package brown.user.agent.library;
 
-import brown.mechanism.channel.library.GameChannel;
+import brown.communication.channel.library.GameChannel;
 import brown.system.setup.ISetup;
 
 public abstract class AbsGameAgent extends AbsAgent {

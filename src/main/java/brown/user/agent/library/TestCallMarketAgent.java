@@ -1,14 +1,13 @@
 package brown.user.agent.library;
 
 
+import brown.communication.bid.library.BidDirection;
+import brown.communication.bid.library.TwoSidedBidBundle;
+import brown.communication.channel.library.TwoSidedChannel;
+import brown.communication.messages.library.BankUpdateMessage;
+import brown.communication.messages.library.CallMarketReportMessage;
+import brown.communication.messages.library.GameReportMessage;
 import brown.logging.library.Logging;
-import brown.mechanism.bid.library.BidDirection;
-import brown.mechanism.bid.library.TwoSidedBidBundle;
-import brown.mechanism.bidbundle.library.TwoSidedBidBundle;
-import brown.mechanism.channel.library.TwoSidedChannel;
-import brown.mechanism.messages.library.BankUpdateMessage;
-import brown.mechanism.messages.library.CallMarketReportMessage;
-import brown.mechanism.messages.library.GameReportMessage;
 import brown.system.setup.library.CallMarketSetup;
 
 /**

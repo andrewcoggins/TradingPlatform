@@ -5,10 +5,10 @@ import java.util.List;
 
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.valuation.IValuation;
+import brown.communication.messages.library.PrivateInformationMessage;
+import brown.communication.messages.library.ValuationInformationMessage;
 import brown.logging.library.Logging;
-import brown.mechanism.messages.library.PrivateInformationMessage;
-import brown.mechanism.messages.library.ValuationInformationMessage;
-import brown.mechanism.tradeable.ITradeable;
+import brown.platform.tradeable.ITradeable;
 import brown.system.setup.ISetup;
 import brown.user.agent.ISimpleSealedAgent;
 

@@ -1,6 +1,6 @@
 package brown.platform.accounting.library; 
 
-import brown.mechanism.tradeable.ITradeable;
+import brown.platform.tradeable.ITradeable;
 
 /**
  * An order is produced by the payment rule, and 

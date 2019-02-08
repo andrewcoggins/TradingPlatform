@@ -1,6 +1,6 @@
 package brown.user.agent.library;
 
-import brown.mechanism.channel.library.TwoSidedChannel;
+import brown.communication.channel.library.TwoSidedChannel;
 
 /**
  * Calculates fair value and then updates in direction of trades it does

@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import brown.mechanism.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.SimpleTradeable;
 
 public class LedgerTest {
   

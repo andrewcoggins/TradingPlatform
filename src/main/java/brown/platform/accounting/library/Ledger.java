@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import brown.logging.library.Logging;
-import brown.mechanism.tradeable.ITradeable;
 import brown.platform.accounting.ILedger;
+import brown.platform.tradeable.ITradeable;
 
 /**
  * A ledger tracks all trades within a Market. 

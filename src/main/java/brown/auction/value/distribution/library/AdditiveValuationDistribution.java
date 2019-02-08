@@ -8,7 +8,7 @@ import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.valuation.IValuation;
 import brown.auction.value.valuation.library.AdditiveValuation;
-import brown.mechanism.tradeable.ITradeable;
+import brown.platform.tradeable.ITradeable;
 
 /**
  * Distribution for generating additive valuations.

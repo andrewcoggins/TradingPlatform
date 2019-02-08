@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import brown.communication.channel.library.GameChannel;
+import brown.communication.messages.library.GameReportMessage;
+import brown.communication.messages.library.LemonadeReportMessage;
+import brown.communication.messages.library.PrivateInformationMessage;
 import brown.logging.library.Logging;
 import brown.mechanism.bidbundle.library.GameBidBundle;
-import brown.mechanism.channel.library.GameChannel;
-import brown.mechanism.messages.library.GameReportMessage;
-import brown.mechanism.messages.library.LemonadeReportMessage;
-import brown.mechanism.messages.library.PrivateInformationMessage;
 import brown.system.setup.library.LemonadeSetup;
 
 /**
