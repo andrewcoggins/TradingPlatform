@@ -5,6 +5,7 @@ package brown.communication.bid;
  * 
  * @author andrew
  */
+
 public interface IBid {
   
 }
