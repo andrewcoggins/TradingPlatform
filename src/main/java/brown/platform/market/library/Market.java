@@ -55,7 +55,7 @@ public class Market implements IMarket {
     this.ITCONDITION = rules.tCondition; 
     
     this.STATE = state;
-    this.HISTORY = history;
+    this.HISTORY = null;
   }
   
   // Make MarketID a field
@@ -142,6 +142,12 @@ public class Market implements IMarket {
   @Override
   public void close() {
     this.STATE.close(); 
+  }
+
+  @Override
+  public PrevStateInfo constructSummaryState() {
+    // TODO Auto-generated method stub
+    return null;
   } 
   
 }

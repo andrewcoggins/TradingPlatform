@@ -14,16 +14,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
-import brown.auction.preset.AbsMarketRules;
-import brown.auction.preset.FlexibleRules;
 import brown.auction.rules.IActivityRule;
 import brown.auction.rules.IAllocationRule;
 import brown.auction.rules.IInformationRevelationPolicy;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
-import brown.auction.rules.library.NoRecordKeeping;
-import brown.auction.rules.library.OneGrouping;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.platform.managers.IAccountManager;
@@ -134,60 +130,60 @@ public class JsonParse {
 		    IValuationDistribution valDistribution = (IValuationDistribution) distributionCons.newInstance(valGenerator,
 		            new HashSet<>(allTradeables));
 
-		    for (Seqmarket m : s.getSeqmarket()) {
-		    	List<AbsMarketRules> marketList = new LinkedList<>();
-		    	for (Simmarket i : m.getSimmarket()) {
-			    	String aRuleString = i.getMarketrules().getAllocationRule();
-				    String pRuleString = i.getMarketrules().getPaymentRule();
-				    String qRuleString = i.getMarketrules().getQueryRule();
-				    String actRuleString = i.getMarketrules().getActivityRule();
-				    String irPolicyString = i.getMarketrules().getInformationRevelationPolicy();
-				    String tConditionString = i.getMarketrules().getTerminationCondition();
-				    
-					Class<?> aRuleClass = Class.forName(aRuleString);
-					Class<?> pRuleClass = Class.forName(pRuleString);
-					Class<?> qRuleClass = Class.forName(qRuleString);
-					Class<?> actRuleClass = Class.forName(actRuleString);
-					Class<?> irPolicyClass = Class.forName(irPolicyString);
-					Class<?> tConditionClass = Class.forName(tConditionString);
-					
-					Constructor<?> aRuleCons = aRuleClass.getConstructor();
-					Constructor<?> pRuleCons = pRuleClass.getConstructor();
-					Constructor<?> qRuleCons = qRuleClass.getConstructor();
-					Constructor<?> actRuleCons = actRuleClass.getConstructor();
-					Constructor<?> irPolicyCons = irPolicyClass.getConstructor();
-					Constructor<?> tConditionCons = tConditionClass.getConstructor();   	
-					
-					 AbsMarketRules marketRule = new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
-					            (IPaymentRule) pRuleCons.newInstance(),
-					            (IQueryRule) qRuleCons.newInstance(),
-					            new OneGrouping(),
-					            (IActivityRule) actRuleCons.newInstance(),
-					            (IInformationRevelationPolicy) irPolicyCons.newInstance(),
-					            (ITerminationCondition) tConditionCons.newInstance(),
-					            new NoRecordKeeping());
-
-					    marketList.add(marketRule);
-		    	}
-			    marketManager.createSimultaneousMarket(marketList);
-
-		    }
-		   
-		    endowmentManager.createEndowment(endowmentMoney, endowTradeables);
-		    valuationManager.createValuation(0, valDistribution);
-		    tradeableManager.createTradeables(numTradeables);
-		    domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
-		    worldManager.createWorld(domainManager, marketManager, whiteboard);
-		    simulationManager.createSimulation(worldManager);
-
-		    tradeableManager.lock();
-		    valuationManager.lock();
-		    simulationManager.lock();
-		    marketManager.lock();
-
-	    }
-	    
-	    simulationManager.runSimulation(delayTime, numRuns);
+//		    for (Seqmarket m : s.getSeqmarket()) {
+//		    	List<AbsMarketRules> marketList = new LinkedList<>();
+//		    	for (Simmarket i : m.getSimmarket()) {
+//			    	String aRuleString = i.getMarketrules().getAllocationRule();
+//				    String pRuleString = i.getMarketrules().getPaymentRule();
+//				    String qRuleString = i.getMarketrules().getQueryRule();
+//				    String actRuleString = i.getMarketrules().getActivityRule();
+//				    String irPolicyString = i.getMarketrules().getInformationRevelationPolicy();
+//				    String tConditionString = i.getMarketrules().getTerminationCondition();
+//				    
+//					Class<?> aRuleClass = Class.forName(aRuleString);
+//					Class<?> pRuleClass = Class.forName(pRuleString);
+//					Class<?> qRuleClass = Class.forName(qRuleString);
+//					Class<?> actRuleClass = Class.forName(actRuleString);
+//					Class<?> irPolicyClass = Class.forName(irPolicyString);
+//					Class<?> tConditionClass = Class.forName(tConditionString);
+//					
+//					Constructor<?> aRuleCons = aRuleClass.getConstructor();
+//					Constructor<?> pRuleCons = pRuleClass.getConstructor();
+//					Constructor<?> qRuleCons = qRuleClass.getConstructor();
+//					Constructor<?> actRuleCons = actRuleClass.getConstructor();
+//					Constructor<?> irPolicyCons = irPolicyClass.getConstructor();
+//					Constructor<?> tConditionCons = tConditionClass.getConstructor();   	
+//					
+//					 AbsMarketRules marketRule = new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
+//					            (IPaymentRule) pRuleCons.newInstance(),
+//					            (IQueryRule) qRuleCons.newInstance(),
+//					            new OneGrouping(),
+//					            (IActivityRule) actRuleCons.newInstance(),
+//					            (IInformationRevelationPolicy) irPolicyCons.newInstance(),
+//					            (ITerminationCondition) tConditionCons.newInstance(),
+//					            new NoRecordKeeping());
+//
+//					    marketList.add(marketRule);
+//		    	}
+//			    marketManager.createSimultaneousMarket(marketList);
+//
+//		    }
+//		   
+//		    endowmentManager.createEndowment(endowmentMoney, endowTradeables);
+//		    valuationManager.createValuation(0, valDistribution);
+//		    tradeableManager.createTradeables(numTradeables);
+//		    domainManager.createDomain(tradeableManager, valuationManager, accountManager, endowmentManager);
+//		    worldManager.createWorld(domainManager, marketManager, whiteboard);
+//		    simulationManager.createSimulation(worldManager);
+//
+//		    tradeableManager.lock();
+//		    valuationManager.lock();
+//		    simulationManager.lock();
+//		    marketManager.lock();
+//
+//	    }
+//	    
+//	    simulationManager.runSimulation(delayTime, numRuns);
 
 	}
 
@@ -490,5 +486,6 @@ class MarketRules {
 	public void setTerminationCondition(String terminationCondition) {
 		this.terminationCondition = terminationCondition;
 	}
+}
 
 }
