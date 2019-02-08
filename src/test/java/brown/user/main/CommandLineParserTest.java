@@ -123,9 +123,4 @@ public class CommandLineParserTest {
     assertEquals(sConfig, testConfig); 
   }
   
-  public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
-  InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-    CommandLineParserTest t = new CommandLineParserTest(); 
-    t.testCommandLineParser();
-  }
 }

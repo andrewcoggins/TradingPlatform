@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
+import brown.platform.accounting.IAccount;
+import brown.platform.accounting.IInitialEndowment;
 import brown.platform.accounting.library.Account;
 import brown.platform.accounting.library.InitialEndowment;
 import brown.platform.managers.IAccountManager;
-import brown.platform.managers.IEndowmentManager;
 
 /**
  * Account manager stores and manages accounts for the server.
@@ -17,7 +19,7 @@ import brown.platform.managers.IEndowmentManager;
  */
 public class AccountManager implements IAccountManager {
 
-	private Map<Integer, Account> accounts;
+	private Map<Integer, IAccount> accounts;
 	private boolean lock;
 
 	public AccountManager() {
@@ -25,26 +27,25 @@ public class AccountManager implements IAccountManager {
 		this.lock = false;
 	}
 
-	public void createAccount(Integer agentID, IEndowmentManager endowmentManager) {
+	public void createAccount(Integer agentID, IInitialEndowment endowment) {
 	    if (!this.lock) {
             synchronized (agentID) {
-                InitialEndowment endowment = (InitialEndowment) endowmentManager.getEndowment();
-                this.accounts.put(agentID, new Account(agentID, endowment.money, endowment.goods));
+                this.accounts.put(agentID, new Account(agentID, endowment.getMoney(), endowment.getGoods()));
             }
         } else {
             PlatformLogging.log("Creation denied: account manager locked.");
         }
     }
 
-    public Account getAccount(Integer ID) {
+    public IAccount getAccount(Integer ID) {
         return accounts.get(ID);
     }
 
-  public List<Account> getAccounts() {
+  public List<IAccount> getAccounts() {
     return new ArrayList<>(accounts.values());
   }
   
-	public void setAccount(Integer ID, Account account) {
+	public void setAccount(Integer ID, IAccount account) {
 		synchronized (ID) {
             if (this.accounts.containsKey(ID)) {
                 accounts.put(ID, account);
@@ -57,15 +58,25 @@ public class AccountManager implements IAccountManager {
     this.lock = false;
   }
 
-    public Boolean containsAccount(Integer ID) {
-        return accounts.containsKey(ID);
-    }
+  public Boolean containsAccount(Integer ID) {
+      return accounts.containsKey(ID);
+  }  
 
-  public void reendow(Map<Integer, InitialEndowment> intialEndowments) {
-	    this.reset();
-	    for (Map.Entry<Integer, InitialEndowment> endowment : intialEndowments.entrySet()) {
-	        accounts.put(endowment.getKey(),
-                    new Account(endowment.getKey(), endowment.getValue().money, endowment.getValue().goods));
+  public void reendow(Map<Integer, IInitialEndowment> initialEndowments) {
+      for (Integer anID : this.accounts.keySet()) {
+        this.accounts.get(anID).clear();
+      }
+      try {
+        for (Integer anID : initialEndowments.keySet()) {
+          IAccount endowAccount = this.accounts.get(anID); 
+          for (String s : initialEndowments.get(anID).getGoods().keySet()) {
+            endowAccount.addTradeables(s, initialEndowments.get(anID).getGoods().get(s));
+          }
+          endowAccount.addMoney(initialEndowments.get(anID).getMoney());
+        }
+      } catch (NullPointerException n) {
+        ErrorLogging.log("ERROR: AccountManager: ID not found.");
+        throw n; 
       }
   }
 

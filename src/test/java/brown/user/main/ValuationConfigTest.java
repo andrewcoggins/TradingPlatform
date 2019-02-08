@@ -37,8 +37,4 @@ public class ValuationConfigTest {
     assertEquals(tConfig.getGenerators(), gMap);
   }
   
-  public static void main(String[] args) throws NoSuchMethodException, SecurityException {
-    ValuationConfigTest v = new ValuationConfigTest(); 
-    v.testValuationConfigOne();
-  }
 }

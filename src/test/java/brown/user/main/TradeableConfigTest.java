@@ -21,8 +21,4 @@ public class TradeableConfigTest {
     assertEquals(tConfig.getNumTradeables(), new Integer(10)); 
   }
   
-  public static void main(String[] args) throws NoSuchMethodException, SecurityException {
-    TradeableConfigTest t = new TradeableConfigTest(); 
-    t.testTradeableConfigOne(); 
-  }
 }

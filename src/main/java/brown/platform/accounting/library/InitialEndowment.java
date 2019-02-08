@@ -11,8 +11,8 @@ import java.util.Map;
  */
 public class InitialEndowment implements IInitialEndowment {
 
-    public final double money;
-    public final Map<String, List<ITradeable>> goods;
+    private double money;
+    private Map<String, List<ITradeable>> goods;
 
     /**
      * Agent's initial endowment.
@@ -22,5 +22,15 @@ public class InitialEndowment implements IInitialEndowment {
     public InitialEndowment(double money, Map<String, List<ITradeable>> goods) {
         this.money = money;
         this.goods = goods;
+    }
+
+    @Override
+    public double getMoney() {
+      return this.money;
+    }
+
+    @Override
+    public Map<String, List<ITradeable>> getGoods() {
+      return this.goods;
     }
 }

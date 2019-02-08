@@ -25,9 +25,5 @@ public class WorldManagerTest {
     
     assertEquals(worldManager.getWorld(), expectedWorld); 
   }
-  
-  public static void main(String[] args) {
-    WorldManagerTest t = new WorldManagerTest(); 
-    t.testWorldManager();
-  }
+
 }

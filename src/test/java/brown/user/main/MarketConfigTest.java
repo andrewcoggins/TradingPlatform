@@ -66,10 +66,4 @@ public class MarketConfigTest {
     assertEquals(mConfig.getMustInclude(), mustInclude); 
   }
   
-  
-  public static void main(String[] args) {
-    MarketConfigTest t = new MarketConfigTest(); 
-    t.testMarketConfigOne(); 
-    t.testMarketConfigTwo(); 
-  }
 }

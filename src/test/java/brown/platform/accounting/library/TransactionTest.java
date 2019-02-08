@@ -38,9 +38,4 @@ public class TransactionTest {
     assertTrue(tFour.FROM == null); 
   }
   
-  
-  public static void main(String[] args) {
-    TransactionTest t = new TransactionTest(); 
-    t.testTrasactions();
-  }
 }

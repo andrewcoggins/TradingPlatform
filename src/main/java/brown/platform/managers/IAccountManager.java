@@ -3,8 +3,8 @@ package brown.platform.managers;
 import java.util.List;
 import java.util.Map;
 
-import brown.platform.accounting.library.Account;
-import brown.platform.accounting.library.InitialEndowment;
+import brown.platform.accounting.IAccount;
+import brown.platform.accounting.IInitialEndowment;
 
 /**
  * account manager stores agent accounts.
@@ -13,7 +13,7 @@ import brown.platform.accounting.library.InitialEndowment;
  */
 public interface IAccountManager {
 
-  void createAccount(Integer agentID, IEndowmentManager endowment);
+  void createAccount(Integer agentID, IInitialEndowment endowment);
 
   /**
    * gets an account from an agent's private id, if it exists
@@ -21,18 +21,18 @@ public interface IAccountManager {
    * @return - account, if it exists;
    *   otherwise null (as per Java maps)
    */
-  Account getAccount(Integer ID);
+  IAccount getAccount(Integer ID);
 
   /**
    * Get all accounts from the manager, in a List
    */
-  List<Account> getAccounts();
+  List<IAccount> getAccounts();
   
   /**
    * @param ID - agent's ID whose account is to be stored
    * @param account - agent's account
    */
-  void setAccount(Integer ID, Account account);
+  void setAccount(Integer ID, IAccount account);
 
   
   /**
@@ -50,7 +50,7 @@ public interface IAccountManager {
   /**
    * resets accounts to their initial endowments, ostensibly as defined in the constructor.
    */
-  void reendow(Map<Integer, InitialEndowment> intialEndowments);
+  void reendow(Map<Integer, IInitialEndowment> intialEndowments);
 
   void lock();
 }

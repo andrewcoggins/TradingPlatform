@@ -94,9 +94,4 @@ public class SimulationConfigTest {
     assertEquals(sConfig.getMConfig(), mConfigSquared); 
   }
   
-  
-  public static void main(String[] args) throws NoSuchMethodException, SecurityException {
-    SimulationConfigTest t = new SimulationConfigTest(); 
-    t.testSimulationConfigOne(); 
-  }
 }

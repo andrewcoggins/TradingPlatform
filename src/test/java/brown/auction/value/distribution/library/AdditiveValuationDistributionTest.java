@@ -42,10 +42,4 @@ public class AdditiveValuationDistributionTest {
     assertEquals(valuation, testValuation); 
   }
   
- 
-  public static void main(String[] args) {
-    AdditiveValuationDistributionTest t = new AdditiveValuationDistributionTest(); 
-    t.testAdditiveValuationDistribution(); 
-    
-  }
 }
