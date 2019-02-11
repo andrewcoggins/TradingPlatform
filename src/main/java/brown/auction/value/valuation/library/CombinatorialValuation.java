@@ -13,7 +13,7 @@ import brown.platform.tradeable.library.SimpleTradeable;
  * @author andrew
  *
  */
-public class CombinatorialValuation implements ICombinatorialValuation {
+public class CombinatorialValuation implements IValuation {
   
   private final Double baseValue; 
   private final Double discountFactor; 
@@ -78,10 +78,4 @@ public class CombinatorialValuation implements ICombinatorialValuation {
         + "]";
   }
 
-  @Override
-  public IValuation safeCopy() {
-    return new CombinatorialValuation(this.baseValue, this.discountFactor);
-  }
-  
-  
 }
