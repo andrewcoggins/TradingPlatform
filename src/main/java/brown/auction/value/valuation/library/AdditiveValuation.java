@@ -17,20 +17,20 @@ import brown.platform.tradeable.library.SimpleTradeable;
  */
 public class AdditiveValuation implements IMonotonicValuation { 
 
-  private final Map<ITradeable, Double> valueParams; 
+  private final Map<ITradeable, Double> valuation; 
   
   // for kryo
   public AdditiveValuation() {
-    this.valueParams = null;
+    this.valuation = null;
   }
   
   /**
    * additive valuation takes in a mapping from values to 
    * individual tradeables.
-   * @param valueParams
+   * @param valuation
    */
-  public AdditiveValuation(Map<ITradeable, Double> valueParams) {
-    this.valueParams = valueParams; 
+  public AdditiveValuation(Map<ITradeable, Double> valuation) {
+    this.valuation = valuation; 
   }
   
   @Override
@@ -38,7 +38,7 @@ public class AdditiveValuation implements IMonotonicValuation {
     Double value = 0.0; 
     List<SimpleTradeable> allTradeables = tradeable.flatten(); 
     for(SimpleTradeable atom : allTradeables) {  
-      value = value + this.valueParams.get(atom); 
+      value = value + this.valuation.get(atom); 
     }
     return value;
   }
@@ -48,7 +48,7 @@ public class AdditiveValuation implements IMonotonicValuation {
     final int prime = 31;
     int result = 1;
     result =
-        prime * result + ((valueParams == null) ? 0 : valueParams.hashCode());
+        prime * result + ((valuation == null) ? 0 : valuation.hashCode());
     return result;
   }
 
@@ -61,17 +61,17 @@ public class AdditiveValuation implements IMonotonicValuation {
     if (getClass() != obj.getClass())
       return false;
     AdditiveValuation other = (AdditiveValuation) obj;
-    if (valueParams == null) {
-      if (other.valueParams != null)
+    if (valuation == null) {
+      if (other.valuation != null)
         return false;
-    } else if (!valueParams.equals(other.valueParams))
+    } else if (!valuation.equals(other.valuation))
       return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "AdditiveValuation [valueParams=" + valueParams + "]";
+    return "AdditiveValuation [valuation=" + valuation + "]";
   }
 
 }
