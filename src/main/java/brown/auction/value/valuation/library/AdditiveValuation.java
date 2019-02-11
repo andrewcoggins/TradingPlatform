@@ -14,15 +14,13 @@ import brown.platform.tradeable.library.SimpleTradeable;
  * additive valuation specifies a valuation over goods, 
  * where values are additive.
  * @author andrew
- *
  */
 public class AdditiveValuation implements IMonotonicValuation { 
 
   private final Map<ITradeable, Double> valueParams; 
   
-  
   // for kryo
-  public AdditiveValuation(){
+  public AdditiveValuation() {
     this.valueParams = null;
   }
   
@@ -76,14 +74,4 @@ public class AdditiveValuation implements IMonotonicValuation {
     return "AdditiveValuation [valueParams=" + valueParams + "]";
   }
 
-  @Override
-  public IValuation safeCopy() {
-    Map<ITradeable, Double> newValueParams = new HashMap<ITradeable,Double>();
-    for (ITradeable t: this.valueParams.keySet()){
-      newValueParams.put(t, this.valueParams.get(t));
-    }
-    return new AdditiveValuation(newValueParams);
-  }
-  
-  
 }
