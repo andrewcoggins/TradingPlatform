@@ -9,13 +9,13 @@ import brown.platform.tradeable.ITradeable;
 
 public abstract class AbsValuationDistribution {
 
-  protected List<IValuationGenerator> generators; 
-  protected Map<String, List<ITradeable>> tradeables; 
+  protected List<IValuationGenerator> generators;
+  protected Map<String, List<ITradeable>> tradeableNames;
   
-  public AbsValuationDistribution(Map<String, List<ITradeable>> tradeables,
+  public AbsValuationDistribution(Map<String, List<ITradeable>> tradeableNames,
       List<IValuationGenerator> generators) {
-    this.generators = generators; 
-    this.tradeables = tradeables; 
+    this.generators = generators;
+    this.tradeableNames = tradeableNames;
   }
   
   public abstract IValuation sample();
@@ -23,7 +23,7 @@ public abstract class AbsValuationDistribution {
   @Override
   public String toString() {
     return "AbsValuationDistribution [generators=" + generators
-        + ", tradeables=" + tradeables + "]";
+        + ", tradeableNames=" + tradeableNames + "]";
   }
 
   @Override
