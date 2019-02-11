@@ -49,5 +49,4 @@ public abstract class AbsValuationGenerator implements IValuationGenerator {
     return true;
   } 
   
-  
 }
