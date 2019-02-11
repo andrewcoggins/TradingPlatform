@@ -10,8 +10,9 @@ import brown.platform.tradeable.library.SimpleTradeable;
 /**
  * a combinatorial valuation produces a valuation of goods, where 
  * bundles are preferred to individual goods.
+ * can represent complements or substitutes depending 
+ * on the value of the discount factor.
  * @author andrew
- *
  */
 public class CombinatorialValuation implements IValuation {
   
