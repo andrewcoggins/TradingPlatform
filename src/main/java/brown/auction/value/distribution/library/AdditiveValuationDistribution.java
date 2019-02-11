@@ -18,7 +18,6 @@ public class AdditiveValuationDistribution extends AbsValuationDistribution impl
  
   private Map<ITradeable, Double> values; 
   
-  
   /**
    * For kryo
    * DO NOT USE
@@ -32,8 +31,7 @@ public class AdditiveValuationDistribution extends AbsValuationDistribution impl
    * @param generator
    * a value generator for producing values of individual tradeables.
    * @param goods
-   * all tradeables to be valued. These can be input as any type but will be 
-   * valued based on the simple tradeables they contain.
+   * the tradeables to be assigned values.
    */
   public AdditiveValuationDistribution(Map<String, List<ITradeable>> goods, List<IValuationGenerator> generators) {
     super(goods, generators); 
