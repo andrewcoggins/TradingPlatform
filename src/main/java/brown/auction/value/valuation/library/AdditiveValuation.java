@@ -1,12 +1,10 @@
 
 package brown.auction.value.valuation.library;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import brown.auction.value.valuation.IMonotonicValuation;
-import brown.auction.value.valuation.IValuation;
 import brown.platform.tradeable.ITradeable;
 import brown.platform.tradeable.library.SimpleTradeable;
 
@@ -73,5 +71,5 @@ public class AdditiveValuation implements IMonotonicValuation {
   public String toString() {
     return "AdditiveValuation [valuation=" + valuation + "]";
   }
-
+  
 }
