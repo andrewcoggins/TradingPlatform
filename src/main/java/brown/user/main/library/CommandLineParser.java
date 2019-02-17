@@ -52,7 +52,7 @@ public class CommandLineParser implements ICommandLineParser {
     TestLogging.log(irPolicyString); 
     TestLogging.log(tConditionString); 
     
-    Class<?> tTypeClass = Class.forName("brown.mechanism.tradeable.library." + tTypeString);
+    Class<?> tTypeClass = Class.forName("brown.platform.tradeable.library." + tTypeString);
     Class<?> generatorClass = Class.forName("brown.auction.value.generator.library." + generatorString);
     Class<?> distributionClass = Class.forName("brown.auction.value.distribution.library." + distributionString);
     Class<?> aRuleClass = Class.forName("brown.auction.rules.allocation.onesided." + aRuleString);
@@ -63,7 +63,7 @@ public class CommandLineParser implements ICommandLineParser {
     Class<?> tConditionClass = Class.forName("brown.auction.rules.termination.onesided." + tConditionString);
 
     Constructor<?> tTypeCons = tTypeClass.getConstructor(Integer.class);
-    Constructor<?> generatorCons = generatorClass.getConstructor(Double.class, Double.class);
+    Constructor<?> generatorCons = generatorClass.getConstructor(List.class);
     Constructor<?> distributionCons = distributionClass.getConstructor(Map.class, List.class);
     Constructor<?> aRuleCons = aRuleClass.getConstructor();
     Constructor<?> pRuleCons = pRuleClass.getConstructor();

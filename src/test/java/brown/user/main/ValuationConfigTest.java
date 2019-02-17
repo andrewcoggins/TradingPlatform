@@ -7,12 +7,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.junit.Test;
 
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
-import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.generator.library.NormalValGenerator;
 import brown.user.main.library.ValuationConfig;
 
@@ -21,10 +19,10 @@ public class ValuationConfigTest {
   @Test
   public void testValuationConfigOne() throws NoSuchMethodException, SecurityException {
     
-    Constructor<?> distCons = AdditiveValuationDistribution.class.getConstructor(IValuationGenerator.class, Set.class);
+    Constructor<?> distCons = AdditiveValuationDistribution.class.getConstructor(Map.class, List.class);
     List<String> tNames = new LinkedList<String>();
     tNames.add("test"); 
-    Constructor<?> gCons = NormalValGenerator.class.getConstructor(Double.class, Double.class); 
+    Constructor<?> gCons = NormalValGenerator.class.getConstructor(List.class); 
     List<Double> params = new LinkedList<Double>(); 
     params.add(0.0); 
     params.add(1.0);  
