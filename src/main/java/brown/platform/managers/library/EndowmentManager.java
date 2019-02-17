@@ -24,6 +24,9 @@ public class EndowmentManager implements IEndowmentManager {
     
     public EndowmentManager() {
         this.lock = false; 
+        this.endowmentAlias = new HashMap<String, Integer>(); 
+        this.endowments = new HashMap<String, Map<String, List<ITradeable>>>(); 
+        this.endowmentMoneyAlias = new HashMap<String, Double>(); 
     }
 
     @Override
