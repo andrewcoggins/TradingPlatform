@@ -50,12 +50,12 @@ public class OneSidedChannel extends AbsChannel {
     for (Entry<ITradeable, Double> b : c.bids.entrySet() ) {
       fixedBids.put(b.getKey(), b.getValue());
       if (fixedBids.size() > 2) {
-        agent.CLIENT.sendTCP(new TradeMessage(0,new OneSidedBidBundle(fixedBids),this.ID,agent.ID));
+        agent.CLIENT.sendTCP(new TradeMessage(0,this.ID,agent.ID, new OneSidedBidBundle(fixedBids)));
         fixedBids.clear(); 
       }
     }
     if (fixedBids.size() > 0) {
-    TradeMessage toSend = (new TradeMessage(0,new OneSidedBidBundle(fixedBids),this.ID,agent.ID));
+    TradeMessage toSend = (new TradeMessage(0,this.ID,agent.ID, new OneSidedBidBundle(fixedBids)));
       agent.CLIENT.sendTCP(toSend);
     }        
   }

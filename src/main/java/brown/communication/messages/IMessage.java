@@ -13,7 +13,7 @@ public interface IMessage {
 	 * Get message ID
 	 * @return ID
 	 */
-	public Integer getID();
+	public Integer getMessageID();
 	
 	/**
 	 * Figures out what type of message this is, and acts accordingly
