@@ -21,6 +21,30 @@ import brown.platform.whiteboard.library.Whiteboard;
  * @author acoggins
  *
  */
+
+
+// brainstorm time. 
+// what does the market manager need to do? 
+// It needs to create markets.
+// it needs to run markets. 
+// it needs to close markets, once they are done. 
+
+// in order to run markets, what needs to happen? 
+// it needs to serve as an API between the messages and the markets. 
+
+// it needs to handle the whiteboard. 
+
+// it needs to receive TradeMessages
+
+// it needs to return
+
+// it needs to cycle()
+
+// needs to complete simultaneous markets.
+
+// 
+
+
 public class MarketManager implements IMarketManager {
   // stores all markets in a simulation
   private Map<Integer, IMarket> openMarkets;
