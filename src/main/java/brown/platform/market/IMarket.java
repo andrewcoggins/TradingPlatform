@@ -3,7 +3,6 @@ package brown.platform.market;
 import java.util.List;
 import java.util.Map;
 
-import brown.auction.prevstate.library.PrevStateInfo;
 import brown.communication.messages.library.GameReportMessage;
 import brown.communication.messages.library.TradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
@@ -82,14 +81,6 @@ public interface IMarket {
    */
   public void clearBidCache();
 
-  /**
-   * Constructs a summary state that can be used in markets opened 
-   * after this market. What is stored in the summary state depends
-   * on IR policy
-   * @return a PrevStateInfo containing some information 
-   * from this market.
-   */
-  PrevStateInfo constructSummaryState();
   
   /**
    * Marks the market as closed so it can be closed in the MarketManager.

@@ -3,7 +3,6 @@ package brown.auction.marketstate;
 import java.util.List;
 import java.util.Map;
 
-import brown.auction.prevstate.library.PrevStateInfo;
 import brown.communication.messages.library.GameReportMessage;
 import brown.communication.messages.library.TradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
