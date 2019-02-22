@@ -66,10 +66,5 @@ public class LedgerTest {
     
     
   }
-  
-  public static void main(String[] args) {
-    LedgerTest t = new LedgerTest(); 
-    t.testLedger();
-    t.testLedgerAdd(); 
-  }
+
 }

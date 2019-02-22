@@ -67,11 +67,4 @@ public class EndowmentConfigTest {
     assertEquals(eConfig.getIncludeMapping(), iMap); 
   }
   
-  public static void main(String[] args) {
-    EndowmentConfigTest t = new EndowmentConfigTest(); 
-    t.testEndowmentConfigOne(); 
-    t.testEndowmentConfigTwo(); 
-    t.testEndowmentConfigThree(); 
-    t.testEndowmentConfigFour();
-  }
 }

@@ -72,10 +72,4 @@ public class ValuationManagerTest {
       
   }
   
-  public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
-  InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-    ValuationManagerTest t = new ValuationManagerTest(); 
-    t.testCreateValuation();
-    t.testAgentValuation();
-  }
 }

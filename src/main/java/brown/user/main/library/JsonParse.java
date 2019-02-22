@@ -439,6 +439,7 @@ class MarketRules {
 		this.type = type;
 	}
 
+	
 	public String getAllocationRule() {
 		return allocationRule;
 	}

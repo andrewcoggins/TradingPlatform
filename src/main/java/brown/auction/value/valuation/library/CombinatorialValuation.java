@@ -1,8 +1,6 @@
 package brown.auction.value.valuation.library;
 
 import java.util.List;
-
-import brown.auction.value.valuation.ICombinatorialValuation;
 import brown.auction.value.valuation.IValuation;
 import brown.platform.tradeable.ITradeable;
 import brown.platform.tradeable.library.SimpleTradeable;

@@ -1,5 +1,6 @@
 package brown.platform.accounting.library; 
 
+import brown.platform.accounting.IOrder;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -9,7 +10,7 @@ import brown.platform.tradeable.ITradeable;
  * @author acoggins
  *
  */
-public class Order {
+public class Order implements IOrder {
 
   // recipient of the order
 	public final Integer TO;

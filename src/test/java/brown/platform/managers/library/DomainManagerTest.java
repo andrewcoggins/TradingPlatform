@@ -29,8 +29,4 @@ public class DomainManagerTest {
     
   }
   
-  public static void main(String[] args) {
-    DomainManagerTest t = new DomainManagerTest(); 
-    t.testDomainManager();
-  }
 }

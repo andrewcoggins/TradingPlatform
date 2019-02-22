@@ -4,7 +4,6 @@ import brown.communication.bid.IBid;
 
 public abstract class AbsGameBid implements IBid {
   
-  
   public final Integer action; 
   
   public AbsGameBid(Integer action) {

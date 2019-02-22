@@ -17,35 +17,22 @@ public class Main {
   /**
    *
    * @param args
-   * 1
    * 0: numruns : int
-   * 5
    * 1: delayTime: int
    * SimpleTradeable
    * 2: tradeabletype : string
-   * 1
    * 3: numtradeables : int
-   * AdditiveValuationDistribution
    * 4: distribution
-   * NormalValGenerator
    * 5: generator
    * SimpleTradeable
    * 6: endowment tradeable type
-   * 0
    * 7: endowment num tradeables
-   * 1000
    * 8: endowment money
-   * HighestPriceAllocation
    * 9: allocationrule
-   * SimpleSecondPricePayment
    * 10: paymentrule
-   * SimpleQuery
    * 11: queryrule
-   * OneShotActivity
    * 12: activityrule
-   * SSSPAnonymousPolicy
    * 13: ir policy
-   * OneShotTermination
    * 14: termination condition
    * @throws InterruptedException 
    * @throws IllegalArgumentException 

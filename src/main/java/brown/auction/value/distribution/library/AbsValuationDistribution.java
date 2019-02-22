@@ -32,8 +32,8 @@ public abstract class AbsValuationDistribution {
     int result = 1;
     result =
         prime * result + ((generators == null) ? 0 : generators.hashCode());
-    result =
-        prime * result + ((tradeables == null) ? 0 : tradeables.hashCode());
+    result = prime * result
+        + ((tradeableNames == null) ? 0 : tradeableNames.hashCode());
     return result;
   }
 
@@ -51,12 +51,14 @@ public abstract class AbsValuationDistribution {
         return false;
     } else if (!generators.equals(other.generators))
       return false;
-    if (tradeables == null) {
-      if (other.tradeables != null)
+    if (tradeableNames == null) {
+      if (other.tradeableNames != null)
         return false;
-    } else if (!tradeables.equals(other.tradeables))
+    } else if (!tradeableNames.equals(other.tradeableNames))
       return false;
     return true;
   }
+
+  
   
 }

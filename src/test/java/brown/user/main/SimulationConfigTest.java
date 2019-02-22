@@ -64,9 +64,9 @@ public class SimulationConfigTest {
     mConfigs.add(mConfig); 
     mConfigSquared.add(mConfigs); 
     
-    Constructor<?> distCons = AdditiveValuationDistribution.class.getConstructor(IValuationGenerator.class, Set.class);
+    Constructor<?> distCons = AdditiveValuationDistribution.class.getConstructor(Map.class, List.class);
     Constructor<?> tTypeCons = SimpleTradeable.class.getConstructor(Integer.class); 
-    Constructor<?> gCons = NormalValGenerator.class.getConstructor(Double.class, Double.class); 
+    Constructor<?> gCons = NormalValGenerator.class.getConstructor(List.class); 
     List<Double> params = new LinkedList<Double>(); 
     params.add(0.0); 
     params.add(1.0);  
@@ -94,9 +94,4 @@ public class SimulationConfigTest {
     assertEquals(sConfig.getMConfig(), mConfigSquared); 
   }
   
-  
-  public static void main(String[] args) throws NoSuchMethodException, SecurityException {
-    SimulationConfigTest t = new SimulationConfigTest(); 
-    t.testSimulationConfigOne(); 
-  }
 }

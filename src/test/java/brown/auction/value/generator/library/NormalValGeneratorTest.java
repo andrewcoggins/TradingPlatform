@@ -33,9 +33,4 @@ public class NormalValGeneratorTest {
     }
   }
   
-  public static void main(String[] args) {
-    NormalValGeneratorTest t = new NormalValGeneratorTest(); 
-    t.testNormalValGenerator();
-    t.testNormalValGeneratorTwo();
-  }
 }

@@ -20,9 +20,5 @@ public class AdditiveValuationTest {
     AdditiveValuation a = new AdditiveValuation(tMap); 
     assertTrue(a.getValuation(tradeable) == 1.0); 
   }
-  
-  public static void main(String[] args) {
-    AdditiveValuationTest t = new AdditiveValuationTest(); 
-    t.testAdditiveValuation(); 
-  }
+
 }

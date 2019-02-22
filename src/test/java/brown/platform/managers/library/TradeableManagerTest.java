@@ -19,7 +19,7 @@ public class TradeableManagerTest {
   @Test
   public void testTradeableManager() throws ClassNotFoundException, NoSuchMethodException, SecurityException,
   InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-    Class<?> tTypeClass = Class.forName("brown.mechanism.tradeable.library.SimpleTradeable");
+    Class<?> tTypeClass = Class.forName("brown.platform.tradeable.library.SimpleTradeable");
     Constructor<?> tTypeCons = tTypeClass.getConstructor(Integer.class); 
     
     ITradeableManager tManager = new TradeableManager(); 
@@ -46,10 +46,4 @@ public class TradeableManagerTest {
     assertEquals(tManager.getTradeables("testThree"), new LinkedList<ITradeable>()); 
   }
   
-  
-  public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
-  InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-    TradeableManagerTest t = new TradeableManagerTest();
-    t.testTradeableManager();
-  }
 }

@@ -9,18 +9,18 @@ import brown.user.agent.library.AbsAgent;
  */
 public abstract class AbsMessage implements IMessage {
   
-	protected final Integer ID;
+	protected final Integer messageID;
 	
 	/**
 	 * Empty message
 	 * @param ID - message ID
 	 */
-	public AbsMessage(Integer ID) {
-		this.ID = ID;
+	public AbsMessage(Integer messageID) {
+		this.messageID = messageID;
 	}
 	
-	public Integer getID() {
-		return this.ID;
+	public Integer getMessageID() {
+		return this.messageID;
 	}
 	
 	public abstract void dispatch(AbsAgent agent);

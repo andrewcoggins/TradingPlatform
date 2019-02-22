@@ -60,10 +60,4 @@ public class OrderTest {
     
   }
   
-  public static void main(String[] args) {
-    OrderTest t = new OrderTest(); 
-    t.testOrder();
-    t.testOrderTwo();
-    t.testOrderThree();
-  }
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.prevstate.library.PrevStateInfo;
 import brown.auction.rules.IActivityRule;
 import brown.auction.rules.IAllocationRule;
 import brown.auction.rules.IInformationRevelationPolicy;
@@ -143,11 +142,5 @@ public class Market implements IMarket {
   public void close() {
     this.STATE.close(); 
   }
-
-  @Override
-  public PrevStateInfo constructSummaryState() {
-    // TODO Auto-generated method stub
-    return null;
-  } 
   
 }

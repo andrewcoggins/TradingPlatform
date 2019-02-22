@@ -1,14 +1,13 @@
 package brown.communication.messages.library;
 
-import brown.user.agent.library.AbsAgent;
+import brown.communication.messages.IRegistrationMessage;
 
 /**
  * a request for an agent to join the server 
  * is a sent as a registration.
  * @author lcamery
  */
-public class RegistrationMessage extends AbsMessage {
-	public String name;
+public class RegistrationMessage extends AbsRegistrationMessage implements IRegistrationMessage {
   
 	/**
 	 * Empty constructor for Kryo
@@ -16,7 +15,6 @@ public class RegistrationMessage extends AbsMessage {
 	 */
 	public RegistrationMessage() {
 		super(null);
-		this.name = null;
 	}
 
 	/**
@@ -26,7 +24,6 @@ public class RegistrationMessage extends AbsMessage {
 	 */
 	public RegistrationMessage(Integer ID) {
 		super(ID);
-		this.name = null;
 	}
 	
 	/**
@@ -35,40 +32,7 @@ public class RegistrationMessage extends AbsMessage {
 	 * @param name: agent's name
 	 */
 	 public RegistrationMessage(Integer ID, String name) {
-	    super(ID);
-	    this.name = name;
+	    super(ID, name);
 	  }
-
-
-	@Override
-	public void dispatch(AbsAgent agent) {
-		agent.onRegistration(this);
-	}
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((name == null) ? 0 : name.hashCode());
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    RegistrationMessage other = (RegistrationMessage) obj;
-    if (name == null) {
-      if (other.name != null)
-        return false;
-    } else if (!name.equals(other.name))
-      return false;
-    return true;
-  }
-	
 	
 }

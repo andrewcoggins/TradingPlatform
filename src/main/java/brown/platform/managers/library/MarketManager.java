@@ -5,7 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.IInformationRequestMessage;
+import brown.communication.messages.ITradeMessage;
+import brown.communication.messages.ITradeRequestMessage;
 import brown.logging.library.PlatformLogging;
+import brown.platform.accounting.IOrder;
 import brown.platform.managers.IMarketManager;
 import brown.platform.market.IMarket;
 import brown.platform.market.IMarketBlock;
@@ -69,9 +74,37 @@ public class MarketManager implements IMarketManager {
   public void lock() {
     this.lock = true;
   }
-  
-  // open markets. 
-  
-  // close markets. 
+
+  @Override
+  public Map<Integer, List<IOrder>> runSimultaneousMarket() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Map<Integer, ITradeRequestMessage>
+      giveTradeRequests(Integer marketID) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void handleTradeMessage(ITradeMessage message) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public IInformationMessage
+      handleInformationRequest(IInformationRequestMessage message) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void reset() {
+    // TODO Auto-generated method stub
+    
+  }
 
 }
