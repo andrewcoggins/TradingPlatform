@@ -9,11 +9,19 @@ import brown.platform.tradeable.ITradeable;
 
 public class SimultaneousMarket implements IMarketBlock {
 
-    public final List<IMarketRules> markets;
-    public final List<Map<String, List<ITradeable>>> marketTradeables; 
+    private List<IMarketRules> markets;
+    private List<Map<String, List<ITradeable>>> marketTradeables; 
 
     public SimultaneousMarket(List<IMarketRules> markets, List<Map<String, List<ITradeable>>> marketTradeables) {
         this.markets = markets;
         this.marketTradeables = marketTradeables; 
+    }
+    
+    public List<IMarketRules> getMarkets() {
+      return this.markets; 
+    }
+    
+    public List<Map<String, List<ITradeable>>> getMarketTradeables() {
+      return this.marketTradeables; 
     }
 }

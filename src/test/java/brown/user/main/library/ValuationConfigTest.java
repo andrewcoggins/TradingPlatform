@@ -1,4 +1,4 @@
-package brown.user.main;
+package brown.user.main.library;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.library.NormalValGenerator;
+import brown.user.main.IValuationConfig;
 import brown.user.main.library.ValuationConfig;
 
 public class ValuationConfigTest {

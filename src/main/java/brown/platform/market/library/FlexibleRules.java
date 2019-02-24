@@ -4,6 +4,7 @@ package brown.platform.market.library;
 import brown.platform.market.IMarketRules;  
  
  public class FlexibleRules extends AbsMarketRules implements IMarketRules {  
+   
     public FlexibleRules(IAllocationRule aRule, 
                          IPaymentRule pRule,  
                          IQueryRule qRule,  
@@ -13,6 +14,7 @@ import brown.platform.market.IMarketRules;
                          ) {  
         super(aRule, pRule, qRule, actRule, irPolicy, tCondition);  
     } 
+    
      public AbsMarketRules copy() { 
         return new FlexibleRules(aRule, pRule, qRule, actRule, infoPolicy, tCondition);  
     } 
