@@ -1,4 +1,4 @@
-package brown.user.main;
+package brown.user.main.library;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -31,6 +31,7 @@ import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
 import brown.user.main.ITradeableConfig;
+import brown.user.main.IValuationConfig;
 import brown.user.main.library.CommandLineParser;
 import brown.user.main.library.EndowmentConfig;
 import brown.user.main.library.MarketConfig;

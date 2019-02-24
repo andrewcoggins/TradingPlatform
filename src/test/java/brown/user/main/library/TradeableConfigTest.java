@@ -1,4 +1,4 @@
-package brown.user.main;
+package brown.user.main.library;
 
 import static org.junit.Assert.assertEquals;
 import java.lang.reflect.Constructor;

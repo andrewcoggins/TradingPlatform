@@ -1,4 +1,4 @@
-package brown.user.main;
+package brown.user.main.library;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -31,6 +31,7 @@ import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
 import brown.user.main.ITradeableConfig;
+import brown.user.main.IValuationConfig;
 import brown.user.main.library.EndowmentConfig;
 import brown.user.main.library.MarketConfig;
 import brown.user.main.library.SimulationConfig;

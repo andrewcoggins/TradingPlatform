@@ -33,6 +33,31 @@ public abstract class AbsMarketRules implements IMarketRules {
     this.tCondition = tCondition;   
   } 
 
+  public IAllocationRule getARule() {
+    return this.aRule; 
+  }
+  
+  public IPaymentRule getPRule() {
+    return this.pRule; 
+  }
+  
+  public IQueryRule getQRule() {
+    return this.qRule; 
+  }
+  
+  public IActivityRule getActRule() {
+    return this.actRule; 
+  } 
+  
+  public IInformationRevelationPolicy getIRPolicy() {
+    return this.infoPolicy; 
+  }
+  
+  public ITerminationCondition getTerminationCondition() {
+    return this.tCondition; 
+  }
+  
+  
   @Override 
   public String toString() {  
     return "AbsMarketRules [aRule=" + aRule + ", pRule=" + pRule + ", qRule=" 
