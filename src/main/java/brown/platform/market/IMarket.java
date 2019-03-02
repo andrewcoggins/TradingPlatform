@@ -6,7 +6,7 @@ import java.util.Map;
 import brown.communication.messages.library.GameReportMessage;
 import brown.communication.messages.library.TradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
-import brown.platform.accounting.library.Order;
+import brown.platform.accounting.library.AccountUpdate;
 
 /**
  * The market receives bids from the agents via the server
@@ -46,7 +46,7 @@ public interface IMarket {
    * the agents' accounts.
    * @return a list of orders that update the agents' accounts.
    */
-  public List<Order> constructOrders();
+  public List<AccountUpdate> constructOrders();
   
   
   /**

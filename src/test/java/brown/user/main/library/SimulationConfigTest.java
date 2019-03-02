@@ -5,11 +5,9 @@ import static org.mockito.Mockito.mock;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.junit.Test;
 
@@ -20,23 +18,15 @@ import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
-import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.generator.library.NormalValGenerator;
 import brown.platform.market.IMarketRules;
 import brown.platform.market.library.FlexibleRules;
-import brown.platform.tradeable.ITradeable;
 import brown.platform.tradeable.library.SimpleTradeable;
-import brown.platform.tradeable.library.TradeableType;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
 import brown.user.main.ITradeableConfig;
 import brown.user.main.IValuationConfig;
-import brown.user.main.library.EndowmentConfig;
-import brown.user.main.library.MarketConfig;
-import brown.user.main.library.SimulationConfig;
-import brown.user.main.library.TradeableConfig;
-import brown.user.main.library.ValuationConfig;
 
 public class SimulationConfigTest {
   
@@ -59,9 +49,9 @@ public class SimulationConfigTest {
     ITerminationCondition mocktCondition = mock(ITerminationCondition.class); 
     
     IMarketRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, mocktCondition); 
-    Map<String, Integer> numTradeablesMap = new HashMap<String, Integer>(); 
-    numTradeablesMap.put("default", 1); 
-    IMarketConfig mConfig = new MarketConfig(mRules, numTradeablesMap); 
+    List<String> tradeableNames = new LinkedList<String>(); 
+    tradeableNames.add("default"); 
+    IMarketConfig mConfig = new MarketConfig(mRules, tradeableNames); 
     mConfigs.add(mConfig); 
     mConfigSquared.add(mConfigs); 
     

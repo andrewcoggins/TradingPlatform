@@ -15,7 +15,7 @@ import brown.auction.value.valuation.IValuation;
 import brown.communication.messages.library.GameReportMessage;
 import brown.communication.messages.library.TradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
-import brown.platform.accounting.library.Order;
+import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.market.IMarket;
 import brown.platform.market.IHistory;
 
@@ -86,7 +86,7 @@ public class Market implements IMarket {
     return this.STATE.getAcceptable();
   }
 
-  public List<Order> constructOrders() {
+  public List<AccountUpdate> constructOrders() {
     // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
     this.PRULE.setOrders(this.STATE); // setPayment

@@ -3,10 +3,8 @@ package brown.user.main.library;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
@@ -33,37 +31,13 @@ public class MarketConfigTest {
     ITerminationCondition mocktCondition = mock(ITerminationCondition.class); 
     
     IMarketRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, mocktCondition); 
-    Map<String, Integer> numTradeablesMap = new HashMap<String, Integer>(); 
-    numTradeablesMap.put("default", 1); 
-    
-    IMarketConfig mConfig = new MarketConfig(mRules, numTradeablesMap); 
+    List<String> tradeableNames = new LinkedList<String>(); 
+    tradeableNames.add("default"); 
+
+    IMarketConfig mConfig = new MarketConfig(mRules, tradeableNames); 
     assertEquals(mConfig.getRules(), mRules); 
-    assertEquals(mConfig.getNumTradeablesMap(), numTradeablesMap); 
+    assertEquals(mConfig.getTradeableNames(), tradeableNames); 
     
-  }
-  
-  @Test
-  public void testMarketConfigTwo() {
-    IAllocationRule mockAllocationRule = mock(IAllocationRule.class); 
-    IPaymentRule mockPaymentRule = mock(IPaymentRule.class); 
-    IQueryRule mockQueryRule = mock(IQueryRule.class);
-    IActivityRule mockActivityRule = mock(IActivityRule.class); 
-    IInformationRevelationPolicy mockIR = mock(IInformationRevelationPolicy.class); 
-    ITerminationCondition mocktCondition = mock(ITerminationCondition.class); 
-    
-    IMarketRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, mocktCondition); 
-    Map<String, Integer> numTradeablesMap = new HashMap<String, Integer>(); 
-    numTradeablesMap.put("default", 1); 
-    
-    Map<String, List<String>> mustInclude = new HashMap<String,List<String>>(); 
-    List<String> aList = new LinkedList<String>(); 
-    aList.add("A"); 
-    mustInclude.put("default", aList); 
-    
-    IMarketConfig mConfig = new MarketConfig(mRules, numTradeablesMap, mustInclude); 
-    assertEquals(mConfig.getRules(), mRules); 
-    assertEquals(mConfig.getNumTradeablesMap(), numTradeablesMap); 
-    assertEquals(mConfig.getMustInclude(), mustInclude); 
   }
   
 }

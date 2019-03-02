@@ -9,7 +9,7 @@ import brown.auction.marketstate.IMarketState;
 import brown.communication.messages.library.GameReportMessage;
 import brown.communication.messages.library.TradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
-import brown.platform.accounting.library.Order;
+import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -30,7 +30,7 @@ public class MarketState implements IMarketState {
   private Map<Integer, List<ITradeable>> allocation;
   
   // Payment rule
-  private List<Order> payments;
+  private List<AccountUpdate> payments;
   
   // Query rule
   private TradeRequestMessage tRequest;
@@ -60,7 +60,7 @@ public class MarketState implements IMarketState {
     this.terminated = false;
     this.allocation = new HashMap<Integer, List<ITradeable>>();
     this.altAlloc = new HashMap<ITradeable, List<Integer>>();
-    this.payments = new LinkedList<Order>();
+    this.payments = new LinkedList<AccountUpdate>();
     this.time = System.currentTimeMillis();
     this.isOpen = true; 
     this.reserve = new HashMap<ITradeable, Double>();
@@ -127,7 +127,7 @@ public class MarketState implements IMarketState {
   // Maybe rename this method clearPayments:
   @Override
   public void clearOrders() {
-    this.setPayments(new LinkedList<Order>());
+    this.setPayments(new LinkedList<AccountUpdate>());
   }
 
   @Override
@@ -221,7 +221,7 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public List<Order> getPayments() {
+  public List<AccountUpdate> getPayments() {
     return this.payments;
   }
 
@@ -231,7 +231,7 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public void setPayments(List<Order> payments) {
+  public void setPayments(List<AccountUpdate> payments) {
     this.payments = payments;
   }
 

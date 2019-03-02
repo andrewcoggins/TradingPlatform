@@ -1,5 +1,5 @@
 package brown.platform.accounting;
 
-public interface IOrder {
+public interface IAccountUpdate {
 
 }

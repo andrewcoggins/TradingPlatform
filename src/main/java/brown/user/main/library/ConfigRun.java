@@ -85,10 +85,10 @@ public class ConfigRun {
             // for the market manager, gonna need the rules, map, and the mustInclude
             for (List<IMarketConfig> mConfigList : aConfig.getMConfig()) {
                 List<IMarketRules> marketRules = new LinkedList<IMarketRules>(); 
-                List<Map<String, Integer>> marketTradeables = new LinkedList<Map<String, Integer>>(); 
+                List<List<String>> marketTradeables = new LinkedList<List<String>>(); 
                 for (IMarketConfig mConfig : mConfigList) {
                   marketRules.add(mConfig.getRules()); 
-                  marketTradeables.add(mConfig.getNumTradeablesMap()); 
+                  marketTradeables.add(mConfig.getTradeableNames()); 
                 }
                 marketManager.createSimultaneousMarket(marketRules, marketTradeables, allTradeables);
             }
