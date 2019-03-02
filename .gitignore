@@ -9,4 +9,5 @@
 *.DS_Store
 loggedResults.txt
 /sats_output/
-/.metadata/
+.metadata
+.settings
