@@ -40,7 +40,7 @@ public class TPClientTest {
                     }
                 }
             });
-            CLIENT.sendTCP(new RegistrationMessage(-1, "testing"));
+            CLIENT.sendTCP(new RegistrationMessage(-1, -1, "testing"));
         }
     }
 
@@ -53,7 +53,7 @@ public class TPClientTest {
                         Integer theID = 1;
                         connection.sendTCP(15000);
                         connection.setTimeout(60000);
-                        kryoServer.sendToTCP(connection.getID(), new RegistrationMessage(theID));
+                        kryoServer.sendToTCP(connection.getID(), new RegistrationMessage(theID, theID));
                         kryoServer.sendToTCP(connection.getID(), new ErrorMessage(0, "test error"));
                         kryoServer.sendToTCP(connection.getID(), new StringMessage(0, "test string"));
                 }}});

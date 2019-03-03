@@ -14,7 +14,7 @@ public class RegistrationMessage extends AbsRegistrationMessage implements IRegi
 	 * DO NOT USE
 	 */
 	public RegistrationMessage() {
-		super(null);
+		super(null, null);
 	}
 
 	/**
@@ -22,8 +22,8 @@ public class RegistrationMessage extends AbsRegistrationMessage implements IRegi
 	 * Server sends back a message with the agent's ID
 	 * @param ID : agent's ID
 	 */
-	public RegistrationMessage(Integer ID) {
-		super(ID);
+	public RegistrationMessage(Integer ID, Integer agentID) {
+		super(ID, agentID);
 	}
 	
 	/**
@@ -31,8 +31,8 @@ public class RegistrationMessage extends AbsRegistrationMessage implements IRegi
 	 * @param ID agent's ID
 	 * @param name: agent's name
 	 */
-	 public RegistrationMessage(Integer ID, String name) {
-	    super(ID, name);
+	 public RegistrationMessage(Integer ID, Integer agentID, String name) {
+	    super(ID, agentID, name);
 	  }
 	
 }

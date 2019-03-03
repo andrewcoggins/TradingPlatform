@@ -10,7 +10,6 @@ import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccount;
 import brown.platform.accounting.IInitialEndowment;
 import brown.platform.accounting.library.Account;
-import brown.platform.accounting.library.InitialEndowment;
 import brown.platform.managers.IAccountManager;
 
 /**
@@ -62,18 +61,15 @@ public class AccountManager implements IAccountManager {
       return accounts.containsKey(ID);
   }  
 
-  public void reendow(Map<Integer, IInitialEndowment> initialEndowments) {
-      for (Integer anID : this.accounts.keySet()) {
-        this.accounts.get(anID).clear();
-      }
+  public void reendow(Integer agentID, IInitialEndowment initialEndowment) {
       try {
-        for (Integer anID : initialEndowments.keySet()) {
-          IAccount endowAccount = this.accounts.get(anID); 
-          for (String s : initialEndowments.get(anID).getGoods().keySet()) {
-            endowAccount.addTradeables(s, initialEndowments.get(anID).getGoods().get(s));
+          IAccount endowAccount = this.accounts.get(agentID);
+          endowAccount.clear(); 
+          for (String s : initialEndowment.getGoods().keySet()) {
+            endowAccount.addTradeables(s, initialEndowment.getGoods().get(s));
           }
-          endowAccount.addMoney(initialEndowments.get(anID).getMoney());
-        }
+          endowAccount.addMoney(initialEndowment.getMoney());
+          this.accounts.put(agentID, endowAccount); 
       } catch (NullPointerException n) {
         ErrorLogging.log("ERROR: AccountManager: ID not found.");
         throw n; 

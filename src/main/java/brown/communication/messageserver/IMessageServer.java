@@ -1,5 +1,8 @@
   package brown.communication.messageserver;
 
+import com.esotericsoftware.kryonet.Connection;
+
+import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.IInformationRequestMessage;
 import brown.communication.messages.IRegistrationMessage;
@@ -13,11 +16,9 @@ import brown.communication.messages.ITradeRequestMessage;
  */
 public interface IMessageServer {
   
-  // server sends invitaions for registration
-  public void openRegistration(); 
   
   // server receives registration message from agent. 
-  public void onRegistration(IRegistrationMessage registrationMessage); 
+  public void onRegistration(Connection connection, IRegistrationMessage registrationMessage); 
   
   // server receives request for information from agent. 
   public void onInformationRequest(IInformationRequestMessage informationRequestMessage); 
@@ -30,4 +31,7 @@ public interface IMessageServer {
   
   // server sends information message
   public void sendInfomationMessage(IInformationMessage informationMessage); 
+  
+  public void sendBankUpdate(IBankUpdateMessage bankUpdateMessage);
+  
 }
