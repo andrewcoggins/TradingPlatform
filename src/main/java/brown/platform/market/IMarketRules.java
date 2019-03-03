@@ -20,6 +20,5 @@ public interface IMarketRules {
   public IInformationRevelationPolicy getIRPolicy(); 
   
   public ITerminationCondition getTerminationCondition(); 
-  
-  
+
 }

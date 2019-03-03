@@ -1,9 +1,9 @@
 package brown.platform.market.library;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import brown.auction.marketstate.IMarketPublicState;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
 import brown.auction.rules.IAllocationRule;
@@ -11,13 +11,11 @@ import brown.auction.rules.IInformationRevelationPolicy;
 import brown.auction.rules.ITerminationCondition;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
-import brown.auction.value.valuation.IValuation;
 import brown.communication.messages.library.GameReportMessage;
 import brown.communication.messages.library.TradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.market.IMarket;
-import brown.platform.market.IHistory;
 
 /**
  * Common implementation of IMarket.
@@ -26,6 +24,7 @@ import brown.platform.market.IHistory;
  */
 public class Market implements IMarket {
 
+  
   // TODO: private final IFlexibleRules RULES;
   // delete all of these individual rule variables
   private final IPaymentRule PRULE;
@@ -36,14 +35,14 @@ public class Market implements IMarket {
   private final ITerminationCondition ITCONDITION;
   
   private final IMarketState STATE;
-  private final IMarketState HISTORY;
+  private final IMarketPublicState PUBLICSTATE;
 
   /**
    * @param rules
    * @param state
    * TODO: history
    */
-  public Market(AbsMarketRules rules, IMarketState state, IHistory history) {
+  public Market(AbsMarketRules rules, IMarketState state, IMarketPublicState publicState) {
     // TODO: this.RULES = rules;
     // delete all of these individual assignments of rules
     this.PRULE = rules.pRule;
@@ -54,7 +53,7 @@ public class Market implements IMarket {
     this.ITCONDITION = rules.tCondition; 
     
     this.STATE = state;
-    this.HISTORY = null;
+    this.PUBLICSTATE = publicState;
   }
   
   // Make MarketID a field

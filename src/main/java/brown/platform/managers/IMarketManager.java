@@ -12,8 +12,7 @@ import brown.platform.market.IMarketRules;
 import brown.platform.tradeable.ITradeable;
 
 /**
- * market manager keeps track of all open and closed markets within
- * a simulation. 
+ * market manager keeps track of all open and closed markets within a simulation. 
  * @author andrew
  *
  */
@@ -26,14 +25,18 @@ public interface IMarketManager {
   public void handleTradeMessage(ITradeMessage message); 
   
   public IInformationMessage handleInformationRequest(IInformationRequestMessage message); 
-  
-  // one sided order book. 
+   
   public Map<Integer, List<IAccountUpdate>> runSimultaneousMarket(); 
   
   public ITradeRequestMessage giveTradeRequest(Integer marketID, Integer agentID); 
   
-  // this could be asking for highest bidder stuff, reserve price.. maybe I should just return all the information on the particular market. 
-  
   public void reset(); 
   
+  // so... I could have agents receive a channel, and then query for information from within that channel call... 
+  // but other than that, there's no way to do this. Would querying for info from within a channel call be worth it? 
+  // It would be 'pinging' so to speak and would add another layer. They could query reserve prices, market information,
+  // valuation stuff, like the distribution. But only the querying related to the market is handled through the market manager
+  
 }
+
+  
