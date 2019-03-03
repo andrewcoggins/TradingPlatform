@@ -1,6 +1,6 @@
 package brown.platform.accounting.library; 
 
-import brown.platform.accounting.IOrder;
+import brown.platform.accounting.IAccountUpdate;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -10,7 +10,7 @@ import brown.platform.tradeable.ITradeable;
  * @author acoggins
  *
  */
-public class Order implements IOrder {
+public class AccountUpdate implements IAccountUpdate {
 
   // recipient of the order
 	public final Integer TO;
@@ -26,7 +26,7 @@ public class Order implements IOrder {
 	/**
 	 * For Kryo do not use
 	 */
-	public Order() {
+	public AccountUpdate() {
 		this.TO = null;
 		this.FROM = null;
 		this.PRICE = -1;
@@ -42,7 +42,7 @@ public class Order implements IOrder {
 	 * @param quantity
 	 * @param good
 	 */
-	public Order(Integer to, Integer from, double price, double quantity, ITradeable good) {
+	public AccountUpdate(Integer to, Integer from, double price, double quantity, ITradeable good) {
 		this.TO = to;
 		this.FROM = from;
 		this.PRICE = price;
@@ -54,16 +54,16 @@ public class Order implements IOrder {
 		this.QUANTITY = quantity;
 	}
 
-	public Order updatePrice(double price) {
-		return new Order(this.TO, this.FROM, price, this.QUANTITY, this.GOOD);
+	public AccountUpdate updatePrice(double price) {
+		return new AccountUpdate(this.TO, this.FROM, price, this.QUANTITY, this.GOOD);
 	}
 
-	public Order updateToAgent(Integer newAgent) {
-		return new Order(newAgent, this.FROM, this.PRICE, this.QUANTITY, this.GOOD);
+	public AccountUpdate updateToAgent(Integer newAgent) {
+		return new AccountUpdate(newAgent, this.FROM, this.PRICE, this.QUANTITY, this.GOOD);
 	}
 	
-	public Order updateFromAgent(Integer newAgent) {
-   return new Order(this.TO, newAgent, this.PRICE, this.QUANTITY, this.GOOD);
+	public AccountUpdate updateFromAgent(Integer newAgent) {
+   return new AccountUpdate(this.TO, newAgent, this.PRICE, this.QUANTITY, this.GOOD);
   }
 	
 	/**
@@ -102,7 +102,7 @@ public class Order implements IOrder {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Order other = (Order) obj;
+    AccountUpdate other = (AccountUpdate) obj;
     if (Double.doubleToLongBits(PRICE) != Double.doubleToLongBits(other.PRICE))
       return false;
     if (FROM == null) {

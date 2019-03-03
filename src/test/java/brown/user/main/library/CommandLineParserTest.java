@@ -111,11 +111,11 @@ public class CommandLineParserTest {
         new AnonymousPolicy(),
         new OneShotTermination());
     // marketConfig
-    Map<String, Integer> mMap = new HashMap<String, Integer>(); 
-    mMap.put("default", allTradeables.size()); 
+    List<String> mList = new LinkedList<String>(); 
+    mList.add("default"); 
     List<List<IMarketConfig>> mConfigSquared = new LinkedList<List<IMarketConfig>>(); 
     List<IMarketConfig> mConfigList = new LinkedList<IMarketConfig>(); 
-    IMarketConfig mConfig = new MarketConfig(marketRule, mMap);
+    IMarketConfig mConfig = new MarketConfig(marketRule, mList);
     mConfigList.add(mConfig); 
     mConfigSquared.add(mConfigList); 
     

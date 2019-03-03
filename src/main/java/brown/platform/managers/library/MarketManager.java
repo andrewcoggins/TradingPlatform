@@ -11,7 +11,7 @@ import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
-import brown.platform.accounting.IOrder;
+import brown.platform.accounting.IAccountUpdate;
 import brown.platform.managers.IMarketManager;
 import brown.platform.market.IMarket;
 import brown.platform.market.IMarketBlock;
@@ -52,23 +52,18 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public void createSimultaneousMarket(List<IMarketRules> s,
-      List<Map<String, Integer>> marketTStrings, Map<String, List<ITradeable>> allTradeables) {
+  public void createSimultaneousMarket(List<IMarketRules> marketRules,
+      List<List<String>> marketTradeableNames, Map<String, List<ITradeable>> allTradeables) {
     if (!this.lock) {
-      List<Map<String, List<ITradeable>>> marketTradeables =
-          new LinkedList<Map<String, List<ITradeable>>>();
-      for (Map<String, Integer> tMap : marketTStrings) {
-        Map<String, List<ITradeable>> singleMarketTradeables =
-            new HashMap<String, List<ITradeable>>();
-        for (String tName : tMap.keySet()) {
-          List<ITradeable> nameTradeables = allTradeables.get(tName);
-          List<ITradeable> mTradeableList =
-              nameTradeables.subList(0, tMap.get(tName));
-          singleMarketTradeables.put(tName, mTradeableList);
+      List<Map<String, List<ITradeable>>> marketTradeables = new LinkedList<Map<String, List<ITradeable>>>();
+      for (List<String> tList : marketTradeableNames) {
+        Map<String, List<ITradeable>> singleMarketTradeables = new HashMap<String, List<ITradeable>>();
+        for (String tName : tList) {
+          singleMarketTradeables.put(tName, allTradeables.get(tName));
         }
         marketTradeables.add(singleMarketTradeables);
       }
-      IMarketBlock marketBlock = new SimultaneousMarket(s, marketTradeables);
+      IMarketBlock marketBlock = new SimultaneousMarket(marketRules, marketTradeables);
       this.allMarkets.add(marketBlock); 
     } else {
       PlatformLogging.log("ERROR: market manager locked.");
@@ -81,7 +76,7 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public Map<Integer, List<IOrder>> runSimultaneousMarket() {
+  public Map<Integer, List<IAccountUpdate>> runSimultaneousMarket() {
     
     // need some concept of a pointer that points to a particular market in the sequence. 
     // this pointer will scan over the simul markets, and it will do a run. 
@@ -111,8 +106,7 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public Map<Integer, ITradeRequestMessage>
-      giveTradeRequests(Integer marketID) {
+  public ITradeRequestMessage giveTradeRequest(Integer marketID, Integer agentID) {
     // TODO Auto-generated method stub
     return null;
   }

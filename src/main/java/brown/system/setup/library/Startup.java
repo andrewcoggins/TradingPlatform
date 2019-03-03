@@ -24,7 +24,7 @@ import brown.communication.messages.library.TradeRequestMessage;
 import brown.communication.messages.library.ValuationInformationMessage;
 import brown.platform.accounting.library.Account;
 import brown.platform.accounting.library.Ledger;
-import brown.platform.accounting.library.Order;
+import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.accounting.library.Transaction;
 import brown.platform.tradeable.library.SimpleTradeable;
 import brown.platform.tradeable.library.TradeableType;
@@ -64,7 +64,7 @@ public final class Startup {
 		kryo.register(Timestamp.class);
 		kryo.register(Date.class);
 		kryo.register(OneSidedBidBundle.class); 
-		kryo.register(Order.class);
+		kryo.register(AccountUpdate.class);
 		kryo.register(Ledger.class);
 		kryo.register(HashMap.class);
 		kryo.register(TradeableType.class);

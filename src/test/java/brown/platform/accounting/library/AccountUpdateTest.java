@@ -19,7 +19,7 @@ import brown.platform.tradeable.library.SimpleTradeable;
  * @author andrew
  *
  */
-public class AccountTest {
+public class AccountUpdateTest {
   
   @Test
   public void testAccountInit() {

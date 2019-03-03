@@ -22,11 +22,6 @@ public interface IMarketConfig extends IInputConfig {
    * get num tradeables map. 
    * @return
    */
-  public  Map<String, Integer> getNumTradeablesMap(); 
+  public List<String> getTradeableNames(); 
   
-  /**
-   * get mustInclude information. 
-   * @return
-   */
-  public  Map<String, List<String>> getMustInclude();
 }
