@@ -76,7 +76,7 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public Map<Integer, List<IAccountUpdate>> runSimultaneousMarket() {
+  public List<IAccountUpdate> finishMarket(Integer marketID) {
     
     // need some concept of a pointer that points to a particular market in the sequence. 
     // this pointer will scan over the simul markets, and it will do a run. 
@@ -104,11 +104,9 @@ public class MarketManager implements IMarketManager {
     }
     return null;
   }
-
-  @Override
-  public ITradeRequestMessage giveTradeRequest(Integer marketID, Integer agentID) {
-    // TODO Auto-generated method stub
-    return null;
+  
+  public List<ITradeRequestMessage> updateMarket(Integer marketID, List<Integer> agents) {
+    return null; 
   }
 
   @Override
@@ -128,6 +126,24 @@ public class MarketManager implements IMarketManager {
   public void reset() {
     // TODO Auto-generated method stub
     
+  }
+
+  @Override
+  public Integer getNumMarketBlocks() {
+    // TODO Auto-generated method stub
+    return this.allMarkets.size();
+  }
+
+  @Override
+  public List<IMarket> getOpenMarkets() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public boolean anyMarketsOpen() {
+    // TODO Auto-generated method stub
+    return false;
   }
 
 }

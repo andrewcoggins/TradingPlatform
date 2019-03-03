@@ -50,7 +50,7 @@ public interface IAccountManager {
   /**
    * resets accounts to their initial endowments, ostensibly as defined in the constructor.
    */
-  void reendow(Map<Integer, IInitialEndowment> intialEndowments);
+  void reendow(Integer agentID, IInitialEndowment endowment);
 
   void lock();
 }

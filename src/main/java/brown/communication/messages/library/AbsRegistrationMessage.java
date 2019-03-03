@@ -6,19 +6,22 @@ import brown.user.agent.library.AbsAgent;
 public abstract class AbsRegistrationMessage extends AbsMessage implements IRegistrationMessage {
 
   private String name; 
+  private Integer agentID; 
   
   public AbsRegistrationMessage() {
     super(null);
   }
   
-  public AbsRegistrationMessage(Integer messageID) {
+  public AbsRegistrationMessage(Integer messageID, Integer agentID) {
     super(messageID);
+    this.agentID = agentID; 
     this.name = ""; 
   }
   
-  public AbsRegistrationMessage(Integer messageID, String name) {
+  public AbsRegistrationMessage(Integer messageID, Integer agentID, String name) {
     super(messageID); 
     this.name = name; 
+    this.agentID = agentID; 
   }
   
   @Override
@@ -29,6 +32,11 @@ public abstract class AbsRegistrationMessage extends AbsMessage implements IRegi
   @Override
   public String getName() {
     return this.name; 
+  }
+  
+  @Override
+  public Integer getAgentID() {
+    return this.agentID; 
   }
   
   @Override

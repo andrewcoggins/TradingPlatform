@@ -88,14 +88,11 @@ public class AccountManagerTest {
     
     assertEquals(manager.getAccount(0), act); 
     
-    Map<Integer, IInitialEndowment> endowments = new HashMap<Integer, IInitialEndowment>(); 
-    endowments.put(0, new InitialEndowment(60.0, tradeables)); 
-    endowments.put(1, new InitialEndowment(70.0, tradeables)); 
-    
     IAccount acctOne = new Account(0, 60.0, tradeables); 
     IAccount acctTwo = new Account(1, 70.0, tradeables); 
     
-    manager.reendow(endowments);
+    manager.reendow(0, new InitialEndowment(60.0, tradeables));
+    manager.reendow(1, new InitialEndowment(70.0, tradeables));
     
     assertEquals(manager.getAccount(0), acctOne); 
     assertEquals(manager.getAccount(1), acctTwo); 

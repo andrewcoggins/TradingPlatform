@@ -18,7 +18,7 @@ public class KryoServer implements IKryoServer {
   
   // Server stuff
   protected final int PORT;
-  protected Server kryoServer;
+  public final Server kryoServer;
   protected Map<Connection, Integer> connections;
   
   public KryoServer(int port, ISetup gameSetup) {
