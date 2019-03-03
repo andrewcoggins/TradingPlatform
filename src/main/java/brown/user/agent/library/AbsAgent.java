@@ -50,7 +50,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
       }
     });
 
-    CLIENT.sendTCP(new RegistrationMessage(-1));
+    CLIENT.sendTCP(new RegistrationMessage(-1, -1));
     
     this.monies = 0.0;
     this.goods = new LinkedList<ITradeable>();
@@ -79,7 +79,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
       }
     });
 
-    CLIENT.sendTCP(new RegistrationMessage(-1,name));
+    CLIENT.sendTCP(new RegistrationMessage(-1, -1, name));
     this.monies = 0.0;
     this.goods = new LinkedList<ITradeable>();
   }
