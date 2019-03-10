@@ -1,4 +1,4 @@
-  package brown.communication.messageserver;
+package brown.communication.messageserver;
 
 import com.esotericsoftware.kryonet.Connection;
 
@@ -12,14 +12,14 @@ import brown.communication.messages.ITradeMessage;
  *
  */
 public interface IMessageServer {
-  
-  
+
   // server receives registration message from agent. 
   public void onRegistration(Connection connection, IRegistrationMessage registrationMessage); 
   
   // server receives bid message from agent. 
   public void onBid(Connection connection, ITradeMessage bidMessage); 
   
+  // server sends message to agent.
   public void sendMessage(Connection connection, IServerToAgentMessage message); 
   
 }
