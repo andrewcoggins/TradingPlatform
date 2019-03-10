@@ -23,7 +23,6 @@ public class TradeRequestMessage extends AbsTradeRequestMessage implements ITrad
   @Override
   public void agentDispatch(IAgent agent) {
     // TODO Auto-generated method stub
-    
   }
 
 }

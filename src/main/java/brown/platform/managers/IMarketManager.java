@@ -29,13 +29,15 @@ public interface IMarketManager {
   
   public Integer getNumMarketBlocks(); 
   
-  public List<IMarket> getOpenMarkets(); 
+  public List<IMarket> getCurrentMarkets(); 
   
   public List<IAccountUpdate> finishMarket(Integer marketID); 
   
   public List<ITradeRequestMessage> updateMarket(Integer marketID, List<Integer> agents); 
   
   public Map<Integer, IInformationMessage> constructInformationMessages(Integer marketID); 
+  
+  public void finalizeMarket(Integer marketID); 
   
   public boolean anyMarketsOpen(); 
   

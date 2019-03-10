@@ -107,7 +107,7 @@ public class SimulationManager implements ISimulationManager {
     }
     
     private void updateAuctions() {
-      for (IMarket market : this.currentMarketManager.getOpenMarkets()) {
+      for (IMarket market : this.currentMarketManager.getCurrentMarkets()) {
         if (market.isOpen()) {
           List<ITradeRequestMessage> tradeRequests = this.currentMarketManager.updateMarket(market.getMarketID(), new LinkedList<Integer>(this.agentConnections.keySet())); 
           for (ITradeRequestMessage tradeRequest : tradeRequests) {
@@ -123,6 +123,7 @@ public class SimulationManager implements ISimulationManager {
             this.messageServer.sendMessage(this.agentConnections.get(agentID), informationMessages.get(agentID));
             this.messageServer.sendMessage(this.agentConnections.get(agentID), bankUpdates.get(agentID));
           }
+          this.currentMarketManager.finalizeMarket(market.getMarketID()); 
         }
       }
     }
