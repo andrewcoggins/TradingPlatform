@@ -3,7 +3,7 @@ package brown.auction.marketstate;
 import java.util.List;
 import java.util.Map;
 
-import brown.communication.messages.library.GameReportMessage;
+import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.library.TradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
@@ -62,8 +62,8 @@ public interface IMarketState {
     public void setAltAlloc(Map<ITradeable, List<Integer>> o);
     
     // IR policy 
-    public Map<Integer, List<GameReportMessage>> getReport();
-    public void setReport(Map<Integer,List<GameReportMessage>> gameReport);
+    public Map<Integer, List<IInformationMessage>> getReport();
+    public void setReport(Map<Integer,List<IInformationMessage>> gameReport);
 
     // Termination condition
     public long getTime();

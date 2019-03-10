@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
-import brown.communication.messages.library.GameReportMessage;
+import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.library.TradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
@@ -46,7 +46,7 @@ public class MarketState implements IMarketState {
   private Map<ITradeable, List<Integer>> altAlloc;
   
   // IR policy
-  private Map<Integer, List<GameReportMessage>> gameReports;
+  private Map<Integer, List<IInformationMessage>> gameReports;
   
   // Termination condition
   private Boolean terminated; 
@@ -206,12 +206,12 @@ public class MarketState implements IMarketState {
   }
   
   @Override
-  public Map<Integer, List<GameReportMessage>>  getReport() {
+  public Map<Integer, List<IInformationMessage>>  getReport() {
     return this.gameReports; 
   }
 
   @Override
-  public void setReport(Map<Integer, List<GameReportMessage>> gameReport) {
+  public void setReport(Map<Integer, List<IInformationMessage>> gameReport) {
     this.gameReports = gameReport;
   }
 

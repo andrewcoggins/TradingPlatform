@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 
+import brown.communication.messages.IErrorMessage;
 import brown.communication.messages.IRegistrationMessage;
 import brown.logging.library.SystemLogging;
 import brown.system.client.IClient;
@@ -56,7 +57,7 @@ public abstract class TPClient implements IClient {
   
   @Override
   public void onErrorMessage(IErrorMessage message) {
-    SystemLogging.log("[x] rej: " + message.error + ", agent ID: " +this.ID);
+    SystemLogging.log("[x] rej: " + message.getError() + ", agent ID: " +this.ID);
   }
 
   

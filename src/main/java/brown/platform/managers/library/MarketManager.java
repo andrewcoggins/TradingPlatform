@@ -140,4 +140,11 @@ public class MarketManager implements IMarketManager {
     return false;
   }
 
+  @Override
+  public Map<Integer, IInformationMessage>
+      constructInformationMessages(Integer marketID) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

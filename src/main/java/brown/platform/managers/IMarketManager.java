@@ -3,6 +3,7 @@ package brown.platform.managers;
 import java.util.List;
 import java.util.Map;
 
+import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
@@ -33,6 +34,8 @@ public interface IMarketManager {
   public List<IAccountUpdate> finishMarket(Integer marketID); 
   
   public List<ITradeRequestMessage> updateMarket(Integer marketID, List<Integer> agents); 
+  
+  public Map<Integer, IInformationMessage> constructInformationMessages(Integer marketID); 
   
   public boolean anyMarketsOpen(); 
   

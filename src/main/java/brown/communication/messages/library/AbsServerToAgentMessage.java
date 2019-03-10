@@ -7,7 +7,6 @@ public abstract class AbsServerToAgentMessage extends AbsMessage implements ISer
 
   public AbsServerToAgentMessage(Integer messageID) {
     super(messageID);
-    // TODO Auto-generated constructor stub
   }
 
   public abstract void agentDispatch(IAgent agent);

@@ -7,7 +7,6 @@ import brown.communication.messages.IAgentToServerMessage;
 import brown.communication.messages.IRegistrationMessage;
 import brown.communication.messages.IServerToAgentMessage;
 import brown.communication.messages.ITradeMessage;
-import brown.communication.messages.library.RegistrationMessage;
 import brown.communication.messages.library.RegistrationResponseMessage;
 import brown.communication.messageserver.IMessageServer;
 import brown.logging.library.ErrorLogging;
@@ -53,7 +52,7 @@ public class MessageServer extends KryoServer implements IMessageServer {
         return;
       }
       Integer agentID = this.manager.handleRegistration(registrationMessage, connection); 
-      this.sendMessage(connection, new RegistrationResponseMessage(agentID));
+      this.sendMessage(connection, new RegistrationResponseMessage(0, agentID, registrationMessage.getName()));
       } else {
         ErrorLogging.log("[x] Server-onRegistration: encountered redundant registration");
       }

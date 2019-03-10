@@ -8,7 +8,6 @@ import com.esotericsoftware.kryonet.Listener;
 
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.library.AbsMessage;
-import brown.communication.messages.library.AccountResetMessage;
 import brown.communication.messages.library.RegistrationMessage;
 import brown.logging.library.Logging;
 import brown.platform.tradeable.ITradeable;
@@ -44,7 +43,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
           if (message instanceof AbsMessage) {
             AbsMessage theMessage = (AbsMessage) message;
             
-            theMessage.dispatch(agent);
+            theMessage.agentDispatch(agent);
           }
         }
       }

@@ -1,8 +1,7 @@
 package brown.system.client;
 
+import brown.communication.messages.IErrorMessage;
 import brown.communication.messages.IRegistrationMessage;
-import brown.communication.messages.library.ErrorMessage;
-import brown.communication.messages.library.StringMessage;
 
 /**
  * Agents are responsible for receiving messages from the server,
@@ -22,7 +21,7 @@ public interface IClient {
    * Whenever a message is rejected, a rejection message is sent
    * @param message - includes a string about rejection
    */
-  void onErrorMessage(ErrorMessage message);
+  void onErrorMessage(IErrorMessage message);
 
 }
 

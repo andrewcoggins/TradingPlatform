@@ -9,6 +9,7 @@ import java.util.Map;
 import com.esotericsoftware.kryonet.Connection;
 
 import brown.communication.messages.IBankUpdateMessage;
+import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.IRegistrationMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
@@ -100,7 +101,6 @@ public class SimulationManager implements ISimulationManager {
 
     private void completeAuctions() throws InterruptedException {
       while (this.currentMarketManager.anyMarketsOpen()) {
-        // TODO: make this a platform parameter
         Thread.sleep(1000);
         updateAuctions(); 
       }
@@ -111,14 +111,18 @@ public class SimulationManager implements ISimulationManager {
         if (market.isOpen()) {
           List<ITradeRequestMessage> tradeRequests = this.currentMarketManager.updateMarket(market.getMarketID(), new LinkedList<Integer>(this.agentConnections.keySet())); 
           for (ITradeRequestMessage tradeRequest : tradeRequests) {
-            this.messageServer.sendMessage(tradeRequest);
-            // TODO: send an information message 
+            // TODO: send an (inner) information message 
+            this.messageServer.sendMessage(this.agentConnections.get(tradeRequest.getAgentID()), tradeRequest);
           }
         } else {
           List<IAccountUpdate> accountUpdates = this.currentMarketManager.finishMarket(market.getMarketID());
-          // TODO: send an (outer) information message
-          // TODO: update accounts
-          // TODO: send bank updates. 
+          this.currentAccountManager.updateAccounts(accountUpdates); 
+          Map<Integer, IBankUpdateMessage> bankUpdates = this.currentAccountManager.constructBankUpdateMessages(accountUpdates); 
+          Map<Integer, IInformationMessage> informationMessages = this.currentMarketManager.constructInformationMessages(market.getMarketID()); 
+          for (Integer agentID : bankUpdates.keySet()) {
+            this.messageServer.sendMessage(this.agentConnections.get(agentID), informationMessages.get(agentID));
+            this.messageServer.sendMessage(this.agentConnections.get(agentID), bankUpdates.get(agentID));
+          }
         }
       }
     }
@@ -138,8 +142,8 @@ public class SimulationManager implements ISimulationManager {
       Map<Integer, IValuationMessage> agentValuations = this.currentValuationManager.constructValuationMessages(); 
       for (Integer agentID : accountInitializations.keySet()) {
         this.messageServer.sendMessage(this.agentConnections.get(agentID), accountInitializations.get(agentID));
+        this.messageServer.sendMessage(this.agentConnections.get(agentID), agentValuations.get(agentID));
       }
-      // give/send the agents valuations. 
     }
     
     public Integer handleRegistration(IRegistrationMessage registrationMessage, Connection connection) {

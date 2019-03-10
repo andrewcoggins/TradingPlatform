@@ -11,6 +11,7 @@ import brown.communication.messages.library.AccountInitializationMessage;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccount;
+import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.IInitialEndowment;
 import brown.platform.accounting.library.Account;
 import brown.platform.managers.IAccountManager;
@@ -95,6 +96,19 @@ public class AccountManager implements IAccountManager {
   }
   
   @Override
+  public Map<Integer, IBankUpdateMessage>
+      constructBankUpdateMessages(List<IAccountUpdate> accountUpdates) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void updateAccounts(List<IAccountUpdate> accountUpdates) {
+    // TODO Auto-generated method stub
+    
+  }
+  
+  @Override
   public String toString() {
     return "AccountManager [accounts=" + accounts + "]";
   }
@@ -123,5 +137,6 @@ public class AccountManager implements IAccountManager {
       return false;
     return true;
   }
+
 
 }

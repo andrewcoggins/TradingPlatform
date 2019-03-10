@@ -5,6 +5,7 @@ import java.util.Map;
 
 import brown.communication.messages.IBankUpdateMessage;
 import brown.platform.accounting.IAccount;
+import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.IInitialEndowment;
 
 /**
@@ -56,5 +57,10 @@ public interface IAccountManager {
   
   Map<Integer, IBankUpdateMessage> constructInitializationMessages(); 
 
+  Map<Integer, IBankUpdateMessage> constructBankUpdateMessages(List<IAccountUpdate> accountUpdates); 
+  
   void lock();
+  
+  void updateAccounts(List<IAccountUpdate> accountUpdates); 
+  
 }
