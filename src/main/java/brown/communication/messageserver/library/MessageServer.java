@@ -18,7 +18,6 @@ import brown.system.setup.ISetup;
 
 /**
  * Message passing server for Trading Platform
- * 
  * @author acoggins
  *
  */
@@ -42,7 +41,6 @@ public class MessageServer extends KryoServer implements IMessageServer {
     Logging.log("[-] server started");
   }
   
-
   @Override
   public void onRegistration(Connection connection, IRegistrationMessage registrationMessage) {
     if (!connections.containsKey(connection)) {
