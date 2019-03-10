@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import brown.communication.messages.IInformationMessage;
-import brown.communication.messages.library.TradeMessage;
+import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
 
@@ -38,7 +38,7 @@ public interface IMarket {
    * @return a boolean representing whether or not the bid was accepted
    * by the activity rule. 
    */
-  public boolean handleBid(TradeMessage bid);
+  public boolean handleBid(ITradeMessage bid);
   
   /**
    * applies the allocation and payment rules to all bids

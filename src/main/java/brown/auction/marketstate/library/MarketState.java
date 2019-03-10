@@ -20,7 +20,7 @@ import brown.platform.tradeable.ITradeable;
 public class MarketState implements IMarketState {
 
   private final Integer ID;  
-  private final List<ITradeable> TRADEABLES;
+  private final Map<String, List<ITradeable>> TRADEABLES;
   private List<TradeMessage> bids;
   private boolean isOpen; 
   private int ticks;  
@@ -51,9 +51,9 @@ public class MarketState implements IMarketState {
   // Termination condition
   private Boolean terminated; 
   
-  public MarketState(Integer ID, List<ITradeable> allGoods) {
+  public MarketState(Integer ID, Map<String, List<ITradeable>> tradeables) {
     this.ID = ID; 
-    this.TRADEABLES = allGoods; 
+    this.TRADEABLES = tradeables; 
     this.bids = new LinkedList<TradeMessage>();
     this.increment = new HashMap<ITradeable, Double>();
     this.ticks = 0; 
@@ -64,10 +64,10 @@ public class MarketState implements IMarketState {
     this.time = System.currentTimeMillis();
     this.isOpen = true; 
     this.reserve = new HashMap<ITradeable, Double>();
-    for (ITradeable t : this.TRADEABLES) {
-      this.reserve.put(t,0.);
-      this.altAlloc.put(t,  new LinkedList<Integer>());
-    }
+//    for (ITradeable t : this.TRADEABLES) {
+//      this.reserve.put(t,0.);
+//      this.altAlloc.put(t,  new LinkedList<Integer>());
+//    }
   }
   
   @Override
@@ -77,7 +77,7 @@ public class MarketState implements IMarketState {
 
   @Override
   public List<ITradeable> getTradeables() {
-    return this.TRADEABLES; 
+    return null;//this.TRADEABLES; 
   }
   
   @Override
@@ -149,11 +149,11 @@ public class MarketState implements IMarketState {
   // it is not part of the state (since it is constant)
   @Override
   public void setIncrement(Map<ITradeable, Double> increment) {
-   for (ITradeable t : this.TRADEABLES) {
-     if (!increment.containsKey(t)) {
-       increment.put(t, 0.0); 
-     }
-   }
+//   for (ITradeable t : this.TRADEABLES) {
+//     if (!increment.containsKey(t)) {
+//       increment.put(t, 0.0); 
+//     }
+//   }
    this.increment = increment;
   }
   

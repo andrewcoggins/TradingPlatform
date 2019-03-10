@@ -1,13 +1,14 @@
 package brown.user.agent;
 
 import brown.communication.messages.IBankUpdateMessage;
+import brown.system.client.IClient;
 
 /**
  * Agents are responsible for receiving messages from the server,
  * constructing bids, and sending them back.
  * @author andrew
  */
-public interface IAgent { 
+public interface IAgent extends IClient { 
 
   /**
    * Sent whenever an agent's bank account changes

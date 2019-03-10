@@ -57,8 +57,11 @@ public class AccountManager implements IAccountManager {
 	}
 
   public void reset() {
-    this.accounts.clear();
-    this.lock = false;
+    for (Integer agentID : this.accounts.keySet()) {
+      IAccount agentAccount = this.accounts.get(agentID); 
+      agentAccount.clear();
+      this.accounts.put(agentID, agentAccount); 
+    }
   }
 
   public Boolean containsAccount(Integer ID) {

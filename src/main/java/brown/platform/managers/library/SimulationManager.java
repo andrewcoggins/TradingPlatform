@@ -92,38 +92,47 @@ public class SimulationManager implements ISimulationManager {
           for (int k = 0; k < this.numSimulationRuns.get(k); j++) {
             this.initializeAgents();
             for (int l = 0; l < this.currentMarketManager.getNumMarketBlocks(); l++) {
-              this.completeAuctions(); 
+              this.completeAuctions(l); 
             }
             // TODO: log to output  
+            // reset
+            this.currentMarketManager.reset();
+            this.currentAccountManager.reset();
+            this.currentValuationManager.reset();
+            // no need for endowment manager, since it's stateless
           }
         }
       }
 
-    private void completeAuctions() throws InterruptedException {
+    private synchronized void completeAuctions(int index) throws InterruptedException {
+      this.currentMarketManager.openMarkets(index); 
       while (this.currentMarketManager.anyMarketsOpen()) {
         Thread.sleep(1000);
         updateAuctions(); 
+        Thread.sleep(1000);
       }
     }
     
     private void updateAuctions() {
-      for (IMarket market : this.currentMarketManager.getCurrentMarkets()) {
-        if (market.isOpen()) {
-          List<ITradeRequestMessage> tradeRequests = this.currentMarketManager.updateMarket(market.getMarketID(), new LinkedList<Integer>(this.agentConnections.keySet())); 
-          for (ITradeRequestMessage tradeRequest : tradeRequests) {
-            // TODO: send an (inner) information message 
-            this.messageServer.sendMessage(this.agentConnections.get(tradeRequest.getAgentID()), tradeRequest);
+      for (IMarket market : this.currentMarketManager.getActiveMarkets()) {
+        synchronized(market) {
+          if (market.isOpen()) {
+            List<ITradeRequestMessage> tradeRequests = this.currentMarketManager.updateMarket(market.getMarketID(), new LinkedList<Integer>(this.agentConnections.keySet())); 
+            for (ITradeRequestMessage tradeRequest : tradeRequests) {
+              // TODO: send an (inner) information message 
+              this.messageServer.sendMessage(this.agentConnections.get(tradeRequest.getAgentID()), tradeRequest);
+            }
+          } else {
+            List<IAccountUpdate> accountUpdates = this.currentMarketManager.finishMarket(market.getMarketID());
+            this.currentAccountManager.updateAccounts(accountUpdates); 
+            Map<Integer, IBankUpdateMessage> bankUpdates = this.currentAccountManager.constructBankUpdateMessages(accountUpdates); 
+            Map<Integer, IInformationMessage> informationMessages = this.currentMarketManager.constructInformationMessages(market.getMarketID()); 
+            for (Integer agentID : bankUpdates.keySet()) {
+              this.messageServer.sendMessage(this.agentConnections.get(agentID), informationMessages.get(agentID));
+              this.messageServer.sendMessage(this.agentConnections.get(agentID), bankUpdates.get(agentID));
+            }
+            this.currentMarketManager.finalizeMarket(market.getMarketID()); 
           }
-        } else {
-          List<IAccountUpdate> accountUpdates = this.currentMarketManager.finishMarket(market.getMarketID());
-          this.currentAccountManager.updateAccounts(accountUpdates); 
-          Map<Integer, IBankUpdateMessage> bankUpdates = this.currentAccountManager.constructBankUpdateMessages(accountUpdates); 
-          Map<Integer, IInformationMessage> informationMessages = this.currentMarketManager.constructInformationMessages(market.getMarketID()); 
-          for (Integer agentID : bankUpdates.keySet()) {
-            this.messageServer.sendMessage(this.agentConnections.get(agentID), informationMessages.get(agentID));
-            this.messageServer.sendMessage(this.agentConnections.get(agentID), bankUpdates.get(agentID));
-          }
-          this.currentMarketManager.finalizeMarket(market.getMarketID()); 
         }
       }
     }
@@ -137,6 +146,8 @@ public class SimulationManager implements ISimulationManager {
         } else {
           this.currentAccountManager.createAccount(agentID, agentEndowment);
         }
+        
+        // TODO: give agents valuations
       }
       // the account manager should be able to create these messages. 
       Map<Integer, IBankUpdateMessage> accountInitializations = this.currentAccountManager.constructInitializationMessages(); 

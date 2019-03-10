@@ -80,7 +80,10 @@ public class ValuationManager implements IValuationManager {
       // TODO Auto-generated method stub
       return null;
     }
-    
-    
+
+    @Override
+    public void reset() {
+      this.agentValuations.clear();
+    }   
     
 }

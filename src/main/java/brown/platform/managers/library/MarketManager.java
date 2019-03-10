@@ -4,10 +4,16 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
+import brown.auction.marketstate.library.MarketPublicState;
+import brown.auction.marketstate.library.MarketState;
 import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.IStatusMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
+import brown.communication.messages.library.ErrorMessage;
+import brown.communication.messages.library.TradeRejectionMessage;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
@@ -15,6 +21,7 @@ import brown.platform.managers.IMarketManager;
 import brown.platform.market.IMarket;
 import brown.platform.market.IMarketBlock;
 import brown.platform.market.IMarketRules;
+import brown.platform.market.library.Market;
 import brown.platform.market.library.SimultaneousMarket;
 import brown.platform.tradeable.ITradeable;
 import brown.platform.whiteboard.IWhiteboard;
@@ -42,7 +49,7 @@ public class MarketManager implements IMarketManager {
    */
   public MarketManager() {
     this.allMarkets = new LinkedList<IMarketBlock>();
-    this.activeMarkets = new HashMap<Integer, IMarket>(); 
+    this.activeMarkets = new ConcurrentHashMap<Integer, IMarket>(); 
     this.lock = false;
     this.whiteboard = new Whiteboard(); 
     this.marketIndex = 0; 
@@ -71,7 +78,19 @@ public class MarketManager implements IMarketManager {
   public void lock() {
     this.lock = true;
   }
-
+  
+  @Override
+  public void openMarkets(int index) {
+    IMarketBlock currentMarketBlock = this.allMarkets.get(index); 
+    List<IMarketRules> marketRules = currentMarketBlock.getMarkets(); 
+    List<Map<String, List<ITradeable>>> marketTradeables = currentMarketBlock.getMarketTradeables(); 
+    for (int i = 0; i < marketRules.size(); i++) {
+      this.activeMarkets.put(this.marketIndex, new Market(marketRules.get(i),
+          new MarketState(this.marketIndex, marketTradeables.get(i)),
+          new MarketPublicState(this.marketIndex))); 
+    }
+  }
+  
   @Override
   public List<IAccountUpdate> finishMarket(Integer marketID) {
     try {
@@ -95,12 +114,28 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public void handleTradeMessage(ITradeMessage message) {
+  public IStatusMessage handleTradeMessage(ITradeMessage message) {
+    Integer marketID = message.getAuctionID(); 
+    if (this.activeMarkets.containsKey(marketID)) {
+      IMarket market = this.activeMarkets.get(marketID); 
+      synchronized (market) {
+        boolean accepted = market.handleBid(message); 
+        if (!accepted) {
+          return new TradeRejectionMessage(0, "[x] REJECTED: Trade message for auction " + message.getAuctionID().toString()
+              + " denied: rejected by activity rule."); 
+        } else {
+          return new TradeRejectionMessage(-1, ""); 
+        }
+      }
+    } else {
+      return new ErrorMessage(0, "[x] ERROR: Trade message for auction " + message.getAuctionID().toString()
+          + " denied: market no longer active."); 
+    }
   }
-
 
   @Override
   public void reset() {
+    
   }
 
   @Override
@@ -109,7 +144,7 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public List<IMarket> getCurrentMarkets() {
+  public List<IMarket> getActiveMarkets() {
     return new LinkedList<IMarket>(this.activeMarkets.values()); 
   }
 
@@ -132,7 +167,7 @@ public class MarketManager implements IMarketManager {
   @Override
   public Map<Integer, IInformationMessage>
       constructInformationMessages(Integer marketID) {
-    // TODO Auto-generated method stub
+
     return null;
   }
 

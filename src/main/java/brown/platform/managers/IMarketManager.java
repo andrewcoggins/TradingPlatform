@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.IStatusMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
@@ -22,14 +23,15 @@ public interface IMarketManager {
 
   public void lock();
   
-  public void handleTradeMessage(ITradeMessage message); 
+  public IStatusMessage handleTradeMessage(ITradeMessage message); 
   
+  public void openMarkets(int index); 
   // cutting this out.
   //public IInformationMessage handleInformationRequest(IInformationRequestMessage message); 
   
   public Integer getNumMarketBlocks(); 
   
-  public List<IMarket> getCurrentMarkets(); 
+  public List<IMarket> getActiveMarkets(); 
   
   public List<IAccountUpdate> finishMarket(Integer marketID); 
   
@@ -43,11 +45,4 @@ public interface IMarketManager {
   
   public void reset(); 
   
-  // so... I could have agents receive a channel, and then query for information from within that channel call... 
-  // but other than that, there's no way to do this. Would querying for info from within a channel call be worth it? 
-  // It would be 'pinging' so to speak and would add another layer. They could query reserve prices, market information,
-  // valuation stuff, like the distribution. But only the querying related to the market is handled through the market manager
-  
 }
-
-  

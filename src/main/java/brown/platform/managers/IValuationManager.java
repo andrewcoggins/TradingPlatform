@@ -27,5 +27,6 @@ public interface IValuationManager {
     
     public Map<Integer, IValuationMessage> constructValuationMessages(); 
     
+    public void reset(); 
 }
 

@@ -12,10 +12,11 @@ import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 import brown.communication.messages.IInformationMessage;
-import brown.communication.messages.library.TradeMessage;
+import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.market.IMarket;
+import brown.platform.market.IMarketRules;
 
 /**
  * Common implementation of IMarket.
@@ -42,15 +43,15 @@ public class Market implements IMarket {
    * @param state
    * TODO: history
    */
-  public Market(AbsMarketRules rules, IMarketState state, IMarketPublicState publicState) {
+  public Market(IMarketRules rules, IMarketState state, IMarketPublicState publicState) {
     // TODO: this.RULES = rules;
     // delete all of these individual assignments of rules
-    this.PRULE = rules.pRule;
-    this.ARULE = rules.aRule;
-    this.QRULE = rules.qRule;
-    this.ACTRULE = rules.actRule;
-    this.IRPOLICY = rules.infoPolicy;
-    this.ITCONDITION = rules.tCondition; 
+    this.PRULE = rules.getPRule();
+    this.ARULE = rules.getARule();
+    this.QRULE = rules.getQRule();
+    this.ACTRULE = rules.getActRule();
+    this.IRPOLICY = rules.getIRPolicy();
+    this.ITCONDITION = rules.getTerminationCondition(); 
     
     this.STATE = state;
     this.PUBLICSTATE = publicState;
@@ -76,12 +77,12 @@ public class Market implements IMarket {
 
   // this looks like it is checking validity, not processing the bids
   // name seems misleading
-  public boolean handleBid(TradeMessage bid) {
-    this.ACTRULE.isAcceptable(this.STATE, bid); 
-    // why are we checking isOpen here? should check this much earlier!
-    if (this.STATE.getAcceptable() && this.STATE.isOpen()) {
-      STATE.addBid(bid);
-    }
+  public boolean handleBid(ITradeMessage bid) {
+//    this.ACTRULE.isAcceptable(this.STATE, bid); 
+//    // why are we checking isOpen here? should check this much earlier!
+//    if (this.STATE.getAcceptable() && this.STATE.isOpen()) {
+//      STATE.addBid(bid);
+//    }
     return this.STATE.getAcceptable();
   }
 
