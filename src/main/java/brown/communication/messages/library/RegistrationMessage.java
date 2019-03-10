@@ -23,7 +23,7 @@ public class RegistrationMessage extends AbsRegistrationMessage implements IRegi
 	 * @param ID : agent's ID
 	 */
 	public RegistrationMessage(Integer ID, Integer agentID) {
-		super(ID, agentID);
+		super(ID);
 	}
 	
 	/**
@@ -32,7 +32,7 @@ public class RegistrationMessage extends AbsRegistrationMessage implements IRegi
 	 * @param name: agent's name
 	 */
 	 public RegistrationMessage(Integer ID, Integer agentID, String name) {
-	    super(ID, agentID, name);
+	    super(ID, name);
 	  }
 	
 }

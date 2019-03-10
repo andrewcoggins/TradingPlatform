@@ -1,6 +1,5 @@
 package brown.user.agent;
 
-import brown.communication.channel.library.OneSidedChannel;
 
 /**
  * Specval agent for single ascending round without a sealed bid round.
@@ -9,10 +8,5 @@ import brown.communication.channel.library.OneSidedChannel;
  */
 public interface ISpecValV2Agent {
   
-  /**
-   * response to ascending auction query. 
-   * @param channel
-   */
-  public void onClockMarket(OneSidedChannel channel);
 
 }

@@ -1,6 +1,5 @@
 package brown.user.agent;
 
-import brown.communication.channel.library.TwoSidedChannel;
 
 /**
  * Interface for agent that bids in call markets.
@@ -9,10 +8,5 @@ import brown.communication.channel.library.TwoSidedChannel;
  */
 public interface ICallMarketAgent {
 
-  /**
-   * Provides agent response to sealed-bid auction
-   * @param channel - simple agent channel
-   */
-  public void onCallMarket(TwoSidedChannel channel);
-  
+
 }

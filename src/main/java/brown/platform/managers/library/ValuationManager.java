@@ -10,6 +10,7 @@ import java.util.Set;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.valuation.IValuation;
+import brown.communication.messages.IValuationMessage;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.managers.IValuationManager;
@@ -73,5 +74,16 @@ public class ValuationManager implements IValuationManager {
     public void lock() {
         this.lock = true;
     }
+
+    @Override
+    public Map<Integer, IValuationMessage> constructValuationMessages() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+    @Override
+    public void reset() {
+      this.agentValuations.clear();
+    }   
     
 }

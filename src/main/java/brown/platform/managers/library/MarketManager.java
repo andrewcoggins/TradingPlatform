@@ -4,11 +4,16 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
+import brown.auction.marketstate.library.MarketPublicState;
+import brown.auction.marketstate.library.MarketState;
 import brown.communication.messages.IInformationMessage;
-import brown.communication.messages.IInformationRequestMessage;
+import brown.communication.messages.IStatusMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
+import brown.communication.messages.library.ErrorMessage;
+import brown.communication.messages.library.TradeRejectionMessage;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
@@ -16,6 +21,7 @@ import brown.platform.managers.IMarketManager;
 import brown.platform.market.IMarket;
 import brown.platform.market.IMarketBlock;
 import brown.platform.market.IMarketRules;
+import brown.platform.market.library.Market;
 import brown.platform.market.library.SimultaneousMarket;
 import brown.platform.tradeable.ITradeable;
 import brown.platform.whiteboard.IWhiteboard;
@@ -28,9 +34,7 @@ import brown.platform.whiteboard.library.Whiteboard;
  *
  */
 public class MarketManager implements IMarketManager {
-  // stores all markets in a simulation
-  // open markets are open at a given moment in time. 
-  private Map<Integer, IMarket> openMarkets;
+  private Map<Integer, IMarket> activeMarkets;
   private List<IMarketBlock> allMarkets;
   private IWhiteboard whiteboard; 
   private Integer marketIndex; 
@@ -45,7 +49,7 @@ public class MarketManager implements IMarketManager {
    */
   public MarketManager() {
     this.allMarkets = new LinkedList<IMarketBlock>();
-    this.openMarkets = new HashMap<Integer, IMarket>(); 
+    this.activeMarkets = new ConcurrentHashMap<Integer, IMarket>(); 
     this.lock = false;
     this.whiteboard = new Whiteboard(); 
     this.marketIndex = 0; 
@@ -74,22 +78,22 @@ public class MarketManager implements IMarketManager {
   public void lock() {
     this.lock = true;
   }
-
+  
+  @Override
+  public void openMarkets(int index) {
+    IMarketBlock currentMarketBlock = this.allMarkets.get(index); 
+    List<IMarketRules> marketRules = currentMarketBlock.getMarkets(); 
+    List<Map<String, List<ITradeable>>> marketTradeables = currentMarketBlock.getMarketTradeables(); 
+    for (int i = 0; i < marketRules.size(); i++) {
+      this.activeMarkets.put(this.marketIndex, new Market(marketRules.get(i),
+          new MarketState(this.marketIndex, marketTradeables.get(i)),
+          new MarketPublicState(this.marketIndex))); 
+    }
+  }
+  
   @Override
   public List<IAccountUpdate> finishMarket(Integer marketID) {
-    
-    // need some concept of a pointer that points to a particular market in the sequence. 
-    // this pointer will scan over the simul markets, and it will do a run. 
-    // what is a run? the simulation manager is going to do the heavy lifting. 
-    // so what is done here? basically, the markets just process the information given to them. 
-    // ... so ... need that pointer concept. 
-    // does this involve setting the reserve prices? 
-    // 
-    // TODO Auto-generated method stub
-    
-    
     try {
-      // so first, grab the index at the pointer: 
       IMarketBlock currentBlock = this.allMarkets.get(this.marketIndex); 
       List<IMarketRules> mRules = currentBlock.getMarkets(); 
       List<Map<String, List<ITradeable>>> mTradeables = currentBlock.getMarketTradeables(); 
@@ -110,40 +114,62 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public void handleTradeMessage(ITradeMessage message) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public IInformationMessage
-      handleInformationRequest(IInformationRequestMessage message) {
-    // TODO Auto-generated method stub
-    return null;
+  public IStatusMessage handleTradeMessage(ITradeMessage message) {
+    Integer marketID = message.getAuctionID(); 
+    if (this.activeMarkets.containsKey(marketID)) {
+      IMarket market = this.activeMarkets.get(marketID); 
+      synchronized (market) {
+        boolean accepted = market.handleBid(message); 
+        if (!accepted) {
+          return new TradeRejectionMessage(0, "[x] REJECTED: Trade message for auction " + message.getAuctionID().toString()
+              + " denied: rejected by activity rule."); 
+        } else {
+          return new TradeRejectionMessage(-1, ""); 
+        }
+      }
+    } else {
+      return new ErrorMessage(0, "[x] ERROR: Trade message for auction " + message.getAuctionID().toString()
+          + " denied: market no longer active."); 
+    }
   }
 
   @Override
   public void reset() {
-    // TODO Auto-generated method stub
     
   }
 
   @Override
   public Integer getNumMarketBlocks() {
-    // TODO Auto-generated method stub
     return this.allMarkets.size();
   }
 
   @Override
-  public List<IMarket> getOpenMarkets() {
-    // TODO Auto-generated method stub
-    return null;
+  public List<IMarket> getActiveMarkets() {
+    return new LinkedList<IMarket>(this.activeMarkets.values()); 
   }
 
   @Override
-  public boolean anyMarketsOpen() {
-    // TODO Auto-generated method stub
-    return false;
+  public void finalizeMarket(Integer marketID) {
+    // TODO: put market information in whiteboard.
+    this.activeMarkets.remove(marketID); 
   }
+  
+  @Override
+  public boolean anyMarketsOpen() {
+    for (Integer marketID : this.activeMarkets.keySet()) {
+      if (this.activeMarkets.get(marketID).isOpen()) {
+        return true; 
+      }
+    }
+    return false; 
+  }
+
+  @Override
+  public Map<Integer, IInformationMessage>
+      constructInformationMessages(Integer marketID) {
+
+    return null;
+  }
+
 
 }

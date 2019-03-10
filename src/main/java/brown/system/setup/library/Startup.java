@@ -10,29 +10,24 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import com.esotericsoftware.kryo.Kryo;
+
 import brown.communication.bid.library.OneSidedBidBundle;
-import brown.communication.channel.library.GameChannel;
 import brown.communication.messages.library.AbsMessage;
-import brown.communication.messages.library.AccountResetMessage;
 import brown.communication.messages.library.BankUpdateMessage;
-import brown.communication.messages.library.ErrorMessage;
-import brown.communication.messages.library.GameReportMessage;
-import brown.communication.messages.library.PrivateInformationMessage;
 import brown.communication.messages.library.RegistrationMessage;
 import brown.communication.messages.library.TradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
-import brown.communication.messages.library.ValuationInformationMessage;
 import brown.platform.accounting.library.Account;
-import brown.platform.accounting.library.Ledger;
 import brown.platform.accounting.library.AccountUpdate;
+import brown.platform.accounting.library.Ledger;
 import brown.platform.accounting.library.Transaction;
 import brown.platform.tradeable.library.SimpleTradeable;
 import brown.platform.tradeable.library.TradeableType;
+import brown.system.setup.ISetup;
 import brown.user.agent.library.AbsAgent;
 
-import com.esotericsoftware.kryo.Kryo;
-
-public final class Startup {
+public final class Startup implements ISetup {
 	
   /**
    * registers most necessary classes with kryo
@@ -50,17 +45,14 @@ public final class Startup {
 		kryo.register(TreeMap.class);
 		kryo.register(java.util.Collections.reverseOrder().getClass());
 		kryo.register(int[].class);
-		kryo.register(GameChannel.class);
 		kryo.register(AbsAgent.class);
 		kryo.register(AbsMessage.class);
 		kryo.register(BankUpdateMessage.class);
-		kryo.register(GameReportMessage.class);
 		kryo.register(TradeMessage.class);
 		kryo.register(Transaction.class);
 		kryo.register(RegistrationMessage.class);
 		kryo.register(Account.class);
 		kryo.register(TradeRequestMessage.class);
-		kryo.register(ErrorMessage.class);
 		kryo.register(Timestamp.class);
 		kryo.register(Date.class);
 		kryo.register(OneSidedBidBundle.class); 
@@ -69,12 +61,14 @@ public final class Startup {
 		kryo.register(HashMap.class);
 		kryo.register(TradeableType.class);
 		kryo.register(Integer[].class);
-		kryo.register(SimpleTradeable.class);
-		kryo.register(ValuationInformationMessage.class);
-    kryo.register(PrivateInformationMessage.class);		
+		kryo.register(SimpleTradeable.class);	
     kryo.register(List.class);
-    kryo.register(AccountResetMessage.class);
 		return true;
 	}
+
+  @Override
+  public void setup(Kryo kryo) {
+    start(kryo); 
+  }
 
 }

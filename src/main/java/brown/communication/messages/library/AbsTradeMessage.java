@@ -1,10 +1,12 @@
 package brown.communication.messages.library;
+import com.esotericsoftware.kryonet.Connection;
+
 import brown.communication.bid.IBid;
 import brown.communication.messages.ITradeMessage;
-import brown.user.agent.library.AbsAgent;
+import brown.communication.messageserver.IMessageServer;
 
 
-public abstract class AbsTradeMessage extends AbsMessage implements ITradeMessage {
+public abstract class AbsTradeMessage extends AbsAgentToServerMessage implements ITradeMessage {
   
   private Integer agentID;
   private Integer auctionID; 
@@ -34,8 +36,8 @@ public abstract class AbsTradeMessage extends AbsMessage implements ITradeMessag
   }
   
   @Override
-  public void dispatch(AbsAgent agent) {
-    // Noop
+  public void serverDispatch(Connection connection, IMessageServer server) {
+    server.onBid(connection, this);
   }
 
   @Override

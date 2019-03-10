@@ -1,11 +1,9 @@
 package brown.communication.messages;
 
-import brown.user.agent.library.AbsAgent;
-
 /**
  * A message is used to communicate between the agent and the server
  *
- * @author lcamery
+ * @author acoggins
  */
 public interface IMessage {
 	
@@ -15,10 +13,5 @@ public interface IMessage {
 	 */
 	public Integer getMessageID();
 	
-	/**
-	 * Figures out what type of message this is, and acts accordingly
-	 * @param agent
-	 */
-	public void dispatch(AbsAgent agent);
 	
 }

@@ -1,13 +1,17 @@
 package brown.platform.managers.library; 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import brown.communication.messages.IBankUpdateMessage;
+import brown.communication.messages.library.AccountInitializationMessage;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccount;
+import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.IInitialEndowment;
 import brown.platform.accounting.library.Account;
 import brown.platform.managers.IAccountManager;
@@ -53,8 +57,11 @@ public class AccountManager implements IAccountManager {
 	}
 
   public void reset() {
-    this.accounts.clear();
-    this.lock = false;
+    for (Integer agentID : this.accounts.keySet()) {
+      IAccount agentAccount = this.accounts.get(agentID); 
+      agentAccount.clear();
+      this.accounts.put(agentID, agentAccount); 
+    }
   }
 
   public Boolean containsAccount(Integer ID) {
@@ -79,7 +86,31 @@ public class AccountManager implements IAccountManager {
   public void lock() {
     this.lock = true;
   }
+  
+  @Override
+  public Map<Integer, IBankUpdateMessage> constructInitializationMessages() {
+    Map<Integer, IBankUpdateMessage> bankUpdates = new HashMap<Integer, IBankUpdateMessage>(); 
+    for (Integer agentID : this.accounts.keySet()) {
+      IAccount agentAccount = this.accounts.get(agentID); 
+      IBankUpdateMessage agentBankUpdate = new AccountInitializationMessage(0, agentID, agentAccount.getAllGoods(), agentAccount.getMoney());
+      bankUpdates.put(agentID, agentBankUpdate); 
+    }
+    return bankUpdates;
+  }
+  
+  @Override
+  public Map<Integer, IBankUpdateMessage>
+      constructBankUpdateMessages(List<IAccountUpdate> accountUpdates) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
+  @Override
+  public void updateAccounts(List<IAccountUpdate> accountUpdates) {
+    // TODO Auto-generated method stub
+    
+  }
+  
   @Override
   public String toString() {
     return "AccountManager [accounts=" + accounts + "]";
@@ -109,5 +140,6 @@ public class AccountManager implements IAccountManager {
       return false;
     return true;
   }
+
 
 }

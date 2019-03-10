@@ -3,8 +3,8 @@ package brown.platform.market;
 import java.util.List;
 import java.util.Map;
 
-import brown.communication.messages.library.GameReportMessage;
-import brown.communication.messages.library.TradeMessage;
+import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
 
@@ -38,7 +38,7 @@ public interface IMarket {
    * @return a boolean representing whether or not the bid was accepted
    * by the activity rule. 
    */
-  public boolean handleBid(TradeMessage bid);
+  public boolean handleBid(ITradeMessage bid);
   
   /**
    * applies the allocation and payment rules to all bids
@@ -56,7 +56,7 @@ public interface IMarket {
    * @param ID - ID of the agent to which to send this game report
    * @return a Game Report, which will be sent over TCP by the server
    */
-  public Map<Integer,List<GameReportMessage>> constructReport();
+  public Map<Integer,List<IInformationMessage>> constructReport();
 
   /**
    * Per the (inner) termination condition, 
