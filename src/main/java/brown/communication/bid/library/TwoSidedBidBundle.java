@@ -11,8 +11,7 @@ import brown.platform.tradeable.ITradeable;
  *
  */
 public class TwoSidedBidBundle extends AbsTwoSidedBidBundle implements IBid {
-  
-    
+
   public TwoSidedBidBundle(Map<ITradeable, Double> bids, BidDirection direction) {
   	super(bids, direction); 
   }
