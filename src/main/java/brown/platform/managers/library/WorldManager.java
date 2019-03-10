@@ -7,7 +7,6 @@ import brown.platform.managers.IWorldManager;
 import brown.platform.world.IWorld;
 import brown.platform.world.library.World;
 
-
 public class WorldManager implements IWorldManager {
 
     private IWorld world;
@@ -32,4 +31,5 @@ public class WorldManager implements IWorldManager {
     public IWorld getWorld() {
         return this.world;
     }
+    
 }
