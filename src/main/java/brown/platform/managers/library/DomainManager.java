@@ -9,7 +9,6 @@ import brown.platform.managers.IValuationManager;
 import brown.platform.world.IDomain;
 import brown.platform.world.library.Domain;
 
-
 public class DomainManager implements IDomainManager {
 
     private IDomain domain;
@@ -36,5 +35,4 @@ public class DomainManager implements IDomainManager {
         return this.domain;
     }
 
-    
 }
