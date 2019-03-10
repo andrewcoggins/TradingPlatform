@@ -6,6 +6,7 @@ package brown.communication.bid.library;
  * @author kerry
  *
  */
+
 public enum BidDirection {
   BUY, SELL
 }
