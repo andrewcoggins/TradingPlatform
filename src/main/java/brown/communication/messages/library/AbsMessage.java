@@ -1,7 +1,7 @@
 package brown.communication.messages.library; 
 
+
 import brown.communication.messages.IMessage;
-import brown.user.agent.library.AbsAgent;
 
 /**
  * a message is used to communicate between the agent and the server
@@ -22,7 +22,6 @@ public abstract class AbsMessage implements IMessage {
 	public Integer getMessageID() {
 		return this.messageID;
 	}
-	
-	public abstract void dispatch(AbsAgent agent);
+
 	
 }

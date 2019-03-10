@@ -3,8 +3,6 @@ package brown.platform.managers;
 import java.util.List;
 import java.util.Map;
 
-import brown.communication.messages.IInformationMessage;
-import brown.communication.messages.IInformationRequestMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
@@ -25,7 +23,8 @@ public interface IMarketManager {
   
   public void handleTradeMessage(ITradeMessage message); 
   
-  public IInformationMessage handleInformationRequest(IInformationRequestMessage message); 
+  // cutting this out.
+  //public IInformationMessage handleInformationRequest(IInformationRequestMessage message); 
   
   public Integer getNumMarketBlocks(); 
   

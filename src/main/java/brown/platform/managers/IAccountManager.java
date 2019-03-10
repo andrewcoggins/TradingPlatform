@@ -3,6 +3,7 @@ package brown.platform.managers;
 import java.util.List;
 import java.util.Map;
 
+import brown.communication.messages.IBankUpdateMessage;
 import brown.platform.accounting.IAccount;
 import brown.platform.accounting.IInitialEndowment;
 
@@ -51,6 +52,9 @@ public interface IAccountManager {
    * resets accounts to their initial endowments, ostensibly as defined in the constructor.
    */
   void reendow(Integer agentID, IInitialEndowment endowment);
+  
+  
+  Map<Integer, IBankUpdateMessage> constructInitializationMessages(); 
 
   void lock();
 }

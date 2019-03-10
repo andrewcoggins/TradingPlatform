@@ -6,8 +6,6 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
 
 import brown.communication.messages.IRegistrationMessage;
-import brown.communication.messages.library.ErrorMessage;
-import brown.communication.messages.library.StringMessage;
 import brown.logging.library.SystemLogging;
 import brown.system.client.IClient;
 import brown.system.setup.ISetup;
@@ -57,12 +55,9 @@ public abstract class TPClient implements IClient {
   }
   
   @Override
-  public void onErrorMessage(ErrorMessage message) {
+  public void onErrorMessage(IErrorMessage message) {
     SystemLogging.log("[x] rej: " + message.error + ", agent ID: " +this.ID);
   }
 
-  @Override
-  public void onStringMessage(StringMessage message) {
-    SystemLogging.log("[-] Message Received: " + message.message + ", agent ID: " +this.ID);
-  }  
+  
 }

@@ -6,9 +6,9 @@ import java.util.List;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
+import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.library.AbsMessage;
 import brown.communication.messages.library.AccountResetMessage;
-import brown.communication.messages.library.BankUpdateMessage;
 import brown.communication.messages.library.RegistrationMessage;
 import brown.logging.library.Logging;
 import brown.platform.tradeable.ITradeable;
@@ -84,15 +84,15 @@ public abstract class AbsAgent extends TPClient implements IAgent {
     this.goods = new LinkedList<ITradeable>();
   }
   
-  public void onBankUpdate(BankUpdateMessage bankUpdate) {
-    this.monies += bankUpdate.moniesChanged;
-    Logging.log(bankUpdate.toString());
-    // as long as u don't do weird shit with fractions this should work
-    // maybe fix this later
-    for (int i = 0; i < bankUpdate.quantity;i++){
-      this.goods.add(bankUpdate.tradeableAdded);
-      this.goods.remove(bankUpdate.tradeableLost);      
-    }
+  public void onBankUpdate(IBankUpdateMessage bankUpdate) {
+//    this.monies += bankUpdate.moniesChanged;
+//    Logging.log(bankUpdate.toString());
+//    // as long as u don't do weird shit with fractions this should work
+//    // maybe fix this later
+//    for (int i = 0; i < bankUpdate.quantity;i++){
+//      this.goods.add(bankUpdate.tradeableAdded);
+//      this.goods.remove(bankUpdate.tradeableLost);      
+//    }
   }
 
   @Override

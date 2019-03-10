@@ -1,7 +1,7 @@
 package brown.communication.messages.library;
 
-import brown.communication.channel.IChannel;
 import brown.communication.messages.ITradeRequestMessage;
+import brown.user.agent.IAgent;
 
 /**
  * Trade request message is sent by an open market 
@@ -20,8 +20,10 @@ public class TradeRequestMessage extends AbsTradeRequestMessage implements ITrad
 		super();
 	}
 
-	public TradeRequestMessage(Integer ID, IChannel channel) {
-		super(ID, channel);
-	}
-	
+  @Override
+  public void agentDispatch(IAgent agent) {
+    // TODO Auto-generated method stub
+    
+  }
+
 }

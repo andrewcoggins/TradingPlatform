@@ -8,6 +8,7 @@ import java.util.Map;
 
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.valuation.IValuation;
+import brown.communication.messages.IValuationMessage;
 import brown.platform.tradeable.ITradeable;
 
 public interface IValuationManager {
@@ -23,4 +24,8 @@ public interface IValuationManager {
     public IValuationDistribution getDistribution(List<String> tradeableNames);
 
     public void lock();
+    
+    public Map<Integer, IValuationMessage> constructValuationMessages(); 
+    
 }
+

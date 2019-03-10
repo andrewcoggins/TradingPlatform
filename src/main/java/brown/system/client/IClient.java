@@ -24,7 +24,6 @@ public interface IClient {
    */
   void onErrorMessage(ErrorMessage message);
 
-  void onStringMessage(StringMessage message);
 }
 
   

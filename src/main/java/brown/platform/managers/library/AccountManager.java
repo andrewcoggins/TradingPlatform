@@ -1,10 +1,13 @@
 package brown.platform.managers.library; 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import brown.communication.messages.IBankUpdateMessage;
+import brown.communication.messages.library.AccountInitializationMessage;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccount;
@@ -79,7 +82,18 @@ public class AccountManager implements IAccountManager {
   public void lock() {
     this.lock = true;
   }
-
+  
+  @Override
+  public Map<Integer, IBankUpdateMessage> constructInitializationMessages() {
+    Map<Integer, IBankUpdateMessage> bankUpdates = new HashMap<Integer, IBankUpdateMessage>(); 
+    for (Integer agentID : this.accounts.keySet()) {
+      IAccount agentAccount = this.accounts.get(agentID); 
+      IBankUpdateMessage agentBankUpdate = new AccountInitializationMessage(0, agentID, agentAccount.getAllGoods(), agentAccount.getMoney());
+      bankUpdates.put(agentID, agentBankUpdate); 
+    }
+    return bankUpdates;
+  }
+  
   @Override
   public String toString() {
     return "AccountManager [accounts=" + accounts + "]";

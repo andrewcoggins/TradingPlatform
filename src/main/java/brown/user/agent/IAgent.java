@@ -1,9 +1,6 @@
 package brown.user.agent;
 
-import brown.communication.messages.library.AccountResetMessage;
-import brown.communication.messages.library.BankUpdateMessage;
-import brown.communication.messages.library.GameReportMessage;
-import brown.communication.messages.library.PrivateInformationMessage;
+import brown.communication.messages.IBankUpdateMessage;
 
 /**
  * Agents are responsible for receiving messages from the server,
@@ -16,24 +13,12 @@ public interface IAgent {
    * Sent whenever an agent's bank account changes
    * @param bankUpdate - contains the old and new bank accounts
    */
-  public void onBankUpdate(BankUpdateMessage bankUpdate);
+  public void onBankUpdate(IBankUpdateMessage bankUpdate);
 
   /**
    * Sent whenever an agent gets a game report
    * @param gamereport -- contains a report of recent activity
    */
-  public void onGameReport(GameReportMessage gameReport);
 
-  /**
-   * Sends an agent their private information
-   * @param privateInfo -- agent's particular characteristics
-   */
-  public void onPrivateInformation(PrivateInformationMessage privateInfo);
-  
-  /**
-   * Sent whenever an agent's account is reset
-   * @param acctReset - contains acct initialization info
-   */
-  public void onAccountInitialization(AccountResetMessage accountResetMessage);
 
 }

@@ -2,7 +2,7 @@ package brown.communication.messages;
 
 import brown.communication.bid.IBid;
 
-public interface ITradeMessage extends IMessage {
+public interface ITradeMessage extends IAgentToServerMessage {
 
   public IBid getBid();
   

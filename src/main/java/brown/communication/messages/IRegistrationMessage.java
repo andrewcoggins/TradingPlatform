@@ -1,9 +1,7 @@
 package brown.communication.messages;
 
-public interface IRegistrationMessage extends IMessage {
+public interface IRegistrationMessage extends IAgentToServerMessage {
   
-  public String getName(); 
-  
-  public Integer getAgentID(); 
+  public String getName();  
   
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import brown.communication.messages.IInformationMessage;
-import brown.communication.messages.IInformationRequestMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.logging.library.ErrorLogging;
@@ -32,6 +31,7 @@ public class MarketManager implements IMarketManager {
   // open markets are open at a given moment in time. 
   private Map<Integer, IMarket> openMarkets;
   private List<IMarketBlock> allMarkets;
+  // whiteboard per agent? Inner IR Policy? To come. 
   private IWhiteboard whiteboard; 
   private Integer marketIndex; 
   private boolean lock;
@@ -115,12 +115,6 @@ public class MarketManager implements IMarketManager {
     
   }
 
-  @Override
-  public IInformationMessage
-      handleInformationRequest(IInformationRequestMessage message) {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
   @Override
   public void reset() {

@@ -8,10 +8,10 @@ import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
 import brown.auction.rules.IAllocationRule;
 import brown.auction.rules.IInformationRevelationPolicy;
-import brown.auction.rules.ITerminationCondition;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
-import brown.communication.messages.library.GameReportMessage;
+import brown.auction.rules.ITerminationCondition;
+import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.library.TradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
@@ -97,9 +97,9 @@ public class Market implements IMarket {
 
   @Override 
   // Make sure this is called after constructOrders
-  public Map<Integer, List<GameReportMessage>> constructReport() {
+  public Map<Integer, List<IInformationMessage>> constructReport() {
     this.IRPOLICY.setReport(this.STATE);
-    return this.STATE.getReport();
+    return null;
   }
   
   
