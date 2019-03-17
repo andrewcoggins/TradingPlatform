@@ -1,10 +1,9 @@
-package brown.platform.world.library;
+package brown.platform.domain;
 
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.ITradeableManager;
 import brown.platform.managers.IValuationManager;
-import brown.platform.world.IDomain;
 
 
 /**
@@ -12,26 +11,47 @@ import brown.platform.world.IDomain;
  */
 public class Domain implements IDomain {
 
-    public final ITradeableManager tManager;
-    public final  IValuationManager valuation;
-    public final IAccountManager acctManager;
-    public final IEndowmentManager endowmentManager;
+    private ITradeableManager tManager;
+    private IValuationManager valuationManager;
+    private IAccountManager acctManager;
+    private IEndowmentManager endowmentManager;
 
-    public Domain (ITradeableManager tManager, IValuationManager valuation, IAccountManager acctManager,
+    public Domain (ITradeableManager tManager, IValuationManager valuationManager, IAccountManager acctManager,
                    IEndowmentManager endowmentManager) {
         this.tManager = tManager;
-        this.valuation = valuation;
+        this.valuationManager = valuationManager;
         this.acctManager = acctManager;
         this.endowmentManager = endowmentManager;
     }
+    
+    @Override
+    public ITradeableManager getTradeableManager() {
+      return this.tManager;
+    }
 
     @Override
+    public IAccountManager getAccountManager() {
+      return this.acctManager;
+    }
+
+    @Override
+    public IEndowmentManager getEndowmentManager() {
+      return this.endowmentManager;
+    }
+
+    @Override
+    public IValuationManager getValuationManager() {
+      return valuationManager;
+    }
+    
+    
+    @Override
     public String toString() {
-      return "Domain [tManager=" + tManager + ", valuation=" + valuation
+      return "Domain [tManager=" + tManager + ", valuationManager=" + valuationManager
           + ", acctManager=" + acctManager + ", endowmentManager="
           + endowmentManager + "]";
     }
-
+   
     @Override
     public int hashCode() {
       final int prime = 31;
@@ -42,7 +62,7 @@ public class Domain implements IDomain {
           + ((endowmentManager == null) ? 0 : endowmentManager.hashCode());
       result = prime * result + ((tManager == null) ? 0 : tManager.hashCode());
       result =
-          prime * result + ((valuation == null) ? 0 : valuation.hashCode());
+          prime * result + ((valuationManager == null) ? 0 : valuationManager.hashCode());
       return result;
     }
 
@@ -70,13 +90,12 @@ public class Domain implements IDomain {
           return false;
       } else if (!tManager.equals(other.tManager))
         return false;
-      if (valuation == null) {
-        if (other.valuation != null)
+      if (valuationManager == null) {
+        if (other.valuationManager != null)
           return false;
-      } else if (!valuation.equals(other.valuation))
+      } else if (!valuationManager.equals(other.valuationManager))
         return false;
       return true;
     }
-    
     
 }

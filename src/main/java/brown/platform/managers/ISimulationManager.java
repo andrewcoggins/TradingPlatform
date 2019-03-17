@@ -2,7 +2,6 @@ package brown.platform.managers;
 
 import com.esotericsoftware.kryonet.Connection;
 
-import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.IRegistrationMessage;
 import brown.communication.messages.ITradeMessage;
 
@@ -16,6 +15,6 @@ public interface ISimulationManager {
     
     void giveTradeMessage(ITradeMessage tradeMessage); 
     
-    void runSimulation(int waitTime, int numRuns) throws InterruptedException;
+    void runSimulation(int startingDelayTime, int simulationDelayTime, int numRuns) throws InterruptedException;
 
 }

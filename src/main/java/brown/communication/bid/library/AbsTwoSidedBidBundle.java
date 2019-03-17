@@ -2,7 +2,7 @@ package brown.communication.bid.library;
 
 import java.util.Map;
 
-import brown.communication.bid.IBid;
+import brown.communication.bid.ITwoSidedBidBundle;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -10,13 +10,17 @@ import brown.platform.tradeable.ITradeable;
  * @author andrew, modified by kerry
  *
  */
-public abstract class AbsTwoSidedBidBundle extends AbsBidBundle implements IBid {
+public abstract class AbsTwoSidedBidBundle extends AbsOneSidedBidBundle implements ITwoSidedBidBundle {
    
-  public final BidDirection direction; 
+  private BidDirection direction; 
   
   public AbsTwoSidedBidBundle(Map<ITradeable, Double> bids, BidDirection direction) {
     super(bids);
     this.direction = direction; 
+  }
+
+  public BidDirection getBidDirection() {
+    return this.direction;
   }
 
   @Override
@@ -45,5 +49,8 @@ public abstract class AbsTwoSidedBidBundle extends AbsBidBundle implements IBid 
       return false;
     return true;
   }
+  
+  
+
 
 }

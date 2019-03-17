@@ -42,7 +42,8 @@ public class Main {
           InstantiationException, IllegalAccessException, InvocationTargetException, IllegalArgumentException, InterruptedException {
      
     Integer numRuns;
-    Integer delayTime;
+    Integer startingDelayTime;
+    Integer simulationDelayTime; 
     String tTypeString;
     Integer numTradeables;
     String distributionString;
@@ -63,43 +64,46 @@ public class Main {
     TestLogging.log(inputType); 
     if (inputType.equals("args")) {
       numRuns = new Integer(args[1]);
-      delayTime = new Integer(args[2]);
-      tTypeString = args[3];
-      numTradeables = new Integer(args[4]);
-      distributionString = args[5];
-      generatorString = args[6];
-      endowmentNumTradeables = new Integer(args[7]);
-      endowmentMoney = new Integer(args[8]);
-      aRuleString = args[9];
-      pRuleString = args[10];
-      qRuleString = args[11];
-      actRuleString = args[12];
-      irPolicyString = args[13];
-      tConditionString = args[14];
+      startingDelayTime = new Integer(args[2]);
+      simulationDelayTime = new Integer(args[3]); 
+      tTypeString = args[4];
+      numTradeables = new Integer(args[5]);
+      distributionString = args[6];
+      generatorString = args[7];
+      endowmentNumTradeables = new Integer(args[8]);
+      endowmentMoney = new Integer(args[9]);
+      aRuleString = args[10];
+      pRuleString = args[12];
+      qRuleString = args[13];
+      actRuleString = args[14];
+      irPolicyString = args[14];
+      tConditionString = args[15];
 
       CommandLineParser parser = new CommandLineParser(); 
-      SimulationConfig runConfig = parser.parseCommandLine(numRuns, delayTime, tTypeString, numTradeables, distributionString, generatorString,
+      SimulationConfig runConfig = parser.parseCommandLine(numRuns, startingDelayTime, simulationDelayTime, tTypeString, numTradeables, distributionString, generatorString,
           endowmentNumTradeables, endowmentMoney, aRuleString, pRuleString, qRuleString, actRuleString, irPolicyString, tConditionString); 
       configs.add(runConfig); 
     } else if (inputType == "json") {
       numRuns = new Integer(args[0]);
-      delayTime = new Integer(args[1]);
-      tTypeString = args[2];
-      numTradeables = new Integer(args[3]);
-      distributionString = args[4];
-      generatorString = args[5];
-      endowmenttTypeString = args[6];
-      endowmentNumTradeables = new Integer(args[7]);
-      endowmentMoney = new Integer(args[8]);
-      aRuleString = args[9];
-      pRuleString = args[10];
-      qRuleString = args[11];
-      actRuleString = args[12];
-      irPolicyString = args[13];
-      tConditionString = args[14];
+      startingDelayTime = new Integer(args[1]);
+      simulationDelayTime = new Integer(args[2]); 
+      tTypeString = args[3];
+      numTradeables = new Integer(args[4]);
+      distributionString = args[5];
+      generatorString = args[6];
+      endowmenttTypeString = args[7];
+      endowmentNumTradeables = new Integer(args[8]);
+      endowmentMoney = new Integer(args[9]);
+      aRuleString = args[10];
+      pRuleString = args[11];
+      qRuleString = args[12];
+      actRuleString = args[13];
+      irPolicyString = args[14];
+      tConditionString = args[15];
     } else {
       numRuns = 0;
-      delayTime = 0;
+      startingDelayTime = 0;
+      simulationDelayTime = 0; 
       tTypeString = "";
       numTradeables = 0;
       distributionString = "";
@@ -118,6 +122,6 @@ public class Main {
     } 
     
     ConfigRun configRun = new ConfigRun(configs);
-    configRun.run(delayTime, numRuns);
+    configRun.run(startingDelayTime, simulationDelayTime, numRuns);
   }
 }

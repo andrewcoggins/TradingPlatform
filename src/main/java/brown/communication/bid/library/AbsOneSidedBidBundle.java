@@ -2,7 +2,7 @@ package brown.communication.bid.library;
 
 import java.util.Map;
 
-import brown.communication.bid.IBid;
+import brown.communication.bid.IOneSidedBidBundle;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -10,12 +10,16 @@ import brown.platform.tradeable.ITradeable;
  * @author andrew, modified by kerry
  *
  */
-public abstract class AbsBidBundle implements IBid {
+public abstract class AbsOneSidedBidBundle implements IOneSidedBidBundle {
    
-  public final Map<ITradeable, Double> bids;
-  
-  public AbsBidBundle(Map<ITradeable, Double> bids) {
+  private Map<ITradeable, Double> bids;
+ 
+  public AbsOneSidedBidBundle(Map<ITradeable, Double> bids) {
     this.bids = bids; 
+  }
+  
+  public Map<ITradeable, Double> getOneSidedBids() {
+    return this.bids; 
   }
   
   @Override
@@ -39,7 +43,7 @@ public abstract class AbsBidBundle implements IBid {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    AbsBidBundle other = (AbsBidBundle) obj;
+    AbsOneSidedBidBundle other = (AbsOneSidedBidBundle) obj;
     if (bids == null) {
       if (other.bids != null)
         return false;
@@ -47,5 +51,6 @@ public abstract class AbsBidBundle implements IBid {
       return false;
     return true;
   }
+
    
 }

@@ -38,7 +38,7 @@ public class ConfigRun {
         this.config = config;
     }
 
-    public void run(Integer delayTime, Integer numSimulations) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InterruptedException {
+    public void run(Integer startingDelayTime, Integer simulationDelayTime, Integer numSimulations) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InterruptedException {
         ISimulationManager simulationManager = new SimulationManager();
         for (SimulationConfig aConfig : this.config) {
             IWorldManager worldManager = new WorldManager();
@@ -106,6 +106,6 @@ public class ConfigRun {
         }
 
 
-        simulationManager.runSimulation(delayTime, numSimulations);
+        simulationManager.runSimulation(startingDelayTime, simulationDelayTime, numSimulations);
     }
 }

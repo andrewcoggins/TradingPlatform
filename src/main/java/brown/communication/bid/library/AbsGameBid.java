@@ -1,13 +1,17 @@
 package brown.communication.bid.library;
 
-import brown.communication.bid.IBid;
+import brown.communication.bid.IGameBid;
 
-public abstract class AbsGameBid implements IBid {
+public abstract class AbsGameBid implements IGameBid {
   
-  public final Integer action; 
+  private Integer action; 
   
   public AbsGameBid(Integer action) {
     this.action = action; 
+  }
+  
+  public Integer getAction() {
+    return this.action; 
   }
   
   @Override
@@ -31,7 +35,7 @@ public abstract class AbsGameBid implements IBid {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    GameBid other = (GameBid) obj;
+    AbsGameBid other = (AbsGameBid) obj;
     if (action == null) {
       if (other.action != null)
         return false;
@@ -39,4 +43,5 @@ public abstract class AbsGameBid implements IBid {
       return false;
     return true;
   }
+
 }
