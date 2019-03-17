@@ -1,6 +1,6 @@
 package brown.platform.managers;
 
-import brown.platform.world.IDomain;
+import brown.platform.domain.IDomain;
 
 /**
  * A domain manager creates domains.

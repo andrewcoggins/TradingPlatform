@@ -25,6 +25,8 @@ public class AccountManager implements IAccountManager {
 	private Map<Integer, IAccount> accounts;
 	private boolean lock;
 
+	//TODO: put endowment manager in account manager. 
+	
 	public AccountManager() {
 		this.accounts = new ConcurrentHashMap<>();
 		this.lock = false;

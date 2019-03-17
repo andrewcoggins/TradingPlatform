@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import brown.auction.rules.IActivityRule;
 import brown.auction.rules.IAllocationRule;
@@ -14,7 +13,6 @@ import brown.auction.rules.IInformationRevelationPolicy;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
-import brown.auction.value.generator.IValuationGenerator;
 import brown.logging.library.TestLogging;
 import brown.platform.market.library.AbsMarketRules;
 import brown.platform.market.library.FlexibleRules;
@@ -27,7 +25,7 @@ import brown.user.main.IValuationConfig;
 public class CommandLineParser implements ICommandLineParser {
 
   @Override
-  public SimulationConfig parseCommandLine(int numRuns, int delayTime,
+  public SimulationConfig parseCommandLine(int numRuns, int startingDelayTime, int simulationDelayTime,
       String tTypeString, int numTradeables, String distributionString,
       String generatorString,
       int endowmentNumTradeables, double endowmentMoney, String aRuleString,
@@ -38,7 +36,8 @@ public class CommandLineParser implements ICommandLineParser {
     
     
     TestLogging.log(numRuns); 
-    TestLogging.log(delayTime); 
+    TestLogging.log(startingDelayTime); 
+    TestLogging.log(simulationDelayTime);
     TestLogging.log(tTypeString); 
     TestLogging.log(numTradeables); 
     TestLogging.log(distributionString); 

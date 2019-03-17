@@ -1,13 +1,13 @@
 package brown.platform.managers.library;
 
 import brown.logging.library.PlatformLogging;
+import brown.platform.domain.Domain;
+import brown.platform.domain.IDomain;
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IDomainManager;
 import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.ITradeableManager;
 import brown.platform.managers.IValuationManager;
-import brown.platform.world.IDomain;
-import brown.platform.world.library.Domain;
 
 public class DomainManager implements IDomainManager {
 

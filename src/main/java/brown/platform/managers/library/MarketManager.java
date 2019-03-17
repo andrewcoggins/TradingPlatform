@@ -98,7 +98,6 @@ public class MarketManager implements IMarketManager {
       List<IMarketRules> mRules = currentBlock.getMarkets(); 
       List<Map<String, List<ITradeable>>> mTradeables = currentBlock.getMarketTradeables(); 
       
-      
       // going to create the markets, and then garbage collection will handle the rest I assume. 
       
     } catch (IndexOutOfBoundsException e) {

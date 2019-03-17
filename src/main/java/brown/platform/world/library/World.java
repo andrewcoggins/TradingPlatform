@@ -7,14 +7,25 @@ import brown.platform.world.IWorld;
 
 public class World implements IWorld {
 
-    public final IDomainManager domain;
-    public final IMarketManager market;
+    private IDomainManager domain;
+    private IMarketManager market;
 
     public World(IDomainManager domain, IMarketManager market) {
         this.domain = domain;
         this.market = market;
     }
+    
+    @Override
+    public IDomainManager getDomainManager() {
+      return this.domain;
+    }
 
+    @Override
+    public IMarketManager getMarketManager() {
+      return this.market;
+    }
+    
+    
     @Override
     public String toString() {
       return "World [domain=" + domain + ", market=" + market + "]";
@@ -50,5 +61,5 @@ public class World implements IWorld {
         return false;
       return true;
     }
-    
+
 }

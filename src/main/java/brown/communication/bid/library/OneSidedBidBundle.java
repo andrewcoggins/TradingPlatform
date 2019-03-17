@@ -2,7 +2,7 @@ package brown.communication.bid.library;
 
 import java.util.Map;
 
-import brown.communication.bid.IBid;
+import brown.communication.bid.IOneSidedBidBundle;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -10,7 +10,7 @@ import brown.platform.tradeable.ITradeable;
  * @author andrew, modified by kerry
  *
  */
-public class OneSidedBidBundle extends AbsBidBundle implements IBid {
+public class OneSidedBidBundle extends AbsOneSidedBidBundle implements IOneSidedBidBundle {
 	
 	public OneSidedBidBundle(Map<ITradeable, Double> bids) {
 		super(bids);  
