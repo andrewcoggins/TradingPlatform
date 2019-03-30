@@ -2,29 +2,28 @@ package brown.communication.bid.library;
 
 import java.util.Map;
 
-import brown.communication.bid.IOneSidedBidBundle;
-import brown.platform.tradeable.ITradeable;
+import brown.communication.bid.IBidBundle;
+import brown.communication.bid.ICart;
 
 /**
  * A map from Tradeables to a Bids.
- * @author andrew, modified by kerry
  *
  */
-public abstract class AbsOneSidedBidBundle implements IOneSidedBidBundle {
+public abstract class AbsOneSidedBidBundle implements IBidBundle {
    
-  private Map<ITradeable, Double> bids;
- 
-  public AbsOneSidedBidBundle(Map<ITradeable, Double> bids) {
+  private Map<ICart, Double> bids; 
+  
+  public AbsOneSidedBidBundle(Map<ICart, Double> bids) {
     this.bids = bids; 
   }
   
-  public Map<ITradeable, Double> getOneSidedBids() {
+  public Map<ICart, Double> getBids() {
     return this.bids; 
   }
-  
+
   @Override
   public String toString() {
-    return "AbsBidBundle [bids=" + bids + "]";
+    return "AbsOneSidedBidBundle [bids=" + bids + "]";
   }
 
   @Override
@@ -51,6 +50,5 @@ public abstract class AbsOneSidedBidBundle implements IOneSidedBidBundle {
       return false;
     return true;
   }
-
    
 }

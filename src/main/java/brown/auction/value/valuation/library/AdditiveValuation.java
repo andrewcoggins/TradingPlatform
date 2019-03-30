@@ -1,75 +1,56 @@
 
 package brown.auction.value.valuation.library;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import brown.auction.value.valuation.IMonotonicValuation;
+import brown.communication.bid.ICart;
+import brown.communication.bid.IItem;
+import brown.communication.bid.ISingleItem;
 import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.SimpleTradeable;
 
 /**
  * additive valuation specifies a valuation over goods, 
  * where values are additive.
  * @author andrew
  */
-public class AdditiveValuation implements IMonotonicValuation { 
+public class AdditiveValuation extends AbsAdditiveValuation implements IMonotonicValuation { 
 
-  private final Map<ITradeable, Double> valuation; 
+  private final Map<ITradeable, ISingleItem> tradeableToItem; 
   
   // for kryo
   public AdditiveValuation() {
-    this.valuation = null;
+    super(null); 
+    this.tradeableToItem = null; 
   }
   
   /**
    * additive valuation takes in a mapping from values to 
    * individual tradeables.
+   * 
    * @param valuation
    */
-  public AdditiveValuation(Map<ITradeable, Double> valuation) {
-    this.valuation = valuation; 
+  public AdditiveValuation(Map<ISingleItem, Double> valuation) {
+    super(valuation); 
+    this.tradeableToItem = new HashMap<ITradeable, ISingleItem>(); 
+    for (ISingleItem item: valuation.keySet()) {
+      ITradeable t = item.getItem(); 
+      this.tradeableToItem.put(t, item); 
+    }
   }
   
   @Override
-  public Double getValuation(ITradeable tradeable) {
+  public Double getValuation(ICart cart) {
     Double value = 0.0; 
-    List<SimpleTradeable> allTradeables = tradeable.flatten(); 
-    for(SimpleTradeable atom : allTradeables) {  
-      value = value + this.valuation.get(atom); 
+    List<IItem> allItems = cart.getItems(); 
+    for(IItem item : allItems) {  
+      ITradeable t = item.getItem(); 
+      value += this.valuation.get(this.tradeableToItem.get(t)) * item.getItemCount(); 
     }
     return value;
   }
 
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result =
-        prime * result + ((valuation == null) ? 0 : valuation.hashCode());
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    AdditiveValuation other = (AdditiveValuation) obj;
-    if (valuation == null) {
-      if (other.valuation != null)
-        return false;
-    } else if (!valuation.equals(other.valuation))
-      return false;
-    return true;
-  }
-
-  @Override
-  public String toString() {
-    return "AdditiveValuation [valuation=" + valuation + "]";
-  }
   
 }

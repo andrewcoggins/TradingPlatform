@@ -1,9 +1,9 @@
 package brown.communication.bid;
 
+import java.util.List;
+
 public interface ICart {
 
-  public String getTradeableName();
-  
-  public Integer getNumTradeables();
+  public List<IItem> getItems(); 
   
 }
