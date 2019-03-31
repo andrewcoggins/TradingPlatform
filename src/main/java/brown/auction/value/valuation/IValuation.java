@@ -1,6 +1,6 @@
 package brown.auction.value.valuation;
 
-import brown.communication.bid.ICart;
+import brown.platform.item.ICart;
 
 /**
  * IValuation specifies valuations for ITradeables. 

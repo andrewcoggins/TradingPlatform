@@ -3,118 +3,61 @@ package brown.platform.accounting.library;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Test;
 
-import brown.platform.accounting.IAccount;
-import brown.platform.tradeable.ITradeable;
 import brown.platform.tradeable.library.Tradeable;
 
-/**
- * Test for account class.
- * @author andrew
- *
- */
 public class AccountUpdateTest {
   
   @Test
-  public void testAccountInit() {
-    Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>();
+  public void testOrder() {
     
-    List<ITradeable> tList = new LinkedList<ITradeable>(); 
+    Tradeable aGood = new Tradeable(0, "default");
+    AccountUpdate anOrder = new AccountUpdate(0, 1, 100.0, 1, aGood); 
+    assertTrue(anOrder.TO == 0); 
+    assertTrue(anOrder.FROM == 1); 
+    assertTrue(anOrder.PRICE == 100.0); 
+    assertTrue(anOrder.QUANTITY == 1); 
+    assertEquals(anOrder.GOOD, aGood); 
     
-    tList.add(new Tradeable(0)); 
     
-    tList.add(new Tradeable(1)); 
-    
-    tradeables.put("default", tList);
-    
-    IAccount a = new Account(100, 90.0, tradeables);
-    
-    assertTrue(a.getID() == 100); 
-    
-    assertTrue(a.getMoney() == 90.0); 
-    
-    assertEquals(a.getAllGoods(), tradeables); 
-    
-    assertEquals(a.getGoods("default"), tradeables.get("default")); 
   }
-  
   
   @Test
-  public void testAccount() {
+  public void testOrderTwo() {
     
-    Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>(); 
+    Tradeable aGood = new Tradeable(2, "deafult");
+    AccountUpdate anOrder = new AccountUpdate(10, 9, 10.0, 4, aGood); 
+    assertTrue(anOrder.TO == 10); 
+    assertTrue(anOrder.FROM == 9); 
+    assertTrue(anOrder.PRICE == 10.0); 
+    assertTrue(anOrder.QUANTITY == 4); 
+    assertEquals(anOrder.GOOD, aGood); 
     
-    List<ITradeable> tList = new LinkedList<ITradeable>(); 
-    
-    tList.add(new Tradeable(0)); 
-    
-    tList.add(new Tradeable(1)); 
-    
-    tradeables.put("default", tList);
-    
-    IAccount a = new Account(5, 100.0, tradeables); 
-    
-    // test money
-    
-    a.addMoney(50.0);
-    
-    assertTrue(a.getMoney() == 150.0);
-    
-    a.removeMoney(90.0);
-    
-    assertTrue(a.getMoney() == 60.0);
-    
-    // test tradeables
-    
-    List<ITradeable> moreTradeables = new LinkedList<ITradeable>(); 
-    
-    moreTradeables.add(new Tradeable(2)); 
-    
-    a.addTradeables("default", moreTradeables);
-    
-    List<ITradeable> tradeablesList = tradeables.get("default"); 
-    
-    tradeablesList.add(new Tradeable(2)); 
-    
-    tradeables.put("default", tradeablesList); 
-    
-    assertEquals(a.getGoods("default"), tradeables.get("default")); 
-    
-    assertEquals(a.getAllGoods(), tradeables); 
-    
-    List<ITradeable> evenMoreTradeables = new LinkedList<ITradeable>(); 
-    
-    evenMoreTradeables.add(new Tradeable(3)); 
-    
-    a.addTradeables("other", evenMoreTradeables);
-    
-    assertEquals(a.getGoods("other"), evenMoreTradeables); 
-    
-    tradeables.put("other", evenMoreTradeables);
-    
-    assertEquals(a.getAllGoods(), tradeables); 
-    
-    a.removeTradeables("other", evenMoreTradeables);
-    
-    tradeables.put("other", new LinkedList<ITradeable>());
-    
-    assertEquals(a.getAllGoods(), tradeables);
-    
-    // test clear function
-    
-    a.clear();
-    
-    assertTrue(a.getMoney() == 0.0); 
-    
-    assertEquals(a.getAllGoods(), new HashMap<String, List<ITradeable>>()); 
     
   }
   
+  @Test
+  public void testOrderThree() {
+    
+    Tradeable aGood = new Tradeable(0, "default");
+    AccountUpdate anOrder = new AccountUpdate(0, 1, 100.0, 1, aGood); 
+    AccountUpdate anOrder2 = new AccountUpdate(0, 1, 90.0, 1, aGood); 
+    assertEquals(anOrder.updatePrice(90.0), anOrder2); 
+    AccountUpdate anOrder3 = new AccountUpdate(0, 1, 100.0, 2, aGood); 
+    anOrder.updateQuantity(2);
+    assertEquals(anOrder, anOrder3); 
+    anOrder.updateQuantity(1);
+    AccountUpdate anOrder4 = new AccountUpdate(2, 1, 100.0, 1, aGood); 
+    assertEquals(anOrder.updateToAgent(2), anOrder4); 
+    AccountUpdate anOrder5 = new AccountUpdate(0, 4, 100.0, 1, aGood);
+    assertEquals(anOrder.updateFromAgent(4), anOrder5); 
+    
+    Transaction aTransaction = new Transaction(0, 1, 100.0, 1, aGood); 
+    assertEquals(anOrder.toTransaction(), aTransaction); 
+    
+    
+    
+  }
   
 }

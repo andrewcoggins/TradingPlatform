@@ -1,6 +1,6 @@
-package brown.communication.bid.library;
+package brown.platform.item.library;
 
-import brown.communication.bid.ISingleItem;
+import brown.platform.item.ISingleItem;
 import brown.platform.tradeable.ITradeable;
 
 public class SingleItem extends AbsItem implements ISingleItem {

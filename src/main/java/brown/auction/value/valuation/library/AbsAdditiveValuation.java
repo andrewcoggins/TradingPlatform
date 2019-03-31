@@ -3,7 +3,7 @@ package brown.auction.value.valuation.library;
 import java.util.Map;
 
 import brown.auction.value.valuation.IMonotonicValuation;
-import brown.communication.bid.ISingleItem;
+import brown.platform.item.ISingleItem;
 
 public abstract class AbsAdditiveValuation implements IMonotonicValuation {
 

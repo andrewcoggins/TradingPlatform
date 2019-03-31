@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.value.valuation.IMonotonicValuation;
-import brown.communication.bid.ICart;
-import brown.communication.bid.IItem;
-import brown.communication.bid.ISingleItem;
+import brown.platform.item.ICart;
+import brown.platform.item.IItem;
+import brown.platform.item.ISingleItem;
 import brown.platform.tradeable.ITradeable;
 
 /**

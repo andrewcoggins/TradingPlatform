@@ -1,4 +1,4 @@
-package brown.communication.bid;
+package brown.platform.item;
 
 public interface ISingleItem extends IItem {
 

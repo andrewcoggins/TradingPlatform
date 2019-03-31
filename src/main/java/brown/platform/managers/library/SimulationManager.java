@@ -63,6 +63,7 @@ public class SimulationManager implements ISimulationManager {
     this.agentCount = 0;
   }
 
+  @Override
   public void createSimulation(int numSimulationRuns,
       IWorldManager worldManager) {
     if (!this.lock) {
@@ -73,14 +74,12 @@ public class SimulationManager implements ISimulationManager {
     }
   }
 
+  @Override
   public void lock() {
     this.lock = true;
   }
 
-  private void startMessageServer() {
-    this.messageServer = new MessageServer(2121, new Startup(), this);
-  }
-
+  @Override
   public void runSimulation(int startingDelayTime, int simulationDelayTime,
       int numRuns) throws InterruptedException {
     startMessageServer();
@@ -114,6 +113,37 @@ public class SimulationManager implements ISimulationManager {
     }
   }
 
+  @Override
+  public Integer handleRegistration(IRegistrationMessage registrationMessage,
+      Connection connection) {
+    Integer theID = -1;
+    Collection<Integer> allIds = this.agentConnections.keySet();
+    if (!allIds.contains(theID)) {
+      theID = new Integer((int) (Math.random() * IDMULTIPLIER));
+      while (allIds.contains(theID)) {
+        theID = new Integer((int) (Math.random() * IDMULTIPLIER));
+      }
+      privateToPublic.put(theID, agentCount++);
+      this.agentConnections.put(theID, connection);
+      if (registrationMessage.getName() != null) {
+        this.idToName.put(theID, registrationMessage.getName());
+      } else {
+        Logging.log(
+            "[x] AbsServer-onRegistration: encountered registration from existing agent");
+      }
+      Logging.log("[-] registered " + theID);
+      connection.sendTCP(15000);
+      connection.setTimeout(60000);
+      return theID;
+    }
+    return -1;
+  }
+
+  @Override
+  public void giveTradeMessage(ITradeMessage tradeMessage) {
+    this.currentMarketManager.handleTradeMessage(tradeMessage);
+  }
+  
   private synchronized void runAuction(int simulationDelayTime, int index)
       throws InterruptedException {
     this.currentMarketManager.openMarkets(index);
@@ -132,7 +162,6 @@ public class SimulationManager implements ISimulationManager {
               this.currentMarketManager.updateMarket(market.getMarketID(),
                   new LinkedList<Integer>(this.agentConnections.keySet()));
           for (ITradeRequestMessage tradeRequest : tradeRequests) {
-            // TODO: send an (inner) information message
             this.messageServer.sendMessage(
                 this.agentConnections.get(tradeRequest.getAgentID()),
                 tradeRequest);
@@ -145,8 +174,8 @@ public class SimulationManager implements ISimulationManager {
               this.currentAccountManager
                   .constructBankUpdateMessages(accountUpdates);
           Map<Integer, IInformationMessage> informationMessages =
-              this.currentMarketManager
-                  .constructInformationMessages(market.getMarketID());
+              this.currentMarketManager.constructInformationMessages(market.getMarketID(), 
+                      new LinkedList<Integer>(this.agentConnections.keySet()));
           for (Integer agentID : bankUpdates.keySet()) {
             this.messageServer.sendMessage(this.agentConnections.get(agentID),
                 informationMessages.get(agentID));
@@ -183,34 +212,9 @@ public class SimulationManager implements ISimulationManager {
           agentValuations.get(agentID));
     }
   }
-
-  public Integer handleRegistration(IRegistrationMessage registrationMessage,
-      Connection connection) {
-    Integer theID = -1;
-    Collection<Integer> allIds = this.agentConnections.keySet();
-    if (!allIds.contains(theID)) {
-      theID = new Integer((int) (Math.random() * IDMULTIPLIER));
-      while (allIds.contains(theID)) {
-        theID = new Integer((int) (Math.random() * IDMULTIPLIER));
-      }
-      privateToPublic.put(theID, agentCount++);
-      this.agentConnections.put(theID, connection);
-      if (registrationMessage.getName() != null) {
-        this.idToName.put(theID, registrationMessage.getName());
-      } else {
-        Logging.log(
-            "[x] AbsServer-onRegistration: encountered registration from existing agent");
-      }
-      Logging.log("[-] registered " + theID);
-      connection.sendTCP(15000);
-      connection.setTimeout(60000);
-      return theID;
-    }
-    return -1;
-  }
-
-  public void giveTradeMessage(ITradeMessage tradeMessage) {
-    this.currentMarketManager.handleTradeMessage(tradeMessage);
+  
+  private void startMessageServer() {
+    this.messageServer = new MessageServer(2121, new Startup(), this);
   }
 
 }

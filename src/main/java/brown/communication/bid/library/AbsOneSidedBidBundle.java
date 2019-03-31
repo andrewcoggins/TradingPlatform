@@ -3,7 +3,7 @@ package brown.communication.bid.library;
 import java.util.Map;
 
 import brown.communication.bid.IBidBundle;
-import brown.communication.bid.ICart;
+import brown.platform.item.ICart;
 
 /**
  * A map from Tradeables to a Bids.

@@ -1,6 +1,6 @@
-package brown.communication.bid.library;
+package brown.platform.item.library;
 
-import brown.communication.bid.IItem;
+import brown.platform.item.IItem;
 import brown.platform.tradeable.ITradeable;
 
 public class MultiItem extends AbsItem implements IItem {

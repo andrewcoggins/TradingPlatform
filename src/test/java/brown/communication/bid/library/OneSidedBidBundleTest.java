@@ -9,8 +9,10 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import brown.communication.bid.ICart;
-import brown.communication.bid.IItem;
+import brown.platform.item.ICart;
+import brown.platform.item.IItem;
+import brown.platform.item.library.Cart;
+import brown.platform.item.library.SingleItem;
 import brown.platform.tradeable.library.Tradeable;
 
 public class OneSidedBidBundleTest {

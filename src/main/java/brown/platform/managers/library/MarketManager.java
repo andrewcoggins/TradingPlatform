@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import brown.auction.marketstate.IMarketPublicState;
 import brown.auction.marketstate.library.MarketPublicState;
 import brown.auction.marketstate.library.MarketState;
 import brown.communication.messages.IInformationMessage;
@@ -14,7 +15,6 @@ import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.library.ErrorMessage;
 import brown.communication.messages.library.TradeRejectionMessage;
-import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.managers.IMarketManager;
@@ -80,6 +80,11 @@ public class MarketManager implements IMarketManager {
   }
   
   @Override
+  public Integer getNumMarketBlocks() {
+    return this.allMarkets.size();
+  }
+  
+  @Override
   public void openMarkets(int index) {
     IMarketBlock currentMarketBlock = this.allMarkets.get(index); 
     List<IMarketRules> marketRules = currentMarketBlock.getMarkets(); 
@@ -91,27 +96,6 @@ public class MarketManager implements IMarketManager {
     }
   }
   
-  @Override
-  public List<IAccountUpdate> finishMarket(Integer marketID) {
-    try {
-      IMarketBlock currentBlock = this.allMarkets.get(this.marketIndex); 
-      List<IMarketRules> mRules = currentBlock.getMarkets(); 
-      List<Map<String, List<ITradeable>>> mTradeables = currentBlock.getMarketTradeables(); 
-      
-      // going to create the markets, and then garbage collection will handle the rest I assume. 
-      
-    } catch (IndexOutOfBoundsException e) {
-      ErrorLogging.log("ERROR: Market index out of range! Index: " + this.marketIndex.toString() + 
-          " market block length: " + Integer.toString(this.allMarkets.size()));
-      throw e; 
-    }
-    return null;
-  }
-  
-  public List<ITradeRequestMessage> updateMarket(Integer marketID, List<Integer> agents) {
-    return null; 
-  }
-
   @Override
   public IStatusMessage handleTradeMessage(ITradeMessage message) {
     Integer marketID = message.getAuctionID(); 
@@ -133,23 +117,40 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public void reset() {
-    
-  }
-
-  @Override
-  public Integer getNumMarketBlocks() {
-    return this.allMarkets.size();
-  }
-
-  @Override
   public List<IMarket> getActiveMarkets() {
     return new LinkedList<IMarket>(this.activeMarkets.values()); 
   }
-
+  
+  public List<ITradeRequestMessage> updateMarket(Integer marketID, List<Integer> agents) {
+    List<ITradeRequestMessage> tradeRequests = new LinkedList<ITradeRequestMessage>(); 
+    IMarket market = this.activeMarkets.get(marketID); 
+    market.tick();
+    this.whiteboard.postInnerInformation(marketID, this.activeMarkets.get(marketID).getPublicState());
+    for (Integer agentID : agents) {
+      tradeRequests.add(market.constructTradeRequest(agentID)); 
+    }
+    // TODO: modify the trade requests with information.
+    return tradeRequests; 
+  }
+  
+  @Override
+  public Map<Integer, IInformationMessage>
+      constructInformationMessages(Integer marketID, List<Integer> agentIDs) {
+    Map<Integer, IInformationMessage> informationMessages = new HashMap<Integer, IInformationMessage>(); 
+    IMarketPublicState publicState = this.whiteboard.getOuterInformation(marketID); 
+    //TODO: somehow construct information messages from this public state.
+    return null;
+  }
+  
+  @Override
+  public List<IAccountUpdate> finishMarket(Integer marketID) {  
+    List<IAccountUpdate> accountUpdates = this.activeMarkets.get(marketID).constructOrders(); 
+    this.whiteboard.postOuterInformation(marketID, this.activeMarkets.get(marketID).getPublicState());
+    return accountUpdates;
+  }
+  
   @Override
   public void finalizeMarket(Integer marketID) {
-    // TODO: put market information in whiteboard.
     this.activeMarkets.remove(marketID); 
   }
   
@@ -162,13 +163,12 @@ public class MarketManager implements IMarketManager {
     }
     return false; 
   }
-
+  
   @Override
-  public Map<Integer, IInformationMessage>
-      constructInformationMessages(Integer marketID) {
-
-    return null;
+  public void reset() {
+    this.activeMarkets.clear();
+    this.whiteboard.clear(); 
+    this.marketIndex = 0; 
   }
-
 
 }

@@ -14,7 +14,7 @@ import brown.auction.rules.ITerminationCondition;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
-import brown.platform.accounting.library.AccountUpdate;
+import brown.platform.accounting.IAccountUpdate;
 import brown.platform.market.IMarket;
 import brown.platform.market.IMarketRules;
 
@@ -86,14 +86,15 @@ public class Market implements IMarket {
     return this.STATE.getAcceptable();
   }
 
-  public List<AccountUpdate> constructOrders() {
+  public List<IAccountUpdate> constructOrders() {
     // Set allocation and payment
     this.ARULE.setAllocation(this.STATE);
     this.PRULE.setOrders(this.STATE); // setPayment
 
     // Construct orders from allocation and payments
     // why no? return this.STATE.getAllocation();
-    return this.STATE.getPayments();
+    //return this.STATE.getPayments();
+    return null; 
   }
 
   @Override 
@@ -141,6 +142,12 @@ public class Market implements IMarket {
   @Override
   public void close() {
     this.STATE.close(); 
+  }
+
+  @Override
+  public IMarketPublicState getPublicState() {
+    // TODO Auto-generated method stub
+    return null;
   }
   
 }

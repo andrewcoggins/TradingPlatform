@@ -29,7 +29,7 @@ public class EndowmentManagerTest {
     List<ITradeable> tList = new LinkedList<ITradeable>(); 
     
     for (int i = 0; i < 5; i++) {
-      tList.add(new Tradeable(i)); 
+      tList.add(new Tradeable(i, "default")); 
     }
     
     allTradeables.put("default", tList); 

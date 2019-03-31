@@ -3,10 +3,11 @@ package brown.platform.market;
 import java.util.List;
 import java.util.Map;
 
+import brown.auction.marketstate.IMarketPublicState;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
-import brown.platform.accounting.library.AccountUpdate;
+import brown.platform.accounting.IAccountUpdate;
 
 /**
  * The market receives bids from the agents via the server
@@ -46,7 +47,7 @@ public interface IMarket {
    * the agents' accounts.
    * @return a list of orders that update the agents' accounts.
    */
-  public List<AccountUpdate> constructOrders();
+  public List<IAccountUpdate> constructOrders();
   
   
   /**
@@ -91,4 +92,8 @@ public interface IMarket {
    * @return whether or not the market has been closed.
    */
   public boolean isOpen(); 
+  
+  
+  public IMarketPublicState getPublicState(); 
+  
 }

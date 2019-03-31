@@ -3,14 +3,11 @@ package brown.user.main.library;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import brown.auction.rules.activity.onesided.OneShotActivity;
 import brown.auction.rules.allocation.onesided.HighestPriceAllocation;
@@ -18,10 +15,6 @@ import brown.auction.rules.ir.onesided.AnonymousPolicy;
 import brown.auction.rules.payment.onesided.SecondPricePayment;
 import brown.auction.rules.query.onesided.SimpleQuery;
 import brown.auction.rules.termination.onesided.OneShotTermination;
-import brown.auction.value.distribution.IValuationDistribution;
-import brown.auction.value.distribution.library.AdditiveValuationDistribution;
-import brown.auction.value.generator.IValuationGenerator;
-import brown.auction.value.generator.library.NormalValGenerator;
 import brown.platform.market.library.AbsMarketRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.platform.tradeable.ITradeable;
@@ -32,12 +25,6 @@ import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
 import brown.user.main.ITradeableConfig;
 import brown.user.main.IValuationConfig;
-import brown.user.main.library.CommandLineParser;
-import brown.user.main.library.EndowmentConfig;
-import brown.user.main.library.MarketConfig;
-import brown.user.main.library.SimulationConfig;
-import brown.user.main.library.TradeableConfig;
-import brown.user.main.library.ValuationConfig;
 
 
 public class CommandLineParserTest {
@@ -76,7 +63,7 @@ public class CommandLineParserTest {
     // tradeableConfigs
     List<ITradeable> allTradeables = new LinkedList<ITradeable>();
     for (int i = 0; i < numTradeables; i++) {
-      allTradeables.add(new Tradeable(i)); 
+      allTradeables.add(new Tradeable(i, "default")); 
     }
     
     // tradeable config

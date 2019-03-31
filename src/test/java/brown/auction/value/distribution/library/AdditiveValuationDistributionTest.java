@@ -14,7 +14,11 @@ import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.generator.library.NormalValGenerator;
 import brown.auction.value.valuation.IValuation;
 import brown.auction.value.valuation.library.AdditiveValuation;
-import brown.communication.bid.ISingleItem;
+import brown.platform.item.ICart;
+import brown.platform.item.IItem;
+import brown.platform.item.ISingleItem;
+import brown.platform.item.library.Cart;
+import brown.platform.item.library.SingleItem;
 import brown.platform.tradeable.ITradeable;
 import brown.platform.tradeable.library.Tradeable;
 
@@ -37,7 +41,14 @@ public class AdditiveValuationDistributionTest {
     IValuation valuation = dist.sample(); 
     
     Map<ISingleItem, Double> vals = new HashMap<ISingleItem, Double>(); 
-    vals.put(t, valuation.getValuation(t)); 
+    ISingleItem anItem = new SingleItem(t); 
+    
+    List<IItem> items = new LinkedList<IItem>(); 
+    items.add(anItem); 
+    
+    ICart aCart = new Cart(items); 
+    
+    vals.put(anItem, valuation.getValuation(aCart)); 
     IValuation testValuation = new AdditiveValuation(vals); 
     
     assertEquals(valuation, testValuation); 

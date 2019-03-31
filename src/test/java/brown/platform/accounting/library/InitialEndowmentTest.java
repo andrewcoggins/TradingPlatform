@@ -23,9 +23,9 @@ public class InitialEndowmentTest {
       
       List<ITradeable> someTradeables = new LinkedList<ITradeable>(); 
       
-      someTradeables.add(new Tradeable(0)); 
+      someTradeables.add(new Tradeable(0, "default")); 
       
-      someTradeables.add(new Tradeable(1)); 
+      someTradeables.add(new Tradeable(1, "default")); 
       
       tradeables.put("default", someTradeables); 
       

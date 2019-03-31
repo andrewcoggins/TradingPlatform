@@ -23,21 +23,19 @@ public interface IMarketManager {
 
   public void lock();
   
-  public IStatusMessage handleTradeMessage(ITradeMessage message); 
+  public Integer getNumMarketBlocks(); 
   
   public void openMarkets(int index); 
-  // cutting this out.
-  //public IInformationMessage handleInformationRequest(IInformationRequestMessage message); 
   
-  public Integer getNumMarketBlocks(); 
+  public IStatusMessage handleTradeMessage(ITradeMessage message); 
   
   public List<IMarket> getActiveMarkets(); 
   
-  public List<IAccountUpdate> finishMarket(Integer marketID); 
-  
   public List<ITradeRequestMessage> updateMarket(Integer marketID, List<Integer> agents); 
   
-  public Map<Integer, IInformationMessage> constructInformationMessages(Integer marketID); 
+  public Map<Integer, IInformationMessage> constructInformationMessages(Integer marketID, List<Integer> agentIDs); 
+  
+  public List<IAccountUpdate> finishMarket(Integer marketID); 
   
   public void finalizeMarket(Integer marketID); 
   

@@ -28,12 +28,12 @@ public class TradeableManagerTest {
     
     Set<ITradeable> expected = new HashSet<ITradeable>(); 
     for (int i = 0; i < 5; i++) {
-      expected.add(new Tradeable(i)); 
+      expected.add(new Tradeable(i, "default")); 
     }
     
     Set<ITradeable> expectedTwo = new HashSet<ITradeable>(); 
     for (int i = 0; i < 4; i++) {
-      expectedTwo.add(new Tradeable(i + 5)); 
+      expectedTwo.add(new Tradeable(i + 5, "default")); 
     }
     
     assertEquals(new HashSet<ITradeable>(tManager.getTradeables("test")), expected); 

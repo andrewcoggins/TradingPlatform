@@ -8,8 +8,8 @@ import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.valuation.IValuation;
 import brown.auction.value.valuation.library.AdditiveValuation;
-import brown.communication.bid.ISingleItem;
-import brown.communication.bid.library.SingleItem;
+import brown.platform.item.ISingleItem;
+import brown.platform.item.library.SingleItem;
 import brown.platform.tradeable.ITradeable;
 
 /**

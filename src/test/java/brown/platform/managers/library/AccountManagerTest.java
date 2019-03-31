@@ -29,8 +29,8 @@ public class AccountManagerTest {
     Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>(); 
     List<ITradeable> tList = new LinkedList<ITradeable>(); 
     
-    tList.add(new Tradeable(0)); 
-    tList.add(new Tradeable(1)); 
+    tList.add(new Tradeable(0, "default")); 
+    tList.add(new Tradeable(1, "default")); 
     
     tradeables.put("default", tList); 
     
@@ -69,8 +69,8 @@ public class AccountManagerTest {
     Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>(); 
     List<ITradeable> tList = new LinkedList<ITradeable>(); 
     
-    tList.add(new Tradeable(0)); 
-    tList.add(new Tradeable(1)); 
+    tList.add(new Tradeable(0, "default")); 
+    tList.add(new Tradeable(1, "default")); 
     
     tradeables.put("default", tList); 
     
