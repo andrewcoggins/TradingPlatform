@@ -8,7 +8,6 @@ public abstract class AbsItem implements IItem {
   private int count; 
   private ITradeable tradeable; 
   
-  
   public AbsItem(ITradeable tradeable, int count) {
     this.tradeable = tradeable; 
     this.count = count; 
@@ -29,7 +28,6 @@ public abstract class AbsItem implements IItem {
     return "AbsItem [count=" + count + ", tradeable=" + tradeable + "]";
   }
 
-
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -38,7 +36,6 @@ public abstract class AbsItem implements IItem {
     result = prime * result + ((tradeable == null) ? 0 : tradeable.hashCode());
     return result;
   }
-
 
   @Override
   public boolean equals(Object obj) {
@@ -59,5 +56,4 @@ public abstract class AbsItem implements IItem {
     return true;
   }
 
-  
 }
