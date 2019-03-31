@@ -8,4 +8,5 @@ public class MultiItem extends AbsItem implements IItem {
   public MultiItem(ITradeable tradeable, int count) {
     super(tradeable, count); 
   }
+  
 }
