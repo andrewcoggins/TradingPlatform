@@ -3,22 +3,33 @@ package brown.auction.value.valuation.library;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
 
+import brown.platform.item.ICart;
+import brown.platform.item.IItem;
+import brown.platform.item.ISingleItem;
+import brown.platform.item.library.Cart;
+import brown.platform.item.library.SingleItem;
 import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 
 public class AdditiveValuationTest {
   
   @Test
   public void testAdditiveValuation() {
-    ITradeable tradeable = new SimpleTradeable(0); 
-    Map<ITradeable, Double> tMap = new HashMap<ITradeable, Double>();
-    tMap.put(tradeable, 1.0); 
+    ITradeable tradeable = new Tradeable(0, "default"); 
+    Map<ISingleItem, Double> tMap = new HashMap<ISingleItem, Double>();
+    ISingleItem item = new SingleItem(tradeable); 
+    tMap.put(item, 1.0); 
     AdditiveValuation a = new AdditiveValuation(tMap); 
-    assertTrue(a.getValuation(tradeable) == 1.0); 
+    List<IItem> items = new LinkedList<IItem>(); 
+    items.add(item); 
+    ICart cart= new Cart(items); 
+    assertTrue(a.getValuation(cart) == 1.0); 
   }
 
 }

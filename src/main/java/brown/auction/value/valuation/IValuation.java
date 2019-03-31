@@ -1,6 +1,6 @@
 package brown.auction.value.valuation;
 
-import brown.platform.tradeable.ITradeable;
+import brown.platform.item.ICart;
 
 /**
  * IValuation specifies valuations for ITradeables. 
@@ -15,6 +15,6 @@ public interface IValuation {
    * @param tradeable an ITradeable.
    * @return the value the agent has for the input tradeable.
    */
-  public Double getValuation(ITradeable tradeable);
+  public Double getValuation(ICart cart);
  
 }

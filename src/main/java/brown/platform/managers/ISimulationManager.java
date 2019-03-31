@@ -11,10 +11,10 @@ public interface ISimulationManager {
 
     void lock();
     
+    void runSimulation(int startingDelayTime, int simulationDelayTime, int numRuns) throws InterruptedException;
+    
     Integer handleRegistration(IRegistrationMessage registrationMessage, Connection connection); 
     
     void giveTradeMessage(ITradeMessage tradeMessage); 
-    
-    void runSimulation(int startingDelayTime, int simulationDelayTime, int numRuns) throws InterruptedException;
 
 }

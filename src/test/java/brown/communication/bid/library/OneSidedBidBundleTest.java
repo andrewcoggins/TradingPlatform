@@ -9,24 +9,32 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.item.ICart;
+import brown.platform.item.IItem;
+import brown.platform.item.library.Cart;
+import brown.platform.item.library.SingleItem;
+import brown.platform.tradeable.library.Tradeable;
 
 public class OneSidedBidBundleTest {
 
   @Test
   public void testOneSidedBidBundle() {
     
-    Map<ITradeable, Double> bundle = new HashMap<ITradeable, Double>(); 
+    
+    Map<ICart, Double> bundle = new HashMap<ICart, Double>(); 
     
     OneSidedBidBundle aBid = new OneSidedBidBundle(bundle); 
     
-    assertEquals(aBid.bids, bundle); 
+    assertEquals(aBid.getBids(), bundle); 
     
-    bundle.put(new SimpleTradeable(0), 99.9); 
+    List<IItem> items = new LinkedList<IItem>(); 
+    
+    items.add(new SingleItem(new Tradeable(0, "default"))); 
+    
+    bundle.put(new Cart(items), 99.9); 
     
     OneSidedBidBundle bidTwo = new OneSidedBidBundle(bundle); 
     
-    assertEquals(bidTwo.bids, bundle); 
+    assertEquals(bidTwo.getBids(), bundle); 
   }
 }

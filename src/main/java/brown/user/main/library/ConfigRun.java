@@ -22,7 +22,7 @@ import brown.platform.managers.library.SimulationManager;
 import brown.platform.managers.library.TradeableManager;
 import brown.platform.managers.library.ValuationManager;
 import brown.platform.managers.library.WorldManager;
-import brown.platform.market.IMarketRules;
+import brown.platform.market.IFlexibleRules;
 import brown.platform.tradeable.ITradeable;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
@@ -84,7 +84,7 @@ public class ConfigRun {
             
             // for the market manager, gonna need the rules, map, and the mustInclude
             for (List<IMarketConfig> mConfigList : aConfig.getMConfig()) {
-                List<IMarketRules> marketRules = new LinkedList<IMarketRules>(); 
+                List<IFlexibleRules> marketRules = new LinkedList<IFlexibleRules>(); 
                 List<List<String>> marketTradeables = new LinkedList<List<String>>(); 
                 for (IMarketConfig mConfig : mConfigList) {
                   marketRules.add(mConfig.getRules()); 

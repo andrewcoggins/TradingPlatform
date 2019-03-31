@@ -13,7 +13,7 @@ import brown.platform.accounting.IInitialEndowment;
 import brown.platform.accounting.library.InitialEndowment;
 import brown.platform.managers.IEndowmentManager;
 import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 
 public class EndowmentManagerTest {
 
@@ -29,7 +29,7 @@ public class EndowmentManagerTest {
     List<ITradeable> tList = new LinkedList<ITradeable>(); 
     
     for (int i = 0; i < 5; i++) {
-      tList.add(new SimpleTradeable(i)); 
+      tList.add(new Tradeable(i, "default")); 
     }
     
     allTradeables.put("default", tList); 

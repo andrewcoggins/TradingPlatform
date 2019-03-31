@@ -19,9 +19,9 @@ import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.library.NormalValGenerator;
-import brown.platform.market.IMarketRules;
+import brown.platform.market.IFlexibleRules;
 import brown.platform.market.library.FlexibleRules;
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
@@ -48,7 +48,7 @@ public class SimulationConfigTest {
     IInformationRevelationPolicy mockIR = mock(IInformationRevelationPolicy.class); 
     ITerminationCondition mocktCondition = mock(ITerminationCondition.class); 
     
-    IMarketRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, mocktCondition); 
+    IFlexibleRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, mocktCondition); 
     List<String> tradeableNames = new LinkedList<String>(); 
     tradeableNames.add("default"); 
     IMarketConfig mConfig = new MarketConfig(mRules, tradeableNames); 
@@ -56,7 +56,7 @@ public class SimulationConfigTest {
     mConfigSquared.add(mConfigs); 
     
     Constructor<?> distCons = AdditiveValuationDistribution.class.getConstructor(Map.class, List.class);
-    Constructor<?> tTypeCons = SimpleTradeable.class.getConstructor(Integer.class); 
+    Constructor<?> tTypeCons = Tradeable.class.getConstructor(Integer.class); 
     Constructor<?> gCons = NormalValGenerator.class.getConstructor(List.class); 
     List<Double> params = new LinkedList<Double>(); 
     params.add(0.0); 

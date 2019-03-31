@@ -8,6 +8,8 @@ import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.valuation.IValuation;
 import brown.auction.value.valuation.library.AdditiveValuation;
+import brown.platform.item.ISingleItem;
+import brown.platform.item.library.SingleItem;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -16,7 +18,7 @@ import brown.platform.tradeable.ITradeable;
  */
 public class AdditiveValuationDistribution extends AbsValuationDistribution implements IValuationDistribution {
  
-  private Map<ITradeable, Double> values; 
+  private Map<ISingleItem, Double> values; 
   
   /**
    * For kryo
@@ -35,15 +37,17 @@ public class AdditiveValuationDistribution extends AbsValuationDistribution impl
    */
   public AdditiveValuationDistribution(Map<String, List<ITradeable>> goods, List<IValuationGenerator> generators) {
     super(goods, generators); 
-    this.values = new HashMap<ITradeable, Double>(); 
+    this.values = new HashMap<ISingleItem, Double>(); 
   }
   
   @Override
   public IValuation sample() {
     for (String s : this.tradeableNames.keySet()) {
-      for (ITradeable atom : this.tradeableNames.get(s)){ 
+      for (ITradeable atom : this.tradeableNames.get(s)) { 
+        ISingleItem item = new SingleItem(atom); 
         Double aValue = this.generators.get(0).makeValuation(); 
-        this.values.put(atom, aValue);
+        this.values.put(item, aValue);
+        break; 
       }
     }
     return new AdditiveValuation(this.values);

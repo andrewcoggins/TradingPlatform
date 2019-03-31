@@ -7,7 +7,7 @@ import brown.platform.tradeable.ITradeable;
 
 public interface IMarketBlock {
 
-  public List<IMarketRules> getMarkets(); 
+  public List<IFlexibleRules> getMarkets(); 
   
   public List<Map<String, List<ITradeable>>> getMarketTradeables(); 
   

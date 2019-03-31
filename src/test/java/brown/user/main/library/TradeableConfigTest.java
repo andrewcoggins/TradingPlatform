@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import java.lang.reflect.Constructor;
 import org.junit.Test;
 
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 import brown.user.main.ITradeableConfig;
 import brown.user.main.library.TradeableConfig;
 
@@ -13,7 +13,7 @@ public class TradeableConfigTest {
   @Test
   public void testTradeableConfigOne() throws NoSuchMethodException, SecurityException {
     
-    Constructor<?> tTypeCons = SimpleTradeable.class.getConstructor(Integer.class); 
+    Constructor<?> tTypeCons = Tradeable.class.getConstructor(Integer.class); 
     ITradeableConfig tConfig = new TradeableConfig("trade", tTypeCons, 10);
     
     assertEquals(tConfig.getTradeableName(), "trade"); 

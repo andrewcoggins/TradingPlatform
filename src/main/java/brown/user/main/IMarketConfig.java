@@ -1,9 +1,8 @@
 package brown.user.main;
 
 import java.util.List;
-import java.util.Map;
 
-import brown.platform.market.IMarketRules;
+import brown.platform.market.IFlexibleRules;
 
 /**
  * config for specifying markets. See implementation for details. 
@@ -16,7 +15,7 @@ public interface IMarketConfig extends IInputConfig {
    * get rules
    * @return
    */
-  public  IMarketRules getRules(); 
+  public  IFlexibleRules getRules(); 
   
   /**
    * get num tradeables map. 

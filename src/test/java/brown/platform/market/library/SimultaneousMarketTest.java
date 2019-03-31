@@ -8,15 +8,15 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import brown.platform.market.IFlexibleRules;
 import brown.platform.market.IMarketBlock;
-import brown.platform.market.IMarketRules;
 import brown.platform.tradeable.ITradeable;
 
 public class SimultaneousMarketTest {
 
   @Test
   public void testSimultaneousMarket() {
-    List<IMarketRules> rules = new LinkedList<IMarketRules>(); 
+    List<IFlexibleRules> rules = new LinkedList<IFlexibleRules>(); 
     List<Map<String, List<ITradeable>>> marketTradeables = new LinkedList<Map<String, List<ITradeable>>>();
     IMarketBlock s = new SimultaneousMarket(rules, marketTradeables); 
     

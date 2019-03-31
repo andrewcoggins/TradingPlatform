@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 
 public class LedgerTest {
   
@@ -27,22 +27,22 @@ public class LedgerTest {
     
     List<Transaction> transactions = new LinkedList<Transaction>(); 
     Ledger ledger = new Ledger(0); 
-    ledger.add(new Transaction(0, 1, 100.0, 1, new SimpleTradeable(0)));
-    transactions.add(new Transaction(0, 1, 100.0, 1, new SimpleTradeable(0)));
+    ledger.add(new Transaction(0, 1, 100.0, 1, new Tradeable(0, "default")));
+    transactions.add(new Transaction(0, 1, 100.0, 1, new Tradeable(0, "default")));
     assertEquals(ledger.transactions, transactions); 
     assertEquals(ledger.unshared, transactions); 
     
     List<Transaction> transactionsTwo = new LinkedList<Transaction>(); 
-    transactionsTwo.add(new Transaction(0, 1, 90.0, 1, new SimpleTradeable(1))); 
-    transactionsTwo.add(new Transaction(0, 1, 90.0, 1, new SimpleTradeable(2))); 
+    transactionsTwo.add(new Transaction(0, 1, 90.0, 1, new Tradeable(1, "default"))); 
+    transactionsTwo.add(new Transaction(0, 1, 90.0, 1, new Tradeable(2, "default"))); 
     ledger.add(transactionsTwo);
-    transactions.add(new Transaction(0, 1, 90.0, 1, new SimpleTradeable(1))); 
-    transactions.add(new Transaction(0, 1, 90.0, 1, new SimpleTradeable(2))); 
+    transactions.add(new Transaction(0, 1, 90.0, 1, new Tradeable(1, "default"))); 
+    transactions.add(new Transaction(0, 1, 90.0, 1, new Tradeable(2, "default"))); 
     
     assertEquals(ledger.transactions, transactions); 
     
-    ledger.add(new SimpleTradeable(3), 3, 100.0);
-    transactions.add(new Transaction(3, null, 100.0, 1, new SimpleTradeable(3))); 
+    ledger.add(new Tradeable(3, "default"), 3, 100.0);
+    transactions.add(new Transaction(3, null, 100.0, 1, new Tradeable(3, "default"))); 
     assertEquals(ledger.transactions, transactions); 
     assertEquals(ledger.unshared, transactions); 
     

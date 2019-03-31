@@ -14,7 +14,7 @@ import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 import brown.logging.library.TestLogging;
-import brown.platform.market.library.AbsMarketRules;
+import brown.platform.market.IFlexibleRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.user.main.ICommandLineParser;
 import brown.user.main.IEndowmentConfig;
@@ -74,7 +74,7 @@ public class CommandLineParser implements ICommandLineParser {
     // constructors
 
 
-    AbsMarketRules marketRule = new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
+    IFlexibleRules marketRule = new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
             (IPaymentRule) pRuleCons.newInstance(),
             (IQueryRule) qRuleCons.newInstance(),
             (IActivityRule) actRuleCons.newInstance(),
@@ -84,7 +84,7 @@ public class CommandLineParser implements ICommandLineParser {
     generatorArgs.add(1.0); 
     generatorArgs.add(0.0); 
     
-    List<AbsMarketRules> rules = new LinkedList<>();
+    List<IFlexibleRules> rules = new LinkedList<>();
     rules.add(marketRule);
 
     

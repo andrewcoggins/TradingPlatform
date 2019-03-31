@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 
 /**
  * Test for Transaction. 
@@ -16,19 +16,19 @@ public class TransactionTest {
   
   @Test
   public void testTrasactions() {
-    Transaction tOne = new Transaction(0, 1, 0.0, 0, new SimpleTradeable(0)); 
+    Transaction tOne = new Transaction(0, 1, 0.0, 0, new Tradeable(0, "default")); 
     assertTrue(tOne.TO == 0); 
     assertTrue(tOne.FROM == 1); 
     assertTrue(tOne.PRICE == 0.0); 
     assertTrue(tOne.QUANTITY == 0.0); 
-    assertEquals(tOne.TRADEABLE, new SimpleTradeable(0)); 
+    assertEquals(tOne.TRADEABLE, new Tradeable(0, "default")); 
     
-    Transaction tTwo = new Transaction(2, 3, 100.0, 2, new SimpleTradeable(1)); 
+    Transaction tTwo = new Transaction(2, 3, 100.0, 2, new Tradeable(1, "default")); 
     assertTrue(tTwo.TO == 2); 
     assertTrue(tTwo.FROM == 3); 
     assertTrue(tTwo.PRICE == 100.0); 
     assertTrue(tTwo.QUANTITY == 2); 
-    assertEquals(tTwo.TRADEABLE, new SimpleTradeable(1)); 
+    assertEquals(tTwo.TRADEABLE, new Tradeable(1, "default")); 
     
     Transaction tThree = tTwo.sanitize(2); 
     assertTrue(tThree.TO == tTwo.TO);

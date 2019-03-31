@@ -1,6 +1,7 @@
 package brown.platform.whiteboard.library;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketPublicState;
@@ -8,23 +9,42 @@ import brown.platform.whiteboard.IWhiteboard;
 
 public class Whiteboard implements IWhiteboard {
 
-	private Map<Integer, IMarketPublicState> openMarkets; 
-	
-	private Map<Integer, IMarketPublicState> previousMarkets; 
+	private Map<Integer, List<IMarketPublicState>> innerMarketWhiteboard;
+	private Map<Integer, IMarketPublicState> outerMarketWhiteboard; 
 	
 	public Whiteboard() {
-		this.openMarkets = new HashMap<Integer, IMarketPublicState>(); 
-		this.previousMarkets = new HashMap<Integer, IMarketPublicState>(); 
+		this.innerMarketWhiteboard = new HashMap<Integer, List<IMarketPublicState>>(); 
+		this.outerMarketWhiteboard = new HashMap<Integer, IMarketPublicState>(); 
 	}
-	
-	public IMarketPublicState getCurrentState(Integer openMarket) {
-		return this.openMarkets.get(openMarket); 
-	}
-	
-	public IMarketPublicState getPreviousState(Integer previousMarket) {
-		return this.previousMarkets.get(previousMarket); 
-	}
-	
-	// maybe more? 
+
+  @Override
+  public void postInnerInformation(Integer marketID,
+      IMarketPublicState marketPublicState) {
+    List<IMarketPublicState> innerMarketStates = this.innerMarketWhiteboard.get(marketID); 
+    innerMarketStates.add(marketPublicState); 
+    this.innerMarketWhiteboard.put(marketID, innerMarketStates); 
+  }
+
+  @Override
+  public void postOuterInformation(Integer marketID,
+      IMarketPublicState marketPublicState) {
+    this.outerMarketWhiteboard.put(marketID, marketPublicState); 
+  }
+
+  @Override
+  public IMarketPublicState getInnerInformation(Integer marketID, Integer timeStep) {
+    return this.innerMarketWhiteboard.get(marketID).get(timeStep); 
+  }
+
+  @Override
+  public IMarketPublicState getOuterInformation(Integer marketID) {
+    return this.outerMarketWhiteboard.get(marketID); 
+  }
+
+  @Override
+  public void clear() {
+    this.innerMarketWhiteboard.clear();
+    this.outerMarketWhiteboard.clear(); 
+  }
 
 }
