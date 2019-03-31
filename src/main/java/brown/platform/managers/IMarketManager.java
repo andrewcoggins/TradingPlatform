@@ -8,8 +8,8 @@ import brown.communication.messages.IStatusMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
+import brown.platform.market.IFlexibleRules;
 import brown.platform.market.IMarket;
-import brown.platform.market.IMarketRules;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -19,7 +19,7 @@ import brown.platform.tradeable.ITradeable;
  */
 public interface IMarketManager {
 
-  public void createSimultaneousMarket(List<IMarketRules> s, List<List<String>> marketTradeables, Map<String, List<ITradeable>> allTradeables);
+  public void createSimultaneousMarket(List<IFlexibleRules> s, List<List<String>> marketTradeables, Map<String, List<ITradeable>> allTradeables);
 
   public void lock();
   
@@ -29,7 +29,9 @@ public interface IMarketManager {
   
   public IStatusMessage handleTradeMessage(ITradeMessage message); 
   
-  public List<IMarket> getActiveMarkets(); 
+  public List<Integer> getActiveMarketIDs(); 
+  
+  public IMarket getActiveMarket(Integer marketID); 
   
   public List<ITradeRequestMessage> updateMarket(Integer marketID, List<Integer> agents); 
   
@@ -38,6 +40,8 @@ public interface IMarketManager {
   public List<IAccountUpdate> finishMarket(Integer marketID); 
   
   public void finalizeMarket(Integer marketID); 
+  
+  public boolean marketOpen(Integer marketID); 
   
   public boolean anyMarketsOpen(); 
   

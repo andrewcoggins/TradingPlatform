@@ -155,11 +155,12 @@ public class SimulationManager implements ISimulationManager {
   }
 
   private void updateAuctions() {
-    for (IMarket market : this.currentMarketManager.getActiveMarkets()) {
-      synchronized (market) {
-        if (market.isOpen()) {
+    for (Integer marketID : this.currentMarketManager.getActiveMarketIDs()) {
+      // we still need to synchronize on the market for this whole operation. or maybe can pare it down to MM methods? 
+      synchronized (this.currentMarketManager.getActiveMarket(marketID)) {
+        if (this.currentMarketManager.marketOpen(marketID)) {
           List<ITradeRequestMessage> tradeRequests =
-              this.currentMarketManager.updateMarket(market.getMarketID(),
+              this.currentMarketManager.updateMarket(marketID,
                   new LinkedList<Integer>(this.agentConnections.keySet()));
           for (ITradeRequestMessage tradeRequest : tradeRequests) {
             this.messageServer.sendMessage(
@@ -168,13 +169,13 @@ public class SimulationManager implements ISimulationManager {
           }
         } else {
           List<IAccountUpdate> accountUpdates =
-              this.currentMarketManager.finishMarket(market.getMarketID());
+              this.currentMarketManager.finishMarket(marketID);
           this.currentAccountManager.updateAccounts(accountUpdates);
           Map<Integer, IBankUpdateMessage> bankUpdates =
               this.currentAccountManager
                   .constructBankUpdateMessages(accountUpdates);
           Map<Integer, IInformationMessage> informationMessages =
-              this.currentMarketManager.constructInformationMessages(market.getMarketID(), 
+              this.currentMarketManager.constructInformationMessages(marketID, 
                       new LinkedList<Integer>(this.agentConnections.keySet()));
           for (Integer agentID : bankUpdates.keySet()) {
             this.messageServer.sendMessage(this.agentConnections.get(agentID),
@@ -182,7 +183,7 @@ public class SimulationManager implements ISimulationManager {
             this.messageServer.sendMessage(this.agentConnections.get(agentID),
                 bankUpdates.get(agentID));
           }
-          this.currentMarketManager.finalizeMarket(market.getMarketID());
+          this.currentMarketManager.finalizeMarket(marketID);
         }
       }
     }

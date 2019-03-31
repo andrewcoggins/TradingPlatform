@@ -1,6 +1,7 @@
 package brown.platform.whiteboard.library;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketPublicState;
@@ -8,18 +9,20 @@ import brown.platform.whiteboard.IWhiteboard;
 
 public class Whiteboard implements IWhiteboard {
 
-	private Map<Integer, IMarketPublicState> innerMarketWhiteboard;
+	private Map<Integer, List<IMarketPublicState>> innerMarketWhiteboard;
 	private Map<Integer, IMarketPublicState> outerMarketWhiteboard; 
 	
 	public Whiteboard() {
-		this.innerMarketWhiteboard = new HashMap<Integer, IMarketPublicState>(); 
+		this.innerMarketWhiteboard = new HashMap<Integer, List<IMarketPublicState>>(); 
 		this.outerMarketWhiteboard = new HashMap<Integer, IMarketPublicState>(); 
 	}
 
   @Override
   public void postInnerInformation(Integer marketID,
       IMarketPublicState marketPublicState) {
-    // TODO
+    List<IMarketPublicState> innerMarketStates = this.innerMarketWhiteboard.get(marketID); 
+    innerMarketStates.add(marketPublicState); 
+    this.innerMarketWhiteboard.put(marketID, innerMarketStates); 
   }
 
   @Override
@@ -30,13 +33,12 @@ public class Whiteboard implements IWhiteboard {
 
   @Override
   public IMarketPublicState getInnerInformation(Integer marketID, Integer timeStep) {
-    // TODO
-    return null; 
+    return this.innerMarketWhiteboard.get(marketID).get(timeStep); 
   }
 
   @Override
   public IMarketPublicState getOuterInformation(Integer marketID) {
-    return this.innerMarketWhiteboard.get(marketID); 
+    return this.outerMarketWhiteboard.get(marketID); 
   }
 
   @Override
@@ -44,6 +46,5 @@ public class Whiteboard implements IWhiteboard {
     this.innerMarketWhiteboard.clear();
     this.outerMarketWhiteboard.clear(); 
   }
-
 
 }

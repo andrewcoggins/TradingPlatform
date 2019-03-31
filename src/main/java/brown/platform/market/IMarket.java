@@ -29,7 +29,7 @@ public interface IMarket {
    * @param ID - ID of the agent to which to send this trade request
    * @return a Trade Request, which will be sent over TCP by the server
    */
-  public TradeRequestMessage constructTradeRequest(Integer ID);
+  public TradeRequestMessage constructTradeRequest(Integer agentID);
 
   /**
    * Handles a trade. 
@@ -39,7 +39,7 @@ public interface IMarket {
    * @return a boolean representing whether or not the bid was accepted
    * by the activity rule. 
    */
-  public boolean handleBid(ITradeMessage bid);
+  public boolean processBid(ITradeMessage bid);
   
   /**
    * applies the allocation and payment rules to all bids

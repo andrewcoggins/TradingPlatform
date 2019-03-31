@@ -5,18 +5,12 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketPublicState;
 import brown.auction.marketstate.IMarketState;
-import brown.auction.rules.IActivityRule;
-import brown.auction.rules.IAllocationRule;
-import brown.auction.rules.IInformationRevelationPolicy;
-import brown.auction.rules.IPaymentRule;
-import brown.auction.rules.IQueryRule;
-import brown.auction.rules.ITerminationCondition;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
+import brown.platform.market.IFlexibleRules;
 import brown.platform.market.IMarket;
-import brown.platform.market.IMarketRules;
 
 /**
  * Common implementation of IMarket.
@@ -24,16 +18,8 @@ import brown.platform.market.IMarketRules;
  * @author acoggins
  */
 public class Market implements IMarket {
-
   
-  // TODO: private final IFlexibleRules RULES;
-  // delete all of these individual rule variables
-  private final IPaymentRule PRULE;
-  private final IAllocationRule ARULE;
-  private final IQueryRule QRULE;
-  private final IActivityRule ACTRULE;
-  private final IInformationRevelationPolicy IRPOLICY;
-  private final ITerminationCondition ITCONDITION;
+  private final IFlexibleRules RULES; 
   
   private final IMarketState STATE;
   private final IMarketPublicState PUBLICSTATE;
@@ -43,15 +29,8 @@ public class Market implements IMarket {
    * @param state
    * TODO: history
    */
-  public Market(IMarketRules rules, IMarketState state, IMarketPublicState publicState) {
-    // TODO: this.RULES = rules;
-    // delete all of these individual assignments of rules
-    this.PRULE = rules.getPRule();
-    this.ARULE = rules.getARule();
-    this.QRULE = rules.getQRule();
-    this.ACTRULE = rules.getActRule();
-    this.IRPOLICY = rules.getIRPolicy();
-    this.ITCONDITION = rules.getTerminationCondition(); 
+  public Market(IFlexibleRules rules, IMarketState state, IMarketPublicState publicState) {
+    this.RULES = rules; 
     
     this.STATE = state;
     this.PUBLICSTATE = publicState;
@@ -70,14 +49,14 @@ public class Market implements IMarket {
   // 4. Send game report (via IR policy)
   public TradeRequestMessage constructTradeRequest(Integer ID) {
     // no idea why ledgers are part of the trade request -- they should be sent as market updates!
-    this.QRULE.makeChannel(STATE);
+    this.RULES.getQRule().makeChannel(STATE);
     TradeRequestMessage request = this.STATE.getTRequest();
     return request;
   }
 
   // this looks like it is checking validity, not processing the bids
   // name seems misleading
-  public boolean handleBid(ITradeMessage bid) {
+  public boolean processBid(ITradeMessage bid) {
 //    this.ACTRULE.isAcceptable(this.STATE, bid); 
 //    // why are we checking isOpen here? should check this much earlier!
 //    if (this.STATE.getAcceptable() && this.STATE.isOpen()) {
@@ -88,8 +67,8 @@ public class Market implements IMarket {
 
   public List<IAccountUpdate> constructOrders() {
     // Set allocation and payment
-    this.ARULE.setAllocation(this.STATE);
-    this.PRULE.setOrders(this.STATE); // setPayment
+    this.RULES.getARule().setAllocation(this.STATE);
+    this.RULES.getPRule().setOrders(this.STATE); // setPayment
 
     // Construct orders from allocation and payments
     // why no? return this.STATE.getAllocation();
@@ -100,7 +79,7 @@ public class Market implements IMarket {
   @Override 
   // Make sure this is called after constructOrders
   public Map<Integer, List<IInformationMessage>> constructReport() {
-    this.IRPOLICY.setReport(this.STATE);
+    this.RULES.getIRPolicy().setReport(this.STATE);
     return null;
   }
   
@@ -110,7 +89,7 @@ public class Market implements IMarket {
   // e.g., once per iteration in an Open Outcry auction
   @Override
   public void setReserves() {
-    this.ACTRULE.setReserves(this.STATE); 
+    this.RULES.getActRule().setReserves(this.STATE); 
   }
   
   // This stays, b/c Bids are being moved out of MarketState
@@ -130,7 +109,7 @@ public class Market implements IMarket {
   // do we really need isOver and isOpen?
   @Override
   public boolean isOver() {
-    ITCONDITION.isTerminated(this.STATE);
+    this.RULES.getTerminationCondition().isTerminated(this.STATE);
     return this.STATE.getOver();
   }
   

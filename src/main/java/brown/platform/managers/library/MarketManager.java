@@ -18,9 +18,9 @@ import brown.communication.messages.library.TradeRejectionMessage;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.managers.IMarketManager;
+import brown.platform.market.IFlexibleRules;
 import brown.platform.market.IMarket;
 import brown.platform.market.IMarketBlock;
-import brown.platform.market.IMarketRules;
 import brown.platform.market.library.Market;
 import brown.platform.market.library.SimultaneousMarket;
 import brown.platform.tradeable.ITradeable;
@@ -56,7 +56,7 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public void createSimultaneousMarket(List<IMarketRules> marketRules,
+  public void createSimultaneousMarket(List<IFlexibleRules> marketRules,
       List<List<String>> marketTradeableNames, Map<String, List<ITradeable>> allTradeables) {
     if (!this.lock) {
       List<Map<String, List<ITradeable>>> marketTradeables = new LinkedList<Map<String, List<ITradeable>>>();
@@ -88,7 +88,7 @@ public class MarketManager implements IMarketManager {
   public void openMarkets(int index) {
     // TODO: somehow open markets using whiteboard information.
     IMarketBlock currentMarketBlock = this.allMarkets.get(index); 
-    List<IMarketRules> marketRules = currentMarketBlock.getMarkets(); 
+    List<IFlexibleRules> marketRules = currentMarketBlock.getMarkets(); 
     List<Map<String, List<ITradeable>>> marketTradeables = currentMarketBlock.getMarketTradeables(); 
     for (int i = 0; i < marketRules.size(); i++) {
       this.activeMarkets.put(this.marketIndex, new Market(marketRules.get(i),
@@ -103,7 +103,7 @@ public class MarketManager implements IMarketManager {
     if (this.activeMarkets.containsKey(marketID)) {
       IMarket market = this.activeMarkets.get(marketID); 
       synchronized (market) {
-        boolean accepted = market.handleBid(message); 
+        boolean accepted = market.processBid(message); 
         if (!accepted) {
           return new TradeRejectionMessage(0, "[x] REJECTED: Trade message for auction " + message.getAuctionID().toString()
               + " denied: rejected by activity rule."); 
@@ -118,8 +118,13 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public List<IMarket> getActiveMarkets() {
-    return new LinkedList<IMarket>(this.activeMarkets.values()); 
+  public List<Integer> getActiveMarketIDs() {
+    return new LinkedList<Integer>(this.activeMarkets.keySet()); 
+  }
+  
+  @Override
+  public IMarket getActiveMarket(Integer marketID) {
+    return this.activeMarkets.get(marketID);
   }
   
   public List<ITradeRequestMessage> updateMarket(Integer marketID, List<Integer> agents) {
@@ -153,6 +158,11 @@ public class MarketManager implements IMarketManager {
   @Override
   public void finalizeMarket(Integer marketID) {
     this.activeMarkets.remove(marketID); 
+  }
+  
+  @Override
+  public boolean marketOpen(Integer marketID) {
+    return this.activeMarkets.get(marketID).isOpen();
   }
   
   @Override
