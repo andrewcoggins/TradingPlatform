@@ -86,6 +86,7 @@ public class MarketManager implements IMarketManager {
   
   @Override
   public void openMarkets(int index) {
+    // TODO: somehow open markets using whiteboard information.
     IMarketBlock currentMarketBlock = this.allMarkets.get(index); 
     List<IMarketRules> marketRules = currentMarketBlock.getMarkets(); 
     List<Map<String, List<ITradeable>>> marketTradeables = currentMarketBlock.getMarketTradeables(); 
