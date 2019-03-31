@@ -15,7 +15,7 @@ import brown.auction.rules.ir.onesided.AnonymousPolicy;
 import brown.auction.rules.payment.onesided.SecondPricePayment;
 import brown.auction.rules.query.onesided.SimpleQuery;
 import brown.auction.rules.termination.onesided.OneShotTermination;
-import brown.platform.market.library.AbsMarketRules;
+import brown.platform.market.IFlexibleRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.platform.tradeable.ITradeable;
 import brown.platform.tradeable.library.Tradeable;
@@ -91,7 +91,7 @@ public class CommandLineParserTest {
     
     
     // marketConfig
-    AbsMarketRules marketRule = new FlexibleRules(new HighestPriceAllocation(),
+    IFlexibleRules marketRule = new FlexibleRules(new HighestPriceAllocation(),
         new SecondPricePayment(),
         new SimpleQuery(),
         new OneShotActivity(),

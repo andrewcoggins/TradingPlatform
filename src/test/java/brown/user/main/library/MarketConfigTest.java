@@ -14,7 +14,7 @@ import brown.auction.rules.IInformationRevelationPolicy;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
-import brown.platform.market.IMarketRules;
+import brown.platform.market.IFlexibleRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.user.main.IMarketConfig;
 import brown.user.main.library.MarketConfig; 
@@ -30,7 +30,7 @@ public class MarketConfigTest {
     IInformationRevelationPolicy mockIR = mock(IInformationRevelationPolicy.class); 
     ITerminationCondition mocktCondition = mock(ITerminationCondition.class); 
     
-    IMarketRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, mocktCondition); 
+    IFlexibleRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, mocktCondition); 
     List<String> tradeableNames = new LinkedList<String>(); 
     tradeableNames.add("default"); 
 

@@ -19,7 +19,7 @@ import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.library.NormalValGenerator;
-import brown.platform.market.IMarketRules;
+import brown.platform.market.IFlexibleRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.platform.tradeable.library.Tradeable;
 import brown.user.main.IEndowmentConfig;
@@ -48,7 +48,7 @@ public class SimulationConfigTest {
     IInformationRevelationPolicy mockIR = mock(IInformationRevelationPolicy.class); 
     ITerminationCondition mocktCondition = mock(ITerminationCondition.class); 
     
-    IMarketRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, mocktCondition); 
+    IFlexibleRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, mocktCondition); 
     List<String> tradeableNames = new LinkedList<String>(); 
     tradeableNames.add("default"); 
     IMarketConfig mConfig = new MarketConfig(mRules, tradeableNames); 

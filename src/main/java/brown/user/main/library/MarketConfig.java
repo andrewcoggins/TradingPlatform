@@ -2,22 +2,22 @@ package brown.user.main.library;
 
 import java.util.List;
 
-import brown.platform.market.IMarketRules;
+import brown.platform.market.IFlexibleRules;
 import brown.user.main.IMarketConfig;
 
 public class MarketConfig implements IMarketConfig {
   
-  private IMarketRules rules; 
+  private IFlexibleRules rules; 
   private List<String> tradeableNames; 
  
-  public MarketConfig(IMarketRules marketRules, 
+  public MarketConfig(IFlexibleRules marketRules, 
       List<String> tradeableNames) {
     this.rules = marketRules; 
     this.tradeableNames = tradeableNames;   
   }
   
   @Override
-  public IMarketRules getRules() {
+  public IFlexibleRules getRules() {
     return this.rules;
   }
 
