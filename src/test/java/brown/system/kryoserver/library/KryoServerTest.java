@@ -5,11 +5,9 @@ import com.esotericsoftware.kryonet.Listener;
 
 import brown.communication.messages.library.ErrorMessage;
 import brown.communication.messages.library.RegistrationMessage;
-import brown.communication.messages.library.StringMessage;
 import brown.system.client.library.TPClient;
 import brown.system.kryoserver.library.KryoServer;
 import brown.system.setup.ISetup;
-import brown.system.setup.library.SimpleSetup;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -30,7 +28,7 @@ public class KryoServerTest {
                 if (message instanceof RegistrationMessage) {
                     onRegistration((RegistrationMessage) message);
                 } else if (message instanceof ErrorMessage) {
-                    error = ((ErrorMessage) message).error;
+                    error = ((ErrorMessage) message).getStatus();
                     onErrorMessage((ErrorMessage) message);
                 } else if (message instanceof StringMessage) {
                     string = ((StringMessage) message).message;

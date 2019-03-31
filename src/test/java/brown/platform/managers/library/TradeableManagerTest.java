@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import brown.platform.managers.ITradeableManager;
 import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 
 public class TradeableManagerTest {
 
@@ -28,12 +28,12 @@ public class TradeableManagerTest {
     
     Set<ITradeable> expected = new HashSet<ITradeable>(); 
     for (int i = 0; i < 5; i++) {
-      expected.add(new SimpleTradeable(i)); 
+      expected.add(new Tradeable(i)); 
     }
     
     Set<ITradeable> expectedTwo = new HashSet<ITradeable>(); 
     for (int i = 0; i < 4; i++) {
-      expectedTwo.add(new SimpleTradeable(i + 5)); 
+      expectedTwo.add(new Tradeable(i + 5)); 
     }
     
     assertEquals(new HashSet<ITradeable>(tManager.getTradeables("test")), expected); 

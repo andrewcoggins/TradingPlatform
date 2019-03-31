@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import brown.platform.accounting.IInitialEndowment;
 import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 
 public class InitialEndowmentTest {
 
@@ -23,9 +23,9 @@ public class InitialEndowmentTest {
       
       List<ITradeable> someTradeables = new LinkedList<ITradeable>(); 
       
-      someTradeables.add(new SimpleTradeable(0)); 
+      someTradeables.add(new Tradeable(0)); 
       
-      someTradeables.add(new SimpleTradeable(1)); 
+      someTradeables.add(new Tradeable(1)); 
       
       tradeables.put("default", someTradeables); 
       

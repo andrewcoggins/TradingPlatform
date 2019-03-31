@@ -18,7 +18,7 @@ import brown.auction.value.valuation.IValuation;
 import brown.auction.value.valuation.library.AdditiveValuation;
 import brown.platform.managers.IValuationManager;
 import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 
 public class ValuationManagerTest {
   
@@ -27,7 +27,7 @@ public class ValuationManagerTest {
   IllegalAccessException, IllegalArgumentException, InvocationTargetException {
     Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>(); 
     List<ITradeable> tList = new LinkedList<ITradeable>(); 
-    tList.add(new SimpleTradeable(0)); 
+    tList.add(new Tradeable(0)); 
     tradeables.put("default", tList); 
     
     Class distClass = Class.forName("brown.auction.value.distribution.library.AdditiveValuationDistribution");
@@ -61,7 +61,7 @@ public class ValuationManagerTest {
     List<String> tradeableNames = new LinkedList<String>(); 
     tradeableNames.add("default"); 
     Map<ITradeable, Double> valueParams = new HashMap<ITradeable, Double>(); 
-    valueParams.put(new SimpleTradeable(0), 1.0); 
+    valueParams.put(new Tradeable(0), 1.0); 
     IValuation agentValuation = new AdditiveValuation(valueParams); 
     vManager.addAgentValuation(1, tradeableNames, agentValuation);
     

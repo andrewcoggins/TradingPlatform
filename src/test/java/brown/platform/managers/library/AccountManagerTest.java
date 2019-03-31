@@ -16,7 +16,7 @@ import brown.platform.accounting.library.Account;
 import brown.platform.accounting.library.InitialEndowment;
 import brown.platform.managers.IAccountManager;
 import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 
 public class AccountManagerTest {
   
@@ -29,8 +29,8 @@ public class AccountManagerTest {
     Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>(); 
     List<ITradeable> tList = new LinkedList<ITradeable>(); 
     
-    tList.add(new SimpleTradeable(0)); 
-    tList.add(new SimpleTradeable(1)); 
+    tList.add(new Tradeable(0)); 
+    tList.add(new Tradeable(1)); 
     
     tradeables.put("default", tList); 
     
@@ -69,8 +69,8 @@ public class AccountManagerTest {
     Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>(); 
     List<ITradeable> tList = new LinkedList<ITradeable>(); 
     
-    tList.add(new SimpleTradeable(0)); 
-    tList.add(new SimpleTradeable(1)); 
+    tList.add(new Tradeable(0)); 
+    tList.add(new Tradeable(1)); 
     
     tradeables.put("default", tList); 
     

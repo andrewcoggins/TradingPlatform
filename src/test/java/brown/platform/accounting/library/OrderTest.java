@@ -5,14 +5,14 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 
 public class OrderTest {
   
   @Test
   public void testOrder() {
     
-    SimpleTradeable aGood = new SimpleTradeable(0);
+    Tradeable aGood = new Tradeable(0);
     AccountUpdate anOrder = new AccountUpdate(0, 1, 100.0, 1, aGood); 
     assertTrue(anOrder.TO == 0); 
     assertTrue(anOrder.FROM == 1); 
@@ -26,7 +26,7 @@ public class OrderTest {
   @Test
   public void testOrderTwo() {
     
-    SimpleTradeable aGood = new SimpleTradeable(2);
+    Tradeable aGood = new Tradeable(2);
     AccountUpdate anOrder = new AccountUpdate(10, 9, 10.0, 4, aGood); 
     assertTrue(anOrder.TO == 10); 
     assertTrue(anOrder.FROM == 9); 
@@ -40,7 +40,7 @@ public class OrderTest {
   @Test
   public void testOrderThree() {
     
-    SimpleTradeable aGood = new SimpleTradeable(0);
+    Tradeable aGood = new Tradeable(0);
     AccountUpdate anOrder = new AccountUpdate(0, 1, 100.0, 1, aGood); 
     AccountUpdate anOrder2 = new AccountUpdate(0, 1, 90.0, 1, aGood); 
     assertEquals(anOrder.updatePrice(90.0), anOrder2); 

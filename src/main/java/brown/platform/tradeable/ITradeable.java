@@ -1,8 +1,6 @@
 package brown.platform.tradeable; 
 
-import java.util.List;
 
-import brown.platform.tradeable.library.SimpleTradeable;
 import brown.platform.tradeable.library.TradeableType;
 
 /**
@@ -23,7 +21,7 @@ public interface ITradeable {
    * @return how many atomic tradeables are 
    * stored in this ITradeable
    */
-  public Integer getCount();
+  public String getName();
   
   /**
    * gets the type of a tradeable
@@ -31,11 +29,4 @@ public interface ITradeable {
    */
   public TradeableType getType();
   
-  /**
-   * flattens the ITradeable into a list of 
-   * simple, atomic tradeables.=
-   * @return a list of simple tradeables.
-   * //TODO: make private. remove form interface.
-   */
-  public List<SimpleTradeable> flatten();
 }

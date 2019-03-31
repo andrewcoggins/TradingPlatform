@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import brown.platform.accounting.IAccount;
 import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 
 /**
  * Test for account class.
@@ -27,9 +27,9 @@ public class AccountUpdateTest {
     
     List<ITradeable> tList = new LinkedList<ITradeable>(); 
     
-    tList.add(new SimpleTradeable(0)); 
+    tList.add(new Tradeable(0)); 
     
-    tList.add(new SimpleTradeable(1)); 
+    tList.add(new Tradeable(1)); 
     
     tradeables.put("default", tList);
     
@@ -52,9 +52,9 @@ public class AccountUpdateTest {
     
     List<ITradeable> tList = new LinkedList<ITradeable>(); 
     
-    tList.add(new SimpleTradeable(0)); 
+    tList.add(new Tradeable(0)); 
     
-    tList.add(new SimpleTradeable(1)); 
+    tList.add(new Tradeable(1)); 
     
     tradeables.put("default", tList);
     
@@ -74,13 +74,13 @@ public class AccountUpdateTest {
     
     List<ITradeable> moreTradeables = new LinkedList<ITradeable>(); 
     
-    moreTradeables.add(new SimpleTradeable(2)); 
+    moreTradeables.add(new Tradeable(2)); 
     
     a.addTradeables("default", moreTradeables);
     
     List<ITradeable> tradeablesList = tradeables.get("default"); 
     
-    tradeablesList.add(new SimpleTradeable(2)); 
+    tradeablesList.add(new Tradeable(2)); 
     
     tradeables.put("default", tradeablesList); 
     
@@ -90,7 +90,7 @@ public class AccountUpdateTest {
     
     List<ITradeable> evenMoreTradeables = new LinkedList<ITradeable>(); 
     
-    evenMoreTradeables.add(new SimpleTradeable(3)); 
+    evenMoreTradeables.add(new Tradeable(3)); 
     
     a.addTradeables("other", evenMoreTradeables);
     

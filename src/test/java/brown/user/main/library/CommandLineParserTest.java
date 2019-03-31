@@ -25,7 +25,7 @@ import brown.auction.value.generator.library.NormalValGenerator;
 import brown.platform.market.library.AbsMarketRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.SimpleTradeable;
+import brown.platform.tradeable.library.Tradeable;
 import brown.user.main.ICommandLineParser;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
@@ -63,7 +63,7 @@ public class CommandLineParserTest {
     
     ICommandLineParser p = new CommandLineParser(); 
     ISimulationConfig sConfig = p.parseCommandLine(numRuns, delayTime,
-        tTypeString, numTradeables, distributionString, generatorString,
+        endowmentNumTradeables, tTypeString, numTradeables, distributionString, generatorString,
         endowmentNumTradeables, endowmentMoney, aRuleString, pRuleString,
         qRuleString, actRuleString, irPolicyString, tConditionString);  
     
@@ -76,7 +76,7 @@ public class CommandLineParserTest {
     // tradeableConfigs
     List<ITradeable> allTradeables = new LinkedList<ITradeable>();
     for (int i = 0; i < numTradeables; i++) {
-      allTradeables.add(new SimpleTradeable(i)); 
+      allTradeables.add(new Tradeable(i)); 
     }
     
     // tradeable config

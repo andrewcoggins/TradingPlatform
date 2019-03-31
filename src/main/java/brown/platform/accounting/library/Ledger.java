@@ -54,7 +54,7 @@ public class Ledger implements ILedger {
 	@Override
 	public void add(ITradeable good, Integer toID, Double price) {
 	  synchronized(transactions) {
-	    Transaction trans = new Transaction(toID, null, price, good.getCount(), good);
+	    Transaction trans = new Transaction(toID, null, price, 1, good);
 	    this.transactions.add(trans);
 	    this.unshared.add(trans);
 	  }
