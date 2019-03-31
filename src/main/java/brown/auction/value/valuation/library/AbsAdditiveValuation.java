@@ -12,7 +12,6 @@ public abstract class AbsAdditiveValuation implements IMonotonicValuation {
   public AbsAdditiveValuation(Map<ISingleItem, Double> valuation) {
     this.valuation = valuation; 
   }
-  
 
   @Override
   public int hashCode() {
@@ -21,7 +20,6 @@ public abstract class AbsAdditiveValuation implements IMonotonicValuation {
     result = prime * result + ((valuation == null) ? 0 : valuation.hashCode());
     return result;
   }
-
 
   @Override
   public boolean equals(Object obj) {
@@ -40,9 +38,9 @@ public abstract class AbsAdditiveValuation implements IMonotonicValuation {
     return true;
   }
 
-
   @Override
   public String toString() {
     return "AbsAdditiveValuation [valuation=" + valuation + "]";
   }
+  
 }
