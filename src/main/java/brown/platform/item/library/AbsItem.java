@@ -8,7 +8,6 @@ public abstract class AbsItem implements IItem {
   private int count; 
   private String name; 
   
-  
   public AbsItem(String name, int count) {
     this.name = name; 
     this.count = count; 
@@ -56,5 +55,5 @@ public abstract class AbsItem implements IItem {
       return false;
     return true;
   }
-  
+
 }

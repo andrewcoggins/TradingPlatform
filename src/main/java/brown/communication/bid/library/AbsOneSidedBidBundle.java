@@ -7,7 +7,7 @@ import brown.communication.bid.IBidBundle;
 import brown.platform.item.ICart;
 
 /**
- * A map from Tradeables to a Bids.
+ * A map from Carts to a Bids.
  *
  */
 public abstract class AbsOneSidedBidBundle implements IBidBundle {

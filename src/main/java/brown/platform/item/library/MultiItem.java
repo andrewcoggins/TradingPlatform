@@ -7,4 +7,5 @@ public class MultiItem extends AbsItem implements IItem {
   public MultiItem(String name, int count) {
     super(name, count); 
   }
+  
 }

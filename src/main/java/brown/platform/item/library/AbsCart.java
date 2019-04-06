@@ -17,7 +17,6 @@ public abstract class AbsCart implements ICart {
   public List<IItem> getItems() {
     return this.items;
   }
-
   
   @Override
   public String toString() {
@@ -49,5 +48,4 @@ public abstract class AbsCart implements ICart {
     return true;
   }
 
-  
 }

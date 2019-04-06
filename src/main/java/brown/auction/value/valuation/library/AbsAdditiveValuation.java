@@ -15,7 +15,7 @@ public abstract class AbsAdditiveValuation extends AbsSparseValuation implements
   public AbsAdditiveValuation() {
     this.singleItemMapping = null;
   }
-  
+
   public AbsAdditiveValuation(Map<ISingleItem, Double> valuation) {
     this.singleItemMapping = valuation; 
   }
@@ -29,5 +29,37 @@ public abstract class AbsAdditiveValuation extends AbsSparseValuation implements
      }
      return value; 
   }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result
+        + ((singleItemMapping == null) ? 0 : singleItemMapping.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    AbsAdditiveValuation other = (AbsAdditiveValuation) obj;
+    if (singleItemMapping == null) {
+      if (other.singleItemMapping != null)
+        return false;
+    } else if (!singleItemMapping.equals(other.singleItemMapping))
+      return false;
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "AbsAdditiveValuation [singleItemMapping=" + singleItemMapping + "]";
+  }
+
 
 }
