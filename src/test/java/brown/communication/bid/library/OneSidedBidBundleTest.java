@@ -13,7 +13,6 @@ import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
 import brown.platform.item.library.SingleItem;
-import brown.platform.tradeable.library.Tradeable;
 
 public class OneSidedBidBundleTest {
 
@@ -29,7 +28,7 @@ public class OneSidedBidBundleTest {
     
     List<IItem> items = new LinkedList<IItem>(); 
     
-    items.add(new SingleItem(new Tradeable(0, "default"))); 
+    items.add(new SingleItem("default")); 
     
     bundle.put(new Cart(items), 99.9); 
     

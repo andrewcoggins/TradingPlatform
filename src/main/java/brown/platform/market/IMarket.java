@@ -59,12 +59,6 @@ public interface IMarket {
    */
   public Map<Integer,List<IInformationMessage>> constructReport();
 
-  /**
-   * Per the (inner) termination condition, 
-   * determines whether or not the inner market is over.
-   * @return a boolean indicating whether or not the inner market is over.
-   */
-  public boolean isOver();
   
   /**
    * increments the time of the market.

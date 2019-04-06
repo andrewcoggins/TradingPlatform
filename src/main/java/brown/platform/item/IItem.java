@@ -4,7 +4,7 @@ import brown.platform.tradeable.ITradeable;
 
 public interface IItem {
 
-  public ITradeable getItem(); 
+  public String getName(); 
   
   public int getItemCount(); 
   

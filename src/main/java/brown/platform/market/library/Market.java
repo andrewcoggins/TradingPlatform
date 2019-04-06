@@ -106,12 +106,6 @@ public class Market implements IMarket {
     this.STATE.tick();
   }
   
-  // do we really need isOver and isOpen?
-  @Override
-  public boolean isOver() {
-    this.RULES.getTerminationCondition().isTerminated(this.STATE);
-    return this.STATE.getOver();
-  }
   
   @Override
   public boolean isOpen() {
@@ -125,8 +119,7 @@ public class Market implements IMarket {
 
   @Override
   public IMarketPublicState getPublicState() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.PUBLICSTATE;
   }
-  
+
 }

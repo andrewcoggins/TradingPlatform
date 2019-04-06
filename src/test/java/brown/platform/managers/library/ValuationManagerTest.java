@@ -63,7 +63,7 @@ public class ValuationManagerTest {
     List<String> tradeableNames = new LinkedList<String>(); 
     tradeableNames.add("default"); 
     Map<ISingleItem, Double> valueParams = new HashMap<ISingleItem, Double>(); 
-    valueParams.put(new SingleItem(new Tradeable(0, "default")), 1.0); 
+    valueParams.put(new SingleItem("default"), 1.0); 
     IValuation agentValuation = new AdditiveValuation(valueParams); 
     vManager.addAgentValuation(1, tradeableNames, agentValuation);
     

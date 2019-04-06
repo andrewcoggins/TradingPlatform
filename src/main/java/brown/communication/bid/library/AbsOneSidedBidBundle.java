@@ -1,3 +1,4 @@
+
 package brown.communication.bid.library;
 
 import java.util.Map;
