@@ -41,7 +41,7 @@ public class AdditiveValuationDistributionTest {
     IValuation valuation = dist.sample(); 
     
     Map<ISingleItem, Double> vals = new HashMap<ISingleItem, Double>(); 
-    ISingleItem anItem = new SingleItem(t); 
+    ISingleItem anItem = new SingleItem("default"); 
     
     List<IItem> items = new LinkedList<IItem>(); 
     items.add(anItem); 

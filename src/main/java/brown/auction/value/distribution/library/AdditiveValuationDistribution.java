@@ -44,7 +44,7 @@ public class AdditiveValuationDistribution extends AbsValuationDistribution impl
   public IValuation sample() {
     for (String s : this.tradeableNames.keySet()) {
       for (ITradeable atom : this.tradeableNames.get(s)) { 
-        ISingleItem item = new SingleItem(atom); 
+        ISingleItem item = new SingleItem(atom.getName()); 
         Double aValue = this.generators.get(0).makeValuation(); 
         this.values.put(item, aValue);
         break; 
