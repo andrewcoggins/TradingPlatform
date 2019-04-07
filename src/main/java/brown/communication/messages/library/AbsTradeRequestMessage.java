@@ -4,6 +4,7 @@ import java.util.List;
 
 import brown.communication.bid.library.BidType;
 import brown.communication.messages.ITradeRequestMessage;
+import brown.platform.whiteboard.IWhiteboard;
 
 public abstract class AbsTradeRequestMessage extends AbsServerToAgentMessage implements ITradeRequestMessage {
   
@@ -34,6 +35,9 @@ public abstract class AbsTradeRequestMessage extends AbsServerToAgentMessage imp
     return this.tradeableNames; 
   }
 
+  public void addInformation(IWhiteboard whiteboard) {
+    
+  }
   
   @Override
   public String toString() {
