@@ -1,31 +1,31 @@
 package brown.platform.item.library;
 
 import brown.platform.item.IItem;
-import brown.platform.tradeable.ITradeable;
+
 
 public abstract class AbsItem implements IItem {
 
   private int count; 
-  private ITradeable tradeable; 
+  private String name; 
   
-  public AbsItem(ITradeable tradeable, int count) {
-    this.tradeable = tradeable; 
+  public AbsItem(String name, int count) {
+    this.name = name; 
     this.count = count; 
   }
 
   @Override
-  public ITradeable getItem() {
-    return this.tradeable;
+  public String getName() {
+    return this.name;
   }
 
   @Override
   public int getItemCount() {
     return this.count;
   }
-  
+
   @Override
   public String toString() {
-    return "AbsItem [count=" + count + ", tradeable=" + tradeable + "]";
+    return "AbsItem [count=" + count + ", name=" + name + "]";
   }
 
   @Override
@@ -33,7 +33,7 @@ public abstract class AbsItem implements IItem {
     final int prime = 31;
     int result = 1;
     result = prime * result + count;
-    result = prime * result + ((tradeable == null) ? 0 : tradeable.hashCode());
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
     return result;
   }
 
@@ -48,10 +48,10 @@ public abstract class AbsItem implements IItem {
     AbsItem other = (AbsItem) obj;
     if (count != other.count)
       return false;
-    if (tradeable == null) {
-      if (other.tradeable != null)
+    if (name == null) {
+      if (other.name != null)
         return false;
-    } else if (!tradeable.equals(other.tradeable))
+    } else if (!name.equals(other.name))
       return false;
     return true;
   }

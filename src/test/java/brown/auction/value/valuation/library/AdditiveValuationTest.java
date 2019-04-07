@@ -21,9 +21,8 @@ public class AdditiveValuationTest {
   
   @Test
   public void testAdditiveValuation() {
-    ITradeable tradeable = new Tradeable(0, "default"); 
     Map<ISingleItem, Double> tMap = new HashMap<ISingleItem, Double>();
-    ISingleItem item = new SingleItem(tradeable); 
+    ISingleItem item = new SingleItem("default"); 
     tMap.put(item, 1.0); 
     AdditiveValuation a = new AdditiveValuation(tMap); 
     List<IItem> items = new LinkedList<IItem>(); 

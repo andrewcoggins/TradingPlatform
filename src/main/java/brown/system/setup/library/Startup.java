@@ -22,8 +22,6 @@ import brown.platform.accounting.library.Account;
 import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.accounting.library.Ledger;
 import brown.platform.accounting.library.Transaction;
-import brown.platform.tradeable.library.Tradeable;
-import brown.platform.tradeable.library.TradeableType;
 import brown.system.setup.ISetup;
 import brown.user.agent.library.AbsAgent;
 
@@ -59,9 +57,7 @@ public final class Startup implements ISetup {
 		kryo.register(AccountUpdate.class);
 		kryo.register(Ledger.class);
 		kryo.register(HashMap.class);
-		kryo.register(TradeableType.class);
-		kryo.register(Integer[].class);
-		kryo.register(Tradeable.class);	
+		kryo.register(Integer[].class);	
     kryo.register(List.class);
 		return true;
 	}

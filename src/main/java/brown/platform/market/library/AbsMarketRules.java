@@ -1,68 +1,77 @@
-package brown.platform.market.library; 
+package brown.platform.market.library;
 
-import brown.auction.rules.IActivityRule;  
-import brown.auction.rules.IAllocationRule; 
-import brown.auction.rules.IInformationRevelationPolicy;  
+import brown.auction.rules.IActivityRule;
+import brown.auction.rules.IAllocationRule;
+import brown.auction.rules.IInformationRevelationPolicy;
+import brown.auction.rules.IInnerIRPolicy;
+import brown.auction.rules.IPaymentRule;
+import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 import brown.platform.market.IMarketRules;
-import brown.auction.rules.IPaymentRule;  
-import brown.auction.rules.IQueryRule;
 
-/**  
-* Describes all the rules for a particular market.
-* 
-* @author acoggins 
-*/
+/**
+ * Describes all the rules for a particular market.
+ * 
+ * @author acoggins
+ */
 
 public abstract class AbsMarketRules implements IMarketRules {
- 
-  public IAllocationRule aRule;  
-  public IPaymentRule pRule;  
-  public IQueryRule qRule;  
-  public IActivityRule actRule;   
-  public IInformationRevelationPolicy infoPolicy; 
-  public ITerminationCondition tCondition;   
-    
-  public AbsMarketRules(IAllocationRule aRule, IPaymentRule pRule, IQueryRule qRule, 
-                        IActivityRule oneShotActivity, IInformationRevelationPolicy infoPolicy, ITerminationCondition tCondition) {  
-    this.aRule = aRule;   
-    this.pRule = pRule;   
-    this.qRule = qRule;    
-    this.actRule = oneShotActivity;   
-    this.infoPolicy = infoPolicy;   
-    this.tCondition = tCondition;   
-  } 
+
+  public IAllocationRule aRule;
+  public IPaymentRule pRule;
+  public IQueryRule qRule;
+  public IActivityRule actRule;
+  public IInformationRevelationPolicy infoPolicy;
+  public IInnerIRPolicy innerIRPolicy; 
+  public ITerminationCondition tCondition;
+
+  public AbsMarketRules(IAllocationRule aRule, IPaymentRule pRule,
+      IQueryRule qRule, IActivityRule oneShotActivity,
+      IInformationRevelationPolicy infoPolicy, IInnerIRPolicy innerIRPolicy,
+      ITerminationCondition tCondition) {
+    this.aRule = aRule;
+    this.pRule = pRule;
+    this.qRule = qRule;
+    this.actRule = oneShotActivity;
+    this.infoPolicy = infoPolicy;
+    this.innerIRPolicy = innerIRPolicy; 
+    this.tCondition = tCondition;
+  }
 
   public IAllocationRule getARule() {
-    return this.aRule; 
+    return this.aRule;
   }
-  
+
   public IPaymentRule getPRule() {
-    return this.pRule; 
+    return this.pRule;
   }
-  
+
   public IQueryRule getQRule() {
-    return this.qRule; 
+    return this.qRule;
   }
-  
+
   public IActivityRule getActRule() {
-    return this.actRule; 
-  } 
-  
+    return this.actRule;
+  }
+
   public IInformationRevelationPolicy getIRPolicy() {
-    return this.infoPolicy; 
+    return this.infoPolicy;
   }
   
+  public IInnerIRPolicy getInnerIRPolicy() {
+    return this.getInnerIRPolicy(); 
+  }
+
   public ITerminationCondition getTerminationCondition() {
-    return this.tCondition; 
+    return this.tCondition;
   }
-  
-  
-  @Override 
-  public String toString() {  
-    return "AbsMarketRules [aRule=" + aRule + ", pRule=" + pRule + ", qRule=" 
-        + qRule + ", actRule=" + actRule + ", infoPolicy=" + infoPolicy 
-        + ", innerTCondition=" + tCondition + "]"; 
+
+  @Override
+  public String toString() {
+    return "AbsMarketRules [aRule=" + aRule + ", pRule=" + pRule + ", qRule="
+        + qRule + ", actRule=" + actRule + ", infoPolicy=" + infoPolicy
+        + ", innerIRPolicy=" + innerIRPolicy + ", tCondition=" + tCondition
+        + "]";
   }
 
   @Override
@@ -73,6 +82,8 @@ public abstract class AbsMarketRules implements IMarketRules {
     result = prime * result + ((actRule == null) ? 0 : actRule.hashCode());
     result =
         prime * result + ((infoPolicy == null) ? 0 : infoPolicy.hashCode());
+    result = prime * result
+        + ((innerIRPolicy == null) ? 0 : innerIRPolicy.hashCode());
     result = prime * result + ((pRule == null) ? 0 : pRule.hashCode());
     result = prime * result + ((qRule == null) ? 0 : qRule.hashCode());
     result =
@@ -104,6 +115,11 @@ public abstract class AbsMarketRules implements IMarketRules {
         return false;
     } else if (!infoPolicy.equals(other.infoPolicy))
       return false;
+    if (innerIRPolicy == null) {
+      if (other.innerIRPolicy != null)
+        return false;
+    } else if (!innerIRPolicy.equals(other.innerIRPolicy))
+      return false;
     if (pRule == null) {
       if (other.pRule != null)
         return false;
@@ -121,6 +137,5 @@ public abstract class AbsMarketRules implements IMarketRules {
       return false;
     return true;
   }
- 
-  
-} 
+
+}

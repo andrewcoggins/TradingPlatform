@@ -9,8 +9,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import brown.auction.rules.activity.onesided.OneShotActivity;
-import brown.auction.rules.allocation.onesided.HighestPriceAllocation;
+import brown.auction.rules.activity.onesided.SimpleOneShotActivity;
+import brown.auction.rules.allocation.onesided.SimpleHighestPriceAllocation;
 import brown.auction.rules.ir.onesided.AnonymousPolicy;
 import brown.auction.rules.payment.onesided.SecondPricePayment;
 import brown.auction.rules.query.onesided.SimpleQuery;
@@ -91,10 +91,10 @@ public class CommandLineParserTest {
     
     
     // marketConfig
-    IFlexibleRules marketRule = new FlexibleRules(new HighestPriceAllocation(),
+    IFlexibleRules marketRule = new FlexibleRules(new SimpleHighestPriceAllocation(),
         new SecondPricePayment(),
         new SimpleQuery(),
-        new OneShotActivity(),
+        new SimpleOneShotActivity(),
         new AnonymousPolicy(),
         new OneShotTermination());
     // marketConfig

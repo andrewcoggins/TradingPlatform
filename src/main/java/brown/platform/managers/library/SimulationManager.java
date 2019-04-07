@@ -200,6 +200,7 @@ public class SimulationManager implements ISimulationManager {
       }
 
       // TODO: give agents valuations
+      
     }
     // the account manager should be able to create these messages.
     Map<Integer, IBankUpdateMessage> accountInitializations =
