@@ -91,9 +91,8 @@ public class MarketManager implements IMarketManager {
     List<IFlexibleRules> marketRules = currentMarketBlock.getMarkets(); 
     List<Map<String, List<ITradeable>>> marketTradeables = currentMarketBlock.getMarketTradeables(); 
     for (int i = 0; i < marketRules.size(); i++) {
-      this.activeMarkets.put(this.marketIndex, new Market(marketRules.get(i),
-          new MarketState(this.marketIndex, marketTradeables.get(i)),
-          new MarketPublicState(this.marketIndex))); 
+      this.activeMarkets.put(this.marketIndex, new Market(this.marketIndex, marketRules.get(i),
+          new MarketState(), new MarketPublicState(),  marketTradeables.get(i))); 
     }
   }
   

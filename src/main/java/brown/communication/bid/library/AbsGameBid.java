@@ -2,11 +2,12 @@ package brown.communication.bid.library;
 
 import brown.communication.bid.IGameBid;
 
-public abstract class AbsGameBid implements IGameBid {
+public abstract class AbsGameBid extends AbsBid implements IGameBid {
   
   private Integer action; 
   
   public AbsGameBid(Integer action) {
+    super(BidType.GameBid); 
     this.action = action; 
   }
   

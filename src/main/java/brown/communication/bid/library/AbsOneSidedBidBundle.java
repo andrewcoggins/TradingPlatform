@@ -10,11 +10,12 @@ import brown.platform.item.ICart;
  * A map from Carts to a Bids.
  *
  */
-public abstract class AbsOneSidedBidBundle implements IBidBundle {
+public abstract class AbsOneSidedBidBundle extends AbsBid implements IBidBundle {
    
   private Map<ICart, Double> bids; 
   
   public AbsOneSidedBidBundle(Map<ICart, Double> bids) {
+    super(BidType.OneSidedBidBundle); 
     this.bids = bids; 
   }
   

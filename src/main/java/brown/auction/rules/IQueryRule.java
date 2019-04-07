@@ -15,7 +15,7 @@ public interface IQueryRule {
    * This comes with a trade request.
    * @param state market state.
    */
-  void makeChannel(IMarketState state);
+  void makeTradeRequest(IMarketState state);
 
   
 }

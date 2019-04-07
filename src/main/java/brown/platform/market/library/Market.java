@@ -1,5 +1,6 @@
 package brown.platform.market.library;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.market.IFlexibleRules;
 import brown.platform.market.IMarket;
+import brown.platform.tradeable.ITradeable;
 
 /**
  * Common implementation of IMarket.
@@ -19,27 +21,33 @@ import brown.platform.market.IMarket;
  */
 public class Market implements IMarket {
   
+  private final Integer ID; 
   private final IFlexibleRules RULES; 
-  
   private final IMarketState STATE;
-  private final IMarketPublicState PUBLICSTATE;
+  private final IMarketPublicState PUBLICSTATE; 
+  private final Map<String, List<ITradeable>> TRADEABLES; 
+   
+  private List<ITradeMessage> bids; 
 
   /**
    * @param rules
    * @param state
    * TODO: history
    */
-  public Market(IFlexibleRules rules, IMarketState state, IMarketPublicState publicState) {
+  public Market(Integer ID, IFlexibleRules rules, IMarketState state, IMarketPublicState publicState,
+      Map<String, List<ITradeable>> tradeables) {
+    this.ID = ID; 
     this.RULES = rules; 
-    
     this.STATE = state;
     this.PUBLICSTATE = publicState;
+    this.TRADEABLES = tradeables; 
+    this.bids = new LinkedList<ITradeMessage>(); 
   }
   
   // Make MarketID a field
   @Override
   public Integer getMarketID() {
-    return this.STATE.getID();
+    return this.ID;
   }
 
   // Processing bids is a four step process:
@@ -49,25 +57,24 @@ public class Market implements IMarket {
   // 4. Send game report (via IR policy)
   public TradeRequestMessage constructTradeRequest(Integer ID) {
     // no idea why ledgers are part of the trade request -- they should be sent as market updates!
-    this.RULES.getQRule().makeChannel(STATE);
+    this.RULES.getQRule().makeTradeRequest(STATE);
     TradeRequestMessage request = this.STATE.getTRequest();
     return request;
   }
 
-  // this looks like it is checking validity, not processing the bids
-  // name seems misleading
   public boolean processBid(ITradeMessage bid) {
-//    this.ACTRULE.isAcceptable(this.STATE, bid); 
-//    // why are we checking isOpen here? should check this much earlier!
-//    if (this.STATE.getAcceptable() && this.STATE.isOpen()) {
-//      STATE.addBid(bid);
-//    }
-    return this.STATE.getAcceptable();
+    // TODO: put logic where trade message much only contain tradeables in market.
+    this.RULES.getActRule().isAcceptable(this.STATE, bid, this.bids, this.TRADEABLES);
+    boolean acceptable = this.STATE.getAcceptable(); 
+    if (acceptable) {
+      this.bids.add(bid); 
+    }
+    return acceptable;
   }
 
   public List<IAccountUpdate> constructOrders() {
     // Set allocation and payment
-    this.RULES.getARule().setAllocation(this.STATE);
+    this.RULES.getARule().setAllocation(this.STATE, this.bids);
     this.RULES.getPRule().setOrders(this.STATE); // setPayment
 
     // Construct orders from allocation and payments
@@ -96,7 +103,7 @@ public class Market implements IMarket {
   // But all that logic might end up somewhere else
   @Override
   public void clearBidCache() {
-    this.STATE.clearBids();
+    this.bids.clear();
   }
   
   

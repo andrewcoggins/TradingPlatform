@@ -7,7 +7,7 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.communication.messages.IInformationMessage;
-import brown.communication.messages.library.TradeMessage;
+import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.tradeable.ITradeable;
@@ -18,10 +18,7 @@ import brown.platform.tradeable.ITradeable;
  * @author acoggins
  */
 public class MarketState implements IMarketState {
-
-  private final Integer ID;  
-  private final Map<String, List<ITradeable>> TRADEABLES;
-  private List<TradeMessage> bids;
+ 
   private boolean isOpen; 
   private int ticks;  
   private long time;
@@ -51,10 +48,7 @@ public class MarketState implements IMarketState {
   // Termination condition
   private Boolean terminated; 
   
-  public MarketState(Integer ID, Map<String, List<ITradeable>> tradeables) {
-    this.ID = ID; 
-    this.TRADEABLES = tradeables; 
-    this.bids = new LinkedList<TradeMessage>();
+  public MarketState() {
     this.increment = new HashMap<ITradeable, Double>();
     this.ticks = 0; 
     this.terminated = false;
@@ -69,16 +63,7 @@ public class MarketState implements IMarketState {
 //      this.altAlloc.put(t,  new LinkedList<Integer>());
 //    }
   }
-  
-  @Override
-  public Integer getID() {
-    return this.ID; 
-  }
 
-  @Override
-  public List<ITradeable> getTradeables() {
-    return null;//this.TRADEABLES; 
-  }
   
   @Override
   public void tick() {
@@ -94,18 +79,6 @@ public class MarketState implements IMarketState {
   public long getTime() {
     return this.time;
   }
-
-  // TODO: Move handling of bids to Market
-  @Override
-  public void addBid(TradeMessage bid) {
-    bids.add(bid);
-  }
-
-  // TODO: Move handling of bids to Market
-  @Override
-  public void clearBids() {
-   this.bids.clear(); 
-  }
   
   @Override
   public void close() { 
@@ -115,12 +88,6 @@ public class MarketState implements IMarketState {
   @Override
   public boolean isOpen() {
     return this.isOpen; 
-  }
-    
-  // TODO: Move handling of bids to Market
-  @Override
-  public List<TradeMessage> getBids() {
-    return this.bids; 
   }
 
   // TODO: clearAllocation()
