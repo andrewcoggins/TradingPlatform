@@ -1,5 +1,6 @@
 package brown.auction.rules;
 
+import brown.auction.marketstate.IMarketPublicState;
 import brown.auction.marketstate.IMarketState;
 
 /**
@@ -14,12 +15,7 @@ public interface IInformationRevelationPolicy {
    * determines what the game report should be
    * @param state market internal state. 
    */
-  void setReport(IMarketState state);
+  void updatePublicState(IMarketState state, IMarketPublicState publicState);
 
 
-  /**
-   * construct some summary state for use in a future auction. 
-   * @param state market internal state.
-   */
-  void constructSummaryState(IMarketState state);
 }

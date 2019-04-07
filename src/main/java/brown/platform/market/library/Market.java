@@ -55,9 +55,8 @@ public class Market implements IMarket {
   // 2. Check acceptability via Activity Rule
   // 3. Find allocation and payments (via these rules)
   // 4. Send game report (via IR policy)
-  public TradeRequestMessage constructTradeRequest(Integer ID) {
-    // no idea why ledgers are part of the trade request -- they should be sent as market updates!
-    this.RULES.getQRule().makeTradeRequest(STATE);
+  public TradeRequestMessage constructTradeRequest(Integer agentID) {
+    this.RULES.getQRule().makeTradeRequest(STATE, TRADEABLES, bids, agentID);
     TradeRequestMessage request = this.STATE.getTRequest();
     return request;
   }
@@ -86,7 +85,7 @@ public class Market implements IMarket {
   @Override 
   // Make sure this is called after constructOrders
   public Map<Integer, List<IInformationMessage>> constructReport() {
-    this.RULES.getIRPolicy().setReport(this.STATE);
+    this.RULES.getIRPolicy().updatePublicState(this.STATE, this.PUBLICSTATE);
     return null;
   }
   
@@ -97,6 +96,11 @@ public class Market implements IMarket {
   @Override
   public void setReserves() {
     this.RULES.getActRule().setReserves(this.STATE); 
+  }
+  
+  @Override
+  public void updateInnerInformation() {
+    this.RULES.getInnerIRPolicy().updatePublicState(this.STATE, this.PUBLICSTATE);
   }
   
   // This stays, b/c Bids are being moved out of MarketState

@@ -1,5 +1,8 @@
 package brown.communication.messages.library;
 
+import java.util.List;
+
+import brown.communication.bid.library.BidType;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.user.agent.IAgent;
 
@@ -20,6 +23,10 @@ public class TradeRequestMessage extends AbsTradeRequestMessage implements ITrad
 		super();
 	}
 
+	public TradeRequestMessage(Integer messageID, Integer agentID, BidType bidType, List<String> tradeableTypes) {
+	  super(messageID, agentID, bidType, tradeableTypes); 
+	}
+	
   @Override
   public void agentDispatch(IAgent agent) {
     // TODO Auto-generated method stub
