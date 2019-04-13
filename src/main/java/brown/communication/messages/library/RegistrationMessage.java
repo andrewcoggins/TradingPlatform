@@ -1,38 +1,72 @@
 package brown.communication.messages.library;
 
+import com.esotericsoftware.kryonet.Connection;
+
 import brown.communication.messages.IRegistrationMessage;
+import brown.communication.messageserver.IMessageServer;
 
 /**
  * a request for an agent to join the server 
  * is a sent as a registration.
  * @author lcamery
  */
-public class RegistrationMessage extends AbsRegistrationMessage implements IRegistrationMessage {
+public class RegistrationMessage extends AbsAgentToServerMessage implements IRegistrationMessage {
   
-	/**
-	 * Empty constructor for Kryo
-	 * DO NOT USE
-	 */
-	public RegistrationMessage() {
-		super(null, null);
-	}
+  private String name; 
+  
+  public RegistrationMessage() {
+    super(null);
+  }
+  
+  public RegistrationMessage(Integer messageID) {
+    super(messageID); 
+    this.name = ""; 
+  }
+  
+  public RegistrationMessage(Integer messageID, String name) {
+    super(messageID); 
+    this.name = name; 
+  }
+  
+  @Override
+  public void serverDispatch(Connection connection, IMessageServer server) {
+    server.onRegistration(connection, this);
+  }
+  
+  @Override
+  public String getName() {
+    return this.name; 
+  }
 
-	/**
-	 * Agent sends a registration message initially
-	 * Server sends back a message with the agent's ID
-	 * @param ID : agent's ID
-	 */
-	public RegistrationMessage(Integer ID, Integer agentID) {
-		super(ID);
-	}
-	
-	/**
-	 * Registration with name.
-	 * @param ID agent's ID
-	 * @param name: agent's name
-	 */
-	 public RegistrationMessage(Integer ID, Integer agentID, String name) {
-	    super(ID, name);
-	  }
+  @Override
+  public String toString() {
+    return "RegistrationMessage [name=" + name + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    RegistrationMessage other = (RegistrationMessage) obj;
+    if (name == null) {
+      if (other.name != null)
+        return false;
+    } else if (!name.equals(other.name))
+      return false;
+    return true;
+  }
+  
 	
 }
