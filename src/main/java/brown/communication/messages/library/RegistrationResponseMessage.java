@@ -5,21 +5,20 @@ import brown.user.agent.IAgent;
 
 public class RegistrationResponseMessage extends AbsServerToAgentMessage implements IRegistrationResponseMessage {
 
-  private Integer agentID; 
   private String name; 
  
+  public RegistrationResponseMessage() {
+    super(null, null); 
+    this.name = null; 
+  }
+  
   public RegistrationResponseMessage(Integer messageID, Integer agentID, String name) {
-    super(messageID);
-    this.agentID = agentID; 
+    super(messageID, agentID);
     this.name = name; 
   }
 
   public void agentDispatch(IAgent agent) {
     
-  }
-  
-  public Integer getAgentID() {
-    return this.agentID; 
   }
   
   public String getName() {
@@ -28,15 +27,13 @@ public class RegistrationResponseMessage extends AbsServerToAgentMessage impleme
 
   @Override
   public String toString() {
-    return "RegistrationResponseMessage [agentID=" + agentID + ", name=" + name
-        + "]";
+    return "RegistrationResponseMessage [name=" + name + "]";
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((agentID == null) ? 0 : agentID.hashCode());
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     return result;
   }
@@ -50,11 +47,6 @@ public class RegistrationResponseMessage extends AbsServerToAgentMessage impleme
     if (getClass() != obj.getClass())
       return false;
     RegistrationResponseMessage other = (RegistrationResponseMessage) obj;
-    if (agentID == null) {
-      if (other.agentID != null)
-        return false;
-    } else if (!agentID.equals(other.agentID))
-      return false;
     if (name == null) {
       if (other.name != null)
         return false;

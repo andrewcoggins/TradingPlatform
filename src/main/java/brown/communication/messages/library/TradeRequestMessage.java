@@ -17,27 +17,21 @@ import brown.user.agent.IAgent;
  */
 public class TradeRequestMessage extends AbsServerToAgentMessage implements ITradeRequestMessage {
 
-  private Integer agentID; 
   private BidType bidType; 
   private List<String> tradeableNames; 
   
   public TradeRequestMessage() {
-    super(null);
-    this.agentID = null; 
+    super(null, null);
     this.bidType = null; 
     this.tradeableNames = null; 
   }
   
   public TradeRequestMessage(Integer messageID, Integer agentID, BidType bidType, List<String> tradeableNames) {
-    super(messageID);
-    this.agentID = agentID; 
+    super(messageID, agentID);
     this.bidType = bidType; 
     this.tradeableNames = tradeableNames; 
   }
   
-  public Integer getAgentID() {
-    return this.agentID; 
-  }
   
   public BidType getBidType() {
     return this.bidType; 
@@ -56,18 +50,17 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
     // TODO Auto-generated method stub
     
   }
-  
+
   @Override
   public String toString() {
-    return "AbsTradeRequestMessage [agentID=" + agentID + ", bidType=" + bidType
-        + ", tradeableNames=" + tradeableNames + "]";
+    return "TradeRequestMessage [bidType=" + bidType + ", tradeableNames="
+        + tradeableNames + "]";
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((agentID == null) ? 0 : agentID.hashCode());
     result = prime * result + ((bidType == null) ? 0 : bidType.hashCode());
     result = prime * result
         + ((tradeableNames == null) ? 0 : tradeableNames.hashCode());
@@ -83,11 +76,6 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
     if (getClass() != obj.getClass())
       return false;
     TradeRequestMessage other = (TradeRequestMessage) obj;
-    if (agentID == null) {
-      if (other.agentID != null)
-        return false;
-    } else if (!agentID.equals(other.agentID))
-      return false;
     if (bidType != other.bidType)
       return false;
     if (tradeableNames == null) {

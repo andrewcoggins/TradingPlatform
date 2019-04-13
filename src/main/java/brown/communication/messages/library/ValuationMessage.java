@@ -5,8 +5,12 @@ import brown.user.agent.IAgent;
 
 public class ValuationMessage extends AbsServerToAgentMessage implements IValuationMessage {
 
-  public ValuationMessage(Integer messageID) {
-    super(messageID);
+  public ValuationMessage() {
+    super(null, null); 
+  }
+  
+  public ValuationMessage(Integer messageID, Integer agentID) {
+    super(messageID, agentID);
     // TODO Auto-generated constructor stub
   }
   
