@@ -5,12 +5,16 @@ import java.lang.reflect.InvocationTargetException;
 import brown.user.main.library.SimulationConfig;
 
 public interface ICommandLineParser extends IInputParser {
-  
-  public SimulationConfig parseCommandLine(int numRuns, int startingDelayTime, int simulationDelayTime, String tTypeString, int numTradeables, 
-      String distributionString, String generatorString, int endowmentNumTradeables, 
-      double endowmentMoney, String aRuleString, String pRuleString, String qRuleString, String actRuleString, 
-      String irPolicyString, String tConditionString) throws ClassNotFoundException, NoSuchMethodException, SecurityException, 
-  InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException;
-  
-  
+
+  public SimulationConfig parseCommandLine(int numRuns, int startingDelayTime,
+      int simulationDelayTime, String tTypeString, int numTradeables,
+      String distributionString, String generatorString,
+      int endowmentNumTradeables, double endowmentMoney, String aRuleString,
+      String pRuleString, String qRuleString, String actRuleString,
+      String irPolicyString, String innerIRPolicyString,
+      String tConditionString)
+      throws ClassNotFoundException, NoSuchMethodException, SecurityException,
+      InstantiationException, IllegalAccessException, IllegalArgumentException,
+      InvocationTargetException;
+
 }

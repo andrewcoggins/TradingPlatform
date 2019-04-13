@@ -10,6 +10,7 @@ import java.util.Map;
 import brown.auction.rules.IActivityRule;
 import brown.auction.rules.IAllocationRule;
 import brown.auction.rules.IInformationRevelationPolicy;
+import brown.auction.rules.IInnerIRPolicy;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
@@ -30,7 +31,7 @@ public class CommandLineParser implements ICommandLineParser {
       String generatorString,
       int endowmentNumTradeables, double endowmentMoney, String aRuleString,
       String pRuleString, String qRuleString, String actRuleString,
-      String irPolicyString, String tConditionString) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
+      String irPolicyString, String innerIRPolicyString, String tConditionString) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
   InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
     
@@ -59,6 +60,7 @@ public class CommandLineParser implements ICommandLineParser {
     Class<?> qRuleClass = Class.forName("brown.auction.rules.query.onesided." + qRuleString);
     Class<?> actRuleClass = Class.forName("brown.auction.rules.activity.onesided." + actRuleString);
     Class<?> irPolicyClass = Class.forName("brown.auction.rules.ir.onesided." + irPolicyString);
+    Class<?> innerIRPolicyClass = Class.forName("brown.auction.rules.onesided." + innerIRPolicyString); 
     Class<?> tConditionClass = Class.forName("brown.auction.rules.termination.onesided." + tConditionString);
 
     Constructor<?> tTypeCons = tTypeClass.getConstructor(Integer.class);
@@ -69,6 +71,7 @@ public class CommandLineParser implements ICommandLineParser {
     Constructor<?> qRuleCons = qRuleClass.getConstructor();
     Constructor<?> actRuleCons = actRuleClass.getConstructor();
     Constructor<?> irPolicyCons = irPolicyClass.getConstructor();
+    Constructor<?> innerIRPolicyCons = innerIRPolicyClass.getConstructor(); 
     Constructor<?> tConditionCons = tConditionClass.getConstructor();
 
     // constructors
@@ -79,6 +82,7 @@ public class CommandLineParser implements ICommandLineParser {
             (IQueryRule) qRuleCons.newInstance(),
             (IActivityRule) actRuleCons.newInstance(),
             (IInformationRevelationPolicy) irPolicyCons.newInstance(),
+            (IInnerIRPolicy) innerIRPolicyCons.newInstance(), 
             (ITerminationCondition) tConditionCons.newInstance());
     List<Double> generatorArgs = new LinkedList<Double>(); 
     generatorArgs.add(1.0); 

@@ -56,6 +56,7 @@ public class Main {
     String qRuleString;
     String actRuleString; 
     String irPolicyString; 
+    String innerIRPolicyString;
     String tConditionString; 
 
     List<SimulationConfig> configs = new LinkedList<>();
@@ -77,11 +78,12 @@ public class Main {
       qRuleString = args[13];
       actRuleString = args[14];
       irPolicyString = args[14];
-      tConditionString = args[15];
+      innerIRPolicyString = args[15]; 
+      tConditionString = args[16];
 
       CommandLineParser parser = new CommandLineParser(); 
       SimulationConfig runConfig = parser.parseCommandLine(numRuns, startingDelayTime, simulationDelayTime, tTypeString, numTradeables, distributionString, generatorString,
-          endowmentNumTradeables, endowmentMoney, aRuleString, pRuleString, qRuleString, actRuleString, irPolicyString, tConditionString); 
+          endowmentNumTradeables, endowmentMoney, aRuleString, pRuleString, qRuleString, actRuleString, irPolicyString, innerIRPolicyString, tConditionString); 
       configs.add(runConfig); 
     } else if (inputType == "json") {
       numRuns = new Integer(args[0]);

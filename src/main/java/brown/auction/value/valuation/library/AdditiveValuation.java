@@ -9,27 +9,26 @@ import brown.platform.item.IItem;
 import brown.platform.item.ISingleItem;
 import brown.platform.item.library.SingleItem;
 
+public class AdditiveValuation extends AbsSparseValuation
+    implements IValuation {
 
-public class AdditiveValuation extends AbsSparseValuation implements IValuation { 
+  private Map<ISingleItem, Double> singleItemMapping;
 
-  private Map<ISingleItem, Double> singleItemMapping; 
-  
   public AdditiveValuation() {
     this.singleItemMapping = null;
   }
 
   public AdditiveValuation(Map<ISingleItem, Double> valuation) {
-    this.singleItemMapping = valuation; 
+    this.singleItemMapping = valuation;
   }
-  
-  
+
   public Double getValuation(ICart cart) {
-     Double value = 0.0; 
-     for (IItem item : cart.getItems()) {
-       ISingleItem sItem = new SingleItem(item.getName()); 
-       value += this.singleItemMapping.get(sItem) * item.getItemCount(); 
-     }
-     return value; 
+    Double value = 0.0;
+    for (IItem item : cart.getItems()) {
+      ISingleItem sItem = new SingleItem(item.getName());
+      value += this.singleItemMapping.get(sItem) * item.getItemCount();
+    }
+    return value;
   }
 
   @Override
