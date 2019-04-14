@@ -91,6 +91,7 @@ public class JsonParser implements IJsonParser {
     List<List<List<List<String>>>> valuationGeneratorParameters =
         new LinkedList<List<List<List<String>>>>();
 
+    // get the strings from the json
     while (simulationIterator.hasNext()) {
       List<Map<String, String>> simulationTradeables =
           new LinkedList<Map<String, String>>();
@@ -400,7 +401,9 @@ public class JsonParser implements IJsonParser {
       valuationGeneratorNames.add(simulationValuationGeneratorNames);
       valuationGeneratorParameters.add(simulationValuationGeneratorParameters);
     }
-
+    
+    // parse the strings into classes if necessary, and put into configs
+    
     // tradeable configs
 
     List<List<ITradeableConfig>> tConfigs =

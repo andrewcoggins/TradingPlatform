@@ -1,0 +1,50 @@
+
+{
+	"name": "testParse", 
+	"startingDelayTime": "10", 
+	"simulationDelayTime": "500", 
+	"numTotalRuns": "1", 
+	"simulation": [{
+		"numRuns": "1", 
+		"tradeables": [{
+			"tradeableName": "testTradeable", 
+			"numTradeables": "1"
+		}], 
+		"valuation": [{
+			"distribution": "",
+			"generator": [{
+				"name": "", 
+				"parameters": {
+
+				}
+			}],
+			"tradeables": [{
+				"tradeableName": "testTradeable"
+			}]
+		}], 
+		"endowments": [{
+			"tradeable": [{
+				"tradeableName": "testTradeable", 
+				"numTradeables": "1"
+			}],
+			"money": "100", 
+			"frequency": "1"
+		}], 
+		"seqMarket": [{
+			"simMarket": [{
+				"marketRules": {
+					"aRule": "", 
+					"pRule": "", 
+					"qRule": "", 
+					"actRule": "", 
+					"irPolicy": "", 
+					"innerIRPolicy": "", 
+					"tCondition": ""
+				}, 
+				"tradeables": [{
+					"tradeableName": "testTradeable"
+				}]
+			}]
+		}]
+	}]
+}
