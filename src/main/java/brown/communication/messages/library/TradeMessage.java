@@ -15,17 +15,15 @@ import brown.communication.messageserver.IMessageServer;
  */
 public class TradeMessage extends AbsAgentToServerMessage implements ITradeMessage {
   
-  private Integer agentID;
   private Integer auctionID; 
   private IBid bid; 
   
   public TradeMessage() {
-    super(null); 
+    super(null, null); 
   }
   
   public TradeMessage(Integer messageID, Integer agentID, Integer auctionID, IBid bid) {
-    super(messageID);
-    this.agentID = agentID; 
+    super(messageID ,agentID); 
     this.auctionID = auctionID; 
     this.bid = bid; 
   }

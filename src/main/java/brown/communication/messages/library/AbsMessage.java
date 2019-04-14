@@ -10,18 +10,23 @@ import brown.communication.messages.IMessage;
 public abstract class AbsMessage implements IMessage {
   
 	protected final Integer messageID;
+	protected final Integer agentID; 
 	
 	/**
 	 * Empty message
 	 * @param ID - message ID
 	 */
-	public AbsMessage(Integer messageID) {
+	public AbsMessage(Integer messageID, Integer agentID) {
 		this.messageID = messageID;
+		this.agentID = agentID; 
 	}
 	
 	public Integer getMessageID() {
 		return this.messageID;
 	}
 
+	public Integer getAgentID() {
+    return this.agentID; 
+  }
 	
 }

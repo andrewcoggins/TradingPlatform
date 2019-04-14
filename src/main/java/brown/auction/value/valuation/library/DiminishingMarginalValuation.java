@@ -5,44 +5,43 @@ import brown.logging.library.ErrorLogging;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 
-public class DiminishingMarginalValuation extends AbsSparseValuation implements IValuation {
+public class DiminishingMarginalValuation extends AbsSparseValuation
+    implements IValuation {
 
-  private double baseValue; 
-  private double factor; 
-  
+  private double baseValue;
+  private double factor;
+
   public DiminishingMarginalValuation(double baseValue, double factor) {
     if (factor > 1) {
-      ErrorLogging.log("ERROR: diminishing marginal valuation factor should be less than 1");
+      ErrorLogging.log(
+          "ERROR: diminishing marginal valuation factor should be less than 1");
     } else {
-      this.baseValue = baseValue; 
-      this.factor = factor;  
+      this.baseValue = baseValue;
+      this.factor = factor;
     }
-  }
-  
-  
-  public Double getValuation(ICart cart) {
-    double count = 0; 
-    double value = 0.0; 
-    
-    for (IItem item : cart.getItems()) {
-      count += item.getItemCount(); 
-    }
-    
-    for (int i = 0; i < count; i++) {
-      value += baseValue; 
-      baseValue *= factor; 
-    }
-    
-    return value; 
   }
 
+  public Double getValuation(ICart cart) {
+    double count = 0;
+    double value = 0.0;
+
+    for (IItem item : cart.getItems()) {
+      count += item.getItemCount();
+    }
+
+    for (int i = 0; i < count; i++) {
+      value += baseValue;
+      baseValue *= factor;
+    }
+
+    return value;
+  }
 
   @Override
   public String toString() {
     return "DiminishingMarginalValuation [baseValue=" + baseValue + ", factor="
         + factor + "]";
   }
-
 
   @Override
   public int hashCode() {
@@ -73,5 +72,5 @@ public class DiminishingMarginalValuation extends AbsSparseValuation implements 
       return false;
     return true;
   }
-  
+
 }

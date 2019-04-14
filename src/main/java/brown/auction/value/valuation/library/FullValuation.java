@@ -7,19 +7,19 @@ import brown.platform.item.ICart;
 
 public class FullValuation extends AbsValuation implements IValuation {
 
-  private Map<ICart, Double> valuation; 
-  
+  private Map<ICart, Double> valuation;
+
   public FullValuation() {
     this.valuation = null;
   }
-  
+
   public FullValuation(Map<ICart, Double> valuation) {
-    this.valuation = valuation; 
+    this.valuation = valuation;
   }
-  
+
   @Override
   public Double getValuation(ICart cart) {
-    return this.valuation.get(cart); 
+    return this.valuation.get(cart);
   }
 
   @Override
