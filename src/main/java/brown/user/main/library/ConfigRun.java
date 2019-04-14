@@ -26,21 +26,22 @@ import brown.platform.market.IFlexibleRules;
 import brown.platform.tradeable.ITradeable;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
+import brown.user.main.ISimulationConfig;
 import brown.user.main.ITradeableConfig;
 import brown.user.main.IValuationConfig;
 
 
 public class ConfigRun {
 
-    private List<SimulationConfig> config;
+    private List<ISimulationConfig> config;
 
-    public ConfigRun(List<SimulationConfig> config) {
+    public ConfigRun(List<ISimulationConfig> config) {
         this.config = config;
     }
 
     public void run(Integer startingDelayTime, Integer simulationDelayTime, Integer numSimulations) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, InterruptedException {
         ISimulationManager simulationManager = new SimulationManager();
-        for (SimulationConfig aConfig : this.config) {
+        for (ISimulationConfig aConfig : this.config) {
             IWorldManager worldManager = new WorldManager();
             IDomainManager domainManager = new DomainManager();
             IEndowmentManager endowmentManager = new EndowmentManager();

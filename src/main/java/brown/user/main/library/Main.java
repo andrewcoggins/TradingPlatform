@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.parser.ParseException;
 
@@ -38,14 +39,13 @@ public class Main {
       InstantiationException, IllegalAccessException, InvocationTargetException,
       IllegalArgumentException, InterruptedException, FileNotFoundException, IOException, ParseException {
 
-    Integer numRuns;
+    Integer numTotalRuns;
     Integer startingDelayTime;
     Integer simulationDelayTime;
     String tTypeString;
     Integer numTradeables;
     String distributionString;
     String generatorString;
-    String endowmenttTypeString;
     Integer endowmentNumTradeables;
     Integer endowmentMoney;
     String aRuleString;
@@ -56,12 +56,12 @@ public class Main {
     String innerIRPolicyString;
     String tConditionString;
 
-    List<SimulationConfig> configs = new LinkedList<>();
+    List<ISimulationConfig> configs = new LinkedList<>();
 
     String inputType = args[0];
     TestLogging.log(inputType);
     if (inputType.equals("args")) {
-      numRuns = new Integer(args[1]);
+      numTotalRuns = new Integer(args[1]);
       startingDelayTime = new Integer(args[2]);
       simulationDelayTime = new Integer(args[3]);
       tTypeString = args[4];
@@ -79,7 +79,7 @@ public class Main {
       tConditionString = args[16];
 
       CommandLineParser parser = new CommandLineParser();
-      SimulationConfig runConfig = parser.parseCommandLine(numRuns,
+      SimulationConfig runConfig = parser.parseCommandLine(numTotalRuns,
           startingDelayTime, simulationDelayTime, tTypeString, numTradeables,
           distributionString, generatorString, endowmentNumTradeables,
           endowmentMoney, aRuleString, pRuleString, qRuleString, actRuleString,
@@ -89,20 +89,19 @@ public class Main {
        String fileName = args[1]; 
        IJsonParser jsonParser = new JsonParser(); 
        List<ISimulationConfig> runConfig = jsonParser.parseJSON(fileName); 
-       
-       // TODO: deal with these better.
-       startingDelayTime = 0; 
-       simulationDelayTime = 0; 
-       numRuns = 0; 
+       configs.addAll(runConfig); 
+       Map<String, Integer> outerParams = jsonParser.parseJSONOuterParameters(fileName); 
+       startingDelayTime = outerParams.get("startingDelayTime");
+       simulationDelayTime = outerParams.get("simulationDelayTime");
+       numTotalRuns = outerParams.get("numTotalRuns"); 
     } else {
-      numRuns = 0;
+      numTotalRuns = 0;
       startingDelayTime = 0;
       simulationDelayTime = 0;
       tTypeString = "";
       numTradeables = 0;
       distributionString = "";
       generatorString = "";
-      endowmenttTypeString = "";
       endowmentNumTradeables = 0;
       endowmentMoney = 0;
       aRuleString = "";
@@ -116,6 +115,6 @@ public class Main {
     }
 
     ConfigRun configRun = new ConfigRun(configs);
-    configRun.run(startingDelayTime, simulationDelayTime, numRuns);
+    configRun.run(startingDelayTime, simulationDelayTime, numTotalRuns);
   }
 }

@@ -70,12 +70,7 @@ public class JsonParser implements IJsonParser {
     Iterator<Map.Entry> valuationTradeablesKeyIterator;
     Iterator<Map.Entry> generatorKeyIterator;
     Iterator<Map.Entry> generatorParamsKeyIterator;
-
-    // outside strings
-    String name = (String) jo.get("name");
-    String startingDelayTime = (String) jo.get("startingDelayTime");
-    String simulationDelayTime = (String) jo.get("simulationDelayTime");
-
+    
     // within simulation strings
     List<String> numRunsList = new LinkedList<String>();
     List<List<Map<String, String>>> tradeables =
@@ -589,20 +584,7 @@ public class JsonParser implements IJsonParser {
       marketConfigs.add(simulationMarketConfigs);
     }
 
-    // TODO: put it all together
-    // List<List<ITradeableConfig>> tConfigs =
-    // new LinkedList<List<ITradeableConfig>>();
-    // List<List<IValuationConfig>> valuationConfigs =
-    // new LinkedList<List<IValuationConfig>>();
-    // List<List<IEndowmentConfig>> endowmentConfigs =
-    // new LinkedList<List<IEndowmentConfig>>();
-    // List<List<List<IMarketConfig>>> marketConfigs =
-    // new LinkedList<List<List<IMarketConfig>>>();
-
-    // public SimulationConfig(Integer simulationRuns, List<ITradeableConfig>
-    // tConfig, List<IValuationConfig> vConfig,
-    // List<IEndowmentConfig> eConfig, List<List<IMarketConfig>> mConfig) {
-
+    // put it all together
     List<ISimulationConfig> simulationConfigs =
         new LinkedList<ISimulationConfig>();
 
@@ -617,4 +599,22 @@ public class JsonParser implements IJsonParser {
     return simulationConfigs;
   }
 
+  @Override
+  public Map<String, Integer> parseJSONOuterParameters(String fileName)
+      throws FileNotFoundException, IOException, ParseException {
+    Object rawInput = new JSONParser().parse(new FileReader(fileName));
+
+    JSONObject jo = (JSONObject) rawInput;
+
+    
+    Map<String, Integer> outerParams = new HashMap<String, Integer>(); 
+    outerParams.put("numTotalRuns", Integer.parseInt((String) jo.get("numTotalRuns"))); 
+    outerParams.put("startingDelayTime", Integer.parseInt((String) jo.get("startingDelayTime"))); 
+    outerParams.put("simulationDelayTime", Integer.parseInt((String) jo.get("simulationDelayTime"))); 
+    
+    return outerParams; 
+    
+  }
+
+  
 }

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.parser.ParseException;
 
@@ -14,5 +15,8 @@ public interface IJsonParser extends IInputParser {
       ClassNotFoundException, NoSuchMethodException, SecurityException,
       InstantiationException, IllegalAccessException, IllegalArgumentException,
       InvocationTargetException;
+
+  public Map<String, Integer> parseJSONOuterParameters(String fileName)
+      throws FileNotFoundException, IOException, ParseException;
 
 }
