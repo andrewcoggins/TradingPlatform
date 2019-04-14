@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -15,7 +16,16 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import brown.auction.rules.IActivityRule;
+import brown.auction.rules.IAllocationRule;
+import brown.auction.rules.IInformationRevelationPolicy;
+import brown.auction.rules.IInnerIRPolicy;
+import brown.auction.rules.IPaymentRule;
+import brown.auction.rules.IQueryRule;
+import brown.auction.rules.ITerminationCondition;
 import brown.logging.library.ErrorLogging;
+import brown.platform.market.IFlexibleRules;
+import brown.platform.market.library.FlexibleRules;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IJsonParser;
 import brown.user.main.IMarketConfig;
@@ -29,7 +39,9 @@ public class JsonParser implements IJsonParser {
   @Override
   public List<ISimulationConfig> parseJSON(String fileName)
       throws FileNotFoundException, IOException, ParseException,
-      ClassNotFoundException, NoSuchMethodException, SecurityException {
+      ClassNotFoundException, NoSuchMethodException, SecurityException,
+      InstantiationException, IllegalAccessException, IllegalArgumentException,
+      InvocationTargetException {
     Object rawInput = new JSONParser().parse(new FileReader(fileName));
 
     JSONObject jo = (JSONObject) rawInput;
@@ -395,7 +407,7 @@ public class JsonParser implements IJsonParser {
     }
 
     // tradeable configs
-    
+
     List<List<ITradeableConfig>> tConfigs =
         new LinkedList<List<ITradeableConfig>>();
     for (List<Map<String, String>> simulationTradeables : tradeables) {
@@ -411,102 +423,198 @@ public class JsonParser implements IJsonParser {
     }
 
     // valuation configs
-    
+
     List<List<IValuationConfig>> valuationConfigs =
         new LinkedList<List<IValuationConfig>>();
     for (int i = 0; i < valuationDistributions.size(); i++) {
-      List<IValuationConfig> simulationValConfigs = new LinkedList<IValuationConfig>(); 
+      List<IValuationConfig> simulationValConfigs =
+          new LinkedList<IValuationConfig>();
       List<String> simulationValuationDistributions =
           valuationDistributions.get(i);
-      List<List<String>> simulationValuationTradeables = valuationTradeables.get(i); 
-      List<List<String>> simulationValuationGeneratorNames = valuationGeneratorNames.get(i); 
-      List<List<List<String>>> simulationValuationGeneratorParams = valuationGeneratorParameters.get(i); 
+      List<List<String>> simulationValuationTradeables =
+          valuationTradeables.get(i);
+      List<List<String>> simulationValuationGeneratorNames =
+          valuationGeneratorNames.get(i);
+      List<List<List<String>>> simulationValuationGeneratorParams =
+          valuationGeneratorParameters.get(i);
       for (int j = 0; i < simulationValuationDistributions.size(); j++) {
         String valuationDistributionString =
             simulationValuationDistributions.get(i);
-        Class<?> distributionClass = Class.forName(
-            "brown.auction.value.distribution.library." + valuationDistributionString);
+        Class<?> distributionClass =
+            Class.forName("brown.auction.value.distribution.library."
+                + valuationDistributionString);
         Constructor<?> distributionCons =
             distributionClass.getConstructor(Map.class, List.class);
-        
-        List<String> singleValuationTradeables = simulationValuationTradeables.get(j);
-        
-        List<String> singleValuationGeneratorNames = simulationValuationGeneratorNames.get(j); 
-        
-        List<List<String>> singleValuationGeneratorParams = simulationValuationGeneratorParams.get(j); 
-        
-        Map<Constructor<?>, List<Double>> generators = new HashMap<Constructor<?>, List<Double>>(); 
-        
+
+        List<String> singleValuationTradeables =
+            simulationValuationTradeables.get(j);
+
+        List<String> singleValuationGeneratorNames =
+            simulationValuationGeneratorNames.get(j);
+
+        List<List<String>> singleValuationGeneratorParams =
+            simulationValuationGeneratorParams.get(j);
+
+        Map<Constructor<?>, List<Double>> generators =
+            new HashMap<Constructor<?>, List<Double>>();
+
         for (int k = 0; k < singleValuationGeneratorNames.size(); k++) {
-          String generatorName = singleValuationGeneratorNames.get(k); 
-          Class<?> generatorClass = Class
-              .forName("brown.auction.value.generator.library." + generatorName);
-          Constructor<?> generatorCons = generatorClass.getConstructor(List.class);
-          
-          List<Double> generatorParams = new LinkedList<Double>(); 
-          List<String> generatorStringParams = singleValuationGeneratorParams.get(k); 
+          String generatorName = singleValuationGeneratorNames.get(k);
+          Class<?> generatorClass = Class.forName(
+              "brown.auction.value.generator.library." + generatorName);
+          Constructor<?> generatorCons =
+              generatorClass.getConstructor(List.class);
+
+          List<Double> generatorParams = new LinkedList<Double>();
+          List<String> generatorStringParams =
+              singleValuationGeneratorParams.get(k);
           for (String param : generatorStringParams) {
-            generatorParams.add(Double.parseDouble(param)); 
+            generatorParams.add(Double.parseDouble(param));
           }
           // TODO: need to make this not a map so we can have dup generators
-          generators.put(generatorCons, generatorParams); 
+          generators.put(generatorCons, generatorParams);
         }
-        IValuationConfig valConfig = new ValuationConfig(singleValuationTradeables, distributionCons, generators); 
-        simulationValConfigs.add(valConfig); 
+        IValuationConfig valConfig = new ValuationConfig(
+            singleValuationTradeables, distributionCons, generators);
+        simulationValConfigs.add(valConfig);
       }
-      valuationConfigs.add(simulationValConfigs); 
+      valuationConfigs.add(simulationValConfigs);
     }
 
     // endowment configs
-    
-    List<List<IEndowmentConfig>> endowmentConfigs = new LinkedList<List<IEndowmentConfig>>();
+
+    List<List<IEndowmentConfig>> endowmentConfigs =
+        new LinkedList<List<IEndowmentConfig>>();
     for (int i = 0; i < endowmentTradeables.size(); i++) {
-      List<IEndowmentConfig> simulationEndowmentConfigs = new LinkedList<IEndowmentConfig>(); 
-      List<List<Map<String, String>>> simulationEndowmentTradeables = endowmentTradeables.get(i); 
-      List<Map<String, String>> simulationEndowmentParams = endowmentParams.get(i); 
+      List<IEndowmentConfig> simulationEndowmentConfigs =
+          new LinkedList<IEndowmentConfig>();
+      List<List<Map<String, String>>> simulationEndowmentTradeables =
+          endowmentTradeables.get(i);
+      List<Map<String, String>> simulationEndowmentParams =
+          endowmentParams.get(i);
       for (int j = 0; j < simulationEndowmentTradeables.size(); j++) {
-        List<Map<String, String>> singleEndowmentTradeables = simulationEndowmentTradeables.get(j); 
-        Map<String, String> singleEndowmentParams = simulationEndowmentParams.get(j); 
+        List<Map<String, String>> singleEndowmentTradeables =
+            simulationEndowmentTradeables.get(j);
+        Map<String, String> singleEndowmentParams =
+            simulationEndowmentParams.get(j);
         Double money = Double.parseDouble(singleEndowmentParams.get("money"));
-        Integer frequency = Integer.parseInt(singleEndowmentParams.get("frequency")); 
-        Map<String, Integer> endowmentMapping = new HashMap<String, Integer>(); 
+        Integer frequency =
+            Integer.parseInt(singleEndowmentParams.get("frequency"));
+        Map<String, Integer> endowmentMapping = new HashMap<String, Integer>();
         for (int k = 0; k < singleEndowmentTradeables.size(); k++) {
-          Map<String, String> singleTradeable = singleEndowmentTradeables.get(k); 
-          String tName = singleTradeable.get("tradeableName"); 
-          Integer numTradeables = Integer.parseInt(singleTradeable.get("numTradeables")); 
-          endowmentMapping.put(tName, numTradeables); 
+          Map<String, String> singleTradeable =
+              singleEndowmentTradeables.get(k);
+          String tName = singleTradeable.get("tradeableName");
+          Integer numTradeables =
+              Integer.parseInt(singleTradeable.get("numTradeables"));
+          endowmentMapping.put(tName, numTradeables);
         }
-        // TODO: endowment names?? 
-        simulationEndowmentConfigs.add(new EndowmentConfig("default", endowmentMapping, money, frequency)); 
+        // TODO: endowment names??
+        simulationEndowmentConfigs.add(
+            new EndowmentConfig("default", endowmentMapping, money, frequency));
       }
-      endowmentConfigs.add(simulationEndowmentConfigs); 
+      endowmentConfigs.add(simulationEndowmentConfigs);
     }
-    
+
     // market configs
-//    List<List<List<Map<String, String>>>> marketRules =
-//        new LinkedList<List<List<Map<String, String>>>>();
-//    List<List<List<List<String>>>> marketTradeables =
-//        new LinkedList<List<List<List<String>>>>();
-    
-    List<List<List<IMarketConfig>>> marketConfigs = new LinkedList<List<List<IMarketConfig>>>(); 
+
+    List<List<List<IMarketConfig>>> marketConfigs =
+        new LinkedList<List<List<IMarketConfig>>>();
     for (int i = 0; i < marketRules.size(); i++) {
-      List<List<IMarketConfig>> simulationMarketConfigs = new LinkedList<List<IMarketConfig>>(); 
-      List<List<Map<String, String>>> simulationMarketRules = marketRules.get(i); 
-      List<List<List<String>>> simulationMarketTradeables = marketTradeables.get(i); 
-      for(int j = 0; j < simulationMarketRules.size(); j++) {
-        List<IMarketConfig> simMarketConfigs = new LinkedList<IMarketConfig>(); 
-        List<Map<String, String>> simultaneousMarketRules = simulationMarketRules.get(j); 
-        List<List<String>> simultaneousMarketTradeables = simulationMarketTradeables.get(j);
+      List<List<IMarketConfig>> simulationMarketConfigs =
+          new LinkedList<List<IMarketConfig>>();
+      List<List<Map<String, String>>> simulationMarketRules =
+          marketRules.get(i);
+      List<List<List<String>>> simulationMarketTradeables =
+          marketTradeables.get(i);
+      for (int j = 0; j < simulationMarketRules.size(); j++) {
+        List<IMarketConfig> simMarketConfigs = new LinkedList<IMarketConfig>();
+        List<Map<String, String>> simultaneousMarketRules =
+            simulationMarketRules.get(j);
+        List<List<String>> simultaneousMarketTradeables =
+            simulationMarketTradeables.get(j);
         for (int k = 0; k < simultaneousMarketRules.size(); k++) {
-          Map<String, String> singleMarketRules = simultaneousMarketRules.get(k); 
-          List<String> singleMarketTradeables = simultaneousMarketTradeables.get(k); 
+          Map<String, String> singleMarketRules =
+              simultaneousMarketRules.get(k);
+          String aRuleString = singleMarketRules.get("aRule");
+          String pRuleString = singleMarketRules.get("pRule");
+          String qRuleString = singleMarketRules.get("qRule");
+          String actRuleString = singleMarketRules.get("actRule");
+          String irPolicyString = singleMarketRules.get("irPolicy");
+          String innerIRPolicyString = singleMarketRules.get("innerIRPolicy");
+          String tConditionString = singleMarketRules.get("tCondition");
+
+          Class<?> aRuleClass = Class.forName(
+              "brown.auction.rules.allocation.onesided." + aRuleString);
+          Class<?> pRuleClass = Class
+              .forName("brown.auction.rules.payment.onesided." + pRuleString);
+          Class<?> qRuleClass = Class
+              .forName("brown.auction.rules.query.onesided." + qRuleString);
+          Class<?> actRuleClass = Class.forName(
+              "brown.auction.rules.activity.onesided." + actRuleString);
+          Class<?> irPolicyClass = Class
+              .forName("brown.auction.rules.ir.onesided." + irPolicyString);
+          Class<?> innerIRPolicyClass = Class
+              .forName("brown.auction.rules.onesided." + innerIRPolicyString);
+          Class<?> tConditionClass = Class.forName(
+              "brown.auction.rules.termination.onesided." + tConditionString);
+
+          Constructor<?> aRuleCons = aRuleClass.getConstructor();
+          Constructor<?> pRuleCons = pRuleClass.getConstructor();
+          Constructor<?> qRuleCons = qRuleClass.getConstructor();
+          Constructor<?> actRuleCons = actRuleClass.getConstructor();
+          Constructor<?> irPolicyCons = irPolicyClass.getConstructor();
+          Constructor<?> innerIRPolicyCons =
+              innerIRPolicyClass.getConstructor();
+          Constructor<?> tConditionCons = tConditionClass.getConstructor();
+
+          IFlexibleRules marketRule =
+              new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
+                  (IPaymentRule) pRuleCons.newInstance(),
+                  (IQueryRule) qRuleCons.newInstance(),
+                  (IActivityRule) actRuleCons.newInstance(),
+                  (IInformationRevelationPolicy) irPolicyCons.newInstance(),
+                  (IInnerIRPolicy) innerIRPolicyCons.newInstance(),
+                  (ITerminationCondition) tConditionCons.newInstance());
+
+          List<String> singleMarketTradeables =
+              simultaneousMarketTradeables.get(k);
+
+          IMarketConfig singleMarketConfig =
+              new MarketConfig(marketRule, singleMarketTradeables);
+          simMarketConfigs.add(singleMarketConfig);
         }
+        simulationMarketConfigs.add(simMarketConfigs);
       }
+      marketConfigs.add(simulationMarketConfigs);
     }
+
+    // TODO: put it all together
+    // List<List<ITradeableConfig>> tConfigs =
+    // new LinkedList<List<ITradeableConfig>>();
+    // List<List<IValuationConfig>> valuationConfigs =
+    // new LinkedList<List<IValuationConfig>>();
+    // List<List<IEndowmentConfig>> endowmentConfigs =
+    // new LinkedList<List<IEndowmentConfig>>();
+    // List<List<List<IMarketConfig>>> marketConfigs =
+    // new LinkedList<List<List<IMarketConfig>>>();
+
+    // public SimulationConfig(Integer simulationRuns, List<ITradeableConfig>
+    // tConfig, List<IValuationConfig> vConfig,
+    // List<IEndowmentConfig> eConfig, List<List<IMarketConfig>> mConfig) {
+
     List<ISimulationConfig> simulationConfigs =
         new LinkedList<ISimulationConfig>();
 
-    return null;
+    for (int i = 0; i < tConfigs.size(); i++) {
+      ISimulationConfig singleConfig =
+          new SimulationConfig(Integer.parseInt(numRunsList.get(i)),
+              tConfigs.get(i), valuationConfigs.get(i), endowmentConfigs.get(i),
+              marketConfigs.get(i));
+      simulationConfigs.add(singleConfig); 
+    }
+
+    return simulationConfigs;
   }
 
 }
