@@ -10,7 +10,6 @@ public class EndowmentConfig implements IEndowmentConfig {
    
   private String name; 
   private Map<String, Integer> endowmentMapping; 
-  private Map<String, List<String>> includeMapping; 
   private Double money; 
   private Integer frequency; 
   
@@ -18,34 +17,19 @@ public class EndowmentConfig implements IEndowmentConfig {
   public EndowmentConfig(String name, Map<String, Integer> endowmentMapping, Double money) {
     this.name = name; 
     this.endowmentMapping = endowmentMapping;
-    this.includeMapping = new HashMap<String, List<String>>(); 
     this.money = money;
     this.frequency = 1; 
   }
   
-  public EndowmentConfig(String name, Map<String, Integer> endowmentMapping, Map<String, List<String>> includeMapping, Double money) {
-    this.name = name; 
-    this.endowmentMapping = endowmentMapping;
-    this.includeMapping = includeMapping; 
-    this.money = money;
-    this.frequency = 1; 
-  }
+
   
   public EndowmentConfig(String name, Map<String, Integer> endowmentMapping, Double money, Integer frequency) {
     this.name = name; 
     this.endowmentMapping = endowmentMapping; 
-    this.includeMapping = new HashMap<String, List<String>>();
     this.money = money;
     this.frequency = frequency; 
   }
   
-  public EndowmentConfig(String name, Map<String, Integer> endowmentMapping,  Map<String, List<String>> includeMapping, Double money, Integer frequency) {
-    this.name = name; 
-    this.endowmentMapping = endowmentMapping; 
-    this.includeMapping = includeMapping; 
-    this.money = money;
-    this.frequency = frequency; 
-  }
 
   @Override
   public String getName() {
@@ -57,10 +41,6 @@ public class EndowmentConfig implements IEndowmentConfig {
     return this.endowmentMapping;
   }
 
-  @Override
-  public Map<String, List<String>> getIncludeMapping() {
-    return this.includeMapping;
-  }
 
   @Override
   public Double getMoney() {
@@ -75,8 +55,8 @@ public class EndowmentConfig implements IEndowmentConfig {
   @Override
   public String toString() {
     return "EndowmentConfig [name=" + name + ", endowmentMapping="
-        + endowmentMapping + ", includeMapping=" + includeMapping + ", money="
-        + money + ", frequency=" + frequency + "]";
+        + endowmentMapping + ", money=" + money + ", frequency=" + frequency
+        + "]";
   }
 
   @Override
@@ -86,8 +66,6 @@ public class EndowmentConfig implements IEndowmentConfig {
     result = prime * result
         + ((endowmentMapping == null) ? 0 : endowmentMapping.hashCode());
     result = prime * result + ((frequency == null) ? 0 : frequency.hashCode());
-    result = prime * result
-        + ((includeMapping == null) ? 0 : includeMapping.hashCode());
     result = prime * result + ((money == null) ? 0 : money.hashCode());
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     return result;
@@ -112,11 +90,6 @@ public class EndowmentConfig implements IEndowmentConfig {
         return false;
     } else if (!frequency.equals(other.frequency))
       return false;
-    if (includeMapping == null) {
-      if (other.includeMapping != null)
-        return false;
-    } else if (!includeMapping.equals(other.includeMapping))
-      return false;
     if (money == null) {
       if (other.money != null)
         return false;
@@ -129,6 +102,5 @@ public class EndowmentConfig implements IEndowmentConfig {
       return false;
     return true;
   }
-  
   
 }

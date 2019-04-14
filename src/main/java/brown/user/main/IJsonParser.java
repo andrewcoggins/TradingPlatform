@@ -7,7 +7,9 @@ import java.util.List;
 import org.json.simple.parser.ParseException;
 
 public interface IJsonParser extends IInputParser {
-  
-  public List<ISimulationConfig> parseJSON(String fileName) throws FileNotFoundException, IOException, ParseException ; 
-  
+
+  public List<ISimulationConfig> parseJSON(String fileName)
+      throws FileNotFoundException, IOException, ParseException,
+      ClassNotFoundException, NoSuchMethodException;
+
 }

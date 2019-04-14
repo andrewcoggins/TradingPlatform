@@ -1,6 +1,5 @@
 package brown.platform.managers.library;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,6 +12,7 @@ import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.managers.ITradeableManager;
 import brown.platform.tradeable.ITradeable;
+import brown.platform.tradeable.library.Tradeable;
 
 /**
  * A TradeableManager is an entity that creates tradeables for an auction.
@@ -40,13 +40,12 @@ public class TradeableManager implements ITradeableManager {
     }
 
     @Override
-    public void createTradeables(String name, Constructor<?> tTypeCons, int numTradeables) throws InstantiationException,
-    IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public void createTradeables(String name, int numTradeables) {
       try {
       if (!lock) {
           List<ITradeable> tentative = new LinkedList<>();
           for (int i = 0; i < numTradeables; i++) {
-              tentative.add((ITradeable) tTypeCons.newInstance(i + this.tradeableCount));
+              tentative.add(new Tradeable(i + this.tradeableCount, name));
           }
           this.tradeableCount += numTradeables; 
           this.tradeables.put(name, tentative); 

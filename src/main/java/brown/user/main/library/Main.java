@@ -89,6 +89,11 @@ public class Main {
        String fileName = args[1]; 
        IJsonParser jsonParser = new JsonParser(); 
        List<ISimulationConfig> runConfig = jsonParser.parseJSON(fileName); 
+       
+       // TODO: deal with these better.
+       startingDelayTime = 0; 
+       simulationDelayTime = 0; 
+       numRuns = 0; 
     } else {
       numRuns = 0;
       startingDelayTime = 0;

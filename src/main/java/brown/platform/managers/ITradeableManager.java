@@ -1,7 +1,6 @@
 
 package brown.platform.managers;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -16,8 +15,7 @@ public interface ITradeableManager {
      * createTradeables: creates simple tradeables.
      * @param numTradeables number of tradeables to be created.
      */
-    void createTradeables(String name, Constructor<?> tType, int numTradeables) throws InstantiationException,
-    IllegalAccessException, IllegalArgumentException, InvocationTargetException;
+    void createTradeables(String name, int numTradeables); 
 
     /**
      * getter for itradeabes

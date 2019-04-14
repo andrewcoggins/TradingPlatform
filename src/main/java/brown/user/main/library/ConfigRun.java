@@ -54,7 +54,7 @@ public class ConfigRun {
             
             List<ITradeableConfig> tradeableConfig = aConfig.getTConfig(); 
             for (ITradeableConfig tConfig : tradeableConfig) {
-              tradeableManager.createTradeables(tConfig.getTradeableName(), tConfig.getTType(), tConfig.getNumTradeables()); 
+              tradeableManager.createTradeables(tConfig.getTradeableName(), tConfig.getNumTradeables()); 
             }
             
             // valuation manager. 
@@ -78,7 +78,7 @@ public class ConfigRun {
             for (IEndowmentConfig eConfig: aConfig.getEConfig()) {
               
               endowmentManager.createEndowment(eConfig.getName(), eConfig.getEndowmentMapping(),
-                  eConfig.getIncludeMapping(), eConfig.getFrequency(), allTradeables, eConfig.getMoney());
+                   eConfig.getFrequency(), allTradeables, eConfig.getMoney());
             }
             
             
