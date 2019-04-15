@@ -22,26 +22,19 @@ public class Tradeable implements ITradeable {
   }
   
   /**
-   * An abstract tradeable has an ID, a count and a type.
-   * @param ID tradeable ID
-   * @param type type of tradeable
+   * A tradeable has an ID and a name.
+   * @param ID
+   * @param name
    */
   public Tradeable(Integer id, String name) {
    this.ID = id; 
    this.NAME = name; 
   }
-
-  /**
-   * Gets the ID of the tradeable. 
-   */
+  
   public Integer getID() {
     return this.ID;
   }
   
-  /**
-   * gets the name of the tradeable.
-   * @return
-   */
   public String getName() {
     return this.NAME; 
   }
