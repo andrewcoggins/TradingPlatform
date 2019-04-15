@@ -1,7 +1,7 @@
 package brown.platform.tradeable;
 
 /**
- * Interface for items that are bid on and won in auctions.
+ * Interface for items in auctions.
  * @author acoggins
  *
  */
@@ -9,14 +9,13 @@ public interface ITradeable {
   
   /**
    * gets the ID of a tradeable.
-   * @return inter ID
+   * @return integer ID
    */
   public Integer getID();
   
   /**
-   * gets the count of a tradeable.
-   * @return how many atomic tradeables are 
-   * stored in this ITradeable
+   * gets the name of a tradeable.
+   * @return string Name
    */
   public String getName();
   
