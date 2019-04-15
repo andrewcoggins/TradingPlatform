@@ -20,5 +20,4 @@ public interface ITradeable {
    */
   public String getName();
   
-  
 }
