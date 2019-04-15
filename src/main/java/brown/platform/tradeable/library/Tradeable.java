@@ -4,11 +4,10 @@ package brown.platform.tradeable.library;
 import brown.platform.tradeable.ITradeable;
 
 /**
-* A simple tradeable is a single tradeable.
+* A tradeable.
 * @author amy
 */
 public class Tradeable implements ITradeable {   
-
 
   private Integer ID;
   private String NAME; 
@@ -25,11 +24,10 @@ public class Tradeable implements ITradeable {
   /**
    * An abstract tradeable has an ID, a count and a type.
    * @param ID tradeable ID
-   * @param count count of tradeable. 
-   * @param type type of tradeable.
+   * @param type type of tradeable
    */
-  public Tradeable(Integer ID, String name) {
-   this.ID = ID; 
+  public Tradeable(Integer id, String name) {
+   this.ID = id; 
    this.NAME = name; 
   }
 
@@ -47,7 +45,6 @@ public class Tradeable implements ITradeable {
   public String getName() {
     return this.NAME; 
   }
-  
 
   @Override
   public String toString() {
