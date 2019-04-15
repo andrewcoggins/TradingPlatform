@@ -11,7 +11,6 @@ import brown.platform.item.ICart;
  */
 public abstract class AbsSparseValuation extends AbsValuation implements IValuation {
 
-  
   @Override
   public abstract Double getValuation(ICart cart); 
 
