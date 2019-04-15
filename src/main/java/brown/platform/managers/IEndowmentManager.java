@@ -8,13 +8,12 @@ import brown.platform.tradeable.ITradeable;
 
 public interface IEndowmentManager {
 
-    void createEndowment(String endowmentName, Map<String, Integer> endowmentMapping,
-        Map<String, List<String>> includeMapping, Integer frequency, Map<String, List<ITradeable>> allTradeables, 
-        Double money);
+  void createEndowment(String endowmentName,
+      Map<String, Integer> endowmentMapping, Integer frequency,
+      Map<String, List<ITradeable>> allTradeables, Double money);
 
-    IInitialEndowment getEndowment();
-    
-    void lock(); 
+  IInitialEndowment getEndowment();
+
+  void lock();
 
 }
-

@@ -73,6 +73,9 @@ public interface IMarket {
   
   public void updateInnerInformation(); 
   
+  
+  public void updateOuterInformation(); 
+  
   /**
    * clears all information stored in market state
    * and rules.

@@ -105,21 +105,22 @@ public class MarketManager implements IMarketManager {
   @Override
   public IStatusMessage handleTradeMessage(ITradeMessage message) {
     Integer marketID = message.getAuctionID();
+    Integer agentID = message.getAgentID(); 
     if (this.activeMarkets.containsKey(marketID)) {
       IMarket market = this.activeMarkets.get(marketID);
       synchronized (market) {
         boolean accepted = market.processBid(message);
         if (!accepted) {
-          return new TradeRejectionMessage(0,
+          return new TradeRejectionMessage(0, agentID, 
               "[x] REJECTED: Trade message for auction "
                   + message.getAuctionID().toString()
                   + " denied: rejected by activity rule.");
         } else {
-          return new TradeRejectionMessage(-1, "");
+          return new TradeRejectionMessage(-1, -1, "");
         }
       }
     } else {
-      return new ErrorMessage(0,
+      return new ErrorMessage(0, agentID,
           "[x] ERROR: Trade message for auction "
               + message.getAuctionID().toString()
               + " denied: market no longer active.");
@@ -150,6 +151,7 @@ public class MarketManager implements IMarketManager {
       ITradeRequestMessage tRequest = market.constructTradeRequest(agentID); 
       // TODO: add the inner information here. This includes reserves, whatever else.
       //tRequest.addInformation(whiteboard)
+      //for an initial trade request in the most basic case... what is it? 
       tradeRequests.add(tRequest);
     }
     return tradeRequests;

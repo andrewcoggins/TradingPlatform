@@ -7,9 +7,14 @@ public abstract class AbsStatusMessage extends AbsServerToAgentMessage implement
   
   private String error; 
   
-  public AbsStatusMessage(Integer messageID, String error) {
-    super(messageID);
-    // TODO Auto-generated constructor stub
+  public AbsStatusMessage() {
+    super(null, null); 
+    this.error = null; 
+  }
+  
+  public AbsStatusMessage(Integer messageID, Integer agentID, String error) {
+    super(messageID, agentID);
+    this.error = error; 
   }
   
   @Override

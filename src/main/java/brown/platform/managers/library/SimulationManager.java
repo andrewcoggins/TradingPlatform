@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.esotericsoftware.kryonet.Connection;
 
+import brown.auction.value.valuation.IValuation;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.IRegistrationMessage;
@@ -26,7 +27,6 @@ import brown.platform.managers.IMarketManager;
 import brown.platform.managers.ISimulationManager;
 import brown.platform.managers.IValuationManager;
 import brown.platform.managers.IWorldManager;
-import brown.platform.market.IMarket;
 import brown.platform.simulation.ISimulation;
 import brown.platform.simulation.library.Simulation;
 import brown.system.setup.library.Startup;
@@ -141,6 +141,7 @@ public class SimulationManager implements ISimulationManager {
 
   @Override
   public void giveTradeMessage(ITradeMessage tradeMessage) {
+    // TODO: send back a status message
     this.currentMarketManager.handleTradeMessage(tradeMessage);
   }
   
@@ -200,6 +201,7 @@ public class SimulationManager implements ISimulationManager {
       }
 
       // TODO: give agents valuations
+      
       
     }
     // the account manager should be able to create these messages.

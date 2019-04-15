@@ -19,9 +19,9 @@ public interface IValuationManager {
     
     public void addAgentValuation(Integer agentID, List<String> tradeableNames, IValuation valuation); 
     
-    public Map<List<String>, IValuation> getAgentValuation(Integer agentID); 
+    public IValuation getAgentValuation(Integer agentID); 
     
-    public IValuationDistribution getDistribution(List<String> tradeableNames);
+    public IValuationDistribution getDistribution();
 
     public void lock();
     

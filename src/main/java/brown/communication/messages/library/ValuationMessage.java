@@ -3,10 +3,14 @@ package brown.communication.messages.library;
 import brown.communication.messages.IValuationMessage;
 import brown.user.agent.IAgent;
 
-public class AbsValuationMessage extends AbsServerToAgentMessage implements IValuationMessage {
+public class ValuationMessage extends AbsServerToAgentMessage implements IValuationMessage {
 
-  public AbsValuationMessage(Integer messageID) {
-    super(messageID);
+  public ValuationMessage() {
+    super(null, null); 
+  }
+  
+  public ValuationMessage(Integer messageID, Integer agentID) {
+    super(messageID, agentID);
     // TODO Auto-generated constructor stub
   }
   

@@ -4,11 +4,11 @@ import brown.communication.messages.IServerToAgentMessage;
 import brown.user.agent.IAgent;
 
 public abstract class AbsServerToAgentMessage extends AbsMessage implements IServerToAgentMessage {
-
-  public AbsServerToAgentMessage(Integer messageID) {
-    super(messageID);
+  
+  public AbsServerToAgentMessage(Integer messageID, Integer agentID) {
+    super(messageID, agentID); 
   }
-
+  
   public abstract void agentDispatch(IAgent agent);
   
 }

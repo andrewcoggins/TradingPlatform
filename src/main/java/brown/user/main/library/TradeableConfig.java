@@ -8,13 +8,11 @@ import brown.user.main.ITradeableConfig;
 public class TradeableConfig implements ITradeableConfig {
   
   private String tradeableName; 
-  private Constructor<?> tType; 
   private Integer numTradeables; 
   
   
-  public TradeableConfig(String tradeableName, Constructor<?> tTypeCons, Integer numTradeables) {
+  public TradeableConfig(String tradeableName, Integer numTradeables) {
     this.tradeableName = tradeableName; 
-    this.tType = tTypeCons; 
     this.numTradeables = numTradeables;    
   }
 
@@ -25,12 +23,6 @@ public class TradeableConfig implements ITradeableConfig {
   }
 
   @Override
-  public Constructor<?> getTType() {
-    
-    return this.tType;
-  }
-
-  @Override
   public Integer getNumTradeables() {
     
     return this.numTradeables;
@@ -38,8 +30,8 @@ public class TradeableConfig implements ITradeableConfig {
 
   @Override
   public String toString() {
-    return "TradeableConfig [tradeableName=" + tradeableName + ", tType="
-        + tType + ", numTradeables=" + numTradeables + "]";
+    return "TradeableConfig [tradeableName=" + tradeableName
+        + ", numTradeables=" + numTradeables + "]";
   }
 
   @Override
@@ -48,7 +40,6 @@ public class TradeableConfig implements ITradeableConfig {
     int result = 1;
     result = prime * result
         + ((numTradeables == null) ? 0 : numTradeables.hashCode());
-    result = prime * result + ((tType == null) ? 0 : tType.hashCode());
     result = prime * result
         + ((tradeableName == null) ? 0 : tradeableName.hashCode());
     return result;
@@ -68,11 +59,6 @@ public class TradeableConfig implements ITradeableConfig {
         return false;
     } else if (!numTradeables.equals(other.numTradeables))
       return false;
-    if (tType == null) {
-      if (other.tType != null)
-        return false;
-    } else if (!tType.equals(other.tType))
-      return false;
     if (tradeableName == null) {
       if (other.tradeableName != null)
         return false;
@@ -80,4 +66,6 @@ public class TradeableConfig implements ITradeableConfig {
       return false;
     return true;
   }
+
+
 }

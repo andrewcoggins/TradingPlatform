@@ -6,7 +6,6 @@ import java.util.Map;
 
 import brown.communication.messages.IBankUpdateMessage;
 import brown.platform.tradeable.ITradeable;
-import brown.user.agent.library.AbsAgent;
 
 /**
  * Message provided to agents when their accounts change

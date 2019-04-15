@@ -1,7 +1,4 @@
-package brown.platform.tradeable; 
-
-
-import brown.platform.tradeable.library.TradeableType;
+package brown.platform.tradeable;
 
 /**
  * Interface for items that are bid on and won in auctions.
@@ -22,11 +19,5 @@ public interface ITradeable {
    * stored in this ITradeable
    */
   public String getName();
-  
-  /**
-   * gets the type of a tradeable
-   * @return a Tradeabletype enum
-   */
-  public TradeableType getType();
   
 }

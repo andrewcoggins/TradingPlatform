@@ -9,21 +9,16 @@ import brown.user.agent.IAgent;
 
 public abstract class AbsBankUpdateMessage extends AbsServerToAgentMessage implements IBankUpdateMessage {
 
-  private Integer agentID; 
   private Map<String, List<ITradeable>> tradeablesAdded; 
   private Map<String, List<ITradeable>> tradeablesLost; 
   private Double money; 
   
   public AbsBankUpdateMessage(Integer messageID, Integer agentID, Map<String, List<ITradeable>> tradeablesAdded,
       Map<String, List<ITradeable>> tradeablesLost, Double money) {
-    super(messageID);
+    super(messageID, agentID);
     this.tradeablesAdded = tradeablesAdded; 
     this.tradeablesLost = tradeablesLost; 
     this.money = money; 
-  }
-
-  public Integer getAgentID() {
-    return this.agentID; 
   }
   
   public Map<String, List<ITradeable>> getTradeablesAdded() {
@@ -42,19 +37,17 @@ public abstract class AbsBankUpdateMessage extends AbsServerToAgentMessage imple
   public void agentDispatch(IAgent agent) {
     agent.onBankUpdate(this);
   }
-  
+
   @Override
   public String toString() {
-    return "[x] Bank Update Message: [agentID=" + agentID + ", tradeablesAdded="
-        + tradeablesAdded + ", tradeablesLost=" + tradeablesLost + ", money="
-        + money + "]";
+    return "AbsBankUpdateMessage [tradeablesAdded=" + tradeablesAdded
+        + ", tradeablesLost=" + tradeablesLost + ", money=" + money + "]";
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((agentID == null) ? 0 : agentID.hashCode());
     result = prime * result + ((money == null) ? 0 : money.hashCode());
     result = prime * result
         + ((tradeablesAdded == null) ? 0 : tradeablesAdded.hashCode());
@@ -72,11 +65,6 @@ public abstract class AbsBankUpdateMessage extends AbsServerToAgentMessage imple
     if (getClass() != obj.getClass())
       return false;
     AbsBankUpdateMessage other = (AbsBankUpdateMessage) obj;
-    if (agentID == null) {
-      if (other.agentID != null)
-        return false;
-    } else if (!agentID.equals(other.agentID))
-      return false;
     if (money == null) {
       if (other.money != null)
         return false;
@@ -94,7 +82,5 @@ public abstract class AbsBankUpdateMessage extends AbsServerToAgentMessage imple
       return false;
     return true;
   }
-  
-  
-  
+ 
 }

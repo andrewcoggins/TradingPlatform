@@ -133,4 +133,9 @@ public class Market implements IMarket {
     return this.PUBLICSTATE;
   }
 
+  @Override
+  public void updateOuterInformation() {
+    this.RULES.getIRPolicy().updatePublicState(this.STATE, this.PUBLICSTATE);
+  }
+
 }

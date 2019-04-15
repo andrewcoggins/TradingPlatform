@@ -7,8 +7,8 @@ import brown.communication.messageserver.IMessageServer;
 
 public abstract class AbsAgentToServerMessage extends AbsMessage implements IAgentToServerMessage {
 
-  public AbsAgentToServerMessage(Integer messageID) {
-    super(messageID);
+  public AbsAgentToServerMessage(Integer messageID, Integer agentID) {
+    super(messageID, agentID);
   }
   
   @Override
