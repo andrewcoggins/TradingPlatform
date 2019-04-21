@@ -172,6 +172,8 @@ public class MarketManager implements IMarketManager {
   public List<IAccountUpdate> finishMarket(Integer marketID) {
     List<IAccountUpdate> accountUpdates =
         this.activeMarkets.get(marketID).constructOrders();
+    IMarket market = this.activeMarkets.get(marketID);
+    market.updateOuterInformation();
     this.whiteboard.postOuterInformation(marketID,
         this.activeMarkets.get(marketID).getPublicState());
     return accountUpdates;
