@@ -52,8 +52,7 @@ public class ValuationManagerTest {
     expectedGenList.add(expectedGen); 
     IValuationDistribution expected = new AdditiveValuationDistribution(tradeables, expectedGenList); 
     
-    List<String> nameList = new LinkedList<String>(tradeables.keySet()); 
-    assertEquals(valManager.getDistribution(nameList), expected); 
+    assertEquals(valManager.getDistribution(), expected); 
   }
   
   @Test
@@ -67,10 +66,7 @@ public class ValuationManagerTest {
     IValuation agentValuation = new AdditiveValuation(valueParams); 
     vManager.addAgentValuation(1, tradeableNames, agentValuation);
     
-    Map<List<String>, IValuation> expected = new HashMap<List<String>, IValuation>(); 
-    expected.put(tradeableNames, agentValuation); 
-    
-    assertEquals(vManager.getAgentValuation(1), expected); 
+    assertEquals(vManager.getAgentValuation(1), agentValuation); 
       
   }
   

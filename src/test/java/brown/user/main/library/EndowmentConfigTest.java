@@ -21,7 +21,6 @@ public class EndowmentConfigTest {
     assertEquals(eConfig.getName(), "trade"); 
     assertEquals(eConfig.getEndowmentMapping(), eMap); 
     assertEquals(eConfig.getFrequency(), new Integer(1)); 
-    assertEquals(eConfig.getIncludeMapping(), new HashMap<String, List<String>>()); 
     assertEquals(eConfig.getMoney(), new Double(100.0)); 
   }
   
@@ -30,13 +29,11 @@ public class EndowmentConfigTest {
     Map<String, Integer> eMap = new HashMap<String, Integer>(); 
     Map<String, List<String>> iMap = new HashMap<String, List<String>>(); 
     eMap.put("a", 1);
-    iMap.put("b", new LinkedList<String>()); 
-    EndowmentConfig eConfig = new EndowmentConfig("trade", eMap, iMap, 100.0); 
+    EndowmentConfig eConfig = new EndowmentConfig("trade", eMap, 100.0); 
     assertEquals(eConfig.getName(), "trade"); 
     assertEquals(eConfig.getEndowmentMapping(), eMap); 
     assertEquals(eConfig.getMoney(), new Double(100.0)); 
     assertEquals(eConfig.getFrequency(), new Integer(1));
-    assertEquals(eConfig.getIncludeMapping(), iMap); 
     
   }
   
@@ -49,7 +46,6 @@ public class EndowmentConfigTest {
     assertEquals(eConfig.getName(), "trade"); 
     assertEquals(eConfig.getEndowmentMapping(), eMap); 
     assertEquals(eConfig.getMoney(), new Double(100.0)); 
-    assertEquals(eConfig.getIncludeMapping(), new HashMap<String, List<String>>()); 
     assertEquals(eConfig.getFrequency(), new Integer(5));
   }
   
@@ -59,12 +55,11 @@ public class EndowmentConfigTest {
     Map<String, List<String>> iMap = new HashMap<String, List<String>>(); 
     eMap.put("a", 1);
     iMap.put("b", new LinkedList<String>()); 
-    EndowmentConfig eConfig = new EndowmentConfig("trade", eMap, iMap, 100.0, 5); 
+    EndowmentConfig eConfig = new EndowmentConfig("trade", eMap, 100.0, 5); 
     assertEquals(eConfig.getName(), "trade"); 
     assertEquals(eConfig.getEndowmentMapping(), eMap); 
     assertEquals(eConfig.getMoney(), new Double(100.0)); 
     assertEquals(eConfig.getFrequency(), new Integer(5));
-    assertEquals(eConfig.getIncludeMapping(), iMap); 
   }
   
 }

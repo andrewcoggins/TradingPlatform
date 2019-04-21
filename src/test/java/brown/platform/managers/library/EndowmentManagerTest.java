@@ -34,7 +34,7 @@ public class EndowmentManagerTest {
     
     allTradeables.put("default", tList); 
     
-    m.createEndowment("e", included, new HashMap<String, List<String>>(), 1, allTradeables, 90.0);
+    m.createEndowment("e", included, 1, allTradeables, 90.0);
      
     IInitialEndowment testEndowment = new InitialEndowment(90.0, allTradeables); 
     

@@ -35,7 +35,7 @@ public class KryoServerTest {
                 }
             }
         });
-        CLIENT.sendTCP(new RegistrationMessage(-1, -1, "testing"));
+        CLIENT.sendTCP(new RegistrationMessage(-1, "testing"));
         CLIENT.sendTCP("testing_one"); 
         CLIENT.sendTCP(1010); 
         CLIENT.sendTCP(false); 
@@ -57,7 +57,7 @@ public class KryoServerTest {
                       Integer theID = 1;
                       connection.sendTCP(15000);
                       connection.setTimeout(60000);
-                      kryoServer.sendToTCP(connection.getID(), new RegistrationMessage(theID, theID));
+                      kryoServer.sendToTCP(connection.getID(), new RegistrationMessage(theID));
                       kryoServer.sendToTCP(connection.getID(), new ErrorMessage(0, "test error"));
                       kryoServer.sendToTCP(connection.getID(), new StringMessage(0, "test string"));
               } else if (message instanceof String) {
@@ -86,7 +86,7 @@ public class KryoServerTest {
     assertEquals(testServer.receivedString, "testing_one"); 
     assertEquals(testServer.receivedBoolean, false); 
     assertTrue(testServer.receivedInteger == 1010); 
-    assertEquals(testServer.receivedMessage, new RegistrationMessage(-1, -1, "testing"));
+    assertEquals(testServer.receivedMessage, new RegistrationMessage(-1, "testing"));
   }
   
   @Test public void testSendMessage() throws InterruptedException {

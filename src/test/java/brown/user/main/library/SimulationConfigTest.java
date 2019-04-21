@@ -14,6 +14,7 @@ import org.junit.Test;
 import brown.auction.rules.IActivityRule;
 import brown.auction.rules.IAllocationRule;
 import brown.auction.rules.IInformationRevelationPolicy;
+import brown.auction.rules.IInnerIRPolicy;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
@@ -21,7 +22,6 @@ import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.library.NormalValGenerator;
 import brown.platform.market.IFlexibleRules;
 import brown.platform.market.library.FlexibleRules;
-import brown.platform.tradeable.library.Tradeable;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
@@ -47,8 +47,9 @@ public class SimulationConfigTest {
     IActivityRule mockActivityRule = mock(IActivityRule.class); 
     IInformationRevelationPolicy mockIR = mock(IInformationRevelationPolicy.class); 
     ITerminationCondition mocktCondition = mock(ITerminationCondition.class); 
+    IInnerIRPolicy innerIR = mock(IInnerIRPolicy.class); 
     
-    IFlexibleRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, mocktCondition); 
+    IFlexibleRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, innerIR, mocktCondition); 
     List<String> tradeableNames = new LinkedList<String>(); 
     tradeableNames.add("default"); 
     IMarketConfig mConfig = new MarketConfig(mRules, tradeableNames); 
@@ -56,14 +57,13 @@ public class SimulationConfigTest {
     mConfigSquared.add(mConfigs); 
     
     Constructor<?> distCons = AdditiveValuationDistribution.class.getConstructor(Map.class, List.class);
-    Constructor<?> tTypeCons = Tradeable.class.getConstructor(Integer.class); 
     Constructor<?> gCons = NormalValGenerator.class.getConstructor(List.class); 
     List<Double> params = new LinkedList<Double>(); 
     params.add(0.0); 
     params.add(1.0);  
     Map<Constructor<?>, List<Double>> gMap = new HashMap<Constructor<?>, List<Double>>(); 
     gMap.put(gCons, params); 
-    ITradeableConfig tConfig = new TradeableConfig("trade", tTypeCons, 10);
+    ITradeableConfig tConfig = new TradeableConfig("trade", 10);
     tConfigs.add(tConfig);
     
     List<String> tNameList = new LinkedList<String>(); 
