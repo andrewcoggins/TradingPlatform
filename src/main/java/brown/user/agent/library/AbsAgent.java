@@ -101,7 +101,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   }
   
   @Override
-  public abstract void onInformationMessage(IInformationMessage imformationMessage); 
+  public abstract void onInformationMessage(IInformationMessage informationMessage); 
 
   @Override
   public abstract void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage); 
