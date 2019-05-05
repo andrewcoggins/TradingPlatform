@@ -440,7 +440,7 @@ public class JsonParser implements IJsonParser {
           valuationGeneratorParameters.get(i);
       for (int j = 0; j < simulationValuationDistributions.size(); j++) {
         String valuationDistributionString =
-            simulationValuationDistributions.get(i);
+            simulationValuationDistributions.get(j);
         Class<?> distributionClass =
             Class.forName("brown.auction.value.distribution.library."
                 + valuationDistributionString);

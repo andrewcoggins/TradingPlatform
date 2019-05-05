@@ -23,8 +23,6 @@ public class JsonParserTest {
     IJsonParser testParser = new JsonParser();
     List<ISimulationConfig> simulationConfigs = testParser.parseJSON("input_configs/test_input.json");
     System.out.println(simulationConfigs.toString()); 
-    assertTrue(simulationConfigs.size() == 1); 
-    
+    assertTrue(simulationConfigs.size() == 2); 
   }
-
 }

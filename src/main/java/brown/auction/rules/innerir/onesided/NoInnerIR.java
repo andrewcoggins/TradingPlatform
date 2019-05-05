@@ -9,7 +9,6 @@ public class NoInnerIR implements IInnerIRPolicy {
   @Override
   public void updatePublicState(IMarketState state,
       IMarketPublicState publicState) {
-    // TODO Auto-generated method stub
     
   }
 

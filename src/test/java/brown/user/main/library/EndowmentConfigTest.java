@@ -13,7 +13,8 @@ import brown.user.main.library.EndowmentConfig;
 
 public class EndowmentConfigTest {
   
-  @Test
+  @SuppressWarnings("deprecation")
+@Test
   public void testEndowmentConfigOne() {
     Map<String, Integer> eMap = new HashMap<String, Integer>(); 
     eMap.put("a", 1); 

@@ -45,5 +45,46 @@
 			}]
 		}]
 	}, 
+	{
+		"numRuns": 1, 
+		"tradeables": [{
+			"tradeableName": "testTradeable", 
+			"numTradeables": "1"
+		}], 
+		"valuation": [{
+			"distribution": "AdditiveValuationDistribution",
+			"generator": [{
+				"name": "NormalValGenerator", 
+				"parameters": [1.0, 1.0]
+			}],
+			"tradeables": [{
+				"tradeableName": "testTradeable"
+			}]
+		}], 
+		"endowments": [{
+			"tradeable": [{
+				"tradeableName": "testTradeable", 
+				"numTradeables": "1"
+			}],
+			"money": 100.0, 
+			"frequency": 1.0
+		}], 
+		"seqMarket": [{
+			"simMarket": [{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"tradeables": [{
+					"tradeableName": "testTradeable"
+				}]
+			}]
+		}]
+	}
 ]
 }
