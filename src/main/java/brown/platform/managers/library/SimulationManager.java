@@ -199,7 +199,8 @@ public class SimulationManager implements ISimulationManager {
       }
 
       // TODO: give agents valuations
-      
+      // TODO: valuation manager needs to be able to store MULTIPLE distributions..?
+      //this.currentValuationManager.addAgentValuation(agentID, this.currentValuationManager.getDistribution(). this.currentValuationManager.getDistribution().sample());
       
     }
     // the account manager should be able to create these messages.

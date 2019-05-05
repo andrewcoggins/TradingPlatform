@@ -19,7 +19,9 @@ public class ValuationManager implements IValuationManager {
     private IValuationDistribution distribution;
     private Map<Integer, IValuation> agentValuations; 
     private boolean lock;
-
+    
+    // TODO: can be multiple. 
+    
     public ValuationManager() {
 
         this.lock = false;
