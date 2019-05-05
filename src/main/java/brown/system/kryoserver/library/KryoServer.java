@@ -21,7 +21,7 @@ public class KryoServer implements IKryoServer {
   public final Server kryoServer;
   protected Map<Connection, Integer> connections;
   
-  public KryoServer(int port, ISetup gameSetup) {
+  public KryoServer(int port, ISetup gameSetup) throws ClassNotFoundException, IOException {
     this.PORT = port;
     this.connections = new ConcurrentHashMap<Connection, Integer>();
 

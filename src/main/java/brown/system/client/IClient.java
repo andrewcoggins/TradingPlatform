@@ -1,6 +1,6 @@
 package brown.system.client;
 
-import brown.communication.messages.IRegistrationMessage;
+import brown.communication.messages.IRegistrationResponseMessage;
 import brown.communication.messages.IStatusMessage;
 
 /**
@@ -15,7 +15,7 @@ public interface IClient {
    * Gets called when the server sends a registration method back to the agent (2nd part of handshake)
    * @param registration - includes the agent's new ID
    */
-  void onRegistration(IRegistrationMessage registration);
+  void onRegistrationResponse(IRegistrationResponseMessage registration);
  
   /**
    * Whenever a message is rejected, a rejection message is sent
