@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.esotericsoftware.kryonet.Connection;
 
-import brown.auction.value.valuation.IValuation;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.IRegistrationMessage;
@@ -17,7 +16,6 @@ import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
 import brown.communication.messageserver.IMessageServer;
 import brown.communication.messageserver.library.MessageServer;
-import brown.logging.library.Logging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.IInitialEndowment;
@@ -128,10 +126,10 @@ public class SimulationManager implements ISimulationManager {
       if (registrationMessage.getName() != null) {
         this.idToName.put(theID, registrationMessage.getName());
       } else {
-        Logging.log(
+        PlatformLogging.log(
             "[x] AbsServer-onRegistration: encountered registration from existing agent");
       }
-      Logging.log("[-] registered " + theID);
+      PlatformLogging.log("[-] registered " + theID);
       connection.sendTCP(15000);
       connection.setTimeout(60000);
       return theID;
@@ -201,7 +199,8 @@ public class SimulationManager implements ISimulationManager {
       }
 
       // TODO: give agents valuations
-      
+      // TODO: valuation manager needs to be able to store MULTIPLE distributions..?
+      //this.currentValuationManager.addAgentValuation(agentID, this.currentValuationManager.getDistribution(). this.currentValuationManager.getDistribution().sample());
       
     }
     // the account manager should be able to create these messages.

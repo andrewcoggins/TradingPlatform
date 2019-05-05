@@ -8,6 +8,7 @@ import org.junit.Test;
 import brown.auction.rules.IActivityRule;
 import brown.auction.rules.IAllocationRule;
 import brown.auction.rules.IInformationRevelationPolicy;
+import brown.auction.rules.IInnerIRPolicy;
 import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
@@ -24,8 +25,9 @@ public class FlexibleRulesTest {
     IActivityRule mockActivityRule = mock(IActivityRule.class); 
     IInformationRevelationPolicy mockIR = mock(IInformationRevelationPolicy.class); 
     ITerminationCondition mocktCondition = mock(ITerminationCondition.class); 
+    IInnerIRPolicy innerIR = mock(IInnerIRPolicy.class); 
     
-    IMarketRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, mocktCondition);
+    IMarketRules mRules = new FlexibleRules(mockAllocationRule, mockPaymentRule, mockQueryRule, mockActivityRule, mockIR, innerIR, mocktCondition);
     
     assertEquals(mRules.getARule(), mockAllocationRule); 
     

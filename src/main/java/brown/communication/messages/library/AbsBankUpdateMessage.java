@@ -1,32 +1,29 @@
 package brown.communication.messages.library;
 
-import java.util.List;
-import java.util.Map;
-
 import brown.communication.messages.IBankUpdateMessage;
-import brown.platform.tradeable.ITradeable;
+import brown.platform.item.ICart;
 import brown.user.agent.IAgent;
 
 public abstract class AbsBankUpdateMessage extends AbsServerToAgentMessage implements IBankUpdateMessage {
 
-  private Map<String, List<ITradeable>> tradeablesAdded; 
-  private Map<String, List<ITradeable>> tradeablesLost; 
+  private ICart itemsAdded; 
+  private ICart itemsLost; 
   private Double money; 
   
-  public AbsBankUpdateMessage(Integer messageID, Integer agentID, Map<String, List<ITradeable>> tradeablesAdded,
-      Map<String, List<ITradeable>> tradeablesLost, Double money) {
+  public AbsBankUpdateMessage(Integer messageID, Integer agentID, ICart itemsAdded,
+      ICart itemsLost, Double money) {
     super(messageID, agentID);
-    this.tradeablesAdded = tradeablesAdded; 
-    this.tradeablesLost = tradeablesLost; 
+    this.itemsAdded = itemsAdded;  
+    this.itemsLost = itemsLost;  
     this.money = money; 
   }
   
-  public Map<String, List<ITradeable>> getTradeablesAdded() {
-    return this.tradeablesAdded; 
+  public ICart getItemsAdded() {
+    return this.itemsAdded; 
   }
   
-  public Map<String, List<ITradeable>> getTradeablesLost() {
-    return this.tradeablesLost; 
+  public ICart getItemsLost() {
+    return this.itemsLost; 
   }
   
   public Double getMoneyAddedLost() {
@@ -40,19 +37,18 @@ public abstract class AbsBankUpdateMessage extends AbsServerToAgentMessage imple
 
   @Override
   public String toString() {
-    return "AbsBankUpdateMessage [tradeablesAdded=" + tradeablesAdded
-        + ", tradeablesLost=" + tradeablesLost + ", money=" + money + "]";
+    return "AbsBankUpdateMessage [itemsAdded=" + itemsAdded + ", itemsLost="
+        + itemsLost + ", money=" + money + "]";
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result =
+        prime * result + ((itemsAdded == null) ? 0 : itemsAdded.hashCode());
+    result = prime * result + ((itemsLost == null) ? 0 : itemsLost.hashCode());
     result = prime * result + ((money == null) ? 0 : money.hashCode());
-    result = prime * result
-        + ((tradeablesAdded == null) ? 0 : tradeablesAdded.hashCode());
-    result = prime * result
-        + ((tradeablesLost == null) ? 0 : tradeablesLost.hashCode());
     return result;
   }
 
@@ -65,22 +61,22 @@ public abstract class AbsBankUpdateMessage extends AbsServerToAgentMessage imple
     if (getClass() != obj.getClass())
       return false;
     AbsBankUpdateMessage other = (AbsBankUpdateMessage) obj;
+    if (itemsAdded == null) {
+      if (other.itemsAdded != null)
+        return false;
+    } else if (!itemsAdded.equals(other.itemsAdded))
+      return false;
+    if (itemsLost == null) {
+      if (other.itemsLost != null)
+        return false;
+    } else if (!itemsLost.equals(other.itemsLost))
+      return false;
     if (money == null) {
       if (other.money != null)
         return false;
     } else if (!money.equals(other.money))
       return false;
-    if (tradeablesAdded == null) {
-      if (other.tradeablesAdded != null)
-        return false;
-    } else if (!tradeablesAdded.equals(other.tradeablesAdded))
-      return false;
-    if (tradeablesLost == null) {
-      if (other.tradeablesLost != null)
-        return false;
-    } else if (!tradeablesLost.equals(other.tradeablesLost))
-      return false;
     return true;
   }
- 
+  
 }

@@ -7,9 +7,9 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.communication.messages.IInformationMessage;
-import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
+import brown.platform.item.ICart;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -24,7 +24,7 @@ public class MarketState implements IMarketState {
   private long time;
   
   // Allocation rule
-  private Map<Integer, List<ITradeable>> allocation;
+  private Map<Integer, List<ICart>> allocation;
   
   // Payment rule
   private List<AccountUpdate> payments;
@@ -52,8 +52,7 @@ public class MarketState implements IMarketState {
     this.increment = new HashMap<ITradeable, Double>();
     this.ticks = 0; 
     this.terminated = false;
-    this.allocation = new HashMap<Integer, List<ITradeable>>();
-    this.altAlloc = new HashMap<ITradeable, List<Integer>>();
+    this.allocation = new HashMap<Integer, List<ICart>>();
     this.payments = new LinkedList<AccountUpdate>();
     this.time = System.currentTimeMillis();
     this.isOpen = true; 
@@ -151,16 +150,6 @@ public class MarketState implements IMarketState {
   public void setReserve(Map<ITradeable,Double> reserve) {
      this.reserve = reserve;
   }
-  
-  @Override 
-  public Map<ITradeable, List<Integer>> getAltAlloc() { 
-    return this.altAlloc;
-  }
-  
-  @Override
-  public void setAltAlloc(Map<ITradeable, List<Integer>> altAlloc) {
-    this.altAlloc = altAlloc;
-  }
 
   @Override
   public boolean getOver() {
@@ -183,7 +172,7 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public Map<Integer, List<ITradeable>> getAllocation() {
+  public Map<Integer, List<ICart>> getAllocation() {
     return this.allocation;
   }
 
@@ -193,7 +182,7 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public void setAllocation(Map<Integer, List<ITradeable>> allocation) {
+  public void setAllocation(Map<Integer, List<ICart>> allocation) {
     this.allocation = allocation;
   }
 

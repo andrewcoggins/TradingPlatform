@@ -37,7 +37,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
     return this.bidType; 
   }
   
-  public List<String> getTradeableTypes() {
+  public List<String> getTradeableNames() {
     return this.tradeableNames; 
   }
 

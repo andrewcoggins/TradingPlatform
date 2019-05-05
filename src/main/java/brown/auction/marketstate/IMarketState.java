@@ -6,6 +6,7 @@ import java.util.Map;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
+import brown.platform.item.ICart;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -26,9 +27,9 @@ public interface IMarketState {
   public void setFlatIncrement(Double increment);
 
   // Allocation rule
-  public Map<Integer, List<ITradeable>> getAllocation();
+  public Map<Integer, List<ICart>> getAllocation();
 
-  public void setAllocation(Map<Integer, List<ITradeable>> allocation);
+  public void setAllocation(Map<Integer, List<ICart>> allocation);
 
   // Payment rule
   public void setPayments(List<AccountUpdate> payment);
@@ -52,10 +53,6 @@ public interface IMarketState {
   public Map<ITradeable, Double> getReserve();
 
   public void setReserve(Map<ITradeable, Double> o);
-
-  public Map<ITradeable, List<Integer>> getAltAlloc();
-
-  public void setAltAlloc(Map<ITradeable, List<Integer>> o);
 
   // IR policy
   public Map<Integer, List<IInformationMessage>> getReport();

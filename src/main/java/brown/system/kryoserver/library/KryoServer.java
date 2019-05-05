@@ -1,7 +1,6 @@
 package brown.system.kryoserver.library;
 
 import java.io.IOException;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -15,19 +14,19 @@ import brown.system.setup.ISetup;
 import brown.system.setup.library.Startup;
 
 public class KryoServer implements IKryoServer {
-  
+
   // Server stuff
   protected final int PORT;
   public final Server kryoServer;
   protected Map<Connection, Integer> connections;
-  
+
   public KryoServer(int port, ISetup gameSetup) {
     this.PORT = port;
     this.connections = new ConcurrentHashMap<Connection, Integer>();
 
     // Kryo Stuff
     kryoServer = new Server(16384, 8192);
-    kryoServer.start();    
+    kryoServer.start();
     Kryo serverKryo = kryoServer.getKryo();
     Startup.start(serverKryo);
     if (gameSetup != null) {

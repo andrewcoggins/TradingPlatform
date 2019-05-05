@@ -1,36 +1,38 @@
 package brown.communication.messages.library;
 
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.LinkedList;
 
 import brown.communication.messages.IBankUpdateMessage;
-import brown.platform.tradeable.ITradeable;
+import brown.platform.item.ICart;
+import brown.platform.item.IItem;
+import brown.platform.item.library.Cart;
 
 /**
  * Message provided to agents when their accounts change
  */
 public class AccountInitializationMessage extends AbsBankUpdateMessage implements IBankUpdateMessage {
-
+  
   private Integer agentID; 
-  private Map<String, List<ITradeable>> tradeablesAdded; 
+  private ICart itemsAdded; 
   private Double money; 
-   
+  
   public AccountInitializationMessage() {
     super(null, null, null, null, null); 
   }
   
   public AccountInitializationMessage(Integer messageID, Integer agentID,
-      Map<String, List<ITradeable>> tradeablesAdded, Double money) {
-    super(messageID, agentID, tradeablesAdded, new HashMap<String, List<ITradeable>>(), money);
+      ICart itemsAdded, Double money) {
+    super(messageID, agentID, itemsAdded, new Cart(new LinkedList<IItem>()), money);
     this.agentID = agentID; 
-    this.tradeablesAdded = tradeablesAdded; 
+    this.itemsAdded = itemsAdded; 
     this.money = money; 
   }
 
   @Override
   public String toString() {
-    return "[x] Account Initialized: [agentID: " + agentID + ", tradeables: " + tradeablesAdded +  ", money: " + money + "]";
+    return "Account Initialized: [agentID=" + agentID + ", itemsAdded="
+        + itemsAdded + ", money=" + money + "]";
   }
+
 }

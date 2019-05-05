@@ -2,7 +2,6 @@ package brown.platform.managers.library;
 
 import static org.junit.Assert.assertEquals;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -19,21 +18,20 @@ public class TradeableManagerTest {
   @Test
   public void testTradeableManager() throws ClassNotFoundException, NoSuchMethodException, SecurityException,
   InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-    Class<?> tTypeClass = Class.forName("brown.platform.tradeable.library.SimpleTradeable");
-    Constructor<?> tTypeCons = tTypeClass.getConstructor(Integer.class); 
-    
+
+
     ITradeableManager tManager = new TradeableManager(); 
-    tManager.createTradeables("test", tTypeCons, 5);
-    tManager.createTradeables("testTwo", tTypeCons, 4);
+    tManager.createTradeables("test", 5);
+    tManager.createTradeables("testTwo", 4);
     
     Set<ITradeable> expected = new HashSet<ITradeable>(); 
     for (int i = 0; i < 5; i++) {
-      expected.add(new Tradeable(i, "default")); 
+      expected.add(new Tradeable(i, "test")); 
     }
     
     Set<ITradeable> expectedTwo = new HashSet<ITradeable>(); 
     for (int i = 0; i < 4; i++) {
-      expectedTwo.add(new Tradeable(i + 5, "default")); 
+      expectedTwo.add(new Tradeable(i + 5, "testTwo")); 
     }
     
     assertEquals(new HashSet<ITradeable>(tManager.getTradeables("test")), expected); 
@@ -42,7 +40,7 @@ public class TradeableManagerTest {
     
     tManager.lock();
     
-    tManager.createTradeables("testThree", tTypeCons, 3);
+    tManager.createTradeables("testThree", 3);
     assertEquals(tManager.getTradeables("testThree"), new LinkedList<ITradeable>()); 
   }
   

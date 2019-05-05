@@ -10,7 +10,7 @@ public interface ITradeRequestMessage extends IServerToAgentMessage {
   
   public BidType getBidType(); 
   
-  public List<String> getTradeableTypes(); 
+  public List<String> getTradeableNames(); 
   
   
 }
