@@ -10,10 +10,11 @@ import com.esotericsoftware.kryonet.Client;
 public class StartupTest {
 
   @Test
-  public void testStartup() throws IOException, ClassNotFoundException {
+  public void testStartup() {
+    
+    // just check that no errors are thrown..?
     
     Startup s = new Startup(); 
-    
     Client c = new Client(16384, 8192);
     c.start();
     Kryo agentKryo = c.getKryo();

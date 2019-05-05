@@ -1,23 +1,26 @@
 package brown.system.kryoserver.library;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.junit.Test;
+
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
 import brown.communication.messages.library.ErrorMessage;
 import brown.communication.messages.library.RegistrationMessage;
+import brown.communication.messages.library.RegistrationResponseMessage;
 import brown.system.client.library.TPClient;
-import brown.system.kryoserver.library.KryoServer;
 import brown.system.setup.ISetup;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
-import java.util.concurrent.ConcurrentHashMap;
+import brown.system.setup.library.Startup;
 
 public class KryoServerTest {
   
   
   private class TestClient extends TPClient {
-    public String string;
     public String error;
 
     private TestClient(String host, Integer port, ISetup setup) {
@@ -25,13 +28,11 @@ public class KryoServerTest {
         super(host, port, setup);
         CLIENT.addListener(new Listener() {
             public void received(Connection connection, Object message) {
-                if (message instanceof RegistrationMessage) {
-                    onRegistration((RegistrationMessage) message);
+                if (message instanceof RegistrationResponseMessage) {
+                    onRegistrationResponse((RegistrationResponseMessage) message);
                 } else if (message instanceof ErrorMessage) {
                     error = ((ErrorMessage) message).getStatus();
-                    onErrorMessage((ErrorMessage) message);
-                } else if (message instanceof StringMessage) {
-                    string = ((StringMessage) message).message;
+                    onStatusMessage((ErrorMessage) message);
                 }
             }
         });
@@ -57,9 +58,8 @@ public class KryoServerTest {
                       Integer theID = 1;
                       connection.sendTCP(15000);
                       connection.setTimeout(60000);
-                      kryoServer.sendToTCP(connection.getID(), new RegistrationMessage(theID));
-                      kryoServer.sendToTCP(connection.getID(), new ErrorMessage(0, "test error"));
-                      kryoServer.sendToTCP(connection.getID(), new StringMessage(0, "test string"));
+                      kryoServer.sendToTCP(connection.getID(), new RegistrationResponseMessage(theID, theID, "a"));
+                      kryoServer.sendToTCP(connection.getID(), new ErrorMessage(0, 0, "test error"));
               } else if (message instanceof String) {
                 receivedString = (String) message; 
               } else if (message instanceof Boolean) {
@@ -72,7 +72,7 @@ public class KryoServerTest {
   
   @Test
   public void testConstructor() {
-    TestServer testServer = new TestServer(2121, new SimpleSetup()); 
+    TestServer testServer = new TestServer(2121, new Startup()); 
     assertTrue(testServer.PORT == 2121);
     assertEquals(testServer.connections, new ConcurrentHashMap<Connection, Integer>()); 
     assertTrue(testServer != null); 
@@ -80,8 +80,8 @@ public class KryoServerTest {
   
   @Test
   public void testReceiveMessage() throws InterruptedException {
-    TestServer testServer = new TestServer(2122, new SimpleSetup()); 
-    TestClient testClient = new TestClient("localhost", 2122, new SimpleSetup());
+    TestServer testServer = new TestServer(2122, new Startup()); 
+    TestClient testClient = new TestClient("localhost", 2122, new Startup());
     Thread.sleep(1000);
     assertEquals(testServer.receivedString, "testing_one"); 
     assertEquals(testServer.receivedBoolean, false); 
@@ -90,13 +90,12 @@ public class KryoServerTest {
   }
   
   @Test public void testSendMessage() throws InterruptedException {
-    TestServer testServer = new TestServer(2123, new SimpleSetup());
+    TestServer testServer = new TestServer(2123, new Startup());
     Thread.sleep(1000);
-    TestClient testClient = new TestClient("localhost", 2123, new SimpleSetup());
+    TestClient testClient = new TestClient("localhost", 2123, new Startup());
     Thread.sleep(1000);
     assertTrue(testClient.ID ==  1);
     assertEquals((testClient).error, "test error");
-    assertEquals((testClient).string, "test string");
   }
 
   public static void main(String[] args) throws InterruptedException {

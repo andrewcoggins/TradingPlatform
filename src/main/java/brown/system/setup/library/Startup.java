@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
-import brown.user.main.library.ConfigRun;
 import com.esotericsoftware.kryo.Kryo;
 
 import brown.logging.library.ErrorLogging;
@@ -21,30 +20,32 @@ public final class Startup implements ISetup {
    * @throws IOException
    * @throws ClassNotFoundException
    */
-  public static boolean start(Kryo kryo)
-      throws IOException, ClassNotFoundException {
-    String PATH = "src/main/java";
-    List<String> classesToReflect = getJavaFiles(PATH);
-    for (String className : classesToReflect) {
-      try {
+  public static boolean start(Kryo kryo) {
+    String PATH = "src/main/java/";
+    try {
+      List<String> classesToReflect = getJavaFiles(PATH);
+      for (String className : classesToReflect) {
         Class<?> tpClass = Class.forName(className);
         kryo.register(tpClass);
-      } catch (ClassNotFoundException c) {
-        ErrorLogging.log("ERROR: java startup: " + c.toString());
-      }
     }
     return true;
+    } catch (IOException a) {
+      ErrorLogging.log("ERROR: java startup: " + a.toString());
+    } catch (ClassNotFoundException b) {
+      ErrorLogging.log("ERROR: java startup: " + b.toString());
+    }
+    return false; 
   }
 
   @Override
-  public void setup(Kryo kryo) throws IOException, ClassNotFoundException {
+  public void setup(Kryo kryo) {
     start(kryo);
   }
 
   public static List<String> getJavaFiles(String path) throws IOException {
     List<String> output = new LinkedList<String>();
     Files.walk(Paths.get(path)).filter(Files::isRegularFile)
-        .forEach(s -> output.add(s.toString().replaceAll("src/main/java/", "")
+        .forEach(s -> output.add(s.toString().replaceAll(path, "")
             .replaceAll(".java", "").replaceAll("/", ".")));
     return output;
   }

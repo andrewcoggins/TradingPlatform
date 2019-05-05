@@ -26,8 +26,7 @@ public class TPClientTest {
   private class TestClient extends TPClient {
     public String error;
 
-    private TestClient(String host, Integer port, ISetup setup)
-        throws IOException {
+    private TestClient(String host, Integer port, ISetup setup) {
 
       super(host, port, setup);
       CLIENT.addListener(new Listener() {
@@ -45,7 +44,8 @@ public class TPClientTest {
   }
 
   private class TestServer extends KryoServer {
-    public TestServer(int port, ISetup setup) {
+    public TestServer(int port, ISetup setup)
+        throws ClassNotFoundException, IOException {
       super(port, setup);
       kryoServer.addListener(new Listener() {
         public void received(Connection connection, Object message) {
@@ -64,7 +64,7 @@ public class TPClientTest {
   }
 
   @Test
-  public void testConstructor() throws IOException {
+  public void testConstructor() throws IOException, ClassNotFoundException {
     TPClient tpClient = new TestClient("localhost", 2121, new Startup());
     assertTrue(tpClient.CLIENT != null);
     assertTrue(tpClient.CLIENT instanceof Client);
@@ -72,7 +72,8 @@ public class TPClientTest {
   }
 
   @Test
-  public void testRegistration() throws InterruptedException, IOException {
+  public void testRegistration()
+      throws InterruptedException, IOException, ClassNotFoundException {
     TestServer testServer = new TestServer(2121, new Startup());
     Thread.sleep(1000);
     TestClient testClient = new TestClient("localhost", 2121, new Startup());
@@ -82,7 +83,8 @@ public class TPClientTest {
     assertEquals((testClient).error, "test error");
   }
 
-  public static void main(String[] args) throws InterruptedException, IOException {
+  public static void main(String[] args)
+      throws InterruptedException, IOException, ClassNotFoundException {
     TPClientTest clientTest = new TPClientTest();
     clientTest.testConstructor();
     clientTest.testRegistration();

@@ -1,7 +1,5 @@
 package brown.system.setup;
 
-import java.io.IOException;
-
 import com.esotericsoftware.kryo.Kryo;
 
 /**
@@ -11,6 +9,6 @@ import com.esotericsoftware.kryo.Kryo;
  */
 public interface ISetup {
   
-	void setup(Kryo kryo) throws IOException, ClassNotFoundException;
+	void setup(Kryo kryo);
 	
 }

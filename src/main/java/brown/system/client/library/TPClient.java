@@ -32,8 +32,7 @@ public abstract class TPClient implements IClient {
    * @throws IOException
    * @throws ClassNotFoundException
    */
-  public TPClient(String host, int port, ISetup gameSetup)
-      throws IOException, ClassNotFoundException {
+  public TPClient(String host, int port, ISetup gameSetup) {
     this.CLIENT = new Client(16384, 8192);
     this.ID = null;
     CLIENT.start();

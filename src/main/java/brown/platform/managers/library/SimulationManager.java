@@ -1,5 +1,6 @@
 package brown.platform.managers.library;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -8,7 +9,6 @@ import java.util.Map;
 
 import com.esotericsoftware.kryonet.Connection;
 
-import brown.auction.value.valuation.IValuation;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.IRegistrationMessage;

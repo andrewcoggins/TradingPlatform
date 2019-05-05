@@ -9,8 +9,6 @@ import java.util.Map;
 
 import org.json.simple.parser.ParseException;
 
-import brown.logging.library.ErrorLogging;
-import brown.logging.library.TestLogging;
 import brown.user.main.IJsonParser;
 import brown.user.main.ISimulationConfig;
 
