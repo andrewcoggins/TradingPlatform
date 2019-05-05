@@ -23,6 +23,6 @@ public interface IAgent extends IClient {
   
   public void onTradeRequestMessage(ITradeRequestMessage tRequestMessage); 
   
-  public void onValuationMessage(IValuationMessage vaulationMessage); 
+  public void onValuationMessage(IValuationMessage valuationMessage); 
 
 }
