@@ -1,6 +1,5 @@
 package brown.platform.managers.library;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -17,7 +16,6 @@ import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
 import brown.communication.messageserver.IMessageServer;
 import brown.communication.messageserver.library.MessageServer;
-import brown.logging.library.Logging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.IInitialEndowment;
@@ -128,10 +126,10 @@ public class SimulationManager implements ISimulationManager {
       if (registrationMessage.getName() != null) {
         this.idToName.put(theID, registrationMessage.getName());
       } else {
-        Logging.log(
+        PlatformLogging.log(
             "[x] AbsServer-onRegistration: encountered registration from existing agent");
       }
-      Logging.log("[-] registered " + theID);
+      PlatformLogging.log("[-] registered " + theID);
       connection.sendTCP(15000);
       connection.setTimeout(60000);
       return theID;

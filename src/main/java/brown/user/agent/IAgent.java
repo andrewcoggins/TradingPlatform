@@ -1,6 +1,9 @@
 package brown.user.agent;
 
 import brown.communication.messages.IBankUpdateMessage;
+import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.ITradeRequestMessage;
+import brown.communication.messages.IValuationMessage;
 import brown.system.client.IClient;
 
 /**
@@ -16,10 +19,10 @@ public interface IAgent extends IClient {
    */
   public void onBankUpdate(IBankUpdateMessage bankUpdate);
 
-  /**
-   * Sent whenever an agent gets a game report
-   * @param gamereport -- contains a report of recent activity
-   */
-
+  public void onInformationMessage(IInformationMessage informationMessage); 
+  
+  public void onTradeRequestMessage(ITradeRequestMessage tRequestMessage); 
+  
+  public void onValuationMessage(IValuationMessage vaulationMessage); 
 
 }

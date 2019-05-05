@@ -10,7 +10,6 @@ import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.RegistrationResponseMessage;
 import brown.communication.messageserver.IMessageServer;
 import brown.logging.library.ErrorLogging;
-import brown.logging.library.Logging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.managers.ISimulationManager;
 import brown.system.kryoserver.library.KryoServer;
@@ -38,7 +37,7 @@ public class MessageServer extends KryoServer implements IMessageServer {
         castedMessage.serverDispatch(connection, aServer);
     }}});
     
-    Logging.log("[-] server started");
+    PlatformLogging.log("[-] server started");
   }
   
   @Override
