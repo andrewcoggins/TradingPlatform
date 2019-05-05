@@ -2,6 +2,7 @@ package brown.platform.managers.library;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,7 +15,11 @@ import brown.platform.accounting.IAccount;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.IInitialEndowment;
 import brown.platform.accounting.library.Account;
+import brown.platform.item.IItem;
+import brown.platform.item.library.Cart;
+import brown.platform.item.library.MultiItem;
 import brown.platform.managers.IAccountManager;
+import brown.platform.tradeable.ITradeable;
 
 /**
  * Account manager stores and manages accounts for the server.
@@ -74,9 +79,7 @@ public class AccountManager implements IAccountManager {
       try {
           IAccount endowAccount = this.accounts.get(agentID);
           endowAccount.clear(); 
-          for (String s : initialEndowment.getGoods().keySet()) {
-            endowAccount.addTradeables(s, initialEndowment.getGoods().get(s));
-          }
+          initialEndowment.getGoods().forEach((k, v) -> endowAccount.addTradeables(k, v)); 
           endowAccount.addMoney(initialEndowment.getMoney());
           this.accounts.put(agentID, endowAccount); 
       } catch (NullPointerException n) {
@@ -94,7 +97,10 @@ public class AccountManager implements IAccountManager {
     Map<Integer, IBankUpdateMessage> bankUpdates = new HashMap<Integer, IBankUpdateMessage>(); 
     for (Integer agentID : this.accounts.keySet()) {
       IAccount agentAccount = this.accounts.get(agentID); 
-      IBankUpdateMessage agentBankUpdate = new AccountInitializationMessage(0, agentID, agentAccount.getAllGoods(), agentAccount.getMoney());
+      Map<String, List<ITradeable>> agentTradeables = agentAccount.getAllGoods(); 
+      List<IItem> items = new LinkedList<IItem>(); 
+      agentTradeables.forEach((k, v) -> items.add(new MultiItem(k, v.size())));
+      IBankUpdateMessage agentBankUpdate = new AccountInitializationMessage(0, agentID, new Cart(items), agentAccount.getMoney());
       bankUpdates.put(agentID, agentBankUpdate); 
     }
     return bankUpdates;

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import brown.communication.messages.IBankUpdateMessage;
+import brown.platform.item.ICart;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -18,9 +19,9 @@ public class BankUpdateMessage extends AbsBankUpdateMessage implements IBankUpda
   }
   
   public BankUpdateMessage(Integer messageID, Integer agentID,
-      Map<String, List<ITradeable>> tradeablesAdded,
-      Map<String, List<ITradeable>> tradeablesLost, Double money) {
-    super(messageID, agentID, tradeablesAdded, tradeablesLost, money);
+      ICart itemsAdded,
+      ICart itemsLost, Double money) {
+    super(messageID, agentID, itemsAdded, itemsLost, money);
   }
 
 }

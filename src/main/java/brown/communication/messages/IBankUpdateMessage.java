@@ -1,19 +1,15 @@
 package brown.communication.messages;
 
-import java.util.List;
-import java.util.Map;
-
-import brown.platform.tradeable.ITradeable;
+import brown.platform.item.ICart;
 
 public interface IBankUpdateMessage extends IServerToAgentMessage {
 
   public Integer getAgentID(); 
   
-  public Map<String, List<ITradeable>> getTradeablesAdded(); 
+  public ICart getItemsAdded(); 
   
-  public Map<String, List<ITradeable>> getTradeablesLost();
+  public ICart getItemsLost();
   
   public Double getMoneyAddedLost(); 
-  
   
 }
