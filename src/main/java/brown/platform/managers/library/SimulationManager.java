@@ -188,7 +188,7 @@ public class SimulationManager implements ISimulationManager {
     }
   }
 
-  private void initializeAgents() {
+  private void initializeAgents() { 
     for (Integer agentID : privateToPublic.keySet()) {
       IInitialEndowment agentEndowment =
           this.currentEndowmentManager.getEndowment();
@@ -197,11 +197,24 @@ public class SimulationManager implements ISimulationManager {
       } else {
         this.currentAccountManager.createAccount(agentID, agentEndowment);
       }
-
+      
       // TODO: give agents valuations
       // TODO: valuation manager needs to be able to store MULTIPLE distributions..?
       //this.currentValuationManager.addAgentValuation(agentID, this.currentValuationManager.getDistribution(). this.currentValuationManager.getDistribution().sample());
       
+      // get all distributions, construct a map from tradeable names to 
+      // how is this going to work? 
+      // can an agent have distributions from which they draw good prices? 
+      // so... an agent can really only have one distribution they draw from, becuase only have one
+      // IValuation... you can't just combine them. 
+      // any variations... part of a single distribution. 
+      
+      // what needs to change? 
+      // json parser: only one distribution
+      // valuation config. 
+      
+      // or, instead, have multiple, and combine in some way for valuations. 
+      agentEndowment.getGoods(); 
     }
     // the account manager should be able to create these messages.
     Map<Integer, IBankUpdateMessage> accountInitializations =

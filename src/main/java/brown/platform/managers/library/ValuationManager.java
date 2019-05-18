@@ -16,16 +16,17 @@ import brown.platform.tradeable.ITradeable;
 
 public class ValuationManager implements IValuationManager {
 
-    private IValuationDistribution distribution;
+    private List<IValuationDistribution> distributions;
     private Map<Integer, IValuation> agentValuations; 
     private boolean lock;
     
-    // TODO: can be multiple. 
+    // TODO: must be multiple. 
     
     public ValuationManager() {
 
         this.lock = false;
-        this.agentValuations = new HashMap<Integer,  IValuation>();       
+        this.agentValuations = new HashMap<Integer,  IValuation>();
+        this.distributions = new LinkedList<IValuationDistribution>(); 
     }
 
     public void createValuation(Constructor<?> distCons, Map<Constructor<?>, List<Double>> generators,
@@ -36,7 +37,7 @@ public class ValuationManager implements IValuationManager {
               IValuationGenerator newGen = (IValuationGenerator) generator.newInstance(generators.get(generator)); 
               generatorList.add(newGen); 
             }
-            this.distribution = (IValuationDistribution) distCons.newInstance(tradeables, generatorList); 
+            this.distributions.add((IValuationDistribution) distCons.newInstance(tradeables, generatorList)); 
         } else {
             PlatformLogging.log("Creation denied: valuation manager locked.");
         }
@@ -50,8 +51,10 @@ public class ValuationManager implements IValuationManager {
         return this.agentValuations.get(agentID);
     }
     
-    public IValuationDistribution getDistribution() {
-      return this.distribution;
+    // TODO: but... how to tell which tradeables correspond to each distribution? 
+    // TODO: get distributions, but also need to know the tradeables that they correspond to? 
+    public List<IValuationDistribution> getDistribution() {
+      return this.distributions;
     }
 
     public void lock() {

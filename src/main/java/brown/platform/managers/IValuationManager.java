@@ -21,7 +21,7 @@ public interface IValuationManager {
     
     public IValuation getAgentValuation(Integer agentID); 
     
-    public IValuationDistribution getDistribution();
+    public List<IValuationDistribution> getDistribution();
 
     public void lock();
     

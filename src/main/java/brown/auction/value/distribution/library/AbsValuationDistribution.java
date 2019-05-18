@@ -20,6 +20,10 @@ public abstract class AbsValuationDistribution {
   
   public abstract IValuation sample();
 
+  public Map<String, List<ITradeable>> getTradeableNames() {
+    return this.tradeableNames; 
+  }
+  
   @Override
   public String toString() {
     return "AbsValuationDistribution [generators=" + generators

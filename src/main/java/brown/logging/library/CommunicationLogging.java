@@ -7,7 +7,7 @@ import brown.logging.ILogging;
  * logging.log(X) prints X to console.
  * @author lcamery
  */
-public class MechanismLogging implements ILogging {
+public class CommunicationLogging implements ILogging {
   
   // Enable or disable logging here.
   public final static boolean MECHANISMLOGGING = true;
