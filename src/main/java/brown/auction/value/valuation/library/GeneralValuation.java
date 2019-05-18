@@ -35,5 +35,38 @@ public class GeneralValuation implements IGeneralValuation {
     }
     return totalValue;
   }
+
+  @Override
+  public String toString() {
+    return "GeneralValuation [specificValuationMap=" + specificValuationMap
+        + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((specificValuationMap == null) ? 0
+        : specificValuationMap.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    GeneralValuation other = (GeneralValuation) obj;
+    if (specificValuationMap == null) {
+      if (other.specificValuationMap != null)
+        return false;
+    } else if (!specificValuationMap.equals(other.specificValuationMap))
+      return false;
+    return true;
+  }
+  
   
 }
