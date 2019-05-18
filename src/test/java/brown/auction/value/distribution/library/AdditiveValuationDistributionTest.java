@@ -12,7 +12,7 @@ import org.junit.Test;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.generator.library.NormalValGenerator;
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.auction.value.valuation.library.AdditiveValuation;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
@@ -38,7 +38,7 @@ public class AdditiveValuationDistributionTest {
     generators.add(new NormalValGenerator(params));
     
     IValuationDistribution dist = new AdditiveValuationDistribution(goods, generators); 
-    IValuation valuation = dist.sample(); 
+    ISpecificValuation valuation = dist.sample(); 
     
     Map<ISingleItem, Double> vals = new HashMap<ISingleItem, Double>(); 
     ISingleItem anItem = new SingleItem("default"); 
@@ -49,7 +49,7 @@ public class AdditiveValuationDistributionTest {
     ICart aCart = new Cart(items); 
     
     vals.put(anItem, valuation.getValuation(aCart)); 
-    IValuation testValuation = new AdditiveValuation(vals); 
+    ISpecificValuation testValuation = new AdditiveValuation(vals); 
     
     assertEquals(valuation, testValuation); 
   }

@@ -1,10 +1,11 @@
 package brown.auction.value.distribution.library;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import brown.auction.value.generator.IValuationGenerator;
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.platform.tradeable.ITradeable;
 
 public abstract class AbsValuationDistribution {
@@ -18,10 +19,10 @@ public abstract class AbsValuationDistribution {
     this.tradeableNames = tradeableNames;
   }
   
-  public abstract IValuation sample();
+  public abstract ISpecificValuation sample();
 
-  public Map<String, List<ITradeable>> getTradeableNames() {
-    return this.tradeableNames; 
+  public List<String> getTradeableNames() {
+    return new LinkedList<String>(this.tradeableNames.keySet()); 
   }
   
   @Override

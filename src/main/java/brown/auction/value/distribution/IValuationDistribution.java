@@ -3,7 +3,7 @@ package brown.auction.value.distribution;
 import java.util.List;
 import java.util.Map;
 
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.platform.tradeable.ITradeable;
 
 /**
@@ -16,9 +16,9 @@ public interface IValuationDistribution {
    * samples IValuations from a distribution
    * @return IValuation
    */
-  public IValuation sample();
+  public ISpecificValuation sample();
   
-  public Map<String, List<ITradeable>> getTradeableNames();
+  public List<String> getTradeableNames();
   
   
 }

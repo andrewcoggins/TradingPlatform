@@ -6,7 +6,7 @@ import java.util.Map;
 
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.auction.value.valuation.library.AdditiveValuation;
 import brown.platform.item.ISingleItem;
 import brown.platform.item.library.SingleItem;
@@ -41,7 +41,7 @@ public class AdditiveValuationDistribution extends AbsValuationDistribution impl
   }
   
   @Override
-  public IValuation sample() {
+  public ISpecificValuation sample() {
     for (String s : this.tradeableNames.keySet()) {
       for (ITradeable atom : this.tradeableNames.get(s)) { 
         ISingleItem item = new SingleItem(atom.getName()); 

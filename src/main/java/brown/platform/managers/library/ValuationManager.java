@@ -8,7 +8,7 @@ import java.util.Map;
 
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.IGeneralValuation;
 import brown.communication.messages.IValuationMessage;
 import brown.logging.library.PlatformLogging;
 import brown.platform.managers.IValuationManager;
@@ -17,15 +17,14 @@ import brown.platform.tradeable.ITradeable;
 public class ValuationManager implements IValuationManager {
 
     private List<IValuationDistribution> distributions;
-    private Map<Integer, IValuation> agentValuations; 
+    private Map<Integer, IGeneralValuation> agentValuations; 
     private boolean lock;
     
-    // TODO: must be multiple. 
     
     public ValuationManager() {
 
         this.lock = false;
-        this.agentValuations = new HashMap<Integer,  IValuation>();
+        this.agentValuations = new HashMap<Integer,  IGeneralValuation>();
         this.distributions = new LinkedList<IValuationDistribution>(); 
     }
 
@@ -43,16 +42,14 @@ public class ValuationManager implements IValuationManager {
         }
     }
     
-    public void addAgentValuation(Integer agentID, List<String> tradeableNames, IValuation valuation) {
+    public void addAgentValuation(Integer agentID, IGeneralValuation valuation) {
         this.agentValuations.put(agentID, valuation);
     }
     
-    public IValuation getAgentValuation(Integer agentID) {
+    public IGeneralValuation getAgentValuation(Integer agentID) {
         return this.agentValuations.get(agentID);
     }
     
-    // TODO: but... how to tell which tradeables correspond to each distribution? 
-    // TODO: get distributions, but also need to know the tradeables that they correspond to? 
     public List<IValuationDistribution> getDistribution() {
       return this.distributions;
     }

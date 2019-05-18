@@ -14,7 +14,7 @@ import org.junit.Test;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.auction.value.valuation.library.AdditiveValuation;
 import brown.platform.item.ISingleItem;
 import brown.platform.item.library.SingleItem;
@@ -63,7 +63,7 @@ public class ValuationManagerTest {
     tradeableNames.add("default"); 
     Map<ISingleItem, Double> valueParams = new HashMap<ISingleItem, Double>(); 
     valueParams.put(new SingleItem("default"), 1.0); 
-    IValuation agentValuation = new AdditiveValuation(valueParams); 
+    ISpecificValuation agentValuation = new AdditiveValuation(valueParams); 
     vManager.addAgentValuation(1, tradeableNames, agentValuation);
     
     assertEquals(vManager.getAgentValuation(1), agentValuation); 

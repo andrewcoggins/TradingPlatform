@@ -8,6 +8,8 @@ import java.util.Map;
 
 import com.esotericsoftware.kryonet.Connection;
 
+import brown.auction.value.distribution.IValuationDistribution;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.IRegistrationMessage;
@@ -19,6 +21,8 @@ import brown.communication.messageserver.library.MessageServer;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.IInitialEndowment;
+import brown.platform.item.ISingleItem;
+import brown.platform.item.library.SingleItem;
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.IMarketManager;
@@ -185,7 +189,7 @@ public class SimulationManager implements ISimulationManager {
           this.currentMarketManager.finalizeMarket(marketID);
         }
       }
-    }
+    };
   }
 
   private void initializeAgents() { 
@@ -214,6 +218,20 @@ public class SimulationManager implements ISimulationManager {
       // valuation config. 
       
       // or, instead, have multiple, and combine in some way for valuations. 
+      // 
+      
+      Map<List<ISingleItem>, ISpecificValuation> specificValuationMap = new HashMap<List<ISingleItem>, ISpecificValuation>(); 
+      
+      for (IValuationDistribution specificDistribution : this.currentValuationManager.getDistribution()) { 
+        
+        ISpecificValuation specificValuation = specificDistribution.sample(); 
+        List<String> specificItemNames = specificDistribution.getTradeableNames(); 
+        List<ISingleItem> specificItems = new LinkedList<ISingleItem>(); 
+        for (String itemName : specificItemNames) {
+          specificItems.add(new SingleItem(itemName)); 
+        }
+        specificValuationMap.put(specificItems, specificValuation); 
+      }
       agentEndowment.getGoods(); 
     }
     // the account manager should be able to create these messages.
