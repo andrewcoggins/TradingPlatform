@@ -10,6 +10,7 @@ import com.esotericsoftware.kryonet.Connection;
 
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.valuation.ISpecificValuation;
+import brown.auction.value.valuation.library.GeneralValuation;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.IRegistrationMessage;
@@ -194,6 +195,7 @@ public class SimulationManager implements ISimulationManager {
 
   private void initializeAgents() { 
     for (Integer agentID : privateToPublic.keySet()) {
+      // give agent endowment, and create account. 
       IInitialEndowment agentEndowment =
           this.currentEndowmentManager.getEndowment();
       if (this.currentAccountManager.containsAccount(agentID)) {
@@ -201,38 +203,16 @@ public class SimulationManager implements ISimulationManager {
       } else {
         this.currentAccountManager.createAccount(agentID, agentEndowment);
       }
-      
-      // TODO: give agents valuations
-      // TODO: valuation manager needs to be able to store MULTIPLE distributions..?
-      //this.currentValuationManager.addAgentValuation(agentID, this.currentValuationManager.getDistribution(). this.currentValuationManager.getDistribution().sample());
-      
-      // get all distributions, construct a map from tradeable names to 
-      // how is this going to work? 
-      // can an agent have distributions from which they draw good prices? 
-      // so... an agent can really only have one distribution they draw from, becuase only have one
-      // IValuation... you can't just combine them. 
-      // any variations... part of a single distribution. 
-      
-      // what needs to change? 
-      // json parser: only one distribution
-      // valuation config. 
-      
-      // or, instead, have multiple, and combine in some way for valuations. 
-      // 
-      
+      // give agent valuation
       Map<List<ISingleItem>, ISpecificValuation> specificValuationMap = new HashMap<List<ISingleItem>, ISpecificValuation>(); 
-      
       for (IValuationDistribution specificDistribution : this.currentValuationManager.getDistribution()) { 
-        
-        ISpecificValuation specificValuation = specificDistribution.sample(); 
-        List<String> specificItemNames = specificDistribution.getTradeableNames(); 
         List<ISingleItem> specificItems = new LinkedList<ISingleItem>(); 
-        for (String itemName : specificItemNames) {
+        for (String itemName : specificDistribution.getTradeableNames()) {
           specificItems.add(new SingleItem(itemName)); 
         }
-        specificValuationMap.put(specificItems, specificValuation); 
+        specificValuationMap.put(specificItems, specificDistribution.sample()); 
       }
-      agentEndowment.getGoods(); 
+      this.currentValuationManager.addAgentValuation(agentID, new GeneralValuation(specificValuationMap));
     }
     // the account manager should be able to create these messages.
     Map<Integer, IBankUpdateMessage> accountInitializations =

@@ -54,7 +54,7 @@ public class ValuationManagerTest {
     expectedGenList.add(expectedGen); 
     IValuationDistribution expected = new AdditiveValuationDistribution(tradeables, expectedGenList); 
     
-    assertEquals(valManager.getDistribution(), expected); 
+    assertEquals(valManager.getDistribution().get(0), expected); 
   }
   
   @Test
@@ -71,7 +71,7 @@ public class ValuationManagerTest {
     IGeneralValuation gValuation = new GeneralValuation(specific); 
     vManager.addAgentValuation(1, gValuation);
     
-    assertEquals(vManager.getAgentValuation(1), agentValuation); 
+    assertEquals(vManager.getAgentValuation(1), gValuation); 
       
   }
   

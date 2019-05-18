@@ -24,7 +24,7 @@ public abstract class AbsValuationDistribution {
   public List<String> getTradeableNames() {
     return new LinkedList<String>(this.tradeableNames.keySet()); 
   }
-  
+
   @Override
   public String toString() {
     return "AbsValuationDistribution [generators=" + generators
@@ -63,7 +63,5 @@ public abstract class AbsValuationDistribution {
       return false;
     return true;
   }
-
-  
-  
+ 
 }

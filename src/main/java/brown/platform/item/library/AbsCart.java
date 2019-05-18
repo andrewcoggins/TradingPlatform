@@ -1,5 +1,6 @@
 package brown.platform.item.library;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ public abstract class AbsCart implements ICart {
   
   public AbsCart(List<IItem> items) {
     this.items = items; 
+    this.itemMap = new HashMap<String, IItem>(); 
     for(IItem item: items) {
       itemMap.put(item.getName(), item);  
     }
