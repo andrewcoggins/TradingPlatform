@@ -1,6 +1,8 @@
 package brown.platform.item.library;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
@@ -8,14 +10,48 @@ import brown.platform.item.IItem;
 public abstract class AbsCart implements ICart {
 
   private List<IItem> items; 
+  private Map<String, IItem> itemMap; 
   
   public AbsCart(List<IItem> items) {
     this.items = items; 
+    this.itemMap = new HashMap<String, IItem>(); 
+    for(IItem item: items) {
+      itemMap.put(item.getName(), item);  
+    }
   }
   
   @Override
   public List<IItem> getItems() {
     return this.items;
+  }
+  
+  @Override 
+  public IItem getItemByName(String name) {
+    return this.itemMap.get(name); 
+  }
+  
+  @Override 
+  public boolean containsItem(String name) {
+    return this.itemMap.containsKey(name); 
+  }
+  
+  @Override
+  public void addToCart(IItem item) {
+    if (!this.itemMap.containsKey(item.getName())) {
+      this.items.add(item); 
+      this.itemMap.put(item.getName(), item); 
+    }
+  }
+  
+  @Override
+  public void removeFromCart(IItem item) {
+
+  }
+  
+  @Override
+  public void combine(ICart cart) {
+
+
   }
   
   @Override

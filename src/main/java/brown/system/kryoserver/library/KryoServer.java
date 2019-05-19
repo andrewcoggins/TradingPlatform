@@ -15,16 +15,20 @@ import brown.system.setup.library.Startup;
 
 public class KryoServer implements IKryoServer {
 
-  // Server stuff
   protected final int PORT;
   public final Server kryoServer;
   protected Map<Connection, Integer> connections;
 
+  /**
+   * a KryoServer needs a port and a setup.
+   * 
+   * @param port the port number
+   * @param gameSetup a class that registers the needed classes with kryo.
+   */
   public KryoServer(int port, ISetup gameSetup) {
     this.PORT = port;
     this.connections = new ConcurrentHashMap<Connection, Integer>();
 
-    // Kryo Stuff
     kryoServer = new Server(16384, 8192);
     kryoServer.start();
     Kryo serverKryo = kryoServer.getKryo();
@@ -32,7 +36,6 @@ public class KryoServer implements IKryoServer {
     if (gameSetup != null) {
       gameSetup.setup(serverKryo);
     }
-    // Set up Server
     try {
       kryoServer.bind(PORT, PORT);
     } catch (IOException e) {

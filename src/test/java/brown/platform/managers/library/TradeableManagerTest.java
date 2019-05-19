@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import brown.platform.managers.ITradeableManager;
+import brown.platform.managers.IItemManager;
 import brown.platform.tradeable.ITradeable;
 import brown.platform.tradeable.library.Tradeable;
 
@@ -20,7 +20,7 @@ public class TradeableManagerTest {
   InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
 
-    ITradeableManager tManager = new TradeableManager(); 
+    IItemManager tManager = new ItemManager(); 
     tManager.createTradeables("test", 5);
     tManager.createTradeables("testTwo", 4);
     

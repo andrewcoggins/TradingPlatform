@@ -1,33 +1,33 @@
 package brown.user.main.library;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
+import brown.platform.item.ICart;
+import brown.platform.item.IItem;
+import brown.platform.item.library.Cart;
+import brown.platform.item.library.MultiItem;
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IDomainManager;
 import brown.platform.managers.IEndowmentManager;
+import brown.platform.managers.IItemManager;
 import brown.platform.managers.IMarketManager;
 import brown.platform.managers.ISimulationManager;
-import brown.platform.managers.ITradeableManager;
 import brown.platform.managers.IValuationManager;
 import brown.platform.managers.IWorldManager;
 import brown.platform.managers.library.AccountManager;
 import brown.platform.managers.library.DomainManager;
 import brown.platform.managers.library.EndowmentManager;
+import brown.platform.managers.library.ItemManager;
 import brown.platform.managers.library.MarketManager;
 import brown.platform.managers.library.SimulationManager;
-import brown.platform.managers.library.TradeableManager;
 import brown.platform.managers.library.ValuationManager;
 import brown.platform.managers.library.WorldManager;
 import brown.platform.market.IFlexibleRules;
-import brown.platform.tradeable.ITradeable;
-import brown.user.main.IEndowmentConfig;
+import brown.user.main.IItemConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
-import brown.user.main.ITradeableConfig;
 import brown.user.main.IValuationConfig;
 
 public class ConfigRun {
@@ -39,9 +39,9 @@ public class ConfigRun {
   }
 
   public void run(Integer startingDelayTime, Integer simulationDelayTime,
-      Integer numSimulations)
-      throws InstantiationException, IllegalAccessException,
-      IllegalArgumentException, InvocationTargetException, InterruptedException {
+      Integer numSimulations) throws InstantiationException,
+      IllegalAccessException, IllegalArgumentException,
+      InvocationTargetException, InterruptedException {
     ISimulationManager simulationManager = new SimulationManager();
     for (ISimulationConfig aConfig : this.config) {
       IWorldManager worldManager = new WorldManager();
@@ -49,66 +49,64 @@ public class ConfigRun {
       IEndowmentManager endowmentManager = new EndowmentManager();
       IAccountManager accountManager = new AccountManager();
       IValuationManager valuationManager = new ValuationManager();
-      ITradeableManager tradeableManager = new TradeableManager();
+      IItemManager itemManager = new ItemManager();
       IMarketManager marketManager = new MarketManager();
 
       // tradeable manager should be easy so gonna start here.
 
-      List<ITradeableConfig> tradeableConfig = aConfig.getTConfig();
-      for (ITradeableConfig tConfig : tradeableConfig) {
-        tradeableManager.createTradeables(tConfig.getTradeableName(),
-            tConfig.getNumTradeables());
+      List<IItemConfig> itemConfig = aConfig.getTConfig();
+      for (IItemConfig tConfig : itemConfig) {
+        itemManager.createItems(tConfig.getItemName(), tConfig.getNumItems());
       }
 
       // valuation manager.
-
       List<IValuationConfig> vConfigs = aConfig.getVConfig();
       for (IValuationConfig vConfig : vConfigs) {
-        List<String> tradeableNames = vConfig.getTradeableNames();
-        Map<String, List<ITradeable>> valuationTradeables =
-            new HashMap<String, List<ITradeable>>();
-        for (String s : tradeableNames) {
-          valuationTradeables.put(s, tradeableManager.getTradeables(s));
-        }
+        List<String> itemNames = vConfig.getItemNames();
+        List<IItem> valuationItems = new LinkedList<IItem>();
+        vConfig.getItemNames()
+            .forEach(item -> valuationItems.add(itemManager.getItems(item)));
         valuationManager.createValuation(vConfig.getValDistribution(),
-            vConfig.getGenerators(), valuationTradeables);
+            vConfig.getGenerators(), new Cart(valuationItems));
       }
 
       // endowments also need a tradeable map, and a tradeable config.
-      Map<String, List<ITradeable>> allTradeables =
-          new HashMap<String, List<ITradeable>>();
-      for (ITradeableConfig tConfig : tradeableConfig) {
-        allTradeables.put(tConfig.getTradeableName(),
-            tradeableManager.getTradeables(tConfig.getTradeableName()));
-      }
+      List<IItem> allItems = new LinkedList<IItem>();
+      itemConfig.forEach(iConfig -> allItems
+          .add(new MultiItem(iConfig.getItemName(), iConfig.getNumItems())));
 
-      for (IEndowmentConfig eConfig : aConfig.getEConfig()) {
-
-        endowmentManager.createEndowment(eConfig.getName(),
-            eConfig.getEndowmentMapping(), eConfig.getFrequency(),
-            allTradeables, eConfig.getMoney());
-      }
+      ICart itemCart = new Cart(allItems);
+      aConfig.getEConfig()
+          .forEach(eConfig -> endowmentManager.createEndowment(
+              eConfig.getName(), eConfig.getEndowmentMapping(),
+              eConfig.getFrequency(), itemCart, eConfig.getMoney()));
 
       // for the market manager, gonna need the rules, map, and the mustInclude
       for (List<IMarketConfig> mConfigList : aConfig.getMConfig()) {
         List<IFlexibleRules> marketRules = new LinkedList<IFlexibleRules>();
-        List<List<String>> marketTradeables = new LinkedList<List<String>>();
+        List<List<String>> marketItems = new LinkedList<List<String>>();
         for (IMarketConfig mConfig : mConfigList) {
           marketRules.add(mConfig.getRules());
-          marketTradeables.add(mConfig.getTradeableNames());
+          marketItems.add(mConfig.getTradeableNames());
         }
-        marketManager.createSimultaneousMarket(marketRules, marketTradeables,
-            allTradeables);
+        List<ICart> marketCarts = new LinkedList<ICart>();
+        for (List<String> singleMarketItemNames : marketItems) {
+          List<IItem> singleMarketItems = new LinkedList<IItem>();
+          singleMarketItemNames.forEach(itemName -> singleMarketItems
+              .add(itemCart.getItemByName(itemName)));
+          marketCarts.add(new Cart(singleMarketItems));
+        }
+        marketManager.createSimultaneousMarket(marketRules, marketCarts);
       }
 
       // todo: refactor account manager b/c endowments?
 
-      domainManager.createDomain(tradeableManager, valuationManager,
-          accountManager, endowmentManager);
+      domainManager.createDomain(itemManager, valuationManager, accountManager,
+          endowmentManager);
       worldManager.createWorld(domainManager, marketManager);
       simulationManager.createSimulation(aConfig.getSimulationRuns(),
           worldManager);
-      tradeableManager.lock();
+      itemManager.lock();
       valuationManager.lock();
       simulationManager.lock();
       marketManager.lock();

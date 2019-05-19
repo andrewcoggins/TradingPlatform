@@ -11,7 +11,6 @@ import brown.communication.bid.IBidBundle;
 import brown.communication.bid.library.BidType;
 import brown.communication.messages.ITradeMessage;
 import brown.platform.item.ICart;
-import brown.platform.tradeable.ITradeable;
 
 /**
  * carts must be of 1 item of size 1, agents must not have bid before.
@@ -23,7 +22,7 @@ public class SimpleOneShotActivity extends AbsRule implements IActivityRule {
 
   @Override
   public void isAcceptable(IMarketState state, ITradeMessage aBid,
-      List<ITradeMessage> currentBids, Map<String, List<ITradeable>> tradeables) {
+      List<ITradeMessage> currentBids, ICart items) {
     state.setAcceptable(true);
     IBid bid = aBid.getBid();
     for (ITradeMessage currentBid : currentBids) {
@@ -48,10 +47,9 @@ public class SimpleOneShotActivity extends AbsRule implements IActivityRule {
           state.setAcceptable(false);
           break;
         }
-        // only bidding on tradeables open in the market. 
-        // TODO should this be higher up? it will always be the case. 
-        if (!tradeables.keySet()
-            .contains(cart.getItems().get(0).getName())) {
+        // only bidding on tradeables open in the market.
+        // TODO should this be higher up? it will always be the case.
+        if (!items.containsItem(cart.getItems().get(0).getName())) {
           state.setAcceptable(false);
           break;
         }

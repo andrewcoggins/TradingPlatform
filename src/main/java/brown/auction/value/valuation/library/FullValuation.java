@@ -2,10 +2,10 @@ package brown.auction.value.valuation.library;
 
 import java.util.Map;
 
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.platform.item.ICart;
 
-public class FullValuation extends AbsValuation implements IValuation {
+public class FullValuation extends AbsValuation implements ISpecificValuation {
 
   private Map<ICart, Double> valuation;
 

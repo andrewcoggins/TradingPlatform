@@ -1,4 +1,4 @@
-package brown.platform.managers.library; 
+package brown.platform.managers.library;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,97 +15,101 @@ import brown.platform.accounting.IAccount;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.IInitialEndowment;
 import brown.platform.accounting.library.Account;
+import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
-import brown.platform.item.library.MultiItem;
 import brown.platform.managers.IAccountManager;
-import brown.platform.tradeable.ITradeable;
 
 /**
  * Account manager stores and manages accounts for the server.
+ * 
  * @author acoggins, modified by kerry
  */
 public class AccountManager implements IAccountManager {
 
-	private Map<Integer, IAccount> accounts;
-	private boolean lock;
+  private Map<Integer, IAccount> accounts;
+  private boolean lock;
 
-	//TODO: put endowment manager in account manager. 
-	
-	public AccountManager() {
-		this.accounts = new ConcurrentHashMap<>();
-		this.lock = false;
-	}
+  // TODO: put endowment manager in account manager.
 
-	public void createAccount(Integer agentID, IInitialEndowment endowment) {
-	    if (!this.lock) {
-            synchronized (agentID) {
-                this.accounts.put(agentID, new Account(agentID, endowment.getMoney(), endowment.getGoods()));
-            }
-        } else {
-            PlatformLogging.log("Creation denied: account manager locked.");
-        }
+  public AccountManager() {
+    this.accounts = new ConcurrentHashMap<>();
+    this.lock = false;
+  }
+
+  public void createAccount(Integer agentID, IInitialEndowment endowment) {
+    if (!this.lock) {
+      synchronized (agentID) {
+        this.accounts.put(agentID,
+            new Account(agentID, endowment.getMoney(), endowment.getGoods()));
+      }
+    } else {
+      PlatformLogging.log("Creation denied: account manager locked.");
     }
+  }
 
-    public IAccount getAccount(Integer ID) {
-        return accounts.get(ID);
-    }
+  public IAccount getAccount(Integer ID) {
+    return accounts.get(ID);
+  }
 
   public List<IAccount> getAccounts() {
     return new ArrayList<>(accounts.values());
   }
-  
-	public void setAccount(Integer ID, IAccount account) {
-		synchronized (ID) {
-            if (this.accounts.containsKey(ID)) {
-                accounts.put(ID, account);
-            }
-		}
-	}
+
+  public void setAccount(Integer ID, IAccount account) {
+    synchronized (ID) {
+      if (this.accounts.containsKey(ID)) {
+        accounts.put(ID, account);
+      }
+    }
+  }
 
   public void reset() {
     for (Integer agentID : this.accounts.keySet()) {
-      IAccount agentAccount = this.accounts.get(agentID); 
+      IAccount agentAccount = this.accounts.get(agentID);
       agentAccount.clear();
-      this.accounts.put(agentID, agentAccount); 
+      this.accounts.put(agentID, agentAccount);
     }
   }
 
   public Boolean containsAccount(Integer ID) {
-      return accounts.containsKey(ID);
-  }  
+    return accounts.containsKey(ID);
+  }
 
   public void reendow(Integer agentID, IInitialEndowment initialEndowment) {
-      try {
-          IAccount endowAccount = this.accounts.get(agentID);
-          endowAccount.clear(); 
-          initialEndowment.getGoods().forEach((k, v) -> endowAccount.addTradeables(k, v)); 
-          endowAccount.addMoney(initialEndowment.getMoney());
-          this.accounts.put(agentID, endowAccount); 
-      } catch (NullPointerException n) {
-        ErrorLogging.log("ERROR: AccountManager: ID not found.");
-        throw n; 
-      }
+    try {
+      IAccount endowAccount = this.accounts.get(agentID);
+      endowAccount.clear();
+      initialEndowment.getGoods().getItems()
+          .forEach(item -> endowAccount.addTradeables(item));
+      endowAccount.addMoney(initialEndowment.getMoney());
+      this.accounts.put(agentID, endowAccount);
+    } catch (NullPointerException n) {
+      ErrorLogging.log("ERROR: AccountManager: ID not found.");
+      throw n;
+    }
   }
 
   public void lock() {
     this.lock = true;
   }
-  
+
   @Override
   public Map<Integer, IBankUpdateMessage> constructInitializationMessages() {
-    Map<Integer, IBankUpdateMessage> bankUpdates = new HashMap<Integer, IBankUpdateMessage>(); 
+    Map<Integer, IBankUpdateMessage> bankUpdates =
+        new HashMap<Integer, IBankUpdateMessage>();
     for (Integer agentID : this.accounts.keySet()) {
-      IAccount agentAccount = this.accounts.get(agentID); 
-      Map<String, List<ITradeable>> agentTradeables = agentAccount.getAllGoods(); 
-      List<IItem> items = new LinkedList<IItem>(); 
-      agentTradeables.forEach((k, v) -> items.add(new MultiItem(k, v.size())));
-      IBankUpdateMessage agentBankUpdate = new AccountInitializationMessage(0, agentID, new Cart(items), agentAccount.getMoney());
-      bankUpdates.put(agentID, agentBankUpdate); 
+      IAccount agentAccount = this.accounts.get(agentID);
+      ICart agentTradeables = agentAccount.getAllGoods();
+      List<IItem> items = new LinkedList<IItem>();
+      agentTradeables.getItems().forEach(item -> items.add(item));
+      IBankUpdateMessage agentBankUpdate = new AccountInitializationMessage(0,
+          agentID, new Cart(items), agentAccount.getMoney());
+      bankUpdates.put(agentID, agentBankUpdate);
     }
     return bankUpdates;
   }
-  
+
   @Override
   public Map<Integer, IBankUpdateMessage>
       constructBankUpdateMessages(List<IAccountUpdate> accountUpdates) {
@@ -116,9 +120,9 @@ public class AccountManager implements IAccountManager {
   @Override
   public void updateAccounts(List<IAccountUpdate> accountUpdates) {
     // TODO Auto-generated method stub
-    
+
   }
-  
+
   @Override
   public String toString() {
     return "AccountManager [accounts=" + accounts + "]";
@@ -148,6 +152,5 @@ public class AccountManager implements IAccountManager {
       return false;
     return true;
   }
-
 
 }

@@ -1,12 +1,12 @@
 package brown.auction.value.valuation.library;
 
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.logging.library.ErrorLogging;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 
 public class DiminishingMarginalValuation extends AbsSparseValuation
-    implements IValuation {
+    implements ISpecificValuation {
 
   private double baseValue;
   private double factor;

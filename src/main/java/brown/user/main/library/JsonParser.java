@@ -27,10 +27,10 @@ import brown.logging.library.ErrorLogging;
 import brown.platform.market.IFlexibleRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.user.main.IEndowmentConfig;
+import brown.user.main.IItemConfig;
 import brown.user.main.IJsonParser;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
-import brown.user.main.ITradeableConfig;
 import brown.user.main.IValuationConfig;
 
 public class JsonParser implements IJsonParser {
@@ -48,42 +48,42 @@ public class JsonParser implements IJsonParser {
     JSONArray ja = (JSONArray) jo.get("simulation");
 
     Iterator simulationIterator = ja.iterator();
-    Iterator tradeableIterator;
+    Iterator itemIterator;
     Iterator valuationIterator;
     Iterator endowmentIterator;
     Iterator seqMarketIterator;
     Iterator simMarketIterator;
-    Iterator marketTradeablesIterator;
-    Iterator endowmentTradeablesIterator;
-    Iterator valuationTradeablesIterator;
+    Iterator marketitemsIterator;
+    Iterator endowmentitemsIterator;
+    Iterator valuationitemsIterator;
     Iterator generatorIterator;
 
     Iterator<Map.Entry> keyIterator;
-    Iterator<Map.Entry> tradeableKeyIterator;
+    Iterator<Map.Entry> itemKeyIterator;
     Iterator<Map.Entry> valuationKeyIterator;
     Iterator<Map.Entry> endowmentKeyIterator;
     Iterator<Map.Entry> seqMarketKeyIterator;
     Iterator<Map.Entry> simMarketKeyIterator;
     Iterator<Map.Entry> marketRulesKeyIterator;
-    Iterator<Map.Entry> marketTradeablesKeyIterator;
-    Iterator<Map.Entry> endowmentTradeablesKeyIterator;
-    Iterator<Map.Entry> valuationTradeablesKeyIterator;
+    Iterator<Map.Entry> marketitemsKeyIterator;
+    Iterator<Map.Entry> endowmentitemsKeyIterator;
+    Iterator<Map.Entry> valuationitemsKeyIterator;
     Iterator<Map.Entry> generatorKeyIterator;
     
     // within simulation strings
     List<Integer> numRunsList = new LinkedList<Integer>();
-    List<List<Map<String, String>>> tradeables =
+    List<List<Map<String, String>>> items =
         new LinkedList<List<Map<String, String>>>();
-    List<List<List<Map<String, String>>>> endowmentTradeables =
+    List<List<List<Map<String, String>>>> endowmentitems =
         new LinkedList<List<List<Map<String, String>>>>();
     List<List<Map<String, Double>>> endowmentParams =
         new LinkedList<List<Map<String, Double>>>();
     List<List<List<Map<String, String>>>> marketRules =
         new LinkedList<List<List<Map<String, String>>>>();
-    List<List<List<List<String>>>> marketTradeables =
+    List<List<List<List<String>>>> marketitems =
         new LinkedList<List<List<List<String>>>>();
     List<List<String>> valuationDistributions = new LinkedList<List<String>>();
-    List<List<List<String>>> valuationTradeables =
+    List<List<List<String>>> valuationitems =
         new LinkedList<List<List<String>>>();
     List<List<List<String>>> valuationGeneratorNames =
         new LinkedList<List<List<String>>>();
@@ -92,18 +92,18 @@ public class JsonParser implements IJsonParser {
 
     // get the strings from the json
     while (simulationIterator.hasNext()) {
-      List<Map<String, String>> simulationTradeables =
+      List<Map<String, String>> simulationitems =
           new LinkedList<Map<String, String>>();
-      List<List<Map<String, String>>> simulationEndowmentTradeables =
+      List<List<Map<String, String>>> simulationEndowmentitems =
           new LinkedList<List<Map<String, String>>>();
       List<Map<String, Double>> simulationEndowmentParams =
           new LinkedList<Map<String, Double>>();
       List<List<Map<String, String>>> simulationMarketRules =
           new LinkedList<List<Map<String, String>>>();
-      List<List<List<String>>> simulationMarketTradeables =
+      List<List<List<String>>> simulationMarketitems =
           new LinkedList<List<List<String>>>();
       List<String> simulationValuationDistributions = new LinkedList<String>();
-      List<List<String>> simulationValuationTradeables =
+      List<List<String>> simulationValuationitems =
           new LinkedList<List<String>>();
       List<List<String>> simulationValuationGeneratorNames =
           new LinkedList<List<String>>();
@@ -115,29 +115,29 @@ public class JsonParser implements IJsonParser {
         Map.Entry pair = keyIterator.next();
         if (pair.getKey().equals("numRuns")) {
           numRunsList.add(((Long) pair.getValue()).intValue());
-        } else if (pair.getKey().equals("tradeables")) {
-          tradeableIterator = ((JSONArray) pair.getValue()).iterator();
-          while (tradeableIterator.hasNext()) {
-            Map<String, String> tradeableConfig = new HashMap<String, String>();
-            tradeableKeyIterator =
-                ((Map) tradeableIterator.next()).entrySet().iterator();
-            while (tradeableKeyIterator.hasNext()) {
-              Map.Entry tradeablePair = tradeableKeyIterator.next();
-              if (tradeablePair.getKey().equals("tradeableName")) {
-                String tradeableName = (String) tradeablePair.getValue();
-                tradeableConfig.put((String) tradeablePair.getKey(),
-                    tradeableName);
-              } else if (tradeablePair.getKey().equals("numTradeables")) {
-                String numTradeables = (String) tradeablePair.getValue();
-                tradeableConfig.put((String) tradeablePair.getKey(),
-                    numTradeables);
+        } else if (pair.getKey().equals("items")) {
+          itemIterator = ((JSONArray) pair.getValue()).iterator();
+          while (itemIterator.hasNext()) {
+            Map<String, String> itemConfig = new HashMap<String, String>();
+            itemKeyIterator =
+                ((Map) itemIterator.next()).entrySet().iterator();
+            while (itemKeyIterator.hasNext()) {
+              Map.Entry itemPair = itemKeyIterator.next();
+              if (itemPair.getKey().equals("itemName")) {
+                String itemName = (String) itemPair.getValue();
+                itemConfig.put((String) itemPair.getKey(),
+                    itemName);
+              } else if (itemPair.getKey().equals("numItems")) {
+                String numitems = (String) itemPair.getValue();
+                itemConfig.put((String) itemPair.getKey(),
+                    numitems);
               } else {
                 ErrorLogging.log(
-                    "ERROR: JSON Parse: Tradeable: unrecognized input key: "
-                        + tradeablePair.getKey());
+                    "ERROR: JSON Parse: item: unrecognized input key: "
+                        + itemPair.getKey());
               }
             }
-            simulationTradeables.add(tradeableConfig);
+            simulationitems.add(itemConfig);
           }
         } else if (pair.getKey().equals("valuation")) {
           valuationIterator = ((JSONArray) pair.getValue()).iterator();
@@ -172,31 +172,31 @@ public class JsonParser implements IJsonParser {
                 simulationValuationGeneratorNames
                     .add(singleValuationGeneratorNames);
                 simulationValuationGeneratorParameters.add(singleValuationGeneratorParameters); 
-              } else if (valuationPair.getKey().equals("tradeables")) {
-                List<String> singleValuationTradeables =
+              } else if (valuationPair.getKey().equals("items")) {
+                List<String> singleValuationitems =
                     new LinkedList<String>();
 
-                valuationTradeablesIterator =
+                valuationitemsIterator =
                     ((JSONArray) valuationPair.getValue()).iterator();
-                while (valuationTradeablesIterator.hasNext()) {
-                  valuationTradeablesKeyIterator =
-                      ((Map) valuationTradeablesIterator.next()).entrySet()
+                while (valuationitemsIterator.hasNext()) {
+                  valuationitemsKeyIterator =
+                      ((Map) valuationitemsIterator.next()).entrySet()
                           .iterator();
-                  while (valuationTradeablesKeyIterator.hasNext()) {
-                    Map.Entry valuationTradeablesPair =
-                        valuationTradeablesKeyIterator.next();
-                    if (valuationTradeablesPair.getKey().equals( "tradeableName")) {
-                      String valuationTradeableName =
-                          (String) valuationTradeablesPair.getValue();
-                      singleValuationTradeables.add(valuationTradeableName);
+                  while (valuationitemsKeyIterator.hasNext()) {
+                    Map.Entry valuationitemsPair =
+                        valuationitemsKeyIterator.next();
+                    if (valuationitemsPair.getKey().equals( "itemName")) {
+                      String valuationitemName =
+                          (String) valuationitemsPair.getValue();
+                      singleValuationitems.add(valuationitemName);
                     } else {
                       ErrorLogging.log(
-                          "ERROR: JSON Parse: Valuation Tradeables: unrecognized input key: "
-                              + valuationTradeablesPair.getKey());
+                          "ERROR: JSON Parse: Valuation items: unrecognized input key: "
+                              + valuationitemsPair.getKey());
                     }
                   }
                 }
-                simulationValuationTradeables.add(singleValuationTradeables);
+                simulationValuationitems.add(singleValuationitems);
               } else {
                 ErrorLogging.log(
                     "ERROR: JSON Parse: Valuation: unrecognized input key: "
@@ -207,7 +207,7 @@ public class JsonParser implements IJsonParser {
         } else if (pair.getKey().equals("endowments")) {
           endowmentIterator = ((JSONArray) pair.getValue()).iterator();
           while (endowmentIterator.hasNext()) {
-            List<Map<String, String>> singleEndowmentTradeables =
+            List<Map<String, String>> singleEndowmentitems =
                 new LinkedList<Map<String, String>>();
             Map<String, Double> singleEndowmentParams =
                 new HashMap<String, Double>();
@@ -216,39 +216,39 @@ public class JsonParser implements IJsonParser {
                 ((Map) endowmentIterator.next()).entrySet().iterator();
             while (endowmentKeyIterator.hasNext()) {
               Map.Entry endowmentPair = endowmentKeyIterator.next();
-              if (endowmentPair.getKey().equals("tradeable")) {
-                endowmentTradeablesIterator =
+              if (endowmentPair.getKey().equals("item")) {
+                endowmentitemsIterator =
                     ((JSONArray) endowmentPair.getValue()).iterator();
-                while (endowmentTradeablesIterator.hasNext()) {
-                  Map<String, String> individualEndowmentTradeable =
+                while (endowmentitemsIterator.hasNext()) {
+                  Map<String, String> individualEndowmentitem =
                       new HashMap<String, String>();
 
-                  endowmentTradeablesKeyIterator =
-                      ((Map) endowmentTradeablesIterator.next()).entrySet()
+                  endowmentitemsKeyIterator =
+                      ((Map) endowmentitemsIterator.next()).entrySet()
                           .iterator();
-                  while (endowmentTradeablesKeyIterator.hasNext()) {
-                    Map.Entry endowmentTradeablesPair =
-                        endowmentTradeablesKeyIterator.next();
-                    if (endowmentTradeablesPair.getKey().equals( "tradeableName")) {
-                      String endowmentTradeableName =
-                          (String) endowmentTradeablesPair.getValue();
-                      individualEndowmentTradeable.put(
-                          (String) endowmentTradeablesPair.getKey(),
-                          endowmentTradeableName);
-                    } else if (endowmentTradeablesPair
-                        .getKey().equals("numTradeables")) {
-                      String endowmentNumTradeables =
-                          (String) endowmentTradeablesPair.getValue();
-                      individualEndowmentTradeable.put(
-                          (String) endowmentTradeablesPair.getKey(),
-                          endowmentNumTradeables);
+                  while (endowmentitemsKeyIterator.hasNext()) {
+                    Map.Entry endowmentitemsPair =
+                        endowmentitemsKeyIterator.next();
+                    if (endowmentitemsPair.getKey().equals( "itemName")) {
+                      String endowmentitemName =
+                          (String) endowmentitemsPair.getValue();
+                      individualEndowmentitem.put(
+                          (String) endowmentitemsPair.getKey(),
+                          endowmentitemName);
+                    } else if (endowmentitemsPair
+                        .getKey().equals("numItems")) {
+                      String endowmentNumitems =
+                          (String) endowmentitemsPair.getValue();
+                      individualEndowmentitem.put(
+                          (String) endowmentitemsPair.getKey(),
+                          endowmentNumitems);
                     } else {
                       ErrorLogging.log(
-                          "ERROR: JSON Parse: Endowment Tradeables: unrecognized input key: "
-                              + endowmentTradeablesPair.getKey());
+                          "ERROR: JSON Parse: Endowment items: unrecognized input key: "
+                              + endowmentitemsPair.getKey());
                     }
                   }
-                  singleEndowmentTradeables.add(individualEndowmentTradeable);
+                  singleEndowmentitems.add(individualEndowmentitem);
                 }
               } else if (endowmentPair.getKey().equals("money")) {
                 Double money = (Double) endowmentPair.getValue();
@@ -264,7 +264,7 @@ public class JsonParser implements IJsonParser {
                         + endowmentPair.getKey());
               }
             }
-            simulationEndowmentTradeables.add(singleEndowmentTradeables);
+            simulationEndowmentitems.add(singleEndowmentitems);
             simulationEndowmentParams.add(singleEndowmentParams);
           }
         } else if (pair.getKey().equals("seqMarket")) {
@@ -277,14 +277,14 @@ public class JsonParser implements IJsonParser {
               if (seqMarketPair.getKey().equals( "simMarket")) {
                 List<Map<String, String>> simMarketRules =
                     new LinkedList<Map<String, String>>();
-                List<List<String>> simMarketTradeables =
+                List<List<String>> simMarketitems =
                     new LinkedList<List<String>>();
 
                 simMarketIterator = ((JSONArray) seqMarketPair.getValue()).iterator();
                 while (simMarketIterator.hasNext()) {
                   Map<String, String> singleMarketRules =
                       new HashMap<String, String>();
-                  List<String> singleMarketTradeables =
+                  List<String> singleMarketitems =
                       new LinkedList<String>();
 
                   simMarketKeyIterator =
@@ -334,25 +334,25 @@ public class JsonParser implements IJsonParser {
                                   + marketRulesPair.getKey());
                         }
                       }
-                    } else if (simMarketPair.getKey().equals("tradeables")) {
-                      marketTradeablesIterator =
+                    } else if (simMarketPair.getKey().equals("items")) {
+                      marketitemsIterator =
                           ((JSONArray) simMarketPair.getValue()).iterator();
-                      while (marketTradeablesIterator.hasNext()) {
-                        marketTradeablesKeyIterator =
-                            ((Map) marketTradeablesIterator.next()).entrySet()
+                      while (marketitemsIterator.hasNext()) {
+                        marketitemsKeyIterator =
+                            ((Map) marketitemsIterator.next()).entrySet()
                                 .iterator();
-                        while (marketTradeablesKeyIterator.hasNext()) {
-                          Map.Entry marketTradeablesPair =
-                              marketTradeablesKeyIterator.next();
-                          if (marketTradeablesPair
-                              .getKey().equals( "tradeableName")) {
-                            String marketTradeableName =
-                                (String) marketTradeablesPair.getValue();
-                            singleMarketTradeables.add(marketTradeableName);
+                        while (marketitemsKeyIterator.hasNext()) {
+                          Map.Entry marketitemsPair =
+                              marketitemsKeyIterator.next();
+                          if (marketitemsPair
+                              .getKey().equals( "itemName")) {
+                            String marketitemName =
+                                (String) marketitemsPair.getValue();
+                            singleMarketitems.add(marketitemName);
                           } else {
                             ErrorLogging.log(
-                                "ERROR: JSON Parse: MarketTradeables: unrecognized input key: "
-                                    + marketTradeablesPair.getKey());
+                                "ERROR: JSON Parse: Marketitems: unrecognized input key: "
+                                    + marketitemsPair.getKey());
                           }
                         }
                       }
@@ -363,10 +363,10 @@ public class JsonParser implements IJsonParser {
                     }
                   }
                   simMarketRules.add(singleMarketRules);
-                  simMarketTradeables.add(singleMarketTradeables);
+                  simMarketitems.add(singleMarketitems);
                 }
                 simulationMarketRules.add(simMarketRules);
-                simulationMarketTradeables.add(simMarketTradeables);
+                simulationMarketitems.add(simMarketitems);
               } else {
                 ErrorLogging.log(
                     "ERROR: JSON Parse: SeqMarket: unrecognized input key: "
@@ -380,26 +380,26 @@ public class JsonParser implements IJsonParser {
                   + pair.getKey());
         }
       }
-      tradeables.add(simulationTradeables);
-      endowmentTradeables.add(simulationEndowmentTradeables);
+      items.add(simulationitems);
+      endowmentitems.add(simulationEndowmentitems);
       endowmentParams.add(simulationEndowmentParams);
       marketRules.add(simulationMarketRules);
-      marketTradeables.add(simulationMarketTradeables);
+      marketitems.add(simulationMarketitems);
       valuationDistributions.add(simulationValuationDistributions);
-      valuationTradeables.add(simulationValuationTradeables);
+      valuationitems.add(simulationValuationitems);
       valuationGeneratorNames.add(simulationValuationGeneratorNames);
       valuationGeneratorParameters.add(simulationValuationGeneratorParameters);
       
     }
     
     
-    System.out.println(tradeables);
-    System.out.println(endowmentTradeables);
+    System.out.println(items);
+    System.out.println(endowmentitems);
     System.out.println(endowmentParams);
     System.out.println(marketRules);
-    System.out.println(marketTradeables);
+    System.out.println(marketitems);
     System.out.println(valuationDistributions);
-    System.out.println(valuationTradeables);
+    System.out.println(valuationitems);
     System.out.println(valuationGeneratorNames);
     System.out.println(valuationGeneratorParameters);
     
@@ -407,17 +407,17 @@ public class JsonParser implements IJsonParser {
     
     // parse the strings into classes if necessary, and put into configs
     
-    // tradeable configs
+    // item configs
 
-    List<List<ITradeableConfig>> tConfigs =
-        new LinkedList<List<ITradeableConfig>>();
-    for (List<Map<String, String>> simulationTradeables : tradeables) {
-      List<ITradeableConfig> simulationTConfigs =
-          new LinkedList<ITradeableConfig>();
-      for (Map<String, String> aTradeable : simulationTradeables) {
-        ITradeableConfig tConfig =
-            new TradeableConfig(aTradeable.get("tradeableName"),
-                Integer.parseInt(aTradeable.get("numTradeables")));
+    List<List<IItemConfig>> tConfigs =
+        new LinkedList<List<IItemConfig>>();
+    for (List<Map<String, String>> simulationitems : items) {
+      List<IItemConfig> simulationTConfigs =
+          new LinkedList<IItemConfig>();
+      for (Map<String, String> aitem : simulationitems) {
+        IItemConfig tConfig =
+            new ItemConfig(aitem.get("itemName"),
+                Integer.parseInt(aitem.get("numItems")));
         simulationTConfigs.add(tConfig);
       }
       tConfigs.add(simulationTConfigs);
@@ -432,8 +432,8 @@ public class JsonParser implements IJsonParser {
           new LinkedList<IValuationConfig>();
       List<String> simulationValuationDistributions =
           valuationDistributions.get(i);
-      List<List<String>> simulationValuationTradeables =
-          valuationTradeables.get(i);
+      List<List<String>> simulationValuationitems =
+          valuationitems.get(i);
       List<List<String>> simulationValuationGeneratorNames =
           valuationGeneratorNames.get(i);
       List<List<List<Double>>> simulationValuationGeneratorParams =
@@ -448,8 +448,8 @@ public class JsonParser implements IJsonParser {
             distributionClass.getConstructor(Map.class, List.class);
         
         
-        List<String> singleValuationTradeables =
-            simulationValuationTradeables.get(j);
+        List<String> singleValuationitems =
+            simulationValuationitems.get(j);
 
         List<String> singleValuationGeneratorNames =
             simulationValuationGeneratorNames.get(j);
@@ -477,7 +477,7 @@ public class JsonParser implements IJsonParser {
           generators.put(generatorCons, generatorParams);
         }
         IValuationConfig valConfig = new ValuationConfig(
-            singleValuationTradeables, distributionCons, generators);
+            singleValuationitems, distributionCons, generators);
         simulationValConfigs.add(valConfig);
       }
       valuationConfigs.add(simulationValConfigs);
@@ -487,29 +487,29 @@ public class JsonParser implements IJsonParser {
 
     List<List<IEndowmentConfig>> endowmentConfigs =
         new LinkedList<List<IEndowmentConfig>>();
-    for (int i = 0; i < endowmentTradeables.size(); i++) {
+    for (int i = 0; i < endowmentitems.size(); i++) {
       List<IEndowmentConfig> simulationEndowmentConfigs =
           new LinkedList<IEndowmentConfig>();
-      List<List<Map<String, String>>> simulationEndowmentTradeables =
-          endowmentTradeables.get(i);
+      List<List<Map<String, String>>> simulationEndowmentitems =
+          endowmentitems.get(i);
       List<Map<String, Double>> simulationEndowmentParams =
           endowmentParams.get(i);
-      for (int j = 0; j < simulationEndowmentTradeables.size(); j++) {
-        List<Map<String, String>> singleEndowmentTradeables =
-            simulationEndowmentTradeables.get(j);
+      for (int j = 0; j < simulationEndowmentitems.size(); j++) {
+        List<Map<String, String>> singleEndowmentitems =
+            simulationEndowmentitems.get(j);
         Map<String, Double> singleEndowmentParams =
             simulationEndowmentParams.get(j);
         Double money = singleEndowmentParams.get("money");
         Integer frequency =
             ((Long) Math.round(singleEndowmentParams.get("frequency"))).intValue();
         Map<String, Integer> endowmentMapping = new HashMap<String, Integer>();
-        for (int k = 0; k < singleEndowmentTradeables.size(); k++) {
-          Map<String, String> singleTradeable =
-              singleEndowmentTradeables.get(k);
-          String tName = singleTradeable.get("tradeableName");
-          Integer numTradeables =
-              Integer.parseInt(singleTradeable.get("numTradeables"));
-          endowmentMapping.put(tName, numTradeables);
+        for (int k = 0; k < singleEndowmentitems.size(); k++) {
+          Map<String, String> singleitem =
+              singleEndowmentitems.get(k);
+          String tName = singleitem.get("itemName");
+          Integer numitems =
+              Integer.parseInt(singleitem.get("numitems"));
+          endowmentMapping.put(tName, numitems);
         }
         // TODO: endowment names??
         simulationEndowmentConfigs.add(
@@ -527,14 +527,14 @@ public class JsonParser implements IJsonParser {
           new LinkedList<List<IMarketConfig>>();
       List<List<Map<String, String>>> simulationMarketRules =
           marketRules.get(i);
-      List<List<List<String>>> simulationMarketTradeables =
-          marketTradeables.get(i);
+      List<List<List<String>>> simulationMarketitems =
+          marketitems.get(i);
       for (int j = 0; j < simulationMarketRules.size(); j++) {
         List<IMarketConfig> simMarketConfigs = new LinkedList<IMarketConfig>();
         List<Map<String, String>> simultaneousMarketRules =
             simulationMarketRules.get(j);
-        List<List<String>> simultaneousMarketTradeables =
-            simulationMarketTradeables.get(j);
+        List<List<String>> simultaneousMarketitems =
+            simulationMarketitems.get(j);
         for (int k = 0; k < simultaneousMarketRules.size(); k++) {
           Map<String, String> singleMarketRules =
               simultaneousMarketRules.get(k);
@@ -579,11 +579,11 @@ public class JsonParser implements IJsonParser {
                   (IInnerIRPolicy) innerIRPolicyCons.newInstance(),
                   (ITerminationCondition) tConditionCons.newInstance());
 
-          List<String> singleMarketTradeables =
-              simultaneousMarketTradeables.get(k);
+          List<String> singleMarketItems =
+              simultaneousMarketitems.get(k);
 
           IMarketConfig singleMarketConfig =
-              new MarketConfig(marketRule, singleMarketTradeables);
+              new MarketConfig(marketRule, singleMarketItems);
           simMarketConfigs.add(singleMarketConfig);
         }
         simulationMarketConfigs.add(simMarketConfigs);

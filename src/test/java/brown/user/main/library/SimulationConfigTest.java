@@ -25,7 +25,7 @@ import brown.platform.market.library.FlexibleRules;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
-import brown.user.main.ITradeableConfig;
+import brown.user.main.IItemConfig;
 import brown.user.main.IValuationConfig;
 
 public class SimulationConfigTest {
@@ -33,7 +33,7 @@ public class SimulationConfigTest {
   @Test
   public void testSimulationConfigOne() throws NoSuchMethodException, SecurityException {
     
-    List<ITradeableConfig> tConfigs = new LinkedList<ITradeableConfig>(); 
+    List<IItemConfig> tConfigs = new LinkedList<IItemConfig>(); 
     List<IValuationConfig> vConfigs = new LinkedList<IValuationConfig>(); 
     List<IEndowmentConfig> eConfigs = new LinkedList<IEndowmentConfig>(); 
     List<List<IMarketConfig>> mConfigSquared = new LinkedList<List<IMarketConfig>>(); 
@@ -63,7 +63,7 @@ public class SimulationConfigTest {
     params.add(1.0);  
     Map<Constructor<?>, List<Double>> gMap = new HashMap<Constructor<?>, List<Double>>(); 
     gMap.put(gCons, params); 
-    ITradeableConfig tConfig = new TradeableConfig("trade", 10);
+    IItemConfig tConfig = new ItemConfig("trade", 10);
     tConfigs.add(tConfig);
     
     List<String> tNameList = new LinkedList<String>(); 

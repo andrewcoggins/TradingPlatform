@@ -21,8 +21,8 @@ public interface IAgent extends IClient {
 
   public void onInformationMessage(IInformationMessage informationMessage); 
   
-  public void onTradeRequestMessage(ITradeRequestMessage tRequestMessage); 
+  public void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage); 
   
-  public void onValuationMessage(IValuationMessage vaulationMessage); 
+  public void onValuationMessage(IValuationMessage valuationMessage); 
 
 }

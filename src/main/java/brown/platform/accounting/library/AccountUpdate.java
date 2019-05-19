@@ -1,94 +1,69 @@
-package brown.platform.accounting.library; 
+package brown.platform.accounting.library;
 
 import brown.platform.accounting.IAccountUpdate;
-import brown.platform.tradeable.ITradeable;
+import brown.platform.accounting.ITransaction;
+import brown.platform.item.IItem;
 
-/**
- * An order is produced by the payment rule, and 
- * describes the changes that occur in agent accounts
- * as result of an auction.
- * @author acoggins
- *
- */
 public class AccountUpdate implements IAccountUpdate {
 
-  // recipient of the order
-	public final Integer TO;
-	// tradeable to be put in agent account
-	public final ITradeable GOOD;
-	// benefactor of order (usually not important)
-	public final Integer FROM;
-	// money to be removed from agent account
-	public final double PRICE;
-	// number of tradeables to be put in agent account.
-	public double QUANTITY;
-	
-	/**
-	 * For Kryo do not use
-	 */
-	public AccountUpdate() {
-		this.TO = null;
-		this.FROM = null;
-		this.PRICE = -1;
-		this.QUANTITY = -1;
-		this.GOOD = null;
-	}
-	
-	/**
-	 * Actual order constructor
-	 * @param to
-	 * @param from
-	 * @param price
-	 * @param quantity
-	 * @param good
-	 */
-	public AccountUpdate(Integer to, Integer from, double price, double quantity, ITradeable good) {
-		this.TO = to;
-		this.FROM = from;
-		this.PRICE = price;
-		this.QUANTITY = quantity;
-		this.GOOD = good;
-	}
-	
-	public void updateQuantity(double quantity) {
-		this.QUANTITY = quantity;
-	}
+  public final Integer TO;
+  public final IItem ITEM;
+  public final Integer FROM;
+  public final double PRICE;
 
-	public AccountUpdate updatePrice(double price) {
-		return new AccountUpdate(this.TO, this.FROM, price, this.QUANTITY, this.GOOD);
-	}
+  /**
+   * For Kryo
+   * NO NOT USE
+   */
+  public AccountUpdate() {
+    this.TO = null;
+    this.FROM = null;
+    this.PRICE = -1;
+    this.ITEM = null;
+  }
 
-	public AccountUpdate updateToAgent(Integer newAgent) {
-		return new AccountUpdate(newAgent, this.FROM, this.PRICE, this.QUANTITY, this.GOOD);
-	}
-	
-	public AccountUpdate updateFromAgent(Integer newAgent) {
-   return new AccountUpdate(this.TO, newAgent, this.PRICE, this.QUANTITY, this.GOOD);
+  /**
+   * Constructor for an accountUpdate needs a ToAgent, FromAgent, price, quantity, 
+   * GoodName, and good
+   * @param to
+   * agent whose account is to be updated
+   * @param from
+   * agent who the udpate is from (not important in oneSided)
+   * @param price
+   * money gained or lost
+   * @param quantity
+   * quantity of goods gained or lost. 
+   * @param goodName
+   * name of the good added or lost. 
+   * @param good
+   * tradeable to be added or removed. 
+   */
+  public AccountUpdate(Integer to, Integer from, double price, IItem good) {
+    this.TO = to;
+    this.FROM = from;
+    this.PRICE = price;
+    this.ITEM = good;
   }
-	
-	/**
-	 * Produces a transaction from this order.
-	 * @return a Transaction with the information stored in this order.
-	 */
-  public Transaction toTransaction() {
-    return new Transaction(this.TO, this.FROM, this.PRICE, this.QUANTITY, this.GOOD);
+
+  @Override
+  public ITransaction toTransaction() {
+    return new Transaction(TO, FROM, PRICE, ITEM); 
   }
-	  
-	@Override
-	public String toString() {
-		return "<" + this.FROM + ","+ this.TO + "," + this.GOOD + "," + this.PRICE + ">";
-	}
+
+  @Override
+  public String toString() {
+    return "AccountUpdate [TO=" + TO + ", ITEM=" + ITEM + ", FROM=" + FROM
+        + ", PRICE=" + PRICE + "]";
+  }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((FROM == null) ? 0 : FROM.hashCode());
+    result = prime * result + ((ITEM == null) ? 0 : ITEM.hashCode());
     long temp;
     temp = Double.doubleToLongBits(PRICE);
-    result = prime * result + (int) (temp ^ (temp >>> 32));
-    result = prime * result + ((FROM == null) ? 0 : FROM.hashCode());
-    result = prime * result + ((GOOD == null) ? 0 : GOOD.hashCode());
-    temp = Double.doubleToLongBits(QUANTITY);
     result = prime * result + (int) (temp ^ (temp >>> 32));
     result = prime * result + ((TO == null) ? 0 : TO.hashCode());
     return result;
@@ -103,20 +78,17 @@ public class AccountUpdate implements IAccountUpdate {
     if (getClass() != obj.getClass())
       return false;
     AccountUpdate other = (AccountUpdate) obj;
-    if (Double.doubleToLongBits(PRICE) != Double.doubleToLongBits(other.PRICE))
-      return false;
     if (FROM == null) {
       if (other.FROM != null)
         return false;
     } else if (!FROM.equals(other.FROM))
       return false;
-    if (GOOD == null) {
-      if (other.GOOD != null)
+    if (ITEM == null) {
+      if (other.ITEM != null)
         return false;
-    } else if (!GOOD.equals(other.GOOD))
+    } else if (!ITEM.equals(other.ITEM))
       return false;
-    if (Double.doubleToLongBits(QUANTITY) != Double
-        .doubleToLongBits(other.QUANTITY))
+    if (Double.doubleToLongBits(PRICE) != Double.doubleToLongBits(other.PRICE))
       return false;
     if (TO == null) {
       if (other.TO != null)
@@ -125,5 +97,5 @@ public class AccountUpdate implements IAccountUpdate {
       return false;
     return true;
   }
-	
+  
 }

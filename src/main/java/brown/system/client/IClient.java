@@ -4,26 +4,26 @@ import brown.communication.messages.IRegistrationResponseMessage;
 import brown.communication.messages.IStatusMessage;
 
 /**
- * Agents are responsible for receiving messages from the server,
- * constructing bids, and sending them back to the server.
- * @author andrew
+ * IClient is the kryo client object. It underlies all agent classes.
+ * 
+ * @author andrewcoggins
  *
  */
-public interface IClient { 
+public interface IClient {
 
   /**
-   * Gets called when the server sends a registration method back to the agent (2nd part of handshake)
-   * @param registration - includes the agent's new ID
+   * receives a RegistrationResponse from MessageServer
+   * 
+   * @param registration
    */
   void onRegistrationResponse(IRegistrationResponseMessage registration);
- 
+
   /**
-   * Whenever a message is rejected, a rejection message is sent
-   * @param message - includes a string about rejection
+   * Receives a StatusMessage from MessageServer. Implementation will print the
+   * the contents of the message.
+   * 
+   * @param message
    */
   void onStatusMessage(IStatusMessage message);
 
 }
-
-  
- 

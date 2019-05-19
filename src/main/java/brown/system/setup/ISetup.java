@@ -3,12 +3,18 @@ package brown.system.setup;
 import com.esotericsoftware.kryo.Kryo;
 
 /**
- * Set up Kryo, which handles agent-server communications.
- * @author lcamery
+ * Setup registers necessary classes with kryo.
+ * 
+ * @author andrewcoggins
  *
  */
 public interface ISetup {
-  
-	void setup(Kryo kryo);
-	
+
+  /**
+   * registers necessary classes with kryo.
+   * 
+   * @param kryo
+   */
+  void setup(Kryo kryo);
+
 }

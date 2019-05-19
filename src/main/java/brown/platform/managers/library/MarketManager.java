@@ -17,13 +17,13 @@ import brown.communication.messages.library.ErrorMessage;
 import brown.communication.messages.library.TradeRejectionMessage;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
+import brown.platform.item.ICart;
 import brown.platform.managers.IMarketManager;
 import brown.platform.market.IFlexibleRules;
 import brown.platform.market.IMarket;
 import brown.platform.market.IMarketBlock;
 import brown.platform.market.library.Market;
 import brown.platform.market.library.SimultaneousMarket;
-import brown.platform.tradeable.ITradeable;
 import brown.platform.whiteboard.IWhiteboard;
 import brown.platform.whiteboard.library.Whiteboard;
 
@@ -57,21 +57,10 @@ public class MarketManager implements IMarketManager {
 
   @Override
   public void createSimultaneousMarket(List<IFlexibleRules> marketRules,
-      List<List<String>> marketTradeableNames,
-      Map<String, List<ITradeable>> allTradeables) {
+      List<ICart> marketItems) {
     if (!this.lock) {
-      List<Map<String, List<ITradeable>>> marketTradeables =
-          new LinkedList<Map<String, List<ITradeable>>>();
-      for (List<String> tList : marketTradeableNames) {
-        Map<String, List<ITradeable>> singleMarketTradeables =
-            new HashMap<String, List<ITradeable>>();
-        for (String tName : tList) {
-          singleMarketTradeables.put(tName, allTradeables.get(tName));
-        }
-        marketTradeables.add(singleMarketTradeables);
-      }
       IMarketBlock marketBlock =
-          new SimultaneousMarket(marketRules, marketTradeables);
+          new SimultaneousMarket(marketRules, marketItems);
       this.allMarkets.add(marketBlock);
     } else {
       PlatformLogging.log("ERROR: market manager locked.");
@@ -93,7 +82,7 @@ public class MarketManager implements IMarketManager {
     // TODO: somehow open markets using whiteboard information.
     IMarketBlock currentMarketBlock = this.allMarkets.get(index);
     List<IFlexibleRules> marketRules = currentMarketBlock.getMarkets();
-    List<Map<String, List<ITradeable>>> marketTradeables =
+    List<ICart> marketTradeables =
         currentMarketBlock.getMarketTradeables();
     for (int i = 0; i < marketRules.size(); i++) {
       this.activeMarkets.put(this.marketIndex,

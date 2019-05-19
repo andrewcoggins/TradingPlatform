@@ -26,7 +26,7 @@ public class ValuationConfig implements IValuationConfig {
     return this.generators;
   }
   
-  public List<String> getTradeableNames() {
+  public List<String> getItemNames() {
     return this.tradeableNames; 
   }
 

@@ -6,7 +6,7 @@ import brown.platform.domain.IDomain;
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IDomainManager;
 import brown.platform.managers.IEndowmentManager;
-import brown.platform.managers.ITradeableManager;
+import brown.platform.managers.IItemManager;
 import brown.platform.managers.IValuationManager;
 
 public class DomainManager implements IDomainManager {
@@ -21,7 +21,7 @@ public class DomainManager implements IDomainManager {
         this.lock = false;
     }
 
-    public void createDomain(ITradeableManager manager, IValuationManager valuation, IAccountManager acctManager,
+    public void createDomain(IItemManager manager, IValuationManager valuation, IAccountManager acctManager,
                              IEndowmentManager endowmentManager) {
         if (!this.lock){
             this.domain = new Domain(manager, valuation, acctManager, endowmentManager);

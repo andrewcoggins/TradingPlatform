@@ -1,29 +1,38 @@
 package brown.auction.value.distribution.library;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
+import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
-import brown.auction.value.valuation.IValuation;
-import brown.platform.tradeable.ITradeable;
+import brown.auction.value.valuation.ISpecificValuation;
+import brown.platform.item.ICart;
 
-public abstract class AbsValuationDistribution {
+public abstract class AbsValuationDistribution
+    implements IValuationDistribution {
 
   protected List<IValuationGenerator> generators;
-  protected Map<String, List<ITradeable>> tradeableNames;
-  
-  public AbsValuationDistribution(Map<String, List<ITradeable>> tradeableNames,
+  protected ICart items;
+
+  public AbsValuationDistribution(ICart items,
       List<IValuationGenerator> generators) {
     this.generators = generators;
-    this.tradeableNames = tradeableNames;
+    this.items = items;
   }
-  
-  public abstract IValuation sample();
+
+  public abstract ISpecificValuation sample();
+
+  @Override
+  public List<String> getItemNames() {
+    List<String> itemNames = new LinkedList<String>();
+    this.items.getItems().forEach(item -> itemNames.add(item.getName()));
+    return itemNames;
+  }
 
   @Override
   public String toString() {
-    return "AbsValuationDistribution [generators=" + generators
-        + ", tradeableNames=" + tradeableNames + "]";
+    return "AbsValuationDistribution [generators=" + generators + ", items="
+        + items + "]";
   }
 
   @Override
@@ -32,8 +41,7 @@ public abstract class AbsValuationDistribution {
     int result = 1;
     result =
         prime * result + ((generators == null) ? 0 : generators.hashCode());
-    result = prime * result
-        + ((tradeableNames == null) ? 0 : tradeableNames.hashCode());
+    result = prime * result + ((items == null) ? 0 : items.hashCode());
     return result;
   }
 
@@ -51,14 +59,12 @@ public abstract class AbsValuationDistribution {
         return false;
     } else if (!generators.equals(other.generators))
       return false;
-    if (tradeableNames == null) {
-      if (other.tradeableNames != null)
+    if (items == null) {
+      if (other.items != null)
         return false;
-    } else if (!tradeableNames.equals(other.tradeableNames))
+    } else if (!items.equals(other.items))
       return false;
     return true;
   }
 
-  
-  
 }
