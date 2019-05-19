@@ -10,4 +10,10 @@ public interface ICart {
   
   public boolean containsItem(String itemName); 
   
+  public void addToCart(IItem item); 
+  
+  public void removeFromCart(IItem item); 
+  
+  public void combine(ICart cart); 
+  
 }

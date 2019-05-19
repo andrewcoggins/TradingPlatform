@@ -11,8 +11,8 @@ import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.valuation.IGeneralValuation;
 import brown.communication.messages.IValuationMessage;
 import brown.logging.library.PlatformLogging;
+import brown.platform.item.ICart;
 import brown.platform.managers.IValuationManager;
-import brown.platform.tradeable.ITradeable;
 
 public class ValuationManager implements IValuationManager {
 
@@ -29,14 +29,14 @@ public class ValuationManager implements IValuationManager {
     }
 
     public void createValuation(Constructor<?> distCons, Map<Constructor<?>, List<Double>> generators,
-        Map<String, List<ITradeable>> tradeables) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        ICart items) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         if (!this.lock) {
           List<IValuationGenerator> generatorList = new LinkedList<IValuationGenerator>(); 
             for (Constructor<?> generator : generators.keySet()) {
               IValuationGenerator newGen = (IValuationGenerator) generator.newInstance(generators.get(generator)); 
               generatorList.add(newGen); 
             }
-            this.distributions.add((IValuationDistribution) distCons.newInstance(tradeables, generatorList)); 
+            this.distributions.add((IValuationDistribution) distCons.newInstance(items, generatorList)); 
         } else {
             PlatformLogging.log("Creation denied: valuation manager locked.");
         }

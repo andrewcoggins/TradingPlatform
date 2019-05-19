@@ -7,8 +7,6 @@ import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.item.ICart;
-import brown.platform.tradeable.ITradeable;
-
 /**
  * Stores the internal state of a market as it runs. Consists of a series of
  * getters and setters for the various fields of the market state.
@@ -17,10 +15,6 @@ import brown.platform.tradeable.ITradeable;
  */
 public interface IMarketState {
 
-  // Move to Market -- b/c static across ALL Markets!
-  public Map<ITradeable, Double> getIncrement();
-
-  public void setIncrement(Map<ITradeable, Double> increment);
 
   public Double getFlatIncrement();
 
@@ -49,10 +43,6 @@ public interface IMarketState {
   public boolean getAcceptable();
 
   public void setAcceptable(boolean b);
-
-  public Map<ITradeable, Double> getReserve();
-
-  public void setReserve(Map<ITradeable, Double> o);
 
   // IR policy
   public Map<Integer, List<IInformationMessage>> getReport();

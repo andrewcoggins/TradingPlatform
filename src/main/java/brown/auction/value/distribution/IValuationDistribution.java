@@ -16,7 +16,7 @@ public interface IValuationDistribution {
    */
   public ISpecificValuation sample();
   
-  public List<String> getTradeableNames();
+  public List<String> getItemNames();
   
   
 }

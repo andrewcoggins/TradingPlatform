@@ -6,9 +6,9 @@
 	"numTotalRuns": "1", 
 	"simulation": [{
 		"numRuns": "1", 
-		"tradeables": [{
-			"tradeableName": "testTradeable", 
-			"numTradeables": "1"
+		"items": [{
+			"itemName": "testItem", 
+			"numitems": "1"
 		}], 
 		"valuation": [{
 			"distribution": "",
@@ -18,14 +18,14 @@
 
 				}
 			}],
-			"tradeables": [{
-				"tradeableName": "testTradeable"
+			"items": [{
+				"itemName": "testItem"
 			}]
 		}], 
 		"endowments": [{
-			"tradeable": [{
-				"tradeableName": "testTradeable", 
-				"numTradeables": "1"
+			"item": [{
+				"itemName": "testitem", 
+				"numitems": "1"
 			}],
 			"money": "100", 
 			"frequency": "1"
@@ -41,8 +41,8 @@
 					"innerIRPolicy": "", 
 					"tCondition": ""
 				}, 
-				"tradeables": [{
-					"tradeableName": "testTradeable"
+				"items": [{
+					"itemName": "testitem"
 				}]
 			}]
 		}]

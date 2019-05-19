@@ -36,6 +36,25 @@ public abstract class AbsCart implements ICart {
   }
   
   @Override
+  public void addToCart(IItem item) {
+    if (!this.itemMap.containsKey(item.getName())) {
+      this.items.add(item); 
+      this.itemMap.put(item.getName(), item); 
+    }
+  }
+  
+  @Override
+  public void removeFromCart(IItem item) {
+
+  }
+  
+  @Override
+  public void combine(ICart cart) {
+
+
+  }
+  
+  @Override
   public String toString() {
     return "AbsCart [items=" + items + "]";
   }

@@ -2,7 +2,7 @@ package brown.platform.domain;
 
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IEndowmentManager;
-import brown.platform.managers.ITradeableManager;
+import brown.platform.managers.IItemManager;
 import brown.platform.managers.IValuationManager;
 
 /**
@@ -10,7 +10,7 @@ import brown.platform.managers.IValuationManager;
  */
 public interface IDomain {
 
-  public ITradeableManager getTradeableManager(); 
+  public IItemManager getTradeableManager(); 
   
   public IAccountManager getAccountManager(); 
   

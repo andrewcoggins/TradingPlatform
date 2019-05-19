@@ -8,9 +8,9 @@ import brown.communication.messages.IStatusMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
+import brown.platform.item.ICart;
 import brown.platform.market.IFlexibleRules;
 import brown.platform.market.IMarket;
-import brown.platform.tradeable.ITradeable;
 
 /**
  * market manager keeps track of all open and closed markets within a simulation. 
@@ -19,7 +19,7 @@ import brown.platform.tradeable.ITradeable;
  */
 public interface IMarketManager {
 
-  public void createSimultaneousMarket(List<IFlexibleRules> s, List<List<String>> marketTradeables, Map<String, List<ITradeable>> allTradeables);
+  public void createSimultaneousMarket(List<IFlexibleRules> rules, List<ICart> marketItems);
 
   public void lock();
   

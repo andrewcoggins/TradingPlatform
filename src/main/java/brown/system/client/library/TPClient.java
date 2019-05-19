@@ -12,31 +12,23 @@ import brown.system.client.IClient;
 import brown.system.setup.ISetup;
 import brown.system.setup.library.Startup;
 
-/**
- * abstract client starts an agent with kryo. All agents will extend this class.
- * 
- * @author andrew
- *
- */
+
 public abstract class TPClient implements IClient {
 
   public final Client CLIENT;
   public Integer ID;
 
   /**
-   * The basic client communication object.
+   * TPClient needs a host, a port, and a setup.
    * 
-   * @param host
-   * @param port
-   * @param gameSetup
-   * @throws IOException
-   * @throws ClassNotFoundException
+   * @param host the name of the host. If local, this is "localhost"
+   * @param port the port number
+   * @param gameSetup a class that registers the needed classes with kryo.
    */
   public TPClient(String host, int port, ISetup gameSetup) {
     this.CLIENT = new Client(16384, 8192);
     this.ID = null;
     CLIENT.start();
-    // Log.TRACE();
     Kryo agentKryo = CLIENT.getKryo();
     Startup.start(agentKryo);
     if (gameSetup != null) {

@@ -1,17 +1,28 @@
 package brown.platform.accounting;
 
-import java.util.List;
-import java.util.Map;
-
-import brown.platform.tradeable.ITradeable;
+import brown.platform.item.ICart;
 
 /**
- * IInitialEndowment- specifies an endowment of tradeables and money for the
+ * Initial endowment is the items and money that the agent begins a simulation
+ * with.
+ * 
+ * @author andrewcoggins
+ *
  */
 public interface IInitialEndowment {
-  
-  public double getMoney(); 
-  
-  public Map<String, List<ITradeable>> getGoods(); 
-  
+
+  /**
+   * get the money associated with the endowment.
+   * 
+   * @return money
+   */
+  public double getMoney();
+
+  /**
+   * get the goods associated with the endowment.
+   * 
+   * @return goods
+   */
+  public ICart getGoods();
+
 }

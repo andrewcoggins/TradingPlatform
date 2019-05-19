@@ -3,15 +3,19 @@ package brown.platform.accounting;
 import brown.platform.accounting.library.Transaction;
 
 /**
- * ITransaction describes a change to an agent account. 
- * @author andrew
+ * transaction describes a change made to an account
+ * 
+ * @author andrewcoggins
+ *
  */
 public interface ITransaction {
-  
+
   /**
-   * @param agentID - Agent ID to keep in transaction (wipes other agent IDs)
-   * @return sanitized transaction (Other IDs are set to null)
+   * remove private details from the transaction (the agent's private ID)
+   * 
+   * @param agentID the agent ID to be sanitized
+   * @return a sanitized transaction
    */
   public Transaction sanitize(Integer agentID);
-  
+
 }

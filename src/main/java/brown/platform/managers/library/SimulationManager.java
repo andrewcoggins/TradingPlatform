@@ -207,7 +207,7 @@ public class SimulationManager implements ISimulationManager {
       Map<List<ISingleItem>, ISpecificValuation> specificValuationMap = new HashMap<List<ISingleItem>, ISpecificValuation>(); 
       for (IValuationDistribution specificDistribution : this.currentValuationManager.getDistribution()) { 
         List<ISingleItem> specificItems = new LinkedList<ISingleItem>(); 
-        for (String itemName : specificDistribution.getTradeableNames()) {
+        for (String itemName : specificDistribution.getItemNames()) {
           specificItems.add(new SingleItem(itemName)); 
         }
         specificValuationMap.put(specificItems, specificDistribution.sample()); 

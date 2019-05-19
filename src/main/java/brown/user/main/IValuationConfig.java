@@ -10,5 +10,5 @@ public interface IValuationConfig {
   
   public Map<Constructor<?>, List<Double>> getGenerators(); 
   
-  public List<String> getTradeableNames(); 
+  public List<String> getItemNames(); 
 }
