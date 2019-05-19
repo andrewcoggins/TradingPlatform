@@ -2,7 +2,7 @@ package brown.platform.domain;
 
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IEndowmentManager;
-import brown.platform.managers.ITradeableManager;
+import brown.platform.managers.IItemManager;
 import brown.platform.managers.IValuationManager;
 
 
@@ -11,12 +11,12 @@ import brown.platform.managers.IValuationManager;
  */
 public class Domain implements IDomain {
 
-    private ITradeableManager tManager;
+    private IItemManager tManager;
     private IValuationManager valuationManager;
     private IAccountManager acctManager;
     private IEndowmentManager endowmentManager;
 
-    public Domain (ITradeableManager tManager, IValuationManager valuationManager, IAccountManager acctManager,
+    public Domain (IItemManager tManager, IValuationManager valuationManager, IAccountManager acctManager,
                    IEndowmentManager endowmentManager) {
         this.tManager = tManager;
         this.valuationManager = valuationManager;
@@ -25,7 +25,7 @@ public class Domain implements IDomain {
     }
     
     @Override
-    public ITradeableManager getTradeableManager() {
+    public IItemManager getTradeableManager() {
       return this.tManager;
     }
 

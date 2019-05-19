@@ -5,19 +5,19 @@ import java.util.List;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
-import brown.user.main.ITradeableConfig;
+import brown.user.main.IItemConfig;
 import brown.user.main.IValuationConfig;
 
 public class SimulationConfig implements ISimulationConfig {
 
   
     private Integer simulationRuns;
-    private List<ITradeableConfig> tConfig; 
+    private List<IItemConfig> tConfig; 
     private List<IValuationConfig> vConfig; 
     private List<IEndowmentConfig> eConfig; 
     private List<List<IMarketConfig>> mConfig; 
     
-    public SimulationConfig(Integer simulationRuns, List<ITradeableConfig> tConfig, List<IValuationConfig> vConfig, 
+    public SimulationConfig(Integer simulationRuns, List<IItemConfig> tConfig, List<IValuationConfig> vConfig, 
         List<IEndowmentConfig> eConfig, List<List<IMarketConfig>> mConfig) {
 
         this.simulationRuns = simulationRuns;
@@ -34,7 +34,7 @@ public class SimulationConfig implements ISimulationConfig {
     }
 
     @Override
-    public List<ITradeableConfig> getTConfig() {
+    public List<IItemConfig> getTConfig() {
       
       return this.tConfig;
     }

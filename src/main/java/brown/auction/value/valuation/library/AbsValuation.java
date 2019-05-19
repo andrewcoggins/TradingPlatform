@@ -1,9 +1,9 @@
 package brown.auction.value.valuation.library;
 
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.platform.item.ICart;
 
-public abstract class AbsValuation implements IValuation {
+public abstract class AbsValuation implements ISpecificValuation {
   
   
   @Override

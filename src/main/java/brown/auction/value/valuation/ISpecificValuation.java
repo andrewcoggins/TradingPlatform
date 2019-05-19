@@ -8,7 +8,7 @@ import brown.platform.item.ICart;
  * @author andrew
  *
  */
-public interface IValuation {
+public interface ISpecificValuation {
   
   /**
    * This method returns a valuation for some ITradeable.

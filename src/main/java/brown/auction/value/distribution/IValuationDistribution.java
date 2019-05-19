@@ -1,6 +1,8 @@
 package brown.auction.value.distribution;
 
-import brown.auction.value.valuation.IValuation;
+import java.util.List;
+
+import brown.auction.value.valuation.ISpecificValuation;
 
 /**
  * IValuationDistribution samples IValuations from a distribution. 
@@ -12,6 +14,9 @@ public interface IValuationDistribution {
    * samples IValuations from a distribution
    * @return IValuation
    */
-  public IValuation sample();
+  public ISpecificValuation sample();
+  
+  public List<String> getItemNames();
+  
   
 }

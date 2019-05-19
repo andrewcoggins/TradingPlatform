@@ -10,7 +10,6 @@ import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.item.ICart;
-import brown.platform.tradeable.ITradeable;
 
 /**
  * Standard MarketState stores the internal information of a market.
@@ -32,15 +31,11 @@ public class MarketState implements IMarketState {
   // Query rule
   private TradeRequestMessage tRequest;
   
-  // TODO: move to IMarket!
-  private Map<ITradeable, Double> increment;
   private double flatIncrement;
   
   // Activity rule
   private Boolean isAcceptable; 
-  private Map<ITradeable, Double> reserve;
-  // for Revealed Preference rule
-  private Map<ITradeable, List<Integer>> altAlloc;
+
   
   // IR policy
   private Map<Integer, List<IInformationMessage>> gameReports;
@@ -49,15 +44,12 @@ public class MarketState implements IMarketState {
   private Boolean terminated; 
   
   public MarketState() {
-    this.increment = new HashMap<ITradeable, Double>();
     this.ticks = 0; 
     this.terminated = false;
     this.allocation = new HashMap<Integer, List<ICart>>();
     this.payments = new LinkedList<AccountUpdate>();
     this.time = System.currentTimeMillis();
     this.isOpen = true; 
-    this.reserve = new HashMap<ITradeable, Double>();
-//    for (ITradeable t : this.TRADEABLES) {
 //      this.reserve.put(t,0.);
 //      this.altAlloc.put(t,  new LinkedList<Integer>());
 //    }
@@ -106,22 +98,6 @@ public class MarketState implements IMarketState {
     this.tRequest = t;
   }
   
-  @Override
-  public Map<ITradeable, Double> getIncrement() {
-    return this.increment;
-  }
-
-  // TODO: move increment to Market -- for OpenOutcry markets only
-  // it is not part of the state (since it is constant)
-  @Override
-  public void setIncrement(Map<ITradeable, Double> increment) {
-//   for (ITradeable t : this.TRADEABLES) {
-//     if (!increment.containsKey(t)) {
-//       increment.put(t, 0.0); 
-//     }
-//   }
-   this.increment = increment;
-  }
   
   public Double getFlatIncrement() {
     return this.flatIncrement;
@@ -139,16 +115,6 @@ public class MarketState implements IMarketState {
   @Override
   public void setAcceptable(boolean acceptable) {
     this.isAcceptable = acceptable; 
-  }
-
-  @Override
-  public Map<ITradeable,Double> getReserve() {
-    return this.reserve;
-  }
-
-  @Override
-  public void setReserve(Map<ITradeable,Double> reserve) {
-     this.reserve = reserve;
   }
 
   @Override

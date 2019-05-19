@@ -19,7 +19,7 @@ public interface ISimulationConfig extends IInputConfig {
    * get tradeable config. 
    * @return
    */
-  public  List<ITradeableConfig> getTConfig(); 
+  public  List<IItemConfig> getTConfig(); 
    
   /**
    * get valuation config

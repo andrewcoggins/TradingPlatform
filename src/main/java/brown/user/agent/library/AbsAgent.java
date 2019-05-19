@@ -12,8 +12,8 @@ import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
 import brown.communication.messages.library.AbsServerToAgentMessage;
 import brown.communication.messages.library.RegistrationMessage;
-import brown.logging.library.AuctionLogging;
 import brown.logging.library.ErrorLogging;
+import brown.logging.library.UserLogging;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.MultiItem;
@@ -94,7 +94,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   
   @Override
   public void onBankUpdate(IBankUpdateMessage bankUpdate) {
-    AuctionLogging.log(bankUpdate.toString());
+    UserLogging.log(bankUpdate.toString());
     this.money += bankUpdate.getMoneyAddedLost();
     updateItems(bankUpdate.getItemsAdded(), true);
     updateItems(bankUpdate.getItemsLost(), false);

@@ -1,12 +1,8 @@
 package brown.communication.messages.library;
 
 
-import java.util.List;
-import java.util.Map;
-
 import brown.communication.messages.IBankUpdateMessage;
 import brown.platform.item.ICart;
-import brown.platform.tradeable.ITradeable;
 
 /**
  * Message provided to agents when their accounts change

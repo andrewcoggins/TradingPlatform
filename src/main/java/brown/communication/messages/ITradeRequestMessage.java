@@ -1,8 +1,8 @@
 package brown.communication.messages;
 
-import java.util.List;
-
 import brown.communication.bid.library.BidType;
+import brown.platform.item.ICart;
+import brown.platform.whiteboard.IWhiteboard;
 
 public interface ITradeRequestMessage extends IServerToAgentMessage {
   
@@ -10,7 +10,8 @@ public interface ITradeRequestMessage extends IServerToAgentMessage {
   
   public BidType getBidType(); 
   
-  public List<String> getTradeableNames(); 
+  public ICart getItems(); 
   
+  public void addInformation(IWhiteboard whiteboard); 
   
 }

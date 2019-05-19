@@ -10,9 +10,9 @@ import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
+import brown.platform.item.ICart;
 import brown.platform.market.IFlexibleRules;
 import brown.platform.market.IMarket;
-import brown.platform.tradeable.ITradeable;
 
 /**
  * Common implementation of IMarket.
@@ -25,7 +25,7 @@ public class Market implements IMarket {
   private final IFlexibleRules RULES; 
   private final IMarketState STATE;
   private final IMarketPublicState PUBLICSTATE; 
-  private final Map<String, List<ITradeable>> TRADEABLES; 
+  private final ICart TRADEABLES; 
    
   private List<ITradeMessage> bids; 
 
@@ -35,7 +35,7 @@ public class Market implements IMarket {
    * TODO: history
    */
   public Market(Integer ID, IFlexibleRules rules, IMarketState state, IMarketPublicState publicState,
-      Map<String, List<ITradeable>> tradeables) {
+      ICart tradeables) {
     this.ID = ID; 
     this.RULES = rules; 
     this.STATE = state;

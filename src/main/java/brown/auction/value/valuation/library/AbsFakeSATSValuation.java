@@ -1,9 +1,9 @@
 package brown.auction.value.valuation.library;
 
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.platform.item.ICart;
 
-public abstract class AbsFakeSATSValuation extends AbsSparseValuation implements IValuation {
+public abstract class AbsFakeSATSValuation extends AbsSparseValuation implements ISpecificValuation {
   
   private Queryer queryer; 
   

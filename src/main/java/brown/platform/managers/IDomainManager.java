@@ -13,7 +13,7 @@ public interface IDomainManager {
      * @param valuation domain valuation distribution
      * @param acctManager domain accountManager
      */
-    void createDomain(ITradeableManager manager, IValuationManager valuation, IAccountManager acctManager,
+    void createDomain(IItemManager manager, IValuationManager valuation, IAccountManager acctManager,
                       IEndowmentManager endowmentManager);
 
     IDomain getDomain();

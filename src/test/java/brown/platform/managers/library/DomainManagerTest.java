@@ -9,14 +9,14 @@ import brown.platform.domain.IDomain;
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IDomainManager;
 import brown.platform.managers.IEndowmentManager;
-import brown.platform.managers.ITradeableManager;
+import brown.platform.managers.IItemManager;
 import brown.platform.managers.IValuationManager;
 
 public class DomainManagerTest {
   
   @Test
   public void testDomainManager() {
-    ITradeableManager mockedTManager = mock(TradeableManager.class); 
+    IItemManager mockedTManager = mock(ItemManager.class); 
     IValuationManager mockedVManager = mock(ValuationManager.class); 
     IAccountManager mockedAManager = mock(AccountManager.class); 
     IEndowmentManager mockedEManager = mock(EndowmentManager.class); 

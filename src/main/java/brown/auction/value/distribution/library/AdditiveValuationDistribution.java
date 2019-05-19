@@ -6,50 +6,47 @@ import java.util.Map;
 
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.auction.value.valuation.library.AdditiveValuation;
+import brown.platform.item.ICart;
 import brown.platform.item.ISingleItem;
 import brown.platform.item.library.SingleItem;
-import brown.platform.tradeable.ITradeable;
 
 /**
  * Distribution for generating additive valuations.
+ * 
  * @author andrew
  */
-public class AdditiveValuationDistribution extends AbsValuationDistribution implements IValuationDistribution {
- 
-  private Map<ISingleItem, Double> values; 
-  
+public class AdditiveValuationDistribution extends AbsValuationDistribution
+    implements IValuationDistribution {
+
+  private Map<ISingleItem, Double> values;
+
   /**
-   * For kryo
-   * DO NOT USE
+   * For kryo DO NOT USE
    */
   public AdditiveValuationDistribution() {
-    super(null, null); 
-    this.values = null; 
+    super(null, null);
+    this.values = null;
   }
-  
+
   /**
-   * @param generator
-   * a value generator for producing values of individual tradeables.
-   * @param goods
-   * the tradeables to be assigned values.
+   * @param generator a value generator for producing values of individual
+   *          tradeables.
+   * @param goods the tradeables to be assigned values.
    */
-  public AdditiveValuationDistribution(Map<String, List<ITradeable>> goods, List<IValuationGenerator> generators) {
-    super(goods, generators); 
-    this.values = new HashMap<ISingleItem, Double>(); 
+  public AdditiveValuationDistribution(ICart items,
+      List<IValuationGenerator> generators) {
+    super(items, generators);
+    this.values = new HashMap<ISingleItem, Double>();
   }
-  
+
   @Override
-  public IValuation sample() {
-    for (String s : this.tradeableNames.keySet()) {
-      for (ITradeable atom : this.tradeableNames.get(s)) { 
-        ISingleItem item = new SingleItem(atom.getName()); 
-        Double aValue = this.generators.get(0).makeValuation(); 
-        this.values.put(item, aValue);
-        break; 
-      }
-    }
+  public ISpecificValuation sample() {
+
+    this.items.getItems()
+        .forEach(item -> this.values.put(new SingleItem(item.getName()),
+            this.generators.get(0).makeValuation()));
     return new AdditiveValuation(this.values);
   }
 

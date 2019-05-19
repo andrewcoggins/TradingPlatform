@@ -13,12 +13,10 @@ import brown.system.setup.ISetup;
 public final class Startup implements ISetup {
 
   /**
-   * registers classes with kryo
+   * register all classes with kryo
    * 
-   * @param kryo instance of the kryo object
+   * @param kryo the Kryo object.
    * @return
-   * @throws IOException
-   * @throws ClassNotFoundException
    */
   public static boolean start(Kryo kryo) {
     String PATH = "src/main/java/";
@@ -27,14 +25,14 @@ public final class Startup implements ISetup {
       for (String className : classesToReflect) {
         Class<?> tpClass = Class.forName(className);
         kryo.register(tpClass);
-    }
-    return true;
+      }
+      return true;
     } catch (IOException a) {
       ErrorLogging.log("ERROR: java startup: " + a.toString());
     } catch (ClassNotFoundException b) {
       ErrorLogging.log("ERROR: java startup: " + b.toString());
     }
-    return false; 
+    return false;
   }
 
   @Override
@@ -42,6 +40,13 @@ public final class Startup implements ISetup {
     start(kryo);
   }
 
+  /**
+   * helper that returns every java class starting at an input directory.
+   * 
+   * @param path the starting path for the search
+   * @return every java class starting at a directory.
+   * @throws IOException
+   */
   public static List<String> getJavaFiles(String path) throws IOException {
     List<String> output = new LinkedList<String>();
     Files.walk(Paths.get(path)).filter(Files::isRegularFile)

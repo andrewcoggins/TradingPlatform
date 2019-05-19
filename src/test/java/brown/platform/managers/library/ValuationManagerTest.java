@@ -14,8 +14,10 @@ import org.junit.Test;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.IValuationGenerator;
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.IGeneralValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.auction.value.valuation.library.AdditiveValuation;
+import brown.auction.value.valuation.library.GeneralValuation;
 import brown.platform.item.ISingleItem;
 import brown.platform.item.library.SingleItem;
 import brown.platform.managers.IValuationManager;
@@ -52,7 +54,7 @@ public class ValuationManagerTest {
     expectedGenList.add(expectedGen); 
     IValuationDistribution expected = new AdditiveValuationDistribution(tradeables, expectedGenList); 
     
-    assertEquals(valManager.getDistribution(), expected); 
+    assertEquals(valManager.getDistribution().get(0), expected); 
   }
   
   @Test
@@ -63,10 +65,13 @@ public class ValuationManagerTest {
     tradeableNames.add("default"); 
     Map<ISingleItem, Double> valueParams = new HashMap<ISingleItem, Double>(); 
     valueParams.put(new SingleItem("default"), 1.0); 
-    IValuation agentValuation = new AdditiveValuation(valueParams); 
-    vManager.addAgentValuation(1, tradeableNames, agentValuation);
+    ISpecificValuation agentValuation = new AdditiveValuation(valueParams); 
+    Map<List<ISingleItem>, ISpecificValuation> specific = new HashMap<List<ISingleItem>, ISpecificValuation>(); 
+    specific.put(new LinkedList<ISingleItem>(valueParams.keySet()), agentValuation); 
+    IGeneralValuation gValuation = new GeneralValuation(specific); 
+    vManager.addAgentValuation(1, gValuation);
     
-    assertEquals(vManager.getAgentValuation(1), agentValuation); 
+    assertEquals(vManager.getAgentValuation(1), gValuation); 
       
   }
   

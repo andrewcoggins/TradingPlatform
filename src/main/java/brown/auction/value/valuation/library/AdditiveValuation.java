@@ -3,14 +3,14 @@ package brown.auction.value.valuation.library;
 
 import java.util.Map;
 
-import brown.auction.value.valuation.IValuation;
+import brown.auction.value.valuation.ISpecificValuation;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.ISingleItem;
 import brown.platform.item.library.SingleItem;
 
 public class AdditiveValuation extends AbsSparseValuation
-    implements IValuation {
+    implements ISpecificValuation {
 
   private Map<ISingleItem, Double> singleItemMapping;
 
