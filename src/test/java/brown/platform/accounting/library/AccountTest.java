@@ -85,35 +85,24 @@ public class AccountTest {
     
     assertEquals(a.getAllGoods(), new Cart(allItems)); 
     
-//    assertEquals(a.getAllGoods(), tradeables); 
-//    
-//    List<ITradeable> evenMoreTradeables = new LinkedList<ITradeable>(); 
-//    
-//    evenMoreTradeables.add(new Tradeable(3, "default")); 
-//    
-//    a.addTradeables("other", evenMoreTradeables);
-//    
-//    assertEquals(a.getGoods("other"), evenMoreTradeables); 
-//    
-//    tradeables.put("other", evenMoreTradeables);
-//    
-//    assertEquals(a.getAllGoods(), tradeables); 
-//    
-//    a.removeTradeables("other", evenMoreTradeables);
-//    
-//    tradeables.put("other", new LinkedList<ITradeable>());
-//    
-//    assertEquals(a.getAllGoods(), tradeables);
-//    
-//    // test clear function
-//    
-//    a.clear();
-//    
-//    assertTrue(a.getMoney() == 0.0); 
-//    
-//    assertEquals(a.getAllGoods(), new HashMap<String, List<ITradeable>>()); 
+    
+    
+    a.removeTradeables(new Item("b", 1));
+    
+    assertEquals(a.getGoods("b"), new Item("b", 1)); 
+    
+    allItems.remove(1);
+    
+    allItems.add(new Item("b", 1)); 
+    
+    assertEquals(a.getAllGoods(), new Cart(allItems)); 
+    
+    a.clear();
+    
+    assertEquals(a.getAllGoods(), new Cart(new LinkedList<IItem>()));
+    
+    assertTrue(a.getMoney() == 0.0); 
  
   }
-  
-  
+
 }

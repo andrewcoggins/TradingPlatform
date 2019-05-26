@@ -18,24 +18,25 @@ import brown.auction.value.valuation.IGeneralValuation;
 import brown.auction.value.valuation.ISpecificValuation;
 import brown.auction.value.valuation.library.AdditiveValuation;
 import brown.auction.value.valuation.library.GeneralValuation;
-import brown.platform.item.ISingleItem;
-import brown.platform.item.library.SingleItem;
+import brown.platform.item.ICart;
+import brown.platform.item.IItem;
+import brown.platform.item.library.Cart;
+import brown.platform.item.library.Item;
 import brown.platform.managers.IValuationManager;
-import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.Tradeable;
 
 public class ValuationManagerTest {
   
   @Test
   public void testCreateValuation() throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
   IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-    Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>(); 
-    List<ITradeable> tList = new LinkedList<ITradeable>(); 
-    tList.add(new Tradeable(0, "default")); 
-    tradeables.put("default", tList); 
+    
+    List<IItem> items = new LinkedList<IItem>(); 
+    items.add(new Item("default")); 
+    
+    ICart aCart = new Cart(items); 
     
     Class distClass = Class.forName("brown.auction.value.distribution.library.AdditiveValuationDistribution");
-    Constructor<?> distCons = distClass.getConstructor(Map.class, List.class); 
+    Constructor<?> distCons = distClass.getConstructor(ICart.class, List.class); 
     
     Map<Constructor<?>, List<Double>> generatorMap = new HashMap<Constructor<?>, List<Double>>();
     Class genClass = Class.forName("brown.auction.value.generator.library.NormalValGenerator"); 
@@ -47,12 +48,12 @@ public class ValuationManagerTest {
     generatorMap.put(genCons, genParams); 
     
     IValuationManager valManager = new ValuationManager();
-    valManager.createValuation(distCons, generatorMap, tradeables);
+    valManager.createValuation(distCons, generatorMap, aCart);
     
     List<IValuationGenerator> expectedGenList = new LinkedList<IValuationGenerator>(); 
     IValuationGenerator expectedGen = (IValuationGenerator) genCons.newInstance(genParams); 
     expectedGenList.add(expectedGen); 
-    IValuationDistribution expected = new AdditiveValuationDistribution(tradeables, expectedGenList); 
+    IValuationDistribution expected = new AdditiveValuationDistribution(aCart, expectedGenList); 
     
     assertEquals(valManager.getDistribution().get(0), expected); 
   }
@@ -63,11 +64,11 @@ public class ValuationManagerTest {
     IValuationManager vManager = new ValuationManager(); 
     List<String> tradeableNames = new LinkedList<String>(); 
     tradeableNames.add("default"); 
-    Map<ISingleItem, Double> valueParams = new HashMap<ISingleItem, Double>(); 
-    valueParams.put(new SingleItem("default"), 1.0); 
+    Map<IItem, Double> valueParams = new HashMap<IItem, Double>(); 
+    valueParams.put(new Item("default"), 1.0); 
     ISpecificValuation agentValuation = new AdditiveValuation(valueParams); 
-    Map<List<ISingleItem>, ISpecificValuation> specific = new HashMap<List<ISingleItem>, ISpecificValuation>(); 
-    specific.put(new LinkedList<ISingleItem>(valueParams.keySet()), agentValuation); 
+    Map<List<IItem>, ISpecificValuation> specific = new HashMap<List<IItem>, ISpecificValuation>(); 
+    specific.put(new LinkedList<IItem>(valueParams.keySet()), agentValuation); 
     IGeneralValuation gValuation = new GeneralValuation(specific); 
     vManager.addAgentValuation(1, gValuation);
     
