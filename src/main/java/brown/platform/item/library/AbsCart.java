@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import brown.logging.library.ErrorLogging;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 
@@ -40,12 +41,25 @@ public abstract class AbsCart implements ICart {
     if (!this.itemMap.containsKey(item.getName())) {
       this.items.add(item); 
       this.itemMap.put(item.getName(), item); 
+    } else {
+        IItem itemToChange = this.itemMap.get(item.getName());
+        itemToChange.addItemCount(item.getItemCount());
+        this.itemMap.put(item.getName(), itemToChange);
     }
   }
   
   @Override
   public void removeFromCart(IItem item) {
-
+    if (this.itemMap.containsKey(item.getName())) {
+      for (IItem anItem : this.items) {
+        if (anItem.getName().equals(item.getName())) {
+          anItem.removeItemCount(item.getItemCount());
+          break; 
+        }
+      } 
+    } else {
+      ErrorLogging.log("ERROR: could not remove item " + item.toString() + " from cart " + this.toString());
+    }
   }
   
   @Override

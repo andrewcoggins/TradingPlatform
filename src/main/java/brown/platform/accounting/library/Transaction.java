@@ -27,6 +27,14 @@ public class Transaction implements ITransaction {
 		this.ITEM = null;
 	}
 	
+	 public Transaction(Integer to, double price, IItem good) {
+	    this.TO = to;
+	    this.FROM = -1;
+	    this.PRICE = price;
+	    this.ITEM = good;
+	    this.TIMESTAMP = System.currentTimeMillis();
+	  }
+	 
 	/**
 	 * Actual constructor
 	 * @param to

@@ -3,16 +3,16 @@ package brown.platform.accounting.library;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
 import brown.platform.accounting.IAccount;
-import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.Tradeable;
+import brown.platform.item.ICart;
+import brown.platform.item.IItem;
+import brown.platform.item.library.Cart;
+import brown.platform.item.library.Item;
 
 /**
  * Test for account class.
@@ -23,42 +23,33 @@ public class AccountTest {
   
   @Test
   public void testAccountInit() {
-    Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>();
     
-    List<ITradeable> tList = new LinkedList<ITradeable>(); 
+    List<IItem> someItems = new LinkedList<IItem>(); 
+    someItems.add(new Item("default", 2)); 
     
-    tList.add(new Tradeable(0, "default")); 
+    ICart aCart = new Cart(someItems); 
     
-    tList.add(new Tradeable(1, "default")); 
-    
-    tradeables.put("default", tList);
-    
-    IAccount a = new Account(100, 90.0, tradeables);
+    IAccount a = new Account(100, 90.0, aCart);
     
     assertTrue(a.getID() == 100); 
     
     assertTrue(a.getMoney() == 90.0); 
     
-    assertEquals(a.getAllGoods(), tradeables); 
+    assertEquals(a.getAllGoods(), aCart); 
     
-    assertEquals(a.getGoods("default"), tradeables.get("default")); 
+    assertEquals(a.getGoods("default"), new Item("default", 2)); 
   }
   
   
   @Test
   public void testAccount() {
     
-    Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>(); 
+    List<IItem> someItems = new LinkedList<IItem>(); 
+    someItems.add(new Item("default", 2)); 
     
-    List<ITradeable> tList = new LinkedList<ITradeable>(); 
+    ICart aCart = new Cart(someItems); 
     
-    tList.add(new Tradeable(0, "default")); 
-    
-    tList.add(new Tradeable(1, "default")); 
-    
-    tradeables.put("default", tList);
-    
-    IAccount a = new Account(5, 100.0, tradeables); 
+    IAccount a = new Account(5, 100.0, aCart); 
     
     // test money
     
@@ -72,48 +63,56 @@ public class AccountTest {
     
     // test tradeables
     
-    List<ITradeable> moreTradeables = new LinkedList<ITradeable>(); 
+    List<IItem> moreItems = new LinkedList<IItem>(); 
     
-    moreTradeables.add(new Tradeable(2, "default")); 
+    moreItems.add(new Item("default", 2)); 
     
-    a.addTradeables("default", moreTradeables);
     
-    List<ITradeable> tradeablesList = tradeables.get("default"); 
+    a.addTradeables(new Item("default", 3));
     
-    tradeablesList.add(new Tradeable(2, "default")); 
     
-    tradeables.put("default", tradeablesList); 
+    assertEquals(a.getGoods("default"), new Item("default", 5)); 
     
-    assertEquals(a.getGoods("default"), tradeables.get("default")); 
     
-    assertEquals(a.getAllGoods(), tradeables); 
+    List<IItem> allItems = new LinkedList<IItem>(); 
+    allItems.add(new Item("default", 5)); 
     
-    List<ITradeable> evenMoreTradeables = new LinkedList<ITradeable>(); 
+    assertEquals(a.getAllGoods(), new Cart(allItems)); 
     
-    evenMoreTradeables.add(new Tradeable(3, "default")); 
+    a.addTradeables(new Item("b", 2));
     
-    a.addTradeables("other", evenMoreTradeables);
+    allItems.add(new Item("b", 2)); 
     
-    assertEquals(a.getGoods("other"), evenMoreTradeables); 
+    assertEquals(a.getAllGoods(), new Cart(allItems)); 
     
-    tradeables.put("other", evenMoreTradeables);
-    
-    assertEquals(a.getAllGoods(), tradeables); 
-    
-    a.removeTradeables("other", evenMoreTradeables);
-    
-    tradeables.put("other", new LinkedList<ITradeable>());
-    
-    assertEquals(a.getAllGoods(), tradeables);
-    
-    // test clear function
-    
-    a.clear();
-    
-    assertTrue(a.getMoney() == 0.0); 
-    
-    assertEquals(a.getAllGoods(), new HashMap<String, List<ITradeable>>()); 
-    
+//    assertEquals(a.getAllGoods(), tradeables); 
+//    
+//    List<ITradeable> evenMoreTradeables = new LinkedList<ITradeable>(); 
+//    
+//    evenMoreTradeables.add(new Tradeable(3, "default")); 
+//    
+//    a.addTradeables("other", evenMoreTradeables);
+//    
+//    assertEquals(a.getGoods("other"), evenMoreTradeables); 
+//    
+//    tradeables.put("other", evenMoreTradeables);
+//    
+//    assertEquals(a.getAllGoods(), tradeables); 
+//    
+//    a.removeTradeables("other", evenMoreTradeables);
+//    
+//    tradeables.put("other", new LinkedList<ITradeable>());
+//    
+//    assertEquals(a.getAllGoods(), tradeables);
+//    
+//    // test clear function
+//    
+//    a.clear();
+//    
+//    assertTrue(a.getMoney() == 0.0); 
+//    
+//    assertEquals(a.getAllGoods(), new HashMap<String, List<ITradeable>>()); 
+ 
   }
   
   

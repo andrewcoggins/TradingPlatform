@@ -5,7 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import brown.platform.tradeable.library.Tradeable;
+import brown.platform.item.IItem;
+import brown.platform.item.library.Item;
 
 /**
  * Test for Transaction. 
@@ -15,27 +16,26 @@ import brown.platform.tradeable.library.Tradeable;
 public class TransactionTest {
   
   @Test
-  public void testTrasactions() {
-    Transaction tOne = new Transaction(0, 1, 0.0, 0, new Tradeable(0, "default")); 
-    assertTrue(tOne.TO == 0); 
-    assertTrue(tOne.FROM == 1); 
-    assertTrue(tOne.PRICE == 0.0); 
-    assertTrue(tOne.QUANTITY == 0.0); 
-    assertEquals(tOne.TRADEABLE, new Tradeable(0, "default")); 
-    
-    Transaction tTwo = new Transaction(2, 3, 100.0, 2, new Tradeable(1, "default")); 
-    assertTrue(tTwo.TO == 2); 
-    assertTrue(tTwo.FROM == 3); 
-    assertTrue(tTwo.PRICE == 100.0); 
-    assertTrue(tTwo.QUANTITY == 2); 
-    assertEquals(tTwo.TRADEABLE, new Tradeable(1, "default")); 
-    
-    Transaction tThree = tTwo.sanitize(2); 
-    assertTrue(tThree.TO == tTwo.TO);
-    assertTrue(tThree.FROM == null); 
-    Transaction tFour = tTwo.sanitize(0); 
-    assertTrue(tFour.TO == null);
-    assertTrue(tFour.FROM == null); 
+  public void testTransactionr() {
+
+    IItem anItem = new Item("a");
+    Transaction anOrder = new Transaction(0, 100.0, anItem);
+    assertTrue(anOrder.TO == 0);
+    assertTrue(anOrder.FROM == -1);
+    assertTrue(anOrder.PRICE == 100.0);
+    assertEquals(anOrder.ITEM, anItem);
+
+  }
+
+  @Test
+  public void testTransactionTwo() {
+
+    IItem anItem = new Item("c", 3);
+    Transaction anOrder = new Transaction(10, 11, 10.0, anItem);
+    assertTrue(anOrder.TO == 10);
+    assertTrue(anOrder.FROM == 11);
+    assertTrue(anOrder.PRICE == 10.0);
+    assertEquals(anOrder.ITEM, anItem);
   }
   
 }

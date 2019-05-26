@@ -22,8 +22,8 @@ import brown.communication.messageserver.library.MessageServer;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.IInitialEndowment;
-import brown.platform.item.ISingleItem;
-import brown.platform.item.library.SingleItem;
+import brown.platform.item.IItem;
+import brown.platform.item.library.Item;
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.IMarketManager;
@@ -204,11 +204,11 @@ public class SimulationManager implements ISimulationManager {
         this.currentAccountManager.createAccount(agentID, agentEndowment);
       }
       // give agent valuation
-      Map<List<ISingleItem>, ISpecificValuation> specificValuationMap = new HashMap<List<ISingleItem>, ISpecificValuation>(); 
+      Map<List<IItem>, ISpecificValuation> specificValuationMap = new HashMap<List<IItem>, ISpecificValuation>(); 
       for (IValuationDistribution specificDistribution : this.currentValuationManager.getDistribution()) { 
-        List<ISingleItem> specificItems = new LinkedList<ISingleItem>(); 
+        List<IItem> specificItems = new LinkedList<IItem>(); 
         for (String itemName : specificDistribution.getItemNames()) {
-          specificItems.add(new SingleItem(itemName)); 
+          specificItems.add(new Item(itemName)); 
         }
         specificValuationMap.put(specificItems, specificDistribution.sample()); 
       }

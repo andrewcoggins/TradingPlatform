@@ -3,42 +3,40 @@ package brown.platform.accounting.library;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
 import brown.platform.accounting.IInitialEndowment;
-import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.Tradeable;
+import brown.platform.item.ICart;
+import brown.platform.item.IItem;
+import brown.platform.item.library.Cart;
+import brown.platform.item.library.Item;
+
 
 public class InitialEndowmentTest {
 
     @Test
     public void testInitialEndowment() {
        
-      Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>(); 
+      List<IItem> initItems = new LinkedList<IItem>(); 
       
-      List<ITradeable> someTradeables = new LinkedList<ITradeable>(); 
+      initItems.add(new Item("default", 2));
       
-      someTradeables.add(new Tradeable(0, "default")); 
+      ICart aCart = new Cart(initItems); 
       
-      someTradeables.add(new Tradeable(1, "default")); 
-      
-      tradeables.put("default", someTradeables); 
-      
-      IInitialEndowment anEndowment = new InitialEndowment(100.0, tradeables); 
+      IInitialEndowment anEndowment = new InitialEndowment(100.0, aCart); 
       
       assertTrue(anEndowment.getMoney() == 100.0); 
       assertTrue(anEndowment.getMoney() != 50.0); 
       
-      assertEquals(anEndowment.getGoods(), tradeables); 
+      assertEquals(anEndowment.getGoods(), aCart); 
       
-      Map<String, List<ITradeable>> moreTradeables = new HashMap<String, List<ITradeable>>(); 
-      
-      assertTrue(!(anEndowment.getGoods().equals(moreTradeables))); 
+      List<IItem> otherItems = new LinkedList<IItem>(); 
+      otherItems.add(new Item("a", 1)); 
+     
+      assertTrue(!(anEndowment.getGoods().equals(new Cart(otherItems)))); 
       
     }
     
