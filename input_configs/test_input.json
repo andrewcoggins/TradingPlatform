@@ -42,6 +42,20 @@
 				"items": [{
 					"itemName": "testItem"
 				}]
+			}, 
+		{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
 			}]
 		}]
 	}, 
@@ -71,6 +85,20 @@
 		}], 
 		"seqMarket": [{
 			"simMarket": [{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			}, 
+		{
 				"marketRules": {
 					"aRule": "SimpleHighestPriceAllocation", 
 					"pRule": "SecondPricePayment", 

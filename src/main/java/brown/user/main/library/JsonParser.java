@@ -585,7 +585,7 @@ public class JsonParser implements IJsonParser {
 
           IMarketConfig singleMarketConfig =
               new MarketConfig(marketRule, singleMarketItems);
-          simMarketConfigs.add(singleMarketConfig);
+          simMarketConfigs.add(singleMarketConfig); 
         }
         simulationMarketConfigs.add(simMarketConfigs);
       }
