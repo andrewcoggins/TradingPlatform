@@ -6,24 +6,24 @@
 	"numTotalRuns": 1, 
 	"simulation": [{
 		"numRuns": 1, 
-		"tradeables": [{
-			"tradeableName": "testTradeable", 
-			"numTradeables": "1"
+		"items": [{
+			"itemName": "testItem", 
+			"numItems": "1"
 		}], 
 		"valuation": [{
 			"distribution": "AdditiveValuationDistribution",
 			"generator": [{
 				"name": "NormalValGenerator", 
-				"parameters": [1.0, 1.0]
+				"parameters": [0.0, 1.0]
 			}],
-			"tradeables": [{
-				"tradeableName": "testTradeable"
+			"items": [{
+				"itemName": "testItem"
 			}]
 		}], 
 		"endowments": [{
-			"tradeable": [{
-				"tradeableName": "testTradeable", 
-				"numTradeables": "1"
+			"item": [{
+				"itemName": "testItem", 
+				"numItems": "1"
 			}],
 			"money": 100.0, 
 			"frequency": 1.0
@@ -39,32 +39,32 @@
 					"innerIRPolicy": "NoInnerIR", 
 					"tCondition": "OneShotTermination"
 				}, 
-				"tradeables": [{
-					"tradeableName": "testTradeable"
+				"items": [{
+					"itemName": "testItem"
 				}]
 			}]
 		}]
 	}, 
-	{
+{
 		"numRuns": 1, 
-		"tradeables": [{
-			"tradeableName": "testTradeable", 
-			"numTradeables": "1"
+		"items": [{
+			"itemName": "testItem", 
+			"numItems": "1"
 		}], 
 		"valuation": [{
 			"distribution": "AdditiveValuationDistribution",
 			"generator": [{
 				"name": "NormalValGenerator", 
-				"parameters": [1.0, 1.0]
+				"parameters": [0.0, 1.0]
 			}],
-			"tradeables": [{
-				"tradeableName": "testTradeable"
+			"items": [{
+				"itemName": "testItem"
 			}]
 		}], 
 		"endowments": [{
-			"tradeable": [{
-				"tradeableName": "testTradeable", 
-				"numTradeables": "1"
+			"item": [{
+				"itemName": "testItem", 
+				"numItems": "1"
 			}],
 			"money": 100.0, 
 			"frequency": 1.0
@@ -80,11 +80,10 @@
 					"innerIRPolicy": "NoInnerIR", 
 					"tCondition": "OneShotTermination"
 				}, 
-				"tradeables": [{
-					"tradeableName": "testTradeable"
+				"items": [{
+					"itemName": "testItem"
 				}]
 			}]
 		}]
-	}
-]
+	}]
 }

@@ -13,10 +13,8 @@
 		"valuation": [{
 			"distribution": "",
 			"generator": [{
-				"name": "", 
-				"parameters": {
-
-				}
+				"name": "testGenerator", 
+				"parameters": [0.0, 0.0]
 			}],
 			"items": [{
 				"itemName": "testItem"

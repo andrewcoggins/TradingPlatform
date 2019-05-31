@@ -24,6 +24,7 @@ import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 import brown.logging.library.ErrorLogging;
+import brown.platform.item.ICart;
 import brown.platform.market.IFlexibleRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.user.main.IEndowmentConfig;
@@ -445,7 +446,7 @@ public class JsonParser implements IJsonParser {
             Class.forName("brown.auction.value.distribution.library."
                 + valuationDistributionString);
         Constructor<?> distributionCons =
-            distributionClass.getConstructor(Map.class, List.class);
+            distributionClass.getConstructor(ICart.class, List.class);
         
         
         List<String> singleValuationitems =
@@ -508,7 +509,7 @@ public class JsonParser implements IJsonParser {
               singleEndowmentitems.get(k);
           String tName = singleitem.get("itemName");
           Integer numitems =
-              Integer.parseInt(singleitem.get("numitems"));
+              Integer.parseInt(singleitem.get("numItems"));
           endowmentMapping.put(tName, numitems);
         }
         // TODO: endowment names??
@@ -615,9 +616,9 @@ public class JsonParser implements IJsonParser {
 
     
     Map<String, Integer> outerParams = new HashMap<String, Integer>(); 
-    outerParams.put("numTotalRuns", Integer.parseInt((String) jo.get("numTotalRuns"))); 
-    outerParams.put("startingDelayTime", Integer.parseInt((String) jo.get("startingDelayTime"))); 
-    outerParams.put("simulationDelayTime", Integer.parseInt((String) jo.get("simulationDelayTime"))); 
+    outerParams.put("numTotalRuns", (int) jo.get("numTotalRuns")); 
+    outerParams.put("startingDelayTime", (int) jo.get("startingDelayTime")); 
+    outerParams.put("simulationDelayTime", (int) jo.get("simulationDelayTime")); 
     
     return outerParams; 
     
