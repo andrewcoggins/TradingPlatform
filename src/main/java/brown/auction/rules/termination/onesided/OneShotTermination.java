@@ -7,9 +7,9 @@ import brown.auction.rules.ITerminationCondition;
 public class OneShotTermination extends AbsRule implements ITerminationCondition {
 
   @Override
-  public void isTerminated(IMarketState state) {
+  public void checkTerminated(IMarketState state) {
     if (state.getTicks() > 0) {
-      state.setOver(true);
+      state.close(); 
     }
   }
 }

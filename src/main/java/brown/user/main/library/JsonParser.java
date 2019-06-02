@@ -616,9 +616,9 @@ public class JsonParser implements IJsonParser {
 
     
     Map<String, Integer> outerParams = new HashMap<String, Integer>(); 
-    outerParams.put("numTotalRuns", (int) jo.get("numTotalRuns")); 
-    outerParams.put("startingDelayTime", (int) jo.get("startingDelayTime")); 
-    outerParams.put("simulationDelayTime", (int) jo.get("simulationDelayTime")); 
+    outerParams.put("numTotalRuns", ((Long) jo.get("numTotalRuns")).intValue()); 
+    outerParams.put("startingDelayTime", ((Long) jo.get("startingDelayTime")).intValue()); 
+    outerParams.put("simulationDelayTime", ((Long) jo.get("simulationDelayTime")).intValue()); 
     
     return outerParams; 
     

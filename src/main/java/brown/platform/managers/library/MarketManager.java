@@ -131,8 +131,9 @@ public class MarketManager implements IMarketManager {
     IMarket market = this.activeMarkets.get(marketID);
     market.tick();
     market.updateInnerInformation();
-    this.whiteboard.postInnerInformation(marketID,
-        this.activeMarkets.get(marketID).getPublicState());
+    // TODO: sort this out
+//    this.whiteboard.postInnerInformation(marketID,
+//        this.activeMarkets.get(marketID).getPublicState());
 
     List<ITradeRequestMessage> tradeRequests =
         new LinkedList<ITradeRequestMessage>();

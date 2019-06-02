@@ -114,15 +114,19 @@ public class Market implements IMarket {
   // The remaining logic pertains to the Termination Condition
   @Override
   public void tick() {
+    System.out.println(STATE.getTicks()); 
     this.STATE.tick();
   }
   
   
   @Override
   public boolean isOpen() {
+    this.RULES.getTerminationCondition().checkTerminated(this.STATE);
     return this.STATE.isOpen(); 
   }  
   
+  // TODO: I don't think we need this. 
+  // coggins 6/2/19
   @Override
   public void close() {
     this.STATE.close(); 

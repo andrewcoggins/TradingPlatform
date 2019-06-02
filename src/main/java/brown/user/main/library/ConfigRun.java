@@ -114,5 +114,7 @@ public class ConfigRun {
 
     simulationManager.runSimulation(startingDelayTime, simulationDelayTime,
         numSimulations);
+    
+    
   }
 }

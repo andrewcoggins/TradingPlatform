@@ -86,7 +86,9 @@ public class SimulationManager implements ISimulationManager {
   public void runSimulation(int startingDelayTime, int simulationDelayTime,
       int numRuns) throws InterruptedException {
     startMessageServer();
+    PlatformLogging.log("Agent connection phase: sleeping for " + startingDelayTime + " seconds");
     Thread.sleep(startingDelayTime * INTERVAL);
+    PlatformLogging.log("Agent connection phase: beginning simulation");
     for (int i = 0; i < numRuns; i++) {
       for (int j = 0; j < this.simulations.size(); j++) {
 
@@ -99,10 +101,11 @@ public class SimulationManager implements ISimulationManager {
         this.currentValuationManager = this.simulations.get(j).getWorldManager()
             .getWorld().getDomainManager().getDomain().getValuationManager();
 
-        for (int k = 0; k < this.numSimulationRuns.get(k); k++) {
+        for (int k = 0; k < this.numSimulationRuns.get(j); k++) {
           this.initializeAgents();
           for (int l = 0; l < this.currentMarketManager
               .getNumMarketBlocks(); l++) {
+            PlatformLogging.log("running simulation");
             this.runAuction(simulationDelayTime, l);
           }
           // TODO: log to output
@@ -114,6 +117,8 @@ public class SimulationManager implements ISimulationManager {
         }
       } 
     }
+    
+    this.messageServer.stopMessageServer();
   }
 
   @Override
@@ -153,6 +158,7 @@ public class SimulationManager implements ISimulationManager {
     this.currentMarketManager.openMarkets(index);
     while (this.currentMarketManager.anyMarketsOpen()) {
       Thread.sleep(simulationDelayTime * INTERVAL);
+      PlatformLogging.log("updating auctions");
       updateAuctions();
       Thread.sleep(simulationDelayTime * INTERVAL);
     }

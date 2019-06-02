@@ -16,17 +16,17 @@ public class OneShotTerminationTest {
     IMarketState state = new MarketState(); 
     ITerminationCondition tCondition = new OneShotTermination(); 
     
-    assertTrue(!state.getOver()); 
+    assertTrue(state.isOpen()); 
     
-    tCondition.isTerminated(state);
+    tCondition.checkTerminated(state);
     
-    assertTrue(!state.getOver()); 
+    assertTrue(state.isOpen()); 
     
     state.tick();
     
-    tCondition.isTerminated(state);
+    tCondition.checkTerminated(state);
     
-    assertTrue(state.getOver()); 
+    assertTrue(!state.isOpen()); 
     
   }
 }
