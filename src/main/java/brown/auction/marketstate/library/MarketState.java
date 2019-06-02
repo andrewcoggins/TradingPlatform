@@ -17,8 +17,7 @@ import brown.platform.item.ICart;
  * @author acoggins
  */
 public class MarketState implements IMarketState {
- 
-  private boolean isOpen; 
+  
   private int ticks;  
   private long time;
   
@@ -41,11 +40,9 @@ public class MarketState implements IMarketState {
   private Map<Integer, List<IInformationMessage>> gameReports;
   
   // Termination condition
-  private Boolean terminated; 
+  private boolean isOpen;
   
   public MarketState() {
-    this.ticks = 0; 
-    this.terminated = false;
     this.allocation = new HashMap<Integer, List<ICart>>();
     this.payments = new LinkedList<AccountUpdate>();
     this.time = System.currentTimeMillis();
@@ -117,16 +114,6 @@ public class MarketState implements IMarketState {
     this.isAcceptable = acceptable; 
   }
 
-  @Override
-  public boolean getOver() {
-    return this.terminated; 
-  }
-
-  @Override
-  public void setOver(boolean over) {
-    this.terminated = over; 
-  }
-  
   @Override
   public Map<Integer, List<IInformationMessage>>  getReport() {
     return this.gameReports; 

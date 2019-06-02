@@ -12,12 +12,17 @@ public class SingleItemTest {
   @Test 
   public void testSingleItem() {
     
-    IItem a = new SingleItem("a"); 
-    IItem b = new SingleItem("b"); 
+    IItem a = new Item("a"); 
+    IItem b = new Item("b"); 
+    
+    IItem aTwo = new Item("a"); 
     
     assertTrue(a.getItemCount() == 1); 
     assertTrue(b.getItemCount() == 1); 
     assertEquals(a.getName(), "a"); 
     assertEquals(b.getName(), "b");
+    
+    a.addItemCount(aTwo.getItemCount()); 
+    assertTrue(a.getItemCount() == 2); 
   }
 }

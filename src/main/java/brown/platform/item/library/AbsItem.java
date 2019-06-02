@@ -17,7 +17,17 @@ public abstract class AbsItem implements IItem {
   public String getName() {
     return this.name;
   }
-
+  
+  @Override
+  public void addItemCount(int itemCount) {
+      this.count += itemCount; 
+  }
+  
+  @Override 
+  public void removeItemCount(int itemCount) {
+    this.count -= itemCount; 
+  }
+  
   @Override
   public int getItemCount() {
     return this.count;

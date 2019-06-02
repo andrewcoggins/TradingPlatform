@@ -21,7 +21,14 @@ public class AccountUpdate implements IAccountUpdate {
     this.PRICE = -1;
     this.ITEM = null;
   }
-
+  
+  public AccountUpdate(Integer to, double price, IItem good) {
+    this.TO = to; 
+    this.FROM = -1; 
+    this.PRICE = price; 
+    this.ITEM = good;
+  }
+  
   /**
    * Constructor for an accountUpdate needs a ToAgent, FromAgent, price, quantity, 
    * GoodName, and good

@@ -16,7 +16,7 @@ import brown.logging.library.ErrorLogging;
 import brown.logging.library.UserLogging;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
-import brown.platform.item.library.MultiItem;
+import brown.platform.item.library.Item;
 import brown.system.client.library.TPClient;
 import brown.system.setup.ISetup;
 import brown.user.agent.IAgent;
@@ -117,7 +117,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
           this.goods.put(item.getName(), item);
         } else {
           IItem currentItem = this.goods.get(item.getName());
-          IItem updatedItem = new MultiItem(item.getName(),
+          IItem updatedItem = new Item(item.getName(),
               currentItem.getItemCount() + item.getItemCount());
           this.goods.put(item.getName(), updatedItem);
         }
@@ -131,14 +131,14 @@ public abstract class AbsAgent extends TPClient implements IAgent {
             this.goods.remove(item.getName());
           } else if (newCount > 0) {
             this.goods.put(item.getName(),
-                new MultiItem(item.getName(), newCount));
+                new Item(item.getName(), newCount));
           } else {
             ErrorLogging
                 .log("ERROR: attempted to remove too high quantity of item: "
                     + item.toString() + "vs. "
                     + this.goods.get(item.getName()));
           }
-          IItem updatedItem = new MultiItem(item.getName(),
+          IItem updatedItem = new Item(item.getName(),
               currentItem.getItemCount() - item.getItemCount());
           this.goods.put(item.getName(), updatedItem);
         } else {

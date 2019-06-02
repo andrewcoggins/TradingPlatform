@@ -12,5 +12,10 @@ public abstract class AbsRule {
       return false;
     return true; 
   }
+
+  @Override
+  public String toString() {
+    return "AbsRule []";
+  }
   
 }

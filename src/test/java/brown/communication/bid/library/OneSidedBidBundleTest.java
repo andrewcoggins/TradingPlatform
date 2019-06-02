@@ -12,7 +12,7 @@ import org.junit.Test;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
-import brown.platform.item.library.SingleItem;
+import brown.platform.item.library.Item;
 
 public class OneSidedBidBundleTest {
 
@@ -28,7 +28,7 @@ public class OneSidedBidBundleTest {
     
     List<IItem> items = new LinkedList<IItem>(); 
     
-    items.add(new SingleItem("default")); 
+    items.add(new Item("default")); 
     
     bundle.put(new Cart(items), 99.9); 
     

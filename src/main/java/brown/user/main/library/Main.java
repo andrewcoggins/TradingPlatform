@@ -19,7 +19,7 @@ import brown.user.main.ISimulationConfig;
  *
  */
 public class Main {
-
+ 
 /**
  * 
  * @param args
@@ -52,7 +52,6 @@ public class Main {
     Integer numTotalRuns = outerParams.get("numTotalRuns");
     
     ConfigRun configRun = new ConfigRun(configs);
-    
     configRun.run(startingDelayTime, simulationDelayTime, numTotalRuns);
   }
 }

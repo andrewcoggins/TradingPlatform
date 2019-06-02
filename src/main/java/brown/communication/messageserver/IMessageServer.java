@@ -22,4 +22,7 @@ public interface IMessageServer {
   // server sends message to agent.
   public void sendMessage(Connection connection, IServerToAgentMessage message); 
   
+  
+  public void stopMessageServer(); 
+  
 }

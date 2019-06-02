@@ -1,65 +1,9 @@
-
 {
 	"name": "testParse", 
-	"startingDelayTime": 10, 
-	"simulationDelayTime": 500, 
+	"startingDelayTime": 5, 
+	"simulationDelayTime": 1, 
 	"numTotalRuns": 1, 
 	"simulation": [{
-		"numRuns": 1, 
-		"items": [{
-			"itemName": "testItem", 
-			"numItems": "1"
-		}], 
-		"valuation": [{
-			"distribution": "AdditiveValuationDistribution",
-			"generator": [{
-				"name": "NormalValGenerator", 
-				"parameters": [0.0, 1.0]
-			}],
-			"items": [{
-				"itemName": "testItem"
-			}]
-		}], 
-		"endowments": [{
-			"item": [{
-				"itemName": "testItem", 
-				"numItems": "1"
-			}],
-			"money": 100.0, 
-			"frequency": 1.0
-		}], 
-		"seqMarket": [{
-			"simMarket": [{
-				"marketRules": {
-					"aRule": "SimpleHighestPriceAllocation", 
-					"pRule": "SecondPricePayment", 
-					"qRule": "SimpleOneSidedQuery", 
-					"actRule": "SimpleOneShotActivity", 
-					"irPolicy": "AnonymousPolicy", 
-					"innerIRPolicy": "NoInnerIR", 
-					"tCondition": "OneShotTermination"
-				}, 
-				"items": [{
-					"itemName": "testItem"
-				}]
-			}, 
-		{
-				"marketRules": {
-					"aRule": "SimpleHighestPriceAllocation", 
-					"pRule": "SecondPricePayment", 
-					"qRule": "SimpleOneSidedQuery", 
-					"actRule": "SimpleOneShotActivity", 
-					"irPolicy": "AnonymousPolicy", 
-					"innerIRPolicy": "NoInnerIR", 
-					"tCondition": "OneShotTermination"
-				}, 
-				"items": [{
-					"itemName": "testItem"
-				}]
-			}]
-		}]
-	}, 
-{
 		"numRuns": 1, 
 		"items": [{
 			"itemName": "testItem", 
