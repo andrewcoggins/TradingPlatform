@@ -8,7 +8,7 @@ import org.apache.commons.math3.exception.NotStrictlyPositiveException;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.item.IItem;
-import brown.platform.item.library.MultiItem;
+import brown.platform.item.library.Item;
 import brown.platform.managers.IItemManager;
 
 /**
@@ -38,7 +38,7 @@ public class ItemManager implements IItemManager {
   public void createItems(String name, int numTradeables) {
     try {
       if (!lock) {
-        this.items.put(name, new MultiItem(name, numTradeables)); 
+        this.items.put(name, new Item(name, numTradeables)); 
       } else {
         PlatformLogging.log("Creation denied: tradeable manager locked.");
       }
@@ -53,7 +53,7 @@ public class ItemManager implements IItemManager {
       return this.items.get(name);
     } else {
       ErrorLogging.log("ERROR: TradeableManager: no such tradeable exists.");
-      return new MultiItem("blank", 0);
+      return new Item("blank", 0);
     }
   }
 

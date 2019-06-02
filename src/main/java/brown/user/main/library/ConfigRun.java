@@ -7,7 +7,7 @@ import java.util.List;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
-import brown.platform.item.library.MultiItem;
+import brown.platform.item.library.Item;
 import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IDomainManager;
 import brown.platform.managers.IEndowmentManager;
@@ -73,7 +73,7 @@ public class ConfigRun {
       // endowments also need a tradeable map, and a tradeable config.
       List<IItem> allItems = new LinkedList<IItem>();
       itemConfig.forEach(iConfig -> allItems
-          .add(new MultiItem(iConfig.getItemName(), iConfig.getNumItems())));
+          .add(new Item(iConfig.getItemName(), iConfig.getNumItems())));
 
       ICart itemCart = new Cart(allItems);
       aConfig.getEConfig()
@@ -114,5 +114,7 @@ public class ConfigRun {
 
     simulationManager.runSimulation(startingDelayTime, simulationDelayTime,
         numSimulations);
+    
+    
   }
 }

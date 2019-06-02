@@ -60,8 +60,5 @@ public interface IMarketState {
 
   public void close();
 
-  public boolean getOver();
-
-  public void setOver(boolean b);
 
 }

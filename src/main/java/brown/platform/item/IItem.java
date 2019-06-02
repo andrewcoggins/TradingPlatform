@@ -7,4 +7,8 @@ public interface IItem {
   
   public int getItemCount(); 
   
+  public void addItemCount(int numToAdd); 
+  
+  public void removeItemCount(int numToRemove); 
+  
 }

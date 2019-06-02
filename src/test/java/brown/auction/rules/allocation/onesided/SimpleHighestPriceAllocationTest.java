@@ -19,8 +19,7 @@ import brown.communication.messages.library.TradeMessage;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
-import brown.platform.item.library.SingleItem;
-
+import brown.platform.item.library.Item;
 public class SimpleHighestPriceAllocationTest {
 
   @Test
@@ -36,8 +35,8 @@ public class SimpleHighestPriceAllocationTest {
     List<IItem> items = new LinkedList<IItem>(); 
     List<IItem> itemsTwo = new LinkedList<IItem>();
     
-    items.add(new SingleItem("a"));
-    itemsTwo.add(new SingleItem("b"));
+    items.add(new Item("a"));
+    itemsTwo.add(new Item("b"));
     
     cartsOne.put(new Cart(items), 1.0); 
     cartsOne.put(new Cart(itemsTwo), 2.0);
@@ -85,8 +84,8 @@ public class SimpleHighestPriceAllocationTest {
     List<IItem> items = new LinkedList<IItem>(); 
     List<IItem> itemsTwo = new LinkedList<IItem>();
     
-    items.add(new SingleItem("a"));
-    itemsTwo.add(new SingleItem("b"));
+    items.add(new Item("a"));
+    itemsTwo.add(new Item("b"));
     
     cartsOne.put(new Cart(items), 2.0); 
     cartsOne.put(new Cart(itemsTwo), 2.0);

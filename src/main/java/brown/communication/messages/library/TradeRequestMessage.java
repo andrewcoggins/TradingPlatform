@@ -2,8 +2,8 @@ package brown.communication.messages.library;
 
 import brown.communication.bid.library.BidType;
 import brown.communication.messages.ITradeRequestMessage;
+import brown.platform.information.IWhiteboard;
 import brown.platform.item.ICart;
-import brown.platform.whiteboard.IWhiteboard;
 import brown.user.agent.IAgent;
 
 /**

@@ -70,4 +70,10 @@ public class MessageServer extends KryoServer implements IMessageServer {
     this.kryoServer.sendToTCP(connection.getID(), message);
   }
 
+  @Override
+  public void stopMessageServer() {
+    this.kryoServer.close(); 
+    this.kryoServer.stop(); 
+  }
+  
 }

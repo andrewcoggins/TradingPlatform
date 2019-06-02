@@ -12,15 +12,15 @@ import org.junit.Test;
 
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.library.NormalValGenerator;
+import brown.platform.item.ICart;
 import brown.user.main.IValuationConfig;
-import brown.user.main.library.ValuationConfig;
 
 public class ValuationConfigTest {
   
   @Test
   public void testValuationConfigOne() throws NoSuchMethodException, SecurityException {
     
-    Constructor<?> distCons = AdditiveValuationDistribution.class.getConstructor(Map.class, List.class);
+    Constructor<?> distCons = AdditiveValuationDistribution.class.getConstructor(ICart.class, List.class);
     List<String> tNames = new LinkedList<String>();
     tNames.add("test"); 
     Constructor<?> gCons = NormalValGenerator.class.getConstructor(List.class); 
@@ -31,7 +31,7 @@ public class ValuationConfigTest {
     gMap.put(gCons, params); 
     IValuationConfig tConfig = new ValuationConfig(tNames, distCons, gMap);
     
-    assertEquals(tConfig.getTradeableNames(), tNames); 
+    assertEquals(tConfig.getItemNames(), tNames); 
     assertEquals(tConfig.getValDistribution(), distCons);
     assertEquals(tConfig.getGenerators(), gMap);
   }

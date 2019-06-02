@@ -17,6 +17,8 @@ import brown.communication.messages.library.ErrorMessage;
 import brown.communication.messages.library.TradeRejectionMessage;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
+import brown.platform.information.IWhiteboard;
+import brown.platform.information.library.Whiteboard;
 import brown.platform.item.ICart;
 import brown.platform.managers.IMarketManager;
 import brown.platform.market.IFlexibleRules;
@@ -24,8 +26,6 @@ import brown.platform.market.IMarket;
 import brown.platform.market.IMarketBlock;
 import brown.platform.market.library.Market;
 import brown.platform.market.library.SimultaneousMarket;
-import brown.platform.whiteboard.IWhiteboard;
-import brown.platform.whiteboard.library.Whiteboard;
 
 /**
  * Market manager stores and handles multiple markets
@@ -131,8 +131,9 @@ public class MarketManager implements IMarketManager {
     IMarket market = this.activeMarkets.get(marketID);
     market.tick();
     market.updateInnerInformation();
-    this.whiteboard.postInnerInformation(marketID,
-        this.activeMarkets.get(marketID).getPublicState());
+    // TODO: sort this out
+//    this.whiteboard.postInnerInformation(marketID,
+//        this.activeMarkets.get(marketID).getPublicState());
 
     List<ITradeRequestMessage> tradeRequests =
         new LinkedList<ITradeRequestMessage>();

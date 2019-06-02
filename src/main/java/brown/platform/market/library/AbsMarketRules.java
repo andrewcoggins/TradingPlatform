@@ -59,7 +59,7 @@ public abstract class AbsMarketRules implements IMarketRules {
   }
   
   public IInnerIRPolicy getInnerIRPolicy() {
-    return this.getInnerIRPolicy(); 
+    return this.innerIRPolicy; 
   }
 
   public ITerminationCondition getTerminationCondition() {

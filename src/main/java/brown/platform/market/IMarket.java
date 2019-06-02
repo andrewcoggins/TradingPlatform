@@ -84,11 +84,6 @@ public interface IMarket {
 
   
   /**
-   * Marks the market as closed so it can be closed in the MarketManager.
-   */
-  public void close();
-  
-  /**
    * @return whether or not the market has been closed.
    */
   public boolean isOpen(); 

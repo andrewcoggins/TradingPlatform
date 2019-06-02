@@ -6,26 +6,25 @@ import java.util.Map;
 import brown.auction.value.valuation.ISpecificValuation;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
-import brown.platform.item.ISingleItem;
-import brown.platform.item.library.SingleItem;
+import brown.platform.item.library.Item;
 
 public class AdditiveValuation extends AbsSparseValuation
     implements ISpecificValuation {
 
-  private Map<ISingleItem, Double> singleItemMapping;
+  private Map<IItem, Double> singleItemMapping;
 
   public AdditiveValuation() {
     this.singleItemMapping = null;
   }
 
-  public AdditiveValuation(Map<ISingleItem, Double> valuation) {
+  public AdditiveValuation(Map<IItem, Double> valuation) {
     this.singleItemMapping = valuation;
   }
 
   public Double getValuation(ICart cart) {
     Double value = 0.0;
     for (IItem item : cart.getItems()) {
-      ISingleItem sItem = new SingleItem(item.getName());
+      IItem sItem = new Item(item.getName());
       value += this.singleItemMapping.get(sItem) * item.getItemCount();
     }
     return value;

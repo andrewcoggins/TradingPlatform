@@ -1,7 +1,7 @@
 package brown.communication.messages.library;
 
 import brown.communication.messages.IInformationMessage;
-import brown.platform.whiteboard.IWhiteboard;
+import brown.platform.information.IWhiteboard;
 import brown.user.agent.IAgent;
 
 public class InformationMessage extends AbsServerToAgentMessage implements IInformationMessage {

@@ -1,11 +1,11 @@
-package brown.platform.whiteboard.library;
+package brown.platform.information.library;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketPublicState;
-import brown.platform.whiteboard.IWhiteboard;
+import brown.platform.information.IWhiteboard;
 
 public class Whiteboard implements IWhiteboard {
 
@@ -18,7 +18,7 @@ public class Whiteboard implements IWhiteboard {
 	}
 
   @Override
-  public void postInnerInformation(Integer marketID,
+  public void postInnerInformation(Integer marketID, Integer agentID, 
       IMarketPublicState marketPublicState) {
     List<IMarketPublicState> innerMarketStates = this.innerMarketWhiteboard.get(marketID); 
     innerMarketStates.add(marketPublicState); 
@@ -32,7 +32,7 @@ public class Whiteboard implements IWhiteboard {
   }
 
   @Override
-  public IMarketPublicState getInnerInformation(Integer marketID, Integer timeStep) {
+  public IMarketPublicState getInnerInformation(Integer marketID, Integer agentID, Integer timeStep) {
     return this.innerMarketWhiteboard.get(marketID).get(timeStep); 
   }
 

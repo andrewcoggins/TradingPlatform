@@ -3,10 +3,8 @@ package brown.platform.managers.library;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
@@ -14,9 +12,11 @@ import brown.platform.accounting.IAccount;
 import brown.platform.accounting.IInitialEndowment;
 import brown.platform.accounting.library.Account;
 import brown.platform.accounting.library.InitialEndowment;
+import brown.platform.item.ICart;
+import brown.platform.item.IItem;
+import brown.platform.item.library.Cart;
+import brown.platform.item.library.Item;
 import brown.platform.managers.IAccountManager;
-import brown.platform.tradeable.ITradeable;
-import brown.platform.tradeable.library.Tradeable;
 
 public class AccountManagerTest {
   
@@ -26,21 +26,17 @@ public class AccountManagerTest {
     
     IAccountManager manager = new AccountManager(); 
     
-    Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>(); 
-    List<ITradeable> tList = new LinkedList<ITradeable>(); 
+    List<IItem> items = new LinkedList<IItem>(); 
+    items.add(new Item("default", 2)); 
     
-    tList.add(new Tradeable(0, "default")); 
-    tList.add(new Tradeable(1, "default")); 
-    
-    tradeables.put("default", tList); 
-    
-    IInitialEndowment e = new InitialEndowment(100.0, tradeables); 
+    ICart aCart = new Cart(items); 
+    IInitialEndowment e = new InitialEndowment(100.0, aCart); 
     
     manager.createAccount(0, e);
     manager.createAccount(1, e);
     
-    IAccount accountZero = new Account(0, 100.0, tradeables); 
-    IAccount accountOne = new Account(1, 100.0, tradeables); 
+    IAccount accountZero = new Account(0, 100.0, aCart); 
+    IAccount accountOne = new Account(1, 100.0, aCart); 
     
     assertTrue(manager.containsAccount(0)); 
     assertTrue(manager.containsAccount(1)); 
@@ -66,15 +62,11 @@ public class AccountManagerTest {
     
     IAccountManager manager = new AccountManager(); 
     
-    Map<String, List<ITradeable>> tradeables = new HashMap<String, List<ITradeable>>(); 
-    List<ITradeable> tList = new LinkedList<ITradeable>(); 
+    List<IItem> items = new LinkedList<IItem>(); 
+    items.add(new Item("default", 2)); 
     
-    tList.add(new Tradeable(0, "default")); 
-    tList.add(new Tradeable(1, "default")); 
-    
-    tradeables.put("default", tList); 
-    
-    IInitialEndowment e = new InitialEndowment(100.0, tradeables); 
+    ICart aCart = new Cart(items); 
+    IInitialEndowment e = new InitialEndowment(100.0, aCart); 
     
     manager.createAccount(0, e);
     manager.createAccount(1, e);
@@ -82,17 +74,18 @@ public class AccountManagerTest {
     IAccount act = manager.getAccount(0); 
     
     act.addMoney(1000.0);
-    act.addTradeables("more", tList);
+    
+    act.addTradeables(new Item("b", 2));
     
     manager.setAccount(0, act);
     
     assertEquals(manager.getAccount(0), act); 
     
-    IAccount acctOne = new Account(0, 60.0, tradeables); 
-    IAccount acctTwo = new Account(1, 70.0, tradeables); 
+    IAccount acctOne = new Account(0, 60.0, aCart); 
+    IAccount acctTwo = new Account(1, 70.0, aCart); 
     
-    manager.reendow(0, new InitialEndowment(60.0, tradeables));
-    manager.reendow(1, new InitialEndowment(70.0, tradeables));
+    manager.reendow(0, new InitialEndowment(60.0, aCart));
+    manager.reendow(1, new InitialEndowment(70.0, aCart));
     
     assertEquals(manager.getAccount(0), acctOne); 
     assertEquals(manager.getAccount(1), acctTwo); 

@@ -12,6 +12,6 @@ public interface ITerminationCondition {
    * an example of an inner termined auction is an ascending auction.
    * @param state market internal state.
    */
-  void isTerminated(IMarketState state);
+  void checkTerminated(IMarketState state);
 
 }

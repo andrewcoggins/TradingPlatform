@@ -1,6 +1,7 @@
 package brown.user.main.library;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 import java.lang.reflect.Constructor;
@@ -20,12 +21,13 @@ import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 import brown.auction.value.distribution.library.AdditiveValuationDistribution;
 import brown.auction.value.generator.library.NormalValGenerator;
+import brown.platform.item.ICart;
 import brown.platform.market.IFlexibleRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.user.main.IEndowmentConfig;
+import brown.user.main.IItemConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
-import brown.user.main.IItemConfig;
 import brown.user.main.IValuationConfig;
 
 public class SimulationConfigTest {
@@ -56,7 +58,7 @@ public class SimulationConfigTest {
     mConfigs.add(mConfig); 
     mConfigSquared.add(mConfigs); 
     
-    Constructor<?> distCons = AdditiveValuationDistribution.class.getConstructor(Map.class, List.class);
+    Constructor<?> distCons = AdditiveValuationDistribution.class.getConstructor(ICart.class, List.class);
     Constructor<?> gCons = NormalValGenerator.class.getConstructor(List.class); 
     List<Double> params = new LinkedList<Double>(); 
     params.add(0.0); 
@@ -78,7 +80,7 @@ public class SimulationConfigTest {
     
     ISimulationConfig sConfig = new SimulationConfig(1, tConfigs, vConfigs, eConfigs, mConfigSquared); 
     
-    assertEquals(sConfig.getSimulationRuns(), new Integer(1)); 
+    assertTrue(sConfig.getSimulationRuns() == 1); 
     assertEquals(sConfig.getEConfig(), eConfigs); 
     assertEquals(sConfig.getTConfig(), tConfigs); 
     assertEquals(sConfig.getVConfig(), vConfigs); 
