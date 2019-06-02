@@ -11,7 +11,6 @@ import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
 
 public class GeneralValuation implements IGeneralValuation {
-
   
   private Map<List<IItem>, ISpecificValuation> specificValuationMap; 
   
@@ -22,7 +21,7 @@ public class GeneralValuation implements IGeneralValuation {
   @Override
   public Double getValuation(ICart cart) {
     Double totalValue = 0.0;  
-    for(List<IItem> ItemList : this.specificValuationMap.keySet()) {
+    for (List<IItem> ItemList : this.specificValuationMap.keySet()) {
       List<IItem> subItems = new LinkedList<IItem>(); 
       for (IItem Item : ItemList) {
         if (cart.containsItem(Item.getName())) {
@@ -66,6 +65,5 @@ public class GeneralValuation implements IGeneralValuation {
       return false;
     return true;
   }
-  
   
 }
