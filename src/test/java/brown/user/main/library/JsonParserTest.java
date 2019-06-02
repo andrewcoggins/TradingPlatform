@@ -40,7 +40,6 @@ public class JsonParserTest {
       InvocationTargetException, IOException, ParseException {
     IJsonParser testParser = new JsonParser();
     List<ISimulationConfig> simulationConfigs = testParser.parseJSON("input_configs/test_input.json");
-    System.out.println(simulationConfigs.toString()); 
     assertTrue(simulationConfigs.size() == 2); 
     
     ISimulationConfig firstSimulationConfig = simulationConfigs.get(0); 
