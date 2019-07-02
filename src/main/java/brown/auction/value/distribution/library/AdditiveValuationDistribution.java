@@ -44,9 +44,8 @@ public class AdditiveValuationDistribution extends AbsValuationDistribution
   @Override
   public ISpecificValuation sample() {
 
-    this.items.getItems()
-        .forEach(item -> this.values.put(new Item(item.getName()),
-            this.generators.get(0).makeValuation()));
+    this.items.getItems().forEach(item -> this.values
+        .put(new Item(item.getName()), this.generators.get(0).makeValuation()));
     return new AdditiveValuation(this.values);
   }
 

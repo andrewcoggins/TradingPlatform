@@ -3,9 +3,9 @@ package brown.user.main.library;
 import java.util.List;
 
 import brown.user.main.IEndowmentConfig;
+import brown.user.main.IItemConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
-import brown.user.main.IItemConfig;
 import brown.user.main.IValuationConfig;
 
 public class SimulationConfig implements ISimulationConfig {

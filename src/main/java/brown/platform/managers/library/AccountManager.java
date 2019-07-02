@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import brown.auction.endowment.IEndowment;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.library.AccountInitializationMessage;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccount;
 import brown.platform.accounting.IAccountUpdate;
-import brown.platform.accounting.IInitialEndowment;
 import brown.platform.accounting.library.Account;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
@@ -37,11 +37,11 @@ public class AccountManager implements IAccountManager {
     this.lock = false;
   }
 
-  public void createAccount(Integer agentID, IInitialEndowment endowment) {
+  public void createAccount(Integer agentID, IEndowment endowment) {
     if (!this.lock) {
       synchronized (agentID) {
         this.accounts.put(agentID,
-            new Account(agentID, endowment.getMoney(), endowment.getGoods()));
+            new Account(agentID, endowment.getMoney(), endowment.getCart()));
       }
     } else {
       PlatformLogging.log("Creation denied: account manager locked.");
@@ -76,11 +76,11 @@ public class AccountManager implements IAccountManager {
     return accounts.containsKey(ID);
   }
 
-  public void reendow(Integer agentID, IInitialEndowment initialEndowment) {
+  public void reendow(Integer agentID, IEndowment initialEndowment) {
     try {
       IAccount endowAccount = this.accounts.get(agentID);
       endowAccount.clear();
-      initialEndowment.getGoods().getItems()
+      initialEndowment.getCart().getItems()
           .forEach(item -> endowAccount.addTradeables(item));
       endowAccount.addMoney(initialEndowment.getMoney());
       this.accounts.put(agentID, endowAccount);

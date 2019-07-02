@@ -1,6 +1,6 @@
 {
 	"name": "testParse", 
-	"startingDelayTime": 5, 
+	"startingDelayTime": 10, 
 	"simulationDelayTime": 1, 
 	"numTotalRuns": 1, 
 	"simulation": [{
@@ -20,12 +20,20 @@
 			}]
 		}], 
 		"endowments": [{
-			"item": [{
-				"itemName": "testItem", 
-				"numItems": "1"
+			"distribution": "IndependentEndowmentDist", 
+			"generator": [
+				{
+				"name": "NormalValGenerator", 
+				"parameters": [0.0, 10.0]
+				}, 
+				{
+				"name": "NormalValGenerator", 
+				"parameters": [0.0, 100.0]
+				}, 
+			],
+			"items": [{
+				"itemName": "testitem", 
 			}],
-			"money": 100.0, 
-			"frequency": 1.0
 		}], 
 		"seqMarket": [{
 			"simMarket": [{

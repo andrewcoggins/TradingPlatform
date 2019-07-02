@@ -21,12 +21,14 @@
 			}]
 		}], 
 		"endowments": [{
-			"item": [{
-				"itemName": "testitem", 
-				"numitems": "1"
+			"distribution": "", 
+			"generator": [{
+				"name": "testGenerator", 
+				"parameters": [0.0, 0.0]
 			}],
-			"money": "100", 
-			"frequency": "1"
+			"items": [{
+				"itemName": "testitem", 
+			}],
 		}], 
 		"seqMarket": [{
 			"simMarket": [{
