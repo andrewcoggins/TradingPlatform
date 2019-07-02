@@ -10,10 +10,10 @@ public class ValuationConfig implements IValuationConfig {
   
   private Constructor<?> valDistribution; 
   private Map<Constructor<?>, List<Double>> generators; 
-  private List<String> tradeableNames; 
+  private List<String> itemNames; 
   
-  public ValuationConfig(List<String> tradeableNames, Constructor<?> distCons, Map<Constructor<?>, List<Double>> generators) {
-    this.tradeableNames = tradeableNames; 
+  public ValuationConfig(List<String> itemNames, Constructor<?> distCons, Map<Constructor<?>, List<Double>> generators) {
+    this.itemNames = itemNames; 
     this.generators = generators; 
     this.valDistribution = distCons;
   }
@@ -27,13 +27,13 @@ public class ValuationConfig implements IValuationConfig {
   }
   
   public List<String> getItemNames() {
-    return this.tradeableNames; 
+    return this.itemNames; 
   }
 
   @Override
   public String toString() {
     return "ValuationConfig [valDistribution=" + valDistribution
-        + ", generators=" + generators + ", tradeableNames=" + tradeableNames
+        + ", generators=" + generators + ", itemNames=" + itemNames
         + "]";
   }
 
@@ -44,7 +44,7 @@ public class ValuationConfig implements IValuationConfig {
     result =
         prime * result + ((generators == null) ? 0 : generators.hashCode());
     result = prime * result
-        + ((tradeableNames == null) ? 0 : tradeableNames.hashCode());
+        + ((itemNames == null) ? 0 : itemNames.hashCode());
     result = prime * result
         + ((valDistribution == null) ? 0 : valDistribution.hashCode());
     return result;
@@ -64,10 +64,10 @@ public class ValuationConfig implements IValuationConfig {
         return false;
     } else if (!generators.equals(other.generators))
       return false;
-    if (tradeableNames == null) {
-      if (other.tradeableNames != null)
+    if (itemNames == null) {
+      if (other.itemNames != null)
         return false;
-    } else if (!tradeableNames.equals(other.tradeableNames))
+    } else if (!itemNames.equals(other.itemNames))
       return false;
     if (valDistribution == null) {
       if (other.valDistribution != null)

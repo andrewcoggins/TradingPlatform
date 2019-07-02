@@ -5,8 +5,11 @@ import java.util.List;
 
 import brown.auction.endowment.IEndowment;
 import brown.auction.endowment.distribution.IEndowmentDistribution;
+import brown.auction.endowment.library.Endowment;
 import brown.auction.value.generator.IValuationGenerator;
+import brown.platform.item.ICart;
 import brown.platform.item.IItem;
+import brown.platform.item.library.Cart;
 import brown.platform.item.library.Item;
 
 public class IndependentEndowmentDist
@@ -14,21 +17,20 @@ public class IndependentEndowmentDist
 
   private IValuationGenerator itemGenerator; 
   private IValuationGenerator moneyGenerator; 
-  private List<String> itemNames; 
+  private ICart items;  
   
   
-  public IndependentEndowmentDist(List<String> items, IValuationGenerator itemGenerator, IValuationGenerator moneyGenerator) {
-    this.itemNames = items; 
-    this.itemGenerator = itemGenerator; 
-    this.moneyGenerator = moneyGenerator; 
+  public IndependentEndowmentDist(ICart items, List<IValuationGenerator> generators) {
+    this.items = items; 
+    this.itemGenerator = generators.get(0); 
+    this.moneyGenerator = generators.get(1); 
   }
   
   @Override
   public IEndowment sample() {
     List<IItem> allItems = new LinkedList<IItem>(); 
-    this.itemNames.forEach(itemName -> allItems.add(new Item(itemName, (int) Math.round(itemGenerator.makeValuation()))));
-    // TODO Auto-generated method stub
-    return null;
+    this.items.getItems().forEach(item -> allItems.add(new Item(item.getName(), (int) Math.round(itemGenerator.makeValuation()))));
+    return new Endowment(new Cart(allItems), this.moneyGenerator.makeValuation()); 
   }
 
 }
