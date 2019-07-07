@@ -71,5 +71,4 @@ public class GeneralValuation implements IGeneralValuation {
       return false;
     return true;
   }
-
 }
