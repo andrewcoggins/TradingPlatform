@@ -74,7 +74,6 @@ public class TACValuation extends AbsSparseValuation
         || cart.containsItem("amusementDayThreeTicket")
         || cart.containsItem("amusementDayFourTicket")) {
       funBonus += amusementValue; 
-
     }
     
     if (cart.containsItem("alligatorDayOneTicket")
