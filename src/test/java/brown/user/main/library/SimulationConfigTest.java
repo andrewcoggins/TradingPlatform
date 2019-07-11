@@ -63,14 +63,20 @@ public class SimulationConfigTest {
     List<Double> params = new LinkedList<Double>(); 
     params.add(0.0); 
     params.add(1.0);  
-    Map<Constructor<?>, List<Double>> gMap = new HashMap<Constructor<?>, List<Double>>(); 
-    gMap.put(gCons, params); 
+    
+    List<Constructor<?>> endowmentList = new LinkedList<Constructor<?>>(); 
+    List<List<Double>> endowmentParamList = new LinkedList<List<Double>>(); 
+     
+    endowmentList.add(gCons); 
+    endowmentParamList.add(params); 
+
+    
     IItemConfig tConfig = new ItemConfig("trade", 10);
     tConfigs.add(tConfig);
     
     List<String> tNameList = new LinkedList<String>(); 
     tNameList.add("trade"); 
-    IValuationConfig vConfig = new ValuationConfig(tNameList, distCons, gMap); 
+    IValuationConfig vConfig = new ValuationConfig(tNameList, distCons, endowmentList, endowmentParamList); 
     vConfigs.add(vConfig); 
     
     
@@ -78,24 +84,26 @@ public class SimulationConfigTest {
         Class.forName("brown.auction.endowment.distribution.library.IndependentEndowmentDist");
     Constructor<?> endowmentDistributionCons =
         endowmentDistributionClass.getConstructor(ICart.class, List.class);
-    Map<Constructor<?>, List<Double>> endowmentGenerators = new HashMap<Constructor<?>, List<Double>>(); 
+
     
-    Class<?> eGeneratorClass = Class.forName(
-        "brown.auction.value.generator.library.NormalValGenerator");
-    Constructor<?> eGeneratorCons =
-        eGeneratorClass.getConstructor(List.class);
+    List<Constructor<?>> genList = new LinkedList<Constructor<?>>(); 
+    List<List<Double>> paramList = new LinkedList<List<Double>>(); 
+
+    Class genClass = Class.forName("brown.auction.value.generator.library.NormalValGenerator"); 
+    List<Double> genParams = new LinkedList<Double>(); 
+    genParams.add(0.0); 
+    genParams.add(100.0); 
     
-    List<Double> eGenParams = new LinkedList<Double>(); 
-    eGenParams.add(0.0); 
-    eGenParams.add(100.0); 
+    Constructor<?> genCons = genClass.getConstructor(List.class); 
+    genList.add(genCons); 
+    paramList.add(genParams); 
     
-    endowmentGenerators.put(eGeneratorCons, eGenParams); 
     
     Map<String, Integer> endowmentMapping = new HashMap<String, Integer>(); 
     endowmentMapping.put("trade", 1);
     
     
-    EndowmentConfig eConfig = new EndowmentConfig(tradeableNames, endowmentDistributionCons, endowmentGenerators);  
+    EndowmentConfig eConfig = new EndowmentConfig(tradeableNames, endowmentDistributionCons, genList, paramList);  
     eConfigs.add(eConfig); 
     
     ISimulationConfig sConfig = new SimulationConfig(1, tConfigs, vConfigs, eConfigs, mConfigSquared); 
