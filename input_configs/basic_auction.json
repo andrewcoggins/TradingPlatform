@@ -24,15 +24,15 @@
 			"generator": [
 				{
 				"name": "NormalValGenerator", 
-				"parameters": [0.0, 10.0]
+				"parameters": [5.0, 2.0]
 				}, 
 				{
 				"name": "NormalValGenerator", 
-				"parameters": [0.0, 100.0]
+				"parameters": [100.0, 10.0]
 				}, 
 			],
 			"items": [{
-				"itemName": "testitem", 
+				"itemName": "testItem", 
 			}],
 		}], 
 		"seqMarket": [{

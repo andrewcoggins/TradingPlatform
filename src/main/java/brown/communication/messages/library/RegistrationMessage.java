@@ -21,7 +21,7 @@ public class RegistrationMessage extends AbsAgentToServerMessage implements IReg
   
   public RegistrationMessage(Integer messageID) {
     super(messageID, 0); 
-    this.name = ""; 
+    this.name = "default"; 
   }
   
   public RegistrationMessage(Integer messageID, String name) {

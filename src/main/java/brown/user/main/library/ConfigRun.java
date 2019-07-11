@@ -79,7 +79,8 @@ public class ConfigRun {
         eConfig.getItemNames()
             .forEach(item -> endowmentItems.add(itemManager.getItems(item)));
         endowmentManager.createEndowment(eConfig.getDistribution(),
-            eConfig.getGenerators(), new Cart(endowmentItems));
+            eConfig.getGeneratorConstructors(), eConfig.getGeneratorParams(),
+            new Cart(endowmentItems));
       }
 
       // for the market manager, gonna need the rules, map, and the mustInclude

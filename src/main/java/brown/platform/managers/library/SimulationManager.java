@@ -203,7 +203,7 @@ public class SimulationManager implements ISimulationManager {
     for (Integer agentID : privateToPublic.keySet()) {
       // give agent endowment, and create account. 
       IEndowment agentEndowment =
-          this.currentEndowmentManager.getAgentEndowment(agentID);
+          this.currentEndowmentManager.makeAgentEndowment(agentID);
       if (this.currentAccountManager.containsAccount(agentID)) {
         this.currentAccountManager.reendow(agentID, agentEndowment);
       } else {

@@ -13,6 +13,11 @@ public abstract class AbsCart implements ICart {
   private List<IItem> items; 
   private Map<String, IItem> itemMap; 
   
+  public AbsCart() {
+    this.items = null; 
+    this.itemMap = null; 
+  }
+  
   public AbsCart(List<IItem> items) {
     this.items = items; 
     this.itemMap = new HashMap<String, IItem>(); 
@@ -62,6 +67,7 @@ public abstract class AbsCart implements ICart {
     }
   }
   
+  // TODO: 
   @Override
   public void combine(ICart cart) {
 
