@@ -228,6 +228,7 @@ public class SimulationManager implements ISimulationManager {
     for (Integer agentID : accountInitializations.keySet()) {
       this.messageServer.sendMessage(this.agentConnections.get(agentID),
           accountInitializations.get(agentID));
+      System.out.println(agentValuations); 
       this.messageServer.sendMessage(this.agentConnections.get(agentID),
           agentValuations.get(agentID));
     }

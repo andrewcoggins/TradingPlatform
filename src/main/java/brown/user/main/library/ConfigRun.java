@@ -68,7 +68,7 @@ public class ConfigRun {
         vConfig.getItemNames()
             .forEach(item -> valuationItems.add(itemManager.getItems(item)));
         valuationManager.createValuation(vConfig.getValDistribution(),
-            vConfig.getGenerators(), new Cart(valuationItems));
+            vConfig.getGeneratorConstructors(), vConfig.getGeneratorParams(), new Cart(valuationItems));
       }
 
       // endowment manager.

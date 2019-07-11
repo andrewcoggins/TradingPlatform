@@ -36,17 +36,20 @@ public class EndowmentManagerTest {
     Class distClass = Class.forName("brown.auction.endowment.distribution.library.IndependentEndowmentDist");
     Constructor<?> distCons = distClass.getConstructor(ICart.class, List.class); 
     
-    Map<Constructor<?>, List<Double>> generatorMap = new HashMap<Constructor<?>, List<Double>>();
+    List<Constructor<?>> genList = new LinkedList<Constructor<?>>(); 
+    List<List<Double>> paramList = new LinkedList<List<Double>>(); 
+
     Class genClass = Class.forName("brown.auction.value.generator.library.NormalValGenerator"); 
     List<Double> genParams = new LinkedList<Double>(); 
     genParams.add(0.0); 
     genParams.add(1.0); 
     
     Constructor<?> genCons = genClass.getConstructor(List.class); 
-    generatorMap.put(genCons, genParams); 
+    genList.add(genCons); 
+    paramList.add(genParams); 
     
     IEndowmentManager valManager = new EndowmentManager();
-    valManager.createEndowment(distCons, generatorMap, aCart);
+    valManager.createEndowment(distCons, genList, paramList, aCart);
     
     List<IValuationGenerator> expectedGenList = new LinkedList<IValuationGenerator>(); 
     IValuationGenerator expectedGen = (IValuationGenerator) genCons.newInstance(genParams); 

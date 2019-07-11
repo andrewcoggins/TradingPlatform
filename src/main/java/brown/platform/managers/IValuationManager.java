@@ -13,7 +13,7 @@ import brown.platform.item.ICart;
 
 public interface IValuationManager {
 
-    public void createValuation(Constructor<?> distCons, Map<Constructor<?>, List<Double>> generatorCons, 
+    public void createValuation(Constructor<?> distCons, List<Constructor<?>> generatorCons, List<List<Double>> generatorParams,
         ICart items) throws InstantiationException, IllegalAccessException,
     IllegalArgumentException, InvocationTargetException;
     
