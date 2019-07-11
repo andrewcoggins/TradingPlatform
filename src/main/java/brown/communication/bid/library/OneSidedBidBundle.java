@@ -12,6 +12,10 @@ import brown.platform.item.ICart;
  */
 public class OneSidedBidBundle extends AbsOneSidedBidBundle implements IBidBundle {
 	
+  public OneSidedBidBundle() {
+    super(); 
+  }
+  
 	public OneSidedBidBundle(Map<ICart, Double> bids) {
 		super(bids);  
 	}
