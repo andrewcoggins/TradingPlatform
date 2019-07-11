@@ -8,10 +8,10 @@ import java.util.List;
 
 import org.junit.Test;
 
+import brown.auction.endowment.IEndowment;
+import brown.auction.endowment.library.Endowment;
 import brown.platform.accounting.IAccount;
-import brown.platform.accounting.IInitialEndowment;
 import brown.platform.accounting.library.Account;
-import brown.platform.accounting.library.InitialEndowment;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
@@ -30,7 +30,7 @@ public class AccountManagerTest {
     items.add(new Item("default", 2)); 
     
     ICart aCart = new Cart(items); 
-    IInitialEndowment e = new InitialEndowment(100.0, aCart); 
+    IEndowment e = new Endowment(aCart, 100.0); 
     
     manager.createAccount(0, e);
     manager.createAccount(1, e);
@@ -66,7 +66,7 @@ public class AccountManagerTest {
     items.add(new Item("default", 2)); 
     
     ICart aCart = new Cart(items); 
-    IInitialEndowment e = new InitialEndowment(100.0, aCart); 
+    IEndowment e = new Endowment(aCart, 100.0); 
     
     manager.createAccount(0, e);
     manager.createAccount(1, e);
@@ -84,8 +84,8 @@ public class AccountManagerTest {
     IAccount acctOne = new Account(0, 60.0, aCart); 
     IAccount acctTwo = new Account(1, 70.0, aCart); 
     
-    manager.reendow(0, new InitialEndowment(60.0, aCart));
-    manager.reendow(1, new InitialEndowment(70.0, aCart));
+    manager.reendow(0, new Endowment(aCart, 60.0));
+    manager.reendow(1, new Endowment(aCart, 70.0));
     
     assertEquals(manager.getAccount(0), acctOne); 
     assertEquals(manager.getAccount(1), acctTwo); 

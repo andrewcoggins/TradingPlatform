@@ -2,6 +2,7 @@ package brown.user.main.library;
 
 import static org.junit.Assert.assertEquals;
 
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,58 +10,30 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import brown.user.main.library.EndowmentConfig;
+import brown.auction.endowment.distribution.library.IndependentEndowmentDist;
+import brown.auction.value.generator.library.NormalValGenerator;
+import brown.platform.item.ICart;
+import brown.user.main.IEndowmentConfig;
 
 public class EndowmentConfigTest {
   
-  @SuppressWarnings("deprecation")
-@Test
-  public void testEndowmentConfigOne() {
-    Map<String, Integer> eMap = new HashMap<String, Integer>(); 
-    eMap.put("a", 1); 
-    EndowmentConfig eConfig = new EndowmentConfig("trade", eMap, 100.0); 
-    assertEquals(eConfig.getName(), "trade"); 
-    assertEquals(eConfig.getEndowmentMapping(), eMap); 
-    assertEquals(eConfig.getFrequency(), new Integer(1)); 
-    assertEquals(eConfig.getMoney(), new Double(100.0)); 
-  }
-  
   @Test
-  public void testEndowmentConfigTwo() {
-    Map<String, Integer> eMap = new HashMap<String, Integer>(); 
-    Map<String, List<String>> iMap = new HashMap<String, List<String>>(); 
-    eMap.put("a", 1);
-    EndowmentConfig eConfig = new EndowmentConfig("trade", eMap, 100.0); 
-    assertEquals(eConfig.getName(), "trade"); 
-    assertEquals(eConfig.getEndowmentMapping(), eMap); 
-    assertEquals(eConfig.getMoney(), new Double(100.0)); 
-    assertEquals(eConfig.getFrequency(), new Integer(1));
+  public void testEndowmentConfigOne() throws NoSuchMethodException, SecurityException {
     
-  }
-  
-  
-  @Test
-  public void testEndowmentConfigThree() {
-    Map<String, Integer> eMap = new HashMap<String, Integer>(); 
-    eMap.put("a", 1);
-    EndowmentConfig eConfig = new EndowmentConfig("trade", eMap, 100.0, 5); 
-    assertEquals(eConfig.getName(), "trade"); 
-    assertEquals(eConfig.getEndowmentMapping(), eMap); 
-    assertEquals(eConfig.getMoney(), new Double(100.0)); 
-    assertEquals(eConfig.getFrequency(), new Integer(5));
-  }
-  
-  @Test
-  public void testEndowmentConfigFour() {
-    Map<String, Integer> eMap = new HashMap<String, Integer>(); 
-    Map<String, List<String>> iMap = new HashMap<String, List<String>>(); 
-    eMap.put("a", 1);
-    iMap.put("b", new LinkedList<String>()); 
-    EndowmentConfig eConfig = new EndowmentConfig("trade", eMap, 100.0, 5); 
-    assertEquals(eConfig.getName(), "trade"); 
-    assertEquals(eConfig.getEndowmentMapping(), eMap); 
-    assertEquals(eConfig.getMoney(), new Double(100.0)); 
-    assertEquals(eConfig.getFrequency(), new Integer(5));
+    Constructor<?> distCons = IndependentEndowmentDist.class.getConstructor(ICart.class, List.class);
+    List<String> tNames = new LinkedList<String>();
+    tNames.add("test"); 
+    Constructor<?> gCons = NormalValGenerator.class.getConstructor(List.class); 
+    List<Double> params = new LinkedList<Double>(); 
+    params.add(0.0); 
+    params.add(1.0);  
+    Map<Constructor<?>, List<Double>> gMap = new HashMap<Constructor<?>, List<Double>>(); 
+    gMap.put(gCons, params); 
+    IEndowmentConfig tConfig = new EndowmentConfig(tNames, distCons, gMap);
+    
+    assertEquals(tConfig.getItemNames(), tNames); 
+    assertEquals(tConfig.getDistribution(), distCons);
+    assertEquals(tConfig.getGenerators(), gMap);
   }
   
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.esotericsoftware.kryonet.Connection;
 
+import brown.auction.endowment.IEndowment;
 import brown.auction.value.distribution.IValuationDistribution;
 import brown.auction.value.valuation.ISpecificValuation;
 import brown.auction.value.valuation.library.GeneralValuation;
@@ -21,7 +22,6 @@ import brown.communication.messageserver.IMessageServer;
 import brown.communication.messageserver.library.MessageServer;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
-import brown.platform.accounting.IInitialEndowment;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Item;
 import brown.platform.managers.IAccountManager;
@@ -202,8 +202,8 @@ public class SimulationManager implements ISimulationManager {
   private void initializeAgents() { 
     for (Integer agentID : privateToPublic.keySet()) {
       // give agent endowment, and create account. 
-      IInitialEndowment agentEndowment =
-          this.currentEndowmentManager.getEndowment();
+      IEndowment agentEndowment =
+          this.currentEndowmentManager.getAgentEndowment(agentID);
       if (this.currentAccountManager.containsAccount(agentID)) {
         this.currentAccountManager.reendow(agentID, agentEndowment);
       } else {

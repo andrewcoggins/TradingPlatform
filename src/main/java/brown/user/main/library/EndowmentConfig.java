@@ -1,71 +1,50 @@
 package brown.user.main.library;
 
+import java.lang.reflect.Constructor;
+import java.util.List;
 import java.util.Map;
 
 import brown.user.main.IEndowmentConfig;
 
 public class EndowmentConfig implements IEndowmentConfig {
-   
-  private String name; 
-  private Map<String, Integer> endowmentMapping; 
-  private Double money; 
-  private Integer frequency; 
   
+  private Constructor<?> distribution; 
+  private Map<Constructor<?>, List<Double>> generators; 
+  private List<String> itemNames; 
   
-  public EndowmentConfig(String name, Map<String, Integer> endowmentMapping, Double money) {
-    this.name = name; 
-    this.endowmentMapping = endowmentMapping;
-    this.money = money;
-    this.frequency = 1; 
+  public EndowmentConfig(List<String> itemNames, Constructor<?> distCons, Map<Constructor<?>, List<Double>> generators) {
+    this.itemNames = itemNames; 
+    this.generators = generators; 
+    this.distribution = distCons;
   }
   
-
-  
-  public EndowmentConfig(String name, Map<String, Integer> endowmentMapping, Double money, Integer frequency) {
-    this.name = name; 
-    this.endowmentMapping = endowmentMapping; 
-    this.money = money;
-    this.frequency = frequency; 
+  public Constructor<?> getDistribution() {
+    return this.distribution; 
   }
   
-
-  @Override
-  public String getName() {
-    return this.name;
+  public Map<Constructor<?>, List<Double>> getGenerators() {
+    return this.generators;
   }
-
-  @Override
-  public Map<String, Integer> getEndowmentMapping() {
-    return this.endowmentMapping;
-  }
-
-
-  @Override
-  public Double getMoney() {
-    return this.money;
-  }
-
-  @Override
-  public Integer getFrequency() {
-    return this.frequency;
+  
+  public List<String> getItemNames() {
+    return this.itemNames; 
   }
 
   @Override
   public String toString() {
-    return "EndowmentConfig [name=" + name + ", endowmentMapping="
-        + endowmentMapping + ", money=" + money + ", frequency=" + frequency
-        + "]";
+    return "EndowmentConfig [distribution=" + distribution + ", generators="
+        + generators + ", itemNames=" + itemNames + "]";
   }
-
+  
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result
-        + ((endowmentMapping == null) ? 0 : endowmentMapping.hashCode());
-    result = prime * result + ((frequency == null) ? 0 : frequency.hashCode());
-    result = prime * result + ((money == null) ? 0 : money.hashCode());
-    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result =
+        prime * result + ((distribution == null) ? 0 : distribution.hashCode());
+    result =
+        prime * result + ((generators == null) ? 0 : generators.hashCode());
+    result = prime * result + ((itemNames == null) ? 0 : itemNames.hashCode());
     return result;
   }
 
@@ -78,27 +57,22 @@ public class EndowmentConfig implements IEndowmentConfig {
     if (getClass() != obj.getClass())
       return false;
     EndowmentConfig other = (EndowmentConfig) obj;
-    if (endowmentMapping == null) {
-      if (other.endowmentMapping != null)
+    if (distribution == null) {
+      if (other.distribution != null)
         return false;
-    } else if (!endowmentMapping.equals(other.endowmentMapping))
+    } else if (!distribution.equals(other.distribution))
       return false;
-    if (frequency == null) {
-      if (other.frequency != null)
+    if (generators == null) {
+      if (other.generators != null)
         return false;
-    } else if (!frequency.equals(other.frequency))
+    } else if (!generators.equals(other.generators))
       return false;
-    if (money == null) {
-      if (other.money != null)
+    if (itemNames == null) {
+      if (other.itemNames != null)
         return false;
-    } else if (!money.equals(other.money))
-      return false;
-    if (name == null) {
-      if (other.name != null)
-        return false;
-    } else if (!name.equals(other.name))
+    } else if (!itemNames.equals(other.itemNames))
       return false;
     return true;
   }
-  
+
 }

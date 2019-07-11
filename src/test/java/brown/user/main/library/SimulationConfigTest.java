@@ -33,7 +33,7 @@ import brown.user.main.IValuationConfig;
 public class SimulationConfigTest {
   
   @Test
-  public void testSimulationConfigOne() throws NoSuchMethodException, SecurityException {
+  public void testSimulationConfigOne() throws NoSuchMethodException, SecurityException, ClassNotFoundException {
     
     List<IItemConfig> tConfigs = new LinkedList<IItemConfig>(); 
     List<IValuationConfig> vConfigs = new LinkedList<IValuationConfig>(); 
@@ -73,9 +73,29 @@ public class SimulationConfigTest {
     IValuationConfig vConfig = new ValuationConfig(tNameList, distCons, gMap); 
     vConfigs.add(vConfig); 
     
-    Map<String, Integer> eMap = new HashMap<String, Integer>(); 
-    eMap.put("a", 1); 
-    EndowmentConfig eConfig = new EndowmentConfig("trade", eMap, 100.0); 
+    
+    Class<?> endowmentDistributionClass =
+        Class.forName("brown.auction.endowment.distribution.library.IndependentEndowmentDist");
+    Constructor<?> endowmentDistributionCons =
+        endowmentDistributionClass.getConstructor(ICart.class, List.class);
+    Map<Constructor<?>, List<Double>> endowmentGenerators = new HashMap<Constructor<?>, List<Double>>(); 
+    
+    Class<?> eGeneratorClass = Class.forName(
+        "brown.auction.value.generator.library.NormalValGenerator");
+    Constructor<?> eGeneratorCons =
+        eGeneratorClass.getConstructor(List.class);
+    
+    List<Double> eGenParams = new LinkedList<Double>(); 
+    eGenParams.add(0.0); 
+    eGenParams.add(100.0); 
+    
+    endowmentGenerators.put(eGeneratorCons, eGenParams); 
+    
+    Map<String, Integer> endowmentMapping = new HashMap<String, Integer>(); 
+    endowmentMapping.put("trade", 1);
+    
+    
+    EndowmentConfig eConfig = new EndowmentConfig(tradeableNames, endowmentDistributionCons, endowmentGenerators);  
     eConfigs.add(eConfig); 
     
     ISimulationConfig sConfig = new SimulationConfig(1, tConfigs, vConfigs, eConfigs, mConfigSquared); 

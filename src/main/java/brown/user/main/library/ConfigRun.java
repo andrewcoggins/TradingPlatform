@@ -25,6 +25,7 @@ import brown.platform.managers.library.SimulationManager;
 import brown.platform.managers.library.ValuationManager;
 import brown.platform.managers.library.WorldManager;
 import brown.platform.market.IFlexibleRules;
+import brown.user.main.IEndowmentConfig;
 import brown.user.main.IItemConfig;
 import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
@@ -70,18 +71,24 @@ public class ConfigRun {
             vConfig.getGenerators(), new Cart(valuationItems));
       }
 
+      // endowment manager.
+      List<IEndowmentConfig> eConfigs = aConfig.getEConfig();
+      for (IEndowmentConfig eConfig : eConfigs) {
+        List<String> itemNames = eConfig.getItemNames();
+        List<IItem> endowmentItems = new LinkedList<IItem>();
+        eConfig.getItemNames()
+            .forEach(item -> endowmentItems.add(itemManager.getItems(item)));
+        endowmentManager.createEndowment(eConfig.getDistribution(),
+            eConfig.getGenerators(), new Cart(endowmentItems));
+      }
+
+      // for the market manager, gonna need the rules, map, and the mustInclude
       // endowments also need a tradeable map, and a tradeable config.
       List<IItem> allItems = new LinkedList<IItem>();
       itemConfig.forEach(iConfig -> allItems
           .add(new Item(iConfig.getItemName(), iConfig.getNumItems())));
-
       ICart itemCart = new Cart(allItems);
-      aConfig.getEConfig()
-          .forEach(eConfig -> endowmentManager.createEndowment(
-              eConfig.getName(), eConfig.getEndowmentMapping(),
-              eConfig.getFrequency(), itemCart, eConfig.getMoney()));
-
-      // for the market manager, gonna need the rules, map, and the mustInclude
+      
       for (List<IMarketConfig> mConfigList : aConfig.getMConfig()) {
         List<IFlexibleRules> marketRules = new LinkedList<IFlexibleRules>();
         List<List<String>> marketItems = new LinkedList<List<String>>();
@@ -98,8 +105,6 @@ public class ConfigRun {
         }
         marketManager.createSimultaneousMarket(marketRules, marketCarts);
       }
-
-      // todo: refactor account manager b/c endowments?
 
       domainManager.createDomain(itemManager, valuationManager, accountManager,
           endowmentManager);

@@ -1,5 +1,6 @@
 package brown.user.main;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Map;
 
@@ -10,27 +11,10 @@ import java.util.Map;
  */
 public interface IEndowmentConfig extends IInputConfig {
   
-  /**
-   * get name
-   * @return
-   */
-  public  String getName(); 
+  public Constructor<?> getDistribution(); 
   
-  /**
-   * get endowment mapping. 
-   * @return
-   */
-  public  Map<String, Integer> getEndowmentMapping(); 
+  public Map<Constructor<?>, List<Double>> getGenerators(); 
   
-  /**
-   * get money. 
-   * @return
-   */
-  public  Double getMoney();
+  public List<String> getItemNames(); 
   
-  /**
-   * get frequency. 
-   * @return
-   */
-  public  Integer getFrequency();
 }

@@ -11,25 +11,31 @@ import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
 
 public class GeneralValuation implements IGeneralValuation {
-  
-  private Map<List<IItem>, ISpecificValuation> specificValuationMap; 
-  
-  public GeneralValuation(Map<List<IItem>, ISpecificValuation> specificValuations) {
-    this.specificValuationMap = specificValuations; 
+
+  private Map<List<IItem>, ISpecificValuation> specificValuationMap;
+
+  // each of the specific valuations are independendent; assuming here that they
+  // are also additive but this may not always be the case.
+  // TODO: make this more generatal, plus could be a lambda. 
+  public GeneralValuation(
+      Map<List<IItem>, ISpecificValuation> specificValuations) {
+    this.specificValuationMap = specificValuations;
   }
-  
+
+  // TODO: make this cleaner. 
   @Override
   public Double getValuation(ICart cart) {
-    Double totalValue = 0.0;  
+    Double totalValue = 0.0;
     for (List<IItem> ItemList : this.specificValuationMap.keySet()) {
-      List<IItem> subItems = new LinkedList<IItem>(); 
+      List<IItem> subItems = new LinkedList<IItem>();
       for (IItem Item : ItemList) {
         if (cart.containsItem(Item.getName())) {
-          subItems.add(cart.getItemByName(Item.getName())); 
+          subItems.add(cart.getItemByName(Item.getName()));
         }
       }
-      ICart subCart = new Cart(subItems); 
-      totalValue += this.specificValuationMap.get(ItemList).getValuation(subCart); 
+      ICart subCart = new Cart(subItems);
+      totalValue +=
+          this.specificValuationMap.get(ItemList).getValuation(subCart);
     }
     return totalValue;
   }
@@ -65,5 +71,4 @@ public class GeneralValuation implements IGeneralValuation {
       return false;
     return true;
   }
-  
 }

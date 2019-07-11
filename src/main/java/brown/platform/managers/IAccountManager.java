@@ -3,10 +3,10 @@ package brown.platform.managers;
 import java.util.List;
 import java.util.Map;
 
+import brown.auction.endowment.IEndowment;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.platform.accounting.IAccount;
 import brown.platform.accounting.IAccountUpdate;
-import brown.platform.accounting.IInitialEndowment;
 
 /**
  * account manager stores agent accounts.
@@ -15,7 +15,7 @@ import brown.platform.accounting.IInitialEndowment;
  */
 public interface IAccountManager {
 
-  void createAccount(Integer agentID, IInitialEndowment endowment);
+  void createAccount(Integer agentID, IEndowment endowment);
 
   /**
    * gets an account from an agent's private id, if it exists
@@ -52,7 +52,7 @@ public interface IAccountManager {
   /**
    * resets accounts to their initial endowments, ostensibly as defined in the constructor.
    */
-  void reendow(Integer agentID, IInitialEndowment endowment);
+  void reendow(Integer agentID, IEndowment endowment);
   
   
   Map<Integer, IBankUpdateMessage> constructInitializationMessages(); 

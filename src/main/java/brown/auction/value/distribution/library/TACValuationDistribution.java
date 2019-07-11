@@ -10,6 +10,13 @@ import brown.platform.item.ICart;
 
 public class TACValuationDistribution extends AbsValuationDistribution implements IValuationDistribution {
 
+  /**
+   * For kryo DO NOT USE
+   */
+  public TACValuationDistribution() {
+    super(null, null);
+  }
+  
   public TACValuationDistribution(ICart items, List<IValuationGenerator> generators) {
     super(items, generators); 
   }
