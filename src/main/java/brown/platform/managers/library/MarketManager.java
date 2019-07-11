@@ -93,6 +93,7 @@ public class MarketManager implements IMarketManager {
 
   @Override
   public IStatusMessage handleTradeMessage(ITradeMessage message) {
+    System.out.println(activeMarkets); 
     Integer marketID = message.getAuctionID();
     Integer agentID = message.getAgentID(); 
     if (this.activeMarkets.containsKey(marketID)) {

@@ -68,7 +68,7 @@ public class ConfigRun {
         vConfig.getItemNames()
             .forEach(item -> valuationItems.add(itemManager.getItems(item)));
         valuationManager.createValuation(vConfig.getValDistribution(),
-            vConfig.getGenerators(), new Cart(valuationItems));
+            vConfig.getGeneratorConstructors(), vConfig.getGeneratorParams(), new Cart(valuationItems));
       }
 
       // endowment manager.
@@ -79,7 +79,8 @@ public class ConfigRun {
         eConfig.getItemNames()
             .forEach(item -> endowmentItems.add(itemManager.getItems(item)));
         endowmentManager.createEndowment(eConfig.getDistribution(),
-            eConfig.getGenerators(), new Cart(endowmentItems));
+            eConfig.getGeneratorConstructors(), eConfig.getGeneratorParams(),
+            new Cart(endowmentItems));
       }
 
       // for the market manager, gonna need the rules, map, and the mustInclude

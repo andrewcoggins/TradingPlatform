@@ -98,6 +98,8 @@ public abstract class AbsAgent extends TPClient implements IAgent {
     this.money += bankUpdate.getMoneyAddedLost();
     updateItems(bankUpdate.getItemsAdded(), true);
     updateItems(bankUpdate.getItemsLost(), false);
+    System.out.println(money); 
+    System.out.println(goods); 
   }
   
   @Override

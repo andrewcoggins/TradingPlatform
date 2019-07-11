@@ -60,9 +60,12 @@ public class JsonParserTest {
     
     Class<?> distributionClass =
         Class.forName("brown.auction.value.distribution.library.AdditiveValuationDistribution");
+    
     Constructor<?> distributionCons =
         distributionClass.getConstructor(ICart.class, List.class);
-    Map<Constructor<?>, List<Double>> generators = new HashMap<Constructor<?>, List<Double>>(); 
+    
+    List<Constructor<?>> genList = new LinkedList<Constructor<?>>(); 
+    List<List<Double>> paramList = new LinkedList<List<Double>>(); 
     
     Class<?> generatorClass = Class.forName(
         "brown.auction.value.generator.library.NormalValGenerator");
@@ -73,10 +76,10 @@ public class JsonParserTest {
     genParams.add(0.0); 
     genParams.add(1.0); 
     
-    generators.put(generatorCons, genParams); 
-    generators.put(generatorCons, genParams); 
+    genList.add(generatorCons); 
+    paramList.add(genParams); 
     
-    valuationConfigs.add(new ValuationConfig(tradeableNames, distributionCons, generators)); 
+    valuationConfigs.add(new ValuationConfig(tradeableNames, distributionCons, genList, paramList)); 
     assertEquals(firstSimulationConfig.getVConfig(), valuationConfigs); 
     
     List<IEndowmentConfig> eConfigs = new LinkedList<IEndowmentConfig>(); 
@@ -85,22 +88,30 @@ public class JsonParserTest {
         Class.forName("brown.auction.endowment.distribution.library.IndependentEndowmentDist");
     Constructor<?> endowmentDistributionCons =
         endowmentDistributionClass.getConstructor(ICart.class, List.class);
-    Map<Constructor<?>, List<Double>> endowmentGenerators = new HashMap<Constructor<?>, List<Double>>(); 
+
+    List<Constructor<?>> endowmentList = new LinkedList<Constructor<?>>(); 
+    List<List<Double>> endowmentParamList = new LinkedList<List<Double>>(); 
     
     Class<?> eGeneratorClass = Class.forName(
         "brown.auction.value.generator.library.NormalValGenerator");
     Constructor<?> eGeneratorCons =
         eGeneratorClass.getConstructor(List.class);
     
+    List<Double> eGenParamsOne = new LinkedList<Double>(); 
+    eGenParamsOne.add(0.0); 
+    eGenParamsOne.add(10.0); 
     List<Double> eGenParams = new LinkedList<Double>(); 
     eGenParams.add(0.0); 
     eGenParams.add(100.0); 
     
-    endowmentGenerators.put(eGeneratorCons, eGenParams); 
+    endowmentList.add(eGeneratorCons); 
+    endowmentList.add(eGeneratorCons); 
+    endowmentParamList.add(eGenParamsOne);
+    endowmentParamList.add(eGenParams); 
     
     Map<String, Integer> endowmentMapping = new HashMap<String, Integer>(); 
     endowmentMapping.put("testItem", 1);
-    eConfigs.add(new EndowmentConfig(tradeableNames, endowmentDistributionCons, endowmentGenerators)); 
+    eConfigs.add(new EndowmentConfig(tradeableNames, endowmentDistributionCons, endowmentList, endowmentParamList)); 
     
     System.out.println(eConfigs); 
     System.out.println(firstSimulationConfig.getEConfig()); 

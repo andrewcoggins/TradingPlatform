@@ -9,12 +9,15 @@ import brown.user.main.IEndowmentConfig;
 public class EndowmentConfig implements IEndowmentConfig {
   
   private Constructor<?> distribution; 
-  private Map<Constructor<?>, List<Double>> generators; 
+  private List<Constructor<?>> endowmentCons;
+  private List<List<Double>> endowmentParams; 
   private List<String> itemNames; 
   
-  public EndowmentConfig(List<String> itemNames, Constructor<?> distCons, Map<Constructor<?>, List<Double>> generators) {
+  public EndowmentConfig(List<String> itemNames, Constructor<?> distCons, 
+      List<Constructor<?>> endowmentCons, List<List<Double>> endowmentParams) {
     this.itemNames = itemNames; 
-    this.generators = generators; 
+    this.endowmentCons = endowmentCons; 
+    this.endowmentParams = endowmentParams; 
     this.distribution = distCons;
   }
   
@@ -22,8 +25,12 @@ public class EndowmentConfig implements IEndowmentConfig {
     return this.distribution; 
   }
   
-  public Map<Constructor<?>, List<Double>> getGenerators() {
-    return this.generators;
+  public List<Constructor<?>> getGeneratorConstructors() {
+    return this.endowmentCons;
+  }
+  
+  public List<List<Double>> getGeneratorParams() {
+    return this.endowmentParams; 
   }
   
   public List<String> getItemNames() {
@@ -31,19 +38,15 @@ public class EndowmentConfig implements IEndowmentConfig {
   }
 
   @Override
-  public String toString() {
-    return "EndowmentConfig [distribution=" + distribution + ", generators="
-        + generators + ", itemNames=" + itemNames + "]";
-  }
-  
-  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
     result =
         prime * result + ((distribution == null) ? 0 : distribution.hashCode());
-    result =
-        prime * result + ((generators == null) ? 0 : generators.hashCode());
+    result = prime * result
+        + ((endowmentCons == null) ? 0 : endowmentCons.hashCode());
+    result = prime * result
+        + ((endowmentParams == null) ? 0 : endowmentParams.hashCode());
     result = prime * result + ((itemNames == null) ? 0 : itemNames.hashCode());
     return result;
   }
@@ -62,10 +65,15 @@ public class EndowmentConfig implements IEndowmentConfig {
         return false;
     } else if (!distribution.equals(other.distribution))
       return false;
-    if (generators == null) {
-      if (other.generators != null)
+    if (endowmentCons == null) {
+      if (other.endowmentCons != null)
         return false;
-    } else if (!generators.equals(other.generators))
+    } else if (!endowmentCons.equals(other.endowmentCons))
+      return false;
+    if (endowmentParams == null) {
+      if (other.endowmentParams != null)
+        return false;
+    } else if (!endowmentParams.equals(other.endowmentParams))
       return false;
     if (itemNames == null) {
       if (other.itemNames != null)
@@ -73,6 +81,13 @@ public class EndowmentConfig implements IEndowmentConfig {
     } else if (!itemNames.equals(other.itemNames))
       return false;
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return "EndowmentConfig [distribution=" + distribution + ", endowmentCons="
+        + endowmentCons + ", endowmentParams=" + endowmentParams
+        + ", itemNames=" + itemNames + "]";
   }
 
 }

@@ -3,8 +3,10 @@ package brown.system.setup.library;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+
 import com.esotericsoftware.kryo.Kryo;
 
 import brown.logging.library.ErrorLogging;
@@ -21,11 +23,13 @@ public final class Startup implements ISetup {
   public static boolean start(Kryo kryo) {
     String PATH = "src/main/java/";
     try {
+      kryo.register(HashMap.class);
+      kryo.register(LinkedList.class);
       List<String> classesToReflect = getJavaFiles(PATH);
       for (String className : classesToReflect) {
         Class<?> tpClass = Class.forName(className);
         kryo.register(tpClass);
-      }
+      } 
       return true;
     } catch (IOException a) {
       ErrorLogging.log("ERROR: java startup: " + a.toString());

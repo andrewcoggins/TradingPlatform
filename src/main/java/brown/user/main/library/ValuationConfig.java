@@ -2,19 +2,21 @@ package brown.user.main.library;
 
 import java.lang.reflect.Constructor;
 import java.util.List;
-import java.util.Map;
 
 import brown.user.main.IValuationConfig;
 
 public class ValuationConfig implements IValuationConfig {
   
   private Constructor<?> valDistribution; 
-  private Map<Constructor<?>, List<Double>> generators; 
+  private List<Constructor<?>> valuationCons;
+  private List<List<Double>> valuationParams; 
   private List<String> itemNames; 
   
-  public ValuationConfig(List<String> itemNames, Constructor<?> distCons, Map<Constructor<?>, List<Double>> generators) {
+  public ValuationConfig(List<String> itemNames, Constructor<?> distCons, 
+      List<Constructor<?>> valuationCons, List<List<Double>> valuationParams) {
     this.itemNames = itemNames; 
-    this.generators = generators; 
+    this.valuationCons = valuationCons; 
+    this.valuationParams = valuationParams; 
     this.valDistribution = distCons;
   }
   
@@ -22,31 +24,30 @@ public class ValuationConfig implements IValuationConfig {
     return this.valDistribution; 
   }
   
-  public Map<Constructor<?>, List<Double>> getGenerators() {
-    return this.generators;
+  public List<Constructor<?>> getGeneratorConstructors() {
+    return this.valuationCons;
   }
+  
+  public List<List<Double>> getGeneratorParams() {
+    return this.valuationParams; 
+  }
+  
   
   public List<String> getItemNames() {
     return this.itemNames; 
   }
 
   @Override
-  public String toString() {
-    return "ValuationConfig [valDistribution=" + valDistribution
-        + ", generators=" + generators + ", itemNames=" + itemNames
-        + "]";
-  }
-
-  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result =
-        prime * result + ((generators == null) ? 0 : generators.hashCode());
-    result = prime * result
-        + ((itemNames == null) ? 0 : itemNames.hashCode());
+    result = prime * result + ((itemNames == null) ? 0 : itemNames.hashCode());
     result = prime * result
         + ((valDistribution == null) ? 0 : valDistribution.hashCode());
+    result = prime * result
+        + ((valuationCons == null) ? 0 : valuationCons.hashCode());
+    result = prime * result
+        + ((valuationParams == null) ? 0 : valuationParams.hashCode());
     return result;
   }
 
@@ -59,11 +60,6 @@ public class ValuationConfig implements IValuationConfig {
     if (getClass() != obj.getClass())
       return false;
     ValuationConfig other = (ValuationConfig) obj;
-    if (generators == null) {
-      if (other.generators != null)
-        return false;
-    } else if (!generators.equals(other.generators))
-      return false;
     if (itemNames == null) {
       if (other.itemNames != null)
         return false;
@@ -74,7 +70,24 @@ public class ValuationConfig implements IValuationConfig {
         return false;
     } else if (!valDistribution.equals(other.valDistribution))
       return false;
+    if (valuationCons == null) {
+      if (other.valuationCons != null)
+        return false;
+    } else if (!valuationCons.equals(other.valuationCons))
+      return false;
+    if (valuationParams == null) {
+      if (other.valuationParams != null)
+        return false;
+    } else if (!valuationParams.equals(other.valuationParams))
+      return false;
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return "ValuationConfig [valDistribution=" + valDistribution
+        + ", valuationCons=" + valuationCons + ", valuationParams="
+        + valuationParams + ", itemNames=" + itemNames + "]";
   }
   
 }

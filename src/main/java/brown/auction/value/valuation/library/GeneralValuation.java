@@ -13,7 +13,10 @@ import brown.platform.item.library.Cart;
 public class GeneralValuation implements IGeneralValuation {
 
   private Map<List<IItem>, ISpecificValuation> specificValuationMap;
-
+  
+  public GeneralValuation() {
+    this.specificValuationMap = null; 
+  }
   // each of the specific valuations are independendent; assuming here that they
   // are also additive but this may not always be the case.
   // TODO: make this more generatal, plus could be a lambda. 

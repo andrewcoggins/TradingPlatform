@@ -21,7 +21,7 @@ public class IndependentEndowmentDist extends AbsEndowmentDistribution
   }
 
   @Override
-  public IEndowment sample() {
+  public IEndowment sample() { 
     IValuationGenerator itemGenerator = this.generators.get(0);
     IValuationGenerator moneyGenerator = this.generators.get(1);
 

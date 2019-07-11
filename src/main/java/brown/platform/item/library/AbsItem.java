@@ -5,8 +5,13 @@ import brown.platform.item.IItem;
 
 public abstract class AbsItem implements IItem {
 
-  private int count; 
+  private Integer count; 
   private String name; 
+  
+  public AbsItem() {
+    this.name = null; 
+    this.count = null; 
+  }
   
   public AbsItem(String name, int count) {
     this.name = name; 

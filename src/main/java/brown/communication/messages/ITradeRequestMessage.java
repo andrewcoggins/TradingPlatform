@@ -8,6 +8,8 @@ public interface ITradeRequestMessage extends IServerToAgentMessage {
   
   public Integer getAgentID(); 
   
+  public Integer getAuctionID(); 
+  
   public BidType getBidType(); 
   
   public ICart getItems(); 

@@ -19,9 +19,10 @@ public class SimpleOneSidedQuery extends AbsRule implements IQueryRule {
     // TODO: somehow integrate some inner information into this.
     // how about... we add the market public state (assumed to be for the agent)
     // here.
-
+    
+    //TODO: 
     state.setTRequest(
-        new TradeRequestMessage(0, agentID, BidType.OneSidedBidBundle, items));
+        new TradeRequestMessage(0, 0, agentID, BidType.OneSidedBidBundle, items));
   }
 
 }

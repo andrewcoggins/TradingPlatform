@@ -14,6 +14,11 @@ public abstract class AbsOneSidedBidBundle extends AbsBid implements IBidBundle 
    
   private Map<ICart, Double> bids; 
   
+  public AbsOneSidedBidBundle() {
+    super(); 
+    this.bids = null; 
+  }
+  
   public AbsOneSidedBidBundle(Map<ICart, Double> bids) {
     super(BidType.OneSidedBidBundle); 
     this.bids = bids; 

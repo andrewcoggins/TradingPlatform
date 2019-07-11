@@ -26,7 +26,7 @@ public class MessageServer extends KryoServer implements IMessageServer {
   
   public MessageServer(int port, ISetup gameSetup, ISimulationManager manager) {
     super(port, gameSetup);
-    
+    this.manager = manager; 
     final IMessageServer aServer = this; 
     
     kryoServer.addListener(new Listener() {

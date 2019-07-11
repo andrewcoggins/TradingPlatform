@@ -3,10 +3,8 @@ package brown.user.main.library;
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Constructor;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
@@ -27,13 +25,18 @@ public class EndowmentConfigTest {
     List<Double> params = new LinkedList<Double>(); 
     params.add(0.0); 
     params.add(1.0);  
-    Map<Constructor<?>, List<Double>> gMap = new HashMap<Constructor<?>, List<Double>>(); 
-    gMap.put(gCons, params); 
-    IEndowmentConfig tConfig = new EndowmentConfig(tNames, distCons, gMap);
+    
+    List<Constructor<?>> genList = new LinkedList<Constructor<?>>(); 
+    List<List<Double>> paramList = new LinkedList<List<Double>>(); 
+
+    genList.add(gCons); 
+    paramList.add(params); 
+    IEndowmentConfig tConfig = new EndowmentConfig(tNames, distCons, genList, paramList);
     
     assertEquals(tConfig.getItemNames(), tNames); 
     assertEquals(tConfig.getDistribution(), distCons);
-    assertEquals(tConfig.getGenerators(), gMap);
+    assertEquals(tConfig.getGeneratorConstructors(), genList);
+    assertEquals(tConfig.getGeneratorParams(), paramList);
   }
   
 }

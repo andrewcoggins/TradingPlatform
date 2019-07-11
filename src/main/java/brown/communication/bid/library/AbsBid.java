@@ -6,6 +6,10 @@ public abstract class AbsBid implements IBid {
 
   private BidType type; 
   
+  public AbsBid() {
+    this.type = null; 
+  }
+  
   public AbsBid(BidType type) {
     this.type = type; 
   }

@@ -473,9 +473,10 @@ public class JsonParser implements IJsonParser {
         List<List<Double>> singleValuationGeneratorParams =
             simulationValuationGeneratorParams.get(j);
 
-        Map<Constructor<?>, List<Double>> generators =
-            new HashMap<Constructor<?>, List<Double>>();
-
+        
+        List<Constructor<?>> valuationConstructors = new LinkedList<Constructor<?>>(); 
+        List<List<Double>> valuationConstructorParams = new LinkedList<List<Double>>();
+        
         for (int k = 0; k < singleValuationGeneratorNames.size(); k++) {
           String generatorName = singleValuationGeneratorNames.get(k);
           Class<?> generatorClass = Class.forName(
@@ -489,11 +490,12 @@ public class JsonParser implements IJsonParser {
           for (Double param : generatorStringParams) {
             generatorParams.add(param);
           }
-          // TODO: need to make this not a map so we can have dup generators
-          generators.put(generatorCons, generatorParams);
+
+          valuationConstructors.add(generatorCons); 
+          valuationConstructorParams.add(generatorParams);
         }
         IValuationConfig valConfig = new ValuationConfig(
-            singleValuationitems, distributionCons, generators);
+            singleValuationitems, distributionCons, valuationConstructors, valuationConstructorParams);
         simulationValConfigs.add(valConfig);
       }
       valuationConfigs.add(simulationValConfigs);
@@ -529,12 +531,12 @@ public class JsonParser implements IJsonParser {
 
         List<String> singleEndowmentGeneratorNames =
             simulationEndowmentGeneratorNames.get(j);
-
         List<List<Double>> singleEndowmentGeneratorParams =
             simulationEndowmentGeneratorParams.get(j);
-
-        Map<Constructor<?>, List<Double>> endowmentGenerators =
-            new HashMap<Constructor<?>, List<Double>>();
+        
+        List<Constructor<?>> endowmentConstructors = new LinkedList<Constructor<?>>(); 
+        List<List<Double>> endowmentConstructorParams = new LinkedList<List<Double>>();
+       
 
         for (int k = 0; k < singleEndowmentGeneratorNames.size(); k++) {
           String generatorName = singleEndowmentGeneratorNames.get(k);
@@ -549,11 +551,11 @@ public class JsonParser implements IJsonParser {
           for (Double param : generatorStringParams) {
             generatorParams.add(param);
           }
-          // TODO: need to make this not a map so we can have dup generators
-          endowmentGenerators.put(generatorCons, generatorParams);
+          endowmentConstructors.add(generatorCons); 
+          endowmentConstructorParams.add(generatorParams); 
         }
         IEndowmentConfig endowConfig = new EndowmentConfig(
-            singleEndowmentItems, distributionCons, endowmentGenerators);
+            singleEndowmentItems, distributionCons, endowmentConstructors, endowmentConstructorParams);
         simulationEndowmentConfigs.add(endowConfig);
       }
       endowmentConfigs.add(simulationEndowmentConfigs);

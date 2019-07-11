@@ -49,10 +49,10 @@ public class ItemManager implements IItemManager {
 
   @Override
   public IItem getItems(String name) {
-    if (items.keySet().contains(name)) {
+    if (this.items.containsKey(name)) {
       return this.items.get(name);
     } else {
-      ErrorLogging.log("ERROR: TradeableManager: no such tradeable exists.");
+      ErrorLogging.log("ERROR: ItemManager: no such tradeable exists.");
       return new Item("blank", 0);
     }
   }

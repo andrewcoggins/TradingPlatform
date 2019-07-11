@@ -18,6 +18,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
 
   private BidType bidType; 
   private ICart items; 
+  private Integer auctionID; 
   
   public TradeRequestMessage() {
     super(null, null);
@@ -25,10 +26,15 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
     this.items = null; 
   }
   
-  public TradeRequestMessage(Integer messageID, Integer agentID, BidType bidType, ICart items) {
+  public TradeRequestMessage(Integer messageID, Integer auctionID, Integer agentID, BidType bidType, ICart items) {
     super(messageID, agentID);
     this.bidType = bidType; 
     this.items = items; 
+  }
+  
+  @Override
+  public Integer getAuctionID() {
+    return this.auctionID;
   }
   
   @Override
@@ -48,10 +54,41 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
   
   @Override
   public void agentDispatch(IAgent agent) {
-    // TODO Auto-generated method stub
-    
+    agent.onTradeRequestMessage(this);
   }
 
+  @Override
+  public String toString() {
+    return "TradeRequestMessage [bidType=" + bidType + ", items=" + items + "]";
+  }
 
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((bidType == null) ? 0 : bidType.hashCode());
+    result = prime * result + ((items == null) ? 0 : items.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    TradeRequestMessage other = (TradeRequestMessage) obj;
+    if (bidType != other.bidType)
+      return false;
+    if (items == null) {
+      if (other.items != null)
+        return false;
+    } else if (!items.equals(other.items))
+      return false;
+    return true;
+  }
+  
 
 }

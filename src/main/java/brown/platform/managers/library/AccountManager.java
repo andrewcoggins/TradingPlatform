@@ -33,13 +33,15 @@ public class AccountManager implements IAccountManager {
   // TODO: put endowment manager in account manager.
 
   public AccountManager() {
-    this.accounts = new ConcurrentHashMap<>();
+    this.accounts = new ConcurrentHashMap<Integer, IAccount>();
     this.lock = false;
   }
 
   public void createAccount(Integer agentID, IEndowment endowment) {
     if (!this.lock) {
       synchronized (agentID) {
+        System.out.println(agentID); 
+        System.out.println(endowment);
         this.accounts.put(agentID,
             new Account(agentID, endowment.getMoney(), endowment.getCart()));
       }
