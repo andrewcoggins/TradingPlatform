@@ -19,7 +19,7 @@
 				"itemName": "testItem"
 			}]
 		}], 
-		"endowments": [{
+		"endowment": [{
 			"distribution": "IndependentEndowmentDist", 
 			"generator": [
 				{

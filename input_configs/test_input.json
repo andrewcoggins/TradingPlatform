@@ -20,13 +20,21 @@
 				"itemName": "testItem"
 			}]
 		}], 
-		"endowments": [{
-			"item": [{
+		"endowment": [{
+			"distribution": "IndependentEndowmentDist", 
+			"generator": [
+				{
+				"name": "NormalValGenerator", 
+				"parameters": [0.0, 10.0]
+				}, 
+				{
+				"name": "NormalValGenerator", 
+				"parameters": [0.0, 100.0]
+				}, 
+			],
+			"items": [{
 				"itemName": "testItem", 
-				"numItems": "1"
 			}],
-			"money": 100.0, 
-			"frequency": 1.0
 		}], 
 		"seqMarket": [{
 			"simMarket": [{
@@ -75,14 +83,22 @@
 				"itemName": "testItem"
 			}]
 		}], 
-		"endowments": [{
-			"item": [{
+		"endowment": [{
+			"distribution": "IndependentEndowmentDist", 
+			"generator": [
+				{
+				"name": "NormalValGenerator", 
+				"parameters": [0.0, 10.0]
+				}, 
+				{
+				"name": "NormalValGenerator", 
+				"parameters": [0.0, 100.0]
+				}, 
+			],
+			"items": [{
 				"itemName": "testItem", 
-				"numItems": "1"
 			}],
-			"money": 100.0, 
-			"frequency": 1.0
-		}], 
+		}],  
 		"seqMarket": [{
 			"simMarket": [{
 				"marketRules": {

@@ -74,15 +74,38 @@ public class JsonParserTest {
     genParams.add(1.0); 
     
     generators.put(generatorCons, genParams); 
+    generators.put(generatorCons, genParams); 
     
     valuationConfigs.add(new ValuationConfig(tradeableNames, distributionCons, generators)); 
     assertEquals(firstSimulationConfig.getVConfig(), valuationConfigs); 
     
     List<IEndowmentConfig> eConfigs = new LinkedList<IEndowmentConfig>(); 
     
+    Class<?> endowmentDistributionClass =
+        Class.forName("brown.auction.endowment.distribution.library.IndependentEndowmentDist");
+    Constructor<?> endowmentDistributionCons =
+        endowmentDistributionClass.getConstructor(ICart.class, List.class);
+    Map<Constructor<?>, List<Double>> endowmentGenerators = new HashMap<Constructor<?>, List<Double>>(); 
+    
+    Class<?> eGeneratorClass = Class.forName(
+        "brown.auction.value.generator.library.NormalValGenerator");
+    Constructor<?> eGeneratorCons =
+        eGeneratorClass.getConstructor(List.class);
+    
+    List<Double> eGenParams = new LinkedList<Double>(); 
+    eGenParams.add(0.0); 
+    eGenParams.add(100.0); 
+    
+    endowmentGenerators.put(eGeneratorCons, eGenParams); 
+    
     Map<String, Integer> endowmentMapping = new HashMap<String, Integer>(); 
     endowmentMapping.put("testItem", 1);
-    eConfigs.add(new EndowmentConfig("default", endowmentMapping, 100.0)); 
+    eConfigs.add(new EndowmentConfig(tradeableNames, endowmentDistributionCons, endowmentGenerators)); 
+    
+    System.out.println(eConfigs); 
+    System.out.println(firstSimulationConfig.getEConfig()); 
+    
+    
     assertEquals(firstSimulationConfig.getEConfig(), eConfigs); 
     
     List<List<IMarketConfig>> marketConfigs = new LinkedList<List<IMarketConfig>>(); 

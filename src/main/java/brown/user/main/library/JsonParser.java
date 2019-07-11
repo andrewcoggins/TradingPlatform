@@ -518,7 +518,7 @@ public class JsonParser implements IJsonParser {
         String endowmentDistributionstring =
             simulationEndowmentDistributions.get(j);
         Class<?> distributionClass =
-            Class.forName("brown.auction.value.distribution.library."
+            Class.forName("brown.auction.endowment.distribution.library."
                 + endowmentDistributionstring);
         Constructor<?> distributionCons =
             distributionClass.getConstructor(ICart.class, List.class);

@@ -56,22 +56,5 @@ public class EndowmentManagerTest {
     assertEquals(valManager.getDistribution().get(0), expected); 
   }
   
-//  @Test
-//  public void testAgentEndowment() {
-//    
-//    IEndowmentManager vManager = new EndowmentManager(); 
-//    List<String> tradeableNames = new LinkedList<String>(); 
-//    tradeableNames.add("default"); 
-//    Map<IItem, Double> valueParams = new HashMap<IItem, Double>(); 
-//    valueParams.put(new Item("default"), 1.0); 
-//    IEndowment agentEndowment = new Endowment(new Cart, 100.0); 
-//    Map<List<IItem>, IEndowment>  = new HashMap<List<IItem>, IEndowment>(); 
-//    .put(new LinkedList<IItem>(valueParams.keySet()), agentEndowment); 
-//    IEndowment gEndowment = new Endowment(); 
-//    vManager.addAgentEndowment(1, gEndowment);
-//    
-//    assertEquals(vManager.getAgentEndowment(1), gEndowment); 
-//      
-//  }
   
 }

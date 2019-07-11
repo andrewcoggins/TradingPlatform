@@ -20,12 +20,18 @@
 				"itemName": "testItem"
 			}]
 		}], 
-		"endowments": [{
+		"endowment": [{
 			"distribution": "", 
-			"generator": [{
+			"generator": [
+				{
 				"name": "testGenerator", 
 				"parameters": [0.0, 0.0]
-			}],
+				}, 
+				{
+				"name": "testGenerator", 
+				"parameters": [0.0, 0.0]
+				}, 
+			],
 			"items": [{
 				"itemName": "testitem", 
 			}],
