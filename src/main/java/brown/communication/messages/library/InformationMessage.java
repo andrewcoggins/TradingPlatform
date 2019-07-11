@@ -12,14 +12,7 @@ public class InformationMessage extends AbsServerToAgentMessage implements IInfo
   
   @Override
   public void agentDispatch(IAgent agent) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public Integer getMessageID() {
-    // TODO Auto-generated method stub
-    return null;
+    agent.onInformationMessage(this);
   }
 
 }

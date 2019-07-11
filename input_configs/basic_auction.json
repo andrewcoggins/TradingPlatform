@@ -28,7 +28,7 @@
 				}, 
 				{
 				"name": "NormalValGenerator", 
-				"parameters": [100.0, 10.0]
+				"parameters": [1000.0, 10.0]
 				}, 
 			],
 			"items": [{
