@@ -1,6 +1,7 @@
 package brown.platform.accounting;
 
 import brown.platform.accounting.library.Transaction;
+import brown.platform.item.ICart;
 
 /**
  * transaction describes a change made to an account
@@ -17,5 +18,18 @@ public interface ITransaction {
    * @return a sanitized transaction
    */
   public Transaction sanitize(Integer agentID);
-
+  
+  public Integer getTo(); 
+  
+  public Integer getFrom(); 
+  
+  public Double getCost(); 
+  
+  public ICart getCart(); 
+  
+  /**
+   * the direction
+   * @return
+   */
+  public boolean receiveCart(); 
 }

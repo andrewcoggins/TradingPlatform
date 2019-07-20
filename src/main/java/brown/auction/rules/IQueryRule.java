@@ -26,7 +26,7 @@ public interface IQueryRule {
    * This comes with a trade request.
    * @param state market state.
    */
-  void makeTradeRequest(IMarketState state, ICart items, List<ITradeMessage> bids, Integer agentID);
+  void makeTradeRequest(Integer marketID, IMarketState state, ICart items, List<ITradeMessage> bids, Integer agentID);
 
   
 }

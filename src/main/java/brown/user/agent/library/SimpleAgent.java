@@ -29,6 +29,10 @@ public class SimpleAgent extends AbsAgent implements IAgent {
   public SimpleAgent(String host, int port, ISetup gameSetup) {
     super(host, port, gameSetup);
   }
+  
+  public SimpleAgent(String host, int port, ISetup gameSetup, String name) {
+    super(host, port, gameSetup, name);
+  }
 
   @Override
   public void onInformationMessage(IInformationMessage informationMessage) {
@@ -51,7 +55,6 @@ public class SimpleAgent extends AbsAgent implements IAgent {
     bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
     ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getAuctionID(), oneSided);
-    // send the message
     this.CLIENT.sendTCP(tradeMessage); 
   }
 
@@ -63,7 +66,8 @@ public class SimpleAgent extends AbsAgent implements IAgent {
   }
   
   public static void main(String[] args) {
-    new SimpleAgent("localhost", 2121, new Startup()); 
+    new SimpleAgent("localhost", 2121, new Startup(), "rocky"); 
+    new SimpleAgent("localhost", 2121, new Startup(), "sierra"); 
     while(true) {}
   }
 

@@ -48,6 +48,9 @@ public class MessageServer extends KryoServer implements IMessageServer {
         PlatformLogging.log("[x] Server-onRegistration: encountered null registration");
         return;
       }
+      // put connection in kryoServer
+      // TODO: is this right? 
+      this.connections.put(connection, connection.getID()); 
       Integer agentID = this.manager.handleRegistration(registrationMessage, connection); 
       this.sendMessage(connection, new RegistrationResponseMessage(0, agentID, registrationMessage.getName()));
       } else {

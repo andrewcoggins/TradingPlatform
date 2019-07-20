@@ -12,5 +12,7 @@ public interface IMessage {
    * @return ID
    */
    public Integer getMessageID();
+   
+   public Integer getAgentID();
 	
 }

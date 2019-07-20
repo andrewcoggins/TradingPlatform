@@ -55,7 +55,7 @@ public class Market implements IMarket {
   // 3. Find allocation and payments (via these rules)
   // 4. Send game report (via IR policy)
   public TradeRequestMessage constructTradeRequest(Integer agentID) {
-    this.RULES.getQRule().makeTradeRequest(STATE, TRADEABLES, bids, agentID);
+    this.RULES.getQRule().makeTradeRequest(ID, STATE, TRADEABLES, bids, agentID);
     TradeRequestMessage request = this.STATE.getTRequest();
     return request;
   }
@@ -79,8 +79,8 @@ public class Market implements IMarket {
 
     // Construct orders from allocation and payments
     // why no? return this.STATE.getAllocation();
-    // return this.STATE.getPayments();
-    return null;
+    return this.STATE.getPayments();
+//    return null;
   }
 
   @Override

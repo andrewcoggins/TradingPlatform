@@ -5,6 +5,7 @@ import java.util.Map;
 
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.library.TradeRequestMessage;
+import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.item.ICart;
 /**
@@ -26,9 +27,9 @@ public interface IMarketState {
   public void setAllocation(Map<Integer, List<ICart>> allocation);
 
   // Payment rule
-  public void setPayments(List<AccountUpdate> payment);
+  public void setPayments(List<IAccountUpdate> payment);
 
-  public List<AccountUpdate> getPayments();
+  public List<IAccountUpdate> getPayments();
 
   // orders (this is from the payment rule)
   // delete this !!! just use set Payments
