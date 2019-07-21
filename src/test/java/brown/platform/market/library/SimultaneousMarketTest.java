@@ -32,6 +32,6 @@ public class SimultaneousMarketTest {
     IMarketBlock s = new SimultaneousMarket(rules, carts); 
     
     assertEquals(s.getMarkets(), rules); 
-    assertEquals(s.getMarketTradeables(), carts); 
+    assertEquals(s.getMarketCarts(), carts); 
   }
 }

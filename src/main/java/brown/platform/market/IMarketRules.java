@@ -8,20 +8,53 @@ import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 
+/**
+ * Encapsulates the rules that define a Market. 
+ * @author andrewcoggins
+ *
+ */
 public interface IMarketRules {
   
-  public IAllocationRule getARule() ;
+  /**
+   * get AllocationRule
+   * @return
+   */
+  public IAllocationRule getARule();
   
+  /**
+   * get PaymentRule
+   * @return
+   */
   public IPaymentRule getPRule(); 
   
+  /**
+   * get QueryRule
+   * @return
+   */
   public IQueryRule getQRule(); 
   
+  /**
+   * get ActivityRule
+   * @return
+   */
   public IActivityRule getActRule(); 
   
+  /**
+   * get InformationRevelationPolicy
+   * @return
+   */
   public IInformationRevelationPolicy getIRPolicy(); 
   
+  /**
+   * get InnerIRPolicy
+   * @return
+   */
   public IInnerIRPolicy getInnerIRPolicy(); 
   
+  /**
+   * get TerminationCondition
+   * @return
+   */
   public ITerminationCondition getTerminationCondition(); 
 
 }

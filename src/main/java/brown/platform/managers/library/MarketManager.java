@@ -83,7 +83,7 @@ public class MarketManager implements IMarketManager {
     // TODO: somehow open markets using whiteboard information.
     IMarketBlock currentMarketBlock = this.allMarkets.get(index);
     List<IFlexibleRules> marketRules = currentMarketBlock.getMarkets();
-    List<ICart> marketTradeables = currentMarketBlock.getMarketTradeables();
+    List<ICart> marketTradeables = currentMarketBlock.getMarketCarts();
     for (int i = 0; i < marketRules.size(); i++) {
       this.activeMarkets.put(this.marketIndex,
           new Market(this.marketIndex, marketRules.get(i), new MarketState(),

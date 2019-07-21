@@ -16,6 +16,10 @@ public interface IDomainManager {
     void createDomain(IItemManager manager, IValuationManager valuation, IAccountManager acctManager,
                       IEndowmentManager endowmentManager);
 
+    /**
+     * get the domain inside the mananger
+     * @return
+     */
     IDomain getDomain();
 
 }
