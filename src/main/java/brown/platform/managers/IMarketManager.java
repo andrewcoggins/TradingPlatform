@@ -114,7 +114,7 @@ public interface IMarketManager {
   public boolean marketOpen(Integer marketID); 
   
   /**
-   * checks of any market is open. 
+   * checks if any market is open. 
    * @return
    */
   public boolean anyMarketsOpen(); 

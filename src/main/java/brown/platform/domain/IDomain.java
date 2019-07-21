@@ -10,13 +10,28 @@ import brown.platform.managers.IValuationManager;
  */
 public interface IDomain {
 
-  public IItemManager getTradeableManager(); 
+  /**
+   * get IDomainManager's ItemManager
+   * @return
+   */
+  public IItemManager getItemManager(); 
   
+  /**
+   * getIDomainManager's AccountManager
+   * @return
+   */
   public IAccountManager getAccountManager(); 
   
+  /**
+   * getIDomainManager's EndowmentManager
+   * @return
+   */
   public IEndowmentManager getEndowmentManager(); 
   
+  /**
+   * getIDomainManager's ValuationManager
+   * @return
+   */
   public IValuationManager getValuationManager(); 
-  
   
 }
