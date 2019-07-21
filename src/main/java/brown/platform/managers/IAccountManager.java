@@ -15,6 +15,13 @@ import brown.platform.accounting.IAccountUpdate;
  */
 public interface IAccountManager {
 
+  /**
+   * create an account. 
+   * @param agentID
+   * ID of the account's agent owner
+   * @param endowment
+   * initial items and money that the account is opened with
+   */
   void createAccount(Integer agentID, IEndowment endowment);
 
   /**
@@ -54,13 +61,30 @@ public interface IAccountManager {
    */
   void reendow(Integer agentID, IEndowment endowment);
   
-  
+  /**
+   * constructs messages that notify the agent that their account has been initialized.n
+   * @return
+   */
   Map<Integer, IBankUpdateMessage> constructInitializationMessages(); 
 
+  /**
+   * constructs messages that notift the agent of changes to their account. 
+   * @param accountUpdates
+   * IAccountUpdate used to construct these messages
+   * @return
+   */
   Map<Integer, IBankUpdateMessage> constructBankUpdateMessages(List<IAccountUpdate> accountUpdates); 
   
+  /**
+   * locks the manager; no more accounts can be created after the manager is locked
+   */
   void lock();
   
+  /**
+   * make changes to accounts per accountUpdates
+   * @param accountUpdates
+   * speify changes to be made to accounts. 
+   */
   void updateAccounts(List<IAccountUpdate> accountUpdates); 
   
 }

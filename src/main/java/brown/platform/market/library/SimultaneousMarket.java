@@ -9,18 +9,18 @@ import brown.platform.market.IMarketBlock;
 public class SimultaneousMarket implements IMarketBlock {
 
     private List<IFlexibleRules> markets;
-    private List<ICart> marketTradeables; 
+    private List<ICart> marketCarts; 
 
-    public SimultaneousMarket(List<IFlexibleRules> markets, List<ICart> marketTradeables) {
+    public SimultaneousMarket(List<IFlexibleRules> markets, List<ICart> marketCarts) {
         this.markets = markets;
-        this.marketTradeables = marketTradeables; 
+        this.marketCarts = marketCarts; 
     }
     
     public List<IFlexibleRules> getMarkets() {
       return this.markets; 
     }
     
-    public List<ICart> getMarketTradeables() {
-      return this.marketTradeables; 
+    public List<ICart> getMarketCarts() {
+      return this.marketCarts; 
     }
 }

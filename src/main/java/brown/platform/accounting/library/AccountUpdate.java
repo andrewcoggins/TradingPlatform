@@ -2,14 +2,15 @@ package brown.platform.accounting.library;
 
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.ITransaction;
-import brown.platform.item.IItem;
+import brown.platform.item.ICart;
 
 public class AccountUpdate implements IAccountUpdate {
 
-  public final Integer TO;
-  public final IItem ITEM;
-  public final Integer FROM;
-  public final double PRICE;
+  private Integer TO;
+  private ICart CART;
+  private Integer FROM;
+  private double PRICE;
+  private boolean receiveCart; 
 
   /**
    * For Kryo
@@ -19,14 +20,15 @@ public class AccountUpdate implements IAccountUpdate {
     this.TO = null;
     this.FROM = null;
     this.PRICE = -1;
-    this.ITEM = null;
+    this.CART = null;
   }
   
-  public AccountUpdate(Integer to, double price, IItem good) {
+  public AccountUpdate(Integer to, double price, ICart good) {
     this.TO = to; 
     this.FROM = -1; 
     this.PRICE = price; 
-    this.ITEM = good;
+    this.CART = good;
+    this.receiveCart = true; 
   }
   
   /**
@@ -45,34 +47,63 @@ public class AccountUpdate implements IAccountUpdate {
    * @param good
    * tradeable to be added or removed. 
    */
-  public AccountUpdate(Integer to, Integer from, double price, IItem good) {
+  public AccountUpdate(Integer to, Integer from, double price, ICart good) {
     this.TO = to;
     this.FROM = from;
     this.PRICE = price;
-    this.ITEM = good;
+    this.CART = good;
+    this.receiveCart = true; 
+  }
+  
+
+  @Override
+  public Integer getTo() {
+    return this.TO; 
   }
 
   @Override
+  public Integer getFrom() {
+    return this.FROM; 
+  }
+
+  @Override
+  public Double getCost() {
+    return this.PRICE; 
+  }
+
+  @Override
+  public ICart getCart() {
+    return CART;
+  }
+  
+  @Override
+  public boolean receiveCart() {
+    return this.receiveCart;
+  }
+  
+  
+  @Override
   public ITransaction toTransaction() {
-    return new Transaction(TO, FROM, PRICE, ITEM); 
+    return new Transaction(TO, FROM, PRICE, CART); 
   }
 
   @Override
   public String toString() {
-    return "AccountUpdate [TO=" + TO + ", ITEM=" + ITEM + ", FROM=" + FROM
-        + ", PRICE=" + PRICE + "]";
+    return "AccountUpdate [TO=" + TO + ", CART=" + CART + ", FROM=" + FROM
+        + ", PRICE=" + PRICE + ", receiveCart=" + receiveCart + "]";
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((CART == null) ? 0 : CART.hashCode());
     result = prime * result + ((FROM == null) ? 0 : FROM.hashCode());
-    result = prime * result + ((ITEM == null) ? 0 : ITEM.hashCode());
     long temp;
     temp = Double.doubleToLongBits(PRICE);
     result = prime * result + (int) (temp ^ (temp >>> 32));
     result = prime * result + ((TO == null) ? 0 : TO.hashCode());
+    result = prime * result + (receiveCart ? 1231 : 1237);
     return result;
   }
 
@@ -85,15 +116,15 @@ public class AccountUpdate implements IAccountUpdate {
     if (getClass() != obj.getClass())
       return false;
     AccountUpdate other = (AccountUpdate) obj;
+    if (CART == null) {
+      if (other.CART != null)
+        return false;
+    } else if (!CART.equals(other.CART))
+      return false;
     if (FROM == null) {
       if (other.FROM != null)
         return false;
     } else if (!FROM.equals(other.FROM))
-      return false;
-    if (ITEM == null) {
-      if (other.ITEM != null)
-        return false;
-    } else if (!ITEM.equals(other.ITEM))
       return false;
     if (Double.doubleToLongBits(PRICE) != Double.doubleToLongBits(other.PRICE))
       return false;
@@ -101,6 +132,8 @@ public class AccountUpdate implements IAccountUpdate {
       if (other.TO != null)
         return false;
     } else if (!TO.equals(other.TO))
+      return false;
+    if (receiveCart != other.receiveCart)
       return false;
     return true;
   }

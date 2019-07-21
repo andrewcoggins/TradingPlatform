@@ -30,6 +30,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
     super(messageID, agentID);
     this.bidType = bidType; 
     this.items = items; 
+    this.auctionID = auctionID; 
   }
   
   @Override
@@ -59,13 +60,15 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
 
   @Override
   public String toString() {
-    return "TradeRequestMessage [bidType=" + bidType + ", items=" + items + "]";
+    return "TradeRequestMessage [bidType=" + bidType + ", items=" + items
+        + ", auctionID=" + auctionID + "]";
   }
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
+    result = prime * result + ((auctionID == null) ? 0 : auctionID.hashCode());
     result = prime * result + ((bidType == null) ? 0 : bidType.hashCode());
     result = prime * result + ((items == null) ? 0 : items.hashCode());
     return result;
@@ -80,6 +83,11 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
     if (getClass() != obj.getClass())
       return false;
     TradeRequestMessage other = (TradeRequestMessage) obj;
+    if (auctionID == null) {
+      if (other.auctionID != null)
+        return false;
+    } else if (!auctionID.equals(other.auctionID))
+      return false;
     if (bidType != other.bidType)
       return false;
     if (items == null) {
@@ -89,6 +97,5 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
       return false;
     return true;
   }
-  
 
 }

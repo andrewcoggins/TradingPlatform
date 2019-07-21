@@ -25,7 +25,7 @@ public class Domain implements IDomain {
     }
     
     @Override
-    public IItemManager getTradeableManager() {
+    public IItemManager getItemManager() {
       return this.tManager;
     }
 

@@ -29,17 +29,19 @@ public class SimpleAgent extends AbsAgent implements IAgent {
   public SimpleAgent(String host, int port, ISetup gameSetup) {
     super(host, port, gameSetup);
   }
+  
+  public SimpleAgent(String host, int port, ISetup gameSetup, String name) {
+    super(host, port, gameSetup, name);
+  }
 
   @Override
   public void onInformationMessage(IInformationMessage informationMessage) {
-    UserLogging.log("[+] Information Message Resceived");
-    System.out.print(informationMessage.toString());
+    UserLogging.log("[+] Information Message Received");
   }
 
   @Override
   public void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage) {
-    UserLogging.log("[+] Trade Request Message Received");
-    System.out.println(tradeRequestMessage.toString()); 
+    UserLogging.log("[+] Trade Request Message Received"); 
     
     Map<ICart, Double> bidMap = new HashMap<ICart, Double>(); 
     List<IItem> bidItems = new LinkedList<IItem>(); 
@@ -51,7 +53,6 @@ public class SimpleAgent extends AbsAgent implements IAgent {
     bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
     ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getAuctionID(), oneSided);
-    // send the message
     this.CLIENT.sendTCP(tradeMessage); 
   }
 
@@ -63,7 +64,8 @@ public class SimpleAgent extends AbsAgent implements IAgent {
   }
   
   public static void main(String[] args) {
-    new SimpleAgent("localhost", 2121, new Startup()); 
+    new SimpleAgent("localhost", 2121, new Startup(), "solo"); 
+    new SimpleAgent("localhost", 2121, new Startup(), "pacifica"); 
     while(true) {}
   }
 

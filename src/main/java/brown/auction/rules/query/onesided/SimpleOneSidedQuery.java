@@ -13,7 +13,7 @@ import brown.platform.item.ICart;
 public class SimpleOneSidedQuery extends AbsRule implements IQueryRule {
 
   @Override
-  public void makeTradeRequest(IMarketState state, ICart items,
+  public void makeTradeRequest(Integer marketID, IMarketState state, ICart items,
       List<ITradeMessage> bids, Integer agentID) {
 
     // TODO: somehow integrate some inner information into this.
@@ -22,7 +22,7 @@ public class SimpleOneSidedQuery extends AbsRule implements IQueryRule {
     
     //TODO: 
     state.setTRequest(
-        new TradeRequestMessage(0, 0, agentID, BidType.OneSidedBidBundle, items));
+        new TradeRequestMessage(0, marketID, agentID, BidType.OneSidedBidBundle, items));
   }
 
 }

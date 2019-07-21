@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import brown.auction.endowment.IEndowment;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.library.AccountInitializationMessage;
+import brown.communication.messages.library.BankUpdateMessage;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccount;
@@ -40,7 +41,7 @@ public class AccountManager implements IAccountManager {
   public void createAccount(Integer agentID, IEndowment endowment) {
     if (!this.lock) {
       synchronized (agentID) {
-        System.out.println(agentID); 
+        System.out.println(agentID);
         System.out.println(endowment);
         this.accounts.put(agentID,
             new Account(agentID, endowment.getMoney(), endowment.getCart()));
@@ -115,13 +116,36 @@ public class AccountManager implements IAccountManager {
   @Override
   public Map<Integer, IBankUpdateMessage>
       constructBankUpdateMessages(List<IAccountUpdate> accountUpdates) {
-    // TODO Auto-generated method stub
-    return null;
+    Map<Integer, IBankUpdateMessage> bankUpdates =
+        new HashMap<Integer, IBankUpdateMessage>();
+
+    accountUpdates.forEach(update -> bankUpdates.put(update.getTo(),
+        new BankUpdateMessage(0, update.getTo(),
+            update.receiveCart() ? update.getCart()
+                : new Cart(new LinkedList<IItem>()),
+            update.receiveCart() ? new Cart(new LinkedList<IItem>())
+                : update.getCart(),
+            update.receiveCart() ? -1.0 * update.getCost()
+                : update.getCost())));
+    return bankUpdates;
+    
+    
   }
 
   @Override
   public void updateAccounts(List<IAccountUpdate> accountUpdates) {
-    // TODO Auto-generated method stub
+    for (IAccountUpdate update : accountUpdates) {
+      if (this.accounts.containsKey(update.getTo())) {
+        IAccount account = this.accounts.get(update.getTo()); 
+        if (update.receiveCart()) {
+          account.removeMoney(update.getCost());
+          update.getCart().getItems().forEach(item -> account.addTradeables(item));
+        } else {
+          account.addMoney(update.getCost());
+          update.getCart().getItems().forEach(item -> account.removeTradeables(item));
+        }
+      }
+    }
 
   }
 

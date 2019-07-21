@@ -6,6 +6,10 @@ import brown.user.agent.IAgent;
 
 public class InformationMessage extends AbsServerToAgentMessage implements IInformationMessage {
 
+  public InformationMessage() {
+    super(null, null); 
+  }
+  
   public InformationMessage(int messageID, int agentID, IWhiteboard whiteboard) {
     super(messageID, agentID); 
   }

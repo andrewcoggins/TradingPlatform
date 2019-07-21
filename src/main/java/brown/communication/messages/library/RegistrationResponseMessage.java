@@ -18,7 +18,7 @@ public class RegistrationResponseMessage extends AbsServerToAgentMessage impleme
   }
 
   public void agentDispatch(IAgent agent) {
-    
+    agent.onRegistrationResponse(this);
   }
   
   public String getName() {

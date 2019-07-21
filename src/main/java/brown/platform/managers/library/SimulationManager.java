@@ -132,6 +132,7 @@ public class SimulationManager implements ISimulationManager {
         theID = new Integer((int) (Math.random() * IDMULTIPLIER));
       }
       privateToPublic.put(theID, agentCount++);
+      
       this.agentConnections.put(theID, connection);
       if (registrationMessage.getName() != null) {
         this.idToName.put(theID, registrationMessage.getName());
@@ -162,6 +163,7 @@ public class SimulationManager implements ISimulationManager {
       updateAuctions();
       Thread.sleep(simulationDelayTime * INTERVAL);
     }
+    updateAuctions();
   }
 
   private void updateAuctions() {
@@ -184,9 +186,13 @@ public class SimulationManager implements ISimulationManager {
           Map<Integer, IBankUpdateMessage> bankUpdates =
               this.currentAccountManager
                   .constructBankUpdateMessages(accountUpdates);
+          System.out.println(accountUpdates); 
+          System.out.println(bankUpdates); 
           Map<Integer, IInformationMessage> informationMessages =
               this.currentMarketManager.constructInformationMessages(marketID, 
                       new LinkedList<Integer>(this.agentConnections.keySet()));
+          
+          
           for (Integer agentID : bankUpdates.keySet()) {
             this.messageServer.sendMessage(this.agentConnections.get(agentID),
                 informationMessages.get(agentID));
@@ -196,7 +202,7 @@ public class SimulationManager implements ISimulationManager {
           this.currentMarketManager.finalizeMarket(marketID);
         }
       }
-    };
+    }
   }
 
   private void initializeAgents() { 
