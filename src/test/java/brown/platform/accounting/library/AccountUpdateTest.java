@@ -26,7 +26,6 @@ public class AccountUpdateTest {
     assertTrue(anOrder.getFrom() == -1);
     assertTrue(anOrder.getCost() == 100.0);
     assertEquals(anOrder.getCart(), cart);
-
   }
 
   @Test
