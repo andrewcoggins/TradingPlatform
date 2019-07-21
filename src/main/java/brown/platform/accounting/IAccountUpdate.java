@@ -17,6 +17,10 @@ public interface IAccountUpdate {
    */
   public ITransaction toTransaction();
   
+  /**
+   * get recipient of the IAccountUpdate
+   * @return
+   */
   public Integer getTo(); 
   
   public Integer getFrom(); 
