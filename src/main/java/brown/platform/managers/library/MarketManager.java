@@ -14,6 +14,7 @@ import brown.communication.messages.IStatusMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.library.ErrorMessage;
+import brown.communication.messages.library.InformationMessage;
 import brown.communication.messages.library.TradeRejectionMessage;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
@@ -82,8 +83,7 @@ public class MarketManager implements IMarketManager {
     // TODO: somehow open markets using whiteboard information.
     IMarketBlock currentMarketBlock = this.allMarkets.get(index);
     List<IFlexibleRules> marketRules = currentMarketBlock.getMarkets();
-    List<ICart> marketTradeables =
-        currentMarketBlock.getMarketTradeables();
+    List<ICart> marketTradeables = currentMarketBlock.getMarketTradeables();
     for (int i = 0; i < marketRules.size(); i++) {
       this.activeMarkets.put(this.marketIndex,
           new Market(this.marketIndex, marketRules.get(i), new MarketState(),
@@ -94,13 +94,13 @@ public class MarketManager implements IMarketManager {
   @Override
   public IStatusMessage handleTradeMessage(ITradeMessage message) {
     Integer marketID = message.getAuctionID();
-    Integer agentID = message.getAgentID(); 
+    Integer agentID = message.getAgentID();
     if (this.activeMarkets.containsKey(marketID)) {
       IMarket market = this.activeMarkets.get(marketID);
       synchronized (market) {
         boolean accepted = market.processBid(message);
         if (!accepted) {
-          return new TradeRejectionMessage(0, agentID, 
+          return new TradeRejectionMessage(0, agentID,
               "[x] REJECTED: Trade message for auction "
                   + message.getAuctionID().toString()
                   + " denied: rejected by activity rule.");
@@ -132,16 +132,17 @@ public class MarketManager implements IMarketManager {
     market.tick();
     market.updateInnerInformation();
     // TODO: sort this out
-//    this.whiteboard.postInnerInformation(marketID,
-//        this.activeMarkets.get(marketID).getPublicState());
+    // this.whiteboard.postInnerInformation(marketID,
+    // this.activeMarkets.get(marketID).getPublicState());
 
     List<ITradeRequestMessage> tradeRequests =
         new LinkedList<ITradeRequestMessage>();
     for (Integer agentID : agents) {
-      ITradeRequestMessage tRequest = market.constructTradeRequest(agentID); 
-      // TODO: add the inner information here. This includes reserves, whatever else.
-      //tRequest.addInformation(whiteboard)
-      //for an initial trade request in the most basic case... what is it? 
+      ITradeRequestMessage tRequest = market.constructTradeRequest(agentID);
+      // TODO: add the inner information here. This includes reserves, whatever
+      // else.
+      // tRequest.addInformation(whiteboard)
+      // for an initial trade request in the most basic case... what is it?
       tradeRequests.add(tRequest);
     }
     return tradeRequests;
@@ -155,7 +156,12 @@ public class MarketManager implements IMarketManager {
     IMarketPublicState publicState =
         this.whiteboard.getOuterInformation(marketID);
     // TODO: somehow construct information messages from this public state.
-    return null;
+
+    for (Integer agentID : agentIDs) {
+      informationMessages.put(agentID,
+          new InformationMessage(0, agentID, new Whiteboard()));
+    }
+    return informationMessages;
   }
 
   @Override

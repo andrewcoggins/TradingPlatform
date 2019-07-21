@@ -28,7 +28,7 @@ public class AccountUpdate implements IAccountUpdate {
     this.FROM = -1; 
     this.PRICE = price; 
     this.CART = good;
-    this.receiveCart = false; 
+    this.receiveCart = true; 
   }
   
   /**
@@ -52,6 +52,7 @@ public class AccountUpdate implements IAccountUpdate {
     this.FROM = from;
     this.PRICE = price;
     this.CART = good;
+    this.receiveCart = true; 
   }
   
 

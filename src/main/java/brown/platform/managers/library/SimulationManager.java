@@ -179,7 +179,6 @@ public class SimulationManager implements ISimulationManager {
                 this.agentConnections.get(tradeRequest.getAgentID()),
                 tradeRequest);
           }
-
         } else {
           List<IAccountUpdate> accountUpdates =
               this.currentMarketManager.finishMarket(marketID);
@@ -192,6 +191,8 @@ public class SimulationManager implements ISimulationManager {
           Map<Integer, IInformationMessage> informationMessages =
               this.currentMarketManager.constructInformationMessages(marketID, 
                       new LinkedList<Integer>(this.agentConnections.keySet()));
+          
+          
           for (Integer agentID : bankUpdates.keySet()) {
             this.messageServer.sendMessage(this.agentConnections.get(agentID),
                 informationMessages.get(agentID));

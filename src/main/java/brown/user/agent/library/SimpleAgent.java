@@ -36,14 +36,12 @@ public class SimpleAgent extends AbsAgent implements IAgent {
 
   @Override
   public void onInformationMessage(IInformationMessage informationMessage) {
-    UserLogging.log("[+] Information Message Resceived");
-    System.out.print(informationMessage.toString());
+    UserLogging.log("[+] Information Message Received");
   }
 
   @Override
   public void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage) {
-    UserLogging.log("[+] Trade Request Message Received");
-    System.out.println(tradeRequestMessage.toString()); 
+    UserLogging.log("[+] Trade Request Message Received"); 
     
     Map<ICart, Double> bidMap = new HashMap<ICart, Double>(); 
     List<IItem> bidItems = new LinkedList<IItem>(); 
@@ -66,8 +64,8 @@ public class SimpleAgent extends AbsAgent implements IAgent {
   }
   
   public static void main(String[] args) {
-    new SimpleAgent("localhost", 2121, new Startup(), "rocky"); 
-    new SimpleAgent("localhost", 2121, new Startup(), "sierra"); 
+    new SimpleAgent("localhost", 2121, new Startup(), "solo"); 
+    new SimpleAgent("localhost", 2121, new Startup(), "pacifica"); 
     while(true) {}
   }
 

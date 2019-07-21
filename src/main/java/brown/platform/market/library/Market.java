@@ -75,7 +75,7 @@ public class Market implements IMarket {
   public List<IAccountUpdate> constructOrders() {
     // Set allocation and payment
     this.RULES.getARule().setAllocation(this.STATE, this.bids);
-    this.RULES.getPRule().setOrders(this.STATE); // setPayment
+    this.RULES.getPRule().setOrders(this.STATE, this.bids); // setPayment
 
     // Construct orders from allocation and payments
     // why no? return this.STATE.getAllocation();
