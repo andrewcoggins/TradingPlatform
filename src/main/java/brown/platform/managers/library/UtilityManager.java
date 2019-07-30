@@ -73,4 +73,9 @@ public class UtilityManager implements IUtilityManager {
     this.lock = true; 
   }
 
+  @Override
+  public Map<Integer, List<Double>> getAgentRecords() {
+    return this.agentRecords;
+  }
+
 }

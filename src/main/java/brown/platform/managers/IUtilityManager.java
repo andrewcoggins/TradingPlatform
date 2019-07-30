@@ -1,5 +1,6 @@
 package brown.platform.managers;
 
+import java.util.List;
 import java.util.Map;
 
 import brown.auction.value.valuation.IGeneralValuation;
@@ -40,6 +41,14 @@ public interface IUtilityManager {
    * no more agent records may be added after this is called. 
    */
   public void lock(); 
+  
+  
+  /**
+   * get the internal records of the datatype
+   * @return
+   * Map from agent IDs to utility per simulation. 
+   */
+  public Map<Integer, List<Double>> getAgentRecords(); 
   
   
 }
