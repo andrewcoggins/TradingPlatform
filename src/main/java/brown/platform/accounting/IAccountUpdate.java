@@ -17,16 +17,33 @@ public interface IAccountUpdate {
    */
   public ITransaction toTransaction();
   
+  /**
+   * get recipient of the IAccountUpdate
+   * @return
+   */
   public Integer getTo(); 
   
+  /**
+   * get sender of the IAccountUpdate, if applicable
+   * @return
+   */
   public Integer getFrom(); 
   
+  /**
+   * get money to be exchanged in the IAccountUpdate
+   * @return
+   */
   public Double getCost(); 
   
+  /**
+   * get ICart about to be exchanged in the IAccountUpdate
+   * @return
+   */
   public ICart getCart(); 
   
   /**
-   * the direction
+   * specifies whether the agent received the cart and lost the money, or lost the 
+   * cart and received the money. 
    * @return
    */
   public boolean receiveCart(); 

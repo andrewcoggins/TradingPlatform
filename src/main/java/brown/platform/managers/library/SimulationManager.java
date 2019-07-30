@@ -10,6 +10,7 @@ import com.esotericsoftware.kryonet.Connection;
 
 import brown.auction.endowment.IEndowment;
 import brown.auction.value.distribution.IValuationDistribution;
+import brown.auction.value.valuation.IGeneralValuation;
 import brown.auction.value.valuation.ISpecificValuation;
 import brown.auction.value.valuation.library.GeneralValuation;
 import brown.communication.messages.IBankUpdateMessage;
@@ -21,6 +22,7 @@ import brown.communication.messages.IValuationMessage;
 import brown.communication.messageserver.IMessageServer;
 import brown.communication.messageserver.library.MessageServer;
 import brown.logging.library.PlatformLogging;
+import brown.platform.accounting.IAccount;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Item;
@@ -28,6 +30,7 @@ import brown.platform.managers.IAccountManager;
 import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.IMarketManager;
 import brown.platform.managers.ISimulationManager;
+import brown.platform.managers.IUtilityManager;
 import brown.platform.managers.IValuationManager;
 import brown.platform.managers.IWorldManager;
 import brown.platform.simulation.ISimulation;
@@ -52,6 +55,8 @@ public class SimulationManager implements ISimulationManager {
   private IAccountManager currentAccountManager;
   private IEndowmentManager currentEndowmentManager;
   private IValuationManager currentValuationManager;
+  
+  private IUtilityManager utilityManager; 
 
   private IMessageServer messageServer;
 
@@ -63,6 +68,7 @@ public class SimulationManager implements ISimulationManager {
     this.privateToPublic = new HashMap<Integer, Integer>();
     this.agentConnections = new HashMap<Integer, Connection>();
     this.idToName = new HashMap<Integer, String>();
+    this.utilityManager = new UtilityManager(); 
     this.agentCount = 0;
   }
 
@@ -89,6 +95,9 @@ public class SimulationManager implements ISimulationManager {
     PlatformLogging.log("Agent connection phase: sleeping for " + startingDelayTime + " seconds");
     Thread.sleep(startingDelayTime * INTERVAL);
     PlatformLogging.log("Agent connection phase: beginning simulation");
+    // add the agent IDs to the utility manager.
+    // should this be here, or in handleRegistration? 
+    this.privateToPublic.keySet().forEach(id -> this.utilityManager.addAgentRecord(id));
     for (int i = 0; i < numRuns; i++) {
       for (int j = 0; j < this.simulations.size(); j++) {
 
@@ -108,42 +117,46 @@ public class SimulationManager implements ISimulationManager {
             PlatformLogging.log("running simulation");
             this.runAuction(simulationDelayTime, l);
           }
-          // TODO: log to output
-          // reset
+          // update utility totals. 
+          Map<Integer, IGeneralValuation> agentValuations = new HashMap<Integer, IGeneralValuation>(); 
+          Map<Integer, IAccount> agentAccounts = new HashMap<Integer, IAccount>(); 
+          this.privateToPublic.keySet().forEach(key -> agentValuations.put(key, this.currentValuationManager.getAgentValuation(key)));
+          this.privateToPublic.keySet().forEach(key -> agentAccounts.put(key, this.currentAccountManager.getAccount(key)));
+          this.utilityManager.updateUtility(agentAccounts, agentValuations);
+          // reset managers. 
           this.currentMarketManager.reset();
           this.currentAccountManager.reset();
           this.currentValuationManager.reset();
-          // no need for endowment manager, since it's stateless
+          this.currentEndowmentManager.reset(); 
         }
       } 
     }
-    
     this.messageServer.stopMessageServer();
+    this.utilityManager.logFinalUtility("", this.privateToPublic, this.idToName);
   }
 
   @Override
   public Integer handleRegistration(IRegistrationMessage registrationMessage,
       Connection connection) {
-    Integer theID = -1;
+    Integer agentPrivateID = -1;
     Collection<Integer> allIds = this.agentConnections.keySet();
-    if (!allIds.contains(theID)) {
-      theID = new Integer((int) (Math.random() * IDMULTIPLIER));
-      while (allIds.contains(theID)) {
-        theID = new Integer((int) (Math.random() * IDMULTIPLIER));
+    if (!allIds.contains(agentPrivateID)) {
+      agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
+      while (allIds.contains(agentPrivateID)) {
+        agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
       }
-      privateToPublic.put(theID, agentCount++);
-      
-      this.agentConnections.put(theID, connection);
+      privateToPublic.put(agentPrivateID, agentCount++);
+      this.agentConnections.put(agentPrivateID, connection);
       if (registrationMessage.getName() != null) {
-        this.idToName.put(theID, registrationMessage.getName());
+        this.idToName.put(agentPrivateID, registrationMessage.getName());
       } else {
         PlatformLogging.log(
             "[x] AbsServer-onRegistration: encountered registration from existing agent");
       }
-      PlatformLogging.log("[-] registered " + theID);
+      PlatformLogging.log("[-] registered " + agentPrivateID);
       connection.sendTCP(15000);
       connection.setTimeout(60000);
-      return theID;
+      return agentPrivateID;
     }
     return -1;
   }
