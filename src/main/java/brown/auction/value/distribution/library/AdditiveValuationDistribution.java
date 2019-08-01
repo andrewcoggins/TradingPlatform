@@ -44,7 +44,9 @@ public class AdditiveValuationDistribution extends AbsValuationDistribution
   public ISpecificValuation sample() {
     this.items.getItems().forEach(item -> this.values
         .put(new Item(item.getName()), this.generators.get(0).makeValuation()));
-    return new AdditiveValuation(this.values);
+    Map<IItem, Double> valuesCopy = new HashMap<IItem, Double>(); 
+    valuesCopy.putAll(values);
+    return new AdditiveValuation(valuesCopy);
   }
 
 }

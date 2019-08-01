@@ -31,7 +31,12 @@ public class SecondPricePayment extends AbsRule implements IPaymentRule {
         if (!highest.containsKey(cartBid.getKey())) {
           highest.put(cartBid.getKey(), cartBid.getValue());
         } else if (!secondHighest.containsKey(cartBid.getKey())) {
-          secondHighest.put(cartBid.getKey(), cartBid.getValue());
+          if (cartBid.getValue() <= highest.get(cartBid.getKey())) {
+            secondHighest.put(cartBid.getKey(), cartBid.getValue());
+          } else {
+            secondHighest.put(cartBid.getKey(), highest.get(cartBid.getKey())); 
+            highest.put(cartBid.getKey(), cartBid.getValue()); 
+          }
         } else {
           if (highest.get(cartBid.getKey()) < cartBid.getValue()) {
             secondHighest.put(cartBid.getKey(), highest.get(cartBid.getKey()));
@@ -60,9 +65,6 @@ public class SecondPricePayment extends AbsRule implements IPaymentRule {
         }
       }
     }
-    
     state.setPayments(accountUpdates);
-
   }
-
 }

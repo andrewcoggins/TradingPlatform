@@ -199,8 +199,6 @@ public class SimulationManager implements ISimulationManager {
           Map<Integer, IBankUpdateMessage> bankUpdates =
               this.currentAccountManager
                   .constructBankUpdateMessages(accountUpdates);
-          System.out.println(accountUpdates); 
-          System.out.println(bankUpdates); 
           Map<Integer, IInformationMessage> informationMessages =
               this.currentMarketManager.constructInformationMessages(marketID, 
                       new LinkedList<Integer>(this.agentConnections.keySet()));
@@ -237,7 +235,8 @@ public class SimulationManager implements ISimulationManager {
         }
         specificValuationMap.put(specificItems, specificDistribution.sample()); 
       }
-      this.currentValuationManager.addAgentValuation(agentID, new GeneralValuation(specificValuationMap));
+ 
+      this.currentValuationManager.addAgentValuation(agentID, new GeneralValuation(specificValuationMap)); 
     }
     // the account manager should be able to create these messages.
     Map<Integer, IBankUpdateMessage> accountInitializations =
@@ -247,7 +246,6 @@ public class SimulationManager implements ISimulationManager {
     for (Integer agentID : accountInitializations.keySet()) {
       this.messageServer.sendMessage(this.agentConnections.get(agentID),
           accountInitializations.get(agentID));
-      System.out.println(agentValuations); 
       this.messageServer.sendMessage(this.agentConnections.get(agentID),
           agentValuations.get(agentID));
     }

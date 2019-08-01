@@ -53,6 +53,7 @@ public class SimpleAgent extends AbsAgent implements IAgent {
     bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
     ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getAuctionID(), oneSided);
+    System.out.println(tradeMessage); 
     this.CLIENT.sendTCP(tradeMessage); 
   }
 
