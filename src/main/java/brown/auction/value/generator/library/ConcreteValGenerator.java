@@ -20,5 +20,5 @@ public class ConcreteValGenerator implements IValuationGenerator {
   public Double makeValuation() {
     return value;
   }
-
+  
 }

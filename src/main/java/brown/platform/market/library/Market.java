@@ -68,7 +68,7 @@ public class Market implements IMarket {
     boolean acceptable = this.STATE.getAcceptable();
     if (acceptable) {
       this.bids.add(bid);
-    }
+    } 
     return acceptable;
   }
 
@@ -108,7 +108,6 @@ public class Market implements IMarket {
   // The remaining logic pertains to the Termination Condition
   @Override
   public void tick() {
-    System.out.println(STATE.getTicks());
     this.STATE.tick();
   }
 
