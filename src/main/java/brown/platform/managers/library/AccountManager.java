@@ -31,8 +31,9 @@ public class AccountManager implements IAccountManager {
   private Map<Integer, IAccount> accounts;
   private boolean lock;
 
-  // TODO: put endowment manager in account manager.
-
+  /**
+   * AccountManager constructor stores Hashmap, and is initially unlocked. 
+   */
   public AccountManager() {
     this.accounts = new ConcurrentHashMap<Integer, IAccount>();
     this.lock = false;
@@ -41,8 +42,6 @@ public class AccountManager implements IAccountManager {
   public void createAccount(Integer agentID, IEndowment endowment) {
     if (!this.lock) {
       synchronized (agentID) {
-        System.out.println(agentID);
-        System.out.println(endowment);
         this.accounts.put(agentID,
             new Account(agentID, endowment.getMoney(), endowment.getCart()));
       }

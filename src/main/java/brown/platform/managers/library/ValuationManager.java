@@ -15,13 +15,21 @@ import brown.logging.library.PlatformLogging;
 import brown.platform.item.ICart;
 import brown.platform.managers.IValuationManager;
 
+/**
+ * ValuationManager stores and creates IValuation and IValuationDistribution
+ * @author andrewcoggins
+ *
+ */
 public class ValuationManager implements IValuationManager {
 
     private List<IValuationDistribution> distributions;
     private Map<Integer, IGeneralValuation> agentValuations; 
     private boolean lock;
     
-    
+    /**
+     * Constructor for IValuationManager begins unlocked, creates initial map for agent valuation
+     * and list for IValuationDistribution
+     */
     public ValuationManager() {
 
         this.lock = false;

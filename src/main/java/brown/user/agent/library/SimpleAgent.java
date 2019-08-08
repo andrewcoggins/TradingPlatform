@@ -22,6 +22,11 @@ import brown.system.setup.ISetup;
 import brown.system.setup.library.Startup;
 import brown.user.agent.IAgent;
 
+/**
+ * an honest agent... bids their valuation. What else is an honest agent to do? 
+ * @author andrewcoggins
+ *
+ */
 public class SimpleAgent extends AbsAgent implements IAgent {
 
   private IGeneralValuation agentValuation; 
@@ -49,10 +54,11 @@ public class SimpleAgent extends AbsAgent implements IAgent {
     bidItems.add(new Item("testItem", 1)); 
     
     ICart bidCart = new Cart(bidItems); 
-    
+
     bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
     ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getAuctionID(), oneSided);
+    System.out.println(tradeMessage); 
     this.CLIENT.sendTCP(tradeMessage); 
   }
 

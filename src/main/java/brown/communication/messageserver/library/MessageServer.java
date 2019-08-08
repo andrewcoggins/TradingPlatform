@@ -69,7 +69,7 @@ public class MessageServer extends KryoServer implements IMessageServer {
   }
 
   @Override
-  public void sendMessage(Connection connection, IServerToAgentMessage message) {
+  public void sendMessage(Connection connection, IServerToAgentMessage message) { 
     this.kryoServer.sendToTCP(connection.getID(), message);
   }
 

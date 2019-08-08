@@ -12,7 +12,7 @@ import brown.platform.item.library.Item;
 import brown.platform.managers.IItemManager;
 
 /**
- * A TradeableManager is an entity that creates tradeables for an auction.
+ * An ItemManager is an entity that creates tradeables for an auction.
  *
  */
 
@@ -22,7 +22,7 @@ public class ItemManager implements IItemManager {
   private boolean lock;
 
   /**
-   * initializes the tradeabeles variable to an initial empty value
+   * initializes the items variable to an initial empty value
    */
   public ItemManager() {
     this.items = new HashMap<String, IItem>();

@@ -26,7 +26,7 @@ public class SimpleOneShotActivity extends AbsRule implements IActivityRule {
     state.setAcceptable(true);
     IBid bid = aBid.getBid();
     for (ITradeMessage currentBid : currentBids) {
-      if (currentBid.getAgentID() == aBid.getAgentID()) {
+      if (currentBid.getAgentID().equals(aBid.getAgentID())) {
         state.setAcceptable(false);
         break;
       }

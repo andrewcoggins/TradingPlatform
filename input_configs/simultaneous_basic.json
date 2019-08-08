@@ -1,4 +1,4 @@
-
+ 
 {
 	"name": "testParse", 
 	"startingDelayTime": 10, 
@@ -8,7 +8,7 @@
 		"numRuns": 1, 
 		"items": [{
 			"itemName": "testItem", 
-			"numItems": "1"
+			"numItems": "2"
 		}], 
 		"valuation": [{
 			"distribution": "AdditiveValuationDistribution",
@@ -24,12 +24,12 @@
 			"distribution": "IndependentEndowmentDist", 
 			"generator": [
 				{
-				"name": "NormalValGenerator", 
-				"parameters": [5.0, 2.0]
+				"name": "ConcreteValGenerator", 
+				"parameters": [0.0]
 				}, 
 				{
-				"name": "NormalValGenerator", 
-				"parameters": [1000.0, 10.0]
+				"name": "ConcreteValGenerator", 
+				"parameters": [100.0]
 				}, 
 			],
 			"items": [{

@@ -8,16 +8,26 @@ import brown.logging.library.ErrorLogging;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 
+/**
+ * Abstract class for a Cart.
+ * @author andrewcoggins
+ *
+ */
 public abstract class AbsCart implements ICart {
 
   private List<IItem> items; 
   private Map<String, IItem> itemMap; 
   
+  // for kryo, do not use
   public AbsCart() {
     this.items = null; 
     this.itemMap = null; 
   }
   
+  /**
+   * Abstract cart takes in a list of IItem
+   * @param items
+   */
   public AbsCart(List<IItem> items) {
     this.items = items; 
     this.itemMap = new HashMap<String, IItem>(); 

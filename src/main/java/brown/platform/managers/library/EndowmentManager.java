@@ -17,12 +17,22 @@ import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
 import brown.platform.managers.IEndowmentManager;
 
+/**
+ * EndowmentManager creates and stores IEndowment
+ * @author andrewcoggins
+ *
+ */
 public class EndowmentManager implements IEndowmentManager {
 
   private List<IEndowmentDistribution> distributions;
   private Map<Integer, IEndowment> agentEndowments;
   private boolean lock;
 
+  /**
+   * Constructor takes no arguments. 
+   * starts unlocked and creates initial map for agent endowments
+   * and list of distributions. 
+   */
   public EndowmentManager() {
 
     this.lock = false;

@@ -85,8 +85,8 @@ public class MarketManager implements IMarketManager {
     List<IFlexibleRules> marketRules = currentMarketBlock.getMarkets();
     List<ICart> marketTradeables = currentMarketBlock.getMarketCarts();
     for (int i = 0; i < marketRules.size(); i++) {
-      this.activeMarkets.put(this.marketIndex,
-          new Market(this.marketIndex, marketRules.get(i), new MarketState(),
+      this.activeMarkets.put(i,
+          new Market(i, marketRules.get(i), new MarketState(),
               new MarketPublicState(), marketTradeables.get(i)));
     }
   }
@@ -167,7 +167,7 @@ public class MarketManager implements IMarketManager {
   @Override
   public List<IAccountUpdate> finishMarket(Integer marketID) {
     List<IAccountUpdate> accountUpdates =
-        this.activeMarkets.get(marketID).constructOrders();
+        this.activeMarkets.get(marketID).constructAccountUpdates();
     IMarket market = this.activeMarkets.get(marketID);
     market.updateOuterInformation();
     this.whiteboard.postOuterInformation(marketID,
