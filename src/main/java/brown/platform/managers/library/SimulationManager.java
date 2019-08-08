@@ -37,6 +37,12 @@ import brown.platform.simulation.ISimulation;
 import brown.platform.simulation.library.Simulation;
 import brown.system.setup.library.Startup;
 
+/**
+ * SimulationManager creates and stores ISimulation. 
+ * simulation runs within the simulation manager. 
+ * @author andrewcoggins
+ *
+ */
 public class SimulationManager implements ISimulationManager {
   
   private final int INTERVAL = 1000; 

@@ -12,6 +12,13 @@ import brown.platform.accounting.IAccount;
 import brown.platform.item.ICart;
 import brown.platform.managers.IUtilityManager;
 
+/**
+ * Keeps track of utility throughout the platform's run. 
+ * Stores a list of agent records keeping track of their total and average 
+ * utility throughout the platform run. 
+ * @author andrewcoggins
+ *
+ */
 public class UtilityManager implements IUtilityManager {
   
   private Map<Integer,List<Double>> agentRecords; 

@@ -25,6 +25,16 @@ public abstract class AbsMarketRules implements IMarketRules {
   public IInnerIRPolicy innerIRPolicy; 
   public ITerminationCondition tCondition;
 
+  /**
+   * Constructor consists of each of the market rules. 
+   * @param aRule
+   * @param pRule
+   * @param qRule
+   * @param oneShotActivity
+   * @param infoPolicy
+   * @param innerIRPolicy
+   * @param tCondition
+   */
   public AbsMarketRules(IAllocationRule aRule, IPaymentRule pRule,
       IQueryRule qRule, IActivityRule oneShotActivity,
       IInformationRevelationPolicy infoPolicy, IInnerIRPolicy innerIRPolicy,

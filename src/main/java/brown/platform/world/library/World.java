@@ -4,12 +4,24 @@ import brown.platform.managers.IDomainManager;
 import brown.platform.managers.IMarketManager;
 import brown.platform.world.IWorld;
 
-
+/**
+ * A World contains a domainManager and a MarketManager. 
+ * @author andrewcoggins
+ *
+ */
 public class World implements IWorld {
 
     private IDomainManager domain;
     private IMarketManager market;
 
+    /**
+     * A World constructor takes as input IDomainManager and IMarketManager
+     * @param domain
+     * the domain of the World, which encapsulates agent endowments, valuation, and accounts, as well as
+     * all Items. 
+     * @param market
+     * The marketManager of the World, which stores and creates markets. 
+     */
     public World(IDomainManager domain, IMarketManager market) {
         this.domain = domain;
         this.market = market;

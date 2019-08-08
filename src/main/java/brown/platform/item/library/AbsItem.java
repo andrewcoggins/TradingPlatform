@@ -3,16 +3,29 @@ package brown.platform.item.library;
 import brown.platform.item.IItem;
 
 
+/**
+ * Abstract class for item. 
+ * @author andrewcoggins
+ *
+ */
 public abstract class AbsItem implements IItem {
 
   private Integer count; 
   private String name; 
   
+  // for kryo do not use. 
   public AbsItem() {
     this.name = null; 
     this.count = null; 
   }
   
+  /**
+   * AbsItem takes in a name and a count
+   * @param name
+   * the name of the item
+   * @param count
+   * the number of the items contained inside. 
+   */
   public AbsItem(String name, int count) {
     this.name = name; 
     this.count = count; 

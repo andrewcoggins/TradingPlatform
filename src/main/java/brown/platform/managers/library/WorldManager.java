@@ -7,6 +7,11 @@ import brown.platform.managers.IWorldManager;
 import brown.platform.world.IWorld;
 import brown.platform.world.library.World;
 
+/**
+ * WorldManager stores and creates IWorld
+ * @author andrewcoggins
+ *
+ */
 public class WorldManager implements IWorldManager {
 
     private IWorld world;

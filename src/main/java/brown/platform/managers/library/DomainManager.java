@@ -9,6 +9,11 @@ import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.IItemManager;
 import brown.platform.managers.IValuationManager;
 
+/**
+ * Domain Manager creates and stores domains. 
+ * @author andrewcoggins
+ *
+ */
 public class DomainManager implements IDomainManager {
 
     private IDomain domain;
