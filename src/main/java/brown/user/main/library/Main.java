@@ -13,7 +13,7 @@ import brown.user.main.IJsonParser;
 import brown.user.main.ISimulationConfig;
 
 /**
- * runs a simple simultaneous first price auction.
+ * the main class of TradingPlatform. Start a simulation by running this class. 
  * 
  * @author acoggins
  *

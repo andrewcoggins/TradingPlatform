@@ -1,10 +1,17 @@
 package brown.simulations;
 
+import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
+
+import org.json.simple.parser.ParseException;
+
+import brown.system.setup.ISetup;
+import brown.system.setup.library.Startup;
+import brown.user.main.library.Main;
 
 public class BasicSimulation {
 
@@ -28,10 +35,12 @@ public class BasicSimulation {
 
     Thread st = new Thread(sr);
     Thread at = new Thread(ar);
+    Thread atTwo = new Thread(ar);
 
     st.start();
     if (agentClass != null) {
       at.start();
+      atTwo.start(); 
     }
     
     while(true) {
@@ -46,36 +55,35 @@ public class BasicSimulation {
   private class ServerRunnable implements Runnable {
 
     private int tier;
-    
-    // TODO: get this running. 
+
     @Override
     public void run() {
       DateFormat df = new SimpleDateFormat("MM.dd.yyyy '-' HH:mm:ss");
       String outfile =
           outFile + agentClass + tier + "-" + df.format(new Date());
-      PredictionMarketServer server = new PredictionMarketServer(marketLength,
-          numSims, delayTime, lag, port + tier, outfile);
+      String[] inputArgs = new String[1];
+      inputArgs[0] = inputJSON; 
+      
       try {
-        server.runAll();
-      } catch (InterruptedException e) {
+        Main.main(inputArgs);
+      } catch (ClassNotFoundException | NoSuchMethodException
+          | InstantiationException | IllegalAccessException
+          | InvocationTargetException | IllegalArgumentException
+          | InterruptedException | IOException | ParseException e) {
         e.printStackTrace();
       }
     }
-
   }
 
   private class AgentRunnable implements Runnable {
-
-    private int tier;
 
     @Override
     public void run() {
       try {
         Class<?> cl = Class.forName(agentClass);
         Constructor<?> cons =
-            cl.getConstructor(String.class, Integer.TYPE, String.class);
-        cons.newInstance(host, port + tier, agentClass);
-
+            cl.getConstructor(String.class, Integer.TYPE, ISetup.class);
+        cons.newInstance(host, port, new Startup());
         while (true) {
         }
       } catch (Exception e) {
@@ -85,7 +93,9 @@ public class BasicSimulation {
   }
   
   public static void main(String[] args) throws InterruptedException {
-    BasicSimulation basicSim = new BasicSimulation("agentClass", "outputJSON", "outfile"); 
+    BasicSimulation basicSim = new BasicSimulation("brown.user.agent.library.SimpleAgent", 
+        "input_configs/second_price_auction.json", 
+        "outfile"); 
     basicSim.run();
   }
   
