@@ -107,8 +107,8 @@ public class ConfigRun {
         marketManager.createSimultaneousMarket(marketRules, marketCarts);
       }
 
-      domainManager.createDomain(itemManager, valuationManager, accountManager,
-          endowmentManager);
+      domainManager.createDomain(itemManager, valuationManager,
+          endowmentManager, accountManager);
       worldManager.createWorld(domainManager, marketManager);
       simulationManager.createSimulation(aConfig.getSimulationRuns(),
           worldManager);

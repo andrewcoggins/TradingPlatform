@@ -26,8 +26,8 @@ public class DomainManager implements IDomainManager {
         this.lock = false;
     }
 
-    public void createDomain(IItemManager manager, IValuationManager valuation, IAccountManager acctManager,
-                             IEndowmentManager endowmentManager) {
+    public void createDomain(IItemManager manager, IValuationManager valuation,
+                             IEndowmentManager endowmentManager, IAccountManager acctManager) {
         if (!this.lock){
             this.domain = new Domain(manager, valuation, endowmentManager, acctManager);
             this.lock = true;
