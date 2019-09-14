@@ -44,19 +44,19 @@ public class Account implements IAccount {
     return this.money;
   }
 
-  public IItem getGoods(String name) {
+  public IItem getItems(String name) {
     return this.goods.getItemByName(name);
   }
 
-  public ICart getAllGoods() {
+  public ICart getAllItems() {
     return this.goods;
   }
 
-  public void addTradeables(IItem itemToAdd) {
+  public void addItems(IItem itemToAdd) {
     this.goods.addToCart(itemToAdd);
   }
 
-  public void removeTradeables(IItem itemToRemove) {
+  public void removeItems(IItem itemToRemove) {
     this.goods.removeFromCart(itemToRemove);
   }
 

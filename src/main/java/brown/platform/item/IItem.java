@@ -1,32 +1,37 @@
 package brown.platform.item;
 
 /**
- * the granular Item in the Trading Platform. 
+ * The granular Item in the Trading Platform. 
+ * 
  * @author andrewcoggins
  *
  */
 public interface IItem {
 
   /**
-   * get the name of the item
+   * Get the name of the item.
+   * 
    * @return
    */
   public String getName(); 
   
   /**
-   * get the count of the item. 
+   * Get the count of the item. 
+   * 
    * @return
    */
   public int getItemCount(); 
   
   /**
-   * add to the item's count. 
+   * Add to the item's count. 
+   * 
    * @param numToAdd
    */
   public void addItemCount(int numToAdd); 
   
   /**
-   * remove from the item's count. 
+   * Remove from the item's count. 
+   * 
    * @param numToRemove
    */
   public void removeItemCount(int numToRemove); 

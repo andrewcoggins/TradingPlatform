@@ -6,32 +6,37 @@ import brown.platform.managers.IItemManager;
 import brown.platform.managers.IValuationManager;
 
 /**
- * Interface IDomain- consists of tradeables, an account manager, and a valuation distribution all stored together.
+ * Interface IDomain
+ * Characterized by items, valuation distributions, and endowments.
  */
 public interface IDomain {
 
   /**
    * get IDomainManager's ItemManager
+   * 
    * @return
    */
   public IItemManager getItemManager(); 
   
   /**
-   * getIDomainManager's AccountManager
+   * get IDomainManager's ValuationManager
+   * 
    * @return
    */
-  public IAccountManager getAccountManager(); 
+  public IValuationManager getValuationManager(); 
   
   /**
-   * getIDomainManager's EndowmentManager
+   * get IDomainManager's EndowmentManager
+   * 
    * @return
    */
   public IEndowmentManager getEndowmentManager(); 
   
   /**
-   * getIDomainManager's ValuationManager
+   * get IDomainManager's AccountManager
+   * 
    * @return
    */
-  public IValuationManager getValuationManager(); 
+  public IAccountManager getAccountManager(); 
   
 }

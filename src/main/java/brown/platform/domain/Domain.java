@@ -5,50 +5,48 @@ import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.IItemManager;
 import brown.platform.managers.IValuationManager;
 
-
 /**
- * a domain consists of Tradeables, an IValuationGenerator, and an AccountManager.
+ * a domain consists of Items, an a valuation distribution, and endowments.
  */
 public class Domain implements IDomain {
 
-    private IItemManager tManager;
+    private IItemManager itemManager;
     private IValuationManager valuationManager;
-    private IAccountManager acctManager;
     private IEndowmentManager endowmentManager;
+    private IAccountManager accountManager;
 
-    public Domain (IItemManager tManager, IValuationManager valuationManager, IAccountManager acctManager,
-                   IEndowmentManager endowmentManager) {
-        this.tManager = tManager;
+    public Domain (IItemManager tManager, IValuationManager valuationManager,
+                   IEndowmentManager endowmentManager, IAccountManager acctManager) {
+        this.itemManager = tManager;
         this.valuationManager = valuationManager;
-        this.acctManager = acctManager;
         this.endowmentManager = endowmentManager;
+        this.accountManager = acctManager;
     }
     
     @Override
     public IItemManager getItemManager() {
-      return this.tManager;
-    }
-
-    @Override
-    public IAccountManager getAccountManager() {
-      return this.acctManager;
-    }
-
-    @Override
-    public IEndowmentManager getEndowmentManager() {
-      return this.endowmentManager;
+      return this.itemManager;
     }
 
     @Override
     public IValuationManager getValuationManager() {
       return valuationManager;
     }
+
+    @Override
+    public IEndowmentManager getEndowmentManager() {
+      return this.endowmentManager;
+    }
     
+    @Override
+    public IAccountManager getAccountManager() {
+      return this.accountManager;
+    }
     
     @Override
     public String toString() {
-      return "Domain [tManager=" + tManager + ", valuationManager=" + valuationManager
-          + ", acctManager=" + acctManager + ", endowmentManager="
+      return "Domain [tManager=" + itemManager + ", valuationManager=" + valuationManager
+          + ", acctManager=" + accountManager + ", endowmentManager="
           + endowmentManager + "]";
     }
    
@@ -57,10 +55,10 @@ public class Domain implements IDomain {
       final int prime = 31;
       int result = 1;
       result =
-          prime * result + ((acctManager == null) ? 0 : acctManager.hashCode());
+          prime * result + ((accountManager == null) ? 0 : accountManager.hashCode());
       result = prime * result
           + ((endowmentManager == null) ? 0 : endowmentManager.hashCode());
-      result = prime * result + ((tManager == null) ? 0 : tManager.hashCode());
+      result = prime * result + ((itemManager == null) ? 0 : itemManager.hashCode());
       result =
           prime * result + ((valuationManager == null) ? 0 : valuationManager.hashCode());
       return result;
@@ -75,20 +73,20 @@ public class Domain implements IDomain {
       if (getClass() != obj.getClass())
         return false;
       Domain other = (Domain) obj;
-      if (acctManager == null) {
-        if (other.acctManager != null)
+      if (accountManager == null) {
+        if (other.accountManager != null)
           return false;
-      } else if (!acctManager.equals(other.acctManager))
+      } else if (!accountManager.equals(other.accountManager))
         return false;
       if (endowmentManager == null) {
         if (other.endowmentManager != null)
           return false;
       } else if (!endowmentManager.equals(other.endowmentManager))
         return false;
-      if (tManager == null) {
-        if (other.tManager != null)
+      if (itemManager == null) {
+        if (other.itemManager != null)
           return false;
-      } else if (!tManager.equals(other.tManager))
+      } else if (!itemManager.equals(other.itemManager))
         return false;
       if (valuationManager == null) {
         if (other.valuationManager != null)

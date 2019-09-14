@@ -18,13 +18,13 @@ public class DomainManagerTest {
   public void testDomainManager() {
     IItemManager mockedTManager = mock(ItemManager.class); 
     IValuationManager mockedVManager = mock(ValuationManager.class); 
-    IAccountManager mockedAManager = mock(AccountManager.class); 
     IEndowmentManager mockedEManager = mock(EndowmentManager.class); 
+    IAccountManager mockedAManager = mock(AccountManager.class); 
     
     IDomainManager dManager = new DomainManager(); 
     
-    dManager.createDomain(mockedTManager, mockedVManager, mockedAManager, mockedEManager); 
-    IDomain expected = new Domain(mockedTManager, mockedVManager, mockedAManager, mockedEManager); 
+    dManager.createDomain(mockedTManager, mockedVManager, mockedEManager, mockedAManager); 
+    IDomain expected = new Domain(mockedTManager, mockedVManager, mockedEManager, mockedAManager); 
     assertEquals(dManager.getDomain(), expected); 
     
   }

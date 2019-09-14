@@ -43,7 +43,7 @@ public class UtilityManager implements IUtilityManager {
   public void updateUtility(Map<Integer, IAccount> agentAccounts, Map<Integer, IGeneralValuation> agentValuations) { 
     for (Map.Entry<Integer, IAccount> entry : agentAccounts.entrySet()) {
       Integer agentID = entry.getKey(); 
-      ICart goods = entry.getValue().getAllGoods(); 
+      ICart goods = entry.getValue().getAllItems(); 
       Double money  = entry.getValue().getMoney(); 
       IGeneralValuation agentValuation = agentValuations.get(agentID); 
       Double goodValues = agentValuation.getValuation(goods); 

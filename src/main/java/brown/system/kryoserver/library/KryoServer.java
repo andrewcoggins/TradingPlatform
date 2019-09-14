@@ -20,12 +20,12 @@ public class KryoServer implements IKryoServer {
   protected Map<Connection, Integer> connections;
 
   /**
-   * a KryoServer needs a port and a setup.
+   * a KryoServer needs a port and a setup
    * 
    * @param port the port number
-   * @param gameSetup a class that registers the needed classes with kryo.
+   * @param setup a class that registers the necessary classes with kryo
    */
-  public KryoServer(int port, ISetup gameSetup) {
+  public KryoServer(int port, ISetup setup) {
     this.PORT = port;
     this.connections = new ConcurrentHashMap<Connection, Integer>();
 
@@ -33,8 +33,8 @@ public class KryoServer implements IKryoServer {
     kryoServer.start();
     Kryo serverKryo = kryoServer.getKryo();
     Setup.start(serverKryo);
-    if (gameSetup != null) {
-      gameSetup.setup(serverKryo);
+    if (setup != null) {
+      setup.setup(serverKryo);
     }
     try {
       kryoServer.bind(PORT, PORT);
@@ -43,4 +43,5 @@ public class KryoServer implements IKryoServer {
       return;
     }
   }
+  
 }

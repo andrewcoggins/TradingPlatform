@@ -14,7 +14,7 @@ public class AccountUpdate implements IAccountUpdate {
 
   /**
    * For Kryo
-   * NO NOT USE
+   * DO NOT USE
    */
   public AccountUpdate() {
     this.TO = null;
@@ -23,39 +23,30 @@ public class AccountUpdate implements IAccountUpdate {
     this.CART = null;
   }
   
-  public AccountUpdate(Integer to, double price, ICart good) {
+  public AccountUpdate(Integer to, double price, ICart cart) {
     this.TO = to; 
     this.FROM = -1; 
     this.PRICE = price; 
-    this.CART = good;
+    this.CART = cart;
     this.receiveCart = true; 
   }
   
   /**
-   * Constructor for an accountUpdate needs a ToAgent, FromAgent, price, quantity, 
-   * GoodName, and good
-   * @param to
-   * agent whose account is to be updated
-   * @param from
-   * agent who the udpate is from (not important in oneSided)
-   * @param price
-   * money gained or lost
-   * @param quantity
-   * quantity of goods gained or lost. 
-   * @param goodName
-   * name of the good added or lost. 
-   * @param good
-   * tradeable to be added or removed. 
+   * Constructor
+   * 
+   * @param to agent whose account is to be updated
+   * @param from agent who the update is from (not relevant in oneSided)
+   * @param price money involved in the exchange
+   * @param cart added or removed
    */
-  public AccountUpdate(Integer to, Integer from, double price, ICart good) {
+  public AccountUpdate(Integer to, Integer from, double price, ICart cart) {
     this.TO = to;
     this.FROM = from;
     this.PRICE = price;
-    this.CART = good;
+    this.CART = cart;
     this.receiveCart = true; 
   }
   
-
   @Override
   public Integer getTo() {
     return this.TO; 
@@ -80,7 +71,6 @@ public class AccountUpdate implements IAccountUpdate {
   public boolean receiveCart() {
     return this.receiveCart;
   }
-  
   
   @Override
   public ITransaction toTransaction() {

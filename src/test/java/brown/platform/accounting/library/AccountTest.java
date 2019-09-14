@@ -35,9 +35,9 @@ public class AccountTest {
     
     assertTrue(a.getMoney() == 90.0); 
     
-    assertEquals(a.getAllGoods(), aCart); 
+    assertEquals(a.getAllItems(), aCart); 
     
-    assertEquals(a.getGoods("default"), new Item("default", 2)); 
+    assertEquals(a.getItems("default"), new Item("default", 2)); 
   }
   
   
@@ -68,38 +68,38 @@ public class AccountTest {
     moreItems.add(new Item("default", 2)); 
     
     
-    a.addTradeables(new Item("default", 3));
+    a.addItems(new Item("default", 3));
     
     
-    assertEquals(a.getGoods("default"), new Item("default", 5)); 
+    assertEquals(a.getItems("default"), new Item("default", 5)); 
     
     
     List<IItem> allItems = new LinkedList<IItem>(); 
     allItems.add(new Item("default", 5)); 
     
-    assertEquals(a.getAllGoods(), new Cart(allItems)); 
+    assertEquals(a.getAllItems(), new Cart(allItems)); 
     
-    a.addTradeables(new Item("b", 2));
+    a.addItems(new Item("b", 2));
     
     allItems.add(new Item("b", 2)); 
     
-    assertEquals(a.getAllGoods(), new Cart(allItems)); 
+    assertEquals(a.getAllItems(), new Cart(allItems)); 
     
     
     
-    a.removeTradeables(new Item("b", 1));
+    a.removeItems(new Item("b", 1));
     
-    assertEquals(a.getGoods("b"), new Item("b", 1)); 
+    assertEquals(a.getItems("b"), new Item("b", 1)); 
     
     allItems.remove(1);
     
     allItems.add(new Item("b", 1)); 
     
-    assertEquals(a.getAllGoods(), new Cart(allItems)); 
+    assertEquals(a.getAllItems(), new Cart(allItems)); 
     
     a.clear();
     
-    assertEquals(a.getAllGoods(), new Cart(new LinkedList<IItem>()));
+    assertEquals(a.getAllItems(), new Cart(new LinkedList<IItem>()));
     
     assertTrue(a.getMoney() == 0.0); 
  

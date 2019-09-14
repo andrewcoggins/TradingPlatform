@@ -83,7 +83,7 @@ public class AccountManager implements IAccountManager {
       IAccount endowAccount = this.accounts.get(agentID);
       endowAccount.clear();
       initialEndowment.getCart().getItems()
-          .forEach(item -> endowAccount.addTradeables(item));
+          .forEach(item -> endowAccount.addItems(item));
       endowAccount.addMoney(initialEndowment.getMoney());
       this.accounts.put(agentID, endowAccount);
     } catch (NullPointerException n) {
@@ -102,7 +102,7 @@ public class AccountManager implements IAccountManager {
         new HashMap<Integer, IBankUpdateMessage>();
     for (Integer agentID : this.accounts.keySet()) {
       IAccount agentAccount = this.accounts.get(agentID);
-      ICart agentTradeables = agentAccount.getAllGoods();
+      ICart agentTradeables = agentAccount.getAllItems();
       List<IItem> items = new LinkedList<IItem>();
       agentTradeables.getItems().forEach(item -> items.add(item));
       IBankUpdateMessage agentBankUpdate = new AccountInitializationMessage(0,
@@ -138,10 +138,10 @@ public class AccountManager implements IAccountManager {
         IAccount account = this.accounts.get(update.getTo()); 
         if (update.receiveCart()) {
           account.removeMoney(update.getCost());
-          update.getCart().getItems().forEach(item -> account.addTradeables(item));
+          update.getCart().getItems().forEach(item -> account.addItems(item));
         } else {
           account.addMoney(update.getCost());
-          update.getCart().getItems().forEach(item -> account.removeTradeables(item));
+          update.getCart().getItems().forEach(item -> account.removeItems(item));
         }
       }
     }

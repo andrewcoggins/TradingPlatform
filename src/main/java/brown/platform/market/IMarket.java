@@ -1,10 +1,8 @@
 package brown.platform.market;
 
 import java.util.List;
-import java.util.Map;
 
 import brown.auction.marketstate.IMarketPublicState;
-import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
