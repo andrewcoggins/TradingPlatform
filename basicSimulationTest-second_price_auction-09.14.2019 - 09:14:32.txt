@@ -1,0 +1,31 @@
+00:00  INFO: Connecting: localhost/127.0.0.1:2121/2121
+00:00  INFO: Connecting: localhost/127.0.0.1:2121/2121
+00:00  INFO: [kryonet] Server opened.
+00:00  INFO: [kryonet] Connection 2 connected: /127.0.0.1
+00:00  INFO: [kryonet] Connection 2 connected: localhost/127.0.0.1
+00:00  INFO: [kryonet] Connection 1 connected: /127.0.0.1
+00:00  INFO: [kryonet] Connection 1 connected: localhost/127.0.0.1
+Account Initialized: [agentID=199667345, itemsAdded=AbsCart [items=[AbsItem [count=0, name=testItem]]], money=100.0]
+Account Initialized: [agentID=810484045, itemsAdded=AbsCart [items=[AbsItem [count=0, name=testItem]]], money=100.0]
+[+] Valuation Message Received
+[+] Valuation Message Received
+ValuationMessage [valuation=GeneralValuation [specificValuationMap={[AbsItem [count=1, name=testItem]]=AdditiveValuation [singleItemMapping={AbsItem [count=1, name=testItem]=0.7534421858245036}]}]]
+ValuationMessage [valuation=GeneralValuation [specificValuationMap={[AbsItem [count=1, name=testItem]]=AdditiveValuation [singleItemMapping={AbsItem [count=1, name=testItem]=0.43331412983708467}]}]]
+[+] Trade Request Message Received
+[+] Trade Request Message Received
+TradeMessage [bid=AbsOneSidedBidBundle [bids={AbsCart [items=[AbsItem [count=1, name=testItem]]]=0.7534421858245036}], auctionID=0, agentID=199667345]
+TradeMessage [bid=AbsOneSidedBidBundle [bids={AbsCart [items=[AbsItem [count=1, name=testItem]]]=0.43331412983708467}], auctionID=0, agentID=810484045]
+[+] Information Message Received
+00:12  INFO: [kryonet] Closing server connections...
+AbsBankUpdateMessage [itemsAdded=AbsCart [items=[AbsItem [count=1, name=testItem]]], itemsLost=AbsCart [items=[]], money=-0.43331412983708467]
+00:12  INFO: [kryonet] Connection 1 disconnected.
+00:12  INFO: [kryonet] Connection 1 disconnected.
+00:12  INFO: [kryonet] Connection 2 disconnected.
+00:12  INFO: [kryonet] Connection 2 disconnected.
+00:12  INFO: [kryonet] Server closed.
+Utility Manager: Final Utility: 
+solo -> [100.0]
+solo -> [100.32012805598741]
+
+
+values, bids, final utilites. 

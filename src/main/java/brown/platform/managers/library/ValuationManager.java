@@ -11,6 +11,7 @@ import brown.auction.value.generator.IValuationGenerator;
 import brown.auction.value.valuation.IGeneralValuation;
 import brown.communication.messages.IValuationMessage;
 import brown.communication.messages.library.ValuationMessage;
+import brown.logging.library.AuctionLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.item.ICart;
 import brown.platform.managers.IValuationManager;
@@ -52,6 +53,7 @@ public class ValuationManager implements IValuationManager {
     }
     
     public void addAgentValuation(Integer agentID, IGeneralValuation valuation) {
+        AuctionLogging.log("Adding Valuation for Agent" + agentID.toString() + ": " + valuation); 
         this.agentValuations.put(agentID, valuation);
     }
     
