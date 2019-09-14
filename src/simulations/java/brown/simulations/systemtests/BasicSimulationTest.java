@@ -60,6 +60,7 @@ public class BasicSimulationTest {
       }
       assertTrue(finalUtility); 
       assertTrue(solo);
+      assertTrue(false); 
     }
   }
 }
