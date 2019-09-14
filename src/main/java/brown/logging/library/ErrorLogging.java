@@ -10,16 +10,24 @@ import brown.logging.ILogging;
 public class ErrorLogging implements ILogging {
   
   // Enable or disable logging here.
-  public final static boolean ERRORLOGGING = true;
+  public static boolean ERRORLOGGING = false;
   
   /**
    * Logs a message to the console, if logging is set to true.
    * @param message
    */
-  public static void log(String message) {
+  public static void log(Object message) {
     if (ERRORLOGGING) {
       System.err.println(message);
     }
+  }
+  
+  /**
+   * set the logging. 
+   * @param setLogging
+   */
+  public static void setLogging(boolean setLogging) {
+    ERRORLOGGING = setLogging; 
   }
 
 }

@@ -10,28 +10,25 @@ import brown.logging.ILogging;
 public class TestLogging implements ILogging {
   
   // Enable or disable logging here.
-  public final static boolean TESTLOGGING = true;
+  public static boolean TESTLOGGING = false;
   
   /**
    * Logs a message to the console, if logging is set to true.
    * @param message
    */
-  public static void log(String message) {
+  public static void log(Object message) {
     if (TESTLOGGING) {
       System.out.println("[x] TEST: " + message);
     }
+  }
+  
+  /**
+   * set the logging. 
+   * @param setLogging
+   */
+  public static void setLogging(boolean setLogging) {
+    TESTLOGGING = setLogging; 
   }
 
-  public static void log(Integer message) {
-    if (TESTLOGGING) {
-      System.out.println("[x] TEST: " + message);
-    }
-  }
-
-  public static void log(double message) {
-    if (TESTLOGGING) {
-      System.out.println("[x] TEST: " + message);
-    }
-  }
   
 }

@@ -78,6 +78,7 @@ public abstract class AbsCart implements ICart {
   }
   
   // TODO: 
+  // what is this used for? 
   @Override
   public void combine(ICart cart) {
 

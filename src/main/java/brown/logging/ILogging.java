@@ -6,5 +6,6 @@ package brown.logging;
  *
  */
 public interface ILogging {
-
+  
+  
 }

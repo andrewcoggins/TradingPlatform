@@ -58,14 +58,14 @@ public class SimpleAgent extends AbsAgent implements IAgent {
     bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
     ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getAuctionID(), oneSided);
-    System.out.println(tradeMessage); 
+    UserLogging.log(tradeMessage); 
     this.CLIENT.sendTCP(tradeMessage); 
   }
 
   @Override
   public void onValuationMessage(IValuationMessage valuationMessage) {
     UserLogging.log("[+] Valuation Message Received");
-    System.out.println(valuationMessage.toString()); 
+    UserLogging.log(valuationMessage.toString()); 
     this.agentValuation = valuationMessage.getValuation(); 
   }
   
