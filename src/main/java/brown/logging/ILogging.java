@@ -7,6 +7,5 @@ package brown.logging;
  */
 public interface ILogging {
   
-  public static void setLog(); 
   
 }
