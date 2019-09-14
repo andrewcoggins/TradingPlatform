@@ -10,7 +10,7 @@ import brown.logging.ILogging;
 public class AuctionLogging implements ILogging {
   
   // Enable or disable logging here.
-  public final static boolean AUCTIONLOGGING = false;
+  public static boolean AUCTIONLOGGING = false;
   
   /**
    * Logs a message to the console, if logging is set to true.
@@ -20,6 +20,14 @@ public class AuctionLogging implements ILogging {
     if (AUCTIONLOGGING) {
       System.out.println(message);
     }
+  }
+  
+  /**
+   * set the logging. 
+   * @param setLogging
+   */
+  public static void setLogging(boolean setLogging) {
+    AUCTIONLOGGING = setLogging; 
   }
 
 }

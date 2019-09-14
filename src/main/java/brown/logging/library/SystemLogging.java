@@ -10,7 +10,7 @@ import brown.logging.ILogging;
 public class SystemLogging implements ILogging {
   
   // Enable or disable logging here.
-  public final static boolean SYSTEMLOGGING = false;
+  public static boolean SYSTEMLOGGING = false;
   
   /**
    * Logs a message to the console, if logging is set to true.
@@ -21,5 +21,14 @@ public class SystemLogging implements ILogging {
       System.out.println(message);
     }
   }
+  
+  /**
+   * set the logging. 
+   * @param setLogging
+   */
+  public static void setLogging(boolean setLogging) {
+    SYSTEMLOGGING = setLogging; 
+  }
+
 
 }

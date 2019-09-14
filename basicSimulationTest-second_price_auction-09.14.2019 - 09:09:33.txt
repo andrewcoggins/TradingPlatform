@@ -1,0 +1,16 @@
+00:00  INFO: Connecting: localhost/127.0.0.1:2121/2121
+00:00  INFO: Connecting: localhost/127.0.0.1:2121/2121
+00:00  INFO: [kryonet] Server opened.
+00:00  INFO: [kryonet] Connection 1 connected: /127.0.0.1
+00:00  INFO: [kryonet] Connection 1 connected: localhost/127.0.0.1
+00:00  INFO: [kryonet] Connection 2 connected: /127.0.0.1
+00:00  INFO: [kryonet] Connection 2 connected: localhost/127.0.0.1
+00:12  INFO: [kryonet] Closing server connections...
+00:12  INFO: [kryonet] Connection 2 disconnected.
+00:12  INFO: [kryonet] Connection 2 disconnected.
+00:12  INFO: [kryonet] Connection 1 disconnected.
+00:12  INFO: [kryonet] Connection 1 disconnected.
+00:12  INFO: [kryonet] Server closed.
+Utility Manager: Final Utility: 
+solo -> [100.43635063088722]
+solo -> [100.0]
