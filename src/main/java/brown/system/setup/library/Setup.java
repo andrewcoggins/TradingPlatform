@@ -12,7 +12,7 @@ import com.esotericsoftware.kryo.Kryo;
 import brown.logging.library.ErrorLogging;
 import brown.system.setup.ISetup;
 
-public final class Startup implements ISetup {
+public final class Setup implements ISetup {
 
   /**
    * register all classes with kryo

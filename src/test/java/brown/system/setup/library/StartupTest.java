@@ -12,7 +12,7 @@ public class StartupTest {
 
     // just check that no errors are thrown..?
 
-    Startup s = new Startup();
+    Setup s = new Setup();
     Client c = new Client(16384, 8192);
     c.start();
     Kryo agentKryo = c.getKryo();

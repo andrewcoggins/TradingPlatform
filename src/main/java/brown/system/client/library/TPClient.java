@@ -10,7 +10,7 @@ import brown.communication.messages.IStatusMessage;
 import brown.logging.library.SystemLogging;
 import brown.system.client.IClient;
 import brown.system.setup.ISetup;
-import brown.system.setup.library.Startup;
+import brown.system.setup.library.Setup;
 
 
 public abstract class TPClient implements IClient {
@@ -30,7 +30,7 @@ public abstract class TPClient implements IClient {
     this.ID = null;
     CLIENT.start();
     Kryo agentKryo = CLIENT.getKryo();
-    Startup.start(agentKryo);
+    Setup.start(agentKryo);
     if (gameSetup != null) {
       gameSetup.setup(agentKryo);
     }

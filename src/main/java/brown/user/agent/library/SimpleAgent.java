@@ -19,7 +19,7 @@ import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
 import brown.platform.item.library.Item;
 import brown.system.setup.ISetup;
-import brown.system.setup.library.Startup;
+import brown.system.setup.library.Setup;
 import brown.user.agent.IAgent;
 
 /**
@@ -70,8 +70,8 @@ public class SimpleAgent extends AbsAgent implements IAgent {
   }
   
   public static void main(String[] args) {
-    new SimpleAgent("localhost", 2121, new Startup(), "solo"); 
-    new SimpleAgent("localhost", 2121, new Startup(), "pacifica"); 
+    new SimpleAgent("localhost", 2121, new Setup(), "solo"); 
+    new SimpleAgent("localhost", 2121, new Setup(), "pacifica"); 
     while(true) {}
   }
 
