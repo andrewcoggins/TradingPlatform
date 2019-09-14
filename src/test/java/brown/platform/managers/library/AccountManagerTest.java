@@ -75,7 +75,7 @@ public class AccountManagerTest {
     
     act.addMoney(1000.0);
     
-    act.addTradeables(new Item("b", 2));
+    act.addItems(new Item("b", 2));
     
     manager.setAccount(0, act);
     

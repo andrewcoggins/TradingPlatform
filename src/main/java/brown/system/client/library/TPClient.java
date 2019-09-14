@@ -12,27 +12,26 @@ import brown.system.client.IClient;
 import brown.system.setup.ISetup;
 import brown.system.setup.library.Setup;
 
-
 public abstract class TPClient implements IClient {
 
   public final Client CLIENT;
   public Integer ID;
 
   /**
-   * TPClient needs a host, a port, and a setup.
+   * TPClient constructor
    * 
    * @param host the name of the host. If local, this is "localhost"
    * @param port the port number
-   * @param gameSetup a class that registers the needed classes with kryo.
+   * @param setup a class that registers the necessary classes with kryo
    */
-  public TPClient(String host, int port, ISetup gameSetup) {
+  public TPClient(String host, int port, ISetup setup) {
     this.CLIENT = new Client(16384, 8192);
     this.ID = null;
     CLIENT.start();
     Kryo agentKryo = CLIENT.getKryo();
     Setup.start(agentKryo);
-    if (gameSetup != null) {
-      gameSetup.setup(agentKryo);
+    if (setup != null) {
+      setup.setup(agentKryo);
     }
     try {
       CLIENT.connect(5000, host, port, port);

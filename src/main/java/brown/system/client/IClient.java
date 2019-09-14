@@ -4,7 +4,8 @@ import brown.communication.messages.IRegistrationResponseMessage;
 import brown.communication.messages.IStatusMessage;
 
 /**
- * IClient is the kryo client object. It underlies all agent classes.
+ * IClient is the kryo client object.
+ * It underlies all agent classes.
  * 
  * @author andrewcoggins
  *
@@ -12,15 +13,15 @@ import brown.communication.messages.IStatusMessage;
 public interface IClient {
 
   /**
-   * receives a RegistrationResponse from MessageServer
+   * Receives a RegistrationResponse from MessageServer.
    * 
    * @param registration
    */
   void onRegistrationResponse(IRegistrationResponseMessage registration);
 
   /**
-   * Receives a StatusMessage from MessageServer. Implementation will print the
-   * the contents of the message.
+   * Receives a StatusMessage from MessageServer. 
+   * Prints the contents of the message.
    * 
    * @param message
    */

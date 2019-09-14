@@ -14,10 +14,15 @@ import brown.system.setup.ISetup;
 
 public final class Setup implements ISetup {
 
+  @Override
+  public void setup(Kryo kryo) {
+	start(kryo);
+  }
+	
   /**
-   * register all classes with kryo
+   * helper that registers all classes with kryo
    * 
-   * @param kryo the Kryo object.
+   * @param kryo the Kryo object
    * @return
    */
   public static boolean start(Kryo kryo) {
@@ -39,16 +44,11 @@ public final class Setup implements ISetup {
     return false;
   }
 
-  @Override
-  public void setup(Kryo kryo) {
-    start(kryo);
-  }
-
   /**
-   * helper that returns every java class starting at an input directory.
+   * helper that returns every java class starting at a path
    * 
    * @param path the starting path for the search
-   * @return every java class starting at a directory.
+   * @return every java class starting at path
    * @throws IOException
    */
   public static List<String> getJavaFiles(String path) throws IOException {

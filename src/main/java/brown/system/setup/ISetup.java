@@ -11,7 +11,7 @@ import com.esotericsoftware.kryo.Kryo;
 public interface ISetup {
 
   /**
-   * registers necessary classes with kryo.
+   * Registers necessary classes with kryo.
    * 
    * @param kryo
    */
