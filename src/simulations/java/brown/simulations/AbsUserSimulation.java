@@ -13,7 +13,7 @@ import java.util.List;
 import org.json.simple.parser.ParseException;
 
 import brown.system.setup.ISetup;
-import brown.system.setup.library.Startup;
+import brown.system.setup.library.Setup;
 import brown.user.main.library.Main;
 
 public abstract class AbsUserSimulation {
@@ -84,11 +84,11 @@ public abstract class AbsUserSimulation {
         if (this.agentName != null) {
           Constructor<?> cons = cl.getConstructor(String.class, Integer.TYPE,
               ISetup.class, String.class);
-          cons.newInstance(host, port, new Startup(), this.agentName);
+          cons.newInstance(host, port, new Setup(), this.agentName);
         } else {
           Constructor<?> cons =
               cl.getConstructor(String.class, Integer.TYPE, ISetup.class);
-          cons.newInstance(host, port, new Startup());
+          cons.newInstance(host, port, new Setup());
         }
         while (true) {
         }
