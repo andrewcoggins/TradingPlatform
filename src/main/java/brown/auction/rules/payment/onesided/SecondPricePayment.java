@@ -21,12 +21,10 @@ public class SecondPricePayment extends AbsRule implements IPaymentRule {
   public void setOrders(IMarketState state, List<ITradeMessage> messages) {
     Map<Integer, List<ICart>> allocation = state.getAllocation();
     
-    System.out.println(allocation); 
     Map<ICart, Double> highest = new HashMap<ICart, Double>();
     Map<ICart, Double> secondHighest = new HashMap<ICart, Double>();
 
-    for (ITradeMessage tradeMessage : messages) {
-      System.out.println(tradeMessage); 
+    for (ITradeMessage tradeMessage : messages) { 
       IBidBundle bundle = (IBidBundle) tradeMessage.getBid();
       Map<ICart, Double> cartBids = bundle.getBids();
       for (Map.Entry<ICart, Double> cartBid : cartBids.entrySet()) {
@@ -67,8 +65,6 @@ public class SecondPricePayment extends AbsRule implements IPaymentRule {
         }
       }
     }
-    System.out.println("account updates"); 
-    System.out.println(accountUpdates); 
     
     state.setPayments(accountUpdates);
   }

@@ -64,14 +64,14 @@ public class UtilityManager implements IUtilityManager {
 
   @Override
   public void logFinalUtility(String inFile, Map<Integer, Integer> privateToPublic, Map<Integer, String> idToName) {
-    PlatformLogging.log("Utility Manager: Final Utility: ");
+    System.out.println("Utility Manager: Final Utility: ");
     for (Integer agentID : this.agentRecords.keySet()) {
       List<Double> money = this.agentRecords.get(agentID); 
       String name = privateToPublic.get(agentID).toString();
       if (idToName.containsKey(agentID)) {
         name = idToName.get(agentID); 
       }
-      PlatformLogging.log(name + " -> " + money);
+      System.out.println(name + " -> " + money);
     }
   }
 

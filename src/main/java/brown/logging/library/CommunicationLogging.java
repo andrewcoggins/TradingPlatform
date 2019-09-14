@@ -10,13 +10,13 @@ import brown.logging.ILogging;
 public class CommunicationLogging implements ILogging {
   
   // Enable or disable logging here.
-  public final static boolean MECHANISMLOGGING = true;
+  public final static boolean MECHANISMLOGGING = false;
   
   /**
    * Logs a message to the console, if logging is set to true.
    * @param message
    */
-  public static void log(String message) {
+  public static void log(Object message) {
     if (MECHANISMLOGGING) {
       System.out.println(message);
     }

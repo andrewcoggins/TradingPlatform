@@ -179,6 +179,7 @@ public class SimulationManager implements ISimulationManager {
     while (this.currentMarketManager.anyMarketsOpen()) {
       Thread.sleep(simulationDelayTime * INTERVAL);
       PlatformLogging.log("updating auctions");
+      
       updateAuctions();
       Thread.sleep(simulationDelayTime * INTERVAL);
     }

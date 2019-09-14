@@ -3,9 +3,9 @@
 	"name": "testParse", 
 	"startingDelayTime": 10, 
 	"simulationDelayTime": 1, 
-	"numTotalRuns": 2, 
+	"numTotalRuns": 1, 
 	"simulation": [{
-		"numRuns": 2, 
+		"numRuns": 1, 
 		"items": [{
 			"itemName": "testItem", 
 			"numItems": "2"

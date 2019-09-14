@@ -46,7 +46,6 @@ public abstract class TPClient implements IClient {
   public void
       onRegistrationResponse(IRegistrationResponseMessage registrationMessage) {
     SystemLogging.log("[-] Registered To Server");
-    System.out.println(registrationMessage.toString()); 
     this.ID = registrationMessage.getAgentID(); 
     SystemLogging.log("ID: " + this.ID);
   }

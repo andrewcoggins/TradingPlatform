@@ -24,6 +24,7 @@ import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 import brown.logging.library.ErrorLogging;
+import brown.logging.library.PlatformLogging;
 import brown.platform.item.ICart;
 import brown.platform.market.IFlexibleRules;
 import brown.platform.market.library.FlexibleRules;
@@ -407,17 +408,17 @@ public class JsonParser implements IJsonParser {
     }
     
     
-    System.out.println(items);
-    System.out.println(marketRules);
-    System.out.println(marketitems);
-    System.out.println(valuationDistributions);
-    System.out.println(valuationitems);
-    System.out.println(valuationGeneratorNames);
-    System.out.println(valuationGeneratorParameters);
-    System.out.println(endowmentDistributions);
-    System.out.println(endowmentItems);
-    System.out.println(endowmentGeneratorNames);
-    System.out.println(endowmentGeneratorParameters);
+    PlatformLogging.log(items);
+    PlatformLogging.log(marketRules);
+    PlatformLogging.log(marketitems);
+    PlatformLogging.log(valuationDistributions);
+    PlatformLogging.log(valuationitems);
+    PlatformLogging.log(valuationGeneratorNames);
+    PlatformLogging.log(valuationGeneratorParameters);
+    PlatformLogging.log(endowmentDistributions);
+    PlatformLogging.log(endowmentItems);
+    PlatformLogging.log(endowmentGeneratorNames);
+    PlatformLogging.log(endowmentGeneratorParameters);
     
     
     
