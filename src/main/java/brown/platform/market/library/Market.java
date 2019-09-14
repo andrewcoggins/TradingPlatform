@@ -10,6 +10,7 @@ import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.library.TradeRequestMessage;
+import brown.logging.library.AuctionLogging;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.item.ICart;
 import brown.platform.market.IFlexibleRules;
@@ -60,10 +61,11 @@ public class Market implements IMarket {
   }
 
   public List<IAccountUpdate> constructAccountUpdates() {
+    AuctionLogging.log("Bids submitted to Auction " + this.ID.toString() + ": " + this.bids);
     this.RULES.getARule().setAllocation(this.STATE, this.bids);
+    AuctionLogging.log("Allocations from Auction " + this.ID.toString() + ": " + this.STATE.getAllocation());
     this.RULES.getPRule().setOrders(this.STATE, this.bids);
-    // Construct orders from allocation and payments
-    // why no? return this.STATE.getAllocation();
+    AuctionLogging.log("Payments from Auction " + this.ID.toString() + ": " + this.STATE.getPayments());
     return this.STATE.getPayments();
   }
 
