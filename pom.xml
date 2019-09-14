@@ -20,6 +20,7 @@
               <sources>
                 <source>src/main/java</source>
                 <source>src/test/java</source>
+                <source>src/simulations/java</source>
               </sources>
             </configuration>
           </execution>

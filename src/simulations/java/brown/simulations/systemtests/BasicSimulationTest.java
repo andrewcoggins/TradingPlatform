@@ -51,9 +51,9 @@ public class BasicSimulationTest {
       
       String line; 
       while((line = br.readLine()) != null) {
-        if (line.strip().equals("Utility Manager: Final Utility:")) {
+        if (line.trim().equals("Utility Manager: Final Utility:")) {
           finalUtility = true; 
-        } else if (line.strip().equals("solo -> [100.0]")) {
+        } else if (line.trim().equals("solo -> [100.0]")) {
           solo = true; 
         }  
  
