@@ -56,11 +56,9 @@ public class BasicSimulationTest {
         } else if (line.trim().equals("solo -> [100.0]")) {
           solo = true; 
         }  
- 
       }
       assertTrue(finalUtility); 
       assertTrue(solo);
-      assertTrue(false); 
     }
   }
 }
