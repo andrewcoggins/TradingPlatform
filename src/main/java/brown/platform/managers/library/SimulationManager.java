@@ -35,7 +35,7 @@ import brown.platform.managers.IValuationManager;
 import brown.platform.managers.IWorldManager;
 import brown.platform.simulation.ISimulation;
 import brown.platform.simulation.library.Simulation;
-import brown.system.setup.library.Startup;
+import brown.system.setup.library.Setup;
 
 /**
  * SimulationManager creates and stores ISimulation. 
@@ -259,7 +259,7 @@ public class SimulationManager implements ISimulationManager {
   }
   
   private void startMessageServer() {
-    this.messageServer = new MessageServer(2121, new Startup(), this);
+    this.messageServer = new MessageServer(2121, new Setup(), this);
   }
 
 }

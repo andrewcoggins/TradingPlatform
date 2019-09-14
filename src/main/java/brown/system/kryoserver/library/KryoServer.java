@@ -11,7 +11,7 @@ import com.esotericsoftware.kryonet.Server;
 import brown.logging.library.SystemLogging;
 import brown.system.kryoserver.IKryoServer;
 import brown.system.setup.ISetup;
-import brown.system.setup.library.Startup;
+import brown.system.setup.library.Setup;
 
 public class KryoServer implements IKryoServer {
 
@@ -32,7 +32,7 @@ public class KryoServer implements IKryoServer {
     kryoServer = new Server(16384, 8192);
     kryoServer.start();
     Kryo serverKryo = kryoServer.getKryo();
-    Startup.start(serverKryo);
+    Setup.start(serverKryo);
     if (gameSetup != null) {
       gameSetup.setup(serverKryo);
     }

@@ -15,7 +15,7 @@ import brown.communication.messages.library.RegistrationMessage;
 import brown.communication.messages.library.RegistrationResponseMessage;
 import brown.system.client.library.TPClient;
 import brown.system.setup.ISetup;
-import brown.system.setup.library.Startup;
+import brown.system.setup.library.Setup;
 
 public class KryoServerTest {
 
@@ -75,7 +75,7 @@ public class KryoServerTest {
 
   @Test
   public void testConstructor() {
-    TestServer testServer = new TestServer(2121, new Startup());
+    TestServer testServer = new TestServer(2121, new Setup());
     assertTrue(testServer.PORT == 2121);
     assertEquals(testServer.connections,
         new ConcurrentHashMap<Connection, Integer>());
@@ -84,8 +84,8 @@ public class KryoServerTest {
 
   @Test
   public void testReceiveMessage() throws InterruptedException {
-    TestServer testServer = new TestServer(2122, new Startup());
-    TestClient testClient = new TestClient("localhost", 2122, new Startup());
+    TestServer testServer = new TestServer(2122, new Setup());
+    TestClient testClient = new TestClient("localhost", 2122, new Setup());
     Thread.sleep(1000);
     assertEquals(testServer.receivedString, "testing_one");
     assertEquals(testServer.receivedBoolean, false);
@@ -96,9 +96,9 @@ public class KryoServerTest {
 
   @Test
   public void testSendMessage() throws InterruptedException {
-    TestServer testServer = new TestServer(2123, new Startup());
+    TestServer testServer = new TestServer(2123, new Setup());
     Thread.sleep(1000);
-    TestClient testClient = new TestClient("localhost", 2123, new Startup());
+    TestClient testClient = new TestClient("localhost", 2123, new Setup());
     Thread.sleep(1000);
     assertTrue(testClient.ID == 1);
     assertEquals((testClient).error, "test error");

@@ -16,7 +16,7 @@ import brown.communication.messages.library.RegistrationMessage;
 import brown.communication.messages.library.RegistrationResponseMessage;
 import brown.system.kryoserver.library.KryoServer;
 import brown.system.setup.ISetup;
-import brown.system.setup.library.Startup;
+import brown.system.setup.library.Setup;
 
 /**
  * Tests of the TP Client object.
@@ -65,7 +65,7 @@ public class TPClientTest {
 
   @Test
   public void testConstructor() throws IOException, ClassNotFoundException {
-    TPClient tpClient = new TestClient("localhost", 2121, new Startup());
+    TPClient tpClient = new TestClient("localhost", 2121, new Setup());
     assertTrue(tpClient.CLIENT != null);
     assertTrue(tpClient.CLIENT instanceof Client);
     assertEquals(tpClient.ID, null);
@@ -74,9 +74,9 @@ public class TPClientTest {
   @Test
   public void testRegistration()
       throws InterruptedException, IOException, ClassNotFoundException {
-    TestServer testServer = new TestServer(2121, new Startup());
+    TestServer testServer = new TestServer(2121, new Setup());
     Thread.sleep(1000);
-    TestClient testClient = new TestClient("localhost", 2121, new Startup());
+    TestClient testClient = new TestClient("localhost", 2121, new Setup());
     Thread.sleep(1000);
     System.out.println(testClient.ID);
     assertTrue(testClient.ID == 1);
