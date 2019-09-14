@@ -12,7 +12,8 @@ import brown.platform.item.ICart;
 public interface ITransaction {
 
   /**
-   * Remove private details from the transaction (the agent's private ID).
+   * Remove private details from the transaction
+   * (e.g., the agent's private ID).
    * 
    * @param agentID the agent ID to be sanitized
    * @return a sanitized transaction

@@ -4,46 +4,52 @@ import java.util.List;
 
 /**
  * ICart is a container for Items. 
+ * 
  * @author andrewcoggins
  *
  */
 public interface ICart {
 
   /**
-   * get the items inside the ICart
+   * Get the items in the cart.
+   * 
    * @return
    */
   public List<IItem> getItems(); 
   
   /**
-   * get an item in the ICart by its name
+   * Get items in the cart by their name.
+   * 
    * @param itemName
    * @return
    */
   public IItem getItemByName(String itemName); 
   
   /**
-   * return whether or not the ICart contains an item with 
-   * a specified name
+   * Return whether or not the cart contains an item with a specified name.
+   * 
    * @param itemName
    * @return
    */
   public boolean containsItem(String itemName); 
   
   /**
-   * add an item to the cart. 
+   * Add an item to the cart. 
+   * 
    * @param item
    */
   public void addToCart(IItem item); 
   
   /**
-   * remove an item from the cart
+   * Remove an item from the cart.
+   * 
    * @param item
    */
   public void removeFromCart(IItem item); 
   
   /**
-   * combine two carts. 
+   * Combine two carts. 
+   * 
    * @param cart
    */
   public void combine(ICart cart); 

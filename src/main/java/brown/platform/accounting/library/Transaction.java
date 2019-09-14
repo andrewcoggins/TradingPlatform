@@ -37,12 +37,12 @@ public class Transaction implements ITransaction {
 	  }
 	 
 	/**
-	 * Actual constructor
-	 * @param to
-	 * @param from
-	 * @param price
-	 * @param quantity
-	 * @param cart
+	 * Constructor
+	 * 
+     * @param to agent whose account is to be updated
+     * @param from agent who the update is from (not relevant in oneSided)
+     * @param price money involved in the exchange
+     * @param cart added or removed
 	 */
 	public Transaction(Integer to, Integer from, double price, ICart cart) {
 		this.TO = to;
@@ -57,7 +57,6 @@ public class Transaction implements ITransaction {
 				ID != null && ID.equals(FROM) ? FROM : null,
 				PRICE, CART);
 	}
-	
 
   @Override
   public Integer getTo() {

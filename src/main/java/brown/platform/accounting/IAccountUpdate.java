@@ -19,7 +19,7 @@ public interface IAccountUpdate {
   
   /**
    * Gets the recipient of the IAccountUpdate.
-   * 
+   *
    * @return
    */
   public Integer getTo(); 

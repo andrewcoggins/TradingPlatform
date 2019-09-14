@@ -14,7 +14,7 @@ public class AccountUpdate implements IAccountUpdate {
 
   /**
    * For Kryo
-   * NO NOT USE
+   * DO NOT USE
    */
   public AccountUpdate() {
     this.TO = null;
@@ -32,10 +32,10 @@ public class AccountUpdate implements IAccountUpdate {
   }
   
   /**
-   * Constructor for an accountUpdate needs a ToAgent, FromAgent, price, quantity, 
-   * GoodName, and good
+   * Constructor
+   * 
    * @param to agent whose account is to be updated
-   * @param from agent who the update is from (not important in oneSided)
+   * @param from agent who the update is from (not relevant in oneSided)
    * @param price money involved in the exchange
    * @param cart added or removed
    */

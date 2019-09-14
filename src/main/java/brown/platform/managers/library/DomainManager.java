@@ -29,7 +29,7 @@ public class DomainManager implements IDomainManager {
     public void createDomain(IItemManager manager, IValuationManager valuation, IAccountManager acctManager,
                              IEndowmentManager endowmentManager) {
         if (!this.lock){
-            this.domain = new Domain(manager, valuation, acctManager, endowmentManager);
+            this.domain = new Domain(manager, valuation, endowmentManager, acctManager);
             this.lock = true;
         } else {
             PlatformLogging.log("Creation denied: domain manager locked.");

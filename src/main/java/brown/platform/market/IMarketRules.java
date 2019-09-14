@@ -9,7 +9,8 @@ import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
 
 /**
- * Encapsulates the rules that define a Market. 
+ * IMarketRules encapsulates the rules that define a Market. 
+ * 
  * @author andrewcoggins
  *
  */
