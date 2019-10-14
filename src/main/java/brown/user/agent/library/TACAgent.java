@@ -22,7 +22,7 @@ import brown.system.setup.ISetup;
 import brown.user.agent.IAgent;
 
 /**
- * an honest agent... bids their valuation. What else is an honest agent to do?
+ * tac agent bids in a TAC auction. 
  * 
  * @author andrewcoggins
  *
