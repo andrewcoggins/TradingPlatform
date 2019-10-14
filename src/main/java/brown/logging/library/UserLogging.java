@@ -10,7 +10,7 @@ import brown.logging.ILogging;
 public class UserLogging implements ILogging {
   
   // Enable or disable logging here.
-  public static boolean USERLOGGING = false;
+  public static boolean USERLOGGING = true;
   
   /**
    * Logs a message to the console, if logging is set to true.

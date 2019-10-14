@@ -13,6 +13,15 @@ public class TACValuation extends AbsSparseValuation
   private int alligatorWrestlingValue;
   private int museumValue;
 
+  public TACValuation() {
+    this.idealArrivalDate = 0;
+    this.idealDepartureDate = 0;
+    this.hotelValue = 0;
+    this.amusementValue = 0;
+    this.alligatorWrestlingValue = 0;
+    this.museumValue = 0;
+  }
+
   public TACValuation(int iad, int idd, int hotelValue, int amValue,
       int awValue, int mValue) {
     this.idealArrivalDate = iad;
@@ -27,9 +36,10 @@ public class TACValuation extends AbsSparseValuation
   public Double getValuation(ICart cart) {
 
     // feasibility constraints
-    if (!isFeasible(cart))
+    if (!isFeasible(cart)) {
       return 0.0;
-
+    }
+    
     int arrivalDate = 0;
     int departureDate = 0;
     int hotelBonus = 0;
@@ -73,21 +83,21 @@ public class TACValuation extends AbsSparseValuation
         || cart.containsItem("amusementDayTwoTicket")
         || cart.containsItem("amusementDayThreeTicket")
         || cart.containsItem("amusementDayFourTicket")) {
-      funBonus += amusementValue; 
+      funBonus += amusementValue;
     }
-    
+
     if (cart.containsItem("alligatorDayOneTicket")
         || cart.containsItem("alligatorDayTwoTicket")
         || cart.containsItem("alligatorDayThreeTicket")
         || cart.containsItem("alligatorDayFourTicket")) {
-      funBonus += alligatorWrestlingValue; 
+      funBonus += alligatorWrestlingValue;
     }
-    
+
     if (cart.containsItem("museumDayOneTicket")
         || cart.containsItem("museumDayTwoTicket")
         || cart.containsItem("museumDayThreeTicket")
         || cart.containsItem("museumDayFourTicket")) {
-      funBonus += museumValue; 
+      funBonus += museumValue;
     }
 
     return (double) 1000 - travelPenalty + hotelBonus + funBonus;
@@ -326,7 +336,20 @@ public class TACValuation extends AbsSparseValuation
       }
     }
 
+    // at least one arrival and one departure
+    
+    if (!(cart.containsItem("dayOneArrivalTicket")
+        || cart.containsItem("dayTwoArrivalTicket")
+        || cart.containsItem("dayThreeArrivalTicket")
+        || cart.containsItem("dayFourArrivalTicket"))
+        && (!(cart.containsItem("dayTwoDepartureTicket")
+            || cart.containsItem("dayThreeDepartureTicket")
+            || cart.containsItem("dayFourDepartureTicket")
+            || cart.containsItem("dayFiveDepartureTicket")))) {
+      return false;
+    }
+    
     return true;
-  }
 
+  }
 }
