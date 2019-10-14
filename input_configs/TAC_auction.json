@@ -1,0 +1,563 @@
+{
+	"name": "TACAuction", 
+	"startingDelayTime": 10, 
+	"simulationDelayTime": 1, 
+	"numTotalRuns": 1, 
+	"simulation": [{
+		"numRuns": 1, 
+		"items": [{
+			"itemName": "dayOneArrivalTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayTwoArrivalTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayThreeArrivalTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayFourArrivalTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayTwoDepartureTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayThreeDepartureTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayFourDepartureTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayFiveDepartureTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightOneHotelGood", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightTwoHotelGood", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightThreeHotelGood", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightFourHotelGood", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightOneHotelFair", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightTwoHotelFair", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightThreeHotelFair", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightFourHotelFair", 
+			"numItems": "1"
+		}, 
+			{
+			"itemName": "museumDayOneTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "museumDayTwoTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "museumDayThreeTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "museumDayFourTicket", 
+			"numItems": "1"
+		}, 
+			{
+			"itemName": "amusementDayOneTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "amusementDayTwoTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "amusementDayThreeTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "amusementDayFourTicket", 
+			"numItems": "1"
+		}
+			{
+			"itemName": "alligatorDayOneTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "alligatorDayTwoTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "alligatorDayThreeTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "alligatorDayFourTicket", 
+			"numItems": "1"
+		}
+	], 
+		"valuation": [{
+			"distribution": "TACValuationDistribution",
+			"generator": [{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}, 
+			{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}, 
+			{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}, 
+			{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}, 
+			{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}, 
+			{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}],
+			"items": [{
+				"itemName": "testItem"
+			}]
+		}], 
+		"endowment": [{
+			"distribution": "IndependentEndowmentDist", 
+			"generator": [
+				{
+				"name": "ConcreteValGenerator", 
+				"parameters": [0.0]
+				}, 
+				{
+				"name": "ConcreteValGenerator", 
+				"parameters": [100.0]
+				}, 
+			],
+			"items": [{
+				"itemName": "testItem", 
+			}],
+		}], 
+		"seqMarket": [{
+			"simMarket": [{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			}, 
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			}, 
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+						{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			},
+		]
+		}]
+	}]
+}
