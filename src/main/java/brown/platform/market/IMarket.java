@@ -48,6 +48,10 @@ public interface IMarket {
    */
   public void tick();
   
+  
+  public Integer getTimestep(); 
+  
+  
   /**
    * Set/update reserve price(s) for the auction. 
    */

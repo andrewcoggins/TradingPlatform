@@ -131,18 +131,18 @@ public class MarketManager implements IMarketManager {
     IMarket market = this.activeMarkets.get(marketID);
     market.tick();
     market.updateInnerInformation();
-    // TODO: sort this out
-    // this.whiteboard.postInnerInformation(marketID,
-    // this.activeMarkets.get(marketID).getPublicState());
+    
+    for (Integer agentID : agents) {
+      this.whiteboard.postInnerInformation(marketID, agentID,
+          this.activeMarkets.get(marketID).getPublicState());
+    }
 
     List<ITradeRequestMessage> tradeRequests =
         new LinkedList<ITradeRequestMessage>();
     for (Integer agentID : agents) {
       ITradeRequestMessage tRequest = market.constructTradeRequest(agentID);
-      // TODO: add the inner information here. This includes reserves, whatever
-      // else.
-      // tRequest.addInformation(whiteboard)
-      // for an initial trade request in the most basic case... what is it?
+      IMarketPublicState agentState = whiteboard.getInnerInformation(marketID, agentID, market.getTimestep()); 
+      tRequest.addInformation(agentState); 
       tradeRequests.add(tRequest);
     }
     return tradeRequests;
@@ -155,11 +155,10 @@ public class MarketManager implements IMarketManager {
         new HashMap<Integer, IInformationMessage>();
     IMarketPublicState publicState =
         this.whiteboard.getOuterInformation(marketID);
-    // TODO: somehow construct information messages from this public state.
 
     for (Integer agentID : agentIDs) {
       informationMessages.put(agentID,
-          new InformationMessage(0, agentID, new Whiteboard()));
+          new InformationMessage(0, agentID, publicState));
     }
     return informationMessages;
   }

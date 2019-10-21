@@ -88,6 +88,11 @@ public class Market implements IMarket {
   public void tick() {
     this.STATE.tick();
   }
+  
+  @Override
+  public Integer getTimestep() {
+    return this.STATE.getTicks();
+  }
 
   @Override
   public boolean isOpen() {

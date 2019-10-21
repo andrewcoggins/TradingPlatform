@@ -51,12 +51,14 @@ public class BasicSimulationTest {
       
       String line; 
       while((line = br.readLine()) != null) {
+        System.out.println(line); 
         if (line.trim().equals("Utility Manager: Final Utility:")) {
           finalUtility = true; 
         } else if (line.trim().equals("solo -> [100.0]")) {
           solo = true; 
         }  
       }
+      
       assertTrue(finalUtility); 
       assertTrue(solo);
     }
