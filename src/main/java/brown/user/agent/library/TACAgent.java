@@ -23,6 +23,7 @@ import brown.user.agent.IAgent;
 
 /**
  * tac agent bids in a TAC auction. 
+ * selects a minimally feasible package. 
  * 
  * @author andrewcoggins
  *
