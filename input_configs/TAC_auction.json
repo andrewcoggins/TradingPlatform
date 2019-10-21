@@ -1,0 +1,643 @@
+{
+	"name": "TACAuction", 
+	"startingDelayTime": 3, 
+	"simulationDelayTime": 1, 
+	"numTotalRuns": 1, 
+	"simulation": [{
+		"numRuns": 1, 
+		"items": [{
+			"itemName": "dayOneArrivalTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayTwoArrivalTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayThreeArrivalTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayFourArrivalTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayTwoDepartureTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayThreeDepartureTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayFourDepartureTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "dayFiveDepartureTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightOneHotelGood", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightTwoHotelGood", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightThreeHotelGood", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightFourHotelGood", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightOneHotelFair", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightTwoHotelFair", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightThreeHotelFair", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "nightFourHotelFair", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "museumDayOneTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "museumDayTwoTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "museumDayThreeTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "museumDayFourTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "amusementDayOneTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "amusementDayTwoTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "amusementDayThreeTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "amusementDayFourTicket", 
+			"numItems": "1"
+		}
+			{
+			"itemName": "alligatorDayOneTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "alligatorDayTwoTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "alligatorDayThreeTicket", 
+			"numItems": "1"
+		}, 
+		{
+			"itemName": "alligatorDayFourTicket", 
+			"numItems": "1"
+		}
+	], 
+		"valuation": [{
+			"distribution": "TACValuationDistribution",
+			"generator": [{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}, 
+			{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}, 
+			{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}, 
+			{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}, 
+			{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}, 
+			{
+				"name": "UniformIntegerValGenerator", 
+				"parameters": [0.0, 1.0]
+			}],
+			"items": [{
+			"itemName": "dayOneArrivalTicket"
+		}, 
+		{
+			"itemName": "dayTwoArrivalTicket"
+		}, 
+		{
+			"itemName": "dayThreeArrivalTicket"
+		}, 
+		{
+			"itemName": "dayFourArrivalTicket"
+		}, 
+		{
+			"itemName": "dayTwoDepartureTicket"
+		}, 
+		{
+			"itemName": "dayThreeDepartureTicket"
+		}, 
+		{
+			"itemName": "dayFourDepartureTicket"
+		}, 
+		{
+			"itemName": "dayFiveDepartureTicket"
+		}, 
+		{
+			"itemName": "nightOneHotelGood"
+		}, 
+		{
+			"itemName": "nightTwoHotelGood"
+		}, 
+		{
+			"itemName": "nightThreeHotelGood"
+		}, 
+		{
+			"itemName": "nightFourHotelGood"
+		}, 
+		{
+			"itemName": "nightOneHotelFair"
+		}, 
+		{
+			"itemName": "nightTwoHotelFair"
+		}, 
+		{
+			"itemName": "nightThreeHotelFair"
+		}, 
+		{
+			"itemName": "nightFourHotelFair"
+		}, 
+		{
+			"itemName": "museumDayOneTicket"
+		}, 
+		{
+			"itemName": "museumDayTwoTicket"
+		}, 
+		{
+			"itemName": "museumDayThreeTicket"
+		}, 
+		{
+			"itemName": "museumDayFourTicket"
+		}, 
+		{
+			"itemName": "amusementDayOneTicket"
+		}, 
+		{
+			"itemName": "amusementDayTwoTicket"
+		}, 
+		{
+			"itemName": "amusementDayThreeTicket"
+		}, 
+		{
+			"itemName": "amusementDayFourTicket"
+		}
+			{
+			"itemName": "alligatorDayOneTicket"
+		}, 
+		{
+			"itemName": "alligatorDayTwoTicket"
+		}, 
+		{
+			"itemName": "alligatorDayThreeTicket"
+		}, 
+		{
+			"itemName": "alligatorDayFourTicket"
+		}
+		]
+		}], 
+		"endowment": [{
+			"distribution": "IndependentEndowmentDist", 
+			"generator": [
+				{
+				"name": "ConcreteValGenerator", 
+				"parameters": [0.0]
+				}, 
+				{
+				"name": "ConcreteValGenerator", 
+				"parameters": [100.0]
+				}, 
+			],
+			"items": [],
+		}], 
+		"seqMarket": [{
+			"simMarket": [{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "dayOneArrivalTicket"
+				}]
+			}, 
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "dayTwoArrivalTicket"
+				}]
+			}, 
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "dayThreeArrivalTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "dayFourArrivalTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "dayTwoDepartureTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "dayThreeDepartureTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "dayFourDepartureTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "dayFiveDepartureTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "nightOneHotelGood"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "nightTwoHotelGood"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "nightThreeHotelGood"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "nightFourHotelGood"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "nightOneHotelFair"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "nightTwoHotelFair"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "nightThreeHotelFair"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "nightFourHotelFair"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "museumDayOneTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "museumDayTwoTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "museumDayThreeTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "museumDayFourTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "amusementDayOneTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "amusementDayTwoTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "amusementDayThreeTicket"
+				}]
+			},
+						{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "amusementDayFourTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "alligatorDayOneTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "alligatorDayTwoTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "alligatorDayThreeTicket"
+				}]
+			},
+			{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "AnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "alligatorDayFourTicket"
+				}]
+			},
+		]
+		}]
+	}]
+}
