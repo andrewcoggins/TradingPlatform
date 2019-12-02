@@ -2,11 +2,8 @@ package brown.platform.market.library;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import brown.auction.marketstate.IMarketPublicState;
 import brown.auction.marketstate.IMarketState;
-import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.library.TradeRequestMessage;
@@ -22,14 +19,15 @@ public class Market implements IMarket {
   private final Integer ID;
   private final IFlexibleRules RULES;
   private final IMarketState STATE;
-  private final IMarketPublicState PUBLICSTATE;
+  private final IMarketState PUBLICSTATE;
   private final ICart TRADEABLES;
 
   private List<ITradeMessage> bids;
 
-  
+  // TODO: make the market remember its history in a memory-efficient way. 
+  // make the state a remembering thing. 
   public Market(Integer ID, IFlexibleRules rules, IMarketState state,
-      IMarketPublicState publicState, ICart tradeables) {
+      IMarketState publicState, ICart tradeables) {
     this.ID = ID;
     this.RULES = rules;
     this.STATE = state;
@@ -61,6 +59,11 @@ public class Market implements IMarket {
   }
 
   public List<IAccountUpdate> constructAccountUpdates() {
+    // ok... if the termination condition is that there are no bids, the allocation rule is not gonna do anything
+    // because there are no bids. 
+    // so what will do the allocation? 
+    // the allocation rule has to use a history. 
+    
     AuctionLogging.log("Bids submitted to Auction " + this.ID.toString() + ": " + this.bids);
     this.RULES.getARule().setAllocation(this.STATE, this.bids);
     AuctionLogging.log("Allocations from Auction " + this.ID.toString() + ": " + this.STATE.getAllocation());
@@ -101,7 +104,7 @@ public class Market implements IMarket {
   }
 
   @Override
-  public IMarketPublicState getPublicState() {
+  public IMarketState getPublicState() {
     return this.PUBLICSTATE;
   }
 

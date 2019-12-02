@@ -28,6 +28,7 @@ public class BasicSimulation extends AbsUserSimulation {
     while (true) {
       if (!st.isAlive()) {
         at.interrupt();
+        atTwo.interrupt();
         break;
       }
       Thread.sleep(1000);

@@ -1,35 +1,36 @@
 package brown.platform.information.library;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketPublicState;
+import brown.auction.marketstate.library.MarketPublicState;
 import brown.platform.information.IWhiteboard;
 
 //TODO: still need to accomodate different agents having different info. 
 
 public class Whiteboard implements IWhiteboard {
 
-	private Map<Integer, List<IMarketPublicState>> innerMarketWhiteboard;
+  // map from market IDs to a list of market public states, for the timesteps. 
+  // TODO: make the market state something that remembers. 
+	private Map<Integer, IMarketPublicState> innerMarketWhiteboard;
 	private Map<Integer, IMarketPublicState> outerMarketWhiteboard; 
 	
 	public Whiteboard() {
-		this.innerMarketWhiteboard = new HashMap<Integer, List<IMarketPublicState>>(); 
+		this.innerMarketWhiteboard = new HashMap<Integer, IMarketPublicState>(); 
 		this.outerMarketWhiteboard = new HashMap<Integer, IMarketPublicState>(); 
 	}
 
   @Override
   public void postInnerInformation(Integer marketID, Integer agentID, 
       IMarketPublicState marketPublicState) {
-    List<IMarketPublicState> innerMarketStates; 
+    IMarketPublicState innerMarketStates; 
     if (this.innerMarketWhiteboard.containsKey(marketID)) {
       innerMarketStates = this.innerMarketWhiteboard.get(marketID); 
     } else {
-      innerMarketStates = new LinkedList<IMarketPublicState>(); 
+      innerMarketStates = new MarketPublicState(); 
     }
-    innerMarketStates.add(marketPublicState); 
+    innerMarketStates = marketPublicState; 
     this.innerMarketWhiteboard.put(marketID, innerMarketStates); 
   }
 

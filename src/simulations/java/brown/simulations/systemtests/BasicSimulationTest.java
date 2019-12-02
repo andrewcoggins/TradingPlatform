@@ -21,6 +21,7 @@ public class BasicSimulationTest {
 
   @Test
   public void testBasicSimulation() throws InterruptedException, IOException {
+    // NOTE: PRINTING ANYTHING IN THIS TEST WILL KILL THE TEST. 
     List<String> agentList = new LinkedList<String>();
     agentList.add("brown.user.agent.library.SimpleAgent");
     BasicSimulation basicSim = new BasicSimulation(agentList,
@@ -51,7 +52,6 @@ public class BasicSimulationTest {
       
       String line; 
       while((line = br.readLine()) != null) {
-        System.out.println(line); 
         if (line.trim().equals("Utility Manager: Final Utility:")) {
           finalUtility = true; 
         } else if (line.trim().equals("solo -> [100.0]")) {
