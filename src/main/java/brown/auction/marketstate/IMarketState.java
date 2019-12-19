@@ -53,7 +53,5 @@ public interface IMarketState {
   public List<List<ITradeMessage>> getTradeHistory(); 
   
   public void addToTradeHistory(List<ITradeMessage> tradeMessages); 
-  
-
 
 }

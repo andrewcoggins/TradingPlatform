@@ -3,9 +3,9 @@ package brown.simulations;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TACSimulation extends AbsUserSimulation {
+public class TACSimpleSimulation extends AbsUserSimulation {
 
-  public TACSimulation(List<String> agentClass, String inputJSON,
+  public TACSimpleSimulation(List<String> agentClass, String inputJSON,
       String outFile, boolean writeToFile) {
     super(agentClass, inputJSON, outFile, writeToFile);
   }
@@ -38,8 +38,8 @@ public class TACSimulation extends AbsUserSimulation {
   public static void main(String[] args) throws InterruptedException {
     List<String> agentList = new LinkedList<String>();
     agentList.add("brown.user.agent.library.TACAgent");
-    TACSimulation tacSim = new TACSimulation(agentList,
-        "input_configs/TAC_auction.json", "outfile", false);
+    TACSimpleSimulation tacSim = new TACSimpleSimulation(agentList,
+        "input_configs/TAC_auction_simple.json", "outfile", false);
     tacSim.run();
   }
 

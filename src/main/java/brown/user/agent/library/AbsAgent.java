@@ -31,6 +31,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
 
   protected double money;
   protected Map<String, IItem> goods;
+  protected String name; 
 
   /**
    * 
@@ -44,6 +45,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   public AbsAgent(String host, int port, ISetup gameSetup) {
     super(host, port, gameSetup);
     final AbsAgent agent = this;
+    this.name = "default"; 
     // All agents listen for messages
     CLIENT.addListener(new Listener() {
       public void received(Connection connection, Object message) {
@@ -74,6 +76,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   public AbsAgent(String host, int port, ISetup gameSetup, String name) {
     super(host, port, gameSetup);
     final AbsAgent agent = this;
+    this.name = name; 
     // All agents listen for messages.
     CLIENT.addListener(new Listener() {
       public void received(Connection connection, Object message) {
@@ -94,7 +97,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   
   @Override
   public void onBankUpdate(IBankUpdateMessage bankUpdate) {
-    UserLogging.log(bankUpdate.toString());
+    UserLogging.log(this.name + ": " + bankUpdate.toString());
     this.money += bankUpdate.getMoneyAddedLost();
     updateItems(bankUpdate.getItemsAdded(), true);
     updateItems(bankUpdate.getItemsLost(), false);

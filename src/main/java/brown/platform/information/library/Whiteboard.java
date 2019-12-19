@@ -3,7 +3,7 @@ package brown.platform.information.library;
 import java.util.HashMap;
 import java.util.Map;
 
-import brown.auction.marketstate.IMarketPublicState;
+import brown.auction.marketstate.IMarketState;
 import brown.auction.marketstate.library.MarketPublicState;
 import brown.platform.information.IWhiteboard;
 
@@ -13,18 +13,18 @@ public class Whiteboard implements IWhiteboard {
 
   // map from market IDs to a list of market public states, for the timesteps. 
   // TODO: make the market state something that remembers. 
-	private Map<Integer, IMarketPublicState> innerMarketWhiteboard;
-	private Map<Integer, IMarketPublicState> outerMarketWhiteboard; 
+	private Map<Integer, IMarketState> innerMarketWhiteboard;
+	private Map<Integer, IMarketState> outerMarketWhiteboard; 
 	
 	public Whiteboard() {
-		this.innerMarketWhiteboard = new HashMap<Integer, IMarketPublicState>(); 
-		this.outerMarketWhiteboard = new HashMap<Integer, IMarketPublicState>(); 
+		this.innerMarketWhiteboard = new HashMap<Integer, IMarketState>(); 
+		this.outerMarketWhiteboard = new HashMap<Integer, IMarketState>(); 
 	}
 
   @Override
   public void postInnerInformation(Integer marketID, Integer agentID, 
-      IMarketPublicState marketPublicState) {
-    IMarketPublicState innerMarketStates; 
+      IMarketState marketPublicState) {
+    IMarketState innerMarketStates; 
     if (this.innerMarketWhiteboard.containsKey(marketID)) {
       innerMarketStates = this.innerMarketWhiteboard.get(marketID); 
     } else {
@@ -36,17 +36,19 @@ public class Whiteboard implements IWhiteboard {
 
   @Override
   public void postOuterInformation(Integer marketID,
-      IMarketPublicState marketPublicState) {
+      IMarketState marketPublicState) {
     this.outerMarketWhiteboard.put(marketID, marketPublicState); 
   }
 
   @Override
-  public IMarketPublicState getInnerInformation(Integer marketID, Integer agentID, Integer timeStep) {
-    return this.innerMarketWhiteboard.get(marketID).get(timeStep); 
+  public IMarketState getInnerInformation(Integer marketID, Integer agentID, Integer timeStep) {
+    // TODO: fix and uncomment
+    //return this.innerMarketWhiteboard.get(marketID).get(timeStep); 
+    return null; 
   }
 
   @Override
-  public IMarketPublicState getOuterInformation(Integer marketID) {
+  public IMarketState getOuterInformation(Integer marketID) {
     return this.outerMarketWhiteboard.get(marketID); 
   }
 

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import brown.auction.marketstate.IMarketPublicState;
+import brown.auction.marketstate.IMarketState;
 import brown.auction.marketstate.library.MarketPublicState;
 import brown.auction.marketstate.library.MarketState;
 import brown.communication.messages.IInformationMessage;
@@ -141,7 +141,7 @@ public class MarketManager implements IMarketManager {
         new LinkedList<ITradeRequestMessage>();
     for (Integer agentID : agents) {
       ITradeRequestMessage tRequest = market.constructTradeRequest(agentID);
-      IMarketPublicState agentState = whiteboard.getInnerInformation(marketID, agentID, market.getTimestep()); 
+      IMarketState agentState = whiteboard.getInnerInformation(marketID, agentID, market.getTimestep()); 
       tRequest.addInformation(agentState); 
       tradeRequests.add(tRequest);
     }
@@ -153,7 +153,7 @@ public class MarketManager implements IMarketManager {
       constructInformationMessages(Integer marketID, List<Integer> agentIDs) {
     Map<Integer, IInformationMessage> informationMessages =
         new HashMap<Integer, IInformationMessage>();
-    IMarketPublicState publicState =
+    IMarketState publicState =
         this.whiteboard.getOuterInformation(marketID);
 
     for (Integer agentID : agentIDs) {

@@ -1,18 +1,18 @@
 package brown.communication.messages.library;
 
-import brown.auction.marketstate.IMarketPublicState;
+import brown.auction.marketstate.IMarketState;
 import brown.communication.messages.IInformationMessage;
 import brown.user.agent.IAgent;
 
 public class InformationMessage extends AbsServerToAgentMessage implements IInformationMessage {
 
-  private IMarketPublicState publicState; 
+  private IMarketState publicState; 
   
   public InformationMessage() {
     super(null, null); 
   }
   
-  public InformationMessage(int messageID, int agentID, IMarketPublicState publicState) {
+  public InformationMessage(int messageID, int agentID, IMarketState publicState) {
     super(messageID, agentID); 
     this.publicState = publicState; 
   }
@@ -22,7 +22,7 @@ public class InformationMessage extends AbsServerToAgentMessage implements IInfo
     agent.onInformationMessage(this);
   }
   
-  public IMarketPublicState getPublicState() {
+  public IMarketState getPublicState() {
     return this.publicState; 
   } 
 

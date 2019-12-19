@@ -1,6 +1,6 @@
 package brown.communication.messages;
 
-import brown.auction.marketstate.IMarketPublicState;
+import brown.auction.marketstate.IMarketState;
 import brown.communication.bid.library.BidType;
 import brown.platform.item.ICart;
 
@@ -14,6 +14,6 @@ public interface ITradeRequestMessage extends IServerToAgentMessage {
   
   public ICart getItems(); 
   
-  public void addInformation(IMarketPublicState publicState); 
+  public void addInformation(IMarketState publicState); 
   
 }
