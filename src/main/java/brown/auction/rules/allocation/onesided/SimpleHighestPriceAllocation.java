@@ -22,6 +22,7 @@ public class SimpleHighestPriceAllocation extends AbsRule
     implements IAllocationRule {
 
   @Override
+  // what is the allocation for an ascending auction? 
   public void setAllocation(IMarketState state, List<ITradeMessage> messages) {
     // TODO: do I check that bids are single here, or in activity rule?
     Map<Integer, List<ICart>> highest = new HashMap<Integer, List<ICart>>();

@@ -2,7 +2,7 @@ package brown.platform.market;
 
 import java.util.List;
 
-import brown.auction.marketstate.IMarketPublicState;
+import brown.auction.marketstate.IMarketState;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
@@ -48,6 +48,10 @@ public interface IMarket {
    */
   public void tick();
   
+  
+  public Integer getTimestep(); 
+  
+  
   /**
    * Set/update reserve price(s) for the auction. 
    */
@@ -82,6 +86,8 @@ public interface IMarket {
    * IR Policies. 
    * @return
    */
-  public IMarketPublicState getPublicState(); 
+  public IMarketState getPublicState(); 
+  
+  public void updateTradeHistory(); 
   
 }

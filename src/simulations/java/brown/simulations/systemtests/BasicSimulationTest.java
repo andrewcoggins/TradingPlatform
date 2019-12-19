@@ -21,6 +21,7 @@ public class BasicSimulationTest {
 
   @Test
   public void testBasicSimulation() throws InterruptedException, IOException {
+    // NOTE: PRINTING ANYTHING IN THIS TEST WILL KILL THE TEST. 
     List<String> agentList = new LinkedList<String>();
     agentList.add("brown.user.agent.library.SimpleAgent");
     BasicSimulation basicSim = new BasicSimulation(agentList,
@@ -57,6 +58,7 @@ public class BasicSimulationTest {
           solo = true; 
         }  
       }
+      
       assertTrue(finalUtility); 
       assertTrue(solo);
     }

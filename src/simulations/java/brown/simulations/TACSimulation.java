@@ -14,16 +14,16 @@ public class TACSimulation extends AbsUserSimulation {
 
     ServerRunnable sr = new ServerRunnable();
     AgentRunnable ar = new AgentRunnable(agentClass.get(0), "solo");
-
-
+    AgentRunnable arTwo = new AgentRunnable(agentClass.get(0), "pacifica");
+    
     Thread st = new Thread(sr);
     Thread at = new Thread(ar);
-//    Thread atTwo = new Thread(ar);
+    Thread atTwo = new Thread(arTwo);
 
     st.start();
     if (agentClass != null) {
       at.start();
-//      atTwo.start(); 
+      atTwo.start(); 
     }
 
     while (true) {

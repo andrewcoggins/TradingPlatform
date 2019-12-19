@@ -1,5 +1,9 @@
 package brown.communication.messages;
 
-public interface IInformationMessage extends IServerToAgentMessage {
+import brown.auction.marketstate.IMarketState;
 
+public interface IInformationMessage extends IServerToAgentMessage {
+  
+  public IMarketState getPublicState(); 
+  
 }

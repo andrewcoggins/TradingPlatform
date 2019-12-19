@@ -3,10 +3,9 @@ package brown.auction.marketstate;
 import java.util.List;
 import java.util.Map;
 
-import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
-import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.item.ICart;
 /**
  * Stores the internal state of a market as it runs. Consists of a series of
@@ -15,11 +14,6 @@ import brown.platform.item.ICart;
  * @author acoggins
  */
 public interface IMarketState {
-
-
-  public Double getFlatIncrement();
-
-  public void setFlatIncrement(Double increment);
 
   // Allocation rule
   public Map<Integer, List<ICart>> getAllocation();
@@ -44,11 +38,10 @@ public interface IMarketState {
   public boolean getAcceptable();
 
   public void setAcceptable(boolean b);
-
-  // IR policy
-  public Map<Integer, List<IInformationMessage>> getReport();
-
-  public void setReport(Map<Integer, List<IInformationMessage>> gameReport);
+  
+  public Map<String, Double> getReserves(); 
+  
+  public void setReserves(Map<String, Double> reserves); 
 
   // Termination condition
   public long getTime();
@@ -60,6 +53,9 @@ public interface IMarketState {
   public boolean isOpen();
 
   public void close();
-
+  
+  public List<List<ITradeMessage>> getTradeHistory(); 
+  
+  public void addToTradeHistory(List<ITradeMessage> tradeMessages); 
 
 }

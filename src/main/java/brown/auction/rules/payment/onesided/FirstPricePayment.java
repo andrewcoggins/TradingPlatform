@@ -39,7 +39,7 @@ public class FirstPricePayment implements IPaymentRule {
 
     List<IAccountUpdate> accountUpdates = new LinkedList<IAccountUpdate>();
 
-    // of everyone who bid on it, get thehighest price.
+    // of everyone who bid on it, get the highest price.
     for (Map.Entry<Integer, List<ICart>> anEntry : allocation.entrySet()) {
       for (ICart aCart : anEntry.getValue()) {
          if (highest.containsKey(aCart)) {

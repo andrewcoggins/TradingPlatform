@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import brown.auction.marketstate.IMarketPublicState;
+import brown.auction.marketstate.IMarketState;
 import brown.auction.marketstate.library.MarketPublicState;
 import brown.auction.marketstate.library.MarketState;
 import brown.communication.messages.IInformationMessage;
@@ -79,7 +80,7 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public void openMarkets(int index) {
+  public void openMarkets(int index, Set<Integer> agents) {
     // TODO: somehow open markets using whiteboard information.
     IMarketBlock currentMarketBlock = this.allMarkets.get(index);
     List<IFlexibleRules> marketRules = currentMarketBlock.getMarkets();
@@ -87,7 +88,7 @@ public class MarketManager implements IMarketManager {
     for (int i = 0; i < marketRules.size(); i++) {
       this.activeMarkets.put(i,
           new Market(i, marketRules.get(i), new MarketState(),
-              new MarketPublicState(), marketTradeables.get(i)));
+              new MarketPublicState(), agents, marketTradeables.get(i)));
     }
   }
 
@@ -129,20 +130,26 @@ public class MarketManager implements IMarketManager {
   public List<ITradeRequestMessage> updateMarket(Integer marketID,
       List<Integer> agents) {
     IMarket market = this.activeMarkets.get(marketID);
+    // tick the market
     market.tick();
+    // update market trade history
+    market.updateTradeHistory(); 
+    // set reserves. 
+    market.setReserves();
+    // update inner information: copy changes from the market state to the market public state. 
     market.updateInnerInformation();
-    // TODO: sort this out
-    // this.whiteboard.postInnerInformation(marketID,
-    // this.activeMarkets.get(marketID).getPublicState());
+    
+    for (Integer agentID : agents) {
+      this.whiteboard.postInnerInformation(marketID, agentID,
+          this.activeMarkets.get(marketID).getPublicState());
+    }
 
     List<ITradeRequestMessage> tradeRequests =
         new LinkedList<ITradeRequestMessage>();
     for (Integer agentID : agents) {
       ITradeRequestMessage tRequest = market.constructTradeRequest(agentID);
-      // TODO: add the inner information here. This includes reserves, whatever
-      // else.
-      // tRequest.addInformation(whiteboard)
-      // for an initial trade request in the most basic case... what is it?
+      IMarketState agentState = whiteboard.getInnerInformation(marketID, agentID, market.getTimestep()); 
+      tRequest.addInformation(agentState); 
       tradeRequests.add(tRequest);
     }
     return tradeRequests;
@@ -153,13 +160,12 @@ public class MarketManager implements IMarketManager {
       constructInformationMessages(Integer marketID, List<Integer> agentIDs) {
     Map<Integer, IInformationMessage> informationMessages =
         new HashMap<Integer, IInformationMessage>();
-    IMarketPublicState publicState =
+    IMarketState publicState =
         this.whiteboard.getOuterInformation(marketID);
-    // TODO: somehow construct information messages from this public state.
 
     for (Integer agentID : agentIDs) {
       informationMessages.put(agentID,
-          new InformationMessage(0, agentID, new Whiteboard()));
+          new InformationMessage(0, agentID, publicState));
     }
     return informationMessages;
   }

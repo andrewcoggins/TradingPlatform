@@ -175,7 +175,7 @@ public class SimulationManager implements ISimulationManager {
   
   private synchronized void runAuction(int simulationDelayTime, int index)
       throws InterruptedException {
-    this.currentMarketManager.openMarkets(index);
+    this.currentMarketManager.openMarkets(index, this.privateToPublic.keySet());
     while (this.currentMarketManager.anyMarketsOpen()) {
       Thread.sleep(simulationDelayTime * INTERVAL);
       PlatformLogging.log("updating auctions");
@@ -191,6 +191,7 @@ public class SimulationManager implements ISimulationManager {
       // we still need to synchronize on the market for this whole operation. or maybe can pare it down to MM methods? 
       synchronized (this.currentMarketManager.getActiveMarket(marketID)) {
         if (this.currentMarketManager.marketOpen(marketID)) {
+          // updating the market. 
           List<ITradeRequestMessage> tradeRequests =
               this.currentMarketManager.updateMarket(marketID,
                   new LinkedList<Integer>(this.agentConnections.keySet()));
@@ -209,8 +210,6 @@ public class SimulationManager implements ISimulationManager {
           Map<Integer, IInformationMessage> informationMessages =
               this.currentMarketManager.constructInformationMessages(marketID, 
                       new LinkedList<Integer>(this.agentConnections.keySet()));
-          
-          
           for (Integer agentID : bankUpdates.keySet()) {
             this.messageServer.sendMessage(this.agentConnections.get(agentID),
                 informationMessages.get(agentID));

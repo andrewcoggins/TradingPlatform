@@ -3,9 +3,9 @@ package brown.simulations;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BasicSimulation extends AbsUserSimulation {
+public class TACSimpleSimulation extends AbsUserSimulation {
 
-  public BasicSimulation(List<String> agentClass, String inputJSON,
+  public TACSimpleSimulation(List<String> agentClass, String inputJSON,
       String outFile, boolean writeToFile) {
     super(agentClass, inputJSON, outFile, writeToFile);
   }
@@ -14,21 +14,21 @@ public class BasicSimulation extends AbsUserSimulation {
 
     ServerRunnable sr = new ServerRunnable();
     AgentRunnable ar = new AgentRunnable(agentClass.get(0), "solo");
-
+    AgentRunnable arTwo = new AgentRunnable(agentClass.get(0), "pacifica");
+    
     Thread st = new Thread(sr);
     Thread at = new Thread(ar);
-    Thread atTwo = new Thread(ar);
+    Thread atTwo = new Thread(arTwo);
 
     st.start();
     if (agentClass != null) {
       at.start();
-      atTwo.start();
+      atTwo.start(); 
     }
 
     while (true) {
       if (!st.isAlive()) {
         at.interrupt();
-        atTwo.interrupt();
         break;
       }
       Thread.sleep(1000);
@@ -37,10 +37,10 @@ public class BasicSimulation extends AbsUserSimulation {
 
   public static void main(String[] args) throws InterruptedException {
     List<String> agentList = new LinkedList<String>();
-    agentList.add("brown.user.agent.library.SimpleAgent");
-    BasicSimulation basicSim = new BasicSimulation(agentList,
-        "input_configs/second_price_auction.json", "outfile", false);
-    basicSim.run();
+    agentList.add("brown.user.agent.library.TACAgent");
+    TACSimpleSimulation tacSim = new TACSimpleSimulation(agentList,
+        "input_configs/TAC_auction_simple.json", "outfile", false);
+    tacSim.run();
   }
 
 }

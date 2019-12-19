@@ -6,10 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
-import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
-import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.item.ICart;
 
 /**
@@ -18,42 +17,42 @@ import brown.platform.item.ICart;
  * @author acoggins
  */
 public class MarketState implements IMarketState {
-  
-  private int ticks;  
+
+  private int ticks;
   private long time;
   
-  // Allocation rule
-  private Map<Integer, List<ICart>> allocation;
+  // TODO: work the trade history in this guy. 
+  // the trade history needs to be in here for the current step. 
   
+  // history
+  private List<List<ITradeMessage>> tradeHistory;
+
+  // Allocation rule
+
+  private Map<Integer, List<ICart>> allocation;
+
   // Payment rule
   private List<IAccountUpdate> payments;
-  
+
   // Query rule
   private TradeRequestMessage tRequest;
-  
-  private double flatIncrement;
-  
-  // Activity rule
-  private Boolean isAcceptable; 
 
-  
-  // IR policy
-  private Map<Integer, List<IInformationMessage>> gameReports;
-  
+  // Activity rule
+  private Boolean isAcceptable;
+  // activity rule also deals with reserve prices. 
+  private Map<String, Double> reserves; 
+
   // Termination condition
   private boolean isOpen;
-  
+
   public MarketState() {
     this.allocation = new HashMap<Integer, List<ICart>>();
     this.payments = new LinkedList<IAccountUpdate>();
     this.time = System.currentTimeMillis();
-    this.isOpen = true; 
-//      this.reserve.put(t,0.);
-//      this.altAlloc.put(t,  new LinkedList<Integer>());
-//    }
+    this.isOpen = true;
+    this.tradeHistory = new LinkedList<List<ITradeMessage>>();
   }
 
-  
   @Override
   public void tick() {
     this.ticks++;
@@ -61,22 +60,22 @@ public class MarketState implements IMarketState {
 
   @Override
   public int getTicks() {
-    return this.ticks; 
+    return this.ticks;
   }
-  
+
   @Override
   public long getTime() {
     return this.time;
   }
-  
+
   @Override
-  public void close() { 
-    this.isOpen = false; 
+  public void close() {
+    this.isOpen = false;
   }
-  
+
   @Override
   public boolean isOpen() {
-    return this.isOpen; 
+    return this.isOpen;
   }
 
   // TODO: clearAllocation()
@@ -95,34 +94,15 @@ public class MarketState implements IMarketState {
   public void setTRequest(TradeRequestMessage t) {
     this.tRequest = t;
   }
-  
-  
-  public Double getFlatIncrement() {
-    return this.flatIncrement;
-  }
-  
-  public void setFlatIncrement(Double increment) {
-    this.flatIncrement = increment;
-  }
 
   @Override
   public boolean getAcceptable() {
-    return isAcceptable; 
+    return isAcceptable;
   }
 
   @Override
   public void setAcceptable(boolean acceptable) {
-    this.isAcceptable = acceptable; 
-  }
-
-  @Override
-  public Map<Integer, List<IInformationMessage>>  getReport() {
-    return this.gameReports; 
-  }
-
-  @Override
-  public void setReport(Map<Integer, List<IInformationMessage>> gameReport) {
-    this.gameReports = gameReport;
+    this.isAcceptable = acceptable;
   }
 
   @Override
@@ -143,6 +123,26 @@ public class MarketState implements IMarketState {
   @Override
   public void setPayments(List<IAccountUpdate> payments) {
     this.payments = payments;
+  }
+
+  @Override
+  public List<List<ITradeMessage>> getTradeHistory() {
+    return this.tradeHistory;
+  }
+
+  @Override
+  public void addToTradeHistory(List<ITradeMessage> tradeMessages) {
+    this.tradeHistory.add(tradeMessages);
+  }
+
+  @Override
+  public Map<String, Double> getReserves() {
+    return this.reserves; 
+  }
+
+  @Override
+  public void setReserves(Map<String, Double> reserves) {
+    this.reserves = reserves; 
   }
 
 }

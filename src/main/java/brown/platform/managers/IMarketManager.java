@@ -2,6 +2,7 @@ package brown.platform.managers;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.IStatusMessage;
@@ -43,7 +44,7 @@ public interface IMarketManager {
    * open the markets at a specified index. 
    * @param index
    */
-  public void openMarkets(int index); 
+  public void openMarkets(int index, Set<Integer> agents); 
   
   /**
    * handle a tradeMessage, meaning to redirect it to its intended market. 

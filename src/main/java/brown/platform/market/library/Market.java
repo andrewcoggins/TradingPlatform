@@ -2,11 +2,9 @@ package brown.platform.market.library;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
-import brown.auction.marketstate.IMarketPublicState;
 import brown.auction.marketstate.IMarketState;
-import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.library.TradeRequestMessage;
@@ -22,18 +20,22 @@ public class Market implements IMarket {
   private final Integer ID;
   private final IFlexibleRules RULES;
   private final IMarketState STATE;
-  private final IMarketPublicState PUBLICSTATE;
+  private final IMarketState PUBLICSTATE;
+  private final Set<Integer> AGENTS; 
   private final ICart TRADEABLES;
 
   private List<ITradeMessage> bids;
 
-  
+  // TODO: make the market remember its history in a memory-efficient way. 
+  // make the state a remembering thing. 
+  // at some point need to add the bids into the market state. 
   public Market(Integer ID, IFlexibleRules rules, IMarketState state,
-      IMarketPublicState publicState, ICart tradeables) {
+      IMarketState publicState, Set<Integer> agents, ICart tradeables) {
     this.ID = ID;
     this.RULES = rules;
     this.STATE = state;
     this.PUBLICSTATE = publicState;
+    this.AGENTS = agents; 
     this.TRADEABLES = tradeables;
     this.bids = new LinkedList<ITradeMessage>();
   }
@@ -61,6 +63,11 @@ public class Market implements IMarket {
   }
 
   public List<IAccountUpdate> constructAccountUpdates() {
+    // ok... if the termination condition is that there are no bids, the allocation rule is not gonna do anything
+    // because there are no bids. 
+    // so what will do the allocation? 
+    // the allocation rule has to use a history. 
+    
     AuctionLogging.log("Bids submitted to Auction " + this.ID.toString() + ": " + this.bids);
     this.RULES.getARule().setAllocation(this.STATE, this.bids);
     AuctionLogging.log("Allocations from Auction " + this.ID.toString() + ": " + this.STATE.getAllocation());
@@ -75,7 +82,7 @@ public class Market implements IMarket {
   // e.g., once per iteration in an Open Outcry auction
   @Override
   public void setReserves() {
-    this.RULES.getActRule().setReserves(this.STATE);
+    this.RULES.getActRule().setReserves(this.STATE, this.TRADEABLES);
   }
 
   
@@ -88,15 +95,20 @@ public class Market implements IMarket {
   public void tick() {
     this.STATE.tick();
   }
+  
+  @Override
+  public Integer getTimestep() {
+    return this.STATE.getTicks();
+  }
 
   @Override
   public boolean isOpen() {
-    this.RULES.getTerminationCondition().checkTerminated(this.STATE);
+    this.RULES.getTerminationCondition().checkTerminated(this.STATE, this.bids);
     return this.STATE.isOpen();
   }
 
   @Override
-  public IMarketPublicState getPublicState() {
+  public IMarketState getPublicState() {
     return this.PUBLICSTATE;
   }
 
@@ -109,6 +121,11 @@ public class Market implements IMarket {
   public void updateInnerInformation() {
     this.RULES.getInnerIRPolicy().updatePublicState(this.STATE,
         this.PUBLICSTATE);
+  }
+  
+  @Override
+  public void updateTradeHistory() {
+    this.STATE.addToTradeHistory(this.bids);
   }
 
 }

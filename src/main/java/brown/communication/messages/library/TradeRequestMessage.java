@@ -1,8 +1,8 @@
 package brown.communication.messages.library;
 
+import brown.auction.marketstate.IMarketState;
 import brown.communication.bid.library.BidType;
 import brown.communication.messages.ITradeRequestMessage;
-import brown.platform.information.IWhiteboard;
 import brown.platform.item.ICart;
 import brown.user.agent.IAgent;
 
@@ -26,6 +26,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
     this.items = null; 
   }
   
+  // TODO: add a price? 
   public TradeRequestMessage(Integer messageID, Integer auctionID, Integer agentID, BidType bidType, ICart items) {
     super(messageID, agentID);
     this.bidType = bidType; 
@@ -49,7 +50,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
   }
 
   @Override
-  public void addInformation(IWhiteboard whiteboard) {
+  public void addInformation(IMarketState publicState) {
     // TODO: 
   }
   

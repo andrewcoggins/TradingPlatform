@@ -47,7 +47,7 @@ public class TACAgent extends AbsAgent implements IAgent {
 
   @Override
   public void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage) {
-    UserLogging.log("[+] Trade Request Message Received");
+    UserLogging.log("[+] Trade Request Message Received: " + tradeRequestMessage.toString());
 
     Map<ICart, Double> bidMap = new HashMap<ICart, Double>();
     List<IItem> bidItems = new LinkedList<IItem>();
@@ -62,8 +62,7 @@ public class TACAgent extends AbsAgent implements IAgent {
     
     if (bidItems.size() != 0) {
       ICart bidCart = new Cart(bidItems);
-      System.out.println(tradeRequestMessage);
-      bidMap.put(bidCart, 0.0);
+      bidMap.put(bidCart, 10.0);
       IBidBundle oneSided = new OneSidedBidBundle(bidMap);
       ITradeMessage tradeMessage = new TradeMessage(0, this.ID,
           tradeRequestMessage.getAuctionID(), oneSided);

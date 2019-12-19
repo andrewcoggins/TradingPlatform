@@ -1,6 +1,7 @@
 package brown.auction.rules;
 
 import java.util.List;
+import java.util.Set;
 
 import brown.auction.marketstate.IMarketState;
 import brown.communication.messages.ITradeMessage;
@@ -26,6 +27,6 @@ public interface IActivityRule {
    * Handle reserve prices, which may change in some auctions.
    * @param state
    */
-  void setReserves(IMarketState state);
+  void setReserves(IMarketState state, ICart items);
 
 }
