@@ -88,4 +88,6 @@ public interface IMarket {
    */
   public IMarketState getPublicState(); 
   
+  public void updateTradeHistory(); 
+  
 }

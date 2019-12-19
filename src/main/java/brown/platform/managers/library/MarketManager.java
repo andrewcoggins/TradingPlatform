@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import brown.auction.marketstate.IMarketState;
@@ -79,7 +80,7 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public void openMarkets(int index) {
+  public void openMarkets(int index, Set<Integer> agents) {
     // TODO: somehow open markets using whiteboard information.
     IMarketBlock currentMarketBlock = this.allMarkets.get(index);
     List<IFlexibleRules> marketRules = currentMarketBlock.getMarkets();
@@ -87,7 +88,7 @@ public class MarketManager implements IMarketManager {
     for (int i = 0; i < marketRules.size(); i++) {
       this.activeMarkets.put(i,
           new Market(i, marketRules.get(i), new MarketState(),
-              new MarketPublicState(), marketTradeables.get(i)));
+              new MarketPublicState(), agents, marketTradeables.get(i)));
     }
   }
 
@@ -129,7 +130,13 @@ public class MarketManager implements IMarketManager {
   public List<ITradeRequestMessage> updateMarket(Integer marketID,
       List<Integer> agents) {
     IMarket market = this.activeMarkets.get(marketID);
+    // tick the market
     market.tick();
+    // update market trade history
+    market.updateTradeHistory(); 
+    // set reserves. 
+    market.setReserves();
+    // update inner information: copy changes from the market state to the market public state. 
     market.updateInnerInformation();
     
     for (Integer agentID : agents) {

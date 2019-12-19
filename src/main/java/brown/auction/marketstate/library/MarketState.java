@@ -22,6 +22,7 @@ public class MarketState implements IMarketState {
   private long time;
   
   // TODO: work the trade history in this guy. 
+  // the trade history needs to be in here for the current step. 
   
   // history
   private List<List<ITradeMessage>> tradeHistory;
@@ -38,6 +39,8 @@ public class MarketState implements IMarketState {
 
   // Activity rule
   private Boolean isAcceptable;
+  // activity rule also deals with reserve prices. 
+  private Map<String, Double> reserves; 
 
   // Termination condition
   private boolean isOpen;
@@ -130,6 +133,16 @@ public class MarketState implements IMarketState {
   @Override
   public void addToTradeHistory(List<ITradeMessage> tradeMessages) {
     this.tradeHistory.add(tradeMessages);
+  }
+
+  @Override
+  public Map<String, Double> getReserves() {
+    return this.reserves; 
+  }
+
+  @Override
+  public void setReserves(Map<String, Double> reserves) {
+    this.reserves = reserves; 
   }
 
 }

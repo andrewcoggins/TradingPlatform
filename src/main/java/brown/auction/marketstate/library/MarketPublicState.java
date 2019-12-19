@@ -36,6 +36,8 @@ public class MarketPublicState implements IMarketState {
 
   // Activity rule
   private Boolean isAcceptable;
+  // activity rule also deals with reserve prices. 
+  private Map<String, Double> reserves;
 
   // Termination condition
   private boolean isOpen;
@@ -128,6 +130,16 @@ public class MarketPublicState implements IMarketState {
   @Override
   public void addToTradeHistory(List<ITradeMessage> tradeMessages) {
     this.tradeHistory.add(tradeMessages);
+  }
+
+  @Override
+  public Map<String, Double> getReserves() {
+    return this.reserves; 
+  }
+
+  @Override
+  public void setReserves(Map<String, Double> reserves) {
+    this.reserves = reserves; 
   }
 
 }

@@ -2,6 +2,7 @@ package brown.platform.market.library;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import brown.auction.marketstate.IMarketState;
 import brown.communication.messages.ITradeMessage;
@@ -20,18 +21,21 @@ public class Market implements IMarket {
   private final IFlexibleRules RULES;
   private final IMarketState STATE;
   private final IMarketState PUBLICSTATE;
+  private final Set<Integer> AGENTS; 
   private final ICart TRADEABLES;
 
   private List<ITradeMessage> bids;
 
   // TODO: make the market remember its history in a memory-efficient way. 
   // make the state a remembering thing. 
+  // at some point need to add the bids into the market state. 
   public Market(Integer ID, IFlexibleRules rules, IMarketState state,
-      IMarketState publicState, ICart tradeables) {
+      IMarketState publicState, Set<Integer> agents, ICart tradeables) {
     this.ID = ID;
     this.RULES = rules;
     this.STATE = state;
     this.PUBLICSTATE = publicState;
+    this.AGENTS = agents; 
     this.TRADEABLES = tradeables;
     this.bids = new LinkedList<ITradeMessage>();
   }
@@ -78,7 +82,7 @@ public class Market implements IMarket {
   // e.g., once per iteration in an Open Outcry auction
   @Override
   public void setReserves() {
-    this.RULES.getActRule().setReserves(this.STATE);
+    this.RULES.getActRule().setReserves(this.STATE, this.TRADEABLES);
   }
 
   
@@ -99,7 +103,7 @@ public class Market implements IMarket {
 
   @Override
   public boolean isOpen() {
-    this.RULES.getTerminationCondition().checkTerminated(this.STATE);
+    this.RULES.getTerminationCondition().checkTerminated(this.STATE, this.bids);
     return this.STATE.isOpen();
   }
 
@@ -117,6 +121,11 @@ public class Market implements IMarket {
   public void updateInnerInformation() {
     this.RULES.getInnerIRPolicy().updatePublicState(this.STATE,
         this.PUBLICSTATE);
+  }
+  
+  @Override
+  public void updateTradeHistory() {
+    this.STATE.addToTradeHistory(this.bids);
   }
 
 }

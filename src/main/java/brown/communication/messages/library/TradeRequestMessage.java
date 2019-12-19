@@ -26,6 +26,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
     this.items = null; 
   }
   
+  // TODO: add a price? 
   public TradeRequestMessage(Integer messageID, Integer auctionID, Integer agentID, BidType bidType, ICart items) {
     super(messageID, agentID);
     this.bidType = bidType; 

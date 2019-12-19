@@ -38,6 +38,10 @@ public interface IMarketState {
   public boolean getAcceptable();
 
   public void setAcceptable(boolean b);
+  
+  public Map<String, Double> getReserves(); 
+  
+  public void setReserves(Map<String, Double> reserves); 
 
   // Termination condition
   public long getTime();
