@@ -12,6 +12,7 @@ import org.junit.Test;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.marketstate.library.MarketState;
 import brown.auction.rules.IActivityRule;
+import brown.auction.rules.activity.SimpleOneShotActivity;
 import brown.communication.bid.IBidBundle;
 import brown.communication.bid.library.OneSidedBidBundle;
 import brown.communication.messages.ITradeMessage;

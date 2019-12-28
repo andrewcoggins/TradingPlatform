@@ -1,4 +1,4 @@
-package brown.auction.rules.payment.onesided;
+package brown.auction.rules.payment;
 
 import java.util.LinkedList;
 import java.util.List;

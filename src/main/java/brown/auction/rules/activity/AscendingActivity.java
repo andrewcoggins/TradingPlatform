@@ -1,4 +1,4 @@
-package brown.auction.rules.activity.onesided;
+package brown.auction.rules.activity;
 
 import java.util.HashMap;
 import java.util.List;
