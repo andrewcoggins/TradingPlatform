@@ -13,7 +13,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import brown.auction.rules.IActivityRule;
-import brown.auction.rules.IAllocationRule;
+import brown.auction.rules.IUtilityRule;
 import brown.auction.rules.IInformationRevelationPolicy;
 import brown.auction.rules.IInnerIRPolicy;
 import brown.auction.rules.IPaymentRule;
@@ -43,7 +43,7 @@ public class SimulationConfigTest {
     List<IMarketConfig> mConfigs = new LinkedList<IMarketConfig>(); 
     
     
-    IAllocationRule mockAllocationRule = mock(IAllocationRule.class); 
+    IUtilityRule mockAllocationRule = mock(IUtilityRule.class); 
     IPaymentRule mockPaymentRule = mock(IPaymentRule.class); 
     IQueryRule mockQueryRule = mock(IQueryRule.class);
     IActivityRule mockActivityRule = mock(IActivityRule.class); 

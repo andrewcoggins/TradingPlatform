@@ -1,7 +1,6 @@
 package brown.communication.messages.library;
 
 import brown.auction.marketstate.IMarketState;
-import brown.communication.bid.library.BidType;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.platform.item.ICart;
 import brown.user.agent.IAgent;
@@ -14,22 +13,19 @@ import brown.user.agent.IAgent;
  * @author andrew
  *
  */
-public class TradeRequestMessage extends AbsServerToAgentMessage implements ITradeRequestMessage {
+public class ActionRequestMessage extends AbsServerToAgentMessage implements ITradeRequestMessage {
 
-  private BidType bidType; 
   private ICart items; 
   private Integer auctionID; 
   
-  public TradeRequestMessage() {
+  public ActionRequestMessage() {
     super(null, null);
-    this.bidType = null; 
     this.items = null; 
   }
   
   // TODO: add a price? 
-  public TradeRequestMessage(Integer messageID, Integer auctionID, Integer agentID, BidType bidType, ICart items) {
+  public ActionRequestMessage(Integer messageID, Integer auctionID, Integer agentID, ICart items) {
     super(messageID, agentID);
-    this.bidType = bidType; 
     this.items = items; 
     this.auctionID = auctionID; 
   }
@@ -39,10 +35,6 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
     return this.auctionID;
   }
   
-  @Override
-  public BidType getBidType() {
-    return this.bidType; 
-  }
   
   @Override
   public ICart getItems() {
@@ -61,7 +53,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
 
   @Override
   public String toString() {
-    return "TradeRequestMessage [bidType=" + bidType + ", items=" + items
+    return "TradeRequestMessage [items=" + items
         + ", auctionID=" + auctionID + "]";
   }
 
@@ -70,7 +62,6 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
     final int prime = 31;
     int result = 1;
     result = prime * result + ((auctionID == null) ? 0 : auctionID.hashCode());
-    result = prime * result + ((bidType == null) ? 0 : bidType.hashCode());
     result = prime * result + ((items == null) ? 0 : items.hashCode());
     return result;
   }
@@ -83,13 +74,11 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
       return false;
     if (getClass() != obj.getClass())
       return false;
-    TradeRequestMessage other = (TradeRequestMessage) obj;
+    ActionRequestMessage other = (ActionRequestMessage) obj;
     if (auctionID == null) {
       if (other.auctionID != null)
         return false;
     } else if (!auctionID.equals(other.auctionID))
-      return false;
-    if (bidType != other.bidType)
       return false;
     if (items == null) {
       if (other.items != null)

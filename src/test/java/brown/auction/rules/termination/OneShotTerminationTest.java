@@ -1,4 +1,4 @@
-package brown.auction.rules.termination.onesided;
+package brown.auction.rules.termination;
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,6 +9,7 @@ import org.junit.Test;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.marketstate.library.MarketState;
 import brown.auction.rules.ITerminationCondition;
+import brown.auction.rules.termination.OneShotTermination;
 import brown.communication.messages.ITradeMessage;
 
 public class OneShotTerminationTest {

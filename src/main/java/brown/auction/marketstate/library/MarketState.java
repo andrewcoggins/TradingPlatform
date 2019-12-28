@@ -7,7 +7,7 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.communication.messages.ITradeMessage;
-import brown.communication.messages.library.TradeRequestMessage;
+import brown.communication.messages.library.ActionRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.item.ICart;
 
@@ -35,7 +35,7 @@ public class MarketState implements IMarketState {
   private List<IAccountUpdate> payments;
 
   // Query rule
-  private TradeRequestMessage tRequest;
+  private ActionRequestMessage tRequest;
 
   // Activity rule
   private Boolean isAcceptable;
@@ -86,12 +86,12 @@ public class MarketState implements IMarketState {
   }
 
   @Override
-  public TradeRequestMessage getTRequest() {
+  public ActionRequestMessage getTRequest() {
     return this.tRequest;
   }
 
   @Override
-  public void setTRequest(TradeRequestMessage t) {
+  public void setTRequest(ActionRequestMessage t) {
     this.tRequest = t;
   }
 

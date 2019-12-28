@@ -17,7 +17,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import brown.auction.rules.IActivityRule;
-import brown.auction.rules.IAllocationRule;
+import brown.auction.rules.IUtilityRule;
 import brown.auction.rules.IInformationRevelationPolicy;
 import brown.auction.rules.IInnerIRPolicy;
 import brown.auction.rules.IPaymentRule;
@@ -615,7 +615,7 @@ public class JsonParser implements IJsonParser {
           Constructor<?> tConditionCons = tConditionClass.getConstructor();
 
           IFlexibleRules marketRule =
-              new FlexibleRules((IAllocationRule) aRuleCons.newInstance(),
+              new FlexibleRules((IUtilityRule) aRuleCons.newInstance(),
                   (IPaymentRule) pRuleCons.newInstance(),
                   (IQueryRule) qRuleCons.newInstance(),
                   (IActivityRule) actRuleCons.newInstance(),

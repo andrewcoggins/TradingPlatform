@@ -1,12 +1,11 @@
 package brown.platform.market.library;
 
 import brown.auction.rules.IActivityRule;
-import brown.auction.rules.IAllocationRule;
 import brown.auction.rules.IInformationRevelationPolicy;
 import brown.auction.rules.IInnerIRPolicy;
-import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
+import brown.auction.rules.IUtilityRule;
 import brown.platform.market.IMarketRules;
 
 /**
@@ -17,8 +16,7 @@ import brown.platform.market.IMarketRules;
 
 public abstract class AbsMarketRules implements IMarketRules {
 
-  public IAllocationRule aRule;
-  public IPaymentRule pRule;
+  public IUtilityRule aRule;
   public IQueryRule qRule;
   public IActivityRule actRule;
   public IInformationRevelationPolicy infoPolicy;
@@ -35,12 +33,11 @@ public abstract class AbsMarketRules implements IMarketRules {
    * @param innerIRPolicy
    * @param tCondition
    */
-  public AbsMarketRules(IAllocationRule aRule, IPaymentRule pRule,
+  public AbsMarketRules(IUtilityRule aRule,
       IQueryRule qRule, IActivityRule oneShotActivity,
       IInformationRevelationPolicy infoPolicy, IInnerIRPolicy innerIRPolicy,
       ITerminationCondition tCondition) {
     this.aRule = aRule;
-    this.pRule = pRule;
     this.qRule = qRule;
     this.actRule = oneShotActivity;
     this.infoPolicy = infoPolicy;
@@ -48,12 +45,8 @@ public abstract class AbsMarketRules implements IMarketRules {
     this.tCondition = tCondition;
   }
 
-  public IAllocationRule getARule() {
+  public IUtilityRule getARule() {
     return this.aRule;
-  }
-
-  public IPaymentRule getPRule() {
-    return this.pRule;
   }
 
   public IQueryRule getQRule() {
@@ -76,12 +69,12 @@ public abstract class AbsMarketRules implements IMarketRules {
     return this.tCondition;
   }
 
+  
   @Override
   public String toString() {
-    return "AbsMarketRules [aRule=" + aRule + ", pRule=" + pRule + ", qRule="
-        + qRule + ", actRule=" + actRule + ", infoPolicy=" + infoPolicy
-        + ", innerIRPolicy=" + innerIRPolicy + ", tCondition=" + tCondition
-        + "]";
+    return "AbsMarketRules [aRule=" + aRule + ", qRule=" + qRule + ", actRule="
+        + actRule + ", infoPolicy=" + infoPolicy + ", innerIRPolicy="
+        + innerIRPolicy + ", tCondition=" + tCondition + "]";
   }
 
   @Override
@@ -94,7 +87,6 @@ public abstract class AbsMarketRules implements IMarketRules {
         prime * result + ((infoPolicy == null) ? 0 : infoPolicy.hashCode());
     result = prime * result
         + ((innerIRPolicy == null) ? 0 : innerIRPolicy.hashCode());
-    result = prime * result + ((pRule == null) ? 0 : pRule.hashCode());
     result = prime * result + ((qRule == null) ? 0 : qRule.hashCode());
     result =
         prime * result + ((tCondition == null) ? 0 : tCondition.hashCode());
@@ -130,11 +122,6 @@ public abstract class AbsMarketRules implements IMarketRules {
         return false;
     } else if (!innerIRPolicy.equals(other.innerIRPolicy))
       return false;
-    if (pRule == null) {
-      if (other.pRule != null)
-        return false;
-    } else if (!pRule.equals(other.pRule))
-      return false;
     if (qRule == null) {
       if (other.qRule != null)
         return false;
@@ -147,5 +134,7 @@ public abstract class AbsMarketRules implements IMarketRules {
       return false;
     return true;
   }
+
+
 
 }

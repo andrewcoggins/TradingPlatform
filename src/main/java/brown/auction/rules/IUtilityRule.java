@@ -9,7 +9,7 @@ import brown.communication.messages.ITradeMessage;
  * An allocation rule allocates tradeables to agents.
  * @author andrew
  */
-public interface IAllocationRule {
+public interface IUtilityRule {
 
   /**
    * Sets an allocation in the market internal state.

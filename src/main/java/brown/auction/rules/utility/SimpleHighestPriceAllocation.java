@@ -1,4 +1,4 @@
-package brown.auction.rules.allocation.onesided;
+package brown.auction.rules.utility;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -7,7 +7,7 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.AbsRule;
-import brown.auction.rules.IAllocationRule;
+import brown.auction.rules.IUtilityRule;
 import brown.communication.bid.IBidBundle;
 import brown.communication.messages.ITradeMessage;
 import brown.platform.item.ICart;
@@ -19,7 +19,7 @@ import brown.platform.item.ICart;
  *
  */
 public class SimpleHighestPriceAllocation extends AbsRule
-    implements IAllocationRule {
+    implements IUtilityRule {
 
   @Override
   // what is the allocation for an ascending auction? 

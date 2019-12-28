@@ -1,12 +1,11 @@
 package brown.platform.market;
 
 import brown.auction.rules.IActivityRule;
-import brown.auction.rules.IAllocationRule;
 import brown.auction.rules.IInformationRevelationPolicy;
 import brown.auction.rules.IInnerIRPolicy;
-import brown.auction.rules.IPaymentRule;
 import brown.auction.rules.IQueryRule;
 import brown.auction.rules.ITerminationCondition;
+import brown.auction.rules.IUtilityRule;
 
 /**
  * IMarketRules encapsulates the rules that define a Market. 
@@ -20,13 +19,7 @@ public interface IMarketRules {
    * get AllocationRule
    * @return
    */
-  public IAllocationRule getARule();
-  
-  /**
-   * get PaymentRule
-   * @return
-   */
-  public IPaymentRule getPRule(); 
+  public IUtilityRule getARule();
   
   /**
    * get QueryRule

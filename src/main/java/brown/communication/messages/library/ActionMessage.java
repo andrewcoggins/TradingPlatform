@@ -13,16 +13,16 @@ import brown.communication.messageserver.IMessageServer;
  * @author andrew
  *
  */
-public class TradeMessage extends AbsAgentToServerMessage implements ITradeMessage {
+public class ActionMessage extends AbsAgentToServerMessage implements ITradeMessage {
   
   private Integer auctionID; 
   private IBid bid; 
   
-  public TradeMessage() {
+  public ActionMessage() {
     super(null, null); 
   }
   
-  public TradeMessage(Integer messageID, Integer agentID, Integer auctionID, IBid bid) {
+  public ActionMessage(Integer messageID, Integer agentID, Integer auctionID, IBid bid) {
     super(messageID ,agentID); 
     this.auctionID = auctionID; 
     this.bid = bid; 
@@ -71,7 +71,7 @@ public class TradeMessage extends AbsAgentToServerMessage implements ITradeMessa
       return false;
     if (getClass() != obj.getClass())
       return false;
-    TradeMessage other = (TradeMessage) obj;
+    ActionMessage other = (ActionMessage) obj;
     if (agentID == null) {
       if (other.agentID != null)
         return false;

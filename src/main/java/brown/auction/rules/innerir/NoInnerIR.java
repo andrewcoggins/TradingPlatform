@@ -1,4 +1,4 @@
-package brown.auction.rules.innerir.onesided;
+package brown.auction.rules.innerir;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.AbsRule;

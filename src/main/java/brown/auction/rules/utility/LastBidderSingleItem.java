@@ -1,4 +1,4 @@
-package brown.auction.rules.allocation.onesided;
+package brown.auction.rules.utility;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,12 +8,12 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.AbsRule;
-import brown.auction.rules.IAllocationRule;
+import brown.auction.rules.IUtilityRule;
 import brown.communication.bid.IBidBundle;
 import brown.communication.messages.ITradeMessage;
 import brown.platform.item.ICart;
 
-public class LastBidderSingleItem extends AbsRule implements IAllocationRule {
+public class LastBidderSingleItem extends AbsRule implements IUtilityRule {
 
   // sets the allocation to the 'last bid standing' in an ascending auction.
   // if there are multiple last bids standing, chooses one at random.

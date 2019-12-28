@@ -1,15 +1,12 @@
-package brown.auction.rules.activity.onesided;
+package brown.auction.rules.activity;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.rules.AbsRule;
 import brown.auction.rules.IActivityRule;
 import brown.communication.bid.IBid;
 import brown.communication.bid.IBidBundle;
-import brown.communication.bid.library.BidType;
 import brown.communication.messages.ITradeMessage;
 import brown.platform.item.ICart;
 

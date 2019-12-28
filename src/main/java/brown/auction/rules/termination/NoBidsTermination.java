@@ -1,4 +1,4 @@
-package brown.auction.rules.termination.onesided;
+package brown.auction.rules.termination;
 
 import java.util.List;
 

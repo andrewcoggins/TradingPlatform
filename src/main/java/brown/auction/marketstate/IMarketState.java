@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import brown.communication.messages.ITradeMessage;
-import brown.communication.messages.library.TradeRequestMessage;
+import brown.communication.messages.library.ActionRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.item.ICart;
 /**
@@ -30,9 +30,9 @@ public interface IMarketState {
   public void clearOrders();
 
   // Query rule
-  public TradeRequestMessage getTRequest();
+  public ActionRequestMessage getTRequest();
 
-  public void setTRequest(TradeRequestMessage t);
+  public void setTRequest(ActionRequestMessage t);
 
   // Activity rule
   public boolean getAcceptable();

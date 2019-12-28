@@ -16,7 +16,7 @@ import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.library.ErrorMessage;
 import brown.communication.messages.library.InformationMessage;
-import brown.communication.messages.library.TradeRejectionMessage;
+import brown.communication.messages.library.ActionRejectionMessage;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.information.IWhiteboard;
@@ -93,7 +93,7 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public IStatusMessage handleTradeMessage(ITradeMessage message) {
+  public IStatusMessage handleTradeMessage(ITradeMessage message) { 
     Integer marketID = message.getAuctionID();
     Integer agentID = message.getAgentID();
     if (this.activeMarkets.containsKey(marketID)) {
@@ -101,12 +101,12 @@ public class MarketManager implements IMarketManager {
       synchronized (market) {
         boolean accepted = market.processBid(message);
         if (!accepted) {
-          return new TradeRejectionMessage(0, agentID,
+          return new ActionRejectionMessage(0, agentID,
               "[x] REJECTED: Trade message for auction "
                   + message.getAuctionID().toString()
                   + " denied: rejected by activity rule.");
         } else {
-          return new TradeRejectionMessage(-1, -1, "");
+          return new ActionRejectionMessage(-1, -1, "");
         }
       }
     } else {

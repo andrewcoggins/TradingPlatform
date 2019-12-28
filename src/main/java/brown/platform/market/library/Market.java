@@ -7,7 +7,7 @@ import java.util.Set;
 import brown.auction.marketstate.IMarketState;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
-import brown.communication.messages.library.TradeRequestMessage;
+import brown.communication.messages.library.ActionRequestMessage;
 import brown.logging.library.AuctionLogging;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.item.ICart;
@@ -48,7 +48,7 @@ public class Market implements IMarket {
 
   public ITradeRequestMessage constructTradeRequest(Integer agentID) {
     this.RULES.getQRule().makeTradeRequest(ID, STATE, TRADEABLES, bids, agentID);
-    TradeRequestMessage request = this.STATE.getTRequest();
+    ActionRequestMessage request = this.STATE.getTRequest();
     return request;
   }
 

@@ -1,4 +1,4 @@
-package brown.auction.rules.ir.onesided;
+package brown.auction.rules.ir;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.AbsRule;
