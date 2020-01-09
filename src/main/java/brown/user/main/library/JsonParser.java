@@ -591,19 +591,19 @@ public class JsonParser implements IJsonParser {
           String tConditionString = singleMarketRules.get("tCondition");
 
           Class<?> aRuleClass = Class.forName(
-              "brown.auction.rules.allocation.onesided." + aRuleString);
+              "brown.auction.rules.allocation." + aRuleString);
           Class<?> pRuleClass = Class
-              .forName("brown.auction.rules.payment.onesided." + pRuleString);
+              .forName("brown.auction.rules.payment." + pRuleString);
           Class<?> qRuleClass = Class
-              .forName("brown.auction.rules.query.onesided." + qRuleString);
+              .forName("brown.auction.rules.query." + qRuleString);
           Class<?> actRuleClass = Class.forName(
-              "brown.auction.rules.activity.onesided." + actRuleString);
+              "brown.auction.rules.activity." + actRuleString);
           Class<?> irPolicyClass = Class
-              .forName("brown.auction.rules.ir.onesided." + irPolicyString);
+              .forName("brown.auction.rules.ir." + irPolicyString);
           Class<?> innerIRPolicyClass = Class
-              .forName("brown.auction.rules.innerir.onesided." + innerIRPolicyString);
+              .forName("brown.auction.rules.innerir." + innerIRPolicyString);
           Class<?> tConditionClass = Class.forName(
-              "brown.auction.rules.termination.onesided." + tConditionString);
+              "brown.auction.rules.termination." + tConditionString);
 
           Constructor<?> aRuleCons = aRuleClass.getConstructor();
           Constructor<?> pRuleCons = pRuleClass.getConstructor();
