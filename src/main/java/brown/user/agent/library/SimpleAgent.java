@@ -42,6 +42,7 @@ public class SimpleAgent extends AbsAgent implements IAgent {
   @Override
   public void onInformationMessage(IInformationMessage informationMessage) {
     UserLogging.log("[+] Information Message Received");
+    UserLogging.log(informationMessage); 
   }
 
   @Override
@@ -54,8 +55,6 @@ public class SimpleAgent extends AbsAgent implements IAgent {
     bidItems.add(new Item("testItem", 1)); 
     
     ICart bidCart = new Cart(bidItems); 
-    System.out.println(tradeRequestMessage); 
-    System.out.println(agentValuation.getValuation(bidCart)); 
     bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
     ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getAuctionID(), oneSided);

@@ -2,7 +2,7 @@
 {
 	"name": "testParse", 
 	"startingDelayTime": 10, 
-	"simulationDelayTime": 1, 
+	"simulationDelayTime": 1.0, 
 	"numTotalRuns": 2, 
 	"simulation": [{
 		"numRuns": 2, 

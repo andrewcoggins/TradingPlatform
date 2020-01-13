@@ -2,10 +2,10 @@
 {
 	"name": "testParse", 
 	"startingDelayTime": 10, 
-	"simulationDelayTime": 1, 
+	"simulationDelayTime": 1.0, 
 	"numTotalRuns": 1, 
 	"simulation": [{
-		"numRuns": 1, 
+		"numRuns": 2, 
 		"items": [{
 			"itemName": "testItem", 
 			"numItems": "1"
@@ -43,7 +43,7 @@
 					"pRule": "SecondPricePayment", 
 					"qRule": "SimpleOneSidedQuery", 
 					"actRule": "SimpleOneShotActivity", 
-					"irPolicy": "AnonymousPolicy", 
+					"irPolicy": "NonAnonymousPolicy", 
 					"innerIRPolicy": "NoInnerIR", 
 					"tCondition": "OneShotTermination"
 				}, 

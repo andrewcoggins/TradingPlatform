@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import brown.auction.marketstate.IMarketPublicState;
 import brown.auction.marketstate.IMarketState;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
@@ -20,7 +21,7 @@ public class Market implements IMarket {
   private final Integer ID;
   private final IFlexibleRules RULES;
   private final IMarketState STATE;
-  private final IMarketState PUBLICSTATE;
+  private final IMarketPublicState PUBLICSTATE;
   private final Set<Integer> AGENTS; 
   private final ICart TRADEABLES;
 
@@ -30,7 +31,7 @@ public class Market implements IMarket {
   // make the state a remembering thing. 
   // at some point need to add the bids into the market state. 
   public Market(Integer ID, IFlexibleRules rules, IMarketState state,
-      IMarketState publicState, Set<Integer> agents, ICart tradeables) {
+      IMarketPublicState publicState, Set<Integer> agents, ICart tradeables) {
     this.ID = ID;
     this.RULES = rules;
     this.STATE = state;
@@ -108,7 +109,7 @@ public class Market implements IMarket {
   }
 
   @Override
-  public IMarketState getPublicState() {
+  public IMarketPublicState getPublicState() {
     return this.PUBLICSTATE;
   }
 

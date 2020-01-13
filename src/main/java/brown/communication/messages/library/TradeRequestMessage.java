@@ -1,6 +1,6 @@
 package brown.communication.messages.library;
 
-import brown.auction.marketstate.IMarketState;
+import brown.auction.marketstate.IMarketPublicState;
 import brown.communication.bid.library.BidType;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.platform.item.ICart;
@@ -50,7 +50,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
   }
 
   @Override
-  public void addInformation(IMarketState publicState) {
+  public void addInformation(IMarketPublicState publicState) {
     // TODO: 
   }
   

@@ -37,7 +37,7 @@ public interface ISimulationManager {
    * number of times the simulation will be run.  
    * @throws InterruptedException
    */
-  void runSimulation(int startingDelayTime, int simulationDelayTime,
+  void runSimulation(int startingDelayTime, double simulationDelayTime,
       int numRuns) throws InterruptedException;
 
   /**

@@ -45,7 +45,7 @@ import brown.system.setup.library.Setup;
  */
 public class SimulationManager implements ISimulationManager {
   
-  private final int INTERVAL = 1000; 
+  private final int MILLISECONDS = 1000; 
   private final int IDMULTIPLIER = 1000000000; 
   
   private List<ISimulation> simulations;
@@ -95,11 +95,11 @@ public class SimulationManager implements ISimulationManager {
   }
 
   @Override
-  public void runSimulation(int startingDelayTime, int simulationDelayTime,
+  public void runSimulation(int startingDelayTime, double simulationDelayTime,
       int numRuns) throws InterruptedException {
     startMessageServer();
     PlatformLogging.log("Agent connection phase: sleeping for " + startingDelayTime + " seconds");
-    Thread.sleep(startingDelayTime * INTERVAL);
+    Thread.sleep(startingDelayTime * MILLISECONDS);
     PlatformLogging.log("Agent connection phase: beginning simulation");
     // add the agent IDs to the utility manager.
     // should this be here, or in handleRegistration? 
@@ -173,15 +173,16 @@ public class SimulationManager implements ISimulationManager {
     this.currentMarketManager.handleTradeMessage(tradeMessage);
   }
   
-  private synchronized void runAuction(int simulationDelayTime, int index)
+
+  private synchronized void runAuction(double simulationDelayTime, int index)
       throws InterruptedException {
     this.currentMarketManager.openMarkets(index, this.privateToPublic.keySet());
     while (this.currentMarketManager.anyMarketsOpen()) {
-      Thread.sleep(simulationDelayTime * INTERVAL);
+      Thread.sleep((int) (simulationDelayTime * MILLISECONDS));
       PlatformLogging.log("updating auctions");
       
       updateAuctions();
-      Thread.sleep(simulationDelayTime * INTERVAL);
+      Thread.sleep((int) (simulationDelayTime * MILLISECONDS));
     }
     updateAuctions();
   }

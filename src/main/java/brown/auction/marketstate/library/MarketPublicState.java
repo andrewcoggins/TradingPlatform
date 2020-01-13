@@ -5,9 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import brown.auction.marketstate.IMarketState;
+import brown.auction.marketstate.IMarketPublicState;
 import brown.communication.messages.ITradeMessage;
-import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.item.ICart;
 
@@ -16,7 +15,7 @@ import brown.platform.item.ICart;
  * 
  * @author acoggins
  */
-public class MarketPublicState implements IMarketState {
+public class MarketPublicState implements IMarketPublicState {
 
   private int ticks;
   private long time;
@@ -31,22 +30,14 @@ public class MarketPublicState implements IMarketState {
   // Payment rule
   private List<IAccountUpdate> payments;
 
-  // Query rule
-  private TradeRequestMessage tRequest;
-
-  // Activity rule
-  private Boolean isAcceptable;
   // activity rule also deals with reserve prices. 
   private Map<String, Double> reserves;
 
-  // Termination condition
-  private boolean isOpen;
 
   public MarketPublicState() {
     this.allocation = new HashMap<Integer, List<ICart>>();
     this.payments = new LinkedList<IAccountUpdate>();
     this.time = System.currentTimeMillis();
-    this.isOpen = true;
     this.tradeHistory = new LinkedList<List<ITradeMessage>>();
   }
 
@@ -63,43 +54,6 @@ public class MarketPublicState implements IMarketState {
   @Override
   public long getTime() {
     return this.time;
-  }
-
-  @Override
-  public void close() {
-    this.isOpen = false;
-  }
-
-  @Override
-  public boolean isOpen() {
-    return this.isOpen;
-  }
-
-  // TODO: clearAllocation()
-  // Maybe rename this method clearPayments:
-  @Override
-  public void clearOrders() {
-    this.setPayments(new LinkedList<IAccountUpdate>());
-  }
-
-  @Override
-  public TradeRequestMessage getTRequest() {
-    return this.tRequest;
-  }
-
-  @Override
-  public void setTRequest(TradeRequestMessage t) {
-    this.tRequest = t;
-  }
-
-  @Override
-  public boolean getAcceptable() {
-    return isAcceptable;
-  }
-
-  @Override
-  public void setAcceptable(boolean acceptable) {
-    this.isAcceptable = acceptable;
   }
 
   @Override
@@ -142,4 +96,65 @@ public class MarketPublicState implements IMarketState {
     this.reserves = reserves; 
   }
 
+  
+  @Override
+  public String toString() {
+    return "MarketPublicState [ticks=" + ticks + ", time=" + time
+        + ", tradeHistory=" + tradeHistory + ", allocation=" + allocation
+        + ", payments=" + payments + ", reserves=" + reserves + "]";
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result =
+        prime * result + ((allocation == null) ? 0 : allocation.hashCode());
+    result = prime * result + ((payments == null) ? 0 : payments.hashCode());
+    result = prime * result + ((reserves == null) ? 0 : reserves.hashCode());
+    result = prime * result + ticks;
+    result = prime * result + (int) (time ^ (time >>> 32));
+    result =
+        prime * result + ((tradeHistory == null) ? 0 : tradeHistory.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    MarketPublicState other = (MarketPublicState) obj;
+    if (allocation == null) {
+      if (other.allocation != null)
+        return false;
+    } else if (!allocation.equals(other.allocation))
+      return false;
+    if (payments == null) {
+      if (other.payments != null)
+        return false;
+    } else if (!payments.equals(other.payments))
+      return false;
+    if (reserves == null) {
+      if (other.reserves != null)
+        return false;
+    } else if (!reserves.equals(other.reserves))
+      return false;
+    if (ticks != other.ticks)
+      return false;
+    if (time != other.time)
+      return false;
+    if (tradeHistory == null) {
+      if (other.tradeHistory != null)
+        return false;
+    } else if (!tradeHistory.equals(other.tradeHistory))
+      return false;
+    return true;
+  }
+
+  
+  
 }

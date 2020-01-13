@@ -661,10 +661,23 @@ public class JsonParser implements IJsonParser {
     Map<String, Integer> outerParams = new HashMap<String, Integer>(); 
     outerParams.put("numTotalRuns", ((Long) jo.get("numTotalRuns")).intValue()); 
     outerParams.put("startingDelayTime", ((Long) jo.get("startingDelayTime")).intValue()); 
-    outerParams.put("simulationDelayTime", ((Long) jo.get("simulationDelayTime")).intValue()); 
     
     return outerParams; 
     
+  }
+  
+  @Override
+  public Map<String, Double> parseJSONDoubleParameters(String fileName)
+      throws FileNotFoundException, IOException, ParseException {
+    Object rawInput = new JSONParser().parse(new FileReader(fileName));
+
+    JSONObject jo = (JSONObject) rawInput;
+    Map<String, Double> outerParams = new HashMap<String, Double>();
+    outerParams.put("simulationDelayTime",
+        ((Double) jo.get("simulationDelayTime")));
+
+    return outerParams;
+
   }
   
 }
