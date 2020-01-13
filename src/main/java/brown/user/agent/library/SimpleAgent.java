@@ -9,6 +9,7 @@ import brown.auction.value.valuation.IGeneralValuation;
 import brown.communication.bid.IBidBundle;
 import brown.communication.bid.library.OneSidedBidBundle;
 import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
@@ -73,6 +74,13 @@ public class SimpleAgent extends AbsAgent implements IAgent {
     new SimpleAgent("localhost", 2121, new Setup(), "solo"); 
     new SimpleAgent("localhost", 2121, new Setup(), "pacifica"); 
     while(true) {}
+  }
+
+  @Override
+  public void
+      onSimulationReportMessage(ISimulationReportMessage reportMessage) {
+    // TODO Auto-generated method stub
+    
   }
 
 }

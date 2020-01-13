@@ -9,6 +9,7 @@ import brown.auction.value.valuation.IGeneralValuation;
 import brown.communication.bid.IBidBundle;
 import brown.communication.bid.library.OneSidedBidBundle;
 import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
@@ -76,6 +77,13 @@ public class TACAgent extends AbsAgent implements IAgent {
     UserLogging.log("[+] Valuation Message Received");
     UserLogging.log(valuationMessage.toString());
     this.agentValuation = valuationMessage.getValuation();
+  }
+
+  @Override
+  public void
+      onSimulationReportMessage(ISimulationReportMessage reportMessage) {
+    // TODO Auto-generated method stub
+    
   }
 
 }

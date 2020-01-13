@@ -14,6 +14,7 @@ import brown.platform.accounting.IAccountUpdate;
 import brown.platform.item.ICart;
 import brown.platform.market.IFlexibleRules;
 import brown.platform.market.IMarket;
+import brown.platform.utils.Utils;
 
 
 public class Market implements IMarket {
@@ -112,6 +113,11 @@ public class Market implements IMarket {
   public IMarketPublicState getPublicState() {
     return this.PUBLICSTATE;
   }
+  
+  @Override
+  public IMarketPublicState getUnredactedPublicState() {
+    return Utils.toPublicState(this.STATE);
+  }
 
   @Override
   public void updateOuterInformation() {
@@ -128,5 +134,6 @@ public class Market implements IMarket {
   public void updateTradeHistory() {
     this.STATE.addToTradeHistory(this.bids);
   }
+
 
 }

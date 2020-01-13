@@ -88,6 +88,12 @@ public interface IMarket {
    */
   public IMarketPublicState getPublicState(); 
   
+  /**
+   * get the complete MarketPublicState of the market, unredacted by any IR policies. 
+   * @return
+   */
+  public IMarketPublicState getUnredactedPublicState(); 
+  
   public void updateTradeHistory(); 
   
 }

@@ -2,6 +2,7 @@ package brown.user.agent;
 
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
 import brown.system.client.IClient;
@@ -25,4 +26,6 @@ public interface IAgent extends IClient {
   
   public void onValuationMessage(IValuationMessage valuationMessage); 
 
+  public void onSimulationReportMessage(ISimulationReportMessage reportMessage); 
+  
 }

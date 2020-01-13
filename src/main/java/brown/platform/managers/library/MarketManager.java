@@ -11,6 +11,7 @@ import brown.auction.marketstate.IMarketPublicState;
 import brown.auction.marketstate.library.MarketPublicState;
 import brown.auction.marketstate.library.MarketState;
 import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.IStatusMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
@@ -133,12 +134,13 @@ public class MarketManager implements IMarketManager {
     // tick the market
     market.tick();
     // update market trade history
-    market.updateTradeHistory(); 
-    // set reserves. 
+    market.updateTradeHistory();
+    // set reserves.
     market.setReserves();
-    // update inner information: copy changes from the market state to the market public state. 
+    // update inner information: copy changes from the market state to the
+    // market public state.
     market.updateInnerInformation();
-    
+
     for (Integer agentID : agents) {
       this.whiteboard.postInnerInformation(marketID, agentID,
           this.activeMarkets.get(marketID).getPublicState());
@@ -148,8 +150,9 @@ public class MarketManager implements IMarketManager {
         new LinkedList<ITradeRequestMessage>();
     for (Integer agentID : agents) {
       ITradeRequestMessage tRequest = market.constructTradeRequest(agentID);
-      IMarketPublicState agentState = whiteboard.getInnerInformation(marketID, agentID, market.getTimestep()); 
-      tRequest.addInformation(agentState); 
+      IMarketPublicState agentState = whiteboard.getInnerInformation(marketID,
+          agentID, market.getTimestep());
+      tRequest.addInformation(agentState);
       tradeRequests.add(tRequest);
     }
     return tradeRequests;
@@ -171,6 +174,13 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
+  public Map<Integer, ISimulationReportMessage>
+      constructSimulationReportMessages(List<Integer> agentIDs) {
+    // TODO: 
+    return null;
+  }
+
+  @Override
   public List<IAccountUpdate> finishMarket(Integer marketID) {
     List<IAccountUpdate> accountUpdates =
         this.activeMarkets.get(marketID).constructAccountUpdates();
@@ -178,6 +188,8 @@ public class MarketManager implements IMarketManager {
     market.updateOuterInformation();
     this.whiteboard.postOuterInformation(marketID,
         this.activeMarkets.get(marketID).getPublicState());
+    this.whiteboard.postSimulationInformation(marketID,
+        this.activeMarkets.get(marketID).getUnredactedPublicState());
     return accountUpdates;
   }
 

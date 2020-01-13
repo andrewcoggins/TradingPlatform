@@ -8,14 +8,13 @@ public interface IWhiteboard {
   
   public void postOuterInformation(Integer marketID, IMarketPublicState marketPublicState); 
 
-// TODO: include bids and trades in MarketPublicState
-//  public void postBids(Integer marketID, List<IBid> bids); 
-//  
-//  public void postTrades(Integer marketID, List<ITransaction> completedTransactions); 
+  public void postSimulationInformation(Integer marketID, IMarketPublicState marketPublicState); 
   
   public IMarketPublicState getInnerInformation(Integer marketID, Integer agentID, Integer timeStep); 
   
   public IMarketPublicState getOuterInformation(Integer marketID); 
+  
+  public IMarketPublicState getSimulationInformation(Integer marketID); 
   
   
   
