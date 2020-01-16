@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import brown.logging.library.AuctionLogging;
-import brown.logging.library.PlatformLogging;
 
 public class SecondPriceSimulation extends AbsUserSimulation {
 
