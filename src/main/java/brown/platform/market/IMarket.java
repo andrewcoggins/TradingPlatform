@@ -2,7 +2,7 @@ package brown.platform.market;
 
 import java.util.List;
 
-import brown.auction.marketstate.IMarketState;
+import brown.auction.marketstate.IMarketPublicState;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
@@ -86,7 +86,13 @@ public interface IMarket {
    * IR Policies. 
    * @return
    */
-  public IMarketState getPublicState(); 
+  public IMarketPublicState getPublicState(); 
+  
+  /**
+   * get the complete MarketPublicState of the market, unredacted by any IR policies. 
+   * @return
+   */
+  public IMarketPublicState getUnredactedPublicState(); 
   
   public void updateTradeHistory(); 
   

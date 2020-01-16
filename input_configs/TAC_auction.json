@@ -1,7 +1,7 @@
 {
 	"name": "TACAuction", 
 	"startingDelayTime": 3, 
-	"simulationDelayTime": 1, 
+	"simulationDelayTime": 1.0, 
 	"numTotalRuns": 1, 
 	"simulation": [{
 		"numRuns": 1, 

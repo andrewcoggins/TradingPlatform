@@ -1,4 +1,4 @@
-package brown.auction.rules.query.onesided;
+package brown.auction.rules.query;
 
 import java.util.List;
 

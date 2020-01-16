@@ -47,8 +47,10 @@ public class Main {
     configs.addAll(runConfig);
     Map<String, Integer> outerParams =
         jsonParser.parseJSONOuterParameters(fileName);
+    Map<String, Double> doubleParams =
+        jsonParser.parseJSONDoubleParameters(fileName);
     Integer startingDelayTime = outerParams.get("startingDelayTime");
-    Integer simulationDelayTime = outerParams.get("simulationDelayTime");
+    Double simulationDelayTime = doubleParams.get("simulationDelayTime");
     Integer numTotalRuns = outerParams.get("numTotalRuns");
     
     ConfigRun configRun = new ConfigRun(configs);

@@ -591,19 +591,19 @@ public class JsonParser implements IJsonParser {
           String tConditionString = singleMarketRules.get("tCondition");
 
           Class<?> aRuleClass = Class.forName(
-              "brown.auction.rules.allocation.onesided." + aRuleString);
+              "brown.auction.rules.allocation." + aRuleString);
           Class<?> pRuleClass = Class
-              .forName("brown.auction.rules.payment.onesided." + pRuleString);
+              .forName("brown.auction.rules.payment." + pRuleString);
           Class<?> qRuleClass = Class
-              .forName("brown.auction.rules.query.onesided." + qRuleString);
+              .forName("brown.auction.rules.query." + qRuleString);
           Class<?> actRuleClass = Class.forName(
-              "brown.auction.rules.activity.onesided." + actRuleString);
+              "brown.auction.rules.activity." + actRuleString);
           Class<?> irPolicyClass = Class
-              .forName("brown.auction.rules.ir.onesided." + irPolicyString);
+              .forName("brown.auction.rules.ir." + irPolicyString);
           Class<?> innerIRPolicyClass = Class
-              .forName("brown.auction.rules.innerir.onesided." + innerIRPolicyString);
+              .forName("brown.auction.rules.innerir." + innerIRPolicyString);
           Class<?> tConditionClass = Class.forName(
-              "brown.auction.rules.termination.onesided." + tConditionString);
+              "brown.auction.rules.termination." + tConditionString);
 
           Constructor<?> aRuleCons = aRuleClass.getConstructor();
           Constructor<?> pRuleCons = pRuleClass.getConstructor();
@@ -661,10 +661,23 @@ public class JsonParser implements IJsonParser {
     Map<String, Integer> outerParams = new HashMap<String, Integer>(); 
     outerParams.put("numTotalRuns", ((Long) jo.get("numTotalRuns")).intValue()); 
     outerParams.put("startingDelayTime", ((Long) jo.get("startingDelayTime")).intValue()); 
-    outerParams.put("simulationDelayTime", ((Long) jo.get("simulationDelayTime")).intValue()); 
     
     return outerParams; 
     
+  }
+  
+  @Override
+  public Map<String, Double> parseJSONDoubleParameters(String fileName)
+      throws FileNotFoundException, IOException, ParseException {
+    Object rawInput = new JSONParser().parse(new FileReader(fileName));
+
+    JSONObject jo = (JSONObject) rawInput;
+    Map<String, Double> outerParams = new HashMap<String, Double>();
+    outerParams.put("simulationDelayTime",
+        ((Double) jo.get("simulationDelayTime")));
+
+    return outerParams;
+
   }
   
 }

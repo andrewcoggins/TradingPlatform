@@ -1,4 +1,4 @@
-package brown.auction.rules.allocation.onesided;
+package brown.auction.rules.allocation;
 
 import java.util.HashMap;
 import java.util.LinkedList;

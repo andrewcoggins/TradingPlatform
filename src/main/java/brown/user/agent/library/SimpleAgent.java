@@ -9,6 +9,7 @@ import brown.auction.value.valuation.IGeneralValuation;
 import brown.communication.bid.IBidBundle;
 import brown.communication.bid.library.OneSidedBidBundle;
 import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
@@ -42,6 +43,7 @@ public class SimpleAgent extends AbsAgent implements IAgent {
   @Override
   public void onInformationMessage(IInformationMessage informationMessage) {
     UserLogging.log("[+] Information Message Received");
+    UserLogging.log(informationMessage); 
   }
 
   @Override
@@ -54,8 +56,6 @@ public class SimpleAgent extends AbsAgent implements IAgent {
     bidItems.add(new Item("testItem", 1)); 
     
     ICart bidCart = new Cart(bidItems); 
-    System.out.println(tradeRequestMessage); 
-    System.out.println(agentValuation.getValuation(bidCart)); 
     bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
     ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getAuctionID(), oneSided);
@@ -74,6 +74,13 @@ public class SimpleAgent extends AbsAgent implements IAgent {
     new SimpleAgent("localhost", 2121, new Setup(), "solo"); 
     new SimpleAgent("localhost", 2121, new Setup(), "pacifica"); 
     while(true) {}
+  }
+
+  @Override
+  public void
+      onSimulationReportMessage(ISimulationReportMessage reportMessage) {
+    // TODO Auto-generated method stub
+    
   }
 
 }

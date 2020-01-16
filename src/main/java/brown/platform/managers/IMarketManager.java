@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.IStatusMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
@@ -89,6 +90,13 @@ public interface IMarketManager {
    * a map from each agent's ID to its information message. 
    */
   public Map<Integer, IInformationMessage> constructInformationMessages(Integer marketID, List<Integer> agentIDs); 
+  
+  /**
+   * constructs simulation report messages. 
+   * @param agentIDs all agent IDs. 
+   * @return a map from agent IDs to ISimulationReportMessage for those agents. 
+   */
+  public Map<Integer, ISimulationReportMessage> constructSimulationReportMessages(List<Integer> agentIDs); 
   
   /**
    * run the final 'closing' round of a market. 

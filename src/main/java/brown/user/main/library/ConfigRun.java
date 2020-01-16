@@ -39,7 +39,7 @@ public class ConfigRun {
     this.config = config;
   }
 
-  public void run(Integer startingDelayTime, Integer simulationDelayTime,
+  public void run(Integer startingDelayTime, Double simulationDelayTime,
       Integer numSimulations) throws InstantiationException,
       IllegalAccessException, IllegalArgumentException,
       InvocationTargetException, InterruptedException {

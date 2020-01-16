@@ -1,4 +1,4 @@
-package brown.auction.rules.activity.onesided;
+package brown.auction.rules.activity;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +28,6 @@ public class SimpleOneShotActivity extends AbsActivity
     if (!isWellFormed(aBid, items)) {
       state.setAcceptable(false);
     } else {
-
       state.setAcceptable(true);
       IBid bid = aBid.getBid();
       for (ITradeMessage currentBid : currentBids) {

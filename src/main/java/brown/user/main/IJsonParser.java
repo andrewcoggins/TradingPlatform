@@ -18,5 +18,8 @@ public interface IJsonParser extends IInputParser {
 
   public Map<String, Integer> parseJSONOuterParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException;
+  
+  public Map<String, Double> parseJSONDoubleParameters(String fileName)
+      throws FileNotFoundException, IOException, ParseException; 
 
 }
