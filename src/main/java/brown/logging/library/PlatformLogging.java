@@ -10,7 +10,7 @@ import brown.logging.ILogging;
 public class PlatformLogging implements ILogging {
   
   // Enable or disable logging here.
-  public static boolean PLATFORMLOGGING = false;
+  public static boolean PLATFORMLOGGING = true;
   
   /**
    * Logs a message to the console, if logging is set to true.
