@@ -72,6 +72,11 @@ public class Whiteboard implements IWhiteboard {
   }
   
   @Override
+  public Map<Integer, IMarketPublicState> getSimulationReportWhiteboard() {
+    return this.simulationReportWhiteboard; 
+  } 
+  
+  @Override
   public void clear() {
     this.innerMarketWhiteboard.clear();
     this.outerMarketWhiteboard.clear(); 

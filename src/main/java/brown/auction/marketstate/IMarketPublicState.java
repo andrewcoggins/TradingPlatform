@@ -41,5 +41,9 @@ public interface IMarketPublicState {
   public List<List<ITradeMessage>> getTradeHistory(); 
   
   public void addToTradeHistory(List<ITradeMessage> tradeMessages); 
+  
+  public void setTicks(int ticks); 
+  
+  public void setTime(long time);
 
 }

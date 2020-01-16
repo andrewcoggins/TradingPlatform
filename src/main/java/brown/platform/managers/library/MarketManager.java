@@ -17,6 +17,7 @@ import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.library.ErrorMessage;
 import brown.communication.messages.library.InformationMessage;
+import brown.communication.messages.library.SimulationReportMessage;
 import brown.communication.messages.library.TradeRejectionMessage;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccountUpdate;
@@ -176,8 +177,18 @@ public class MarketManager implements IMarketManager {
   @Override
   public Map<Integer, ISimulationReportMessage>
       constructSimulationReportMessages(List<Integer> agentIDs) {
-    // TODO: 
-    return null;
+
+    Map<Integer, IMarketPublicState> simInformation =
+        this.whiteboard.getSimulationReportWhiteboard();
+
+    Map<Integer, ISimulationReportMessage> agentMessages =
+        new HashMap<Integer, ISimulationReportMessage>();
+
+    for (Integer agentID : agentIDs) {
+      agentMessages.put(agentID,
+          new SimulationReportMessage(0, agentID, simInformation));
+    }
+    return agentMessages;
   }
 
   @Override

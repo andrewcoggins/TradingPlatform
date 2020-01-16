@@ -96,6 +96,15 @@ public class MarketPublicState implements IMarketPublicState {
     this.reserves = reserves; 
   }
 
+  @Override
+  public void setTicks(int ticks) {
+    this.ticks = ticks;   
+  }
+
+  @Override
+  public void setTime(long time) {
+    this.time = time;  
+  }
   
   @Override
   public String toString() {
@@ -154,7 +163,5 @@ public class MarketPublicState implements IMarketPublicState {
       return false;
     return true;
   }
-
-  
   
 }

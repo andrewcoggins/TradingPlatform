@@ -1,5 +1,7 @@
 package brown.platform.information;
 
+import java.util.Map;
+
 import brown.auction.marketstate.IMarketPublicState;
 
 public interface IWhiteboard {
@@ -16,7 +18,7 @@ public interface IWhiteboard {
   
   public IMarketPublicState getSimulationInformation(Integer marketID); 
   
-  
+  public Map<Integer, IMarketPublicState> getSimulationReportWhiteboard(); 
   
   public void clear(); 
   

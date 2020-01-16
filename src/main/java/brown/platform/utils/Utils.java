@@ -69,9 +69,9 @@ public class Utils {
         if (from > 0)
           from = agentIDs.get(from);
         newAccountUpdates
-            .add(new AccountUpdate(to, from, acctUpdate.getCost()));
+            .add(new AccountUpdate(to, from, acctUpdate.getCost(), acctUpdate.getCart()));
       }
-      newPublicState.setUtilities(newAccountUpdates);
+      newPublicState.setPayments(newAccountUpdates);
       
       IInformationMessage newMessage = new InformationMessage(iMessage.getMessageID(), iMessage.getAgentID(), newPublicState);  
       
@@ -85,8 +85,17 @@ public class Utils {
   
   public static IMarketPublicState toPublicState(IMarketState state) {
     
-    // TODO: 
-    return null; 
+    IMarketPublicState newState = new MarketPublicState(); 
+    
+    newState.setTicks(state.getTicks());
+    newState.setTime(state.getTime()); 
+    newState.setAllocation(state.getAllocation());
+    newState.setPayments(state.getPayments());
+    
+    for (List<ITradeMessage> tradeStep: state.getTradeHistory())
+      newState.addToTradeHistory(tradeStep);
+  
+    return newState; 
   }
 
 }
