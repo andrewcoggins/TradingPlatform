@@ -2,14 +2,10 @@ package brown.auction.rules.activity;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.rules.AbsRule;
 import brown.auction.rules.IActivityRule;
-import brown.communication.bid.IBid;
 import brown.communication.bid.IBidBundle;
-import brown.communication.bid.library.BidType;
 import brown.communication.messages.ITradeMessage;
 import brown.platform.item.ICart;
 
@@ -29,15 +25,14 @@ public class SimpleOneShotActivity extends AbsActivity
       state.setAcceptable(false);
     } else {
       state.setAcceptable(true);
-      IBid bid = aBid.getBid();
+      IBidBundle bid = aBid.getBid();
       for (ITradeMessage currentBid : currentBids) {
         if (currentBid.getAgentID().equals(aBid.getAgentID())) {
           state.setAcceptable(false);
           break;
         }
       }
-      IBidBundle bundle = (IBidBundle) bid;
-      Map<ICart, Double> carts = bundle.getBids();
+      Map<ICart, Double> carts = bid.getBids();
       for (ICart cart : carts.keySet()) {
         // all carts have only one item
         if (cart.getItems().size() != 1) {

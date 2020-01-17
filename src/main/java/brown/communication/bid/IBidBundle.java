@@ -4,7 +4,7 @@ import java.util.Map;
 
 import brown.platform.item.ICart;
 
-public interface IBidBundle extends IBid {
+public interface IBidBundle {
 
   public Map<ICart, Double> getBids(); 
   

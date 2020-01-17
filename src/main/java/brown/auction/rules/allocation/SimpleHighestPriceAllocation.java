@@ -28,7 +28,7 @@ public class SimpleHighestPriceAllocation extends AbsRule
     Map<Integer, List<ICart>> highest = new HashMap<Integer, List<ICart>>();
     Map<ICart, Double> cartHighest = new HashMap<ICart, Double>();
     for (ITradeMessage message : messages) {
-      IBidBundle bundle = (IBidBundle) message.getBid();
+      IBidBundle bundle = message.getBid();
       Map<ICart, Double> bids = bundle.getBids();
       for (ICart cartBid : bids.keySet()) {
         if (!cartHighest.keySet().contains(cartBid)) {

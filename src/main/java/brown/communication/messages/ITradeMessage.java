@@ -1,10 +1,10 @@
 package brown.communication.messages;
 
-import brown.communication.bid.IBid;
+import brown.communication.bid.IBidBundle;
 
 public interface ITradeMessage extends IAgentToServerMessage {
 
-  public IBid getBid();
+  public IBidBundle getBid();
   
   public Integer getAuctionID();
   
