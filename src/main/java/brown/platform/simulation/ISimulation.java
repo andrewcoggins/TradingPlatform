@@ -17,4 +17,11 @@ public interface ISimulation {
    */
   public IWorldManager getWorldManager(); 
   
+  /**
+   * get group size of the simulation
+   * @return
+   * group size of the simulation
+   */
+  public int getGroupSize(); 
+  
 }

@@ -18,10 +18,13 @@ public interface ISimulationManager {
    * create a simulation. 
    * @param numSimulationRuns
    *  number of times the simulation will be run
+   * @param groupSize
+   *  number of groups in simulation
    * @param worldManager
    * Simulation's WorldManager
    */
-  void createSimulation(int numSimulationRuns, IWorldManager worldManager);
+  void createSimulation(int numSimulationRuns, int groupSize, IWorldManager worldManager);
+
 
   /**
    * Lock the SimulationManager. After it is locked, no more simulations can be created. 

@@ -11,19 +11,26 @@ import brown.platform.simulation.ISimulation;
  */
 public class Simulation implements ISimulation {
 
-    private IWorldManager worldManager;
+  private IWorldManager worldManager;
+  private int groupSize;
 
-    /**
-     * A Simulation consists only of a IWorldManager. 
-     * @param worldManager
-     */
-    public Simulation(IWorldManager worldManager) {
-        this.worldManager = worldManager;
-    }
+  /**
+   * A Simulation consists only of a IWorldManager.
+   * 
+   * @param worldManager
+   */
+  public Simulation(int groupSize, IWorldManager worldManager) {
+    this.groupSize = groupSize;
+    this.worldManager = worldManager;
+  }
 
     @Override
     public IWorldManager getWorldManager() {
       return this.worldManager;
     }
-
+    
+    @Override
+    public int getGroupSize() {
+      return this.groupSize;
+    }
 }

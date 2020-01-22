@@ -110,7 +110,7 @@ public class ConfigRun {
       domainManager.createDomain(itemManager, valuationManager,
           endowmentManager, accountManager);
       worldManager.createWorld(domainManager, marketManager);
-      simulationManager.createSimulation(aConfig.getSimulationRuns(),
+      simulationManager.createSimulation(aConfig.getSimulationRuns(), aConfig.getGroupSize(),
           worldManager);
       itemManager.lock();
       valuationManager.lock();

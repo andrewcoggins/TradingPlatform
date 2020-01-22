@@ -41,7 +41,6 @@ public class MarketManager implements IMarketManager {
   private Map<Integer, IMarket> activeMarkets;
   private List<IMarketBlock> allMarkets;
   private IWhiteboard whiteboard;
-  private Integer marketIndex;
   private boolean lock;
 
   /**
@@ -56,7 +55,6 @@ public class MarketManager implements IMarketManager {
     this.activeMarkets = new ConcurrentHashMap<Integer, IMarket>();
     this.lock = false;
     this.whiteboard = new Whiteboard();
-    this.marketIndex = 0;
   }
 
   @Override
@@ -82,15 +80,18 @@ public class MarketManager implements IMarketManager {
   }
 
   @Override
-  public void openMarkets(int index, Set<Integer> agents) {
+  public void openMarkets(int index, Set<Integer> agents, int groupIndex,
+      int numGroups) {
     // TODO: somehow open markets using whiteboard information.
     IMarketBlock currentMarketBlock = this.allMarkets.get(index);
     List<IFlexibleRules> marketRules = currentMarketBlock.getMarkets();
     List<ICart> marketTradeables = currentMarketBlock.getMarketCarts();
+    // add markets with grouping. 
     for (int i = 0; i < marketRules.size(); i++) {
-      this.activeMarkets.put(i,
-          new Market(i, marketRules.get(i), new MarketState(),
-              new MarketPublicState(), agents, marketTradeables.get(i)));
+      System.out.println("opening market"); 
+      int marketID = i + (marketRules.size() * groupIndex) + (index * marketRules.size() * numGroups);
+      this.activeMarkets.put(marketID, new Market(marketID, marketRules.get(i),
+          new MarketState(), new MarketPublicState(), agents, marketTradeables.get(i)));
     }
   }
 
@@ -142,14 +143,14 @@ public class MarketManager implements IMarketManager {
     // market public state.
     market.updateInnerInformation();
 
-    for (Integer agentID : agents) {
+    for (Integer agentID : market.getMarketAgents()) {
       this.whiteboard.postInnerInformation(marketID, agentID,
           this.activeMarkets.get(marketID).getPublicState());
     }
 
     List<ITradeRequestMessage> tradeRequests =
         new LinkedList<ITradeRequestMessage>();
-    for (Integer agentID : agents) {
+    for (Integer agentID : market.getMarketAgents()) {
       ITradeRequestMessage tRequest = market.constructTradeRequest(agentID);
       IMarketPublicState agentState = whiteboard.getInnerInformation(marketID,
           agentID, market.getTimestep());
@@ -228,7 +229,6 @@ public class MarketManager implements IMarketManager {
   public void reset() {
     this.activeMarkets.clear();
     this.whiteboard.clear();
-    this.marketIndex = 0;
   }
 
 }

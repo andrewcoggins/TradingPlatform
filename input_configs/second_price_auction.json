@@ -1,11 +1,12 @@
 
 {
 	"name": "testParse", 
-	"startingDelayTime": 10, 
+	"startingDelayTime": 5, 
 	"simulationDelayTime": 0.5, 
 	"numTotalRuns": 1, 
 	"simulation": [{
 		"numRuns": 2, 
+		"groupSize": 1,
 		"items": [{
 			"itemName": "testItem", 
 			"numItems": "1"

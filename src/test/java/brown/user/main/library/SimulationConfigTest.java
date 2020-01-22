@@ -106,7 +106,7 @@ public class SimulationConfigTest {
     EndowmentConfig eConfig = new EndowmentConfig(tradeableNames, endowmentDistributionCons, genList, paramList);  
     eConfigs.add(eConfig); 
     
-    ISimulationConfig sConfig = new SimulationConfig(1, tConfigs, vConfigs, eConfigs, mConfigSquared); 
+    ISimulationConfig sConfig = new SimulationConfig(1, -1, tConfigs, vConfigs, eConfigs, mConfigSquared); 
     
     assertTrue(sConfig.getSimulationRuns() == 1); 
     assertEquals(sConfig.getEConfig(), eConfigs); 

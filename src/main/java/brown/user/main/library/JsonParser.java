@@ -74,6 +74,7 @@ public class JsonParser implements IJsonParser {
 
     // within simulation strings
     List<Integer> numRunsList = new LinkedList<Integer>();
+    List<Integer> groupSizeList = new LinkedList<Integer>();
     List<List<Map<String, String>>> items =
         new LinkedList<List<Map<String, String>>>();
 
@@ -120,11 +121,15 @@ public class JsonParser implements IJsonParser {
       List<List<List<Double>>> simulationEndowmentGeneratorParameters =
           new LinkedList<List<List<Double>>>();
 
+      boolean groupSizeAdded = false;
       keyIterator = ((Map) simulationIterator.next()).entrySet().iterator();
       while (keyIterator.hasNext()) {
         Map.Entry pair = keyIterator.next();
         if (pair.getKey().equals("numRuns")) {
           numRunsList.add(((Long) pair.getValue()).intValue());
+        } else if (pair.getKey().equals("groupSize")) {
+          groupSizeList.add(((Long) pair.getValue()).intValue());
+          groupSizeAdded = true;
         } else if (pair.getKey().equals("items")) {
           itemIterator = ((JSONArray) pair.getValue()).iterator();
           while (itemIterator.hasNext()) {
@@ -406,7 +411,8 @@ public class JsonParser implements IJsonParser {
       endowmentItems.add(simulationEndowmentitems);
       endowmentGeneratorNames.add(simulationEndowmentGeneratorNames);
       endowmentGeneratorParameters.add(simulationEndowmentGeneratorParameters);
-
+      if (!groupSizeAdded)
+        groupSizeList.add(-1);
     }
 
     PlatformLogging.log(items);
@@ -633,8 +639,8 @@ public class JsonParser implements IJsonParser {
 
     for (int i = 0; i < tConfigs.size(); i++) {
       ISimulationConfig singleConfig = new SimulationConfig(numRunsList.get(i),
-          tConfigs.get(i), valuationConfigs.get(i), endowmentConfigs.get(i),
-          marketConfigs.get(i));
+          groupSizeList.get(i), tConfigs.get(i), valuationConfigs.get(i),
+          endowmentConfigs.get(i), marketConfigs.get(i));
       simulationConfigs.add(singleConfig);
     }
 
