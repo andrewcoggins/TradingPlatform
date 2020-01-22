@@ -49,7 +49,8 @@ public class SimulationManager implements ISimulationManager {
 
   private final int MILLISECONDS = 1000;
   private final int IDMULTIPLIER = 1000000000;
-
+  
+  private int serverPort; 
   private List<ISimulation> simulations;
   private List<Integer> numSimulationRuns;
   private boolean lock;
@@ -98,11 +99,15 @@ public class SimulationManager implements ISimulationManager {
 
   @Override
   public void runSimulation(int startingDelayTime, double simulationDelayTime,
-      int numRuns) throws InterruptedException {
+      int numRuns, int serverPort) throws InterruptedException {
+    this.serverPort = serverPort; 
     startMessageServer();
     PlatformLogging.log("Agent connection phase: sleeping for "
         + startingDelayTime + " seconds");
-    Thread.sleep(startingDelayTime * MILLISECONDS);
+    for (int i = 0; i < startingDelayTime; i++) {
+      PlatformLogging.log(startingDelayTime - i + " seconds left to register");
+      Thread.sleep(MILLISECONDS);
+    }
     PlatformLogging.log("Agent connection phase: beginning simulation");
     // add the agent IDs to the utility manager.
     // should this be here, or in handleRegistration?
@@ -282,8 +287,13 @@ public class SimulationManager implements ISimulationManager {
     }
   }
 
+  @Override
+  public Map<Integer, Integer> getAgentIDs() {
+    return this.privateToPublic;
+  }
+  
   private void startMessageServer() {
-    this.messageServer = new MessageServer(2121, new Setup(), this);
+    this.messageServer = new MessageServer(this.serverPort, new Setup(), this);
   }
 
 }

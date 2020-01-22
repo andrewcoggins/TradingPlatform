@@ -6,14 +6,17 @@ import brown.user.agent.IAgent;
 public class RegistrationResponseMessage extends AbsServerToAgentMessage implements IRegistrationResponseMessage {
 
   private String name; 
+  private Integer publicAgentID; 
+  
  
   public RegistrationResponseMessage() {
     super(null, null); 
     this.name = null; 
   }
   
-  public RegistrationResponseMessage(Integer messageID, Integer agentID, String name) {
+  public RegistrationResponseMessage(Integer messageID, Integer agentID, Integer publicAgentID, String name) {
     super(messageID, agentID);
+    this.publicAgentID = publicAgentID; 
     this.name = name; 
   }
 
@@ -21,13 +24,20 @@ public class RegistrationResponseMessage extends AbsServerToAgentMessage impleme
     agent.onRegistrationResponse(this);
   }
   
+  @Override
   public String getName() {
     return this.name; 
   }
 
   @Override
+  public Integer getPublicAgentID() {
+    return this.publicAgentID;
+  }
+
+  @Override
   public String toString() {
-    return "RegistrationResponseMessage [name=" + name + "]";
+    return "RegistrationResponseMessage [name=" + name + ", publicAgentID="
+        + publicAgentID + "]";
   }
 
   @Override
@@ -35,6 +45,8 @@ public class RegistrationResponseMessage extends AbsServerToAgentMessage impleme
     final int prime = 31;
     int result = 1;
     result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result
+        + ((publicAgentID == null) ? 0 : publicAgentID.hashCode());
     return result;
   }
 
@@ -52,7 +64,13 @@ public class RegistrationResponseMessage extends AbsServerToAgentMessage impleme
         return false;
     } else if (!name.equals(other.name))
       return false;
+    if (publicAgentID == null) {
+      if (other.publicAgentID != null)
+        return false;
+    } else if (!publicAgentID.equals(other.publicAgentID))
+      return false;
     return true;
   }
+  
   
 }

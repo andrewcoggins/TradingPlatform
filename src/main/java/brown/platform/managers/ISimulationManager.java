@@ -1,5 +1,7 @@
 package brown.platform.managers;
 
+import java.util.Map;
+
 import com.esotericsoftware.kryonet.Connection;
 
 import brown.communication.messages.IRegistrationMessage;
@@ -38,7 +40,7 @@ public interface ISimulationManager {
    * @throws InterruptedException
    */
   void runSimulation(int startingDelayTime, double simulationDelayTime,
-      int numRuns) throws InterruptedException;
+      int numRuns, int serverPort) throws InterruptedException;
 
   /**
    * handle an IRegistrationMessage sent from an agent. 
@@ -58,5 +60,13 @@ public interface ISimulationManager {
    * trade message from agent. 
    */
   void giveTradeMessage(ITradeMessage tradeMessage);
+  
+  /**
+   * get map from private to public agent IDs. 
+   * @return
+   * Map from private to public agent IDs. 
+   */
+  Map<Integer, Integer> getAgentIDs(); 
+  
 
 }

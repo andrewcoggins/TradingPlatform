@@ -8,6 +8,7 @@ import com.esotericsoftware.kryonet.Listener;
 
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
 import brown.communication.messages.library.AbsServerToAgentMessage;
@@ -32,6 +33,8 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   protected double money;
   protected Map<String, IItem> goods;
   protected String name; 
+  // public ID may be accessed as this.publicID
+  // private ID may be accessed as this.ID
 
   /**
    * 
@@ -111,6 +114,9 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   
   @Override
   public abstract void onValuationMessage(IValuationMessage valuationMessage); 
+  
+  @Override
+  public abstract void onSimulationReportMessage(ISimulationReportMessage simReportMessage); 
   
   // helper methods
   private void updateItems(ICart cart, boolean add) {
