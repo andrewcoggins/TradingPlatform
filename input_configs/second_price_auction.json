@@ -6,7 +6,7 @@
 	"numTotalRuns": 1, 
 	"simulation": [{
 		"numRuns": 2, 
-		"groupSize": 1,
+		"groupSize": 2,
 		"items": [{
 			"itemName": "testItem", 
 			"numItems": "1"
