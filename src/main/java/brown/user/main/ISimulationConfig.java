@@ -38,4 +38,10 @@ public interface ISimulationConfig extends IInputConfig {
    * @return
    */
   public  List<List<IMarketConfig>> getMConfig();
+  
+  /**
+   * get grouping size, if applicable
+   * @return
+   */
+  public Integer getGroupSize(); 
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.AbsRule;
 import brown.auction.rules.IQueryRule;
-import brown.communication.bid.library.BidType;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.item.ICart;
@@ -22,7 +21,7 @@ public class SimpleOneSidedQuery extends AbsRule implements IQueryRule {
     
     //TODO: 
     state.setTRequest(
-        new TradeRequestMessage(0, marketID, agentID, BidType.OneSidedBidBundle, items));
+        new TradeRequestMessage(0, marketID, agentID, items));
   }
 
 }

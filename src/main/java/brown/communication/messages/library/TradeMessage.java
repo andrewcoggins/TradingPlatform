@@ -2,7 +2,7 @@ package brown.communication.messages.library;
 
 import com.esotericsoftware.kryonet.Connection;
 
-import brown.communication.bid.IBid;
+import brown.communication.bid.IBidBundle;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messageserver.IMessageServer;
 
@@ -16,13 +16,13 @@ import brown.communication.messageserver.IMessageServer;
 public class TradeMessage extends AbsAgentToServerMessage implements ITradeMessage {
   
   private Integer auctionID; 
-  private IBid bid; 
+  private IBidBundle bid; 
   
   public TradeMessage() {
     super(null, null); 
   }
   
-  public TradeMessage(Integer messageID, Integer agentID, Integer auctionID, IBid bid) {
+  public TradeMessage(Integer messageID, Integer agentID, Integer auctionID, IBidBundle bid) {
     super(messageID ,agentID); 
     this.auctionID = auctionID; 
     this.bid = bid; 
@@ -36,7 +36,7 @@ public class TradeMessage extends AbsAgentToServerMessage implements ITradeMessa
     return this.auctionID; 
   }
   
-  public IBid getBid() {
+  public IBidBundle getBid() {
     return this.bid; 
   }
   

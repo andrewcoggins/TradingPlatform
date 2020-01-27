@@ -71,9 +71,10 @@ public class JsonParser implements IJsonParser {
     Iterator<Map.Entry> endowmentitemsKeyIterator;
     Iterator<Map.Entry> valuationitemsKeyIterator;
     Iterator<Map.Entry> generatorKeyIterator;
-    
+
     // within simulation strings
     List<Integer> numRunsList = new LinkedList<Integer>();
+    List<Integer> groupSizeList = new LinkedList<Integer>();
     List<List<Map<String, String>>> items =
         new LinkedList<List<Map<String, String>>>();
 
@@ -120,30 +121,31 @@ public class JsonParser implements IJsonParser {
       List<List<List<Double>>> simulationEndowmentGeneratorParameters =
           new LinkedList<List<List<Double>>>();
 
+      boolean groupSizeAdded = false;
       keyIterator = ((Map) simulationIterator.next()).entrySet().iterator();
       while (keyIterator.hasNext()) {
         Map.Entry pair = keyIterator.next();
         if (pair.getKey().equals("numRuns")) {
           numRunsList.add(((Long) pair.getValue()).intValue());
+        } else if (pair.getKey().equals("groupSize")) {
+          groupSizeList.add(((Long) pair.getValue()).intValue());
+          groupSizeAdded = true;
         } else if (pair.getKey().equals("items")) {
           itemIterator = ((JSONArray) pair.getValue()).iterator();
           while (itemIterator.hasNext()) {
             Map<String, String> itemConfig = new HashMap<String, String>();
-            itemKeyIterator =
-                ((Map) itemIterator.next()).entrySet().iterator();
+            itemKeyIterator = ((Map) itemIterator.next()).entrySet().iterator();
             while (itemKeyIterator.hasNext()) {
               Map.Entry itemPair = itemKeyIterator.next();
               if (itemPair.getKey().equals("itemName")) {
                 String itemName = (String) itemPair.getValue();
-                itemConfig.put((String) itemPair.getKey(),
-                    itemName);
+                itemConfig.put((String) itemPair.getKey(), itemName);
               } else if (itemPair.getKey().equals("numItems")) {
                 String numitems = (String) itemPair.getValue();
-                itemConfig.put((String) itemPair.getKey(),
-                    numitems);
+                itemConfig.put((String) itemPair.getKey(), numitems);
               } else {
-                ErrorLogging.log(
-                    "ERROR: JSON Parse: item: unrecognized input key: "
+                ErrorLogging
+                    .log("ERROR: JSON Parse: item: unrecognized input key: "
                         + itemPair.getKey());
               }
             }
@@ -164,7 +166,8 @@ public class JsonParser implements IJsonParser {
                     new LinkedList<String>();
                 List<List<Double>> singleValuationGeneratorParameters =
                     new LinkedList<List<Double>>();
-                generatorIterator = ((JSONArray) valuationPair.getValue()).iterator();
+                generatorIterator =
+                    ((JSONArray) valuationPair.getValue()).iterator();
                 while (generatorIterator.hasNext()) {
                   generatorKeyIterator =
                       ((Map) generatorIterator.next()).entrySet().iterator();
@@ -173,18 +176,19 @@ public class JsonParser implements IJsonParser {
                     if (generatorPair.getKey().equals("name")) {
                       String generatorName = (String) generatorPair.getValue();
                       singleValuationGeneratorNames.add(generatorName);
-                    } else if (generatorPair.getKey().equals( "parameters")) {
-                      List<Double> generatorParams = (List<Double>)generatorPair.getValue(); 
+                    } else if (generatorPair.getKey().equals("parameters")) {
+                      List<Double> generatorParams =
+                          (List<Double>) generatorPair.getValue();
                       singleValuationGeneratorParameters.add(generatorParams);
                     }
                   }
                 }
                 simulationValuationGeneratorNames
                     .add(singleValuationGeneratorNames);
-                simulationValuationGeneratorParameters.add(singleValuationGeneratorParameters); 
+                simulationValuationGeneratorParameters
+                    .add(singleValuationGeneratorParameters);
               } else if (valuationPair.getKey().equals("items")) {
-                List<String> singleValuationitems =
-                    new LinkedList<String>();
+                List<String> singleValuationitems = new LinkedList<String>();
 
                 valuationitemsIterator =
                     ((JSONArray) valuationPair.getValue()).iterator();
@@ -195,7 +199,7 @@ public class JsonParser implements IJsonParser {
                   while (valuationitemsKeyIterator.hasNext()) {
                     Map.Entry valuationitemsPair =
                         valuationitemsKeyIterator.next();
-                    if (valuationitemsPair.getKey().equals( "itemName")) {
+                    if (valuationitemsPair.getKey().equals("itemName")) {
                       String valuationitemName =
                           (String) valuationitemsPair.getValue();
                       singleValuationitems.add(valuationitemName);
@@ -214,7 +218,7 @@ public class JsonParser implements IJsonParser {
               }
             }
           }
-        }  else if (pair.getKey().equals("endowment")) {
+        } else if (pair.getKey().equals("endowment")) {
           endowmentIterator = ((JSONArray) pair.getValue()).iterator();
           while (endowmentIterator.hasNext()) {
             endowmentKeyIterator =
@@ -229,7 +233,8 @@ public class JsonParser implements IJsonParser {
                     new LinkedList<String>();
                 List<List<Double>> singleEndowmentGeneratorParameters =
                     new LinkedList<List<Double>>();
-                generatorIterator = ((JSONArray) endowmentPair.getValue()).iterator();
+                generatorIterator =
+                    ((JSONArray) endowmentPair.getValue()).iterator();
                 while (generatorIterator.hasNext()) {
                   generatorKeyIterator =
                       ((Map) generatorIterator.next()).entrySet().iterator();
@@ -238,18 +243,19 @@ public class JsonParser implements IJsonParser {
                     if (generatorPair.getKey().equals("name")) {
                       String generatorName = (String) generatorPair.getValue();
                       singleEndowmentGeneratorNames.add(generatorName);
-                    } else if (generatorPair.getKey().equals( "parameters")) {
-                      List<Double> generatorParams = (List<Double>)generatorPair.getValue(); 
+                    } else if (generatorPair.getKey().equals("parameters")) {
+                      List<Double> generatorParams =
+                          (List<Double>) generatorPair.getValue();
                       singleEndowmentGeneratorParameters.add(generatorParams);
                     }
                   }
                 }
                 simulationEndowmentGeneratorNames
                     .add(singleEndowmentGeneratorNames);
-                simulationEndowmentGeneratorParameters.add(singleEndowmentGeneratorParameters); 
+                simulationEndowmentGeneratorParameters
+                    .add(singleEndowmentGeneratorParameters);
               } else if (endowmentPair.getKey().equals("items")) {
-                List<String> singleEndowmentitems =
-                    new LinkedList<String>();
+                List<String> singleEndowmentitems = new LinkedList<String>();
 
                 endowmentitemsIterator =
                     ((JSONArray) endowmentPair.getValue()).iterator();
@@ -260,7 +266,7 @@ public class JsonParser implements IJsonParser {
                   while (endowmentitemsKeyIterator.hasNext()) {
                     Map.Entry endowmentitemsPair =
                         endowmentitemsKeyIterator.next();
-                    if (endowmentitemsPair.getKey().equals( "itemName")) {
+                    if (endowmentitemsPair.getKey().equals("itemName")) {
                       String endowmentitemName =
                           (String) endowmentitemsPair.getValue();
                       singleEndowmentitems.add(endowmentitemName);
@@ -285,19 +291,19 @@ public class JsonParser implements IJsonParser {
             seqMarketKeyIterator =
                 ((Map) seqMarketIterator.next()).entrySet().iterator();
             while (seqMarketKeyIterator.hasNext()) {
-              Map.Entry seqMarketPair = seqMarketKeyIterator.next(); 
-              if (seqMarketPair.getKey().equals( "simMarket")) {
+              Map.Entry seqMarketPair = seqMarketKeyIterator.next();
+              if (seqMarketPair.getKey().equals("simMarket")) {
                 List<Map<String, String>> simMarketRules =
                     new LinkedList<Map<String, String>>();
                 List<List<String>> simMarketitems =
                     new LinkedList<List<String>>();
 
-                simMarketIterator = ((JSONArray) seqMarketPair.getValue()).iterator();
+                simMarketIterator =
+                    ((JSONArray) seqMarketPair.getValue()).iterator();
                 while (simMarketIterator.hasNext()) {
                   Map<String, String> singleMarketRules =
                       new HashMap<String, String>();
-                  List<String> singleMarketitems =
-                      new LinkedList<String>();
+                  List<String> singleMarketitems = new LinkedList<String>();
 
                   simMarketKeyIterator =
                       ((Map) simMarketIterator.next()).entrySet().iterator();
@@ -325,17 +331,19 @@ public class JsonParser implements IJsonParser {
                           String actRule = (String) marketRulesPair.getValue();
                           singleMarketRules
                               .put((String) marketRulesPair.getKey(), actRule);
-                        } else if (marketRulesPair.getKey().equals("irPolicy")) {
+                        } else if (marketRulesPair.getKey()
+                            .equals("irPolicy")) {
                           String irPolicy = (String) marketRulesPair.getValue();
                           singleMarketRules
                               .put((String) marketRulesPair.getKey(), irPolicy);
-                        } else if (marketRulesPair
-                            .getKey().equals( "innerIRPolicy")) {
+                        } else if (marketRulesPair.getKey()
+                            .equals("innerIRPolicy")) {
                           String innerIRPolicy =
                               (String) marketRulesPair.getValue();
                           singleMarketRules.put(
                               (String) marketRulesPair.getKey(), innerIRPolicy);
-                        } else if (marketRulesPair.getKey().equals("tCondition")) {
+                        } else if (marketRulesPair.getKey()
+                            .equals("tCondition")) {
                           String tCondition =
                               (String) marketRulesPair.getValue();
                           singleMarketRules.put(
@@ -356,8 +364,7 @@ public class JsonParser implements IJsonParser {
                         while (marketitemsKeyIterator.hasNext()) {
                           Map.Entry marketitemsPair =
                               marketitemsKeyIterator.next();
-                          if (marketitemsPair
-                              .getKey().equals( "itemName")) {
+                          if (marketitemsPair.getKey().equals("itemName")) {
                             String marketitemName =
                                 (String) marketitemsPair.getValue();
                             singleMarketitems.add(marketitemName);
@@ -404,10 +411,10 @@ public class JsonParser implements IJsonParser {
       endowmentItems.add(simulationEndowmentitems);
       endowmentGeneratorNames.add(simulationEndowmentGeneratorNames);
       endowmentGeneratorParameters.add(simulationEndowmentGeneratorParameters);
-      
+      if (!groupSizeAdded)
+        groupSizeList.add(-1);
     }
-    
-    
+
     PlatformLogging.log(items);
     PlatformLogging.log(marketRules);
     PlatformLogging.log(marketitems);
@@ -419,22 +426,17 @@ public class JsonParser implements IJsonParser {
     PlatformLogging.log(endowmentItems);
     PlatformLogging.log(endowmentGeneratorNames);
     PlatformLogging.log(endowmentGeneratorParameters);
-    
-    
-    
+
     // parse the strings into classes if necessary, and put into configs
-    
+
     // item configs
 
-    List<List<IItemConfig>> tConfigs =
-        new LinkedList<List<IItemConfig>>();
+    List<List<IItemConfig>> tConfigs = new LinkedList<List<IItemConfig>>();
     for (List<Map<String, String>> simulationitems : items) {
-      List<IItemConfig> simulationTConfigs =
-          new LinkedList<IItemConfig>();
+      List<IItemConfig> simulationTConfigs = new LinkedList<IItemConfig>();
       for (Map<String, String> aitem : simulationitems) {
-        IItemConfig tConfig =
-            new ItemConfig(aitem.get("itemName"),
-                Integer.parseInt(aitem.get("numItems")));
+        IItemConfig tConfig = new ItemConfig(aitem.get("itemName"),
+            Integer.parseInt(aitem.get("numItems")));
         simulationTConfigs.add(tConfig);
       }
       tConfigs.add(simulationTConfigs);
@@ -449,8 +451,7 @@ public class JsonParser implements IJsonParser {
           new LinkedList<IValuationConfig>();
       List<String> simulationValuationDistributions =
           valuationDistributions.get(i);
-      List<List<String>> simulationValuationitems =
-          valuationitems.get(i);
+      List<List<String>> simulationValuationitems = valuationitems.get(i);
       List<List<String>> simulationValuationGeneratorNames =
           valuationGeneratorNames.get(i);
       List<List<List<Double>>> simulationValuationGeneratorParams =
@@ -463,10 +464,8 @@ public class JsonParser implements IJsonParser {
                 + valuationDistributionString);
         Constructor<?> distributionCons =
             distributionClass.getConstructor(ICart.class, List.class);
-        
-        
-        List<String> singleValuationitems =
-            simulationValuationitems.get(j);
+
+        List<String> singleValuationitems = simulationValuationitems.get(j);
 
         List<String> singleValuationGeneratorNames =
             simulationValuationGeneratorNames.get(j);
@@ -474,10 +473,11 @@ public class JsonParser implements IJsonParser {
         List<List<Double>> singleValuationGeneratorParams =
             simulationValuationGeneratorParams.get(j);
 
-        
-        List<Constructor<?>> valuationConstructors = new LinkedList<Constructor<?>>(); 
-        List<List<Double>> valuationConstructorParams = new LinkedList<List<Double>>();
-        
+        List<Constructor<?>> valuationConstructors =
+            new LinkedList<Constructor<?>>();
+        List<List<Double>> valuationConstructorParams =
+            new LinkedList<List<Double>>();
+
         for (int k = 0; k < singleValuationGeneratorNames.size(); k++) {
           String generatorName = singleValuationGeneratorNames.get(k);
           Class<?> generatorClass = Class.forName(
@@ -492,11 +492,12 @@ public class JsonParser implements IJsonParser {
             generatorParams.add(param);
           }
 
-          valuationConstructors.add(generatorCons); 
+          valuationConstructors.add(generatorCons);
           valuationConstructorParams.add(generatorParams);
         }
-        IValuationConfig valConfig = new ValuationConfig(
-            singleValuationitems, distributionCons, valuationConstructors, valuationConstructorParams);
+        IValuationConfig valConfig =
+            new ValuationConfig(singleValuationitems, distributionCons,
+                valuationConstructors, valuationConstructorParams);
         simulationValConfigs.add(valConfig);
       }
       valuationConfigs.add(simulationValConfigs);
@@ -511,8 +512,7 @@ public class JsonParser implements IJsonParser {
           new LinkedList<IEndowmentConfig>();
       List<String> simulationEndowmentDistributions =
           endowmentDistributions.get(i);
-      List<List<String>> simulationEndowmentItems =
-          endowmentItems.get(i);
+      List<List<String>> simulationEndowmentItems = endowmentItems.get(i);
       List<List<String>> simulationEndowmentGeneratorNames =
           endowmentGeneratorNames.get(i);
       List<List<List<Double>>> simulationEndowmentGeneratorParams =
@@ -525,19 +525,18 @@ public class JsonParser implements IJsonParser {
                 + endowmentDistributionstring);
         Constructor<?> distributionCons =
             distributionClass.getConstructor(ICart.class, List.class);
-        
-        
-        List<String> singleEndowmentItems =
-            simulationEndowmentItems.get(j);
+
+        List<String> singleEndowmentItems = simulationEndowmentItems.get(j);
 
         List<String> singleEndowmentGeneratorNames =
             simulationEndowmentGeneratorNames.get(j);
         List<List<Double>> singleEndowmentGeneratorParams =
             simulationEndowmentGeneratorParams.get(j);
-        
-        List<Constructor<?>> endowmentConstructors = new LinkedList<Constructor<?>>(); 
-        List<List<Double>> endowmentConstructorParams = new LinkedList<List<Double>>();
-       
+
+        List<Constructor<?>> endowmentConstructors =
+            new LinkedList<Constructor<?>>();
+        List<List<Double>> endowmentConstructorParams =
+            new LinkedList<List<Double>>();
 
         for (int k = 0; k < singleEndowmentGeneratorNames.size(); k++) {
           String generatorName = singleEndowmentGeneratorNames.get(k);
@@ -552,11 +551,12 @@ public class JsonParser implements IJsonParser {
           for (Double param : generatorStringParams) {
             generatorParams.add(param);
           }
-          endowmentConstructors.add(generatorCons); 
-          endowmentConstructorParams.add(generatorParams); 
+          endowmentConstructors.add(generatorCons);
+          endowmentConstructorParams.add(generatorParams);
         }
-        IEndowmentConfig endowConfig = new EndowmentConfig(
-            singleEndowmentItems, distributionCons, endowmentConstructors, endowmentConstructorParams);
+        IEndowmentConfig endowConfig =
+            new EndowmentConfig(singleEndowmentItems, distributionCons,
+                endowmentConstructors, endowmentConstructorParams);
         simulationEndowmentConfigs.add(endowConfig);
       }
       endowmentConfigs.add(simulationEndowmentConfigs);
@@ -571,8 +571,7 @@ public class JsonParser implements IJsonParser {
           new LinkedList<List<IMarketConfig>>();
       List<List<Map<String, String>>> simulationMarketRules =
           marketRules.get(i);
-      List<List<List<String>>> simulationMarketitems =
-          marketitems.get(i);
+      List<List<List<String>>> simulationMarketitems = marketitems.get(i);
       for (int j = 0; j < simulationMarketRules.size(); j++) {
         List<IMarketConfig> simMarketConfigs = new LinkedList<IMarketConfig>();
         List<Map<String, String>> simultaneousMarketRules =
@@ -590,20 +589,20 @@ public class JsonParser implements IJsonParser {
           String innerIRPolicyString = singleMarketRules.get("innerIRPolicy");
           String tConditionString = singleMarketRules.get("tCondition");
 
-          Class<?> aRuleClass = Class.forName(
-              "brown.auction.rules.allocation." + aRuleString);
-          Class<?> pRuleClass = Class
-              .forName("brown.auction.rules.payment." + pRuleString);
-          Class<?> qRuleClass = Class
-              .forName("brown.auction.rules.query." + qRuleString);
-          Class<?> actRuleClass = Class.forName(
-              "brown.auction.rules.activity." + actRuleString);
-          Class<?> irPolicyClass = Class
-              .forName("brown.auction.rules.ir." + irPolicyString);
+          Class<?> aRuleClass =
+              Class.forName("brown.auction.rules.allocation." + aRuleString);
+          Class<?> pRuleClass =
+              Class.forName("brown.auction.rules.payment." + pRuleString);
+          Class<?> qRuleClass =
+              Class.forName("brown.auction.rules.query." + qRuleString);
+          Class<?> actRuleClass =
+              Class.forName("brown.auction.rules.activity." + actRuleString);
+          Class<?> irPolicyClass =
+              Class.forName("brown.auction.rules.ir." + irPolicyString);
           Class<?> innerIRPolicyClass = Class
               .forName("brown.auction.rules.innerir." + innerIRPolicyString);
-          Class<?> tConditionClass = Class.forName(
-              "brown.auction.rules.termination." + tConditionString);
+          Class<?> tConditionClass = Class
+              .forName("brown.auction.rules.termination." + tConditionString);
 
           Constructor<?> aRuleCons = aRuleClass.getConstructor();
           Constructor<?> pRuleCons = pRuleClass.getConstructor();
@@ -623,12 +622,11 @@ public class JsonParser implements IJsonParser {
                   (IInnerIRPolicy) innerIRPolicyCons.newInstance(),
                   (ITerminationCondition) tConditionCons.newInstance());
 
-          List<String> singleMarketItems =
-              simultaneousMarketitems.get(k);
+          List<String> singleMarketItems = simultaneousMarketitems.get(k);
 
           IMarketConfig singleMarketConfig =
               new MarketConfig(marketRule, singleMarketItems);
-          simMarketConfigs.add(singleMarketConfig); 
+          simMarketConfigs.add(singleMarketConfig);
         }
         simulationMarketConfigs.add(simMarketConfigs);
       }
@@ -640,11 +638,10 @@ public class JsonParser implements IJsonParser {
         new LinkedList<ISimulationConfig>();
 
     for (int i = 0; i < tConfigs.size(); i++) {
-      ISimulationConfig singleConfig =
-          new SimulationConfig(numRunsList.get(i),
-              tConfigs.get(i), valuationConfigs.get(i), endowmentConfigs.get(i),
-              marketConfigs.get(i));
-      simulationConfigs.add(singleConfig); 
+      ISimulationConfig singleConfig = new SimulationConfig(numRunsList.get(i),
+          groupSizeList.get(i), tConfigs.get(i), valuationConfigs.get(i),
+          endowmentConfigs.get(i), marketConfigs.get(i));
+      simulationConfigs.add(singleConfig);
     }
 
     return simulationConfigs;
@@ -657,15 +654,18 @@ public class JsonParser implements IJsonParser {
 
     JSONObject jo = (JSONObject) rawInput;
 
-    
-    Map<String, Integer> outerParams = new HashMap<String, Integer>(); 
-    outerParams.put("numTotalRuns", ((Long) jo.get("numTotalRuns")).intValue()); 
-    outerParams.put("startingDelayTime", ((Long) jo.get("startingDelayTime")).intValue()); 
-    
-    return outerParams; 
-    
+    Map<String, Integer> outerParams = new HashMap<String, Integer>();
+    outerParams.put("numTotalRuns", ((Long) jo.get("numTotalRuns")).intValue());
+    outerParams.put("startingDelayTime",
+        ((Long) jo.get("startingDelayTime")).intValue());
+    if (jo.containsKey("serverPort"))
+      outerParams.put("serverPort", ((Long) jo.get("serverPort")).intValue());
+    else
+      outerParams.put("serverPort", 2121);
+    return outerParams;
+
   }
-  
+
   @Override
   public Map<String, Double> parseJSONDoubleParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException {
@@ -679,5 +679,5 @@ public class JsonParser implements IJsonParser {
     return outerParams;
 
   }
-  
+
 }

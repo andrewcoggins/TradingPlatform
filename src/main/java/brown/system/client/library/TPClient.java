@@ -16,6 +16,7 @@ public abstract class TPClient implements IClient {
 
   public final Client CLIENT;
   public Integer ID;
+  public Integer publicID;
 
   /**
    * TPClient constructor
@@ -27,6 +28,7 @@ public abstract class TPClient implements IClient {
   public TPClient(String host, int port, ISetup setup) {
     this.CLIENT = new Client(16384, 8192);
     this.ID = null;
+    this.publicID = null; 
     CLIENT.start();
     Kryo agentKryo = CLIENT.getKryo();
     Setup.start(agentKryo);
@@ -46,7 +48,9 @@ public abstract class TPClient implements IClient {
       onRegistrationResponse(IRegistrationResponseMessage registrationMessage) {
     SystemLogging.log("[-] Registered To Server");
     this.ID = registrationMessage.getAgentID(); 
-    SystemLogging.log("ID: " + this.ID);
+    this.publicID = registrationMessage.getPublicAgentID(); 
+    SystemLogging.log("Private ID: " + this.ID);
+    SystemLogging.log("Public ID: " + this.publicID);
   }
 
   @Override

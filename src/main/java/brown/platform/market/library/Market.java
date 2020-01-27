@@ -134,6 +134,11 @@ public class Market implements IMarket {
   public void updateTradeHistory() {
     this.STATE.addToTradeHistory(this.bids);
   }
+  
+  @Override
+  public Set<Integer> getMarketAgents() {
+    return this.AGENTS;
+  }
 
 
 }

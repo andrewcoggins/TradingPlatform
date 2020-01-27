@@ -58,7 +58,7 @@ public class KryoServerTest {
             connection.sendTCP(15000);
             connection.setTimeout(60000);
             kryoServer.sendToTCP(connection.getID(),
-                new RegistrationResponseMessage(theID, theID, "a"));
+                new RegistrationResponseMessage(theID, theID, 0, "a"));
             kryoServer.sendToTCP(connection.getID(),
                 new ErrorMessage(0, 0, "test error"));
           } else if (message instanceof String) {
