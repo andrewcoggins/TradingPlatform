@@ -12,6 +12,7 @@ import brown.communication.messageserver.IMessageServer;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.managers.ISimulationManager;
+import brown.platform.utils.Utils;
 import brown.system.kryoserver.library.KryoServer;
 import brown.system.setup.ISetup;
 
@@ -82,7 +83,7 @@ public class MessageServer extends KryoServer implements IMessageServer {
   @Override
   public void sendMessage(Connection connection,
       IServerToAgentMessage message) {
-    this.kryoServer.sendToTCP(connection.getID(), message);
+    this.kryoServer.sendToTCP(connection.getID(), Utils.sanitize(message, this.manager.getAgentIDs()));
   }
 
   @Override

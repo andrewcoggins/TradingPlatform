@@ -79,7 +79,7 @@ public class SimpleAgent extends AbsAgent implements IAgent {
   @Override
   public void
       onSimulationReportMessage(ISimulationReportMessage reportMessage) {
-    // TODO Auto-generated method stub
+    System.out.println(reportMessage); 
     
   }
 
