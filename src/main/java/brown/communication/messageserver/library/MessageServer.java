@@ -62,7 +62,7 @@ public class MessageServer extends KryoServer implements IMessageServer {
           this.manager.handleRegistration(registrationMessage, connection);
       this.sendMessage(connection, new RegistrationResponseMessage(0, agentID,
           this.manager.getAgentIDs().get(agentID),
-          registrationMessage.getName()));
+          registrationMessage.getName(), this.manager.getSimulationJsonFileName()));
     } else {
       ErrorLogging
           .log("[x] Server-onRegistration: encountered redundant registration");

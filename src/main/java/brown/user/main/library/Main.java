@@ -50,10 +50,11 @@ public class Main {
     Map<String, Double> doubleParams =
         jsonParser.parseJSONDoubleParameters(fileName);
     Integer startingDelayTime = outerParams.get("startingDelayTime");
+    Integer learningDelayTime = outerParams.get("learningDelayTime"); 
     Double simulationDelayTime = doubleParams.get("simulationDelayTime");
     Integer numTotalRuns = outerParams.get("numTotalRuns");
     Integer serverPort = outerParams.get("serverPort");
     ConfigRun configRun = new ConfigRun(configs);
-    configRun.run(startingDelayTime, simulationDelayTime, numTotalRuns, serverPort);
+    configRun.run(startingDelayTime, simulationDelayTime, learningDelayTime, numTotalRuns, serverPort, fileName);
   }
 }

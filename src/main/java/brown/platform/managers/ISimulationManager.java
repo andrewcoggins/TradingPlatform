@@ -30,20 +30,29 @@ public interface ISimulationManager {
    * Lock the SimulationManager. After it is locked, no more simulations can be created. 
    */
   void lock();
-
+  
+  /**
+   * Get the filename of the simulation JSON being run.
+   * This is sent to the agent with the RegistrationResponseMessage 
+   * @return
+   */
+  String getSimulationJsonFileName(); 
+  
   /**
    * Run the simulation
    * @param startingDelayTime
    * delay time at the beginning of the simulation, during which agents can register.
    * @param simulationDelayTime
    * delay time between when markets send TradeRequestMessage and when they cycle again. 
+   * @param learningDelayTime
+   * delay time at beginning of simulation given for agents to learn using fictitious play. 
    * Amount of time that agent has to 'think' 
    * @param numRuns
    * number of times the simulation will be run.  
    * @throws InterruptedException
    */
-  void runSimulation(int startingDelayTime, double simulationDelayTime,
-      int numRuns, int serverPort) throws InterruptedException;
+  void runSimulation(int startingDelayTime, double simulationDelayTime, int learningDelayTime, 
+      int numRuns, int serverPort, String simulationJsonFileName) throws InterruptedException;
 
   /**
    * handle an IRegistrationMessage sent from an agent. 

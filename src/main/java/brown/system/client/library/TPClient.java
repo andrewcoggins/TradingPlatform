@@ -17,6 +17,7 @@ public abstract class TPClient implements IClient {
   public final Client CLIENT;
   public Integer ID;
   public Integer publicID;
+  public String simulationJsonFileName; 
 
   /**
    * TPClient constructor
@@ -49,8 +50,10 @@ public abstract class TPClient implements IClient {
     SystemLogging.log("[-] Registered To Server");
     this.ID = registrationMessage.getAgentID(); 
     this.publicID = registrationMessage.getPublicAgentID(); 
+    this.simulationJsonFileName = registrationMessage.getSimulationJsonFileName(); 
     SystemLogging.log("Private ID: " + this.ID);
     SystemLogging.log("Public ID: " + this.publicID);
+    SystemLogging.log("simulation JSON filename: " + this.simulationJsonFileName);
   }
 
   @Override

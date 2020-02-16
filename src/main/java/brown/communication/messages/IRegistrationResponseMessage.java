@@ -6,5 +6,6 @@ public interface IRegistrationResponseMessage extends IServerToAgentMessage {
   
   public String getName(); 
   
+  public String getSimulationJsonFileName(); 
   
 }

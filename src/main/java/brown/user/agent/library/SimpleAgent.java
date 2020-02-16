@@ -42,6 +42,7 @@ public class SimpleAgent extends AbsAgent implements IAgent {
 
   @Override
   public void onInformationMessage(IInformationMessage informationMessage) {
+    UserLogging.log("[+] Simulation Json File Name: " + this.simulationJsonFileName); 
     UserLogging.log("[+] Information Message Received");
     UserLogging.log(informationMessage); 
   }

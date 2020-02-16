@@ -31,6 +31,12 @@ import brown.user.main.IMarketConfig;
 import brown.user.main.ISimulationConfig;
 import brown.user.main.IValuationConfig;
 
+/**
+ * take parameters from the input JSON, organize them into objects. start managers.
+ * Run the simulation through the SimulationManager
+ * @author andrewcoggins
+ *
+ */
 public class ConfigRun {
 
   private List<ISimulationConfig> config;
@@ -39,8 +45,8 @@ public class ConfigRun {
     this.config = config;
   }
 
-  public void run(Integer startingDelayTime, Double simulationDelayTime,
-      Integer numSimulations, Integer serverPort) throws InstantiationException,
+  public void run(Integer startingDelayTime, Double simulationDelayTime, Integer learningDelayTime, 
+      Integer numSimulations, Integer serverPort, String simulationJsonFileName) throws InstantiationException,
       IllegalAccessException, IllegalArgumentException,
       InvocationTargetException, InterruptedException {
     ISimulationManager simulationManager = new SimulationManager();
@@ -53,8 +59,7 @@ public class ConfigRun {
       IItemManager itemManager = new ItemManager();
       IMarketManager marketManager = new MarketManager();
 
-      // tradeable manager should be easy so gonna start here.
-
+      // item manager
       List<IItemConfig> itemConfig = aConfig.getTConfig();
       for (IItemConfig tConfig : itemConfig) {
         itemManager.createItems(tConfig.getItemName(), tConfig.getNumItems());
@@ -118,9 +123,8 @@ public class ConfigRun {
       marketManager.lock();
     }
 
-    simulationManager.runSimulation(startingDelayTime, simulationDelayTime,
-        numSimulations, serverPort);
-    
+    simulationManager.runSimulation(startingDelayTime, simulationDelayTime, learningDelayTime, 
+        numSimulations, serverPort, simulationJsonFileName);
     
   }
 }
