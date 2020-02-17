@@ -18,7 +18,7 @@ public class CommunicationLogging implements ILogging {
    */
   public static void log(Object message) {
     if (COMMUNICATIONLOGGING) {
-      System.out.println(message);
+      System.out.println("CommunicationLogging: " + message);
     }
   }
   

@@ -18,7 +18,7 @@ public class PlatformLogging implements ILogging {
    */
   public static void log(Object message) {
     if (PLATFORMLOGGING) {
-      System.out.println(message);
+      System.out.println("PlatformLogging: " + message);
     }
   }
   

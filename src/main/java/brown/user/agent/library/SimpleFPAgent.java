@@ -8,6 +8,7 @@ import java.util.Map;
 import brown.auction.value.valuation.IGeneralValuation;
 import brown.communication.bid.IBidBundle;
 import brown.communication.bid.library.OneSidedBidBundle;
+import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.ITradeMessage;
@@ -72,18 +73,17 @@ public class SimpleFPAgent extends AbsFictitiousPlayAgent implements IAgent {
     UserLogging.log("[+] Valuation Message Received");
     UserLogging.log(valuationMessage.toString());
     this.agentValuation = valuationMessage.getValuation();
-    initiateFictitiousPlay();
+    System.out.println("starting FP");
+    this.initiateFictitiousPlay(valuationMessage, this.initialEndowment);
   }
 
-  private void initiateFictitiousPlay() {
-    Map<String, String> allAgents = new HashMap<String, String>();
-    // TODO: allow for private class agents to play fictitious play game too.
-    // TODO: add some more parameters for timing
-    // TODO: change parameters. 
-    // TODO: typesig for fictitious play. 
-    // 
-    allAgents.put("FPAgentOne", "brown.user.agent.library.SimpleFPAgent");
-    doFictitiousPlay(allAgents);
+  private void initiateFictitiousPlay(IValuationMessage fictitiousValuation,
+      IBankUpdateMessage fictitiousEndowment) {
+    Map<String, String> allOtherAgents = new HashMap<String, String>();
+    allOtherAgents.put("FPAgentOne", "brown.user.agent.library.SimpleAgent");
+    // play an agent called 'meAgent' against a simple agent. 
+    doFictitiousPlay("meAgent", "brown.user.agent.library.LearningSubAgent",
+        fictitiousValuation, fictitiousEndowment, allOtherAgents);
   }
 
   @Override

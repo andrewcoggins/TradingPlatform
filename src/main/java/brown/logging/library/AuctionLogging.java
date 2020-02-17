@@ -18,7 +18,7 @@ public class AuctionLogging implements ILogging {
    */
   public static void log(Object message) {
     if (AUCTIONLOGGING) {
-      System.out.println(message);
+      System.out.println("AuctionLogging: " + message);
     }
   }
   
