@@ -54,7 +54,7 @@ public class TPClientTest {
             connection.sendTCP(15000);
             connection.setTimeout(60000);
             kryoServer.sendToTCP(connection.getID(),
-                new RegistrationResponseMessage(theID, theID, 0, "testing"));
+                new RegistrationResponseMessage(theID, theID, 0, "testing", "a_filename"));
             kryoServer.sendToTCP(connection.getID(),
                 new ErrorMessage(0, 0, "test error"));
           }

@@ -121,5 +121,13 @@ public class Utils {
 
     return newState;
   }
+  
+  public static void sleep(int time_millis) {
+    try {
+      Thread.sleep(time_millis);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
 
 }

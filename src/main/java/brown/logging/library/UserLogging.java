@@ -18,7 +18,7 @@ public class UserLogging implements ILogging {
    */
   public static void log(Object message) {
     if (USERLOGGING) {
-      System.out.println(message);
+      System.out.println("UserLogging: " + message);
     }
   }
   

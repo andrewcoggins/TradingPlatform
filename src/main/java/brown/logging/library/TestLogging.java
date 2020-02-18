@@ -18,7 +18,7 @@ public class TestLogging implements ILogging {
    */
   public static void log(Object message) {
     if (TESTLOGGING) {
-      System.out.println("[x] TEST: " + message);
+      System.out.println("TestLogging: " + message);
     }
   }
   

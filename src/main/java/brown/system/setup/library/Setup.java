@@ -43,7 +43,7 @@ public final class Setup implements ISetup {
     }
     return false;
   }
-
+  
   /**
    * helper that returns every java class starting at a path
    * 

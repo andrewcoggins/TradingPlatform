@@ -32,7 +32,9 @@ public abstract class AbsAgent extends TPClient implements IAgent {
 
   protected double money;
   protected Map<String, IItem> goods;
-  protected String name; 
+  protected String name;
+  protected IBankUpdateMessage initialEndowment; 
+  
   // public ID may be accessed as this.publicID
   // private ID may be accessed as this.ID
 
@@ -101,6 +103,7 @@ public abstract class AbsAgent extends TPClient implements IAgent {
   @Override
   public void onBankUpdate(IBankUpdateMessage bankUpdate) {
     UserLogging.log(this.name + ": " + bankUpdate.toString());
+    this.initialEndowment = bankUpdate; 
     this.money += bankUpdate.getMoneyAddedLost();
     updateItems(bankUpdate.getItemsAdded(), true);
     updateItems(bankUpdate.getItemsLost(), false);

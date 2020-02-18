@@ -18,7 +18,7 @@ public class SystemLogging implements ILogging {
    */
   public static void log(Object message) {
     if (SYSTEMLOGGING) {
-      System.out.println(message);
+      System.out.println("SystemLogging: " + message);
     }
   }
   
