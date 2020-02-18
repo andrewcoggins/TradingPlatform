@@ -42,14 +42,14 @@ public class SimpleAgent extends AbsAgent implements IAgent {
 
   @Override
   public void onInformationMessage(IInformationMessage informationMessage) {
-    UserLogging.log("[+] Simulation Json File Name: " + this.simulationJsonFileName); 
-    UserLogging.log("[+] Information Message Received");
-    UserLogging.log(informationMessage); 
+//    UserLogging.log("[+] Simulation Json File Name: " + this.simulationJsonFileName); 
+//    UserLogging.log("[+] Information Message Received");
+//    UserLogging.log(informationMessage); 
   }
 
   @Override
   public void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage) {
-    UserLogging.log("[+] Trade Request Message Received"); 
+//    UserLogging.log("[+] Trade Request Message Received"); 
     
     Map<ICart, Double> bidMap = new HashMap<ICart, Double>(); 
     List<IItem> bidItems = new LinkedList<IItem>(); 
@@ -60,14 +60,14 @@ public class SimpleAgent extends AbsAgent implements IAgent {
     bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
     ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getAuctionID(), oneSided);
-    UserLogging.log(tradeMessage); 
+//    UserLogging.log(tradeMessage); 
     this.CLIENT.sendTCP(tradeMessage); 
   }
 
   @Override
   public void onValuationMessage(IValuationMessage valuationMessage) {
-    UserLogging.log("[+] Valuation Message Received");
-    UserLogging.log(valuationMessage.toString()); 
+//    UserLogging.log("[+] Valuation Message Received");
+//    UserLogging.log(valuationMessage.toString()); 
     this.agentValuation = valuationMessage.getValuation(); 
   }
   

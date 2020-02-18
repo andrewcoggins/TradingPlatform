@@ -50,12 +50,13 @@ public class LearningSubAgent extends AbsAgent implements IAgent {
   public void onInformationMessage(IInformationMessage informationMessage) {
     UserLogging.log("[+] Simulation Json File Name: " + this.simulationJsonFileName); 
     UserLogging.log("[+] Information Message Received");
+    UserLogging.log("OUTER VALUATION ON THE INSIDE");
     UserLogging.log(informationMessage); 
   }
 
   @Override
   public void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage) {
-    UserLogging.log("[+] Trade Request Message Received"); 
+//    UserLogging.log("[+] Trade Request Message Received"); 
     
     Map<ICart, Double> bidMap = new HashMap<ICart, Double>(); 
     List<IItem> bidItems = new LinkedList<IItem>(); 
@@ -72,8 +73,8 @@ public class LearningSubAgent extends AbsAgent implements IAgent {
 
   @Override
   public void onValuationMessage(IValuationMessage valuationMessage) {
-    UserLogging.log("[+] Valuation Message Received");
-    UserLogging.log(valuationMessage.toString()); 
+//    UserLogging.log("[+] Valuation Message Received");
+//    UserLogging.log(valuationMessage.toString()); 
     this.agentValuation = this.initialValuation.getValuation(); 
   }
 
@@ -81,9 +82,9 @@ public class LearningSubAgent extends AbsAgent implements IAgent {
   public void
       onSimulationReportMessage(ISimulationReportMessage simReportMessage) {
     // TODO: update learning data structure. 
-    UserLogging.log("THE AGENT WILL LEARN HERE."); 
-    System.out.println(simReportMessage); 
-    
+//    UserLogging.log("THE AGENT WILL LEARN HERE."); 
+//    System.out.println(simReportMessage); 
+//    
     // TODO: save and/or update JSON file. 
     
   }
