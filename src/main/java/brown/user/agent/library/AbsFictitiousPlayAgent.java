@@ -13,7 +13,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import brown.communication.messages.IBankUpdateMessage;
+import brown.communication.messages.IRegistrationResponseMessage;
 import brown.communication.messages.IValuationMessage;
+import brown.logging.library.SystemLogging;
 import brown.logging.library.UserLogging;
 import brown.system.setup.ISetup;
 import brown.system.setup.library.Setup;
@@ -32,7 +34,7 @@ public abstract class AbsFictitiousPlayAgent extends AbsAgent
       String name) {
     super(host, port, gameSetup, name);
   }
-
+  
   /**
    * @param otherAgents map from fictitious agent's name to its class.
    */
@@ -66,24 +68,24 @@ public abstract class AbsFictitiousPlayAgent extends AbsAgent
     }
   }
 
-  /**
-   * @param otherAgents map from fictitious agent's name to its class.
-   */
-  public void doFictitiousPlayClasses(Map<String, Class<?>> otherAgents) {
-    Thread serverThread = new Thread(this.getNewServerRunnable());
-    serverThread.start();
-    Map<String, Thread> agentThreads = new HashMap<String, Thread>();
-    otherAgents.keySet().forEach(key -> agentThreads.put(key, new Thread(
-        this.getNewAgentRunnableWithClass(otherAgents.get(key), key))));
-    agentThreads.keySet().forEach(key -> agentThreads.get(key).start());
-    while (true) {
-      if (!serverThread.isAlive()) {
-        agentThreads.keySet().forEach(key -> agentThreads.get(key).interrupt());
-        break;
-      }
-      Utils.sleep_helper(1000);
-    }
-  }
+//  /**
+//   * @param otherAgents map from fictitious agent's name to its class.
+//   */
+//  public void doFictitiousPlayClasses(Map<String, Class<?>> otherAgents) {
+//    Thread serverThread = new Thread(this.getNewServerRunnable());
+//    serverThread.start();
+//    Map<String, Thread> agentThreads = new HashMap<String, Thread>();
+//    otherAgents.keySet().forEach(key -> agentThreads.put(key, new Thread(
+//        this.getNewAgentRunnableWithClass(otherAgents.get(key), key))));
+//    agentThreads.keySet().forEach(key -> agentThreads.get(key).start());
+//    while (true) {
+//      if (!serverThread.isAlive()) {
+//        agentThreads.keySet().forEach(key -> agentThreads.get(key).interrupt());
+//        break;
+//      }
+//      Utils.sleep_helper(1000);
+//    }
+//  }
 
   private FPServerRunnable getNewServerRunnable() {
     return new FPServerRunnable(this.simulationJsonFileName);
@@ -100,10 +102,10 @@ public abstract class AbsFictitiousPlayAgent extends AbsAgent
     return new FPAgentRunnable(agentString, agentName, valuation, endowment);
   }
 
-  private FPAgentRunnable getNewAgentRunnableWithClass(Class<?> agentClass,
-      String agentName) {
-    return new FPAgentRunnable(agentClass, agentName);
-  }
+//  private FPAgentRunnable getNewAgentRunnableWithClass(Class<?> agentClass,
+//      String agentName) {
+//    return new FPAgentRunnable(agentClass, agentName);
+//  }
 
   private class FPServerRunnable implements Runnable {
 

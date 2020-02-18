@@ -1,4 +1,4 @@
-package brown.user.agent.library;
+package brown.user.agent.learningagent.library;
 
 
 import java.util.HashMap;
@@ -23,25 +23,18 @@ import brown.platform.item.library.Cart;
 import brown.platform.item.library.Item;
 import brown.system.setup.ISetup;
 import brown.user.agent.IAgent;
+import brown.user.agent.library.AbsAgent;
 
-public class LearningSubAgent extends AbsAgent implements IAgent {
+public class LearningOfflineSubAgent extends AbsAgent implements IAgent {
 
-    
-  private IValuationMessage initialValuation; 
-  private IBankUpdateMessage initialEndowment; 
-  
   private IGeneralValuation agentValuation; 
   
-  public LearningSubAgent(String host, int port, ISetup gameSetup, IValuationMessage valuation, IBankUpdateMessage endowment) {
-    super(host, port, gameSetup);
-    this.initialValuation = valuation; 
-    this.initialEndowment = endowment; 
+  public LearningOfflineSubAgent(String host, int port, ISetup gameSetup) {
+    super(host, port, gameSetup); 
   }
   
-  public LearningSubAgent(String host, int port, ISetup gameSetup, String name, IValuationMessage valuation, IBankUpdateMessage endowment) {
+  public LearningOfflineSubAgent(String host, int port, ISetup gameSetup, String name) {
     super(host, port, gameSetup, name);
-    this.initialValuation = valuation; 
-    this.initialEndowment = endowment; 
   }
   
   
@@ -73,7 +66,7 @@ public class LearningSubAgent extends AbsAgent implements IAgent {
   public void onValuationMessage(IValuationMessage valuationMessage) {
     UserLogging.log("[+] Valuation Message Received");
     UserLogging.log(valuationMessage.toString()); 
-    this.agentValuation = this.initialValuation.getValuation(); 
+    this.agentValuation = valuationMessage.getValuation(); 
   }
 
   @Override
@@ -82,6 +75,8 @@ public class LearningSubAgent extends AbsAgent implements IAgent {
     // TODO: update learning data structure. 
     UserLogging.log("THE AGENT WILL LEARN HERE."); 
     System.out.println(simReportMessage); 
+    
+    // TODO: save and/or update JSON file. 
     
   }
 

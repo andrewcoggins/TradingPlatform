@@ -79,11 +79,31 @@ public class SimpleFPAgent extends AbsFictitiousPlayAgent implements IAgent {
 
   private void initiateFictitiousPlay(IValuationMessage fictitiousValuation,
       IBankUpdateMessage fictitiousEndowment) {
+
+    // TODO:
+    // add more adjustable input JSON parameters
+    // use the learning agent to save a model JSON
+    // add 'learningOnly' parameter- only register and send filename.
+    // add ''
+    
+    // TODO: implement online learning here. 
     Map<String, String> allOtherAgents = new HashMap<String, String>();
     allOtherAgents.put("FPAgentOne", "brown.user.agent.library.SimpleAgent");
-    // play an agent called 'meAgent' against a simple agent. 
-    doFictitiousPlay("meAgent", "brown.user.agent.library.LearningSubAgent",
+    // play an agent called 'meAgent' against a simple agent.
+    doFictitiousPlay("meAgent",
+        "brown.user.agent.learningagent.library.LearningSubAgent",
         fictitiousValuation, fictitiousEndowment, allOtherAgents);
+  }
+
+  private void initiateFictitiousPlayLocal() {
+    // TODO: implement offline learning here. 
+    Map<String, String> allOtherAgents = new HashMap<String, String>();
+    allOtherAgents.put("FPAgentOne", "brown.user.agent.library.SimpleAgent");
+    // play an agent called 'meAgent' against a simple agent.
+    // TODO: do something about these nulls. 
+    doFictitiousPlay("meAgent",
+        "brown.user.agent.learningagent.library.LearningOfflineSubAgent", null,
+        null, allOtherAgents);
   }
 
   @Override
@@ -94,7 +114,10 @@ public class SimpleFPAgent extends AbsFictitiousPlayAgent implements IAgent {
   }
 
   public static void main(String[] args) {
-    new SimpleFPAgent("localhost", 2121, new Setup(), "alice");
+    SimpleFPAgent fpAgent =
+        new SimpleFPAgent("localhost", 2121, new Setup(), "alice");
+    fpAgent.simulationJsonFileName = "jsonfilename"; 
+    fpAgent.initiateFictitiousPlayLocal();
     while (true) {
     }
   }
