@@ -40,7 +40,7 @@ public class AdditiveValuationDistributionTest {
     generators.add(new NormalValGenerator(params));
     
     IValuationDistribution dist = new AdditiveValuationDistribution(goods, generators); 
-    ISpecificValuation valuation = dist.sample(); 
+    ISpecificValuation valuation = dist.sample(0, null); 
     
     Map<IItem, Double> vals = new HashMap<IItem, Double>(); 
     IItem anItem = new Item("default"); 
