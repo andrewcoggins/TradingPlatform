@@ -1,19 +1,13 @@
 package brown.user.agent.library;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import brown.auction.value.valuation.IGeneralValuation;
 import brown.communication.bid.IBidBundle;
@@ -85,7 +79,7 @@ public class SimpleFPAgent extends AbsFictitiousPlayAgent implements IAgent {
     this.agentValuation = valuationMessage.getValuation();
     System.out.println("starting FP");
     this.initiateFictitiousPlay(valuationMessage, this.initialEndowment);
-    // TODO: look for JSON
+    // TODO: read JSON output from learning agent.
   }
 
   @Override
@@ -102,7 +96,7 @@ public class SimpleFPAgent extends AbsFictitiousPlayAgent implements IAgent {
     // fill 'other agent' map.
     allOtherAgents.put("FPAgentOne", "brown.user.agent.library.SimpleAgent");
     double newSimulationDelayTime = 0.25;
-    int numLearningRuns = 100; 
+    int numLearningRuns = 2; 
     // generate threads for fictitious play.
     Map<String, Runnable> FPRunnables = generateFPRunnables("meAgent",
         "brown.user.agent.learningagent.library.LearningSubAgent",
@@ -128,9 +122,10 @@ public class SimpleFPAgent extends AbsFictitiousPlayAgent implements IAgent {
   public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
     SimpleFPAgent fpAgent =
         new SimpleFPAgent("localhost", 2121, new Setup(), "alice");
-     fpAgent.simulationJsonFileName = "input_configs/second_price_auction_fp.json";
-     fpAgent.initiateFictitiousPlayOffline();
-     
+    // uncomment to learn offline. 
+//     fpAgent.simulationJsonFileName = "input_configs/second_price_auction_fp.json";
+//     fpAgent.initiateFictitiousPlayOffline();
+//     
      // TODO: read JSON output from out learning agent. 
      
     while (true) {
