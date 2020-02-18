@@ -102,15 +102,14 @@ public class SimpleFPAgent extends AbsFictitiousPlayAgent implements IAgent {
     // fill 'other agent' map.
     allOtherAgents.put("FPAgentOne", "brown.user.agent.library.SimpleAgent");
     double newSimulationDelayTime = 0.25;
+    int numLearningRuns = 100; 
     // generate threads for fictitious play.
     Map<String, Runnable> FPRunnables = generateFPRunnables("meAgent",
         "brown.user.agent.learningagent.library.LearningSubAgent",
         fictitiousValuation, fictitiousEndowment, allOtherAgents,
-        newSimulationDelayTime);
+        newSimulationDelayTime, numLearningRuns);
     // do fictitious play
     doFictitiousPlay(FPRunnables);
-    
-    // TODO: read JSON output by our learning agent. 
   }
 
   private void initiateFictitiousPlayOffline() {
@@ -118,9 +117,10 @@ public class SimpleFPAgent extends AbsFictitiousPlayAgent implements IAgent {
     Map<String, String> allOtherAgents = new HashMap<String, String>();
     allOtherAgents.put("FPAgentOne", "brown.user.agent.library.SimpleAgent");
     double newSimulationDelayTime = 0.25;
+    int numLearningRuns = 100; 
     Map<String, Runnable> FPRunnables = generateFPThreadsOffline("meAgent",
         "brown.user.agent.learningagent.library.LearningOfflineSubAgent",
-        allOtherAgents, newSimulationDelayTime);
+        allOtherAgents, newSimulationDelayTime, numLearningRuns);
     // do fictitious play
     doFictitiousPlay(FPRunnables);
   }

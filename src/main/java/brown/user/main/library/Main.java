@@ -1,12 +1,15 @@
 package brown.user.main.library;
 
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import brown.user.main.IJsonParser;
@@ -41,6 +44,7 @@ public class Main {
     String fileName = args[0];
     List<ISimulationConfig> configs = new LinkedList<>();
     IJsonParser jsonParser = new JsonParser();
+ 
     List<ISimulationConfig> runConfig = jsonParser.parseJSON(fileName);
     configs.addAll(runConfig);
     Map<String, Integer> outerParams =

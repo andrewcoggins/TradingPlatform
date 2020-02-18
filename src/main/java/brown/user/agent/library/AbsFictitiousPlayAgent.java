@@ -47,11 +47,11 @@ public abstract class AbsFictitiousPlayAgent extends AbsAgent
   protected Map<String, Runnable> generateFPRunnables(String meAgentName,
       String meAgentClass, IValuationMessage fpValuation,
       IBankUpdateMessage fpEndowment, Map<String, String> otherAgents,
-      double newSimulationDelayTime) {
+      double newSimulationDelayTime, int numLearningRuns) {
     Map<String, Runnable> allFPRunnables = new HashMap<String, Runnable>();
     // generate server runnables
     allFPRunnables.put("serverRunnable",
-        this.getNewServerRunnable(newSimulationDelayTime));
+        this.getNewServerRunnable(newSimulationDelayTime, numLearningRuns));
     // generate the 'me' agent thread
     Thread meAgentThread = new Thread(this.getNewMeAgentRunnable(meAgentClass,
         meAgentName, fpValuation, fpEndowment));
@@ -73,11 +73,11 @@ public abstract class AbsFictitiousPlayAgent extends AbsAgent
    */
   protected Map<String, Runnable> generateFPThreadsOffline(String meAgentName,
       String meAgentClass, Map<String, String> otherAgents,
-      double newSimulationDelayTime) {
+      double newSimulationDelayTime, int numLearningRuns) {
     Map<String, Runnable> allFPRunnables = new HashMap<String, Runnable>();
     // generate server runnables
     allFPRunnables.put("serverRunnable",
-        this.getNewServerRunnable(newSimulationDelayTime));
+        this.getNewServerRunnable(newSimulationDelayTime, numLearningRuns));
     // generate the 'me' agent thread
     Thread meAgentThread =
         new Thread(this.getNewAgentRunnable(meAgentClass, meAgentName));
@@ -139,9 +139,9 @@ public abstract class AbsFictitiousPlayAgent extends AbsAgent
   // }
   // }
 
-  private FPServerRunnable getNewServerRunnable(double newSimulationDelayTime) {
+  private FPServerRunnable getNewServerRunnable(double newSimulationDelayTime, int numLearningRuns) {
     return new FPServerRunnable(this.simulationJsonFileName,
-        newSimulationDelayTime);
+        newSimulationDelayTime, numLearningRuns);
   }
 
   private FPAgentRunnable getNewAgentRunnable(String agentString,
@@ -164,8 +164,8 @@ public abstract class AbsFictitiousPlayAgent extends AbsAgent
 
     private String jsonFile;
 
-    public FPServerRunnable(String jsonFile, double newSimulationDelayTime) {
-      this.jsonFile = modifyInputJSON(jsonFile, newSimulationDelayTime);
+    public FPServerRunnable(String jsonFile, double newSimulationDelayTime, int numLearningRuns) {
+      this.jsonFile = modifyInputJSON(jsonFile, newSimulationDelayTime, numLearningRuns);
     }
 
     @Override
@@ -191,7 +191,7 @@ public abstract class AbsFictitiousPlayAgent extends AbsAgent
      * @return the filename of the new json to be used for the simulation.
      */
     private String modifyInputJSON(String jsonFile,
-        double newSimulationDelayTime) {
+        double newSimulationDelayTime, int numLearningRuns) {
 
       Object rawInput;
       try {
@@ -201,7 +201,7 @@ public abstract class AbsFictitiousPlayAgent extends AbsAgent
         jo.put("learningDelayTime", 0);
         jo.put("startingDelayTime", 2);
         jo.put("newSimulationDelayTime", newSimulationDelayTime);
-        //jo.put("numTotalRuns", 1000000);
+        jo.put("numTotalRuns", numLearningRuns);
         if (jo.containsKey("serverPort")) {
           jo.put("serverPort", (Long) jo.get("serverPort") + 1);
         } else {

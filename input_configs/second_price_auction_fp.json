@@ -4,9 +4,9 @@
 	"startingDelayTime": 5, 
 	"simulationDelayTime": 0.5, 
 	"learningDelayTime": 30,
-	"numTotalRuns": 1, 
+	"numTotalRuns": 2, 
 	"simulation": [{
-		"numRuns": 2, 
+		"numRuns": 1, 
 		"items": [{
 			"itemName": "testItem", 
 			"numItems": "1"
