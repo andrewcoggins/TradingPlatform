@@ -33,7 +33,7 @@ public class GVSM9ValuationDistribution extends AbsValuationDistribution impleme
     for (List<Integer> lst : agentGroups) {
     	int j = lst.indexOf(agentID);
     	if (j >= 0) {
-    		idx = j;
+    		idx = j % 4;
     		break;
     	}
     }

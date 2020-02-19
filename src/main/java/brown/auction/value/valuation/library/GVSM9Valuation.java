@@ -14,7 +14,14 @@ public class GVSM9Valuation extends AbsSparseValuation implements ISpecificValua
   private int agentNum;
   private Map<String, Double> vals;
   
+  public GVSM9Valuation() {
+	  super();
+	  this.agentNum = 0;
+	  this.vals = new HashMap<>();
+  }
+  
   public GVSM9Valuation(int agentNum) {
+	  super();
 	  this.agentNum = agentNum;
 	  this.vals = new HashMap<>();
 	  makeValuations();
@@ -40,6 +47,7 @@ public class GVSM9Valuation extends AbsSparseValuation implements ISpecificValua
   
   private void makeValuations() {
 	  this.vals.clear();
+	  this.vals.put("natl", (this.agentNum == NATL) ? 1.0 : -1.0);
 	  
 	  switch (this.agentNum) {
 		  case NATL:
@@ -59,9 +67,14 @@ public class GVSM9Valuation extends AbsSparseValuation implements ISpecificValua
   
   public Double getValuation(ICart cart) {
 	double val = 0;
+	System.out.println(cart.getItems());
     for (IItem item : cart.getItems()) {
-    	val = 1.2 * (val + this.vals.get(item.getName()));
+    	if (item.getName().equals("natl")) {
+    		return this.vals.get("natl");
+    	}
+    	
+    	val += this.vals.get(item.getName());
     }
-    return val;
+    return val * Math.pow(1.2, cart.getItems().size() - 1);
   }
 }

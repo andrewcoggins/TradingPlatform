@@ -37,6 +37,11 @@ public class GVSM9Activity extends AbsActivity implements IActivityRule {
     		state.setAcceptable(false);
     		return;
     	}
+    	
+    	if (entry.getKey().getItems().size() > 6) {
+    		state.setAcceptable(false);
+    		return;
+    	}
     }
     
     state.setAcceptable(true);

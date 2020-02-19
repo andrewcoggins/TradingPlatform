@@ -2,10 +2,11 @@
   "name": "testParse",
   "startingDelayTime": 10,
   "simulationDelayTime": 1.0,
-  "numTotalRuns": 2,
-  "groupSize": 4,
+  "learningDelayTime": 1,
+  "numTotalRuns": 100,
   "simulation": [{
-    "numRuns": 100,
+  	"groupSize": 4,
+    "numRuns": 1,
     "items": [{
         "itemName": "A",
         "numItems": "1"
@@ -41,7 +42,11 @@
       {
         "itemName": "I",
         "numItems": "1"
-      }
+      },
+      {
+          "itemName": "natl",
+          "numItems": "0"
+       }
     ],
     "valuation": [{
       "distribution": "GVSM9ValuationDistribution",
@@ -75,6 +80,9 @@
         },
         {
           "itemName": "I"
+        },
+        {
+          "itemName": "natl"
         }
       ]
     }],
