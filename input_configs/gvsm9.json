@@ -3,10 +3,10 @@
   "startingDelayTime": 10,
   "simulationDelayTime": 1.0,
   "learningDelayTime": 0,
-  "numTotalRuns": 100,
+  "numTotalRuns": 1,
   "simulation": [{
   	"groupSize": 4,
-    "numRuns": 1,
+    "numRuns": 100,
     "items": [{
         "itemName": "A",
         "numItems": "1"
