@@ -114,8 +114,10 @@ public class SimulationManager implements ISimulationManager {
   }
 
   @Override
-  public void runSimulation(int startingDelayTime, double simulationDelayTime, int learningDelayTime, int numRuns, int serverPort, String simulationJsonFileName) throws InterruptedException {
-    this.simulationJsonFileName = simulationJsonFileName; 
+  public void runSimulation(int startingDelayTime, double simulationDelayTime,
+      int learningDelayTime, int numRuns, int serverPort,
+      String simulationJsonFileName) {
+    this.simulationJsonFileName = simulationJsonFileName;
     startMessageServer(serverPort);
     PlatformLogging.log("Agent connection phase: sleeping for "
         + startingDelayTime + " seconds");
@@ -130,45 +132,14 @@ public class SimulationManager implements ISimulationManager {
       for (int j = 0; j < this.simulations.size(); j++) {
         this.setManagers(j);
         this.setAgentGroupings();
-
-        for (int k = 0; k < this.numSimulationRuns.get(j); k++) {
-          this.initializeAgents();
-          // stop the simulation for learning after each agent initialization (after agents receive valuations). 
-          if (learningDelayTime > 0) {
-            PlatformLogging.log("Beginning learning delay time: " + learningDelayTime + " seconds");
-            Thread.sleep(learningDelayTime * MILLISECONDS); 
-            PlatformLogging.log("Learning time over"); 
-          }
-          for (int l = 0; l < this.currentMarketManager
-              .getNumMarketBlocks(); l++) {
-            PlatformLogging.log("running simulation");
-            this.runAuction(simulationDelayTime, l);
-          }
-          // after simulation is over, send simulation report messages
-          sendSimulationReportMessages();
-          // update utility totals.
-          Map<Integer, IGeneralValuation> agentValuations =
-              new HashMap<Integer, IGeneralValuation>();
-          Map<Integer, IAccount> agentAccounts =
-              new HashMap<Integer, IAccount>();
-          this.privateToPublic.keySet().forEach(key -> agentValuations.put(key,
-              this.currentValuationManager.getAgentValuation(key)));
-          this.privateToPublic.keySet().forEach(key -> agentAccounts.put(key,
-              this.currentAccountManager.getAccount(key)));
-          this.utilityManager.updateUtility(agentAccounts, agentValuations);
-          // reset managers.
-          this.currentMarketManager.reset();
-          this.currentAccountManager.reset();
-          this.currentValuationManager.reset();
-          this.currentEndowmentManager.reset();
-          
         for (int k = 0; k < this.numSimulationRuns.get(j); k++) {
           this.runSingleSimulation(simulationDelayTime, learningDelayTime);
         }
       }
     }
     this.messageServer.stopMessageServer();
-    this.utilityManager.logFinalUtility("", this.privateToPublic, this.idToName);
+    this.utilityManager.logFinalUtility("", this.privateToPublic,
+        this.idToName);
   }
 
   @Override
@@ -220,11 +191,6 @@ public class SimulationManager implements ISimulationManager {
     updateAuctions();
   }
   
-  @Override
-  public Map<Integer, Integer> getAgentIDs() {
-    return this.privateToPublic;
-  }
-
   @Override
   public Map<Integer, Integer> getAgentIDs() {
     return this.privateToPublic;

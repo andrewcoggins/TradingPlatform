@@ -122,11 +122,7 @@ public class Utils {
     return newState;
   }
   
-<<<<<<< HEAD
-  public static void sleep_helper(int time_millis) {
-=======
   public static void sleep(int time_millis) {
->>>>>>> e91e246b856878c5eb1038c40d70ff84f2b50bca
     try {
       Thread.sleep(time_millis);
     } catch (InterruptedException e) {
