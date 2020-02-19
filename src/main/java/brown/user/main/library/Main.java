@@ -13,36 +13,35 @@ import brown.user.main.IJsonParser;
 import brown.user.main.ISimulationConfig;
 
 /**
- * the main class of TradingPlatform. Start a simulation by running this class. 
+ * the main class of TradingPlatform. Start a simulation by running this class.
  * 
  * @author acoggins
  *
  */
 public class Main {
- 
-/**
- * 
- * @param args
- * @throws ClassNotFoundException
- * @throws NoSuchMethodException
- * @throws InstantiationException
- * @throws IllegalAccessException
- * @throws InvocationTargetException
- * @throws IllegalArgumentException
- * @throws InterruptedException
- * @throws FileNotFoundException
- * @throws IOException
- * @throws ParseException
- */
+
+  /**
+   * 
+   * @param args
+   * @throws ClassNotFoundException
+   * @throws NoSuchMethodException
+   * @throws InstantiationException
+   * @throws IllegalAccessException
+   * @throws InvocationTargetException
+   * @throws IllegalArgumentException
+   * @throws InterruptedException
+   * @throws FileNotFoundException
+   * @throws IOException
+   * @throws ParseException
+   */
   public static void main(String[] args) throws ClassNotFoundException,
       NoSuchMethodException, InstantiationException, IllegalAccessException,
       InvocationTargetException, IllegalArgumentException, InterruptedException,
       FileNotFoundException, IOException, ParseException {
-
-    List<ISimulationConfig> configs = new LinkedList<>();
-
     String fileName = args[0];
+    List<ISimulationConfig> configs = new LinkedList<>();
     IJsonParser jsonParser = new JsonParser();
+ 
     List<ISimulationConfig> runConfig = jsonParser.parseJSON(fileName);
     configs.addAll(runConfig);
     Map<String, Integer> outerParams =
@@ -57,4 +56,5 @@ public class Main {
     ConfigRun configRun = new ConfigRun(configs);
     configRun.run(startingDelayTime, simulationDelayTime, learningDelayTime, numTotalRuns, serverPort, fileName);
   }
+
 }

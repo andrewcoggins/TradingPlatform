@@ -1,9 +1,13 @@
 package brown.user.agent.library;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import org.json.simple.parser.ParseException;
 
 import brown.auction.value.valuation.IGeneralValuation;
 import brown.communication.bid.IBidBundle;
@@ -25,7 +29,7 @@ import brown.system.setup.library.Setup;
 import brown.user.agent.IAgent;
 
 /**
- * an honest agent... bids their valuation. What else is an honest agent to do?
+ * But a smart agent learns.
  * 
  * @author andrewcoggins
  *
@@ -33,7 +37,7 @@ import brown.user.agent.IAgent;
 public class SimpleFPAgent extends AbsFictitiousPlayAgent implements IAgent {
 
   private IGeneralValuation agentValuation;
-
+  
   public SimpleFPAgent(String host, int port, ISetup gameSetup) {
     super(host, port, gameSetup);
   }
@@ -75,15 +79,7 @@ public class SimpleFPAgent extends AbsFictitiousPlayAgent implements IAgent {
     this.agentValuation = valuationMessage.getValuation();
     System.out.println("starting FP");
     this.initiateFictitiousPlay(valuationMessage, this.initialEndowment);
-  }
-
-  private void initiateFictitiousPlay(IValuationMessage fictitiousValuation,
-      IBankUpdateMessage fictitiousEndowment) {
-    Map<String, String> allOtherAgents = new HashMap<String, String>();
-    allOtherAgents.put("FPAgentOne", "brown.user.agent.library.SimpleAgent");
-    // play an agent called 'meAgent' against a simple agent. 
-    doFictitiousPlay("meAgent", "brown.user.agent.library.LearningSubAgent",
-        fictitiousValuation, fictitiousEndowment, allOtherAgents);
+    // TODO: read JSON output from learning agent.
   }
 
   @Override
@@ -93,8 +89,45 @@ public class SimpleFPAgent extends AbsFictitiousPlayAgent implements IAgent {
 
   }
 
-  public static void main(String[] args) {
-    new SimpleFPAgent("localhost", 2121, new Setup(), "alice");
+  private void initiateFictitiousPlay(IValuationMessage fictitiousValuation,
+      IBankUpdateMessage fictitiousEndowment) {
+    // initialize 'other agent' map
+    Map<String, String> allOtherAgents = new HashMap<String, String>();
+    // fill 'other agent' map.
+    allOtherAgents.put("FPAgentOne", "brown.user.agent.library.SimpleAgent");
+    double newSimulationDelayTime = 0.25;
+    int numLearningRuns = 2; 
+    // generate threads for fictitious play.
+    Map<String, Runnable> FPRunnables = generateFPRunnables("meAgent",
+        "brown.user.agent.learningagent.library.LearningSubAgent",
+        fictitiousValuation, fictitiousEndowment, allOtherAgents,
+        newSimulationDelayTime, numLearningRuns);
+    // do fictitious play
+    doFictitiousPlay(FPRunnables);
+  }
+
+  private void initiateFictitiousPlayOffline() {
+    
+    Map<String, String> allOtherAgents = new HashMap<String, String>();
+    allOtherAgents.put("FPAgentOne", "brown.user.agent.library.SimpleAgent");
+    double newSimulationDelayTime = 0.25;
+    int numLearningRuns = 100; 
+    Map<String, Runnable> FPRunnables = generateFPThreadsOffline("meAgent",
+        "brown.user.agent.learningagent.library.LearningOfflineSubAgent",
+        allOtherAgents, newSimulationDelayTime, numLearningRuns);
+    // do fictitious play
+    doFictitiousPlay(FPRunnables);
+  }
+
+  public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+    SimpleFPAgent fpAgent =
+        new SimpleFPAgent("localhost", 2121, new Setup(), "alice");
+    // uncomment to learn offline. 
+//     fpAgent.simulationJsonFileName = "input_configs/second_price_auction_fp.json";
+//     fpAgent.initiateFictitiousPlayOffline();
+//     
+     // TODO: read JSON output from out learning agent. 
+     
     while (true) {
     }
   }

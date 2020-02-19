@@ -38,6 +38,7 @@ import brown.platform.managers.IValuationManager;
 import brown.platform.managers.IWorldManager;
 import brown.platform.simulation.ISimulation;
 import brown.platform.simulation.library.Simulation;
+import brown.platform.utils.Utils;
 import brown.system.setup.library.Setup;
 
 /**
@@ -70,7 +71,7 @@ public class SimulationManager implements ISimulationManager {
   private int groupSize;
 
   private IMessageServer messageServer;
-  private String simulationJsonFileName; 
+  private String simulationJsonFileName;
 
   /**
    * Simulation Manager manages the simulations being run by the platform.
@@ -113,33 +114,21 @@ public class SimulationManager implements ISimulationManager {
   }
 
   @Override
-  public void runSimulation(int startingDelayTime, double simulationDelayTime, int learningDelayTime, 
-      int numRuns, int serverPort, String simulationJsonFileName) throws InterruptedException {
+  public void runSimulation(int startingDelayTime, double simulationDelayTime, int learningDelayTime, int numRuns, int serverPort, String simulationJsonFileName) throws InterruptedException {
     this.simulationJsonFileName = simulationJsonFileName; 
     startMessageServer(serverPort);
     PlatformLogging.log("Agent connection phase: sleeping for "
         + startingDelayTime + " seconds");
     for (int i = 0; i < startingDelayTime; i++) {
       PlatformLogging.log(startingDelayTime - i + " seconds left to register");
-      Thread.sleep(MILLISECONDS);
+      Utils.sleep(MILLISECONDS);
     }
     PlatformLogging.log("Agent connection phase: beginning simulation");
-    // add the agent IDs to the utility manager.
-    // should this be here, or in handleRegistration?
     this.privateToPublic.keySet()
         .forEach(id -> this.utilityManager.addAgentRecord(id));
     for (int i = 0; i < numRuns; i++) {
       for (int j = 0; j < this.simulations.size(); j++) {
-
-        this.currentMarketManager = this.simulations.get(j).getWorldManager()
-            .getWorld().getMarketManager();
-        this.currentAccountManager = this.simulations.get(j).getWorldManager()
-            .getWorld().getDomainManager().getDomain().getAccountManager();
-        this.currentEndowmentManager = this.simulations.get(j).getWorldManager()
-            .getWorld().getDomainManager().getDomain().getEndowmentManager();
-        this.currentValuationManager = this.simulations.get(j).getWorldManager()
-            .getWorld().getDomainManager().getDomain().getValuationManager();
-        this.groupSize = this.simulations.get(j).getGroupSize();
+        this.setManagers(j);
         this.setAgentGroupings();
 
         for (int k = 0; k < this.numSimulationRuns.get(j); k++) {
@@ -172,12 +161,14 @@ public class SimulationManager implements ISimulationManager {
           this.currentAccountManager.reset();
           this.currentValuationManager.reset();
           this.currentEndowmentManager.reset();
+          
+        for (int k = 0; k < this.numSimulationRuns.get(j); k++) {
+          this.runSingleSimulation(simulationDelayTime, learningDelayTime);
         }
       }
     }
     this.messageServer.stopMessageServer();
-    this.utilityManager.logFinalUtility("", this.privateToPublic,
-        this.idToName);
+    this.utilityManager.logFinalUtility("", this.privateToPublic, this.idToName);
   }
 
   @Override
@@ -212,8 +203,7 @@ public class SimulationManager implements ISimulationManager {
     this.currentMarketManager.handleTradeMessage(tradeMessage);
   }
 
-  private synchronized void runAuction(double simulationDelayTime, int index)
-      throws InterruptedException {
+  private synchronized void runAuction(double simulationDelayTime, int index) {
     PlatformLogging.log(this.agentGroups.size() + " Agent Groups");
     PlatformLogging.log(this.agentGroups);
     for (int i = 0; i < this.agentGroups.size(); i++) {
@@ -221,11 +211,11 @@ public class SimulationManager implements ISimulationManager {
           new HashSet<Integer>(agentGroups.get(i)), i, this.agentGroups.size());
     }
     while (this.currentMarketManager.anyMarketsOpen()) {
-      Thread.sleep((int) (simulationDelayTime * MILLISECONDS));
+      Utils.sleep((int) (simulationDelayTime * MILLISECONDS));
       PlatformLogging.log("updating auctions");
 
       updateAuctions();
-      Thread.sleep((int) (simulationDelayTime * MILLISECONDS));
+      Utils.sleep((int) (simulationDelayTime * MILLISECONDS));
     }
     updateAuctions();
   }
@@ -233,6 +223,56 @@ public class SimulationManager implements ISimulationManager {
   @Override
   public Map<Integer, Integer> getAgentIDs() {
     return this.privateToPublic;
+  }
+
+  @Override
+  public Map<Integer, Integer> getAgentIDs() {
+    return this.privateToPublic;
+  }
+
+  private void setManagers(int j) {
+    this.currentMarketManager =
+        this.simulations.get(j).getWorldManager().getWorld().getMarketManager();
+    this.currentAccountManager = this.simulations.get(j).getWorldManager()
+        .getWorld().getDomainManager().getDomain().getAccountManager();
+    this.currentEndowmentManager = this.simulations.get(j).getWorldManager()
+        .getWorld().getDomainManager().getDomain().getEndowmentManager();
+    this.currentValuationManager = this.simulations.get(j).getWorldManager()
+        .getWorld().getDomainManager().getDomain().getValuationManager();
+    this.groupSize = this.simulations.get(j).getGroupSize();
+  }
+
+  private void runSingleSimulation(double simulationDelayTime,
+      int learningDelayTime) {
+    this.initializeAgents();
+    // stop the simulation for learning after each agent
+    // initialization (after agents receive valuations).
+    if (learningDelayTime > 0) {
+      PlatformLogging.log(
+          "Beginning learning delay time: " + learningDelayTime + " seconds");
+      Utils.sleep(learningDelayTime * MILLISECONDS);
+      PlatformLogging.log("Learning time over");
+    }
+    for (int l = 0; l < this.currentMarketManager.getNumMarketBlocks(); l++) {
+      PlatformLogging.log("running simulation");
+      this.runAuction(simulationDelayTime, l);
+    }
+    // after simulation is over, send simulation report messages
+    sendSimulationReportMessages();
+    // update utility totals.
+    Map<Integer, IGeneralValuation> agentValuations =
+        new HashMap<Integer, IGeneralValuation>();
+    Map<Integer, IAccount> agentAccounts = new HashMap<Integer, IAccount>();
+    this.privateToPublic.keySet().forEach(key -> agentValuations.put(key,
+        this.currentValuationManager.getAgentValuation(key)));
+    this.privateToPublic.keySet().forEach(key -> agentAccounts.put(key,
+        this.currentAccountManager.getAccount(key)));
+    this.utilityManager.updateUtility(agentAccounts, agentValuations);
+    // reset managers.
+    this.currentMarketManager.reset();
+    this.currentAccountManager.reset();
+    this.currentValuationManager.reset();
+    this.currentEndowmentManager.reset();
   }
 
   private void updateAuctions() {
