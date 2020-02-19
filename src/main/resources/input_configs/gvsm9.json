@@ -1,9 +1,9 @@
 {
   "name": "testParse",
-  "startingDelayTime": 10,
+  "startingDelayTime": 5,
   "simulationDelayTime": 1.0,
   "learningDelayTime": 0,
-  "numTotalRuns": 100,
+  "numTotalRuns": 3,
   "simulation": [{
     "groupSize": 4,
     "numRuns": 1,
@@ -94,43 +94,17 @@
         },
         {
           "name": "ConcreteValGenerator",
-          "parameters": [100.0]
+          "parameters": [0.0]
         },
       ],
-      "items": [{
-          "itemName": "A"
-        },
-        {
-          "itemName": "B"
-        },
-        {
-          "itemName": "C"
-        },
-        {
-          "itemName": "D"
-        },
-        {
-          "itemName": "E"
-        },
-        {
-          "itemName": "F"
-        },
-        {
-          "itemName": "G"
-        },
-        {
-          "itemName": "H"
-        },
-        {
-          "itemName": "I"
-        },
+      "items": [
       ],
     }],
     "seqMarket": [{
       "simMarket": [{
           "marketRules": {
-            "aRule": "SimpleHighestPriceAllocation",
-            "pRule": "SecondPricePayment",
+            "aRule": "CombinedSingleItemBidHighestPriceAllocation",
+            "pRule": "CombinedSingleItemBidSecondPricePayment",
             "qRule": "SimpleOneSidedQuery",
             "actRule": "GVSM9Activity",
             "irPolicy": "AnonymousPolicy",

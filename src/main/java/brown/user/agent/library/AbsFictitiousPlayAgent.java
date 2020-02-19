@@ -3,6 +3,7 @@ package brown.user.agent.library;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -195,7 +196,7 @@ public abstract class AbsFictitiousPlayAgent extends AbsAgent
 
       Object rawInput;
       try {
-        rawInput = new JSONParser().parse(new FileReader(jsonFile));
+        rawInput = new JSONParser().parse(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(jsonFile)));
         JSONObject jo = (JSONObject) rawInput;
 
         jo.put("learningDelayTime", 0);

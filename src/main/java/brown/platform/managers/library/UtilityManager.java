@@ -46,7 +46,11 @@ public class UtilityManager implements IUtilityManager {
       ICart goods = entry.getValue().getAllItems(); 
       Double money  = entry.getValue().getMoney(); 
       IGeneralValuation agentValuation = agentValuations.get(agentID); 
-      Double goodValues = agentValuation.getValuation(goods); 
+      Double goodValues = agentValuation.getValuation(goods);
+      System.out.println("UTILITY MANAGER:\n" + 
+    		  "GOODS: " + goods + "\n"
+    		  + "VALUATION: " + goodValues + "\nMONEY: " + money);
+      
       if (this.agentRecords.containsKey(agentID)) {
         List<Double> agentUtilities = this.agentRecords.get(agentID); 
         agentUtilities.add(money + goodValues); 

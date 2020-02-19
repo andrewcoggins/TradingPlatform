@@ -3,6 +3,8 @@
 import java.util.LinkedList;
 import java.util.List;
 
+import brown.platform.utils.Utils;
+
 public class BasicSimulation extends AbsUserSimulation {
 
   public BasicSimulation(List<String> agentClass, String inputJSON,
@@ -13,22 +15,35 @@ public class BasicSimulation extends AbsUserSimulation {
   public void run() throws InterruptedException {
 
     ServerRunnable sr = new ServerRunnable();
-    AgentRunnable ar = new AgentRunnable(agentClass.get(0), "solo");
-
+    
+    List<AgentRunnable> ars = new LinkedList<>();
+    List<Thread> agentThreads = new LinkedList<>();
+    int i = 0;
+    for (String s : agentClass) {
+    	AgentRunnable ar = new AgentRunnable(agentClass.get(0), "agent_" + i);
+    	ars.add(ar);
+    	agentThreads.add(new Thread(ar));
+    	i++;
+    }
+    
+    
+   
     Thread st = new Thread(sr);
-    Thread at = new Thread(ar);
-    Thread atTwo = new Thread(ar);
 
     st.start();
+    Utils.sleep(2000);
+    
     if (agentClass != null) {
-      at.start();
-      atTwo.start();
+      for (Thread t : agentThreads) {
+    	  t.start();
+      }
     }
 
     while (true) {
       if (!st.isAlive()) {
-        at.interrupt();
-        atTwo.interrupt();
+    	  for (Thread t : agentThreads) {
+        	  t.interrupt();
+          }
         break;
       }
       Thread.sleep(1000);
