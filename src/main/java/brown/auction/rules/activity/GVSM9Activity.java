@@ -27,18 +27,19 @@ public class GVSM9Activity extends AbsActivity implements IActivityRule {
     }
     
     GVSM9BidBundle bid = (GVSM9BidBundle)aBid.getBid();
-    for (Map.Entry<ICart, Double> entry : bid.getBids().entrySet()) {
-    	if (entry.getValue() < 0) {
-    		state.setAcceptable(false);
-    		return;
-    	}
-    	
-    	if (!bid.isNational() && entry.getKey().getItems().size() > 3) {
-    		state.setAcceptable(false);
-    		return;
-    	}
-    	
-    	if (entry.getKey().getItems().size() > 6) {
+    
+    if (!bid.isNational() && bid.getBids().size() > 3) {
+		state.setAcceptable(false);
+		return;
+	}
+	
+	if (bid.getBids().size() > 6) {
+		state.setAcceptable(false);
+		return;
+	}
+    
+    for (Double x : bid.getBids().values()) {
+    	if (x < 0) {
     		state.setAcceptable(false);
     		return;
     	}
