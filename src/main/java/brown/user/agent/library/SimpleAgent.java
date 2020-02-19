@@ -14,6 +14,7 @@ import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
 import brown.communication.messages.library.TradeMessage;
+import brown.logging.library.UserLogging;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
