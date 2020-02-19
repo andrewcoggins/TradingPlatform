@@ -2,6 +2,7 @@
   "name": "testParse",
   "startingDelayTime": 10,
   "simulationDelayTime": 1.0,
+  "learningDelayTime": 1,
   "numTotalRuns": 100,
   "simulation": [{
     "groupSize": 4,
@@ -42,6 +43,7 @@
         "itemName": "I",
         "numItems": "1"
       },
+      {
         "itemName": "natl",
         "numItems": "0"
       }
@@ -125,46 +127,45 @@
       ]
     }],
   }],
-    "seqMarket": [{
-      "simMarket": [{
-          "marketRules": {
-            "aRule": "SimpleHighestPriceAllocation",
-            "pRule": "SecondPricePayment",
-            "qRule": "SimpleOneSidedQuery",
-            "actRule": "GVSM9Activity",
-            "irPolicy": "AnonymousPolicy",
-            "innerIRPolicy": "NoInnerIR",
-            "tCondition": "OneShotTermination"
-          },
-          "items": [{
-            "itemName": "A"
-          },
-          {
-            "itemName": "B"
-          },
-          {
-            "itemName": "C"
-          },
-          {
-            "itemName": "D"
-          },
-          {
-            "itemName": "E"
-          },
-          {
-            "itemName": "F"
-          },
-          {
-            "itemName": "G"
-          },
-          {
-            "itemName": "H"
-          },
-          {
-            "itemName": "I"
-          }
-        ]
-      }
-    ]
+  "seqMarket": [{
+    "simMarket": [{
+      "marketRules": {
+        "aRule": "SimpleHighestPriceAllocation",
+        "pRule": "SecondPricePayment",
+        "qRule": "SimpleOneSidedQuery",
+        "actRule": "GVSM9Activity",
+        "irPolicy": "AnonymousPolicy",
+        "innerIRPolicy": "NoInnerIR",
+        "tCondition": "OneShotTermination"
+      },
+      "items": [{
+          "itemName": "A"
+        },
+        {
+          "itemName": "B"
+        },
+        {
+          "itemName": "C"
+        },
+        {
+          "itemName": "D"
+        },
+        {
+          "itemName": "E"
+        },
+        {
+          "itemName": "F"
+        },
+        {
+          "itemName": "G"
+        },
+        {
+          "itemName": "H"
+        },
+        {
+          "itemName": "I"
+        }
+      ]
+    }]
   }]
 }
