@@ -44,9 +44,9 @@
         "numItems": "1"
       },
       {
-        "itemName": "natl",
-        "numItems": "1"
-      }
+          "itemName": "natl",
+          "numItems": "0"
+       }
     ],
     "valuation": [{
       "distribution": "GVSM9ValuationDistribution",
@@ -124,9 +124,6 @@
         {
           "itemName": "I"
         },
-        {
-          "itemName": "natl"
-        }
       ],
     }],
     "seqMarket": [{
