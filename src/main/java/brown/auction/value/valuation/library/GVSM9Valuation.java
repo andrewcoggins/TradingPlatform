@@ -67,7 +67,6 @@ public class GVSM9Valuation extends AbsSparseValuation implements ISpecificValua
   
   public Double getValuation(ICart cart) {
 	double val = 0;
-	System.out.println(cart.getItems());
     for (IItem item : cart.getItems()) {
     	if (item.getName().equals("natl")) {
     		return this.vals.get("natl");

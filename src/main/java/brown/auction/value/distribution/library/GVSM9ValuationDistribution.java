@@ -40,5 +40,4 @@ public class GVSM9ValuationDistribution extends AbsValuationDistribution impleme
     
     return new GVSM9Valuation(idx);
   }
-
 }

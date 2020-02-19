@@ -2,11 +2,10 @@
   "name": "testParse",
   "startingDelayTime": 10,
   "simulationDelayTime": 1.0,
-  "learningDelayTime": 0,
-  "numTotalRuns": 1,
+  "numTotalRuns": 100,
   "simulation": [{
-  	"groupSize": 4,
-    "numRuns": 100,
+    "groupSize": 4,
+    "numRuns": 1,
     "items": [{
         "itemName": "A",
         "numItems": "1"
@@ -43,10 +42,9 @@
         "itemName": "I",
         "numItems": "1"
       },
-      {
-          "itemName": "natl",
-          "numItems": "0"
-       }
+        "itemName": "natl",
+        "numItems": "0"
+      }
     ],
     "valuation": [{
       "distribution": "GVSM9ValuationDistribution",
@@ -127,32 +125,18 @@
       ]
     }],
   }],
-  "seqMarket": [{
-    "simMarket": [{
-        "marketRules": {
-          "aRule": "SimpleHighestPriceAllocation",
-          "pRule": "SecondPricePayment",
-          "qRule": "SimpleOneSidedQuery",
-          "actRule": "SimpleOneShotActivity",
-          "irPolicy": "AnonymousPolicy",
-          "innerIRPolicy": "NoInnerIR",
-          "tCondition": "OneShotTermination"
-        },
-        "items": [{
-          "itemName": "testItem"
-        }]
-      },
-      {
-        "marketRules": {
-          "aRule": "SimpleHighestPriceAllocation",
-          "pRule": "SecondPricePayment",
-          "qRule": "SimpleOneSidedQuery",
-          "actRule": "GVSM9Activity",
-          "irPolicy": "AnonymousPolicy",
-          "innerIRPolicy": "NoInnerIR",
-          "tCondition": "OneShotTermination"
-        },
-        "items": [{
+    "seqMarket": [{
+      "simMarket": [{
+          "marketRules": {
+            "aRule": "SimpleHighestPriceAllocation",
+            "pRule": "SecondPricePayment",
+            "qRule": "SimpleOneSidedQuery",
+            "actRule": "GVSM9Activity",
+            "irPolicy": "AnonymousPolicy",
+            "innerIRPolicy": "NoInnerIR",
+            "tCondition": "OneShotTermination"
+          },
+          "items": [{
             "itemName": "A"
           },
           {

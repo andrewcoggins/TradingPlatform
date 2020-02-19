@@ -20,8 +20,6 @@ public abstract class AbsValuationDistribution
     this.items = items;
   }
 
-  public abstract ISpecificValuation sample(Integer agentID, List<List<Integer>> agentGroups);
-
   @Override
   public List<String> getItemNames() {
     List<String> itemNames = new LinkedList<String>();
