@@ -61,7 +61,6 @@ implements IAllocationRule {
 			highest.get(itemWinner.get(item)).get(0).addToCart(item);
 		}
 		
-		System.out.println("ALLOCATING: " + highest);
 		state.setAllocation(highest);
 	};
 }

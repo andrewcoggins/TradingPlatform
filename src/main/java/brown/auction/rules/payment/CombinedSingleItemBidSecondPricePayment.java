@@ -62,7 +62,6 @@ public class CombinedSingleItemBidSecondPricePayment extends AbsRule implements 
 			}
 		}
 
-		System.out.println("PAYMENTS: " + accountUpdates);
 		state.setPayments(accountUpdates);
 	}
 }
