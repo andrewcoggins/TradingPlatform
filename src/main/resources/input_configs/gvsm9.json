@@ -1,6 +1,6 @@
 {
   "name": "testParse",
-  "startingDelayTime": 5,
+  "startingDelayTime": 10,
   "simulationDelayTime": 1.0,
   "learningDelayTime": 0,
   "numTotalRuns": 3,

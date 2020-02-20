@@ -20,7 +20,7 @@ public class BasicSimulation extends AbsUserSimulation {
     List<Thread> agentThreads = new LinkedList<>();
     int i = 0;
     for (String s : agentClass) {
-    	AgentRunnable ar = new AgentRunnable(agentClass.get(0), "agent_" + i);
+    	AgentRunnable ar = new AgentRunnable(agentClass.get(i), "agent_" + i);
     	ars.add(ar);
     	agentThreads.add(new Thread(ar));
     	i++;
@@ -31,7 +31,7 @@ public class BasicSimulation extends AbsUserSimulation {
     Thread st = new Thread(sr);
 
     st.start();
-    Utils.sleep(2000);
+    Utils.sleep(5000);
     
     if (agentClass != null) {
       for (Thread t : agentThreads) {
