@@ -1,9 +1,9 @@
 {
   "name": "testParse",
   "startingDelayTime": 10,
-  "simulationDelayTime": 1.0,
+  "simulationDelayTime": 0.75,
   "learningDelayTime": 0,
-  "numTotalRuns": 3,
+  "numTotalRuns": 100,
   "simulation": [{
     "groupSize": 4,
     "numRuns": 1,
@@ -44,7 +44,7 @@
         "numItems": "1"
       },
       {
-          "itemName": "natl",
+          "itemName": "agentType",
           "numItems": "0"
        }
     ],
@@ -82,7 +82,7 @@
           "itemName": "I"
         },
         {
-          "itemName": "natl"
+          "itemName": "agentType"
         }
       ]
     }],

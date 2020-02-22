@@ -11,18 +11,18 @@ public class GVSM9Valuation extends AbsSparseValuation implements ISpecificValua
   
   private static final int NATL = 0, REG1 = 1, REG2 = 2, REG3 = 3;
   
-  private int agentNum;
+  private int agentType;
   private Map<String, Double> vals;
   
   public GVSM9Valuation() {
 	  super();
-	  this.agentNum = 0;
+	  this.agentType = 0;
 	  this.vals = new HashMap<>();
   }
   
-  public GVSM9Valuation(int agentNum) {
+  public GVSM9Valuation(int agentType) {
 	  super();
-	  this.agentNum = agentNum;
+	  this.agentType = agentType;
 	  this.vals = new HashMap<>();
 	  makeValuations();
   }
@@ -32,24 +32,24 @@ public class GVSM9Valuation extends AbsSparseValuation implements ISpecificValua
 	  return max * Math.random();
   }
   
-  private void putVals(double a, double b, double c, double d,
-		  double e, double f, double g, double h, double i) {
-	  this.vals.put("A", rv(a));
-	  this.vals.put("B", rv(b));
-	  this.vals.put("C", rv(c));
-	  this.vals.put("D", rv(d));
-	  this.vals.put("E", rv(e));
-	  this.vals.put("F", rv(f));
-	  this.vals.put("G", rv(g));
-	  this.vals.put("H", rv(h));
-	  this.vals.put("I", rv(i));
+  private void putVals(int a, int b, int c, int d,
+		  int e, int f, int g, int h, int i) {
+	  this.vals.put("A", (a == 0) ? -1 : rv(a));
+	  this.vals.put("B", (b == 0) ? -1 : rv(b));
+	  this.vals.put("C", (c == 0) ? -1 : rv(c));
+	  this.vals.put("D", (d == 0) ? -1 : rv(d));
+	  this.vals.put("E", (e == 0) ? -1 : rv(e));
+	  this.vals.put("F", (f == 0) ? -1 : rv(f));
+	  this.vals.put("G", (g == 0) ? -1 : rv(g));
+	  this.vals.put("H", (h == 0) ? -1 : rv(h));
+	  this.vals.put("I", (i == 0) ? -1 : rv(i));
   }
   
   private void makeValuations() {
 	  this.vals.clear();
-	  this.vals.put("natl", (this.agentNum == NATL) ? 1.0 : -1.0);
+	  this.vals.put("agentType", this.agentType + 0.0);
 	  
-	  switch (this.agentNum) {
+	  switch (this.agentType) {
 		  case NATL:
 			  this.putVals(15, 15, 30, 30, 15, 15, 0, 0, 0);
 			  break;
@@ -68,8 +68,8 @@ public class GVSM9Valuation extends AbsSparseValuation implements ISpecificValua
   public Double getValuation(ICart cart) {
 	double val = 0;
     for (IItem item : cart.getItems()) {
-    	if (item.getName().equals("natl")) {
-    		return this.vals.get("natl");
+    	if (item.getName().equals("agentType")) {
+    		return this.vals.get("agentType");
     	}
     	
     	val += this.vals.get(item.getName());

@@ -16,16 +16,16 @@ import brown.platform.item.library.Cart;
  *
  */
 public class GVSM9BidBundle extends AbsOneSidedBidBundle implements IBidBundle {
-	private boolean isNational;
+	private int agentNum;
 	
   public GVSM9BidBundle() {
     super(); 
-    this.isNational = false;
+    this.agentNum = 0;
   }
   
-	public GVSM9BidBundle(Map<IItem, Double> bids, boolean isNational) {
+	public GVSM9BidBundle(Map<IItem, Double> bids, int agentNum) {
 		super(mapOf(bids)); 
-		this.isNational = isNational;
+		this.agentNum = agentNum;
 	}
 	
 	private static Map<ICart, Double> mapOf(Map<IItem, Double> bids) {
@@ -38,8 +38,8 @@ public class GVSM9BidBundle extends AbsOneSidedBidBundle implements IBidBundle {
 		return m;
 	}
 	
-	public boolean isNational() {
-		return this.isNational;
+	public int agentNum() {
+		return this.agentNum;
 	}
 	
 }
