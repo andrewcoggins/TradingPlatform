@@ -55,25 +55,27 @@ public class LocalBid {
 		}
 	}
 	
-	public static double calcMarginalValue(Set<IItem> G, IItem good, IGeneralValuation v, IBidVector b, ILinearPrices p) {
-		ICart bundle = new Cart();
-		double payment = 0;
-		for (IItem i2 : G) {
-			if (i2.equals(good)) {
-				continue;
+	public static class CorrectMV {
+		public static double calcMarginalValue(Set<IItem> G, IItem good, IGeneralValuation v, IBidVector b, ILinearPrices p) {
+			ICart bundle = new Cart();
+			double payment = 0;
+			for (IItem i2 : G) {
+				if (i2.equals(good)) {
+					continue;
+				}
+				
+				double price = p.getPrice(i2);
+				double bid = b.getBid(i2);
+				if (bid > price) {
+					bundle.addToCart(i2);
+					payment += price;
+				}
 			}
-			
-			double price = p.getPrice(i2);
-			double bid = b.getBid(i2);
-			if (bid > price) {
-				bundle.addToCart(i2);
-				payment += price;
-			}
+			double uLose = (v.getValuation(bundle) - payment);
+			bundle.addToCart(good);
+			double uWin = (v.getValuation(bundle) - payment);
+	
+			return uWin - uLose;
 		}
-		double uLose = (v.getValuation(bundle) - payment);
-		bundle.addToCart(good);
-		double uWin = (v.getValuation(bundle) - payment);
-
-		return uWin - uLose;
 	}
 }
