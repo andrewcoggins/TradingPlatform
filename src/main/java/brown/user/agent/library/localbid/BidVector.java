@@ -49,4 +49,17 @@ public class BidVector implements IBidVector {
 	public IBidVector copy() {
 		return new BidVector(this);
 	}
+	
+	@Override
+	public String toString() {
+		if (this.bids.isEmpty()) {
+			return "{}";
+		}
+		
+		String s = "BidVector: {";
+		for (Map.Entry<IItem, Double> entry : this.bids.entrySet()) {
+			s += "[" + entry.getKey().getName() + " : " + entry.getValue() + "], ";
+		}
+		return s.substring(0, s.length() - 2) + "}";
+	}
 }	

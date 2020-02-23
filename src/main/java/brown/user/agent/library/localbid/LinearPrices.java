@@ -36,4 +36,17 @@ public class LinearPrices implements ILinearPrices {
 	public ILinearPrices copy() {
 		return new LinearPrices(this);
 	}
+	
+	@Override
+	public String toString() {
+		if (this.prices.isEmpty()) {
+			return "{}";
+		}
+		
+		String s = "LinearPrices: {";
+		for (Map.Entry<IItem, Double> entry : this.prices.entrySet()) {
+			s += "[" + entry.getKey().getName() + " : " + entry.getValue() + "], ";
+		}
+		return s.substring(0, s.length() - 2) + "}";
+	}
 }
