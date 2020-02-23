@@ -119,7 +119,7 @@ public class SampleValuations {
 		}
 	}
 	
-	public static final IGeneralValuation COMPLICATED_VALUATION = new IGeneralValuation() {
+	public static final IGeneralValuation RANDOMIZED_VALUATION = new IGeneralValuation() {
 		
 		@Override
 		public Double getValuation(ICart c) {
