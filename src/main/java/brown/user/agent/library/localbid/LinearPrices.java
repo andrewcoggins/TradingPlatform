@@ -6,9 +6,10 @@ import java.util.Map;
 import java.util.Set;
 
 import brown.platform.item.IItem;
+import brown.platform.item.library.Item;
 
 public class LinearPrices implements ILinearPrices {
-	private Map<IItem, Double> prices;
+	private Map<String, Double> prices;
 	public LinearPrices() {
 		this.prices = new HashMap<>();
 	}
@@ -19,17 +20,21 @@ public class LinearPrices implements ILinearPrices {
 
 	@Override
 	public double getPrice(IItem good) {
-		return this.prices.get(good);
+		return this.prices.get(good.getName());
 	}
 
 	@Override
 	public void setPrice(IItem good, double price) {
-		this.prices.put(good, price);
+		this.prices.put(good.getName(), price);
 	}
 
 	@Override
 	public Set<IItem> goods() {
-		return new HashSet<>(this.prices.keySet());
+		Set<IItem> goods = new HashSet<>();
+		for (String s : this.prices.keySet()) {
+			goods.add(new Item(s));
+		}
+		return goods;
 	}
 
 	@Override
@@ -44,9 +49,14 @@ public class LinearPrices implements ILinearPrices {
 		}
 		
 		String s = "LinearPrices: {";
-		for (Map.Entry<IItem, Double> entry : this.prices.entrySet()) {
-			s += "[" + entry.getKey().getName() + " : " + entry.getValue() + "], ";
+		for (Map.Entry<String, Double> entry : this.prices.entrySet()) {
+			s += "[" + entry.getKey() + " : " + entry.getValue() + "], ";
 		}
 		return s.substring(0, s.length() - 2) + "}";
+	}
+	
+	@Override
+	public boolean contains(IItem good) {
+		return this.prices.containsKey(good.getName());
 	}
 }

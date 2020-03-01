@@ -11,4 +11,5 @@ public interface IBidVector {
 	public void setBid(IItem good, double bid);
 	public double getBid(IItem good);
 	public Set<IItem> goods();
+	public boolean contains(IItem good);
 }

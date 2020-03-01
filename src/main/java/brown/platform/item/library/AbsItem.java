@@ -74,8 +74,8 @@ public abstract class AbsItem implements IItem {
     if (getClass() != obj.getClass())
       return false;
     AbsItem other = (AbsItem) obj;
-    if (count != other.count)
-      return false;
+    //if (count != other.count)
+    //  return false;
     if (name == null) {
       if (other.name != null)
         return false;

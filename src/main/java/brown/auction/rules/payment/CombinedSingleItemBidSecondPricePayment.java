@@ -24,8 +24,6 @@ public class CombinedSingleItemBidSecondPricePayment extends AbsRule implements 
 	public void setOrders(IMarketState state, List<ITradeMessage> messages) {
 		Map<Integer, List<ICart>> allocation = state.getAllocation();
 
-		Map<Integer, List<ICart>> highest = new HashMap<>();
-
 		Map<IItem, Double> itemHighest = new HashMap<>();
 		Map<IItem, Double> itemSecondHighest = new HashMap<>();
 

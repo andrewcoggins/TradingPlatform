@@ -9,4 +9,5 @@ public interface ILinearPrices {
 	public void setPrice(IItem good, double price);
 	public double getPrice(IItem good);
 	public Set<IItem> goods();
+	public boolean contains(IItem good);
 }

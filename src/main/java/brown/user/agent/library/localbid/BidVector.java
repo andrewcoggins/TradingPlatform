@@ -10,9 +10,10 @@ import brown.auction.value.valuation.IGeneralValuation;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
+import brown.platform.item.library.Item;
 
 public class BidVector implements IBidVector {
-	private Map<IItem, Double> bids;
+	private Map<String, Double> bids;
 	public BidVector() {
 		this.bids = new HashMap<>();
 	}
@@ -26,23 +27,27 @@ public class BidVector implements IBidVector {
 		for (IItem g : G) {
 			ICart c = new Cart();
 			c.addToCart(g);
-			this.bids.put(g, v.getValuation(c));
+			this.bids.put(g.getName(), v.getValuation(c));
 		}
 	}
 
 	@Override
 	public double getBid(IItem good) {
-		return this.bids.get(good);
+		return this.bids.get(good.getName());
 	}
 
 	@Override
 	public void setBid(IItem good, double bid) {
-		this.bids.put(good, bid);
+		this.bids.put(good.getName(), bid);
 	}
 
 	@Override
 	public Set<IItem> goods() {
-		return new HashSet<>(this.bids.keySet());
+		Set<IItem> goods = new HashSet<>();
+		for (String s : this.bids.keySet()) {
+			goods.add(new Item(s));
+		}
+		return goods;
 	}
 
 	@Override
@@ -57,9 +62,14 @@ public class BidVector implements IBidVector {
 		}
 		
 		String s = "BidVector: {";
-		for (Map.Entry<IItem, Double> entry : this.bids.entrySet()) {
-			s += "[" + entry.getKey().getName() + " : " + entry.getValue() + "], ";
+		for (Map.Entry<String, Double> entry : this.bids.entrySet()) {
+			s += "[" + entry.getKey() + " : " + entry.getValue() + "], ";
 		}
 		return s.substring(0, s.length() - 2) + "}";
+	}
+
+	@Override
+	public boolean contains(IItem good) {
+		return this.bids.containsKey(good.getName());
 	}
 }	

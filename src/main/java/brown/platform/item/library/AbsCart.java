@@ -70,6 +70,8 @@ public abstract class AbsCart implements ICart {
       for (IItem anItem : this.items) {
         if (anItem.getName().equals(item.getName())) {
           anItem.removeItemCount(item.getItemCount());
+    	  this.itemMap.remove(anItem.getName());
+    	  this.items.remove(anItem);
           break; 
         }
       } 
