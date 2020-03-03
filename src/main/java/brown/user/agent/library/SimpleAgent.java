@@ -27,7 +27,7 @@ import brown.user.agent.IAgent;
  * @author andrewcoggins
  *
  */
-public class SimpleAgent extends AbsAgent implements IAgent {
+public class SimpleAgent extends AbsOnlineAgent implements IAgent {
 
   private IGeneralValuation agentValuation; 
   

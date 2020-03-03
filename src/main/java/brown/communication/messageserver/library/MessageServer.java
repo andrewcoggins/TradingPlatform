@@ -1,5 +1,9 @@
 package brown.communication.messageserver.library;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
@@ -25,10 +29,13 @@ import brown.system.setup.ISetup;
 public class MessageServer extends KryoServer implements IMessageServer {
 
   private ISimulationManager manager;
+  private Map<Integer, Connection> agentConnections;
+  private final int IDMULTIPLIER = 1000000000;
 
   public MessageServer(int port, ISetup gameSetup, ISimulationManager manager) {
     super(port, gameSetup);
     this.manager = manager;
+    this.agentConnections = new HashMap<Integer, Connection>();
     final IMessageServer aServer = this;
 
     kryoServer.addListener(new Listener() {
@@ -58,14 +65,28 @@ public class MessageServer extends KryoServer implements IMessageServer {
       // put connection in kryoServer
       // TODO: is this right?
       this.connections.put(connection, connection.getID());
-      Integer agentID =
-          this.manager.handleRegistration(registrationMessage, connection);
-      this.sendMessage(connection, new RegistrationResponseMessage(0, agentID,
-          this.manager.getAgentIDs().get(agentID),
-          registrationMessage.getName(), this.manager.getSimulationJsonFileName()));
-    } else {
-      ErrorLogging
-          .log("[x] Server-onRegistration: encountered redundant registration");
+
+      Integer agentPrivateID = -1;
+      Collection<Integer> allIds = this.agentConnections.keySet();
+      if (!allIds.contains(agentPrivateID)) {
+        agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
+        while (allIds.contains(agentPrivateID)) {
+          agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
+        }
+
+        this.agentConnections.put(agentPrivateID, connection);
+
+        Integer agentID =
+            this.manager.handleRegistration(registrationMessage, agentPrivateID);
+        this.sendMessage(agentPrivateID,
+            new RegistrationResponseMessage(0, agentID,
+                this.manager.getAgentIDs().get(agentID),
+                registrationMessage.getName(),
+                this.manager.getSimulationJsonFileName()));
+      } else {
+        ErrorLogging.log(
+            "[x] Server-onRegistration: encountered redundant registration");
+      }
     }
   }
 
@@ -81,9 +102,10 @@ public class MessageServer extends KryoServer implements IMessageServer {
   }
 
   @Override
-  public void sendMessage(Connection connection,
+  public void sendMessage(Integer agentPrivateID,
       IServerToAgentMessage message) {
-    this.kryoServer.sendToTCP(connection.getID(), Utils.sanitize(message, this.manager.getAgentIDs()));
+    this.kryoServer.sendToTCP(this.agentConnections.get(agentPrivateID).getID(),
+        Utils.sanitize(message, this.manager.getAgentIDs()));
   }
 
   @Override

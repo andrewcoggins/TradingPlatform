@@ -51,13 +51,11 @@ import brown.system.setup.library.Setup;
 public class SimulationManager implements ISimulationManager {
 
   private final int MILLISECONDS = 1000;
-  private final int IDMULTIPLIER = 1000000000;
 
   private List<ISimulation> simulations;
   private List<Integer> numSimulationRuns;
   private boolean lock;
 
-  private Map<Integer, Connection> agentConnections;
   private Map<Integer, Integer> privateToPublic;
   private Map<Integer, String> idToName;
   private List<List<Integer>> agentGroups;
@@ -86,7 +84,6 @@ public class SimulationManager implements ISimulationManager {
     this.numSimulationRuns = new LinkedList<Integer>();
 
     this.privateToPublic = new HashMap<Integer, Integer>();
-    this.agentConnections = new HashMap<Integer, Connection>();
     this.idToName = new HashMap<Integer, String>();
     this.utilityManager = new UtilityManager();
     this.agentCount = 0;
@@ -144,28 +141,20 @@ public class SimulationManager implements ISimulationManager {
 
   @Override
   public Integer handleRegistration(IRegistrationMessage registrationMessage,
-      Connection connection) {
-    Integer agentPrivateID = -1;
-    Collection<Integer> allIds = this.agentConnections.keySet();
-    if (!allIds.contains(agentPrivateID)) {
-      agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
-      while (allIds.contains(agentPrivateID)) {
-        agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
-      }
-      privateToPublic.put(agentPrivateID, agentCount++);
-      this.agentConnections.put(agentPrivateID, connection);
-      if (registrationMessage.getName() != null) {
-        this.idToName.put(agentPrivateID, registrationMessage.getName());
-      } else {
-        PlatformLogging.log(
-            "[x] AbsServer-onRegistration: encountered registration from existing agent");
-      }
-      PlatformLogging.log("[-] registered " + agentPrivateID);
-      connection.sendTCP(15000);
-      connection.setTimeout(60000);
-      return agentPrivateID;
+      Integer agentPrivateID) {
+
+    privateToPublic.put(agentPrivateID, agentCount++);
+
+    if (registrationMessage.getName() != null) {
+      this.idToName.put(agentPrivateID, registrationMessage.getName());
+    } else {
+      PlatformLogging.log(
+          "[x] AbsServer-onRegistration: encountered registration from existing agent");
     }
-    return -1;
+    PlatformLogging.log("[-] registered " + agentPrivateID);
+
+    return agentPrivateID;
+
   }
 
   @Override
@@ -250,10 +239,10 @@ public class SimulationManager implements ISimulationManager {
           // updating the market.
           List<ITradeRequestMessage> tradeRequests =
               this.currentMarketManager.updateMarket(marketID,
-                  new LinkedList<Integer>(this.agentConnections.keySet()));
+                  new LinkedList<Integer>(this.privateToPublic.keySet()));
           for (ITradeRequestMessage tradeRequest : tradeRequests) {
             this.messageServer.sendMessage(
-                this.agentConnections.get(tradeRequest.getAgentID()),
+                tradeRequest.getAgentID(),
                 tradeRequest);
           }
         } else {
@@ -265,11 +254,11 @@ public class SimulationManager implements ISimulationManager {
                   .constructBankUpdateMessages(accountUpdates);
           Map<Integer, IInformationMessage> informationMessages =
               this.currentMarketManager.constructInformationMessages(marketID,
-                  new LinkedList<Integer>(this.agentConnections.keySet()));
+                  new LinkedList<Integer>(this.privateToPublic.keySet()));
           for (Integer agentID : bankUpdates.keySet()) {
-            this.messageServer.sendMessage(this.agentConnections.get(agentID),
+            this.messageServer.sendMessage(agentID,
                 informationMessages.get(agentID));
-            this.messageServer.sendMessage(this.agentConnections.get(agentID),
+            this.messageServer.sendMessage(agentID,
                 bankUpdates.get(agentID));
           }
           this.currentMarketManager.finalizeMarket(marketID);
@@ -283,7 +272,7 @@ public class SimulationManager implements ISimulationManager {
         this.currentMarketManager.constructSimulationReportMessages(
             new LinkedList<Integer>(this.privateToPublic.keySet()));
     for (Integer agentID : this.privateToPublic.keySet()) {
-      this.messageServer.sendMessage(this.agentConnections.get(agentID),
+      this.messageServer.sendMessage(agentID,
           simReportMessages.get(agentID));
     }
   }
@@ -319,9 +308,9 @@ public class SimulationManager implements ISimulationManager {
     Map<Integer, IValuationMessage> agentValuations =
         this.currentValuationManager.constructValuationMessages();
     for (Integer agentID : accountInitializations.keySet()) {
-      this.messageServer.sendMessage(this.agentConnections.get(agentID),
+      this.messageServer.sendMessage(agentID,
           accountInitializations.get(agentID));
-      this.messageServer.sendMessage(this.agentConnections.get(agentID),
+      this.messageServer.sendMessage(agentID,
           agentValuations.get(agentID));
     }
   }

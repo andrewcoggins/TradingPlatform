@@ -21,7 +21,7 @@ import brown.system.setup.library.Setup;
 import brown.user.agent.IAgent;
 import brown.user.main.library.Main;
 
-public abstract class AbsFictitiousPlayAgent extends AbsAgent
+public abstract class AbsFictitiousPlayAgent extends AbsOnlineAgent
     implements IAgent {
 
   public AbsFictitiousPlayAgent(String host, int port, ISetup gameSetup) {

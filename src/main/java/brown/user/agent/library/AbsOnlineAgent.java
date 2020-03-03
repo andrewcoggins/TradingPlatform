@@ -28,7 +28,7 @@ import brown.user.agent.IAgent;
  * @author andrew
  *
  */
-public abstract class AbsAgent extends TPClient implements IAgent {
+public abstract class AbsOnlineAgent extends TPClient implements IAgent {
 
   protected double money;
   protected Map<String, IItem> goods;
@@ -47,9 +47,9 @@ public abstract class AbsAgent extends TPClient implements IAgent {
    * @param gameSetup
    * @throws AgentCreationException
    */
-  public AbsAgent(String host, int port, ISetup gameSetup) {
+  public AbsOnlineAgent(String host, int port, ISetup gameSetup) {
     super(host, port, gameSetup);
-    final AbsAgent agent = this;
+    final AbsOnlineAgent agent = this;
     this.name = "default"; 
     // All agents listen for messages
     CLIENT.addListener(new Listener() {
@@ -78,9 +78,9 @@ public abstract class AbsAgent extends TPClient implements IAgent {
    * @param gameSetup
    * @throws AgentCreationException
    */
-  public AbsAgent(String host, int port, ISetup gameSetup, String name) {
+  public AbsOnlineAgent(String host, int port, ISetup gameSetup, String name) {
     super(host, port, gameSetup);
-    final AbsAgent agent = this;
+    final AbsOnlineAgent agent = this;
     this.name = name; 
     // All agents listen for messages.
     CLIENT.addListener(new Listener() {

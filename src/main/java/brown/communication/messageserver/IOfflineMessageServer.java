@@ -1,23 +1,17 @@
 package brown.communication.messageserver;
 
-import com.esotericsoftware.kryonet.Connection;
-
 import brown.communication.messages.IRegistrationMessage;
 import brown.communication.messages.IServerToAgentMessage;
 import brown.communication.messages.ITradeMessage;
+import brown.user.agent.IAgent;
 
-/**
- * Interface for communication between server and agents. 
- * @author andrewcoggins
- *
- */
-public interface IMessageServer {
+public interface IOfflineMessageServer {
 
   // server receives registration message from agent. 
-  public void onRegistration(Connection connection, IRegistrationMessage registrationMessage); 
+  public void onRegistration(IAgent connection, IRegistrationMessage registrationMessage); 
   
   // server receives bid message from agent. 
-  public void onBid(Connection connection, ITradeMessage bidMessage); 
+  public void onBid(IAgent connection, ITradeMessage bidMessage); 
   
   // server sends message to agent.
   public void sendMessage(Integer agentPrivateID, IServerToAgentMessage message); 

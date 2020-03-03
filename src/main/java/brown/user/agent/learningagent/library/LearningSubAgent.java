@@ -23,12 +23,13 @@ import brown.platform.item.library.Cart;
 import brown.platform.item.library.Item;
 import brown.system.setup.ISetup;
 import brown.user.agent.IAgent;
-import brown.user.agent.library.AbsAgent;
+import brown.user.agent.library.AbsOnlineAgent;
 
-public class LearningSubAgent extends AbsAgent implements IAgent {
+public class LearningSubAgent extends AbsOnlineAgent implements IAgent {
 
     
   private IValuationMessage initialValuation; 
+  // TODO: 
   private IBankUpdateMessage initialEndowment; 
   
   private IGeneralValuation agentValuation; 

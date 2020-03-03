@@ -29,7 +29,7 @@ import brown.user.agent.IAgent;
  * @author andrewcoggins
  *
  */
-public class TACAgent extends AbsAgent implements IAgent {
+public class TACAgent extends AbsOnlineAgent implements IAgent {
 
   private IGeneralValuation agentValuation;
 

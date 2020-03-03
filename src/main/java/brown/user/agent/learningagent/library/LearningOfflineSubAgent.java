@@ -28,9 +28,9 @@ import brown.platform.item.library.Cart;
 import brown.platform.item.library.Item;
 import brown.system.setup.ISetup;
 import brown.user.agent.IAgent;
-import brown.user.agent.library.AbsAgent;
+import brown.user.agent.library.AbsOnlineAgent;
 
-public class LearningOfflineSubAgent extends AbsAgent implements IAgent {
+public class LearningOfflineSubAgent extends AbsOnlineAgent implements IAgent {
 
   private IGeneralValuation agentValuation; 
   private Map<String, List<Double>> biddingPrices; 
