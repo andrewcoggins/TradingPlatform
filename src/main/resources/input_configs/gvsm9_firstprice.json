@@ -104,7 +104,7 @@
       "simMarket": [{
           "marketRules": {
             "aRule": "CombinedSingleItemBidHighestPriceAllocation",
-            "pRule": "CombinedSingleItemBidSecondPricePayment",
+            "pRule": "CombinedSingleItemBidFirstPricePayment",
             "qRule": "SimpleOneSidedQuery",
             "actRule": "GVSM9Activity",
             "irPolicy": "AnonymousPolicy",

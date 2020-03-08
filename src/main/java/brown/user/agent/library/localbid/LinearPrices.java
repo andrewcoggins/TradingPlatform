@@ -59,4 +59,9 @@ public class LinearPrices implements ILinearPrices {
 	public boolean contains(IItem good) {
 		return this.prices.containsKey(good.getName());
 	}
+
+	@Override
+	public int size() {
+		return this.prices.size();
+	}
 }

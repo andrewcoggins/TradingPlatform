@@ -72,4 +72,9 @@ public class BidVector implements IBidVector {
 	public boolean contains(IItem good) {
 		return this.bids.containsKey(good.getName());
 	}
+
+	@Override
+	public int size() {
+		return this.bids.size();
+	}
 }	

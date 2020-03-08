@@ -12,4 +12,5 @@ public interface IBidVector {
 	public double getBid(IItem good);
 	public Set<IItem> goods();
 	public boolean contains(IItem good);
+	public int size();
 }
