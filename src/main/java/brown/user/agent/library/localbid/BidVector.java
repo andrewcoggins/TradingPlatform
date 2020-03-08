@@ -77,4 +77,9 @@ public class BidVector implements IBidVector {
 	public int size() {
 		return this.bids.size();
 	}
+	
+	@Override
+	public void remove(IItem good) {
+		this.bids.remove(good.getName());
+	}
 }	

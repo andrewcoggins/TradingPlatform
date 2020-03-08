@@ -64,4 +64,9 @@ public class LinearPrices implements ILinearPrices {
 	public int size() {
 		return this.prices.size();
 	}
+
+	@Override
+	public void remove(IItem good) {
+		this.prices.remove(good.getName());
+	}
 }

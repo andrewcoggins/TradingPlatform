@@ -11,4 +11,5 @@ public interface ILinearPrices {
 	public Set<IItem> goods();
 	public boolean contains(IItem good);
 	public int size();
+	public void remove(IItem good);
 }
