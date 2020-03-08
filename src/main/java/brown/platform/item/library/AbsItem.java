@@ -60,7 +60,7 @@ public abstract class AbsItem implements IItem {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + count;
+    //result = prime * result + count;
     result = prime * result + ((name == null) ? 0 : name.hashCode());
     return result;
   }
