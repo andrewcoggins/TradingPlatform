@@ -1,6 +1,7 @@
 package brown.communication.messageserver.library;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,12 +20,22 @@ public class OfflineMessageServer implements IOfflineMessageServer {
 
   private ISimulationManager manager;
   private Map<Integer, IOfflineAgent> agentConnections;
-  private int messagesReceived; 
-
+  
+  private Map<String, Integer> messagesReceived; 
+  
   private final int IDMULTIPLIER = 1000000000;
 
   public OfflineMessageServer(ISimulationManager manager) {
-    this.messagesReceived = 0; 
+    
+    this.messagesReceived = new HashMap<String, Integer>();
+    this.messagesReceived.put("TradeRequestMessage", 0); 
+    this.messagesReceived.put("InformationMessage", 0); 
+    this.messagesReceived.put("RegistrationMessage", 0); 
+    this.messagesReceived.put("StatusMessage", 0); 
+    this.messagesReceived.put("ValuationMessage", 0); 
+    this.messagesReceived.put("InitializationMessage", 0); 
+    this.messagesReceived.put("SimulationReportMessage", 0); 
+    this.messagesReceived.put("BankUpdateMessage", 0);
     this.manager = manager;
     this.agentConnections = new ConcurrentHashMap<Integer, IOfflineAgent>();
     // final IOfflineMessageServer aServer = this;
@@ -118,25 +129,27 @@ public class OfflineMessageServer implements IOfflineMessageServer {
 
   @Override
   public void notifyToRespond() {
-//    System.out.println("trying to notify agents"); 
-//    for (IOfflineAgent agent : this.agentConnections.values()) {
-//      synchronized(agent) {
-//        System.out.println("trying to notify agent"); 
-//        agent.notify(); 
-//      }
-//    }
+    System.out.println("trying to notify agents"); 
+    for (IOfflineAgent agent : this.agentConnections.values()) {
+      synchronized(agent) {
+        System.out.println("trying to notify agent"); 
+        agent.notify(); 
+      }
+    }
   }
   
   @Override
-  public boolean readyToNotify() {
-    this.messagesReceived++; 
+  public boolean readyToNotify(String messagetype) {
+    int numMessages = this.messagesReceived.get(messagetype); 
+    numMessages++; 
+    this.messagesReceived.put(messagetype, numMessages); 
     System.out.println("messages received: " + this.messagesReceived);
-    return this.messagesReceived == this.agentConnections.keySet().size(); 
+    return numMessages == this.agentConnections.keySet().size(); 
   }
 
   @Override
-  public void clearMessagesRecieved() {
-    this.messagesReceived = 0; 
+  public void clearMessagesRecieved(String messageType) {
+    this.messagesReceived.put(messageType, 0); 
   }
   
 }

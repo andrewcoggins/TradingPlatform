@@ -26,7 +26,7 @@ public interface IOfflineMessageServer {
   
   public void notifyToRespond(); 
 
-  public boolean readyToNotify(); 
+  public boolean readyToNotify(String messageType); 
   
-  public void clearMessagesRecieved(); 
+  public void clearMessagesRecieved(String messageType); 
 }

@@ -6,7 +6,7 @@
 	"numTotalRuns": 1, 
 	"offlineMode": 1,
 	"simulation": [{
-		"numRuns": 100, 
+		"numRuns": 1000, 
 
 		"items": [{
 			"itemName": "testItem", 

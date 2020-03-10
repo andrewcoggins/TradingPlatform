@@ -117,6 +117,7 @@ public class OfflineSimulationManager implements ISimulationManager {
     // start the agents.
     startAgents();
     // initiate the simulation.
+    Utils.sleep(1000);
     this.messageServer.notifyToRespond();
     this.messageServer.waitForRegistrations();
     this.privateToPublic.keySet()
@@ -260,11 +261,11 @@ public class OfflineSimulationManager implements ISimulationManager {
             this.messageServer.sendMessage(agentID,
                 informationMessages.get(agentID));
           }
-          //this.messageServer.waitForBids("information message");
+          this.messageServer.waitForBids("information message");
           for (Integer agentID : bankUpdates.keySet()) {
             this.messageServer.sendMessage(agentID, bankUpdates.get(agentID));
           }
-          //this.messageServer.waitForBids("bank update message");
+          this.messageServer.waitForBids("bank update message");
           this.currentMarketManager.finalizeMarket(marketID);
         }
       }
@@ -282,7 +283,7 @@ public class OfflineSimulationManager implements ISimulationManager {
     for (Integer agentID : this.privateToPublic.keySet()) {
       this.messageServer.sendMessage(agentID, simReportMessages.get(agentID));
     }
-    //this.messageServer.waitForBids("simulation report");
+    this.messageServer.waitForBids("simulation report");
   }
 
   private void initializeAgents() {
@@ -325,11 +326,11 @@ public class OfflineSimulationManager implements ISimulationManager {
           accountInitializations.get(agentID));
 
     }
-   //this.messageServer.waitForBids("account initialization");
+   this.messageServer.waitForBids("account initialization");
     for (Integer agentID : accountInitializations.keySet()) {
       this.messageServer.sendMessage(agentID, agentValuations.get(agentID));
     }
-//    this.messageServer.waitForBids("agent valuations");
+    this.messageServer.waitForBids("agent valuations");
   }
 
   private void setAgentGroupings() {

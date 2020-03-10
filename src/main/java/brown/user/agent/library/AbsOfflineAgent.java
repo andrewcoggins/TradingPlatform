@@ -42,6 +42,13 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
     this.messageServer = messageServer;
     messageServer.onRegistration(this, new RegistrationMessage(-1));
     while (true) {
+      synchronized(this) {
+        try {
+          wait();
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        } 
+      }
       synchronized (this.incomingMessages) {
         if (this.incomingMessages.size() > 0) {
           for (IServerToAgentMessage message : this.incomingMessages) {
@@ -50,7 +57,6 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
           this.incomingMessages.clear(); 
         }
       }
-      Utils.sleep(100);
     }
   }
 
@@ -68,8 +74,13 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
   public abstract void onStatusMessage(IStatusMessage message);
 
   public synchronized void receiveMessage(IServerToAgentMessage message) {
+    
+    // TODO: straight notify. 
       synchronized (this.incomingMessages) {
         this.incomingMessages.add(message);
+        synchronized(this) {
+          this.notify();
+        }
       }
   }
 
@@ -78,7 +89,7 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
     this.money += bankUpdate.getMoneyAddedLost();
     updateItems(bankUpdate.getItemsAdded(), true);
     updateItems(bankUpdate.getItemsLost(), false);
-    notifyServer();
+    notifyServer("BankUpdateMessage");
   }
 
   @Override
@@ -89,13 +100,13 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
     this.publicID = registrationMessage.getPublicAgentID();
     SystemLogging.log("Private ID: " + this.ID);
     SystemLogging.log("Public ID: " + this.publicID);
-    notifyServer();
+    notifyServer("RegistrationMessage");
   }
 
-  protected void notifyServer() {
+  protected void notifyServer(String messageType) {
     synchronized (this.messageServer) {
-      if (this.messageServer.readyToNotify()) {
-        this.messageServer.clearMessagesRecieved(); 
+      if (this.messageServer.readyToNotify(messageType)) {
+        this.messageServer.clearMessagesRecieved(messageType); 
         System.out.println("notifying");
         this.messageServer.notify(); 
       }
