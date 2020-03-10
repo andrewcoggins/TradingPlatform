@@ -2,7 +2,7 @@ package brown.communication.messages;
 
 import com.esotericsoftware.kryonet.Connection;
 
-import brown.communication.messageserver.IMessageServer;
+import brown.communication.messageserver.IOnlineMessageServer;
 
 public interface IAgentToServerMessage extends IMessage {
 
@@ -11,6 +11,6 @@ public interface IAgentToServerMessage extends IMessage {
    * @param connection
    * @param server
    */
-  public void serverDispatch(Connection connection, IMessageServer server);
+  public void serverDispatch(Connection connection, IOnlineMessageServer server);
   
 }

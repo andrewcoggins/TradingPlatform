@@ -63,7 +63,5 @@ public class SimulationReportMessage extends AbsServerToAgentMessage implements 
   public String toString() {
     return "SimulationReportMessage [marketResults=" + marketResults + "]";
   }
-  
-  
 
 }

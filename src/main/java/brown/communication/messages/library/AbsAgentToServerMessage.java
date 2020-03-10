@@ -3,7 +3,7 @@ package brown.communication.messages.library;
 import com.esotericsoftware.kryonet.Connection;
 
 import brown.communication.messages.IAgentToServerMessage;
-import brown.communication.messageserver.IMessageServer;
+import brown.communication.messageserver.IOnlineMessageServer;
 
 public abstract class AbsAgentToServerMessage extends AbsMessage implements IAgentToServerMessage {
 
@@ -12,6 +12,6 @@ public abstract class AbsAgentToServerMessage extends AbsMessage implements IAge
   }
   
   @Override
-  public abstract void serverDispatch(Connection connection, IMessageServer server); 
+  public abstract void serverDispatch(Connection connection, IOnlineMessageServer server); 
 
 }

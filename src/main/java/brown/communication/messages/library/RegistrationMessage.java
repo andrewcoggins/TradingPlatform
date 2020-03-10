@@ -3,7 +3,7 @@ package brown.communication.messages.library;
 import com.esotericsoftware.kryonet.Connection;
 
 import brown.communication.messages.IRegistrationMessage;
-import brown.communication.messageserver.IMessageServer;
+import brown.communication.messageserver.IOnlineMessageServer;
 
 /**
  * a request for an agent to join the server 
@@ -30,7 +30,7 @@ public class RegistrationMessage extends AbsAgentToServerMessage implements IReg
   }
   
   @Override
-  public void serverDispatch(Connection connection, IMessageServer server) {
+  public void serverDispatch(Connection connection, IOnlineMessageServer server) {
     server.onRegistration(connection, this);
   }
   

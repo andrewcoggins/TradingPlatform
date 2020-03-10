@@ -53,9 +53,11 @@ public class Main {
     Double simulationDelayTime = doubleParams.get("simulationDelayTime");
     Integer numTotalRuns = outerParams.get("numTotalRuns");
     Integer serverPort = outerParams.get("serverPort");
+    boolean offlineMode = outerParams.get("offlineMode") == 0; 
     ConfigRun configRun = new ConfigRun(configs);
+    System.out.println(learningDelayTime); 
     configRun.run(startingDelayTime, simulationDelayTime, learningDelayTime,
-        numTotalRuns, serverPort, fileName);
+        numTotalRuns, serverPort, fileName, offlineMode);
   }
 
 }

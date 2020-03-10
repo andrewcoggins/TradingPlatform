@@ -21,6 +21,7 @@ import brown.platform.managers.library.DomainManager;
 import brown.platform.managers.library.EndowmentManager;
 import brown.platform.managers.library.ItemManager;
 import brown.platform.managers.library.MarketManager;
+import brown.platform.managers.library.OfflineSimulationManager;
 import brown.platform.managers.library.SimulationManager;
 import brown.platform.managers.library.ValuationManager;
 import brown.platform.managers.library.WorldManager;
@@ -46,10 +47,21 @@ public class ConfigRun {
   }
 
   public void run(Integer startingDelayTime, Double simulationDelayTime, Integer learningDelayTime, 
-      Integer numSimulations, Integer serverPort, String simulationJsonFileName) throws InstantiationException,
+      Integer numSimulations, Integer serverPort, String simulationJsonFileName, boolean offlineMode) throws InstantiationException,
       IllegalAccessException, IllegalArgumentException,
       InvocationTargetException, InterruptedException {
-    ISimulationManager simulationManager = new SimulationManager();
+    
+    ISimulationManager simulationManager; 
+    
+    if (offlineMode) {
+      simulationManager = new SimulationManager();
+      System.out.println("A"); 
+    }
+    else {
+      simulationManager = new OfflineSimulationManager();
+      System.out.println(simulationManager); 
+    }
+    
     for (ISimulationConfig aConfig : this.config) {
       IWorldManager worldManager = new WorldManager();
       IDomainManager domainManager = new DomainManager();
@@ -122,9 +134,14 @@ public class ConfigRun {
       simulationManager.lock();
       marketManager.lock();
     }
-
-    simulationManager.runSimulation(startingDelayTime, simulationDelayTime, learningDelayTime, 
-        numSimulations, serverPort, simulationJsonFileName);
+    
+    simulationManager.runSimulation(
+        startingDelayTime, 
+        simulationDelayTime, 
+        learningDelayTime, 
+        numSimulations, 
+        serverPort, 
+        simulationJsonFileName);
     
   }
 }

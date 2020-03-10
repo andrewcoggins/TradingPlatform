@@ -12,7 +12,7 @@ import brown.communication.messages.IRegistrationMessage;
 import brown.communication.messages.IServerToAgentMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.library.RegistrationResponseMessage;
-import brown.communication.messageserver.IMessageServer;
+import brown.communication.messageserver.IOnlineMessageServer;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.managers.ISimulationManager;
@@ -26,7 +26,7 @@ import brown.system.setup.ISetup;
  * @author acoggins
  *
  */
-public class MessageServer extends KryoServer implements IMessageServer {
+public class MessageServer extends KryoServer implements IOnlineMessageServer {
 
   private ISimulationManager manager;
   private Map<Integer, Connection> agentConnections;
@@ -36,7 +36,7 @@ public class MessageServer extends KryoServer implements IMessageServer {
     super(port, gameSetup);
     this.manager = manager;
     this.agentConnections = new HashMap<Integer, Connection>();
-    final IMessageServer aServer = this;
+    final IOnlineMessageServer aServer = this;
 
     kryoServer.addListener(new Listener() {
 

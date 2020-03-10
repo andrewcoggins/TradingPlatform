@@ -1,5 +1,6 @@
 package brown.platform.managers.library;
 
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -19,8 +20,8 @@ import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
-import brown.communication.messageserver.IOnlineMessageServer;
-import brown.communication.messageserver.library.MessageServer;
+import brown.communication.messageserver.IOfflineMessageServer;
+import brown.communication.messageserver.library.OfflineMessageServer;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccount;
 import brown.platform.accounting.IAccountUpdate;
@@ -36,7 +37,6 @@ import brown.platform.managers.IWorldManager;
 import brown.platform.simulation.ISimulation;
 import brown.platform.simulation.library.Simulation;
 import brown.platform.utils.Utils;
-import brown.system.setup.library.Setup;
 
 /**
  * SimulationManager creates and stores ISimulation. simulation runs within the
@@ -45,7 +45,7 @@ import brown.system.setup.library.Setup;
  * @author andrewcoggins
  *
  */
-public class SimulationManager implements ISimulationManager {
+public class OfflineSimulationManager implements ISimulationManager {
 
   private final int MILLISECONDS = 1000;
 
@@ -65,7 +65,7 @@ public class SimulationManager implements ISimulationManager {
   private IUtilityManager utilityManager;
   private int groupSize;
 
-  private IOnlineMessageServer messageServer;
+  private IOfflineMessageServer messageServer;
   private String simulationJsonFileName;
 
   /**
@@ -75,7 +75,7 @@ public class SimulationManager implements ISimulationManager {
    *          specifies the auction. This is sent to agents in
    *          registrationMessage
    */
-  public SimulationManager() {
+  public OfflineSimulationManager() {
     this.simulations = new LinkedList<>();
     this.lock = false;
     this.numSimulationRuns = new LinkedList<Integer>();
@@ -85,7 +85,7 @@ public class SimulationManager implements ISimulationManager {
     this.utilityManager = new UtilityManager();
     this.agentCount = 0;
   }
-  
+
   @Override
   public void createSimulation(int numSimulationRuns, int groupSize,
       IWorldManager worldManager) {
@@ -112,14 +112,13 @@ public class SimulationManager implements ISimulationManager {
       int learningDelayTime, int numRuns, int serverPort,
       String simulationJsonFileName) {
     this.simulationJsonFileName = simulationJsonFileName;
-    startMessageServer(serverPort);
-    PlatformLogging.log("Agent connection phase: sleeping for "
-        + startingDelayTime + " seconds");
-    for (int i = 0; i < startingDelayTime; i++) {
-      PlatformLogging.log(startingDelayTime - i + " seconds left to register");
-      Utils.sleep(MILLISECONDS);
-    }
-    PlatformLogging.log("Agent connection phase: beginning simulation");
+    // start the message server
+    startMessageServer();
+    // start the agents.
+    startAgents();
+    // initiate the simulation.
+    this.messageServer.notifyToRespond();
+    this.messageServer.waitForRegistrations();
     this.privateToPublic.keySet()
         .forEach(id -> this.utilityManager.addAgentRecord(id));
     for (int i = 0; i < numRuns; i++) {
@@ -168,11 +167,12 @@ public class SimulationManager implements ISimulationManager {
           new HashSet<Integer>(agentGroups.get(i)), i, this.agentGroups.size());
     }
     while (this.currentMarketManager.anyMarketsOpen()) {
-      Utils.sleep((int) (simulationDelayTime * MILLISECONDS));
+      // TODO: wait.
+      // Utils.sleep((int) (simulationDelayTime * MILLISECONDS));
       PlatformLogging.log("updating auctions");
 
       updateAuctions();
-      Utils.sleep((int) (simulationDelayTime * MILLISECONDS));
+      // this.messageServer.waitForBids();
     }
     updateAuctions();
   }
@@ -229,17 +229,19 @@ public class SimulationManager implements ISimulationManager {
 
   private void updateAuctions() {
     for (Integer marketID : this.currentMarketManager.getActiveMarketIDs()) {
+      System.out.println("market ID: " + marketID); 
       // we still need to synchronize on the market for this whole operation. or
       // maybe can pare it down to MM methods?
+      boolean marketWasOpen = false;
       synchronized (this.currentMarketManager.getActiveMarket(marketID)) {
         if (this.currentMarketManager.marketOpen(marketID)) {
+          marketWasOpen = true;
           // updating the market.
           List<ITradeRequestMessage> tradeRequests =
               this.currentMarketManager.updateMarket(marketID,
                   new LinkedList<Integer>(this.privateToPublic.keySet()));
           for (ITradeRequestMessage tradeRequest : tradeRequests) {
-            this.messageServer.sendMessage(
-                tradeRequest.getAgentID(),
+            this.messageServer.sendMessage(tradeRequest.getAgentID(),
                 tradeRequest);
           }
         } else {
@@ -252,15 +254,24 @@ public class SimulationManager implements ISimulationManager {
           Map<Integer, IInformationMessage> informationMessages =
               this.currentMarketManager.constructInformationMessages(marketID,
                   new LinkedList<Integer>(this.privateToPublic.keySet()));
+          System.out.println(bankUpdates); 
           for (Integer agentID : bankUpdates.keySet()) {
+            System.out.println("about to send information message"); 
             this.messageServer.sendMessage(agentID,
                 informationMessages.get(agentID));
-            this.messageServer.sendMessage(agentID,
-                bankUpdates.get(agentID));
           }
+          //this.messageServer.waitForBids("information message");
+          for (Integer agentID : bankUpdates.keySet()) {
+            this.messageServer.sendMessage(agentID, bankUpdates.get(agentID));
+          }
+          //this.messageServer.waitForBids("bank update message");
           this.currentMarketManager.finalizeMarket(marketID);
         }
       }
+      if (marketWasOpen) {
+        this.messageServer.waitForBids("trade request message");
+      }
+
     }
   }
 
@@ -269,9 +280,9 @@ public class SimulationManager implements ISimulationManager {
         this.currentMarketManager.constructSimulationReportMessages(
             new LinkedList<Integer>(this.privateToPublic.keySet()));
     for (Integer agentID : this.privateToPublic.keySet()) {
-      this.messageServer.sendMessage(agentID,
-          simReportMessages.get(agentID));
+      this.messageServer.sendMessage(agentID, simReportMessages.get(agentID));
     }
+    //this.messageServer.waitForBids("simulation report");
   }
 
   private void initializeAgents() {
@@ -304,12 +315,21 @@ public class SimulationManager implements ISimulationManager {
         this.currentAccountManager.constructInitializationMessages();
     Map<Integer, IValuationMessage> agentValuations =
         this.currentValuationManager.constructValuationMessages();
+    System.out.println(accountInitializations);
+    System.out.println(agentValuations);
     for (Integer agentID : accountInitializations.keySet()) {
+      System.out.println(agentID);
+
+      System.out.println("initializing account");
       this.messageServer.sendMessage(agentID,
           accountInitializations.get(agentID));
-      this.messageServer.sendMessage(agentID,
-          agentValuations.get(agentID));
+
     }
+   //this.messageServer.waitForBids("account initialization");
+    for (Integer agentID : accountInitializations.keySet()) {
+      this.messageServer.sendMessage(agentID, agentValuations.get(agentID));
+    }
+//    this.messageServer.waitForBids("agent valuations");
   }
 
   private void setAgentGroupings() {
@@ -339,8 +359,53 @@ public class SimulationManager implements ISimulationManager {
     }
   }
 
-  private void startMessageServer(int serverPort) {
-    this.messageServer = new MessageServer(serverPort, new Setup(), this);
+  private void startMessageServer() {
+    this.messageServer = new OfflineMessageServer(this);
+  }
+
+  private void startAgents() {
+    // start new agent threads using the offline agent runnable..
+    OfflineAgentRunnable agentOne = new OfflineAgentRunnable(
+        "brown.user.agent.library.SimpleOfflineAgent", this.messageServer);
+    OfflineAgentRunnable agentTwo = new OfflineAgentRunnable(
+        "brown.user.agent.library.SimpleOfflineAgent", this.messageServer);
+
+    Thread at = new Thread(agentOne);
+    Thread atTwo = new Thread(agentTwo);
+    Thread atThree = new Thread(agentTwo);
+    Thread atFour = new Thread(agentTwo);
+    Thread atFive = new Thread(agentTwo);
+
+    at.start();
+//    atTwo.start();
+//    atThree.start(); 
+//    atFour.start(); 
+//    atFive.start(); 
+  }
+
+  private class OfflineAgentRunnable implements Runnable {
+
+    private String agentString;
+    private IOfflineMessageServer messageServer;
+
+    public OfflineAgentRunnable(String agentString,
+        IOfflineMessageServer messageServer) {
+      this.agentString = agentString;
+      this.messageServer = messageServer;
+    }
+
+    @Override
+    public void run() {
+      try {
+        Class<?> cl = Class.forName(agentString);
+        Constructor<?> cons = cl.getConstructor(IOfflineMessageServer.class);
+        cons.newInstance(this.messageServer);
+        while (true) {
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
   }
 
 }

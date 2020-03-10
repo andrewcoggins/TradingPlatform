@@ -4,7 +4,7 @@ import com.esotericsoftware.kryonet.Connection;
 
 import brown.communication.bid.IBidBundle;
 import brown.communication.messages.ITradeMessage;
-import brown.communication.messageserver.IMessageServer;
+import brown.communication.messageserver.IOnlineMessageServer;
 
 /**
  * Trade message is sent by the agent to the server
@@ -41,7 +41,7 @@ public class TradeMessage extends AbsAgentToServerMessage implements ITradeMessa
   }
   
   @Override
-  public void serverDispatch(Connection connection, IMessageServer server) {
+  public void serverDispatch(Connection connection, IOnlineMessageServer server) {
     server.onBid(connection, this);
   }
 

@@ -47,7 +47,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
   }
   
   @Override
-  public void agentDispatch(IAgent agent) {
+  public void agentDispatch(IAgent agent) { 
     agent.onTradeRequestMessage(this);
   }
   

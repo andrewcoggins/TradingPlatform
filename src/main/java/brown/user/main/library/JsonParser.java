@@ -665,7 +665,11 @@ public class JsonParser implements IJsonParser {
     if (jo.containsKey("learningDelayTime")) 
       outerParams.put("learningDelayTime", ((Long) jo.get("learningDelayTime")).intValue());
     else
-      outerParams.put("learningDelaytime", 0); 
+      outerParams.put("learningDelayTime", 0); 
+    if (jo.containsKey("offlineMode")) 
+      outerParams.put("offlineMode", ((Long) jo.get("offlineMode")).intValue());
+    else
+      outerParams.put("offlineMode", 0); 
     return outerParams;
 
   }

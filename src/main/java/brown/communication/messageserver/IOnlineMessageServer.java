@@ -11,7 +11,7 @@ import brown.communication.messages.ITradeMessage;
  * @author andrewcoggins
  *
  */
-public interface IMessageServer {
+public interface IOnlineMessageServer {
 
   // server receives registration message from agent. 
   public void onRegistration(Connection connection, IRegistrationMessage registrationMessage); 
