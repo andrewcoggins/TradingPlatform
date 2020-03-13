@@ -44,7 +44,10 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
     while (true) {
       synchronized(this) {
         try {
+          System.out.println("agent waiting"); 
           wait();
+          Utils.sleep(10);
+          System.out.println("agent wait over: " + this.incomingMessages); 
         } catch (InterruptedException e) {
           e.printStackTrace();
         } 
@@ -79,6 +82,7 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
       synchronized (this.incomingMessages) {
         this.incomingMessages.add(message);
         synchronized(this) {
+          System.out.println("server notifying agent for message: " + message); 
           this.notify();
         }
       }
@@ -107,7 +111,7 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
     synchronized (this.messageServer) {
       if (this.messageServer.readyToNotify(messageType)) {
         this.messageServer.clearMessagesRecieved(messageType); 
-        System.out.println("notifying");
+        System.out.println("agent notifying server for message: " + messageType);
         this.messageServer.notify(); 
       }
     }

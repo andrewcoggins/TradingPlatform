@@ -13,6 +13,7 @@ import brown.communication.messageserver.IOfflineMessageServer;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.managers.ISimulationManager;
+import brown.platform.utils.Utils;
 import brown.user.agent.IAgent;
 import brown.user.agent.IOfflineAgent;
 
@@ -60,6 +61,7 @@ public class OfflineMessageServer implements IOfflineMessageServer {
   
   @Override
   public synchronized void waitForBids(String messageType) {
+    Utils.sleep(50);
     System.out.println("server waiting for agent notification: " + messageType); 
     // notify agents to begin registering
       try {
@@ -117,7 +119,6 @@ public class OfflineMessageServer implements IOfflineMessageServer {
   @Override
   public void sendMessage(Integer agentPrivateID,
       IServerToAgentMessage message) {
-    System.out.println("outgoing: " + message); 
     this.agentConnections.get(agentPrivateID).receiveMessage(message); 
   }
 
