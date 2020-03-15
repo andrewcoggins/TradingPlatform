@@ -68,7 +68,7 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
   }
   
   @Override
-  public void sendMessage(IAgentToServerMessage message) {
+  public synchronized void sendMessage(IAgentToServerMessage message) {
 	  this.messageServer.receiveMessage(this, message);
   }
 
@@ -85,7 +85,7 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
 
   public abstract void onStatusMessage(IStatusMessage message);
 
-  public void receiveMessage(IServerToAgentMessage message) {
+  public synchronized void receiveMessage(IServerToAgentMessage message) {
 	  try {
 		this.tasks.put(message);
 	} catch (InterruptedException e) {
