@@ -2,9 +2,13 @@ package brown.communication.messageserver.library;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+import brown.communication.messages.IAgentToServerMessage;
 import brown.communication.messages.IRegistrationMessage;
 import brown.communication.messages.IServerToAgentMessage;
 import brown.communication.messages.ITradeMessage;
@@ -19,138 +23,106 @@ import brown.user.agent.IOfflineAgent;
 
 public class OfflineMessageServer implements IOfflineMessageServer {
 
-  private ISimulationManager manager;
-  private Map<Integer, IOfflineAgent> agentConnections;
-  
-  private Map<String, Integer> messagesReceived; 
-  
-  private final int IDMULTIPLIER = 1000000000;
+	private ISimulationManager manager;
+	private Map<Integer, IOfflineAgent> agentConnections;
 
-  public OfflineMessageServer(ISimulationManager manager) {
-    
-    this.messagesReceived = new HashMap<String, Integer>();
-    this.messagesReceived.put("TradeRequestMessage", 0); 
-    this.messagesReceived.put("InformationMessage", 0); 
-    this.messagesReceived.put("RegistrationMessage", 0); 
-    this.messagesReceived.put("StatusMessage", 0); 
-    this.messagesReceived.put("ValuationMessage", 0); 
-    this.messagesReceived.put("InitializationMessage", 0); 
-    this.messagesReceived.put("SimulationReportMessage", 0); 
-    this.messagesReceived.put("BankUpdateMessage", 0);
-    this.manager = manager;
-    this.agentConnections = new ConcurrentHashMap<Integer, IOfflineAgent>();
-    // final IOfflineMessageServer aServer = this;
+	//  private Map<String, Integer> messagesReceived; 
+	private Set<Integer> messagesAwaiting;
 
-    PlatformLogging.log("[-] server started");
+	private static int ID = 0;
 
-  }
+	private final int IDMULTIPLIER = 1000000000;
 
-  @Override
-  public synchronized void waitForRegistrations() {
-    // notify agents to begin registering
-    synchronized (this) {
-      try {
-        // wait for agents to respond.
-        this.wait();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
+	public OfflineMessageServer(ISimulationManager manager) {
+		this.manager = manager;
+		this.agentConnections = new ConcurrentHashMap<Integer, IOfflineAgent>();
+		this.messagesAwaiting = new HashSet<>();
+		// final IOfflineMessageServer aServer = this;
 
-  }
-  
-  @Override
-  public synchronized void waitForBids(String messageType) {
-    Utils.sleep(50);
-    System.out.println("server waiting for agent notification: " + messageType); 
-    // notify agents to begin registering
-      try {
-        // wait for agents to respond.
-        this.wait();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-      System.out.println("server received agent notification: " + messageType); 
-  }
+		PlatformLogging.log("[-] server started");
+	}
 
-  @Override
-  public void onRegistration(IAgent connection,
-      IRegistrationMessage registrationMessage) {
-    // this will run in the agent thread.
-    // once all have been received (?) do a notify.
-    PlatformLogging
-    .log("[x] new registration");
-    if (registrationMessage.getMessageID() == null) {
-      PlatformLogging
-          .log("[x] Server-onRegistration: encountered null registration");
-      return;
-    }
+	@Override
+	public void receiveMessage(IAgent connection, IAgentToServerMessage message) {
+		// maintain ordering from OfflineSimulationManager.
+		synchronized (this.manager) {
+			synchronized (this) {
+				if (message.getCorrespondingMessageID() == null) {
+					message.offlineServerDispatch(connection, this);
+					return;
+				}
 
-    Integer agentPrivateID = -1;
-    Collection<Integer> allIds = this.agentConnections.keySet();
-    if (!allIds.contains(agentPrivateID)) {
-      agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
-      while (allIds.contains(agentPrivateID)) {
-        agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
-      }
+				if (this.messagesAwaiting.contains(message.getCorrespondingMessageID())) {
+					message.offlineServerDispatch(connection, this);
+					this.messagesAwaiting.remove(message.getCorrespondingMessageID());
+					this.manager.notify();
+					return;
+				} 
+			}
+		}
+	}
 
-      this.agentConnections.put(agentPrivateID, (IOfflineAgent) connection);
+	@Override
+	public void onRegistration(IAgent connection,
+			IRegistrationMessage registrationMessage) {
+		// this will run in the agent thread.
+		// once all have been received (?) do a notify.
+		PlatformLogging
+		.log("[x] new registration");
+		if (registrationMessage.getMessageID() == null) {
+			PlatformLogging
+			.log("[x] Server-onRegistration: encountered null registration");
+			return;
+		}
 
-      Integer agentID =
-          this.manager.handleRegistration(registrationMessage, agentPrivateID);
-      this.sendMessage(agentPrivateID,
-          new RegistrationResponseMessage(0, agentID,
-              this.manager.getAgentIDs().get(agentID),
-              registrationMessage.getName(),
-              this.manager.getSimulationJsonFileName()));
-    } else {
-      ErrorLogging
-          .log("[x] Server-onRegistration: encountered redundant registration");
-    }
-  }
+		Integer agentPrivateID = -1;
+		Collection<Integer> allIds = this.agentConnections.keySet();
+		if (!allIds.contains(agentPrivateID)) {
+			agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
+			while (allIds.contains(agentPrivateID)) {
+				agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
+			}
 
-  @Override
-  public void onBid(IAgent connection, ITradeMessage bidMessage) {
-    PlatformLogging.log("[-] bid recieved from " + bidMessage.getAgentID());
-    this.manager.giveTradeMessage(bidMessage);
-    //System.out.println("given"); 
-  }
+			this.agentConnections.put(agentPrivateID, (IOfflineAgent) connection);
 
-  @Override
-  public void sendMessage(Integer agentPrivateID,
-      IServerToAgentMessage message) {
-    this.agentConnections.get(agentPrivateID).receiveMessage(message); 
-  }
+			Integer agentID =
+					this.manager.handleRegistration(registrationMessage, agentPrivateID);
+			this.sendMessage(agentPrivateID,
+					new RegistrationResponseMessage(0, agentID,
+							this.manager.getAgentIDs().get(agentID),
+							registrationMessage.getName(),
+							this.manager.getSimulationJsonFileName()), false);
+		} else {
+			ErrorLogging
+			.log("[x] Server-onRegistration: encountered redundant registration");
+		}
+	}
 
-  @Override
-  public void stopMessageServer() {
-    // TODO Auto-generated method stub
+	@Override
+	public void onBid(IAgent connection, ITradeMessage bidMessage) {
+		PlatformLogging.log("[-] bid recieved from " + bidMessage.getAgentID());
+		this.manager.giveTradeMessage(bidMessage);
+	}
 
-  }
+	@Override
+	public synchronized void sendMessage(Integer agentPrivateID,
+			IServerToAgentMessage message, boolean wait) {
+		message.setMessageID(ID++);
+		if (wait) {
+			this.messagesAwaiting.add(message.getMessageID());
+		}
+		this.agentConnections.get(agentPrivateID).receiveMessage(message); 
+	}
 
-  @Override
-  public void notifyToRespond() {
-    System.out.println("trying to notify agents"); 
-    for (IOfflineAgent agent : this.agentConnections.values()) {
-      synchronized(agent) {
-        System.out.println("trying to notify agent"); 
-        agent.notify(); 
-      }
-    }
-  }
-  
-  @Override
-  public boolean readyToNotify(String messagetype) {
-    int numMessages = this.messagesReceived.get(messagetype); 
-    numMessages++; 
-    this.messagesReceived.put(messagetype, numMessages); 
-    System.out.println("messages received: " + this.messagesReceived);
-    return numMessages == this.agentConnections.keySet().size(); 
-  }
+	@Override
+	public void stopMessageServer() {
+		// TODO Auto-generated method stub
 
-  @Override
-  public void clearMessagesRecieved(String messageType) {
-    this.messagesReceived.put(messageType, 0); 
-  }
-  
+	}
+
+	@Override
+	public synchronized boolean ready() {
+		return this.messagesAwaiting.isEmpty();
+	}
+
 }

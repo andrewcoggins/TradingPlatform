@@ -1,5 +1,6 @@
 package brown.communication.messageserver;
 
+import brown.communication.messages.IAgentToServerMessage;
 import brown.communication.messages.IRegistrationMessage;
 import brown.communication.messages.IServerToAgentMessage;
 import brown.communication.messages.ITradeMessage;
@@ -16,17 +17,11 @@ public interface IOfflineMessageServer {
 
   // server sends message to agent.
   public void sendMessage(Integer agentPrivateID,
-      IServerToAgentMessage message);
+      IServerToAgentMessage message, boolean wait);
+  
+  public void receiveMessage(IAgent connection, IAgentToServerMessage message);
+  
+  public boolean ready();
 
   public void stopMessageServer();
-
-  public void waitForRegistrations();
-  
-  public void waitForBids(String messageType);
-  
-  public void notifyToRespond(); 
-
-  public boolean readyToNotify(String messageType); 
-  
-  public void clearMessagesRecieved(String messageType); 
 }
