@@ -1,5 +1,6 @@
 package brown.communication.messages.library;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketPublicState;
@@ -20,7 +21,7 @@ public class SimulationReportMessage extends AbsServerToAgentMessage implements 
   
   public SimulationReportMessage(Integer messageID, Integer agentID, Map<Integer, IMarketPublicState> marketResults) {
     super(messageID, agentID);
-    this.marketResults = marketResults; 
+    this.marketResults = marketResults;
   }
 
   @Override

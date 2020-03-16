@@ -6,6 +6,7 @@ import java.util.Map;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 
+import brown.communication.messages.IAgentToServerMessage;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ISimulationReportMessage;
@@ -48,25 +49,12 @@ public abstract class AbsOnlineAgent extends TPClient implements IAgent {
    * @throws AgentCreationException
    */
   public AbsOnlineAgent(String host, int port, ISetup gameSetup) {
-    super(host, port, gameSetup);
-    final AbsOnlineAgent agent = this;
-    this.name = "default"; 
-    // All agents listen for messages
-    CLIENT.addListener(new Listener() {
-      public void received(Connection connection, Object message) {
-        synchronized (agent) {
-          if (message instanceof AbsServerToAgentMessage) {
-            AbsServerToAgentMessage theMessage =
-                (AbsServerToAgentMessage) message;
-            theMessage.agentDispatch(agent);
-          }
-        }
-      }
-    });
-
-    CLIENT.sendTCP(new RegistrationMessage(-1));
-    this.money = 0.0;
-    this.goods = new HashMap<String, IItem>();
+    this(host, port, gameSetup, "default");
+  }
+  
+  @Override
+  public void sendMessage(IAgentToServerMessage message) {
+	  this.CLIENT.sendTCP(message);
   }
 
   /**
@@ -95,7 +83,7 @@ public abstract class AbsOnlineAgent extends TPClient implements IAgent {
       }
     });
 
-    CLIENT.sendTCP(new RegistrationMessage(-1, name));
+    this.sendMessage(new RegistrationMessage(-1, name));
     this.money = 0.0;
     this.goods = new HashMap<String, IItem>();
   }
