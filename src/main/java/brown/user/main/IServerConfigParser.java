@@ -8,18 +8,18 @@ import java.util.Map;
 
 import org.json.simple.parser.ParseException;
 
-public interface IJsonParser extends IInputParser {
+public interface IServerConfigParser extends IInputParser {
 
-  public List<ISimulationConfig> parseJSON(String fileName)
+  public List<ISimulationConfig> parseConfig(String fileName)
       throws FileNotFoundException, IOException, ParseException,
       ClassNotFoundException, NoSuchMethodException, SecurityException,
       InstantiationException, IllegalAccessException, IllegalArgumentException,
       InvocationTargetException;
-
-  public Map<String, Integer> parseJSONOuterParameters(String fileName)
+  
+  public Map<String, Integer> parseServerConfigParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException;
   
-  public Map<String, Double> parseJSONDoubleParameters(String fileName)
+  public Map<String, Double> parseServerConfigDoubleParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException; 
 
 }

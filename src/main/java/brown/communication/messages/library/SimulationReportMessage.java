@@ -1,6 +1,5 @@
 package brown.communication.messages.library;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketPublicState;

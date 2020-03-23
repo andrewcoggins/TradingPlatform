@@ -27,6 +27,7 @@ import brown.platform.accounting.IAccountUpdate;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Item;
 import brown.platform.managers.IAccountManager;
+import brown.platform.managers.IAgentManager;
 import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.IMarketManager;
 import brown.platform.managers.ISimulationManager;
@@ -57,7 +58,7 @@ public class SimulationManager implements ISimulationManager {
   private Map<Integer, String> idToName;
   private List<List<Integer>> agentGroups;
   private int agentCount;
-
+  
   private IMarketManager currentMarketManager;
   private IAccountManager currentAccountManager;
   private IEndowmentManager currentEndowmentManager;
@@ -71,11 +72,8 @@ public class SimulationManager implements ISimulationManager {
   /**
    * Simulation Manager manages the simulations being run by the platform.
    * 
-   * @param simulationJsonFileName the filename of the simulation JSON that
-   *          specifies the auction. This is sent to agents in
-   *          registrationMessage
    */
-  public SimulationManager() {
+  public SimulationManager() { 
     this.simulations = new LinkedList<>();
     this.lock = false;
     this.numSimulationRuns = new LinkedList<Integer>();
@@ -85,6 +83,7 @@ public class SimulationManager implements ISimulationManager {
     this.utilityManager = new UtilityManager();
     this.agentCount = 0;
   }
+  
   
   @Override
   public void createSimulation(int numSimulationRuns, int groupSize,
@@ -113,6 +112,7 @@ public class SimulationManager implements ISimulationManager {
       String simulationJsonFileName) {
     this.simulationJsonFileName = simulationJsonFileName;
     startMessageServer(serverPort);
+    // xxx
     PlatformLogging.log("Agent connection phase: sleeping for "
         + startingDelayTime + " seconds");
     for (int i = 0; i < startingDelayTime; i++) {
@@ -120,6 +120,7 @@ public class SimulationManager implements ISimulationManager {
       Utils.sleep(MILLISECONDS);
     }
     PlatformLogging.log("Agent connection phase: beginning simulation");
+    // xxx
     this.privateToPublic.keySet()
         .forEach(id -> this.utilityManager.addAgentRecord(id));
     for (int i = 0; i < numRuns; i++) {
@@ -168,7 +169,9 @@ public class SimulationManager implements ISimulationManager {
           new HashSet<Integer>(agentGroups.get(i)), i, this.agentGroups.size());
     }
     while (this.currentMarketManager.anyMarketsOpen()) {
+      // xxx
       Utils.sleep((int) (simulationDelayTime * MILLISECONDS));
+      // xxx
       PlatformLogging.log("updating auctions");
 
       updateAuctions();

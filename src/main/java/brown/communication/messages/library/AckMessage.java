@@ -2,9 +2,7 @@ package brown.communication.messages.library;
 
 import com.esotericsoftware.kryonet.Connection;
 
-import brown.communication.bid.IBidBundle;
 import brown.communication.messages.IAgentToServerMessage;
-import brown.communication.messages.ITradeMessage;
 import brown.communication.messageserver.IOfflineMessageServer;
 import brown.communication.messageserver.IOnlineMessageServer;
 import brown.user.agent.IAgent;

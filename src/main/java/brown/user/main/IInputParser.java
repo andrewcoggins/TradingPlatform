@@ -1,5 +1,6 @@
-package brown.user.main; 
+package brown.user.main;
 
 public interface IInputParser {
+  
   
 }

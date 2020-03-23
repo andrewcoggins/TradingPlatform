@@ -1,6 +1,5 @@
 package brown.platform.managers.library;
 
-import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -16,12 +15,10 @@ import brown.auction.value.valuation.library.GeneralValuation;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.IRegistrationMessage;
-import brown.communication.messages.IServerToAgentMessage;
 import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
-import brown.communication.messages.library.TradeRequestMessage;
 import brown.communication.messageserver.IOfflineMessageServer;
 import brown.communication.messageserver.library.OfflineMessageServer;
 import brown.logging.library.PlatformLogging;
@@ -30,6 +27,7 @@ import brown.platform.accounting.IAccountUpdate;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Item;
 import brown.platform.managers.IAccountManager;
+import brown.platform.managers.IAgentManager;
 import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.IMarketManager;
 import brown.platform.managers.ISimulationManager;
@@ -39,7 +37,6 @@ import brown.platform.managers.IWorldManager;
 import brown.platform.simulation.ISimulation;
 import brown.platform.simulation.library.Simulation;
 import brown.platform.utils.Utils;
-import brown.user.agent.library.SimpleOfflineAgent;
 
 /**
  * SimulationManager creates and stores ISimulation. simulation runs within the
@@ -60,7 +57,9 @@ public class OfflineSimulationManager implements ISimulationManager {
 	private Map<Integer, String> idToName;
 	private List<List<Integer>> agentGroups;
 	private int agentCount;
-
+	
+	private IAgentManager agentManager; 
+	
 	private IMarketManager currentMarketManager;
 	private IAccountManager currentAccountManager;
 	private IEndowmentManager currentEndowmentManager;
@@ -72,13 +71,13 @@ public class OfflineSimulationManager implements ISimulationManager {
 	private String simulationJsonFileName;
 
 	/**
-	 * Simulation Manager manages the simulations being run by the platform.
-	 * 
-	 * @param simulationJsonFileName the filename of the simulation JSON that
-	 *          specifies the auction. This is sent to agents in
-	 *          registrationMessage
+   * Simulation Manager manages the simulations being run by the platform.
+   * 
+	 * @param agentManager
+	 * manages agents in an offline simulation. 
 	 */
-	public OfflineSimulationManager() {
+	public OfflineSimulationManager(IAgentManager agentManager) {
+	  this.agentManager = agentManager; 
 		this.simulations = new LinkedList<>();
 		this.lock = false;
 		this.numSimulationRuns = new LinkedList<Integer>();
@@ -118,7 +117,7 @@ public class OfflineSimulationManager implements ISimulationManager {
 		// start the message server
 		startMessageServer();
 		// start the agents.
-		startAgents();
+		this.agentManager.startAgents(this.messageServer);
 		// initiate the simulation.
 		Utils.sleep(1000);
 		//this.messageServer.notifyToRespond();
@@ -245,8 +244,6 @@ public class OfflineSimulationManager implements ISimulationManager {
 	private void updateAuctions() {
 		for (Integer marketID : this.currentMarketManager.getActiveMarketIDs()) {
 			System.out.println("market ID: " + marketID); 
-			// we still need to synchronize on the market for this whole operation. or
-			// maybe can pare it down to MM methods?
 			synchronized (this.currentMarketManager.getActiveMarket(marketID)) {
 				if (this.currentMarketManager.marketOpen(marketID)) {
 					// updating the market.
@@ -326,13 +323,7 @@ public class OfflineSimulationManager implements ISimulationManager {
 				this.currentAccountManager.constructInitializationMessages();
 		Map<Integer, IValuationMessage> agentValuations =
 				this.currentValuationManager.constructValuationMessages();
-		System.out.println(accountInitializations);
-		System.out.println(agentValuations);
-
 		for (Integer agentID : accountInitializations.keySet()) {
-			System.out.println(agentID);
-
-			System.out.println("initializing account");
 			this.messageServer.sendMessage(agentID,
 					accountInitializations.get(agentID), true);
 
@@ -371,55 +362,55 @@ public class OfflineSimulationManager implements ISimulationManager {
 			this.agentGroups.add(agentGroup);
 		}
 	}
+	
+//	 private void startAgents() {
+//	    // TODO abstract this out to allow offline simulation with any agents.
+//	    // similar to simulation classes for online
+//
+//	    // start new agent threads using the offline agent runnable..
+//	    OfflineAgentRunnable agentOne = new OfflineAgentRunnable(
+//	        "brown.user.agent.library.SimpleOfflineAgent", this.messageServer);
+//	    OfflineAgentRunnable agentTwo = new OfflineAgentRunnable(
+//	        "brown.user.agent.library.SimpleOfflineAgent", this.messageServer);
+//
+//	    // jake: no need for new threads/runnables. offline agents now launch listener threads
+//
+//	    // Thread at = new Thread(agentOne);
+//	    // Thread atTwo = new Thread(agentTwo);
+//
+//	    //    at.start();
+//	    //    atTwo.start();
+//
+//	    agentOne.run();
+//	    agentTwo.run();
+//	  }
+//
+//	  private class OfflineAgentRunnable implements Runnable {
+//
+//	    private String agentString;
+//	    private IOfflineMessageServer messageServer;
+//
+//	    public OfflineAgentRunnable(String agentString,
+//	        IOfflineMessageServer messageServer) {
+//	      this.agentString = agentString;
+//	      this.messageServer = messageServer;
+//	    }
+//
+//	    @Override
+//	    public void run() {
+//	      try {
+//	        Class<?> cl = Class.forName(agentString);
+//	        Constructor<?> cons = cl.getConstructor(IOfflineMessageServer.class);
+//	        cons.newInstance(this.messageServer);
+//
+//	      } catch (Exception e) {
+//	        e.printStackTrace();
+//	      }
+//	    }
+//	  }
 
 	private void startMessageServer() {
 		this.messageServer = new OfflineMessageServer(this);
-	}
-
-	private void startAgents() {
-		// TODO abstract this out to allow offline simulation with any agents.
-		// similar to simulation classes for online
-
-		// start new agent threads using the offline agent runnable..
-		OfflineAgentRunnable agentOne = new OfflineAgentRunnable(
-				"brown.user.agent.library.SimpleOfflineAgent", this.messageServer);
-		OfflineAgentRunnable agentTwo = new OfflineAgentRunnable(
-				"brown.user.agent.library.SimpleOfflineAgent", this.messageServer);
-
-		// jake: no need for new threads/runnables. offline agents now launch listener threads
-
-		// Thread at = new Thread(agentOne);
-		// Thread atTwo = new Thread(agentTwo);
-
-		//		at.start();
-		//		atTwo.start();
-
-		agentOne.run();
-		agentTwo.run();
-	}
-
-	private class OfflineAgentRunnable implements Runnable {
-
-		private String agentString;
-		private IOfflineMessageServer messageServer;
-
-		public OfflineAgentRunnable(String agentString,
-				IOfflineMessageServer messageServer) {
-			this.agentString = agentString;
-			this.messageServer = messageServer;
-		}
-
-		@Override
-		public void run() {
-			try {
-				Class<?> cl = Class.forName(agentString);
-				Constructor<?> cons = cl.getConstructor(IOfflineMessageServer.class);
-				cons.newInstance(this.messageServer);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 }

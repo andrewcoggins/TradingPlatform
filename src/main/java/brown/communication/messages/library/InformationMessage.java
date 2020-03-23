@@ -1,7 +1,6 @@
 package brown.communication.messages.library;
 
 import brown.auction.marketstate.IMarketPublicState;
-import brown.auction.marketstate.IMarketState;
 import brown.communication.messages.IInformationMessage;
 import brown.user.agent.IAgent;
 

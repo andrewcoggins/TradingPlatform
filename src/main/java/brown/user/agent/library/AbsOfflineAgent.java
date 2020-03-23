@@ -1,10 +1,7 @@
 package brown.user.agent.library;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import brown.communication.messages.IAgentToServerMessage;
@@ -24,7 +21,6 @@ import brown.logging.library.SystemLogging;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Item;
-import brown.platform.utils.Utils;
 import brown.user.agent.IOfflineAgent;
 
 public abstract class AbsOfflineAgent implements IOfflineAgent {
@@ -37,39 +33,38 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
   protected double money;
   protected Map<String, IItem> goods;
   protected IBankUpdateMessage initialEndowment;
-  
+
   private final LinkedBlockingQueue<IServerToAgentMessage> tasks;
 
   public AbsOfflineAgent(IOfflineMessageServer messageServer) {
     this.goods = new HashMap<String, IItem>();
     this.messageServer = messageServer;
     this.tasks = new LinkedBlockingQueue<>();
-    
+
     // "listener"
     new Thread(new Runnable() {
-		
-		@Override
-		public void run() {
-			while (true) {
-				IServerToAgentMessage message;
-				try {
-					message = AbsOfflineAgent.this.tasks.take();
-					message.agentDispatch(AbsOfflineAgent.this);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
-			}
-		}
-	}).start();
-    
-    
+
+      @Override
+      public void run() {
+        while (true) {
+          IServerToAgentMessage message;
+          try {
+            message = AbsOfflineAgent.this.tasks.take();
+            message.agentDispatch(AbsOfflineAgent.this);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+
+        }
+      }
+    }).start();
+
     this.sendMessage(new RegistrationMessage(-1));
   }
-  
+
   @Override
   public synchronized void sendMessage(IAgentToServerMessage message) {
-	  this.messageServer.receiveMessage(this, message);
+    this.messageServer.receiveMessage(this, message);
   }
 
   public abstract void
@@ -86,11 +81,11 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
   public abstract void onStatusMessage(IStatusMessage message);
 
   public synchronized void receiveMessage(IServerToAgentMessage message) {
-	  try {
-		this.tasks.put(message);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
+    try {
+      this.tasks.put(message);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
   public void onBankUpdate(IBankUpdateMessage bankUpdate) {
@@ -110,7 +105,7 @@ public abstract class AbsOfflineAgent implements IOfflineAgent {
     SystemLogging.log("Private ID: " + this.ID);
     SystemLogging.log("Public ID: " + this.publicID);
   }
-  
+
   // helper methods
   private void updateItems(ICart cart, boolean add) {
     if (add) {

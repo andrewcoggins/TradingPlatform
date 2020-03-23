@@ -9,6 +9,7 @@ import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
 import brown.platform.item.library.Item;
 import brown.platform.managers.IAccountManager;
+import brown.platform.managers.IAgentManager;
 import brown.platform.managers.IDomainManager;
 import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.IItemManager;
@@ -17,6 +18,7 @@ import brown.platform.managers.ISimulationManager;
 import brown.platform.managers.IValuationManager;
 import brown.platform.managers.IWorldManager;
 import brown.platform.managers.library.AccountManager;
+import brown.platform.managers.library.AgentManager;
 import brown.platform.managers.library.DomainManager;
 import brown.platform.managers.library.EndowmentManager;
 import brown.platform.managers.library.ItemManager;
@@ -26,6 +28,7 @@ import brown.platform.managers.library.SimulationManager;
 import brown.platform.managers.library.ValuationManager;
 import brown.platform.managers.library.WorldManager;
 import brown.platform.market.IFlexibleRules;
+import brown.user.main.IAgentConfig;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IItemConfig;
 import brown.user.main.IMarketConfig;
@@ -33,35 +36,48 @@ import brown.user.main.ISimulationConfig;
 import brown.user.main.IValuationConfig;
 
 /**
- * take parameters from the input JSON, organize them into objects. start managers.
- * Run the simulation through the SimulationManager
+ * take parameters from the input JSON, organize them into objects. start
+ * managers. Run the simulation through the SimulationManager
+ * 
  * @author andrewcoggins
  *
  */
 public class ConfigRun {
 
   private List<ISimulationConfig> config;
+  private List<IAgentConfig> agentConfig;
 
   public ConfigRun(List<ISimulationConfig> config) {
     this.config = config;
+    this.agentConfig = new LinkedList<IAgentConfig>();
   }
 
-  public void run(Integer startingDelayTime, Double simulationDelayTime, Integer learningDelayTime, 
-      Integer numSimulations, Integer serverPort, String simulationJsonFileName, boolean offlineMode) throws InstantiationException,
+  public ConfigRun(List<ISimulationConfig> config,
+      List<IAgentConfig> agentConfig) {
+    this.config = config;
+    this.agentConfig = agentConfig;
+  }
+
+  public void run(Integer startingDelayTime, Double simulationDelayTime,
+      Integer learningDelayTime, Integer numSimulations, Integer serverPort,
+      String simulationJsonFileName) throws InstantiationException,
       IllegalAccessException, IllegalArgumentException,
       InvocationTargetException, InterruptedException {
-    
-    ISimulationManager simulationManager; 
-    
-    if (offlineMode) {
+
+    ISimulationManager simulationManager;
+
+    if (this.agentConfig.size() == 0) {
       simulationManager = new SimulationManager();
-      System.out.println("A"); 
+    } else {
+      // agent manager is only created and used in offline simulations.
+      IAgentManager agentManager = new AgentManager();
+      for (IAgentConfig aConfig : agentConfig) {
+        agentManager.createAgent(aConfig);
+      }
+      agentManager.lock();
+      simulationManager = new OfflineSimulationManager(agentManager);
     }
-    else {
-      simulationManager = new OfflineSimulationManager();
-      System.out.println(simulationManager); 
-    }
-    
+
     for (ISimulationConfig aConfig : this.config) {
       IWorldManager worldManager = new WorldManager();
       IDomainManager domainManager = new DomainManager();
@@ -85,7 +101,8 @@ public class ConfigRun {
         vConfig.getItemNames()
             .forEach(item -> valuationItems.add(itemManager.getItems(item)));
         valuationManager.createValuation(vConfig.getValDistribution(),
-            vConfig.getGeneratorConstructors(), vConfig.getGeneratorParams(), new Cart(valuationItems));
+            vConfig.getGeneratorConstructors(), vConfig.getGeneratorParams(),
+            new Cart(valuationItems));
       }
 
       // endowment manager.
@@ -106,7 +123,7 @@ public class ConfigRun {
       itemConfig.forEach(iConfig -> allItems
           .add(new Item(iConfig.getItemName(), iConfig.getNumItems())));
       ICart itemCart = new Cart(allItems);
-      
+
       for (List<IMarketConfig> mConfigList : aConfig.getMConfig()) {
         List<IFlexibleRules> marketRules = new LinkedList<IFlexibleRules>();
         List<List<String>> marketItems = new LinkedList<List<String>>();
@@ -127,21 +144,16 @@ public class ConfigRun {
       domainManager.createDomain(itemManager, valuationManager,
           endowmentManager, accountManager);
       worldManager.createWorld(domainManager, marketManager);
-      simulationManager.createSimulation(aConfig.getSimulationRuns(), aConfig.getGroupSize(),
-          worldManager);
+      simulationManager.createSimulation(aConfig.getSimulationRuns(),
+          aConfig.getGroupSize(), worldManager);
       itemManager.lock();
       valuationManager.lock();
       simulationManager.lock();
       marketManager.lock();
     }
-    
-    simulationManager.runSimulation(
-        startingDelayTime, 
-        simulationDelayTime, 
-        learningDelayTime, 
-        numSimulations, 
-        serverPort, 
-        simulationJsonFileName);
-    
+
+    simulationManager.runSimulation(startingDelayTime, simulationDelayTime,
+        learningDelayTime, numSimulations, serverPort, simulationJsonFileName);
+
   }
 }

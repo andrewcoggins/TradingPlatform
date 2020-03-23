@@ -1,0 +1,28 @@
+{
+	"agents": [
+		{
+			"agentClass": "agent_class", 
+			"agentName": "agent_name", 
+			"agentFixedValuation": [], 
+			"agentFixedEndowment": []
+		}, 
+		{
+			"agentClass": "agent_class", 
+			"agentName": "agent_name", 
+			"agentFixedValuation": [], 
+			"agentFixedEndowment": []
+		},
+		{
+			"agentClass": "agent_class", 
+			"agentName": "agent_name", 
+			"agentFixedValuation": [], 
+			"agentFixedEndowment": []
+		}, 
+		{
+			"agentClass": "agent_class", 
+			"agentName": "agent_name", 
+			"agentFixedValuation": [], 
+			"agentFixedEndowment": []
+		}
+	]
+}

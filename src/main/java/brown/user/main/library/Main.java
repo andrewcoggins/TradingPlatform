@@ -9,7 +9,9 @@ import java.util.Map;
 
 import org.json.simple.parser.ParseException;
 
-import brown.user.main.IJsonParser;
+import brown.user.main.IAgentConfig;
+import brown.user.main.IAgentConfigParser;
+import brown.user.main.IServerConfigParser;
 import brown.user.main.ISimulationConfig;
 
 /**
@@ -38,26 +40,45 @@ public class Main {
       NoSuchMethodException, InstantiationException, IllegalAccessException,
       InvocationTargetException, IllegalArgumentException, InterruptedException,
       FileNotFoundException, IOException, ParseException {
-    String fileName = args[0];
+    String serverConfigFileName = args[0];
     List<ISimulationConfig> configs = new LinkedList<>();
-    IJsonParser jsonParser = new JsonParser();
- 
-    List<ISimulationConfig> runConfig = jsonParser.parseJSON(fileName);
+    IServerConfigParser serverParser = new ServerConfigParser(); 
+    
+    List<ISimulationConfig> runConfig = serverParser.parseConfig(serverConfigFileName);
     configs.addAll(runConfig);
+    
     Map<String, Integer> outerParams =
-        jsonParser.parseJSONOuterParameters(fileName);
+        serverParser.parseServerConfigParameters(serverConfigFileName);
     Map<String, Double> doubleParams =
-        jsonParser.parseJSONDoubleParameters(fileName);
+        serverParser.parseServerConfigDoubleParameters(serverConfigFileName);
     Integer startingDelayTime = outerParams.get("startingDelayTime");
     Integer learningDelayTime = outerParams.get("learningDelayTime");
     Double simulationDelayTime = doubleParams.get("simulationDelayTime");
     Integer numTotalRuns = outerParams.get("numTotalRuns");
     Integer serverPort = outerParams.get("serverPort");
-    boolean offlineMode = outerParams.get("offlineMode") == 0; 
-    ConfigRun configRun = new ConfigRun(configs);
-    System.out.println(learningDelayTime); 
+    
+    ConfigRun configRun; 
+    if (args.length > 1) {
+      String agentConfigFileName = args[1]; 
+      IAgentConfigParser agentParser = new AgentConfigParser(); 
+      List<IAgentConfig> agentConfigs = agentParser.parseConfig(agentConfigFileName); 
+      // if agent config, automatically default to offline mode. 
+      // if no agent config, cannot be in offline mode. 
+      
+      // An FP Agent can, in the outer scope, be offline, but must be offline in the inner scope. 
+      // Online or offline agents can launch offline simulations/agents, but cannot launch online agents. 
+      
+      // all 'simulations' are now to be offline. 
+      
+      
+      configRun = new ConfigRun(configs, agentConfigs);
+    } else {
+      configRun = new ConfigRun(configs);
+    }
+    
+    
     configRun.run(startingDelayTime, simulationDelayTime, learningDelayTime,
-        numTotalRuns, serverPort, fileName, offlineMode);
+        numTotalRuns, serverPort, serverConfigFileName);
   }
 
 }
