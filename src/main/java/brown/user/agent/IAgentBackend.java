@@ -1,19 +1,27 @@
 package brown.user.agent;
 
+import brown.communication.messages.IAgentToServerMessage;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
+import brown.communication.messages.IRegistrationResponseMessage;
+import brown.communication.messages.IServerToAgentMessage;
 import brown.communication.messages.ISimulationReportMessage;
+import brown.communication.messages.IStatusMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
 
 /**
- * IAgent implement's the agent's trading logic. 
+ * IAgentBackend serves as the communication interface between the agent and the server. 
  * @author andrewcoggins
  *
  */
-public interface IAgent {
+public interface IAgentBackend { 
   
-  public void addAgentBackend(IAgentBackend backend); 
+  /**
+   * send a message to the server. 
+   * @param message
+   */
+  public void sendMessage(IAgentToServerMessage message);
   
   /**
    * Respond to IBankUpdateMessage
@@ -46,9 +54,33 @@ public interface IAgent {
   public void onSimulationReportMessage(ISimulationReportMessage reportMessage); 
   
   /**
-   * Get Agent's Name
+   * Receive a message from the server. 
+   * @param message
+   */
+  public void receiveMessage(IServerToAgentMessage message); 
+  
+  /**
+   * Respond to IRegistrationResponseMessage
+   * @param bankUpdate
+   */
+  public void onRegistrationResponse(IRegistrationResponseMessage registration);
+  
+  /**
+   * Respond to IStatusMessage
+   * @param bankUpdate
+   */
+  public void onStatusMessage(IStatusMessage message);
+  
+  /**
+   * Get agent's Public ID
    * @return
    */
-  public String getAgentName(); 
+  public Integer getPublicID(); 
+  
+  /**
+   * Get agent's Private ID
+   * @return
+   */
+  public Integer getPrivateID(); 
   
 }

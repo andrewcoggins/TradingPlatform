@@ -5,7 +5,7 @@ import com.esotericsoftware.kryonet.Connection;
 import brown.communication.messages.IRegistrationMessage;
 import brown.communication.messageserver.IOfflineMessageServer;
 import brown.communication.messageserver.IOnlineMessageServer;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 /**
  * a request for an agent to join the server 
@@ -72,7 +72,7 @@ public class RegistrationMessage extends AbsAgentToServerMessage implements IReg
   }
 
 @Override
-public void offlineServerDispatch(IAgent connection, IOfflineMessageServer server) {
+public void offlineServerDispatch(IAgentBackend connection, IOfflineMessageServer server) {
 	// TODO Auto-generated method stub
 	server.onRegistration(connection, this);
 }

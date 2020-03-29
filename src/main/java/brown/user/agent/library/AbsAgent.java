@@ -3,89 +3,37 @@ package brown.user.agent.library;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
-
-import brown.communication.messages.IAgentToServerMessage;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
-import brown.communication.messages.library.AbsServerToAgentMessage;
-import brown.communication.messages.library.RegistrationMessage;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.UserLogging;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Item;
-import brown.system.client.library.TPClient;
-import brown.system.setup.ISetup;
 import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
-/**
- * every agent class extends this class.
- * 
- * @author andrew
- *
- */
-public abstract class AbsOnlineAgent extends TPClient implements IAgent {
-
+public abstract class AbsAgent implements IAgent {
+  
   protected double money;
   protected Map<String, IItem> goods;
   protected String name;
   protected IBankUpdateMessage initialEndowment; 
+  protected IAgentBackend agentBackend; 
   
-  // public ID may be accessed as this.publicID
-  // private ID may be accessed as this.ID
-
-  /**
-   * 
-   * AbsAgent takes in a host, a port, an ISetup.
-   * 
-   * @param host
-   * @param port
-   * @param gameSetup
-   * @throws AgentCreationException
-   */
-  public AbsOnlineAgent(String host, int port, ISetup gameSetup) {
-    this(host, port, gameSetup, "default");
-  }
   
-  @Override
-  public void sendMessage(IAgentToServerMessage message) {
-	  this.CLIENT.sendTCP(message);
-  }
-
-  /**
-   * 
-   * AbsAgent takes in a host, a port, an ISetup.
-   * 
-   * @param host
-   * @param port
-   * @param gameSetup
-   * @throws AgentCreationException
-   */
-  public AbsOnlineAgent(String host, int port, ISetup gameSetup, String name) {
-    super(host, port, gameSetup);
-    final AbsOnlineAgent agent = this;
+  public AbsAgent(String name) {
     this.name = name; 
-    // All agents listen for messages.
-    CLIENT.addListener(new Listener() {
-      public void received(Connection connection, Object message) {
-        synchronized (agent) {
-          if (message instanceof AbsServerToAgentMessage) {
-            AbsServerToAgentMessage theMessage =
-                (AbsServerToAgentMessage) message;
-            theMessage.agentDispatch(agent);
-          }
-        }
-      }
-    });
-
-    this.sendMessage(new RegistrationMessage(-1, name));
-    this.money = 0.0;
-    this.goods = new HashMap<String, IItem>();
+    this.money = 0.0; 
+    this.goods = new HashMap<String, IItem>(); 
+  }
+  
+  @Override 
+  public void addAgentBackend(IAgentBackend backend) {
+    this.agentBackend = backend; 
   }
   
   @Override
@@ -95,6 +43,11 @@ public abstract class AbsOnlineAgent extends TPClient implements IAgent {
     this.money += bankUpdate.getMoneyAddedLost();
     updateItems(bankUpdate.getItemsAdded(), true);
     updateItems(bankUpdate.getItemsLost(), false);
+  }
+  
+  @Override
+  public String getAgentName() {
+    return this.name;
   }
   
   @Override

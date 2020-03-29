@@ -5,7 +5,7 @@ import com.esotericsoftware.kryonet.Connection;
 import brown.communication.messages.IAgentToServerMessage;
 import brown.communication.messageserver.IOfflineMessageServer;
 import brown.communication.messageserver.IOnlineMessageServer;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 /**
  * Trade message is sent by the agent to the server
@@ -79,7 +79,7 @@ public class AckMessage extends AbsAgentToServerMessage implements IAgentToServe
   }
 
 @Override
-public void offlineServerDispatch(IAgent connection, IOfflineMessageServer server) {
+public void offlineServerDispatch(IAgentBackend connection, IOfflineMessageServer server) {
 	 // noop
 }
 

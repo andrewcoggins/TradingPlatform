@@ -10,31 +10,27 @@ import brown.communication.bid.IBidBundle;
 import brown.communication.bid.library.OneSidedBidBundle;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ISimulationReportMessage;
-import brown.communication.messages.IStatusMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
-import brown.communication.messages.library.AckMessage;
 import brown.communication.messages.library.TradeMessage;
-import brown.communication.messageserver.IOfflineMessageServer;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
 import brown.platform.item.library.Item;
 import brown.user.agent.IAgent;
 
-public class SimpleOfflineAgent extends AbsOfflineAgent implements IAgent {
+public class SimpleOfflineAgent extends AbsAgent implements IAgent {
   
   private IGeneralValuation agentValuation; 
   
-  public SimpleOfflineAgent(IOfflineMessageServer messageServer) {
-    super(messageServer);
+  public SimpleOfflineAgent(String name) {
+    super(name);
   }
 
   @Override
   public void onInformationMessage(IInformationMessage informationMessage) {
     System.out.println("[agent] agent notifying server of information message: " + informationMessage); 
-    this.sendMessage(new AckMessage(0, this.ID, informationMessage.getMessageID()));
   }
 
   @Override
@@ -47,29 +43,21 @@ public class SimpleOfflineAgent extends AbsOfflineAgent implements IAgent {
     ICart bidCart = new Cart(bidItems); 
     bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
-    ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getMessageID(), tradeRequestMessage.getAuctionID(), oneSided);
+    ITradeMessage tradeMessage = new TradeMessage(0, this.agentBackend.getPrivateID(), tradeRequestMessage.getMessageID(), tradeRequestMessage.getAuctionID(), oneSided);
     System.out.println("[agent] agent notifying server of trade request message: " + tradeRequestMessage); 
-    this.sendMessage(tradeMessage);
+    this.agentBackend.sendMessage(tradeMessage);
   }
 
   @Override
   public void onValuationMessage(IValuationMessage valuationMessage) {
     this.agentValuation = valuationMessage.getValuation(); 
     System.out.println("[agent] agent notifying server of valuation message: " + valuationMessage); 
-    this.sendMessage(new AckMessage(0, this.ID, valuationMessage.getMessageID()));
   }
 
   @Override
   public void
       onSimulationReportMessage(ISimulationReportMessage reportMessage) {
     System.out.println("[agent] agent notifying server of simulation report message: " + reportMessage); 
-    this.sendMessage(new AckMessage(0, this.ID, reportMessage.getMessageID()));
-  }
-
-  @Override
-  public void onStatusMessage(IStatusMessage message) {
-    System.out.println("[agent] agent notifying server of status message: " + message); 
-    this.sendMessage(new AckMessage(0, this.ID, message.getMessageID()));
   }
 
 

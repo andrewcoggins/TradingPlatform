@@ -1,28 +1,23 @@
 {
 	"agents": [
 		{
-			"agentClass": "agent_class", 
-			"agentName": "agent_name", 
-			"agentFixedValuation": [], 
-			"agentFixedEndowment": []
+			"agentClass": "brown.user.agent.library.SimpleAgent", 
+			"agentName": "agent1", 
 		}, 
 		{
-			"agentClass": "agent_class", 
-			"agentName": "agent_name", 
-			"agentFixedValuation": [], 
-			"agentFixedEndowment": []
+			"agentClass": "brown.user.agent.library.SimpleAgent", 
+			"agentName": "agent2", 
+
 		},
 		{
-			"agentClass": "agent_class", 
-			"agentName": "agent_name", 
-			"agentFixedValuation": [], 
-			"agentFixedEndowment": []
+			"agentClass": "brown.user.agent.library.SimpleAgent", 
+			"agentName": "agent3", 
+
 		}, 
 		{
-			"agentClass": "agent_class", 
-			"agentName": "agent_name", 
-			"agentFixedValuation": [], 
-			"agentFixedEndowment": []
+			"agentClass": "brown.user.agent.library.SimpleAgent", 
+			"agentName": "agent4", 
+
 		}
 	]
 }

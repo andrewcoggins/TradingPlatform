@@ -19,7 +19,6 @@ import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
 import brown.platform.item.library.Item;
-import brown.system.setup.ISetup;
 import brown.user.agent.IAgent;
 
 /**
@@ -29,16 +28,12 @@ import brown.user.agent.IAgent;
  * @author andrewcoggins
  *
  */
-public class TACAgent extends AbsOnlineAgent implements IAgent {
+public class TACAgent extends AbsAgent implements IAgent {
 
   private IGeneralValuation agentValuation;
 
-  public TACAgent(String host, int port, ISetup gameSetup) {
-    super(host, port, gameSetup);
-  }
-
-  public TACAgent(String host, int port, ISetup gameSetup, String name) {
-    super(host, port, gameSetup, name);
+  public TACAgent(String name) {
+    super(name);
   }
 
   @Override
@@ -65,10 +60,10 @@ public class TACAgent extends AbsOnlineAgent implements IAgent {
       ICart bidCart = new Cart(bidItems);
       bidMap.put(bidCart, 10.0);
       IBidBundle oneSided = new OneSidedBidBundle(bidMap);
-      ITradeMessage tradeMessage = new TradeMessage(0, this.ID,
+      ITradeMessage tradeMessage = new TradeMessage(0, this.agentBackend.getPrivateID(),
           tradeRequestMessage.getAuctionID(), oneSided);
       UserLogging.log(tradeMessage);
-      this.CLIENT.sendTCP(tradeMessage);
+      this.agentBackend.sendMessage(tradeMessage);
     }
   }
 

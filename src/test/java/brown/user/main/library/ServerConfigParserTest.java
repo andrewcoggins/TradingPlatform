@@ -31,7 +31,7 @@ import brown.user.main.IServerConfigParser;
 import brown.user.main.ISimulationConfig;
 import brown.user.main.IValuationConfig;
 
-public class JsonParserTest {
+public class ServerConfigParserTest {
 
   @Test
   public void testJSONParse() throws FileNotFoundException,

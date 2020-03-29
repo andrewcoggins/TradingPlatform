@@ -70,7 +70,6 @@ public class Main {
       
       // all 'simulations' are now to be offline. 
       
-      
       configRun = new ConfigRun(configs, agentConfigs);
     } else {
       configRun = new ConfigRun(configs);

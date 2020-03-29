@@ -1,7 +1,7 @@
 package brown.communication.messages.library;
 
 import brown.communication.messages.IStatusMessage;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 public abstract class AbsStatusMessage extends AbsServerToAgentMessage implements IStatusMessage {
   
@@ -18,7 +18,7 @@ public abstract class AbsStatusMessage extends AbsServerToAgentMessage implement
   }
   
   @Override
-  public void agentDispatch(IAgent agent) {
+  public void agentDispatch(IAgentBackend agent) {
     agent.onStatusMessage(this); 
   }
   

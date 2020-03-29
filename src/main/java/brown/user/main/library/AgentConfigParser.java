@@ -51,11 +51,9 @@ public class AgentConfigParser implements IAgentConfigParser {
           agentName = (String) pair.getValue();
         }
 
-        IAgentConfig agentConfig = new AgentConfig(agentClass, agentName);
-        aConfigs.add(agentConfig);
-
       }
-
+      IAgentConfig agentConfig = new AgentConfig(agentClass, agentName);
+      aConfigs.add(agentConfig);
     }
 
     return aConfigs;

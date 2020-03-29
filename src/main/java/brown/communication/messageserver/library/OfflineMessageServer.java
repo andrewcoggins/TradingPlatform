@@ -1,12 +1,10 @@
 package brown.communication.messageserver.library;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import brown.communication.messages.IAgentToServerMessage;
 import brown.communication.messages.IRegistrationMessage;
@@ -17,14 +15,12 @@ import brown.communication.messageserver.IOfflineMessageServer;
 import brown.logging.library.ErrorLogging;
 import brown.logging.library.PlatformLogging;
 import brown.platform.managers.ISimulationManager;
-import brown.platform.utils.Utils;
-import brown.user.agent.IAgent;
-import brown.user.agent.IOfflineAgent;
+import brown.user.agent.IAgentBackend;
 
 public class OfflineMessageServer implements IOfflineMessageServer {
 
 	private ISimulationManager manager;
-	private Map<Integer, IOfflineAgent> agentConnections;
+	private Map<Integer, IAgentBackend> agentConnections;
 
 	//  private Map<String, Integer> messagesReceived; 
 	private Set<Integer> messagesAwaiting;
@@ -35,7 +31,7 @@ public class OfflineMessageServer implements IOfflineMessageServer {
 
 	public OfflineMessageServer(ISimulationManager manager) {
 		this.manager = manager;
-		this.agentConnections = new ConcurrentHashMap<Integer, IOfflineAgent>();
+		this.agentConnections = new ConcurrentHashMap<Integer, IAgentBackend>();
 		this.messagesAwaiting = new HashSet<>();
 		// final IOfflineMessageServer aServer = this;
 
@@ -43,7 +39,7 @@ public class OfflineMessageServer implements IOfflineMessageServer {
 	}
 
 	@Override
-	public void receiveMessage(IAgent connection, IAgentToServerMessage message) {
+	public void receiveMessage(IAgentBackend connection, IAgentToServerMessage message) {
 		// maintain ordering from OfflineSimulationManager.
 		synchronized (this.manager) {
 			synchronized (this) {
@@ -63,7 +59,7 @@ public class OfflineMessageServer implements IOfflineMessageServer {
 	}
 
 	@Override
-	public void onRegistration(IAgent connection,
+	public void onRegistration(IAgentBackend connection,
 			IRegistrationMessage registrationMessage) {
 		// this will run in the agent thread.
 		// once all have been received (?) do a notify.
@@ -83,7 +79,7 @@ public class OfflineMessageServer implements IOfflineMessageServer {
 				agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
 			}
 
-			this.agentConnections.put(agentPrivateID, (IOfflineAgent) connection);
+			this.agentConnections.put(agentPrivateID, (IAgentBackend) connection);
 
 			Integer agentID =
 					this.manager.handleRegistration(registrationMessage, agentPrivateID);
@@ -99,7 +95,7 @@ public class OfflineMessageServer implements IOfflineMessageServer {
 	}
 
 	@Override
-	public void onBid(IAgent connection, ITradeMessage bidMessage) {
+	public void onBid(IAgentBackend connection, ITradeMessage bidMessage) {
 		PlatformLogging.log("[-] bid recieved from " + bidMessage.getAgentID());
 		this.manager.giveTradeMessage(bidMessage);
 	}

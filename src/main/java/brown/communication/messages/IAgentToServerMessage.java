@@ -4,7 +4,7 @@ import com.esotericsoftware.kryonet.Connection;
 
 import brown.communication.messageserver.IOfflineMessageServer;
 import brown.communication.messageserver.IOnlineMessageServer;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 public interface IAgentToServerMessage extends IMessage {
 
@@ -20,6 +20,6 @@ public interface IAgentToServerMessage extends IMessage {
    */
   public void serverDispatch(Connection connection, IOnlineMessageServer server);
   
-  public void offlineServerDispatch(IAgent connection, IOfflineMessageServer server);
+  public void offlineServerDispatch(IAgentBackend connection, IOfflineMessageServer server);
   
 }

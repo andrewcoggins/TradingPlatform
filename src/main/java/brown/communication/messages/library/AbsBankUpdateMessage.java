@@ -2,7 +2,7 @@ package brown.communication.messages.library;
 
 import brown.communication.messages.IBankUpdateMessage;
 import brown.platform.item.ICart;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 public abstract class AbsBankUpdateMessage extends AbsServerToAgentMessage implements IBankUpdateMessage {
 
@@ -31,7 +31,7 @@ public abstract class AbsBankUpdateMessage extends AbsServerToAgentMessage imple
   }
   
   @Override
-  public void agentDispatch(IAgent agent) {
+  public void agentDispatch(IAgentBackend agent) {
     agent.onBankUpdate(this);
   }
 

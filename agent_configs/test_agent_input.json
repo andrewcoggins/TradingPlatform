@@ -1,0 +1,25 @@
+
+{
+	"agents": [
+		{
+			"agentClass": "agent_class_1", 
+			"agentName": "agent_name_1", 
+
+		}, 
+		{
+			"agentClass": "agent_class_2", 
+			"agentName": "agent_name_2", 
+
+		},
+		{
+			"agentClass": "agent_class_3", 
+			"agentName": "agent_name_3", 
+
+		}, 
+		{
+			"agentClass": "agent_class_4", 
+			"agentName": "agent_name_4", 
+
+		}
+	]
+}

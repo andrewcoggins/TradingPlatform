@@ -2,7 +2,7 @@ package brown.communication.messages.library;
 
 import brown.auction.marketstate.IMarketPublicState;
 import brown.communication.messages.IInformationMessage;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 public class InformationMessage extends AbsServerToAgentMessage implements IInformationMessage {
 
@@ -18,7 +18,7 @@ public class InformationMessage extends AbsServerToAgentMessage implements IInfo
   }
   
   @Override
-  public void agentDispatch(IAgent agent) {
+  public void agentDispatch(IAgentBackend agent) {
     agent.onInformationMessage(this);
   }
   

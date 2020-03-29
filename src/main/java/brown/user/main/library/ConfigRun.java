@@ -55,6 +55,7 @@ public class ConfigRun {
   public ConfigRun(List<ISimulationConfig> config,
       List<IAgentConfig> agentConfig) {
     this.config = config;
+    System.out.println(agentConfig); 
     this.agentConfig = agentConfig;
   }
 

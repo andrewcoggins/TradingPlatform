@@ -7,6 +7,9 @@ import java.util.List;
 import brown.communication.messageserver.IOfflineMessageServer;
 import brown.logging.library.ErrorLogging;
 import brown.platform.managers.IAgentManager;
+import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
+import brown.user.agent.library.OfflineAgentBackend;
 import brown.user.main.IAgentConfig;
 
 public class AgentManager implements IAgentManager {
@@ -37,7 +40,7 @@ public class AgentManager implements IAgentManager {
     
     for (IAgentConfig agentConfig : this.agentConfigs) {
       OfflineAgentRunnable agentRunnable = new OfflineAgentRunnable(
-          agentConfig.getAgentClass(), messageServer);
+          agentConfig.getAgentClass(), agentConfig.getAgentName(), messageServer);
       
       this.agentRunnables.add(agentRunnable); 
     }
@@ -55,10 +58,12 @@ public class AgentManager implements IAgentManager {
   private class OfflineAgentRunnable implements Runnable {
 
     private String agentString;
+    private String agentName; 
     private IOfflineMessageServer messageServer;
 
-    public OfflineAgentRunnable(String agentString,
+    public OfflineAgentRunnable(String agentString, String agentName, 
         IOfflineMessageServer messageServer) {
+      this.agentName = agentName; 
       this.agentString = agentString;
       this.messageServer = messageServer;
     }
@@ -67,8 +72,11 @@ public class AgentManager implements IAgentManager {
     public void run() {
       try {
         Class<?> cl = Class.forName(agentString);
-        Constructor<?> cons = cl.getConstructor(IOfflineMessageServer.class);
-        cons.newInstance(this.messageServer);
+        Constructor<?> cons = cl.getConstructor(String.class);
+        IAgent agent = (IAgent) cons.newInstance(this.agentName);
+        
+        IAgentBackend agentBackend = new OfflineAgentBackend(this.messageServer, agent);
+        agent.addAgentBackend(agentBackend);
 
       } catch (Exception e) {
         e.printStackTrace();

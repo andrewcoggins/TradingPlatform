@@ -6,7 +6,7 @@ import brown.communication.bid.IBidBundle;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messageserver.IOfflineMessageServer;
 import brown.communication.messageserver.IOnlineMessageServer;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 /**
  * Trade message is sent by the agent to the server
@@ -97,7 +97,7 @@ public class TradeMessage extends AbsAgentToServerMessage implements ITradeMessa
   }
 
 @Override
-public void offlineServerDispatch(IAgent connection, IOfflineMessageServer server) {
+public void offlineServerDispatch(IAgentBackend connection, IOfflineMessageServer server) {
 	server.onBid(connection, this);
 }
 

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketPublicState;
 import brown.communication.messages.ISimulationReportMessage;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 public class SimulationReportMessage extends AbsServerToAgentMessage implements ISimulationReportMessage {
 
@@ -24,7 +24,7 @@ public class SimulationReportMessage extends AbsServerToAgentMessage implements 
   }
 
   @Override
-  public void agentDispatch(IAgent agent) {
+  public void agentDispatch(IAgentBackend agent) {
     agent.onSimulationReportMessage(this);
   }
 

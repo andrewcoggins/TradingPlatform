@@ -120,8 +120,6 @@ public class OfflineSimulationManager implements ISimulationManager {
 		this.agentManager.startAgents(this.messageServer);
 		// initiate the simulation.
 		Utils.sleep(1000);
-		//this.messageServer.notifyToRespond();
-		//this.messageServer.waitForRegistrations();
 		this.privateToPublic.keySet()
 		.forEach(id -> this.utilityManager.addAgentRecord(id));
 		for (int i = 0; i < numRuns; i++) {
@@ -232,7 +230,7 @@ public class OfflineSimulationManager implements ISimulationManager {
 	private void waitForMessages() {
 		synchronized (this) {
 			while (!this.messageServer.ready()) {
-				try {
+				try { 
 					wait();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
@@ -243,7 +241,6 @@ public class OfflineSimulationManager implements ISimulationManager {
 
 	private void updateAuctions() {
 		for (Integer marketID : this.currentMarketManager.getActiveMarketIDs()) {
-			System.out.println("market ID: " + marketID); 
 			synchronized (this.currentMarketManager.getActiveMarket(marketID)) {
 				if (this.currentMarketManager.marketOpen(marketID)) {
 					// updating the market.
@@ -255,6 +252,7 @@ public class OfflineSimulationManager implements ISimulationManager {
 								message, true);
 					}
 					this.waitForMessages();
+					System.out.println("got messages"); 
 				} else {
 					List<IAccountUpdate> accountUpdates =
 							this.currentMarketManager.finishMarket(marketID);
@@ -362,52 +360,6 @@ public class OfflineSimulationManager implements ISimulationManager {
 			this.agentGroups.add(agentGroup);
 		}
 	}
-	
-//	 private void startAgents() {
-//	    // TODO abstract this out to allow offline simulation with any agents.
-//	    // similar to simulation classes for online
-//
-//	    // start new agent threads using the offline agent runnable..
-//	    OfflineAgentRunnable agentOne = new OfflineAgentRunnable(
-//	        "brown.user.agent.library.SimpleOfflineAgent", this.messageServer);
-//	    OfflineAgentRunnable agentTwo = new OfflineAgentRunnable(
-//	        "brown.user.agent.library.SimpleOfflineAgent", this.messageServer);
-//
-//	    // jake: no need for new threads/runnables. offline agents now launch listener threads
-//
-//	    // Thread at = new Thread(agentOne);
-//	    // Thread atTwo = new Thread(agentTwo);
-//
-//	    //    at.start();
-//	    //    atTwo.start();
-//
-//	    agentOne.run();
-//	    agentTwo.run();
-//	  }
-//
-//	  private class OfflineAgentRunnable implements Runnable {
-//
-//	    private String agentString;
-//	    private IOfflineMessageServer messageServer;
-//
-//	    public OfflineAgentRunnable(String agentString,
-//	        IOfflineMessageServer messageServer) {
-//	      this.agentString = agentString;
-//	      this.messageServer = messageServer;
-//	    }
-//
-//	    @Override
-//	    public void run() {
-//	      try {
-//	        Class<?> cl = Class.forName(agentString);
-//	        Constructor<?> cons = cl.getConstructor(IOfflineMessageServer.class);
-//	        cons.newInstance(this.messageServer);
-//
-//	      } catch (Exception e) {
-//	        e.printStackTrace();
-//	      }
-//	    }
-//	  }
 
 	private void startMessageServer() {
 		this.messageServer = new OfflineMessageServer(this);

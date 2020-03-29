@@ -18,69 +18,53 @@ import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
 import brown.platform.item.library.Item;
-import brown.system.setup.ISetup;
-import brown.system.setup.library.Setup;
 import brown.user.agent.IAgent;
 
 /**
- * an honest agent... bids their valuation. What else is an honest agent to do? 
+ * an honest agent... bids their valuation. What else is an honest agent to do?
+ * 
  * @author andrewcoggins
  *
  */
-public class SimpleAgent extends AbsOnlineAgent implements IAgent {
+public class SimpleAgent extends AbsAgent implements IAgent {
 
-  private IGeneralValuation agentValuation; 
-  
-  public SimpleAgent(String host, int port, ISetup gameSetup) {
-    super(host, port, gameSetup);
-  }
-  
-  public SimpleAgent(String host, int port, ISetup gameSetup, String name) {
-    super(host, port, gameSetup, name);
+  private IGeneralValuation agentValuation;
+
+  public SimpleAgent(String name) {
+    super(name);
   }
 
   @Override
   public void onInformationMessage(IInformationMessage informationMessage) {
-//    UserLogging.log("[+] Simulation Json File Name: " + this.simulationJsonFileName); 
-//    UserLogging.log("[+] Information Message Received");
-//    UserLogging.log(informationMessage); 
   }
 
   @Override
   public void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage) {
-//    UserLogging.log("[+] Trade Request Message Received"); 
-    
-    Map<ICart, Double> bidMap = new HashMap<ICart, Double>(); 
-    List<IItem> bidItems = new LinkedList<IItem>(); 
-    
-    bidItems.add(new Item("testItem", 1)); 
-    
-    ICart bidCart = new Cart(bidItems); 
-    bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
+
+    Map<ICart, Double> bidMap = new HashMap<ICart, Double>();
+    List<IItem> bidItems = new LinkedList<IItem>();
+
+    bidItems.add(new Item("testItem", 1));
+
+    ICart bidCart = new Cart(bidItems);
+    bidMap.put(bidCart, agentValuation.getValuation(bidCart));
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
-    ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getAuctionID(), oneSided);
-//    UserLogging.log(tradeMessage); 
-    this.CLIENT.sendTCP(tradeMessage); 
+    ITradeMessage tradeMessage =
+        new TradeMessage(0, this.agentBackend.getPrivateID(),
+            tradeRequestMessage.getAuctionID(), oneSided);
+    this.agentBackend.sendMessage(tradeMessage);
   }
 
   @Override
   public void onValuationMessage(IValuationMessage valuationMessage) {
-//    UserLogging.log("[+] Valuation Message Received");
-//    UserLogging.log(valuationMessage.toString()); 
-    this.agentValuation = valuationMessage.getValuation(); 
-  }
-  
-  public static void main(String[] args) {
-    new SimpleAgent("localhost", 2121, new Setup(), "solo"); 
-    new SimpleAgent("localhost", 2121, new Setup(), "pacifica"); 
-    while(true) {}
+    this.agentValuation = valuationMessage.getValuation();
   }
 
   @Override
   public void
       onSimulationReportMessage(ISimulationReportMessage reportMessage) {
-    System.out.println(reportMessage); 
-    
+    System.out.println(reportMessage);
+
   }
 
 }
