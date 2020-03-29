@@ -7,8 +7,19 @@ import java.util.List;
 
 import org.json.simple.parser.ParseException;
 
+/**
+ * parses an agent JSON
+ * @author andrewcoggins
+ *
+ */
 public interface IAgentConfigParser extends IInputParser {
   
+  /**
+   * Parse an agent JSON
+   * @param fileName
+   * @return
+   * List<IAgentConfig>
+   */
   public List<IAgentConfig> parseConfig(String fileName)
       throws FileNotFoundException, IOException, ParseException,
       ClassNotFoundException, NoSuchMethodException, SecurityException,

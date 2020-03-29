@@ -1,13 +1,21 @@
 package brown.user.main;
 
-import brown.auction.endowment.IEndowment;
-import brown.auction.value.valuation.IGeneralValuation;
-
+/**
+ * AgentConfig specified agent class and name. 
+ * @return
+ */
 public interface IAgentConfig {
 
-  public String getAgentClass(); 
-  
+  /**
+   * gets the agent's class. 
+   * @return
+   */
+  public String getAgentClass();
+
+  /**
+   * gets the agent's name. 
+   * @return
+   */
   public String getAgentName();
- 
-  
+
 }
