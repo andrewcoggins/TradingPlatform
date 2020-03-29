@@ -16,7 +16,6 @@ public final class Setup implements ISetup {
 
   @Override
   public void setup(Kryo kryo) {
-    System.out.println("setting everything up");
     start(kryo);
   }
 
@@ -32,7 +31,7 @@ public final class Setup implements ISetup {
       kryo.register(HashMap.class);
       kryo.register(LinkedList.class);
       List<String> classesToReflect = getJavaFiles(PATH);
-      for (String className : classesToReflect) {
+      for (String className : classesToReflect) { 
         Class<?> tpClass = Class.forName(className);
         kryo.register(tpClass);
       }

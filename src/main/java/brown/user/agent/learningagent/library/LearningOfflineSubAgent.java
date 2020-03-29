@@ -1,4 +1,8 @@
-//package brown.user.agent.learningagent.library;
+package brown.user.agent.learningagent.library;
+
+public class LearningOfflineSubAgent {
+  
+}
 //
 //
 //import java.io.FileWriter;

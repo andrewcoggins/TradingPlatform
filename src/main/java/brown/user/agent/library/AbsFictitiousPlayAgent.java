@@ -1,4 +1,4 @@
-//package brown.user.agent.library;
+package brown.user.agent.library;
 //
 //import java.io.FileReader;
 //import java.io.FileWriter;
@@ -21,6 +21,9 @@
 //import brown.user.agent.IAgentBackend;
 //import brown.user.main.library.Main;
 //
+public class AbsFictitiousPlayAgent {
+  
+}
 //public abstract class AbsFictitiousPlayAgent extends OnlineAgentBackend
 //    implements IAgentBackend {
 //

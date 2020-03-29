@@ -1,4 +1,7 @@
-//package brown.user.agent.learningagent.library;
+package brown.user.agent.learningagent.library;
+public class LearningSubAgent {
+  
+}
 //
 //
 //import java.util.HashMap;
