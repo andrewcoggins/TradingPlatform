@@ -1,14 +1,11 @@
 package brown.platform.managers.library;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import com.esotericsoftware.kryonet.Connection;
 
 import brown.auction.endowment.IEndowment;
 import brown.auction.value.distribution.IValuationDistribution;
@@ -22,7 +19,7 @@ import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.ITradeMessage;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.IValuationMessage;
-import brown.communication.messageserver.IMessageServer;
+import brown.communication.messageserver.IOnlineMessageServer;
 import brown.communication.messageserver.library.MessageServer;
 import brown.logging.library.PlatformLogging;
 import brown.platform.accounting.IAccount;
@@ -30,6 +27,7 @@ import brown.platform.accounting.IAccountUpdate;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Item;
 import brown.platform.managers.IAccountManager;
+import brown.platform.managers.IAgentManager;
 import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.IMarketManager;
 import brown.platform.managers.ISimulationManager;
@@ -51,18 +49,16 @@ import brown.system.setup.library.Setup;
 public class SimulationManager implements ISimulationManager {
 
   private final int MILLISECONDS = 1000;
-  private final int IDMULTIPLIER = 1000000000;
 
   private List<ISimulation> simulations;
   private List<Integer> numSimulationRuns;
   private boolean lock;
 
-  private Map<Integer, Connection> agentConnections;
   private Map<Integer, Integer> privateToPublic;
   private Map<Integer, String> idToName;
   private List<List<Integer>> agentGroups;
   private int agentCount;
-
+  
   private IMarketManager currentMarketManager;
   private IAccountManager currentAccountManager;
   private IEndowmentManager currentEndowmentManager;
@@ -70,28 +66,25 @@ public class SimulationManager implements ISimulationManager {
   private IUtilityManager utilityManager;
   private int groupSize;
 
-  private IMessageServer messageServer;
+  private IOnlineMessageServer messageServer;
   private String simulationJsonFileName;
 
   /**
    * Simulation Manager manages the simulations being run by the platform.
    * 
-   * @param simulationJsonFileName the filename of the simulation JSON that
-   *          specifies the auction. This is sent to agents in
-   *          registrationMessage
    */
-  public SimulationManager() {
+  public SimulationManager() { 
     this.simulations = new LinkedList<>();
     this.lock = false;
     this.numSimulationRuns = new LinkedList<Integer>();
 
     this.privateToPublic = new HashMap<Integer, Integer>();
-    this.agentConnections = new HashMap<Integer, Connection>();
     this.idToName = new HashMap<Integer, String>();
     this.utilityManager = new UtilityManager();
     this.agentCount = 0;
   }
-
+  
+  
   @Override
   public void createSimulation(int numSimulationRuns, int groupSize,
       IWorldManager worldManager) {
@@ -119,6 +112,7 @@ public class SimulationManager implements ISimulationManager {
       String simulationJsonFileName) {
     this.simulationJsonFileName = simulationJsonFileName;
     startMessageServer(serverPort);
+    // xxx
     PlatformLogging.log("Agent connection phase: sleeping for "
         + startingDelayTime + " seconds");
     for (int i = 0; i < startingDelayTime; i++) {
@@ -126,6 +120,7 @@ public class SimulationManager implements ISimulationManager {
       Utils.sleep(MILLISECONDS);
     }
     PlatformLogging.log("Agent connection phase: beginning simulation");
+    // xxx
     this.privateToPublic.keySet()
         .forEach(id -> this.utilityManager.addAgentRecord(id));
     for (int i = 0; i < numRuns; i++) {
@@ -144,28 +139,20 @@ public class SimulationManager implements ISimulationManager {
 
   @Override
   public Integer handleRegistration(IRegistrationMessage registrationMessage,
-      Connection connection) {
-    Integer agentPrivateID = -1;
-    Collection<Integer> allIds = this.agentConnections.keySet();
-    if (!allIds.contains(agentPrivateID)) {
-      agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
-      while (allIds.contains(agentPrivateID)) {
-        agentPrivateID = ((int) (Math.random() * IDMULTIPLIER));
-      }
-      privateToPublic.put(agentPrivateID, agentCount++);
-      this.agentConnections.put(agentPrivateID, connection);
-      if (registrationMessage.getName() != null) {
-        this.idToName.put(agentPrivateID, registrationMessage.getName());
-      } else {
-        PlatformLogging.log(
-            "[x] AbsServer-onRegistration: encountered registration from existing agent");
-      }
-      PlatformLogging.log("[-] registered " + agentPrivateID);
-      connection.sendTCP(15000);
-      connection.setTimeout(60000);
-      return agentPrivateID;
+      Integer agentPrivateID) {
+
+    privateToPublic.put(agentPrivateID, agentCount++);
+
+    if (registrationMessage.getName() != null) {
+      this.idToName.put(agentPrivateID, registrationMessage.getName());
+    } else {
+      PlatformLogging.log(
+          "[x] AbsServer-onRegistration: encountered registration from existing agent");
     }
-    return -1;
+    PlatformLogging.log("[-] registered " + agentPrivateID);
+
+    return agentPrivateID;
+
   }
 
   @Override
@@ -182,7 +169,9 @@ public class SimulationManager implements ISimulationManager {
           new HashSet<Integer>(agentGroups.get(i)), i, this.agentGroups.size());
     }
     while (this.currentMarketManager.anyMarketsOpen()) {
+      // xxx
       Utils.sleep((int) (simulationDelayTime * MILLISECONDS));
+      // xxx
       PlatformLogging.log("updating auctions");
 
       updateAuctions();
@@ -250,10 +239,10 @@ public class SimulationManager implements ISimulationManager {
           // updating the market.
           List<ITradeRequestMessage> tradeRequests =
               this.currentMarketManager.updateMarket(marketID,
-                  new LinkedList<Integer>(this.agentConnections.keySet()));
+                  new LinkedList<Integer>(this.privateToPublic.keySet()));
           for (ITradeRequestMessage tradeRequest : tradeRequests) {
             this.messageServer.sendMessage(
-                this.agentConnections.get(tradeRequest.getAgentID()),
+                tradeRequest.getAgentID(),
                 tradeRequest);
           }
         } else {
@@ -265,11 +254,11 @@ public class SimulationManager implements ISimulationManager {
                   .constructBankUpdateMessages(accountUpdates);
           Map<Integer, IInformationMessage> informationMessages =
               this.currentMarketManager.constructInformationMessages(marketID,
-                  new LinkedList<Integer>(this.agentConnections.keySet()));
+                  new LinkedList<Integer>(this.privateToPublic.keySet()));
           for (Integer agentID : bankUpdates.keySet()) {
-            this.messageServer.sendMessage(this.agentConnections.get(agentID),
+            this.messageServer.sendMessage(agentID,
                 informationMessages.get(agentID));
-            this.messageServer.sendMessage(this.agentConnections.get(agentID),
+            this.messageServer.sendMessage(agentID,
                 bankUpdates.get(agentID));
           }
           this.currentMarketManager.finalizeMarket(marketID);
@@ -283,7 +272,7 @@ public class SimulationManager implements ISimulationManager {
         this.currentMarketManager.constructSimulationReportMessages(
             new LinkedList<Integer>(this.privateToPublic.keySet()));
     for (Integer agentID : this.privateToPublic.keySet()) {
-      this.messageServer.sendMessage(this.agentConnections.get(agentID),
+      this.messageServer.sendMessage(agentID,
           simReportMessages.get(agentID));
     }
   }
@@ -319,9 +308,9 @@ public class SimulationManager implements ISimulationManager {
     Map<Integer, IValuationMessage> agentValuations =
         this.currentValuationManager.constructValuationMessages();
     for (Integer agentID : accountInitializations.keySet()) {
-      this.messageServer.sendMessage(this.agentConnections.get(agentID),
+      this.messageServer.sendMessage(agentID,
           accountInitializations.get(agentID));
-      this.messageServer.sendMessage(this.agentConnections.get(agentID),
+      this.messageServer.sendMessage(agentID,
           agentValuations.get(agentID));
     }
   }

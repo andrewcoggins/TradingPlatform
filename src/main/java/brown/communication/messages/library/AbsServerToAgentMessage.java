@@ -1,7 +1,7 @@
 package brown.communication.messages.library;
 
 import brown.communication.messages.IServerToAgentMessage;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 public abstract class AbsServerToAgentMessage extends AbsMessage implements IServerToAgentMessage {
   
@@ -9,6 +9,6 @@ public abstract class AbsServerToAgentMessage extends AbsMessage implements ISer
     super(messageID, agentID); 
   }
   
-  public abstract void agentDispatch(IAgent agent);
+  public abstract void agentDispatch(IAgentBackend agent);
   
 }

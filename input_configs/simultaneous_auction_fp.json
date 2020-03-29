@@ -1,12 +1,13 @@
 
 {
-	"name": "testParse", 
+	"name": "totalMadness", 
 	"startingDelayTime": 5, 
 	"simulationDelayTime": 0.5, 
-	"learningDelayTime": 30,
-	"numTotalRuns": 2, 
+	"learningDelayTime": 60,
+	"numTotalRuns": 1, 
 	"simulation": [{
 		"numRuns": 1, 
+		"groupSize": 2,
 		"items": [{
 			"itemName": "testItem", 
 			"numItems": "1"

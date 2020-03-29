@@ -2,8 +2,7 @@ package brown.communication.messages.library;
 
 import com.esotericsoftware.kryonet.Connection;
 
-import brown.communication.bid.IBidBundle;
-import brown.communication.messages.ITradeMessage;
+import brown.communication.messages.IAgentToServerMessage;
 import brown.communication.messageserver.IOfflineMessageServer;
 import brown.communication.messageserver.IOnlineMessageServer;
 import brown.user.agent.IAgentBackend;
@@ -15,46 +14,29 @@ import brown.user.agent.IAgentBackend;
  * @author andrew
  *
  */
-public class TradeMessage extends AbsAgentToServerMessage implements ITradeMessage {
+public class AckMessage extends AbsAgentToServerMessage implements IAgentToServerMessage {
   
-  private Integer auctionID; 
-  private IBidBundle bid; 
   
-  public TradeMessage() {
+  public AckMessage() {
     super(null, null); 
   }
   
-  public TradeMessage(Integer messageID, Integer agentID, Integer responseID, Integer auctionID, IBidBundle bid) {
+  public AckMessage(Integer messageID, Integer agentID, Integer responseID) {
 	    super(messageID ,agentID, responseID); 
-	    this.auctionID = auctionID; 
-	    this.bid = bid; 
 	  }
-  
-  public TradeMessage(Integer messageID, Integer agentID, Integer auctionID, IBidBundle bid) {
-    this(messageID ,agentID, null, auctionID, bid); 
-  }
   
   public Integer getAgentID() {
     return this.agentID; 
   }
   
-  public Integer getAuctionID() {
-    return this.auctionID; 
-  }
-  
-  public IBidBundle getBid() {
-    return this.bid; 
-  }
-  
   @Override
   public void serverDispatch(Connection connection, IOnlineMessageServer server) {
-    server.onBid(connection, this);
+    // noop
   }
 
   @Override
   public String toString() {
-    return "TradeMessage [bid=" + bid + ", auctionID=" + auctionID
-        + ", agentID=" + agentID + "]";
+    return "AckMessage [agentID=" + agentID + "]";
   }
 
 
@@ -63,8 +45,8 @@ public class TradeMessage extends AbsAgentToServerMessage implements ITradeMessa
     final int prime = 31;
     int result = 1;
     result = prime * result + ((agentID == null) ? 0 : agentID.hashCode());
-    result = prime * result + ((auctionID == null) ? 0 : auctionID.hashCode());
-    result = prime * result + ((bid == null) ? 0 : bid.hashCode());
+    result = prime * result + ((messageID == null) ? 0 : messageID.hashCode());
+    result = prime * result + ((getCorrespondingMessageID() == null) ? 0 : getCorrespondingMessageID().hashCode());
     return result;
   }
 
@@ -77,28 +59,28 @@ public class TradeMessage extends AbsAgentToServerMessage implements ITradeMessa
       return false;
     if (getClass() != obj.getClass())
       return false;
-    TradeMessage other = (TradeMessage) obj;
+    AckMessage other = (AckMessage) obj;
     if (agentID == null) {
       if (other.agentID != null)
         return false;
     } else if (!agentID.equals(other.agentID))
       return false;
-    if (auctionID == null) {
-      if (other.auctionID != null)
+    if (messageID == null) {
+      if (other.messageID != null)
         return false;
-    } else if (!auctionID.equals(other.auctionID))
+    } else if (!messageID.equals(other.messageID))
       return false;
-    if (bid == null) {
-      if (other.bid != null)
+    if (getCorrespondingMessageID() == null) {
+      if (other.getCorrespondingMessageID() != null)
         return false;
-    } else if (!bid.equals(other.bid))
+    } else if (!getCorrespondingMessageID().equals(other.getCorrespondingMessageID()))
       return false;
     return true;
   }
 
 @Override
 public void offlineServerDispatch(IAgentBackend connection, IOfflineMessageServer server) {
-	server.onBid(connection, this);
+	 // noop
 }
 
   

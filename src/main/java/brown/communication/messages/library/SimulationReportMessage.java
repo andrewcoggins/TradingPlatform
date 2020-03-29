@@ -4,7 +4,7 @@ import java.util.Map;
 
 import brown.auction.marketstate.IMarketPublicState;
 import brown.communication.messages.ISimulationReportMessage;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 public class SimulationReportMessage extends AbsServerToAgentMessage implements ISimulationReportMessage {
 
@@ -20,11 +20,11 @@ public class SimulationReportMessage extends AbsServerToAgentMessage implements 
   
   public SimulationReportMessage(Integer messageID, Integer agentID, Map<Integer, IMarketPublicState> marketResults) {
     super(messageID, agentID);
-    this.marketResults = marketResults; 
+    this.marketResults = marketResults;
   }
 
   @Override
-  public void agentDispatch(IAgent agent) {
+  public void agentDispatch(IAgentBackend agent) {
     agent.onSimulationReportMessage(this);
   }
 
@@ -63,7 +63,5 @@ public class SimulationReportMessage extends AbsServerToAgentMessage implements 
   public String toString() {
     return "SimulationReportMessage [marketResults=" + marketResults + "]";
   }
-  
-  
 
 }

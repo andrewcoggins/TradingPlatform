@@ -14,5 +14,7 @@ public interface IMessage {
    public Integer getMessageID();
    
    public Integer getAgentID();
+   
+   public void setMessageID(Integer messageID);
 	
 }

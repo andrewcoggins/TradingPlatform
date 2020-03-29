@@ -11,7 +11,7 @@ import brown.communication.messages.ITradeMessage;
  * @author andrewcoggins
  *
  */
-public interface IMessageServer {
+public interface IOnlineMessageServer {
 
   // server receives registration message from agent. 
   public void onRegistration(Connection connection, IRegistrationMessage registrationMessage); 
@@ -20,7 +20,7 @@ public interface IMessageServer {
   public void onBid(Connection connection, ITradeMessage bidMessage); 
   
   // server sends message to agent.
-  public void sendMessage(Connection connection, IServerToAgentMessage message); 
+  public void sendMessage(Integer agentPrivateID, IServerToAgentMessage message); 
   
   
   public void stopMessageServer(); 

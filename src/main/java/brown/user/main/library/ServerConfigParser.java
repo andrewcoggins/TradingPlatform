@@ -30,16 +30,16 @@ import brown.platform.market.IFlexibleRules;
 import brown.platform.market.library.FlexibleRules;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IItemConfig;
-import brown.user.main.IJsonParser;
 import brown.user.main.IMarketConfig;
+import brown.user.main.IServerConfigParser;
 import brown.user.main.ISimulationConfig;
 import brown.user.main.IValuationConfig;
 
-public class JsonParser implements IJsonParser {
+public class ServerConfigParser implements IServerConfigParser {
 
   @SuppressWarnings("unchecked")
   @Override
-  public List<ISimulationConfig> parseJSON(String fileName)
+  public List<ISimulationConfig> parseConfig(String fileName)
       throws FileNotFoundException, IOException, ParseException,
       ClassNotFoundException, NoSuchMethodException, SecurityException,
       InstantiationException, IllegalAccessException, IllegalArgumentException,
@@ -648,37 +648,47 @@ public class JsonParser implements IJsonParser {
   }
 
   @Override
-  public Map<String, Integer> parseJSONOuterParameters(String fileName)
+  public Map<String, Integer> parseServerConfigParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException {
     Object rawInput = new JSONParser().parse(new FileReader(fileName));
 
     JSONObject jo = (JSONObject) rawInput;
 
     Map<String, Integer> outerParams = new HashMap<String, Integer>();
-    outerParams.put("numTotalRuns", ((Long) jo.get("numTotalRuns")).intValue());
-    outerParams.put("startingDelayTime",
-        ((Long) jo.get("startingDelayTime")).intValue());
+    if (jo.containsKey("numTotalRuns"))
+      outerParams.put("numTotalRuns",
+          ((Long) jo.get("numTotalRuns")).intValue());
+    else
+      outerParams.put("numTotalRuns", 1);
+    if (jo.containsKey("startingDelayTime"))
+      outerParams.put("startingDelayTime",
+          ((Long) jo.get("startingDelayTime")).intValue());
+    else
+      outerParams.put("startingDelayTime", 0);
     if (jo.containsKey("serverPort"))
       outerParams.put("serverPort", ((Long) jo.get("serverPort")).intValue());
     else
       outerParams.put("serverPort", 2121);
-    if (jo.containsKey("learningDelayTime")) 
-      outerParams.put("learningDelayTime", ((Long) jo.get("learningDelayTime")).intValue());
+    if (jo.containsKey("learningDelayTime"))
+      outerParams.put("learningDelayTime",
+          ((Long) jo.get("learningDelayTime")).intValue());
     else
-      outerParams.put("learningDelaytime", 0); 
+      outerParams.put("learningDelayTime", 0);
     return outerParams;
-
   }
 
   @Override
-  public Map<String, Double> parseJSONDoubleParameters(String fileName)
+  public Map<String, Double> parseServerConfigDoubleParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException {
     Object rawInput = new JSONParser().parse(new FileReader(fileName));
 
     JSONObject jo = (JSONObject) rawInput;
     Map<String, Double> outerParams = new HashMap<String, Double>();
-    outerParams.put("simulationDelayTime",
-        ((Double) jo.get("simulationDelayTime")));
+    if (jo.containsKey("simulationDelayTime"))
+      outerParams.put("simulationDelayTime",
+          ((Double) jo.get("simulationDelayTime")));
+    else
+      outerParams.put("simulationDelayTime", ((Double) 0.0));
 
     return outerParams;
 

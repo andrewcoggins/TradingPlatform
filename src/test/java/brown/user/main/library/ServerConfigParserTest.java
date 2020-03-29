@@ -26,20 +26,20 @@ import brown.platform.item.ICart;
 import brown.platform.market.library.FlexibleRules;
 import brown.user.main.IEndowmentConfig;
 import brown.user.main.IItemConfig;
-import brown.user.main.IJsonParser;
 import brown.user.main.IMarketConfig;
+import brown.user.main.IServerConfigParser;
 import brown.user.main.ISimulationConfig;
 import brown.user.main.IValuationConfig;
 
-public class JsonParserTest {
+public class ServerConfigParserTest {
 
   @Test
   public void testJSONParse() throws FileNotFoundException,
       ClassNotFoundException, NoSuchMethodException, SecurityException,
       InstantiationException, IllegalAccessException, IllegalArgumentException,
       InvocationTargetException, IOException, ParseException {
-    IJsonParser testParser = new JsonParser();
-    List<ISimulationConfig> simulationConfigs = testParser.parseJSON("input_configs/test_input.json");
+    IServerConfigParser testParser = new ServerConfigParser();
+    List<ISimulationConfig> simulationConfigs = testParser.parseConfig("input_configs/test_input.json");
     assertTrue(simulationConfigs.size() == 2); 
     
     ISimulationConfig firstSimulationConfig = simulationConfigs.get(0); 

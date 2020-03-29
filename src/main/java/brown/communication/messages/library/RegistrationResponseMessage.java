@@ -1,7 +1,7 @@
 package brown.communication.messages.library;
 
 import brown.communication.messages.IRegistrationResponseMessage;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 public class RegistrationResponseMessage extends AbsServerToAgentMessage
     implements IRegistrationResponseMessage {
@@ -23,7 +23,7 @@ public class RegistrationResponseMessage extends AbsServerToAgentMessage
     this.simulationJsonFileName = simulationJsonFileName;
   }
 
-  public void agentDispatch(IAgent agent) {
+  public void agentDispatch(IAgentBackend agent) {
     agent.onRegistrationResponse(this);
   }
 

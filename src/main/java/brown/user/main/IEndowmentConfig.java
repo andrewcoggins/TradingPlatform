@@ -10,12 +10,28 @@ import java.util.List;
  */
 public interface IEndowmentConfig extends IInputConfig {
   
+  /**
+   * get endowment distribution
+   * @return
+   */
   public Constructor<?> getDistribution(); 
   
+  /**
+   * get constructors for distribution generators. 
+   * @return
+   */
   public List<Constructor<?>> getGeneratorConstructors(); 
   
+  /** 
+   * get generator parameters. 
+   * @return
+   */
   public List<List<Double>> getGeneratorParams(); 
   
+  /**
+   * get item names. 
+   * @return
+   */
   public List<String> getItemNames(); 
   
 }

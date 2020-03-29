@@ -1,0 +1,23 @@
+{
+	"agents": [
+		{
+			"agentClass": "brown.user.agent.library.SimpleAgent", 
+			"agentName": "agent1", 
+		}, 
+		{
+			"agentClass": "brown.user.agent.library.SimpleAgent", 
+			"agentName": "agent2", 
+
+		},
+		{
+			"agentClass": "brown.user.agent.library.SimpleAgent", 
+			"agentName": "agent3", 
+
+		}, 
+		{
+			"agentClass": "brown.user.agent.library.SimpleAgent", 
+			"agentName": "agent4", 
+
+		}
+	]
+}

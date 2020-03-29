@@ -16,9 +16,9 @@ public final class Setup implements ISetup {
 
   @Override
   public void setup(Kryo kryo) {
-	start(kryo);
+    start(kryo);
   }
-	
+
   /**
    * helper that registers all classes with kryo
    * 
@@ -31,10 +31,10 @@ public final class Setup implements ISetup {
       kryo.register(HashMap.class);
       kryo.register(LinkedList.class);
       List<String> classesToReflect = getJavaFiles(PATH);
-      for (String className : classesToReflect) {
+      for (String className : classesToReflect) { 
         Class<?> tpClass = Class.forName(className);
         kryo.register(tpClass);
-      } 
+      }
       return true;
     } catch (IOException a) {
       ErrorLogging.log("ERROR: java startup: " + a.toString());
@@ -43,7 +43,7 @@ public final class Setup implements ISetup {
     }
     return false;
   }
-  
+
   /**
    * helper that returns every java class starting at a path
    * 

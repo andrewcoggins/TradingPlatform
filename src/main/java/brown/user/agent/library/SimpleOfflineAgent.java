@@ -20,51 +20,45 @@ import brown.platform.item.library.Cart;
 import brown.platform.item.library.Item;
 import brown.user.agent.IAgent;
 
-/**
- * an honest agent... bids their valuation. What else is an honest agent to do?
- * 
- * @author andrewcoggins
- *
- */
-public class SimpleAgent extends AbsAgent implements IAgent {
-
-  private IGeneralValuation agentValuation;
-
-  public SimpleAgent(String name) {
+public class SimpleOfflineAgent extends AbsAgent implements IAgent {
+  
+  private IGeneralValuation agentValuation; 
+  
+  public SimpleOfflineAgent(String name) {
     super(name);
   }
 
   @Override
   public void onInformationMessage(IInformationMessage informationMessage) {
+    System.out.println("[agent] agent notifying server of information message: " + informationMessage); 
   }
 
   @Override
   public void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage) {
-
-    Map<ICart, Double> bidMap = new HashMap<ICart, Double>();
-    List<IItem> bidItems = new LinkedList<IItem>();
-
-    bidItems.add(new Item("testItem", 1));
-
-    ICart bidCart = new Cart(bidItems);
-    bidMap.put(bidCart, agentValuation.getValuation(bidCart));
+    Map<ICart, Double> bidMap = new HashMap<ICart, Double>(); 
+    List<IItem> bidItems = new LinkedList<IItem>(); 
+    
+    bidItems.add(new Item("testItem", 1)); 
+    
+    ICart bidCart = new Cart(bidItems); 
+    bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
-    ITradeMessage tradeMessage =
-        new TradeMessage(0, this.agentBackend.getPrivateID(),
-            tradeRequestMessage.getAuctionID(), oneSided);
+    ITradeMessage tradeMessage = new TradeMessage(0, this.agentBackend.getPrivateID(), tradeRequestMessage.getMessageID(), tradeRequestMessage.getAuctionID(), oneSided);
+    System.out.println("[agent] agent notifying server of trade request message: " + tradeRequestMessage); 
     this.agentBackend.sendMessage(tradeMessage);
   }
 
   @Override
   public void onValuationMessage(IValuationMessage valuationMessage) {
-    this.agentValuation = valuationMessage.getValuation();
+    this.agentValuation = valuationMessage.getValuation(); 
+    System.out.println("[agent] agent notifying server of valuation message: " + valuationMessage); 
   }
 
   @Override
   public void
       onSimulationReportMessage(ISimulationReportMessage reportMessage) {
-    System.out.println(reportMessage);
-
+    System.out.println("[agent] agent notifying server of simulation report message: " + reportMessage); 
   }
+
 
 }

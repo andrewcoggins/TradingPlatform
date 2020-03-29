@@ -3,7 +3,7 @@ package brown.communication.messages.library;
 import brown.auction.marketstate.IMarketPublicState;
 import brown.communication.messages.ITradeRequestMessage;
 import brown.platform.item.ICart;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 /**
  * Trade request message is sent by an open market 
@@ -47,7 +47,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
   }
   
   @Override
-  public void agentDispatch(IAgent agent) {
+  public void agentDispatch(IAgentBackend agent) { 
     agent.onTradeRequestMessage(this);
   }
   

@@ -1,4 +1,4 @@
- package brown.simulations;
+package brown.simulations;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -44,4 +44,3 @@ public class BasicSimulation extends AbsUserSimulation {
   }
 
 }
-

@@ -2,7 +2,7 @@ package brown.communication.messages.library;
 
 import brown.auction.value.valuation.IGeneralValuation;
 import brown.communication.messages.IValuationMessage;
-import brown.user.agent.IAgent;
+import brown.user.agent.IAgentBackend;
 
 public class ValuationMessage extends AbsServerToAgentMessage implements IValuationMessage {
   
@@ -19,7 +19,7 @@ public class ValuationMessage extends AbsServerToAgentMessage implements IValuat
   
 
   @Override
-  public void agentDispatch(IAgent agent) {
+  public void agentDispatch(IAgentBackend agent) {
     agent.onValuationMessage(this);
   }
   

@@ -63,7 +63,7 @@ public interface ISimulationManager {
    * @return
    */
   Integer handleRegistration(IRegistrationMessage registrationMessage,
-      Connection connection);
+      Integer agentPrivateID);
 
   /**
    * pass on a Trade Message to the SimulationManager's marketManager. 
