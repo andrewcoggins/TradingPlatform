@@ -1,0 +1,23 @@
+{
+	"agents": [
+		{
+			"agentClass": "brown.user.agent.library.SimpleEnglishAuctionAgent", 
+			"agentName": "agent1", 
+		}, 
+		{
+			"agentClass": "brown.user.agent.library.SimpleEnglishAuctionAgent", 
+			"agentName": "agent2", 
+
+		},
+		{
+			"agentClass": "brown.user.agent.library.SimpleEnglishAuctionAgent", 
+			"agentName": "agent3", 
+
+		}, 
+		{
+			"agentClass": "brown.user.agent.library.SimpleEnglishAuctionAgent", 
+			"agentName": "agent4", 
+
+		}
+	]
+}

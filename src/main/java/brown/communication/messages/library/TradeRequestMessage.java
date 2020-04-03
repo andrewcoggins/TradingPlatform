@@ -17,6 +17,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
 
   private ICart items; 
   private Integer auctionID; 
+  private IMarketPublicState publicState;
   
   public TradeRequestMessage() {
     super(null, null);
@@ -43,7 +44,7 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
 
   @Override
   public void addInformation(IMarketPublicState publicState) {
-    // TODO: 
+    this.publicState = publicState;
   }
   
   @Override
@@ -52,9 +53,14 @@ public class TradeRequestMessage extends AbsServerToAgentMessage implements ITra
   }
   
   @Override
+  public IMarketPublicState getState() {
+    return this.publicState;
+  }
+
+  @Override
   public String toString() {
     return "TradeRequestMessage [items=" + items + ", auctionID=" + auctionID
-        + "]";
+        + ", publicState=" + publicState + "]";
   }
 
   @Override

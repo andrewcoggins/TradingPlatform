@@ -78,13 +78,6 @@ public class MarketState implements IMarketState {
     return this.isOpen;
   }
 
-  // TODO: clearAllocation()
-  // Maybe rename this method clearPayments:
-  @Override
-  public void clearOrders() {
-    this.setPayments(new LinkedList<IAccountUpdate>());
-  }
-
   @Override
   public TradeRequestMessage getTRequest() {
     return this.tRequest;

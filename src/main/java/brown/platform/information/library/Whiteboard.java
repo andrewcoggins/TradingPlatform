@@ -1,10 +1,11 @@
 package brown.platform.information.library;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketPublicState;
-import brown.auction.marketstate.library.MarketPublicState;
 import brown.platform.information.IWhiteboard;
  
 
@@ -14,7 +15,8 @@ public class Whiteboard implements IWhiteboard {
   // map from market IDs to market public states 
   
   // for in-progress markets: inner markets (governed by Inner IR)
-	private Map<Integer, IMarketPublicState> innerMarketWhiteboard;
+  // map from market ID to map from agent ID to a market public state for each timestep. 
+	private Map<Integer, Map<Integer, List<IMarketPublicState>>> innerMarketWhiteboard;
 	// for finished markets: outer markets (governed by outer IR)
 	private Map<Integer, IMarketPublicState> outerMarketWhiteboard; 
 	
@@ -23,7 +25,7 @@ public class Whiteboard implements IWhiteboard {
 	
 	
 	public Whiteboard() {
-		this.innerMarketWhiteboard = new HashMap<Integer, IMarketPublicState>(); 
+		this.innerMarketWhiteboard = new HashMap<Integer, Map<Integer, List<IMarketPublicState>>>(); 
 		this.outerMarketWhiteboard = new HashMap<Integer, IMarketPublicState>(); 
 		this.simulationReportWhiteboard = new HashMap<Integer, IMarketPublicState>(); 
 	}
@@ -31,14 +33,22 @@ public class Whiteboard implements IWhiteboard {
   @Override
   public void postInnerInformation(Integer marketID, Integer agentID, 
       IMarketPublicState marketPublicState) {
-    IMarketPublicState innerMarketPublicStates; 
+    Map<Integer, List<IMarketPublicState>> innerMarketPublicStates;  
     if (this.innerMarketWhiteboard.containsKey(marketID)) {
       innerMarketPublicStates = this.innerMarketWhiteboard.get(marketID); 
     } else {
-      innerMarketPublicStates = new MarketPublicState(); 
+      innerMarketPublicStates = new HashMap<Integer, List<IMarketPublicState>>(); 
     }
-    innerMarketPublicStates = marketPublicState; 
-    this.innerMarketWhiteboard.put(marketID, innerMarketPublicStates); 
+    List<IMarketPublicState> agentPublicStates; 
+    if (innerMarketPublicStates.containsKey(agentID)) {
+      agentPublicStates = innerMarketPublicStates.get(agentID); 
+    } else {
+      agentPublicStates = new LinkedList<IMarketPublicState>(); 
+    }
+    agentPublicStates.add(marketPublicState); 
+    innerMarketPublicStates.put(agentID, agentPublicStates); 
+    
+    this.innerMarketWhiteboard.put(marketID, innerMarketPublicStates);  
   }
 
   @Override
@@ -56,9 +66,7 @@ public class Whiteboard implements IWhiteboard {
 
   @Override
   public IMarketPublicState getInnerInformation(Integer marketID, Integer agentID, Integer timeStep) {
-    // TODO: fix and uncomment
-    //return this.innerMarketWhiteboard.get(marketID).get(timeStep); 
-    return null; 
+    return this.innerMarketWhiteboard.get(marketID).get(agentID).get(timeStep); 
   }
 
   @Override

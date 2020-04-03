@@ -25,10 +25,6 @@ public interface IMarketState {
 
   public List<IAccountUpdate> getPayments();
 
-  // orders (this is from the payment rule)
-  // delete this !!! just use set Payments
-  public void clearOrders();
-
   // Query rule
   public TradeRequestMessage getTRequest();
 

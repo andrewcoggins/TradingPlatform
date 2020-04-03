@@ -11,7 +11,7 @@ public class NoBidsTermination extends AbsRule implements ITerminationCondition 
 
   @Override
   public void checkTerminated(IMarketState state, List<ITradeMessage> messages) {
-    if (messages.isEmpty()) {
+    if (messages.isEmpty() && state.getTicks() != 0) {
       state.close(); 
     }
   }
