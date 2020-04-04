@@ -295,7 +295,7 @@ public class SimulationManager implements ISimulationManager {
         for (String itemName : specificDistribution.getItemNames()) {
           specificItems.add(new Item(itemName));
         }
-        specificValuationMap.put(specificItems, specificDistribution.sample());
+        specificValuationMap.put(specificItems, specificDistribution.sample(agentID, agentGroups));
       }
 
       this.currentValuationManager.addAgentValuation(agentID,

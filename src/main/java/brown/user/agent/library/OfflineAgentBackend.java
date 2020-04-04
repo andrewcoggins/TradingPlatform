@@ -2,6 +2,10 @@ package brown.user.agent.library;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.spectrumauctions.sats.core.model.gsvm.GSVMBidder;
+import org.spectrumauctions.sats.core.model.gsvm.GSVMBidderSetup;
+import org.spectrumauctions.sats.core.model.lsvm.LocalSynergyValueModel;
+
 import brown.communication.messages.IAgentToServerMessage;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
@@ -101,5 +105,7 @@ public class OfflineAgentBackend extends AbsAgentBackend implements IAgentBacken
       e.printStackTrace();
     }
   }
+  
+  
 
 }
