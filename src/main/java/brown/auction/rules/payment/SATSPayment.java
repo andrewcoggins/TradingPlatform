@@ -44,7 +44,7 @@ public class SATSPayment implements IPaymentRule {
 			double rev = payment.getTotalPayments();
 			if (rev > bestRev) {
 				bestRev = rev;
-				bestPayment = null;
+				bestPayment = payment;
 			}
 		}
 
