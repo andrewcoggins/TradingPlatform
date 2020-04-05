@@ -132,7 +132,7 @@ public class Market implements IMarket {
   
   @Override
   public void updateTradeHistory() {
-    this.STATE.addToTradeHistory(this.bids);
+    this.STATE.addToTradeHistory(new LinkedList<ITradeMessage>(this.bids));
   }
   
   @Override

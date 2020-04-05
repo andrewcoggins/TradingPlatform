@@ -17,7 +17,7 @@ public class LastBidderSingleItem extends AbsRule implements IAllocationRule {
 
   // sets the allocation to the 'last bid standing' in an ascending auction.
   // if there are multiple last bids standing, chooses one at random.
-  
+
   // SINGLE GOOD ONLY
   @Override
   public void setAllocation(IMarketState state, List<ITradeMessage> messages) {
@@ -26,12 +26,14 @@ public class LastBidderSingleItem extends AbsRule implements IAllocationRule {
 
     // get the most recent history.
     List<List<ITradeMessage>> tradeHistory = state.getTradeHistory();
-    if (!tradeHistory.isEmpty()) {
+    System.out.println(tradeHistory);
+    if (!this.tradeHistoryEmpty(tradeHistory)) {
       List<ITradeMessage> mostRecent =
           tradeHistory.get(tradeHistory.size() - 1);
       List<ICart> winningCarts = new LinkedList<ICart>();
-      // shuffle to randomize. 
-      // if this is too inefficient, could also do a random number the size of the list. 
+      // shuffle to randomize.
+      // if this is too inefficient, could also do a random number the size of
+      // the list.
       Collections.shuffle(mostRecent);
       ITradeMessage winningTrade = mostRecent.get(0);
       Integer agentID = winningTrade.getAgentID();
@@ -43,6 +45,20 @@ public class LastBidderSingleItem extends AbsRule implements IAllocationRule {
       allocation.put(agentID, winningCarts);
       state.setAllocation(allocation);
     }
+
+  }
+
+  private boolean tradeHistoryEmpty(List<List<ITradeMessage>> tradeHistory) {
+    boolean allEmpty = true; 
+    if (tradeHistory.isEmpty())
+      return true;
+    for (List<ITradeMessage> tradeMessageList : tradeHistory) {
+      if (!tradeMessageList.isEmpty()) {
+        allEmpty = false;
+        break;
+      }
+    }
+    return allEmpty;
   }
 
 }

@@ -11,6 +11,8 @@ public interface ITradeRequestMessage extends IServerToAgentMessage {
   
   public ICart getItems(); 
   
+  public IMarketPublicState getState(); 
+  
   public void addInformation(IMarketPublicState publicState); 
   
 }

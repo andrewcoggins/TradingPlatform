@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import brown.auction.marketstate.IMarketState;
-import brown.auction.rules.AbsRule;
 import brown.auction.rules.IActivityRule;
 import brown.communication.bid.IBidBundle;
 import brown.communication.messages.ITradeMessage;
@@ -23,38 +22,36 @@ public class AscendingActivity extends AbsActivity implements IActivityRule {
 
     Map<String, Double> reserves = state.getReserves();
 
-    Integer bidAgentID = aBid.getAgentID();
-
     if (!isWellFormed(aBid, items)) {
       state.setAcceptable(false);
     } else {
-      if (reserves.keySet().contains(bidAgentID)) {
-        IBidBundle bundle = (IBidBundle) aBid.getBid();
-        Map<ICart, Double> carts = bundle.getBids();
-        state.setAcceptable(true);
-        if (carts.keySet().size() > 1) {
-          state.setAcceptable(false);
-        } else {
-          for (ICart cart : carts.keySet()) {
-            // all carts have only one item
-            if (cart.getItems().size() != 1) {
-              state.setAcceptable(false);
-              break;
-            }
-            // all items are size 1
-            if (cart.getItems().get(0).getItemCount() != 1) {
-              state.setAcceptable(false);
-              break;
-            }
-            // main condition: if the bid is too low for the reserve, reject.
-            String itemName = cart.getItems().get(0).getName();
+      IBidBundle bundle = (IBidBundle) aBid.getBid();
+      Map<ICart, Double> carts = bundle.getBids();
+      state.setAcceptable(true);
+      if (carts.keySet().size() > 1) {
+        state.setAcceptable(false);
+      } else {
+        for (ICart cart : carts.keySet()) {
+          // all carts have only one item
+          if (cart.getItems().size() != 1) {
+            state.setAcceptable(false);
+            break;
+          }
+          // all items are size 1
+          if (cart.getItems().get(0).getItemCount() != 1) { 
+            state.setAcceptable(false);
+            break;
+          }
+          // main condition: if the bid is too low for the reserve, reject.
+          String itemName = cart.getItems().get(0).getName();
+          if (reserves.containsKey(itemName)) {
             if (carts.get(cart) < reserves.get(itemName)) {
               state.setAcceptable(false);
             }
+          } else {
+            state.setAcceptable(false);
           }
         }
-      } else {
-        state.setAcceptable(false);
       }
     }
   }
@@ -70,7 +67,8 @@ public class AscendingActivity extends AbsActivity implements IActivityRule {
     for (IItem item : items.getItems()) {
       reserves.put(item.getName(), baseReserve * timeStep);
     }
-
+    
+    state.setReserves(reserves);
   }
 
 }

@@ -14,12 +14,7 @@ public class SimpleOneSidedQuery extends AbsRule implements IQueryRule {
   @Override
   public void makeTradeRequest(Integer marketID, IMarketState state, ICart items,
       List<ITradeMessage> bids, Integer agentID) {
-
-    // TODO: somehow integrate some inner information into this.
-    // how about... we add the market public state (assumed to be for the agent)
-    // here.
-    
-    //TODO: 
+ 
     state.setTRequest(
         new TradeRequestMessage(0, marketID, agentID, items));
   }

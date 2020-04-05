@@ -87,8 +87,8 @@ public class MarketManager implements IMarketManager {
 		List<IFlexibleRules> marketRules = currentMarketBlock.getMarkets();
 		List<ICart> marketTradeables = currentMarketBlock.getMarketCarts();
 		// add markets with grouping. 
+		
 		for (int i = 0; i < marketRules.size(); i++) {
-			System.out.println("opening market"); 
 			int marketID = i + (marketRules.size() * groupIndex) + (index * marketRules.size() * numGroups);
 			this.activeMarkets.put(marketID, new Market(marketID, marketRules.get(i),
 					new MarketState(), new MarketPublicState(), agents, marketTradeables.get(i)));
@@ -143,7 +143,7 @@ public class MarketManager implements IMarketManager {
 		// market public state.
 		market.updateInnerInformation();
 
-		for (Integer agentID : market.getMarketAgents()) {
+		for (Integer agentID : market.getMarketAgents()) { 
 			this.whiteboard.postInnerInformation(marketID, agentID,
 					this.activeMarkets.get(marketID).getPublicState());
 		}
@@ -153,10 +153,12 @@ public class MarketManager implements IMarketManager {
 		for (Integer agentID : market.getMarketAgents()) {
 			ITradeRequestMessage tRequest = market.constructTradeRequest(agentID);
 			IMarketPublicState agentState = whiteboard.getInnerInformation(marketID,
-					agentID, market.getTimestep());
+					agentID, market.getTimestep() - 1);
 			tRequest.addInformation(agentState);
 			tradeRequests.add(tRequest);
 		}
+		// clear bid cache
+		this.activeMarkets.get(marketID).clearBidCache();
 		return tradeRequests;
 	}
 

@@ -27,7 +27,6 @@ import brown.platform.accounting.IAccountUpdate;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Item;
 import brown.platform.managers.IAccountManager;
-import brown.platform.managers.IAgentManager;
 import brown.platform.managers.IEndowmentManager;
 import brown.platform.managers.IMarketManager;
 import brown.platform.managers.ISimulationManager;

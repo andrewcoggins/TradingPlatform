@@ -156,7 +156,6 @@ public class OfflineSimulationManager implements ISimulationManager {
 
 	@Override
 	public void giveTradeMessage(ITradeMessage tradeMessage) {
-		// TODO: send back a status message
 		this.currentMarketManager.handleTradeMessage(tradeMessage);
 	}
 
@@ -252,7 +251,6 @@ public class OfflineSimulationManager implements ISimulationManager {
 								message, true);
 					}
 					this.waitForMessages();
-					System.out.println("got messages"); 
 				} else {
 					List<IAccountUpdate> accountUpdates =
 							this.currentMarketManager.finishMarket(marketID);
@@ -262,10 +260,8 @@ public class OfflineSimulationManager implements ISimulationManager {
 							.constructBankUpdateMessages(accountUpdates);
 					Map<Integer, IInformationMessage> informationMessages =
 							this.currentMarketManager.constructInformationMessages(marketID,
-									new LinkedList<Integer>(this.privateToPublic.keySet()));
-					System.out.println(bankUpdates); 
+									new LinkedList<Integer>(this.privateToPublic.keySet())); 
 					for (Integer agentID : bankUpdates.keySet()) {
-						System.out.println("about to send information message"); 
 						this.messageServer.sendMessage(agentID,
 								informationMessages.get(agentID), true);
 					}
