@@ -137,8 +137,13 @@ public class MarketManager implements IMarketManager {
 		market.tick();
 		// update market trade history
 		market.updateTradeHistory();
+		
+		// update allocations and payments
+		market.constructAccountUpdates();
+		
 		// set reserves.
 		market.setReserves();
+		
 		// update inner information: copy changes from the market state to the
 		// market public state.
 		market.updateInnerInformation();

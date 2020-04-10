@@ -17,35 +17,12 @@ public class ClockAuctionTermination extends AbsRule implements ITerminationCond
 
 	@Override
 	public void checkTerminated(IMarketState state, List<ITradeMessage> messages) {
+		if (state.getTicks() == 0) {
+			return;
+		}
+		
 		if (messages.isEmpty()) {
-			state.close();
-			return;
-		}
-		
-		Map<String, Set<Integer>> demands = new HashMap<>();
-		for (ITradeMessage msg : messages) {
-			for (ICart cart : msg.getBid().getBids().keySet()) {
-				for (IItem item : cart.getItems()) {
-					demands.putIfAbsent(item.getName(), new HashSet<>());
-					demands.get(item.getName()).add(msg.getAgentID());
-				}
-			}
-		}
-		
-		
-		if (demands.isEmpty()) {
-			state.close();
-			return;
-		}
-		
-		boolean overDemand = false;
-		for (String item : demands.keySet()) {
-			if (demands.getOrDefault(item, new HashSet<>()).size() > 1) {
-				overDemand = true;
-			}
-		}
-		
-		if (!overDemand) {
+			System.out.println("NO MESSAGES!");
 			state.close();
 			return;
 		}

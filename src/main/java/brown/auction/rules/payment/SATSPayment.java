@@ -21,7 +21,7 @@ import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.library.AccountUpdate;
 import brown.platform.item.ICart;
 import brown.platform.item.library.Cart;
-import brown.platform.item.library.SATSItem;
+import brown.platform.item.library.GSVM18Item;
 
 public class SATSPayment implements IPaymentRule {
 

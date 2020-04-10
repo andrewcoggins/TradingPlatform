@@ -1,6 +1,7 @@
 package brown.platform.item.library;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,8 @@ public abstract class AbsCart implements ICart {
   
   // for kryo, do not use
   public AbsCart() {
-    this.items = null; 
-    this.itemMap = null; 
+    this.items = new LinkedList<>(); 
+    this.itemMap = new HashMap<>(); 
   }
   
   /**

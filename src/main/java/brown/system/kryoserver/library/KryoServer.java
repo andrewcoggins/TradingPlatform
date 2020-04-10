@@ -29,7 +29,7 @@ public class KryoServer implements IKryoServer {
     this.PORT = port;
     this.connections = new ConcurrentHashMap<Connection, Integer>();
 
-    kryoServer = new Server(16384, 8192);
+    kryoServer = new Server(65536, 65536);
     kryoServer.start();
     Kryo serverKryo = kryoServer.getKryo();
     Setup.start(serverKryo);

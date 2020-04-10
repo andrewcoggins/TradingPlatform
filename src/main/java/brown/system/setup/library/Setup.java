@@ -26,6 +26,7 @@ public final class Setup implements ISetup {
    * @return
    */
   public static boolean start(Kryo kryo) {
+	  /*
     String PATH = "src/main/java/";
     try {
       kryo.register(HashMap.class);
@@ -42,6 +43,9 @@ public final class Setup implements ISetup {
       ErrorLogging.log("ERROR: java startup: " + b.toString());
     }
     return false;
+    */
+	  kryo.setRegistrationRequired(false);
+	  return true;
   }
 
   /**
