@@ -12,7 +12,6 @@ public class SMRAInnerIR implements IInnerIRPolicy {
     // just add the necessary prices. 
     publicState.setReserves(state.getReserves());
     publicState.setAllocation(state.getAllocation());
-    System.out.println(state.getTradeHistory());
   }
 
 }

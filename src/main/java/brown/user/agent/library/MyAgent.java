@@ -1,15 +1,19 @@
 package brown.user.agent.library;
 
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.spectrumauctions.sats.core.model.gsvm.GSVMLicense;
 
+import brown.communication.messages.ITradeMessage;
 import brown.platform.item.library.DemandSet;
 import brown.system.setup.library.Setup;
 import brown.user.agent.IAgent;
 
-public class MyAgent extends AbsCanadianSpectrumAgent implements IAgent {
-
+public class MyAgent extends AbsSpectrumAgent implements IAgent {
 	public MyAgent(String name) {
 		super(name);
 	}
@@ -17,20 +21,25 @@ public class MyAgent extends AbsCanadianSpectrumAgent implements IAgent {
 	@Override
 	protected void onAuctionStart() {
 	}
-
+	
 	@Override
-	protected DemandSet getDemandSet(Map<GSVMLicense, Double> prices) {
+	protected void onAuctionEnd(Map<Integer, Set<String>> allocations, Map<Integer, Double> payments,
+			List<List<ITradeMessage>> tradeHistory) {
 		// TODO Auto-generated method stub
-		DemandSet d = new DemandSet();
 		
-		for (GSVMLicense good : prices.keySet()) {
+	}
+	
+	@Override
+	protected Map<String, Double> getBids(Map<String, Double> prices) {
+		Map<String, Double> bids = new HashMap<>();
+		for (String good : prices.keySet()) {
 			if (this.getValuation(good) >= prices.get(good)) {
-				d.add(good);
-				System.out.println("BIDDING\t" + good.getId() + "\t" + this.getValuation(good) + "\t" + prices.get(good));
+				bids.put(good, prices.get(good));
 			}
 		}
-		return d;
+		return bids;
 	}
+
 	
 	public static void launch(final String name) {
 		MyAgent agent = new MyAgent(name);
@@ -39,7 +48,12 @@ public class MyAgent extends AbsCanadianSpectrumAgent implements IAgent {
 	
 	public static void main(String[] args) {
 		launch("jake");
-		//launch("fred");
+		launch("fred");
+		launch("tony");
+		launch("jack");
+		launch("greg");
+		launch("jeff");
+		launch("bart");
 		while (true) {}
 	}
 

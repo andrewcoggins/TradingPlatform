@@ -1,5 +1,5 @@
 {
-  "name": "clockAuction",
+  "name": "GVSM18_SMRA",
   "startingDelayTime": 5,
   "simulationDelayTime": 1.0,
   "numTotalRuns": 1,
@@ -8,11 +8,11 @@
     "numRuns": 1,
     "groupSize": 10,
     "items": [{
-        "itemName": "seed",
+        "itemName": "demand_query",
         "numItems": "0"
       },
       {
-		"itemName": "index",
+        "itemName": "reset",
         "numItems": "0"
       },
       {
@@ -20,9 +20,77 @@
         "numItems": "0"
       },
       {
-        "itemName": "1",
+        "itemName": "A",
         "numItems": "1"
-      }
+      },
+      {
+        "itemName": "B",
+        "numItems": "1"
+      },
+      {
+        "itemName": "C",
+        "numItems": "1"
+      },
+      {
+        "itemName": "D",
+        "numItems": "1"
+      },
+      {
+        "itemName": "E",
+        "numItems": "1"
+      },
+      {
+        "itemName": "F",
+        "numItems": "1"
+      },
+      {
+        "itemName": "G",
+        "numItems": "1"
+      },
+      {
+        "itemName": "H",
+        "numItems": "1"
+      },
+      {
+        "itemName": "I",
+        "numItems": "1"
+      },
+      {
+        "itemName": "J",
+        "numItems": "1"
+      },
+      {
+        "itemName": "K",
+        "numItems": "1"
+      },
+      {
+        "itemName": "L",
+        "numItems": "1"
+      },
+      {
+        "itemName": "M",
+        "numItems": "1"
+      },
+      {
+        "itemName": "N",
+        "numItems": "1"
+      },
+      {
+        "itemName": "O",
+        "numItems": "1"
+      },
+      {
+        "itemName": "P",
+        "numItems": "1"
+      },
+      {
+        "itemName": "Q",
+        "numItems": "1"
+      },
+      {
+        "itemName": "R",
+        "numItems": "1"
+      },
     ],
     "valuation": [{
       "distribution": "GSVM18ValuationDistribution",
@@ -31,17 +99,68 @@
         "parameters": [100.0, 25.0]
       }],
       "items": [{
-          "itemName": "seed",
+          "itemName": "demand_query",
         },
         {
-            "itemName": "index",
-          },
+          "itemName": "reset",
+        },
         {
           "itemName": "position",
         },
-      {
-        "itemName": "1",
-      }
+        {
+          "itemName": "A",
+        },
+        {
+          "itemName": "B",
+        },
+        {
+          "itemName": "C",
+        },
+        {
+          "itemName": "D",
+        },
+        {
+          "itemName": "E",
+        },
+        {
+          "itemName": "F",
+        },
+        {
+          "itemName": "G",
+        },
+        {
+          "itemName": "H",
+        },
+        {
+          "itemName": "I",
+        },
+        {
+          "itemName": "J",
+        },
+        {
+          "itemName": "K",
+        },
+        {
+          "itemName": "L",
+        },
+        {
+          "itemName": "M",
+        },
+        {
+          "itemName": "N",
+        },
+        {
+          "itemName": "O",
+        },
+        {
+          "itemName": "P",
+        },
+        {
+          "itemName": "Q",
+        },
+        {
+          "itemName": "R",
+        },
       ],
     }],
     "endowment": [{
@@ -69,17 +188,68 @@
           "tCondition": "ClockAuctionTermination"
         },
         "items": [{
-            "itemName": "seed",
+            "itemName": "demand_query",
           },
           {
-            "itemName": "index",
+            "itemName": "reset",
           },
           {
             "itemName": "position",
           },
           {
-        "itemName": "1",
-      }
+            "itemName": "A",
+          },
+          {
+            "itemName": "B",
+          },
+          {
+            "itemName": "C",
+          },
+          {
+            "itemName": "D",
+          },
+          {
+            "itemName": "E",
+          },
+          {
+            "itemName": "F",
+          },
+          {
+            "itemName": "G",
+          },
+          {
+            "itemName": "H",
+          },
+          {
+            "itemName": "I",
+          },
+          {
+            "itemName": "J",
+          },
+          {
+            "itemName": "K",
+          },
+          {
+            "itemName": "L",
+          },
+          {
+            "itemName": "M",
+          },
+          {
+            "itemName": "N",
+          },
+          {
+            "itemName": "O",
+          },
+          {
+            "itemName": "P",
+          },
+          {
+            "itemName": "Q",
+          },
+          {
+            "itemName": "R",
+          },
         ],
       }]
     }]

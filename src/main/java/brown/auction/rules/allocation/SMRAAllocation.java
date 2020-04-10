@@ -1,5 +1,6 @@
 package brown.auction.rules.allocation;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -96,6 +97,35 @@ public class SMRAAllocation extends AbsRule implements IAllocationRule {
 			}
 		} else {
 			// auction over; search all rounds
+			List<List<ITradeMessage>> history = state.getTradeHistory();
+			double bestRev = 0.0;
+			Map<Integer, List<ICart>> bestAlloc = null;
+			for (int round = 0; round < history.size(); round++) {
+				if (history.get(round).isEmpty()) {
+					continue;
+				}
+				
+				double rev = 0.0;
+				Map<Integer, List<ICart>> alloc = new HashMap<>();
+				for (ITradeMessage msg : history.get(round)) {
+					if (msg.getAuctionID().intValue() == -2) {
+						int agent = msg.getAgentID().intValue();
+						alloc.putIfAbsent(agent, new ArrayList<>());
+						for (Map.Entry<ICart, Double> ent : msg.getBid().getBids().entrySet()) {
+							alloc.get(agent).add(ent.getKey());
+							rev += ent.getValue();
+						}
+					}
+				}
+				if (rev >= bestRev) {
+					bestRev = rev;
+					bestAlloc = alloc;
+				}
+			}
+			
+			if (bestAlloc != null) {
+				allocation = bestAlloc;
+			}
 		}
 		
 		state.setAllocation(allocation);

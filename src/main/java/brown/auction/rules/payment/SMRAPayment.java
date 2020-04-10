@@ -27,7 +27,7 @@ public class SMRAPayment implements IPaymentRule {
 			return;
 		}
 		
-		List<List<ITradeMessage>> tradeHistory = state.getTradeHistory();
+		List<List<ITradeMessage>> history = state.getTradeHistory();
 		List<IAccountUpdate> accountUpdates = new LinkedList<IAccountUpdate>();
 		
 		if (state.isOpen()) {
@@ -58,15 +58,27 @@ public class SMRAPayment implements IPaymentRule {
 				}
 			}
 			
-			Map<ICart, Double> cartPrices = new HashMap<>();
+			Map<String, Double> itemPrices = new HashMap<>();
 			for (Map.Entry<Integer, List<ICart>> ent : state.getAllocation().entrySet()) {
 				for (ICart cart : ent.getValue()) {
-					double price = 0;
 					for (IItem item : cart.getItems()) {
-						price += Math.max(p2.get(item.getName()), reserves.get(item.getName()));
+						double price = 0.0;
+						if (p1.containsKey(item.getName())) {
+							price = Math.max(p2.get(item.getName()), reserves.get(item.getName()));
+						} else {
+							// there were no bids. price is the same as last round.
+							for (IAccountUpdate upd : state.getPayments()) {
+								if (upd.getCart().containsItem(item.getName())) {
+									price = upd.getCost().doubleValue();
+									break;
+								}
+							}
+						}
+						ICart c = new Cart();
+						c.addToCart(item);
+						accountUpdates.add(new AccountUpdate(ent.getKey(), price, c));
+						itemPrices.put(item.getName(), price);
 					}
-					accountUpdates.add(new AccountUpdate(ent.getKey(), price, cart));
-					cartPrices.put(cart, price);
 				}
 			}
 			
@@ -79,17 +91,56 @@ public class SMRAPayment implements IPaymentRule {
 				cart.addToCart(new Item(ent.getKey()));
 				reserveBids.put(cart, ent.getValue());
 			}
-			tradeHistory.get(tradeHistory.size() - 1).add(new TradeMessage(-1, -1, -1, new OneSidedBidBundle(reserveBids)));
+			history.get(history.size() - 1).add(new TradeMessage(-1, -1, -1, new OneSidedBidBundle(reserveBids)));
 			for (Map.Entry<Integer, List<ICart>> ent : state.getAllocation().entrySet()) {
 				Map<ICart, Double> map = new HashMap<>();
 				for (ICart cart : ent.getValue()) {
-					map.put(cart, cartPrices.get(cart));
+					double price = 0.0;
+					for (IItem item : cart.getItems()) {
+						price += itemPrices.get(item.getName());
+					}
+					map.put(cart, price);
 				}
-				tradeHistory.get(tradeHistory.size() - 1).add(new TradeMessage(-1, ent.getKey(), -2, new OneSidedBidBundle(map)));
+				history.get(history.size() - 1).add(new TradeMessage(-1, ent.getKey(), -2, new OneSidedBidBundle(map)));
 			}
 		} else {
-			// last round. best round payment.
+			// auction over; search all rounds
+			double bestRev = 0.0;
+			Map<Integer, Double> bestPayment = null;
+			for (int round = 0; round < history.size(); round++) {
+				if (history.get(round).isEmpty()) {
+					continue;
+				}
+				
+				double rev = 0.0;
+				Map<Integer, Double> payment = new HashMap<>();
+				for (ITradeMessage msg : history.get(round)) {
+					if (msg.getAuctionID().intValue() == -2) {
+						int agent = msg.getAgentID().intValue();
+						payment.putIfAbsent(agent, 0.0);
+						for (Map.Entry<ICart, Double> ent : msg.getBid().getBids().entrySet()) {
+							rev += ent.getValue();
+							payment.put(agent, payment.get(agent) + ent.getValue());
+						}
+					}
+				}
+				System.out.println("ROUND: " + round + " REV: " + rev);
+				if (rev >= bestRev) {
+					bestRev = rev;
+					bestPayment = payment;
+				}
+			}
 			
+			if (bestPayment != null) {
+				for (Map.Entry<Integer, Double> ent : bestPayment.entrySet()) {
+					accountUpdates.add(new AccountUpdate(ent.getKey(), ent.getValue(), state.getAllocation().get(ent.getKey()).get(0)));
+				}
+			}
+			
+			// remove hacky entries from trade history
+			for (List<ITradeMessage> lst : history) {
+				lst.removeIf(message -> message.getAuctionID().intValue() < 0);
+			}
 		}
 		
 		state.setPayments(accountUpdates);
