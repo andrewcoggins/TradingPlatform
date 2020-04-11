@@ -134,6 +134,8 @@ public class OfflineSimulationManager implements ISimulationManager {
 		this.messageServer.stopMessageServer();
 		this.utilityManager.logFinalUtility("", this.privateToPublic,
 				this.idToName);
+		System.out.println();
+		this.utilityManager.logLeaderboard("", this.privateToPublic, this.idToName);
 	}
 
 	@Override
