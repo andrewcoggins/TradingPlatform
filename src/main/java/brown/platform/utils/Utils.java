@@ -16,8 +16,10 @@ import brown.communication.messages.ITradeRequestMessage;
 import brown.communication.messages.library.InformationMessage;
 import brown.communication.messages.library.SimulationReportMessage;
 import brown.communication.messages.library.TradeMessage;
+import brown.communication.messages.library.TradeRequestMessage;
 import brown.platform.accounting.IAccountUpdate;
 import brown.platform.accounting.library.AccountUpdate;
+import brown.platform.item.ICart;
 
 public class Utils {
 
@@ -51,7 +53,11 @@ public class Utils {
           oldMessage.getMessageID(), oldMessage.getAgentID(), newReports);
       return newMessage;
     } else if (message instanceof ITradeRequestMessage) {
-      return message;
+    	ITradeRequestMessage trMessage = (ITradeRequestMessage) message;
+    	IMarketPublicState publicState = trMessage.getState();
+    	IMarketPublicState newPublicState = sanitizeState(publicState, agentIDs);
+    	trMessage.addInformation(newPublicState);
+      return trMessage;
     }
 
     return message;
@@ -103,6 +109,13 @@ public class Utils {
           acctUpdate.getCart()));
     }
     newPublicState.setPayments(newAccountUpdates);
+    
+    // replace allocations
+    Map<Integer, List<ICart>> allocations = new HashMap<>();
+    for (Map.Entry<Integer, List<ICart>> ent : publicState.getAllocation().entrySet()) {
+    	allocations.put(agentIDs.get(ent.getKey()), ent.getValue());
+    }
+    newPublicState.setAllocation(allocations);
 
     return newPublicState;
   }

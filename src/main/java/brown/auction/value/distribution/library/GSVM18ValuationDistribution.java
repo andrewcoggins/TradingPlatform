@@ -41,7 +41,7 @@ public class GSVM18ValuationDistribution extends AbsValuationDistribution implem
 				break;
 			}
 		}
-		return new GSVM18Valuation(this.seed, index, this.populationID);
+		return new GSVM18Valuation(this.seed, index, this.populationID, agentID);
 	}
 
 }

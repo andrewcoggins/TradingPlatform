@@ -15,8 +15,8 @@ import brown.communication.messages.ITradeMessage;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 
-public class ClockAuctionTermination extends AbsRule implements ITerminationCondition {
-	private static final double LAMBDA = 4.0;
+public class SMRATermination extends AbsRule implements ITerminationCondition {
+	private static final double LAMBDA = 0.25;
 	private static final int MIN_END_ROUND = 30;
 	private static Integer END_ROUND = null;
 	
@@ -31,7 +31,19 @@ public class ClockAuctionTermination extends AbsRule implements ITerminationCond
 			return;
 		}
 		
-		if (messages.isEmpty()) {
+		boolean demand = false;
+		for (ITradeMessage msg : messages) {
+			for (ICart cart : msg.getBid().getBids().keySet()) {
+				if (cart.getItems().size() > 0) {
+					demand = true;
+					break;
+				}
+				if (demand) {
+					break;
+				}
+			}
+		}
+		if (!demand) {
 			state.close();
 			return;
 		}

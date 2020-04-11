@@ -181,11 +181,11 @@
         "marketRules": {
           "aRule": "SMRAAllocation",
           "pRule": "SMRAPayment",
-          "qRule": "CanadianSpectrumAuctionQuery",
+          "qRule": "SimpleOneSidedQuery",
           "actRule": "SMRAActivity",
           "irPolicy": "NonAnonymousPolicy",
           "innerIRPolicy": "SMRAInnerIR",
-          "tCondition": "ClockAuctionTermination"
+          "tCondition": "SMRATermination"
         },
         "items": [{
             "itemName": "demand_query",

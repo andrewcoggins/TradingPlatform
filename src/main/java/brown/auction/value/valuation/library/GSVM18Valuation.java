@@ -24,33 +24,57 @@ public class GSVM18Valuation implements ISpecificValuation {
 	private int index;
 	private long populationID;
 	private Set<String> dqResult;
+	private int agentID;
+	private static Map<Integer, Integer> idToPosition = new HashMap<>();
 	
 	public GSVM18Valuation() {
 		this.seed = 0;
 		this.index = 0;
 		this.populationID = 0;
 		this.dqResult = new HashSet<>();
+		this.agentID = -1;
 	}
 	
-	public GSVM18Valuation(int seed, int index, long populationID) {
+	public GSVM18Valuation(int seed, int index, long populationID, int agentID) {
 		this.seed = seed;
 		this.index = index;
 		this.populationID = populationID;
 		this.dqResult = new HashSet<>();
+		this.agentID = agentID;
+		this.getPosition();
 	}
-
-	@Override
-	public Double getValuation(ICart cart) {
+	
+	private GSVMBidder getBidder() {
 		GSVMBidder bidder;
 		try {
 			bidder = SATSUtil.restoreGSVM18Population(this.populationID).get(this.index);
 		} catch (Exception e) {
 			bidder = SATSUtil.createGSVM18Population(this.seed).get(this.index);
 		}
-		
-		if (cart.getItemByName("position") != null) {
-			return new Integer(bidder.getBidderPosition() + 1).doubleValue();
+		return bidder;
+	}
+	
+	private int getPosition() {
+		int pos = getBidder().getBidderPosition() + 1;
+		if (pos == 0) {
+			pos = 7;
 		}
+		idToPosition.put(this.agentID, pos);
+		return pos;
+	}
+	
+	public static Integer positionOf(int agentID) {
+		return idToPosition.get(agentID);
+	}
+
+	@Override
+	public Double getValuation(ICart cart) {
+		if (cart.getItemByName("position") != null) {
+			return new Integer(this.getPosition()).doubleValue();
+		}
+		
+
+		GSVMBidder bidder = this.getBidder();
 		
 		Map<Long, GSVMLicense> allGoods = SATSUtil.mapIDToGSVM18License(bidder.getWorld());
 		

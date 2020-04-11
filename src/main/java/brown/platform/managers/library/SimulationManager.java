@@ -1,5 +1,7 @@
 package brown.platform.managers.library;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -123,7 +125,7 @@ public class SimulationManager implements ISimulationManager {
 			for (int i = 0; i < numRuns; i++) {
 				for (int j = 0; j < this.simulations.size(); j++) {
 					this.setManagers(j);
-					this.setAgentGroupings();
+					this.setAgentGroupings(j);
 					for (int k = 0; k < this.numSimulationRuns.get(j); k++) {
 						this.runSingleSimulation(simulationDelayTime, learningDelayTime);
 					}
@@ -292,26 +294,41 @@ public class SimulationManager implements ISimulationManager {
 		}
 	}
 
-	private void setAgentGroupings() {
-		this.agentGroups = new LinkedList<List<Integer>>();
+	private void setAgentGroupings(int iteration) {
+		List<Integer> shuffledAgents = new ArrayList<>(privateToPublic.keySet());
+		Collections.shuffle(shuffledAgents);
+		
 		if (this.groupSize > 0) {
-			for (Integer agentID : privateToPublic.keySet()) {
-				List<List<Integer>> incompleteAgentGroups = this.agentGroups.stream()
-						.filter(list -> list.size() < this.groupSize).collect(Collectors.toList());
-				if (incompleteAgentGroups.size() > 0) {
-					List<Integer> incompleteGroup = incompleteAgentGroups.get(0);
-					this.agentGroups.remove(incompleteGroup);
-					incompleteGroup.add(agentID);
-					this.agentGroups.add(incompleteGroup);
-				} else {
-					List<Integer> incompleteGroup = new LinkedList<Integer>();
-					incompleteGroup.add(agentID);
-					this.agentGroups.add(incompleteGroup);
+			if (iteration % this.groupSize == 0) {
+				this.agentGroups = new LinkedList<List<Integer>>();
+				
+				for (Integer agentID : shuffledAgents) {
+					List<List<Integer>> incompleteAgentGroups = this.agentGroups.stream()
+							.filter(list -> list.size() < this.groupSize).collect(Collectors.toList());
+					if (incompleteAgentGroups.size() > 0) {
+						List<Integer> incompleteGroup = incompleteAgentGroups.get(0);
+						this.agentGroups.remove(incompleteGroup);
+						incompleteGroup.add(agentID);
+						this.agentGroups.add(incompleteGroup);
+					} else {
+						List<Integer> incompleteGroup = new LinkedList<Integer>();
+						incompleteGroup.add(agentID);
+						this.agentGroups.add(incompleteGroup);
+					}
+				}
+			} else {
+				for (List<Integer> group : this.agentGroups) {
+					if (group.size() > 1) {
+						Integer first = group.remove(0);
+						group.add(first);
+					}
 				}
 			}
+			
 		} else {
+			this.agentGroups = new LinkedList<List<Integer>>();
 			List<Integer> agentGroup = new LinkedList<Integer>();
-			for (Integer agentID : privateToPublic.keySet()) {
+			for (Integer agentID : shuffledAgents) {
 				agentGroup.add(agentID);
 			}
 			this.agentGroups.add(agentGroup);

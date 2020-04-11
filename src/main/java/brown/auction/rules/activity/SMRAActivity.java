@@ -10,6 +10,7 @@ import java.util.Set;
 
 import brown.auction.marketstate.IMarketState;
 import brown.auction.rules.IActivityRule;
+import brown.auction.value.valuation.library.GSVM18Valuation;
 import brown.communication.bid.IBidBundle;
 import brown.communication.bid.library.OneSidedBidBundle;
 import brown.communication.messages.ITradeMessage;
@@ -17,7 +18,7 @@ import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 
 public class SMRAActivity extends AbsActivity implements IActivityRule {
-	private static final double EPSILON = 2.5;
+	public static final double EPSILON = 2.5;
 
 	@Override
 	public void isAcceptable(IMarketState state, ITradeMessage aBid, List<ITradeMessage> currentBids, ICart items) {
@@ -33,6 +34,8 @@ public class SMRAActivity extends AbsActivity implements IActivityRule {
 			return;
 		}
 		
+		int numItems = 0;
+		
 		Map<ICart, Double> carts = bundle.getBids();
 		state.setAcceptable(true);
 		for (ICart cart : carts.keySet()) {
@@ -43,6 +46,7 @@ public class SMRAActivity extends AbsActivity implements IActivityRule {
 			
 			// all items are size 1 and bids are over the reserve.
 			for (IItem item : cart.getItems()) {
+				numItems++;
 				if (item.getItemCount() != 1) {
 					state.setAcceptable(false);
 					return;
@@ -58,6 +62,12 @@ public class SMRAActivity extends AbsActivity implements IActivityRule {
 					return;
 				}
 			}
+		}
+		
+		Integer pos = GSVM18Valuation.positionOf(agent);
+		if (pos == null || pos.intValue() < 1 || pos.intValue() > 7 || (pos.intValue() != 7 && numItems > 4) || numItems > 12) {
+			state.setAcceptable(false);
+			return;
 		}
 		
 		// revealed preference rule

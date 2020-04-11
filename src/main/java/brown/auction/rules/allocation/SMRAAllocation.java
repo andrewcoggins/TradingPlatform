@@ -63,6 +63,16 @@ public class SMRAAllocation extends AbsRule implements IAllocationRule {
 		
 		Map<Integer, List<ICart>> allocation = new HashMap<>();
 		
+		Map<Integer, List<ICart>> oldAllocation = state.getAllocation();
+		Map<IItem, Integer> oldAllocByItem = new HashMap<>();
+		for (Map.Entry<Integer, List<ICart>> ent : oldAllocation.entrySet()) {
+			for (ICart cart : ent.getValue()) {
+				for (IItem item : cart.getItems()) {
+					oldAllocByItem.put(item, ent.getKey());
+				}
+			}
+		}
+		
 		if (state.isOpen()) {
 			// not last round; tentative
 			Map<IItem, Integer> alloc = new HashMap<>();
@@ -89,11 +99,17 @@ public class SMRAAllocation extends AbsRule implements IAllocationRule {
 			}
 			
 			Set<Integer> allocatedAgents = new HashSet<>(alloc.values());
+			allocatedAgents.addAll(oldAllocation.keySet());
 			for (Integer agent : allocatedAgents) {
 				allocation.put(agent, Lists.newArrayList(new Cart()));
 			}
 			for (Map.Entry<IItem, Integer> ent : alloc.entrySet()) {
 				allocation.get(ent.getValue()).get(0).addToCart(ent.getKey());
+			}
+			for (Map.Entry<IItem, Integer> ent : oldAllocByItem.entrySet()) {
+				if (!alloc.containsKey(ent.getKey())) {
+					allocation.get(ent.getValue()).get(0).addToCart(ent.getKey());
+				}
 			}
 		} else {
 			// auction over; search all rounds

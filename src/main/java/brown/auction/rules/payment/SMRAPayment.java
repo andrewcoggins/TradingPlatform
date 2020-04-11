@@ -124,7 +124,6 @@ public class SMRAPayment implements IPaymentRule {
 						}
 					}
 				}
-				System.out.println("ROUND: " + round + " REV: " + rev);
 				if (rev >= bestRev) {
 					bestRev = rev;
 					bestPayment = payment;
