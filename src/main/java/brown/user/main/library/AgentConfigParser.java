@@ -26,7 +26,7 @@ public class AgentConfigParser implements IAgentConfigParser {
       InstantiationException, IllegalAccessException, IllegalArgumentException,
       InvocationTargetException {
 
-    Object rawInput = new JSONParser().parse(new FileReader(fileName));
+    Object rawInput = new JSONParser().parse(new FileReader(this.getClass().getClassLoader().getResource(fileName).getPath()));
 
     JSONObject jo = (JSONObject) rawInput;
     JSONArray ja = (JSONArray) jo.get("agents");

@@ -8,11 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.spectrumauctions.sats.core.model.gsvm.GSVMLicense;
-
 import brown.communication.messages.ITradeMessage;
-import brown.platform.item.library.DemandSet;
-import brown.system.setup.library.Setup;
 import brown.user.agent.IAgent;
 
 public class Tier1SpectrumAuctionAgent extends AbsSpectrumAuctionAgent implements IAgent {
