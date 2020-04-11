@@ -3,6 +3,7 @@ package brown.user.main.library;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -26,7 +27,7 @@ public class AgentConfigParser implements IAgentConfigParser {
       InstantiationException, IllegalAccessException, IllegalArgumentException,
       InvocationTargetException {
 
-    Object rawInput = new JSONParser().parse(new FileReader(this.getClass().getClassLoader().getResource(fileName).getPath()));
+    Object rawInput = new JSONParser().parse(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));
 
     JSONObject jo = (JSONObject) rawInput;
     JSONArray ja = (JSONArray) jo.get("agents");

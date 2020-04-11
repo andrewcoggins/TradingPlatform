@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
@@ -48,7 +49,7 @@ public class ServerConfigParser implements IServerConfigParser {
       InvocationTargetException {
     Object rawInput;
 	try {
-		rawInput = new JSONParser().parse(new FileReader(this.getClass().getClassLoader().getResource(fileName).getPath()));
+		rawInput = new JSONParser().parse(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));
 	} catch (IOException | ParseException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -659,7 +660,7 @@ public class ServerConfigParser implements IServerConfigParser {
   @Override
   public Map<String, Integer> parseServerConfigParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException {
-    Object rawInput = new JSONParser().parse(new FileReader(this.getClass().getClassLoader().getResource(fileName).getPath()));
+    Object rawInput = new JSONParser().parse(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));
 
     JSONObject jo = (JSONObject) rawInput;
 
@@ -689,7 +690,7 @@ public class ServerConfigParser implements IServerConfigParser {
   @Override
   public Map<String, Double> parseServerConfigDoubleParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException {
-    Object rawInput = new JSONParser().parse(new FileReader(this.getClass().getClassLoader().getResource(fileName).getPath()));
+    Object rawInput = new JSONParser().parse(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));
 
     JSONObject jo = (JSONObject) rawInput;
     Map<String, Double> outerParams = new HashMap<String, Double>();
