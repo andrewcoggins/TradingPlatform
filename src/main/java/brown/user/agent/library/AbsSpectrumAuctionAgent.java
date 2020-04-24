@@ -58,6 +58,7 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 
 	@Override
 	public void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage) {
+		synchronized (this) {
 		this.auctionID = tradeRequestMessage.getAuctionID();
 		
 		// set minBids
@@ -67,9 +68,11 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 		reserves.remove("position");
 		
 		Map<String, Double> minBids = new HashMap<>();
-		reserves.entrySet().stream()
-			.filter(ent -> this.isEligible(ent.getKey()))
-			.forEach(ent -> minBids.put(ent.getKey(), ent.getValue()));
+		for (Map.Entry<String, Double> ent : reserves.entrySet()) {
+			if (this.isEligible(ent.getKey())) {
+				minBids.put(ent.getKey(), ent.getValue());
+			}
+		}
 		
 		this.parseAllocation(tradeRequestMessage.getState());
 		
@@ -86,6 +89,7 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 		this.allReserves.add(reserves);
 		
 		this.round++;
+		}
 	}
 	
 	protected abstract void onAuctionStart();
@@ -95,6 +99,7 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 
 	@Override
 	public void onValuationMessage(IValuationMessage valuationMessage) {
+		synchronized (this) {
 		this.valuation = valuationMessage.getValuation();
 		
 		// get position
@@ -109,10 +114,12 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 		this.round = 0;
 		
 		this.onAuctionStart();
+		}
 	}
 
 	@Override
 	public void onSimulationReportMessage(ISimulationReportMessage simReportMessage) {
+		synchronized (this) {
 		Map<Integer, Set<String>> alloc = new HashMap<>();
 		Map<Integer, Double> payments = new HashMap<>();
 		
@@ -133,6 +140,7 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 		}
 		
 		this.onAuctionEnd(alloc, payments, state.getTradeHistory());
+		}
 	}
 	
 	protected double getValuation(Collection<String> goods) {
