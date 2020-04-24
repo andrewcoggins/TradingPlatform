@@ -62,7 +62,7 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 		this.auctionID = tradeRequestMessage.getAuctionID();
 		
 		// set minBids
-		Map<String, Double> reserves = tradeRequestMessage.getState().getReserves();
+		Map<String, Double> reserves = new HashMap<>(tradeRequestMessage.getState().getReserves());
 		reserves.remove("demand_query");
 		reserves.remove("reset");
 		reserves.remove("position");
