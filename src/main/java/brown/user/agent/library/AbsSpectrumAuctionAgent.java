@@ -66,6 +66,8 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 			reserves.remove("demand_query");
 			reserves.remove("reset");
 			reserves.remove("position");
+			
+			this.allReserves.add(reserves);
 
 			Map<String, Double> minBids = new HashMap<>();
 			for (Map.Entry<String, Double> ent : reserves.entrySet()) {
@@ -87,11 +89,13 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 					.sendMessage(new TradeMessage(0, this.agentBackend.getPrivateID(), this.auctionID, bundle));
 
 			this.allBids.add(bids.keySet());
-			this.allReserves.add(reserves);
 
 			this.round++;
 		}
-
+	}
+	
+	protected Map<String, Double> getAllMinBids() {
+		return Collections.unmodifiableMap(new HashMap<>(this.allReserves.get(this.allReserves.size() - 1)));
 	}
 
 	protected abstract void onAuctionStart();
