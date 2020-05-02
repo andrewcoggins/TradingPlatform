@@ -2,6 +2,7 @@ package brown.auction.rules.allocation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -78,7 +79,9 @@ public class SMRAAllocation extends AbsRule implements IAllocationRule {
 			Map<IItem, Integer> alloc = new HashMap<>();
 			Map<IItem, Double> highest = new HashMap<>();
 			Map<String, Double> reserve = state.getReserves();
-			for (ITradeMessage message : messages) {
+			List<ITradeMessage> msgs = new ArrayList<>(messages);
+			Collections.shuffle(msgs);
+			for (ITradeMessage message : msgs) {
 				int agent = message.getAgentID().intValue();
 				for (Map.Entry<ICart, Double> ent : message.getBid().getBids().entrySet()) {
 					ICart cart = ent.getKey();
