@@ -38,6 +38,7 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 	private Set<String> allocation;
 	private List<Set<String>> allBids;
 	private List<Map<String, Double>> allReserves;
+	private Map<Integer, Integer> privateToPublic; // definitely needs fixing next year. server not sanitizing.
 
 	public AbsSpectrumAuctionAgent(String name) {
 		super(name);
@@ -49,6 +50,7 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 		this.allocation = new HashSet<>();
 		this.allBids = new LinkedList<>();
 		this.allReserves = new LinkedList<>();
+		this.privateToPublic = new HashMap<>();
 	}
 
 	@Override
@@ -126,6 +128,50 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 			this.onAuctionStart();
 		}
 	}
+	
+	private List<List<ITradeMessage>> sanitize(Map<Integer, Set<String>> allocations, Map<Integer, Double> payments,
+			List<List<ITradeMessage>> tradeHistory) {
+		Map<Integer, Integer> p = new HashMap<>(this.privateToPublic);
+		Map<Integer, Integer> r = new HashMap<>();
+		for (List<ITradeMessage> msgs : tradeHistory) {
+			for (ITradeMessage msg : msgs) {
+				if (!p.containsKey(msg.getAgentID())) {
+					p.put(msg.getAgentID(), p.size());
+					r.put(r.size(), msg.getAgentID());
+				}
+			}
+		}
+		
+		if (r.containsKey(this.agentBackend.getPublicID())) {
+			Integer pr = r.get(this.agentBackend.getPublicID());
+			p.put(pr, p.size());
+			p.put(this.agentBackend.getPrivateID(), this.agentBackend.getPublicID());
+		}
+		
+		this.privateToPublic = p;
+		
+		List<List<ITradeMessage>> hist = new ArrayList<>(tradeHistory.size());
+		for (List<ITradeMessage> msgs : tradeHistory) {
+			hist.add(new ArrayList<>(msgs.size()));
+			for (ITradeMessage msg : msgs) {
+				if (p.containsKey(msg.getAgentID())) {
+					hist.get(hist.size() - 1).add(new TradeMessage(msg.getMessageID(), p.get(msg.getAgentID()), msg.getCorrespondingMessageID(), msg.getAuctionID(), msg.getBid()));
+				}
+			}
+		} 
+		
+		for (Integer i : new ArrayList<Integer>(allocations.keySet())) {
+			allocations.put(p.get(i), allocations.get(i));
+			allocations.remove(i);
+		}
+		
+		for (Integer i : new ArrayList<Integer>(payments.keySet())) {
+			payments.put(p.get(i), payments.get(i));
+			payments.remove(i);
+		}
+		
+		return hist;
+	}
 
 	@Override
 	public void onSimulationReportMessage(ISimulationReportMessage simReportMessage) {
@@ -148,8 +194,10 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 				payments.putIfAbsent(upd.getTo(), 0.0);
 				payments.put(upd.getTo(), payments.get(upd.getTo()) + upd.getCost());
 			}
+			
+			List<List<ITradeMessage>> hist = this.sanitize(alloc, payments, state.getTradeHistory());
 
-			this.onAuctionEnd(alloc, payments, state.getTradeHistory());
+			this.onAuctionEnd(alloc, payments, hist);
 		}
 	}
 
@@ -305,7 +353,7 @@ public abstract class AbsSpectrumAuctionAgent extends AbsAgent implements IAgent
 	private void parseAllocation(IMarketPublicState state) {
 		Map<Integer, List<ICart>> allocations = new HashMap<>(state.getAllocation());
 		Set<String> alloc = new HashSet<>();
-		for (ICart cart : allocations.getOrDefault(this.agentBackend.getPublicID(), new ArrayList<>())) {
+		for (ICart cart : allocations.getOrDefault(this.agentBackend.getPrivateID(), new ArrayList<>())) {
 			for (IItem item : cart.getItems()) {
 				alloc.add(item.getName());
 			}
