@@ -2,7 +2,7 @@
   "name": "GVSM18_SMRA",
   "startingDelayTime": 30,
   "simulationDelayTime": 2.5,
-  "numTotalRuns": 14,
+  "numTotalRuns": 7,
   "serverPort": 5000,
   "simulation": [{
     "numRuns": 1,
