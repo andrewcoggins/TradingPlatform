@@ -25,6 +25,9 @@ public class SMRAActivity extends AbsActivity implements IActivityRule {
 		// check that the submitted bid is greater than or equal to the reserve for
 		// that agent (they should all be the same here).
 		Map<String, Double> reserves = state.getReserves();
+		if (reserves != null) {
+			reserves = new HashMap<>(reserves);
+		}
 		
 		int agent = aBid.getAgentID();
 
@@ -52,7 +55,7 @@ public class SMRAActivity extends AbsActivity implements IActivityRule {
 					return;
 				}
 				
-				if (reserves.containsKey(item.getName())) {
+				if (reserves != null && reserves.containsKey(item.getName())) {
 					if (carts.get(cart) < reserves.get(item.getName())) {
 						state.setAcceptable(false);
 						return;
