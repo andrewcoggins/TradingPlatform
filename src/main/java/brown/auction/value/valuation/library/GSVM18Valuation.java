@@ -101,11 +101,23 @@ public class GSVM18Valuation implements ISpecificValuation {
 			}
 		}
 		
-		Bundle<GSVMLicense> bundle = new Bundle<>();
-		for (IItem good : cart.getItems()) {
-			bundle.add(allGoods.get(SATSUtil.ITEM_TO_GSVM_ID.get(good.getName())));
+//		Bundle<GSVMLicense> bundle = new Bundle<>();
+//		for (IItem good : cart.getItems()) {
+//			bundle.add(allGoods.get(SATSUtil.ITEM_TO_GSVM_ID.get(good.getName())));
+//		}
+//		return bidder.calculateValue(bundle).doubleValue();
+		
+		if (cart.getItems().size() == 0) {
+			return 0.0;
 		}
-		return bidder.calculateValue(bundle).doubleValue();
+		
+		double sum = 0.0;
+		for (IItem good : cart.getItems()) {
+			Bundle<GSVMLicense> bundle = new Bundle<>();
+			bundle.add(allGoods.get(SATSUtil.ITEM_TO_GSVM_ID.get(good.getName())));
+			sum += bidder.calculateValue(bundle).doubleValue();
+		}
+		return sum * Math.pow(1.2, cart.getItems().size() - 1);
 	}
 
 }
