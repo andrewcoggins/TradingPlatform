@@ -24,7 +24,6 @@ public abstract class AbsAgent implements IAgent {
   protected IBankUpdateMessage initialEndowment; 
   protected IAgentBackend agentBackend; 
   
-  
   public AbsAgent(String name) {
     this.name = name; 
     this.money = 0.0; 

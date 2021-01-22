@@ -61,7 +61,6 @@ public class OfflineSimulationManager implements ISimulationManager {
 	private int agentCount;
 	
 	private IAgentManager agentManager; 
-	
 	private IMarketManager currentMarketManager;
 	private IAccountManager currentAccountManager;
 	private IEndowmentManager currentEndowmentManager;
@@ -233,7 +232,7 @@ public class OfflineSimulationManager implements ISimulationManager {
 	private void waitForMessages() {
 		synchronized (this) {
 			while (!this.messageServer.ready()) {
-				try { 
+				try {
 					wait();
 				} catch (InterruptedException e) {
 					e.printStackTrace();

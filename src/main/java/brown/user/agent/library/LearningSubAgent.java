@@ -1,10 +1,4 @@
-package brown.user.agent.learningagent.library;
-
-public class LearningSubAgent {
-
-
-  
-}
+//package brown.user.agent.library;
 //
 //
 //import java.util.HashMap;
@@ -28,20 +22,18 @@ public class LearningSubAgent {
 //import brown.platform.item.library.Cart;
 //import brown.platform.item.library.Item;
 //import brown.system.setup.ISetup;
-//import brown.user.agent.IAgentBackend;
-//import brown.user.agent.library.OnlineAgentBackend;
+//import brown.user.agent.IAgent;
 //
-//public class LearningSubAgent extends OnlineAgentBackend implements IAgentBackend {
+//public class LearningSubAgent extends AbsAgent implements IAgent {
 //
 //    
 //  private IValuationMessage initialValuation; 
-//  // TODO: 
 //  private IBankUpdateMessage initialEndowment; 
 //  
 //  private IGeneralValuation agentValuation; 
 //  
 //  public LearningSubAgent(String host, int port, ISetup gameSetup, IValuationMessage valuation, IBankUpdateMessage endowment) {
-//    super(host, port, gameSetup);
+//    super("");
 //    this.initialValuation = valuation; 
 //    this.initialEndowment = endowment; 
 //  }
@@ -57,13 +49,12 @@ public class LearningSubAgent {
 //  public void onInformationMessage(IInformationMessage informationMessage) {
 //    UserLogging.log("[+] Simulation Json File Name: " + this.simulationJsonFileName); 
 //    UserLogging.log("[+] Information Message Received");
-//    UserLogging.log("OUTER VALUATION ON THE INSIDE");
 //    UserLogging.log(informationMessage); 
 //  }
 //
 //  @Override
 //  public void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage) {
-////    UserLogging.log("[+] Trade Request Message Received"); 
+//    UserLogging.log("[+] Trade Request Message Received"); 
 //    
 //    Map<ICart, Double> bidMap = new HashMap<ICart, Double>(); 
 //    List<IItem> bidItems = new LinkedList<IItem>(); 
@@ -73,15 +64,15 @@ public class LearningSubAgent {
 //    ICart bidCart = new Cart(bidItems); 
 //    bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
 //    IBidBundle oneSided = new OneSidedBidBundle(bidMap);
-//    ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getAuctionID(), oneSided);
+//    ITradeMessage tradeMessage = new TradeMessage(0, this.getAgentBackend().getPrivateID(), tradeRequestMessage.getAuctionID(), oneSided);
 //    UserLogging.log(tradeMessage); 
 //    this.CLIENT.sendTCP(tradeMessage); 
 //  }
 //
 //  @Override
 //  public void onValuationMessage(IValuationMessage valuationMessage) {
-////    UserLogging.log("[+] Valuation Message Received");
-////    UserLogging.log(valuationMessage.toString()); 
+//    UserLogging.log("[+] Valuation Message Received");
+//    UserLogging.log(valuationMessage.toString()); 
 //    this.agentValuation = this.initialValuation.getValuation(); 
 //  }
 //
@@ -89,10 +80,8 @@ public class LearningSubAgent {
 //  public void
 //      onSimulationReportMessage(ISimulationReportMessage simReportMessage) {
 //    // TODO: update learning data structure. 
-////    UserLogging.log("THE AGENT WILL LEARN HERE."); 
-////    System.out.println(simReportMessage); 
-////    
-//    // TODO: save and/or update JSON file. 
+//    UserLogging.log("THE AGENT WILL LEARN HERE."); 
+//    System.out.println(simReportMessage); 
 //    
 //  }
 //

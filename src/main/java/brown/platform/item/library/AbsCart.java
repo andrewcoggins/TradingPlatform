@@ -1,5 +1,6 @@
 package brown.platform.item.library;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -70,6 +71,8 @@ public abstract class AbsCart implements ICart {
       for (IItem anItem : this.items) {
         if (anItem.getName().equals(item.getName())) {
           anItem.removeItemCount(item.getItemCount());
+    	  this.itemMap.remove(anItem.getName());
+    	  this.items.remove(anItem);
           break; 
         }
       } 

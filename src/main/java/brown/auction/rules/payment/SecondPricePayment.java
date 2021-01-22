@@ -66,6 +66,7 @@ public class SecondPricePayment extends AbsRule implements IPaymentRule {
       }
     }
     
+    System.out.println("PAYMENTS: " + accountUpdates);
     state.setPayments(accountUpdates);
   }
 }

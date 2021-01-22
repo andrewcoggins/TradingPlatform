@@ -1,5 +1,6 @@
 package brown.user.agent;
 
+import brown.communication.messages.IAgentToServerMessage;
 import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ISimulationReportMessage;
@@ -49,6 +50,6 @@ public interface IAgent {
    * Get Agent's Name
    * @return
    */
-  public String getAgentName(); 
+  public String getAgentName();
   
 }
