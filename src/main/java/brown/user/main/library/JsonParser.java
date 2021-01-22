@@ -3,6 +3,7 @@ package brown.user.main.library;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -44,7 +45,7 @@ public class JsonParser implements IJsonParser {
       ClassNotFoundException, NoSuchMethodException, SecurityException,
       InstantiationException, IllegalAccessException, IllegalArgumentException,
       InvocationTargetException {
-    Object rawInput = new JSONParser().parse(new FileReader(fileName));
+    Object rawInput = new JSONParser().parse(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));
 
     JSONObject jo = (JSONObject) rawInput;
     JSONArray ja = (JSONArray) jo.get("simulation");
@@ -650,7 +651,7 @@ public class JsonParser implements IJsonParser {
   @Override
   public Map<String, Integer> parseJSONOuterParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException {
-    Object rawInput = new JSONParser().parse(new FileReader(fileName));
+    Object rawInput = new JSONParser().parse(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));
 
     JSONObject jo = (JSONObject) rawInput;
 
@@ -677,7 +678,7 @@ public class JsonParser implements IJsonParser {
   @Override
   public Map<String, Double> parseJSONDoubleParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException {
-    Object rawInput = new JSONParser().parse(new FileReader(fileName));
+    Object rawInput = new JSONParser().parse(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));
 
     JSONObject jo = (JSONObject) rawInput;
     Map<String, Double> outerParams = new HashMap<String, Double>();

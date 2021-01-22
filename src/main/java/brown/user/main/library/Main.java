@@ -49,15 +49,19 @@ public class Main {
     Map<String, Double> doubleParams =
         jsonParser.parseJSONDoubleParameters(fileName);
     Integer startingDelayTime = outerParams.get("startingDelayTime");
-    Integer learningDelayTime = outerParams.get("learningDelayTime");
+    Integer learningDelayTime = outerParams.get("learningDelayTime"); 
     Double simulationDelayTime = doubleParams.get("simulationDelayTime");
     Integer numTotalRuns = outerParams.get("numTotalRuns");
     Integer serverPort = outerParams.get("serverPort");
     boolean offlineMode = outerParams.get("offlineMode") == 0; 
     ConfigRun configRun = new ConfigRun(configs);
+<<<<<<< HEAD
     System.out.println(learningDelayTime); 
     configRun.run(startingDelayTime, simulationDelayTime, learningDelayTime,
         numTotalRuns, serverPort, fileName, offlineMode);
+=======
+    configRun.run(startingDelayTime, simulationDelayTime, learningDelayTime, numTotalRuns, serverPort, fileName);
+>>>>>>> master
   }
 
 }

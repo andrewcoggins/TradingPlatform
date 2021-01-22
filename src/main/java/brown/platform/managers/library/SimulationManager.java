@@ -1,5 +1,7 @@
 package brown.platform.managers.library;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -176,7 +178,7 @@ public class SimulationManager implements ISimulationManager {
     }
     updateAuctions();
   }
-
+  
   @Override
   public Map<Integer, Integer> getAgentIDs() {
     return this.privateToPublic;
@@ -293,7 +295,7 @@ public class SimulationManager implements ISimulationManager {
         for (String itemName : specificDistribution.getItemNames()) {
           specificItems.add(new Item(itemName));
         }
-        specificValuationMap.put(specificItems, specificDistribution.sample());
+        specificValuationMap.put(specificItems, specificDistribution.sample(agentID, this.agentGroups));
       }
 
       this.currentValuationManager.addAgentValuation(agentID,
@@ -314,8 +316,10 @@ public class SimulationManager implements ISimulationManager {
 
   private void setAgentGroupings() {
     this.agentGroups = new LinkedList<List<Integer>>();
+    List<Integer> ids = new ArrayList<>(privateToPublic.keySet());
+    Collections.shuffle(ids);
     if (this.groupSize > 0) {
-      for (Integer agentID : privateToPublic.keySet()) {
+      for (Integer agentID : ids) {
         List<List<Integer>> incompleteAgentGroups = this.agentGroups.stream()
             .filter(list -> list.size() < this.groupSize)
             .collect(Collectors.toList());
@@ -332,7 +336,7 @@ public class SimulationManager implements ISimulationManager {
       }
     } else {
       List<Integer> agentGroup = new LinkedList<Integer>();
-      for (Integer agentID : privateToPublic.keySet()) {
+      for (Integer agentID : ids) {
         agentGroup.add(agentID);
       }
       this.agentGroups.add(agentGroup);

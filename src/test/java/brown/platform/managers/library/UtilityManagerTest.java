@@ -72,7 +72,7 @@ public class UtilityManagerTest {
     gen.add(new NormalValGenerator(valParams));
     IValuationDistribution valDist =
         new AdditiveValuationDistribution(new Cart(agentItems), gen);
-    ISpecificValuation valuation = valDist.sample();
+    ISpecificValuation valuation = valDist.sample(0, null);
 
     valOne.put(agentItems, valuation);
     valTwo.put(agentItems, valuation);

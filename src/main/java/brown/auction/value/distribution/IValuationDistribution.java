@@ -14,7 +14,7 @@ public interface IValuationDistribution {
    * samples IValuations from a distribution
    * @return IValuation
    */
-  public ISpecificValuation sample();
+  public ISpecificValuation sample(Integer agentID, List<List<Integer>> agentGroups);
   
   public List<String> getItemNames();
   

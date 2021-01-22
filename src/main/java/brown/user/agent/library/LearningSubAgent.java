@@ -1,5 +1,6 @@
 package brown.user.agent.library;
 
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 import brown.auction.value.valuation.IGeneralValuation;
 import brown.communication.bid.IBidBundle;
 import brown.communication.bid.library.OneSidedBidBundle;
+import brown.communication.messages.IBankUpdateMessage;
 import brown.communication.messages.IInformationMessage;
 import brown.communication.messages.ISimulationReportMessage;
 import brown.communication.messages.ITradeMessage;
@@ -20,35 +22,39 @@ import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
 import brown.platform.item.library.Item;
 import brown.system.setup.ISetup;
-import brown.system.setup.library.Setup;
 import brown.user.agent.IAgent;
 
-/**
- * an honest agent... bids their valuation. What else is an honest agent to do? 
- * @author andrewcoggins
- *
- */
-public class SimpleAgent extends AbsOnlineAgent implements IAgent {
+public class LearningSubAgent extends AbsAgent implements IAgent {
 
+    
+  private IValuationMessage initialValuation; 
+  private IBankUpdateMessage initialEndowment; 
+  
   private IGeneralValuation agentValuation; 
   
-  public SimpleAgent(String host, int port, ISetup gameSetup) {
+  public LearningSubAgent(String host, int port, ISetup gameSetup, IValuationMessage valuation, IBankUpdateMessage endowment) {
     super(host, port, gameSetup);
+    this.initialValuation = valuation; 
+    this.initialEndowment = endowment; 
   }
   
-  public SimpleAgent(String host, int port, ISetup gameSetup, String name) {
+  public LearningSubAgent(String host, int port, ISetup gameSetup, String name, IValuationMessage valuation, IBankUpdateMessage endowment) {
     super(host, port, gameSetup, name);
+    this.initialValuation = valuation; 
+    this.initialEndowment = endowment; 
   }
-
+  
+  
   @Override
   public void onInformationMessage(IInformationMessage informationMessage) {
     UserLogging.log("[+] Simulation Json File Name: " + this.simulationJsonFileName); 
     UserLogging.log("[+] Information Message Received");
+    UserLogging.log(informationMessage); 
   }
 
   @Override
   public void onTradeRequestMessage(ITradeRequestMessage tradeRequestMessage) {
-//    UserLogging.log("[+] Trade Request Message Received"); 
+    UserLogging.log("[+] Trade Request Message Received"); 
     
     Map<ICart, Double> bidMap = new HashMap<ICart, Double>(); 
     List<IItem> bidItems = new LinkedList<IItem>(); 
@@ -59,27 +65,23 @@ public class SimpleAgent extends AbsOnlineAgent implements IAgent {
     bidMap.put(bidCart, agentValuation.getValuation(bidCart)); 
     IBidBundle oneSided = new OneSidedBidBundle(bidMap);
     ITradeMessage tradeMessage = new TradeMessage(0, this.ID, tradeRequestMessage.getAuctionID(), oneSided);
-//    UserLogging.log(tradeMessage); 
+    UserLogging.log(tradeMessage); 
     this.CLIENT.sendTCP(tradeMessage); 
   }
 
   @Override
   public void onValuationMessage(IValuationMessage valuationMessage) {
-//    UserLogging.log("[+] Valuation Message Received");
-//    UserLogging.log(valuationMessage.toString()); 
-    this.agentValuation = valuationMessage.getValuation(); 
-  }
-  
-  public static void main(String[] args) {
-    new SimpleAgent("localhost", 2121, new Setup(), "solo"); 
-    new SimpleAgent("localhost", 2121, new Setup(), "pacifica"); 
-    while(true) {}
+    UserLogging.log("[+] Valuation Message Received");
+    UserLogging.log(valuationMessage.toString()); 
+    this.agentValuation = this.initialValuation.getValuation(); 
   }
 
   @Override
   public void
-      onSimulationReportMessage(ISimulationReportMessage reportMessage) {
-    System.out.println(reportMessage); 
+      onSimulationReportMessage(ISimulationReportMessage simReportMessage) {
+    // TODO: update learning data structure. 
+    UserLogging.log("THE AGENT WILL LEARN HERE."); 
+    System.out.println(simReportMessage); 
     
   }
 

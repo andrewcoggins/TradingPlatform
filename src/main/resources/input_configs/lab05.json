@@ -1,0 +1,95 @@
+{
+  "name": "testParse",
+  "startingDelayTime": 10,
+  "simulationDelayTime": 0.5,
+  "learningDelayTime": 0,
+  "numTotalRuns": 100,
+  "simulation": [{
+    "groupSize": 3,
+    "numRuns": 1,
+    "items": [{
+        "itemName": "A",
+        "numItems": "1"
+      },
+      {
+        "itemName": "B",
+        "numItems": "1"
+      },
+      {
+        "itemName": "C",
+        "numItems": "1"
+      },
+      {
+        "itemName": "D",
+        "numItems": "1"
+      },
+      {
+          "itemName": "learning",
+          "numItems": "0"
+      }
+    ],
+    "valuation": [{
+      "distribution": "Lab05ValuationDistribution",
+      "generator": [{
+        "name": "NormalValGenerator",
+        "parameters": [0.0, 1.0]
+      }],
+      "items": [{
+          "itemName": "A"
+        },
+        {
+          "itemName": "B"
+        },
+        {
+          "itemName": "C"
+        },
+        {
+          "itemName": "D"
+        },
+        {
+          "itemName": "learning"
+        }
+      ]
+    }],
+    "endowment": [{
+      "distribution": "IndependentEndowmentDist",
+      "generator": [{
+          "name": "ConcreteValGenerator",
+          "parameters": [0.0]
+        },
+        {
+          "name": "ConcreteValGenerator",
+          "parameters": [0.0]
+        },
+      ],
+      "items": [
+      ],
+    }],
+    "seqMarket": [{
+      "simMarket": [{
+          "marketRules": {
+            "aRule": "CombinedSingleItemBidHighestPriceAllocation",
+            "pRule": "CombinedSingleItemBidSecondPricePayment",
+            "qRule": "SimpleOneSidedQuery",
+            "actRule": "SimpleOneShotActivity",
+            "irPolicy": "AnonymousPolicy",
+            "innerIRPolicy": "NoInnerIR",
+            "tCondition": "OneShotTermination"
+          },
+          "items": [{
+            "itemName": "A"
+          },
+          {
+            "itemName": "B"
+          },
+          {
+            "itemName": "C"
+          },
+          {
+            "itemName": "D"
+          }]
+        }
+      ]
+    }]
+  }]
+}
