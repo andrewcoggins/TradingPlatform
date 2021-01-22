@@ -26,7 +26,7 @@ import brown.user.agent.library.localbid.IBidVector;
 import brown.user.agent.library.localbid.ILinearPrices;
 import brown.user.agent.library.localbid.LinearPrices;
 
-public abstract class AbsGVSM9Agent extends AbsAgent implements IAgent {
+public abstract class AbsGVSM9Agent extends AbsOnlineAgent implements IAgent {
 	private int agentType;
 	private IGeneralValuation valuation;
 	private Integer auctionID;

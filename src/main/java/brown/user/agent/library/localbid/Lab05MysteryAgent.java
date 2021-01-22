@@ -8,18 +8,14 @@ import brown.communication.messages.library.TradeMessage;
 import brown.platform.item.ICart;
 import brown.platform.item.IItem;
 import brown.platform.item.library.Cart;
-import brown.platform.item.library.Item;
 import brown.system.setup.ISetup;
 import brown.user.agent.IAgent;
-import brown.user.agent.library.AbsAgent;
+import brown.user.agent.library.AbsOnlineAgent;
 import brown.user.agent.library.localbid.IBidVector;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.*;
 
-public class Lab05MysteryAgent extends AbsAgent implements IAgent {
+public class Lab05MysteryAgent extends AbsOnlineAgent implements IAgent {
 	private IGeneralValuation valuation;
 	private Integer auctionID;
 

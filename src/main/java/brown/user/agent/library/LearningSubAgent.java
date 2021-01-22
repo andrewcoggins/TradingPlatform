@@ -24,7 +24,7 @@ import brown.platform.item.library.Item;
 import brown.system.setup.ISetup;
 import brown.user.agent.IAgent;
 
-public class LearningSubAgent extends AbsAgent implements IAgent {
+public class LearningSubAgent extends AbsOnlineAgent implements IAgent {
 
     
   private IValuationMessage initialValuation; 
