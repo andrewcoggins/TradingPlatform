@@ -1,0 +1,58 @@
+
+{
+	"name": "offlineBasic", 
+	"startingDelayTime": 5, 
+	"simulationDelayTime": 0.5, 
+	"numTotalRuns": 1, 
+	"offlineMode": 1,
+	"simulation": [{
+		"numRuns": 1000, 
+
+		"items": [{
+			"itemName": "testItem", 
+			"numItems": "1"
+		}], 
+		"valuation": [{
+			"distribution": "AdditiveValuationDistribution",
+			"generator": [{
+				"name": "NormalValGenerator", 
+				"parameters": [0.0, 1.0]
+			}],
+			"items": [{
+				"itemName": "testItem"
+			}]
+		}], 
+		"endowment": [{
+			"distribution": "IndependentEndowmentDist", 
+			"generator": [
+				{
+				"name": "ConcreteValGenerator", 
+				"parameters": [0.0]
+				}, 
+				{
+				"name": "ConcreteValGenerator", 
+				"parameters": [100.0]
+				}, 
+			],
+			"items": [{
+				"itemName": "testItem", 
+			}],
+		}], 
+		"seqMarket": [{
+			"simMarket": [{
+				"marketRules": {
+					"aRule": "SimpleHighestPriceAllocation", 
+					"pRule": "SecondPricePayment", 
+					"qRule": "SimpleOneSidedQuery", 
+					"actRule": "SimpleOneShotActivity", 
+					"irPolicy": "NonAnonymousPolicy", 
+					"innerIRPolicy": "NoInnerIR", 
+					"tCondition": "OneShotTermination"
+				}, 
+				"items": [{
+					"itemName": "testItem"
+				}]
+			}]
+		}]
+	}]
+}

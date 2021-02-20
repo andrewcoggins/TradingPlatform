@@ -1,0 +1,56 @@
+
+{
+	"name": "clockAuction", 
+	"startingDelayTime":10, 
+	"simulationDelayTime": 1.0, 
+	"numTotalRuns": 1, 
+	"groupSize": 10,
+	"serverPort": 5000,
+	"simulation": [{
+		"numRuns": 1, 
+		"items": [{
+			"itemName": "seed", 
+			"numItems": "1"
+		}], 
+		"valuation": [{
+			"distribution": "CanadianSpectrumValuationDistribution",
+			"generator": [{
+				"name": "NormalValGenerator", 
+				"parameters": [100.0, 25.0]
+			}],
+			"items": [{
+				"itemName": "seed"
+			}]
+		}], 
+		"endowment": [{
+			"distribution": "IndependentEndowmentDist", 
+			"generator": [
+				{
+				"name": "ConcreteValGenerator", 
+				"parameters": [0.0]
+				}, 
+				{
+				"name": "ConcreteValGenerator", 
+				"parameters": [0.0]
+				}, 
+			],
+			"items": [],
+		}], 
+		"seqMarket": [{
+			"simMarket": [{
+				"marketRules": {
+					"aRule": "LastBidderMultiItem", 
+					"pRule": "AscendingPaymentMultiItem",
+					"qRule": "CanadianSpectrumAuctionQuery", 
+					"actRule": "ClockAuctionActivity", 
+					"irPolicy": "NonAnonymousPolicy", 
+					"innerIRPolicy": "EnglishIR", 
+					"tCondition": "ClockAuctionTermination"
+				}, 
+				"items": [{
+					"itemName": "seed"
+				}]
+			}]
+		}]
+	}]
+}

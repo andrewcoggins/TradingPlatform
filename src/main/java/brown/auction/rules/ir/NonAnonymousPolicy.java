@@ -12,8 +12,6 @@ public class NonAnonymousPolicy extends AbsRule implements IInformationRevelatio
 
   @Override
   public void updatePublicState(IMarketState state, IMarketPublicState publicState) {
-    
-   
     publicState.tick();
     List<ITradeMessage> recentHistory = state.getTradeHistory().get(state.getTradeHistory().size() - 1); 
     publicState.addToTradeHistory(recentHistory);

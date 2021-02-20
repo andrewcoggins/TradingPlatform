@@ -1,0 +1,257 @@
+{
+  "name": "GVSM18_SMRA",
+  "startingDelayTime": 30,
+  "simulationDelayTime": 2.5,
+  "numTotalRuns": 7,
+  "serverPort": 5000,
+  "simulation": [{
+    "numRuns": 1,
+    "groupSize": 7,
+    "items": [{
+        "itemName": "demand_query",
+        "numItems": "0"
+      },
+      {
+        "itemName": "reset",
+        "numItems": "0"
+      },
+      {
+        "itemName": "position",
+        "numItems": "0"
+      },
+      {
+        "itemName": "A",
+        "numItems": "1"
+      },
+      {
+        "itemName": "B",
+        "numItems": "1"
+      },
+      {
+        "itemName": "C",
+        "numItems": "1"
+      },
+      {
+        "itemName": "D",
+        "numItems": "1"
+      },
+      {
+        "itemName": "E",
+        "numItems": "1"
+      },
+      {
+        "itemName": "F",
+        "numItems": "1"
+      },
+      {
+        "itemName": "G",
+        "numItems": "1"
+      },
+      {
+        "itemName": "H",
+        "numItems": "1"
+      },
+      {
+        "itemName": "I",
+        "numItems": "1"
+      },
+      {
+        "itemName": "J",
+        "numItems": "1"
+      },
+      {
+        "itemName": "K",
+        "numItems": "1"
+      },
+      {
+        "itemName": "L",
+        "numItems": "1"
+      },
+      {
+        "itemName": "M",
+        "numItems": "1"
+      },
+      {
+        "itemName": "N",
+        "numItems": "1"
+      },
+      {
+        "itemName": "O",
+        "numItems": "1"
+      },
+      {
+        "itemName": "P",
+        "numItems": "1"
+      },
+      {
+        "itemName": "Q",
+        "numItems": "1"
+      },
+      {
+        "itemName": "R",
+        "numItems": "1"
+      },
+    ],
+    "valuation": [{
+      "distribution": "GSVM18ValuationDistribution",
+      "generator": [{
+        "name": "NormalValGenerator",
+        "parameters": [100.0, 25.0]
+      }],
+      "items": [{
+          "itemName": "demand_query",
+        },
+        {
+          "itemName": "reset",
+        },
+        {
+          "itemName": "position",
+        },
+        {
+          "itemName": "A",
+        },
+        {
+          "itemName": "B",
+        },
+        {
+          "itemName": "C",
+        },
+        {
+          "itemName": "D",
+        },
+        {
+          "itemName": "E",
+        },
+        {
+          "itemName": "F",
+        },
+        {
+          "itemName": "G",
+        },
+        {
+          "itemName": "H",
+        },
+        {
+          "itemName": "I",
+        },
+        {
+          "itemName": "J",
+        },
+        {
+          "itemName": "K",
+        },
+        {
+          "itemName": "L",
+        },
+        {
+          "itemName": "M",
+        },
+        {
+          "itemName": "N",
+        },
+        {
+          "itemName": "O",
+        },
+        {
+          "itemName": "P",
+        },
+        {
+          "itemName": "Q",
+        },
+        {
+          "itemName": "R",
+        },
+      ],
+    }],
+    "endowment": [{
+      "distribution": "IndependentEndowmentDist",
+      "generator": [{
+          "name": "ConcreteValGenerator",
+          "parameters": [0.0]
+        },
+        {
+          "name": "ConcreteValGenerator",
+          "parameters": [0.0]
+        },
+      ],
+      "items": [],
+    }],
+    "seqMarket": [{
+      "simMarket": [{
+        "marketRules": {
+          "aRule": "SMRAAllocation",
+          "pRule": "SMRAPayment",
+          "qRule": "SimpleOneSidedQuery",
+          "actRule": "SMRAActivity",
+          "irPolicy": "NonAnonymousPolicy",
+          "innerIRPolicy": "SMRAInnerIR",
+          "tCondition": "SMRATermination"
+        },
+        "items": [{
+            "itemName": "demand_query",
+          },
+          {
+            "itemName": "reset",
+          },
+          {
+            "itemName": "position",
+          },
+          {
+            "itemName": "A",
+          },
+          {
+            "itemName": "B",
+          },
+          {
+            "itemName": "C",
+          },
+          {
+            "itemName": "D",
+          },
+          {
+            "itemName": "E",
+          },
+          {
+            "itemName": "F",
+          },
+          {
+            "itemName": "G",
+          },
+          {
+            "itemName": "H",
+          },
+          {
+            "itemName": "I",
+          },
+          {
+            "itemName": "J",
+          },
+          {
+            "itemName": "K",
+          },
+          {
+            "itemName": "L",
+          },
+          {
+            "itemName": "M",
+          },
+          {
+            "itemName": "N",
+          },
+          {
+            "itemName": "O",
+          },
+          {
+            "itemName": "P",
+          },
+          {
+            "itemName": "Q",
+          },
+          {
+            "itemName": "R",
+          },
+        ],
+      }]
+    }]
+  }]
+}

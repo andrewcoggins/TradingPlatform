@@ -27,7 +27,7 @@ public class TACValuationDistributionSimple extends AbsValuationDistribution imp
   }
   
   @Override
-  public ISpecificValuation sample() {
+  public ISpecificValuation sample(Integer agentID, List<List<Integer>> agentGroups) {
     
     IValuationGenerator idealArrivalDateGenerator = this.generators.get(0); 
     IValuationGenerator idealDepartureDateGenerator = this.generators.get(1);

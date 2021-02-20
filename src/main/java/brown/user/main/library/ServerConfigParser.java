@@ -1,10 +1,13 @@
 package brown.user.main.library;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -44,8 +47,15 @@ public class ServerConfigParser implements IServerConfigParser {
       ClassNotFoundException, NoSuchMethodException, SecurityException,
       InstantiationException, IllegalAccessException, IllegalArgumentException,
       InvocationTargetException {
-    Object rawInput = new JSONParser().parse(new FileReader(fileName));
-
+    Object rawInput;
+	try {
+		rawInput = new JSONParser().parse(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));
+	} catch (IOException | ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return null;
+	}
+    
     JSONObject jo = (JSONObject) rawInput;
     JSONArray ja = (JSONArray) jo.get("simulation");
 
@@ -650,7 +660,7 @@ public class ServerConfigParser implements IServerConfigParser {
   @Override
   public Map<String, Integer> parseServerConfigParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException {
-    Object rawInput = new JSONParser().parse(new FileReader(fileName));
+    Object rawInput = new JSONParser().parse(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));
 
     JSONObject jo = (JSONObject) rawInput;
 
@@ -680,7 +690,7 @@ public class ServerConfigParser implements IServerConfigParser {
   @Override
   public Map<String, Double> parseServerConfigDoubleParameters(String fileName)
       throws FileNotFoundException, IOException, ParseException {
-    Object rawInput = new JSONParser().parse(new FileReader(fileName));
+    Object rawInput = new JSONParser().parse(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(fileName)));
 
     JSONObject jo = (JSONObject) rawInput;
     Map<String, Double> outerParams = new HashMap<String, Double>();

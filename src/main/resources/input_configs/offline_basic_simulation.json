@@ -4,6 +4,7 @@
 	"startingDelayTime": 5, 
 	"simulationDelayTime": 0.5, 
 	"numTotalRuns": 1, 
+	"offlineMode": 1,
 	"simulation": [{
 		"numRuns": 1000, 
 

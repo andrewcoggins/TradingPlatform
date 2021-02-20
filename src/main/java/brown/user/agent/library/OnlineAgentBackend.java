@@ -45,7 +45,7 @@ public class OnlineAgentBackend extends AbsAgentBackend implements IAgentBackend
    */
   public OnlineAgentBackend(String host, int port, ISetup setup, IAgent agent) {
     super(agent); 
-    this.CLIENT = new Client(16384, 8192);
+    this.CLIENT = new Client(65536, 65536);
     this.ID = null;
     this.publicID = null; 
     CLIENT.start();

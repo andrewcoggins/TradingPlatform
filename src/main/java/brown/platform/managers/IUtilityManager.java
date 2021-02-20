@@ -31,6 +31,8 @@ public interface IUtilityManager {
   public void logUtility(String inFile, Map<Integer, Integer> privateToPublic, Map<Integer, String> idToName); 
   
   
+  public void logLeaderboard(String inFile, Map<Integer, Integer> privateToPublic, Map<Integer, String> idToName);
+  
   /**
    * prints the utility after all the simulations have finished. 
    */

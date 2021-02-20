@@ -41,7 +41,7 @@ public class AdditiveValuationDistribution extends AbsValuationDistribution
   }
 
   @Override
-  public ISpecificValuation sample() {
+  public ISpecificValuation sample(Integer agentID, List<List<Integer>> agentGroups) {
     this.items.getItems().forEach(item -> this.values
         .put(new Item(item.getName()), this.generators.get(0).makeValuation()));
     Map<IItem, Double> valuesCopy = new HashMap<IItem, Double>(); 
